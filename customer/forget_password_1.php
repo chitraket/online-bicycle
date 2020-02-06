@@ -35,7 +35,7 @@
                         <!-- Login Content Start -->
                         <div class="col-lg-6">
                             <div class="login-reg-form-wrap">
-                                <h5>Froget Password</h5>
+                                <h5>Forget Password</h5>
                                 <form action="#" method="post" >
                                     <div class="single-input-item">
                                         <input type="text" placeholder="Enter OTP" name="email" id="email" required/>

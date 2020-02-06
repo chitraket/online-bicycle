@@ -23,7 +23,7 @@
                                 </div>
                                 <center>
                                     <div class="action_link" style="margin-top: -10px;">
-                                        <a href="index.php"><input type="submit" class="btn btn-cart2" name="add_cart" value="Start shopping" ></a>
+                                        <a href="../index.php"><input type="submit" class="btn btn-cart2" name="add_cart" value="Start shopping" ></a>
                                     </div>   
                                 </center>       
                             </div>
@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="minicart-content">
                                     <h3 class="product-name">
-                                        <a href="product-details.php?pro_id=<?php echo $pro_id ?>"><?php echo $product_title ?></a>
+                                        <a href="../product-details.php?pro_id=<?php echo $pro_id ?>"><?php echo $product_title ?></a>
                                     </h3>
                                     <p>
                                         <span class="cart-quantity"><?php echo $pro_qty ?> <strong> | </strong></span>
@@ -106,8 +106,8 @@
                     </div>
 
                     <div class="minicart-button">
-                        <a href="cart.php"><i class="fa fa-shopping-cart"></i> View Cart</a>
-                        <a href="checkout.php"><i class="fa fa-share"></i> Checkout</a>
+                        <a href="../cart.php"><i class="fa fa-shopping-cart"></i> View Cart</a>
+                        <a href="../checkout.php"><i class="fa fa-share"></i> Checkout</a>
                     </div>
                 </div>
             <?php

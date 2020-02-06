@@ -16,7 +16,7 @@
                         <div class="breadcrumb-wrap">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="index.php"><i class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item active" aria-current="page">contact us</li>
                                 </ul>
                             </nav>
@@ -89,9 +89,9 @@
                                 est notare quam littera gothica, quam nunc putamus parum claram anteposuerit litterarum
                                 formas human.</p>
                             <ul>
-                                <li><i class="fa fa-fax"></i> Address : No 40 Baria Sreet 133/2 NewYork City</li>
-                                <li><i class="fa fa-phone"></i> E-mail: chitraketsavani@gmail.com</li>
-                                <li><i class="fa fa-envelope-o"></i> +7984498992</li>
+                                <li><i class="fa fa-home"></i> Address : 34,vip,surat</li>
+                                <li><i class="fa fa-phone"></i> Phone:+91 7984498992 </li>
+                                <li><i class="fa fa-envelope-o"></i>E-mail:chitraketsavani@gmail.com </li>
                             </ul>
                         </div>
                     </div>

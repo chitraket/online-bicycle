@@ -1,5 +1,5 @@
 <?php
-        $active='contact';
+        $active='';
        include("includes/header.php");
     ?>
     <!-- Start Header Area -->
@@ -24,7 +24,7 @@
             </div>
         </div>
         <!-- breadcrumb area end -->
-        <?php require 'includes/validation.php'?>
+        
         <!-- login register wrapper start -->
         <div class="login-register-wrapper section-padding ">
             <div class="container">
@@ -162,14 +162,46 @@ if(isset($_POST['register'])){
     if($check_cart>0){
         /// If register have items in cart ///
         $_SESSION['customer_email']=$c_email;
-        echo "<script>alert('You have been Registered Sucessfully')</script>";
-        echo "<script>window.open('checkout.php','_self')</script>";
+      ?>
+      <script type="text/javascript">
+              swal({
+                        title: "Registration successful.",
+                        text: "",
+                        icon: "success",
+                        buttons: true,
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('checkout.php','_self');
+                        } else {
+                        
+                        }
+                });
+                </script>
+      <?php
+        
     }
     else{
         /// If register without items in cart ///
         $_SESSION['customer_email']=$c_email;
-        echo "<script>alert('You have been Registered Sucessfully')</script>";
-        echo "<script>window.open('index.php','_self')</script>";
+        ?>
+        <script type="text/javascript">
+              swal({
+                        title: "Registration successful.",
+                        text: "",
+                        icon: "success",
+                        buttons: true,
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('index.php','_self');
+                        } else {
+                        }
+                });
+                </script>
+        <?php 
     }
     
 }
@@ -184,75 +216,75 @@ end:
                                 <div class="row">
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
-                                                    <input type="text" name="c_name" id="f_name" placeholder="Enter your First name" autocomplete="off">
-                                                    <span><?php echo $error_c_name;?></span>
+                                                    <input type="text" name="c_name" id="f_name" placeholder="Enter your First name" autocomplete="off" required>
+                                                    <span style="color: red;"><?php echo $error_c_name;?></span>
                                                     <span id="f_nameMsg"></span>
                                                     
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
-                                                <input type="text" placeholder="Enter your Last name" name="c_lname" id="l_name"  autocomplete="off"/>
+                                                <input type="text" placeholder="Enter your Last name" name="c_lname" id="l_name"  autocomplete="off" required/>
                                                 <span id="l_nameMsg"></span>
-                                                <span><?php echo $error_l_name; ?></span>
+                                                <span style="color: red;"><?php echo $error_l_name; ?></span>
                                             </div>
                                         </div>
                                 </div>
 
                 
                                     <div class="single-input-item">
-                                        <input type="email" placeholder="Enter your Email" name="c_email"  id="email" autocomplete="off"   />
+                                        <input type="email" placeholder="Enter your Email" name="c_email"  id="email" autocomplete="off"   required/>
                                         <span id="emailMsg"></span>
-                                        <span><?php echo $error_email; ?></span>
+                                        <span style="color: red;"><?php echo $error_email; ?></span>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
-                                                <input type="password" placeholder="Enter your Password" id="pass" name="c_pass"/>
+                                                <input type="password" placeholder="Enter your Password" id="pass" name="c_pass" required/>
                                                 <span id="passMsg"></span>
-                                                <span><?php echo $error_pass; ?></span>
+                                                <span style="color: red;"><?php echo $error_pass; ?></span>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
-                                                <input type="password" placeholder="Repeat your Password" id="c_pass" name="c_c_pass" />
+                                                <input type="password" placeholder="Repeat your Password" id="c_pass" name="c_c_pass" required/>
                                                 <span id="c_passMsg"></span>
-                                                <span><?php echo $error_c_pass; ?></span>
+                                                <span style="color: red;"><?php echo $error_c_pass; ?></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Enter your state" name="c_state" id="state" />
+                                        <input type="text" placeholder="Enter your state" name="c_state" id="state" required/>
                                         <span id="stateMsg"></span>
-                                        <span><?php echo $error_state; ?></span>
+                                        <span style="color: red;"><?php echo $error_state; ?></span>
                                     </div>
                            
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Enter your City" name="c_city" id="city" />
+                                        <input type="text" placeholder="Enter your City" name="c_city" id="city" required/>
                                         <span id="cityMsg"></span>
-                                        <span><?php echo $error_city; ?></span>
+                                        <span style="color: red;"><?php echo $error_city; ?></span>
                                     </div>
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Enter your contact " name="c_contact" id="contact"/>
+                                        <input type="text" placeholder="Enter your contact " name="c_contact" id="contact" required/>
                                         <span id="contactMsg"></span>
-                                        <span><?php echo $error_c_contact; ?></span>
+                                        <span style="color: red;"><?php echo $error_c_contact; ?></span>
                                     </div>
 
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Enter your Address" name="c_address"  id="address" />
+                                        <input type="text" placeholder="Enter your Address" name="c_address"  id="address" required/>
                                         <span id="addressMsg"></span>
-                                        <span><?php echo $error_address; ?></span>
+                                        <span style="color: red;"><?php echo $error_address; ?></span>
                                     </div>
 
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Enter your Pincode" name="c_pincode" id="pincode"/>
+                                        <input type="text" placeholder="Enter your Pincode" name="c_pincode" id="pincode" required/>
                                         <span id="pincodeMsg"></span>
-                                        <span><?php echo $error_pincode; ?></span>
+                                        <span style="color: red;"><?php echo $error_pincode; ?></span>
                                     </div>
 
                                     <div class="single-input-item">
-                                    <input type="file"  name="c_image"  >
+                                    <input type="file"  name="c_image"  required/>
                                     </div>
                                    
                                     <div class="single-input-item">
@@ -425,10 +457,9 @@ end:
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
 
-   <!-- <script type="text/javascript">
+   <script type="text/javascript">
 	$(document).ready(function(){
 		// set initially button state hidden
-        
         var f_name_err=true;
         var l_name_err=true;
         var email_err=true;
@@ -479,7 +510,7 @@ end:
             if(f_name.length=='')
             {
                 $("#f_name").css("border","1px solid red");
-                $("#f_nameMsg").html("<p class='text-danger'>Un-validated</p>");
+                $("#f_nameMsg").html("<p class='text-danger'>Please fill out this field.</p>");
                 $('#f_nameMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 f_name_err=false;
@@ -494,7 +525,7 @@ end:
             if(!(reg.test(f_name)))
             {
                 $("#f_name").css("border","1px solid red");
-                $("#f_nameMsg").html("<p class='text-danger'>Username</p>");
+                $("#f_nameMsg").html("<p class='text-danger'>Invalid first name.</p>");
                 $('#f_nameMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 f_name_err=false;
@@ -513,7 +544,7 @@ end:
             if(l_name.length=='')
             {
                 $("#l_name").css("border","1px solid red");
-                $("#l_nameMsg").html("<p class='text-danger'>Un-validated</p>");
+                $("#l_nameMsg").html("<p class='text-danger'>Please fill out this field.</p>");
                 $('#l_nameMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 l_name_err=false;
@@ -528,7 +559,7 @@ end:
             if(!(reg.test(l_name)))
             {
                 $("#l_name").css("border","1px solid red");
-                $("#l_nameMsg").html("<p class='text-danger'>Username</p>");
+                $("#l_nameMsg").html("<p class='text-danger'>Invalid last name.</p>");
                 $('#l_nameMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 l_name_err=false;
@@ -547,7 +578,7 @@ end:
             if(email.length=='')
             {
                 $("#email").css("border","1px solid red");
-                $("#emailMsg").html("<p class='text-danger'>Un-validated</p>");
+                $("#emailMsg").html("<p class='text-danger'>Please fill out this field.</p>");
                 $('#emailMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 email_err=false;
@@ -562,7 +593,7 @@ end:
             if(!(reg.test(email)))
             {
                 $("#email").css("border","1px solid red");
-                $("#emailMsg").html("<p class='text-danger'>Username</p>");
+                $("#emailMsg").html("<p class='text-danger'>Invalid email id.</p>");
                 $('#emailMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 email_err=false;
@@ -577,11 +608,11 @@ end:
         }
         function pass_check(){
             var pass=$('#pass').val();
-            var reg=/^[A-Za-z0-9]*$/
+            var reg=/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/
             if(pass.length=='')
             {
                 $("#pass").css("border","1px solid red");
-                $("#passMsg").html("<p class='text-danger'>Un-validated</p>");
+                $("#passMsg").html("<p class='text-danger'>Please fill out this field.</p>");
                 $('#passMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 pass_err=false;
@@ -595,7 +626,7 @@ end:
             if(!(reg.test(pass)))
             {
                 $("#pass").css("border","1px solid red");
-                $("#passMsg").html("<p class='text-danger'>Username</p>");
+                $("#passMsg").html("<p class='text-danger'>Invalid password.</p>");
                 $('#passMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 pass_err=false;
@@ -614,7 +645,7 @@ end:
             if(c_pass.length=='')
             {
                 $("#c_pass").css("border","1px solid red");
-                $("#c_passMsg").html("<p class='text-danger'>Un-validated</p>");
+                $("#c_passMsg").html("<p class='text-danger'>Please fill out this field.</p>");
                 $('#c_passMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 c_pass_err=false;
@@ -646,7 +677,7 @@ end:
             if(state.length=='')
             {
                 $("#state").css("border","1px solid red");
-                $("#stateMsg").html("<p class='text-danger'>Un-validated</p>");
+                $("#stateMsg").html("<p class='text-danger'>Please fill out this field.</p>");
                 $('#stateMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 state_err=false;
@@ -660,7 +691,7 @@ end:
             if(!(reg.test(state)))
             {
                 $("#state").css("border","1px solid red");
-                $("#stateMsg").html("<p class='text-danger'>Username</p>");
+                $("#stateMsg").html("<p class='text-danger'>Invalid state.</p>");
                 $('#stateMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 state_err=false;
@@ -679,7 +710,7 @@ end:
             if(city.length=='')
             {
                 $("#city").css("border","1px solid red");
-                $("#cityMsg").html("<p class='text-danger'>Un-validated</p>");
+                $("#cityMsg").html("<p class='text-danger'>Please fill out this field.</p>");
                 $('#cityMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 city_err=false;
@@ -693,7 +724,7 @@ end:
             if(!(reg.test(city)))
             {
                 $("#city").css("border","1px solid red");
-                $("#cityMsg").html("<p class='text-danger'>Username</p>");
+                $("#cityMsg").html("<p class='text-danger'>Invalid city.</p>");
                 $('#cityMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 city_err=false;
@@ -709,11 +740,11 @@ end:
         
         function contact_check(){
             var contact=$('#contact').val();
-            var reg=/^[987][0-9]{9}$/
+            var reg=/^[9876][0-9]{9}$/
             if(contact.length=='')
             {
                 $("#contact").css("border","1px solid red");
-                $("#contactMsg").html("<p class='text-danger'>Un-validated</p>");
+                $("#contactMsg").html("<p class='text-danger'>Please fill out this field.</p>");
                 $('#contactMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 contact_err=false;
@@ -728,7 +759,7 @@ end:
             if(!(reg.test(contact)))
             {
                 $("#contact").css("border","1px solid red");
-                $("#contactMsg").html("<p class='text-danger'>Username</p>");
+                $("#contactMsg").html("<p class='text-danger'>Invalid contact number.</p>");
                 $('#contactMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 contact_err=false;
@@ -747,7 +778,7 @@ end:
             if(pincode.length=='')
             {
                 $("#pincode").css("border","1px solid red");
-                $("#pincodeMsg").html("<p class='text-danger'>Un-validated</p>");
+                $("#pincodeMsg").html("<p class='text-danger'>Please fill out this field.</p>");
                 $('#pincodeMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 pincode_err=false;
@@ -762,7 +793,7 @@ end:
             if(!(reg.test(pincode)))
             {
                 $("#pincode").css("border","1px solid red");
-                $("#pincodeMsg").html("<p class='text-danger'>Username</p>");
+                $("#pincodeMsg").html("<p class='text-danger'>Invalid pincode.</p>");
                 $('#pincodeMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 pincode_err=false;
@@ -781,7 +812,7 @@ end:
             if(pass.length=='')
             {
                 $("#address").css("border","1px solid red");
-                $("#addressMsg").html("<p class='text-danger'>Un-validated</p>");
+                $("#addressMsg").html("<p class='text-danger'>Please fill out this field.</p>");
                 $('#addressMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 pass_err=false;
@@ -798,12 +829,7 @@ end:
 
 	
 	});
-
-	
-   
-	
-	
-</script>-->
+</script>
 
 
 </body>

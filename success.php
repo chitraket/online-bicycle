@@ -31,7 +31,7 @@
                    <?php  
                    if(isset($_GET['txnid']))
                         {
-                            $txnid=$_GET['txnid'];
+                            $txnids=$_GET['txnid'];
                             //$_SESSION['txn_id']=$txnid;
                             echo "<p>Transaction ID:$txnid</p>";
                         }
@@ -94,9 +94,9 @@
                            
                                     <tbody>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
+                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="admin_areas/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
                                             <td class="pro-title"><a href="product-details.php?pro_id=<?php echo $pro_id ?>"><?php  echo $product_title ?></a></td>
-                                            <td class="pro-price"><span>Rs.<?php echo $product_price ?></span></td>
+                                            <td class="pro-price"><span>Rs.<?php echo $product_prices ?></span></td>
                                             <td class="pro-quantity">
                                             <span><?php echo $pro_qty ?></span>
                                             </td>
@@ -115,7 +115,7 @@
                         </div>
                     </div>
                     <div class="row">
-                    <div class="col-lg-6 mr-auto">
+                    <!--<div class="col-lg-6 mr-auto">
                         <div class="contact-info">
                             <h4 class="contact-title"></h4>
                             <?php 
@@ -131,7 +131,7 @@
                                                     {   
                                                                     $customer_name=$row_cart['customer_name'];
                                                                     $customer_address=$row_cart['customer_address'];
-                                                                 //   $customer_email=$row_cart['customer_email'];
+                                                                    $customer_email=$row_cart['customer_email'];
                                                                     $customer_phone=$row_cart['customer_contact'];
                                                            
                                                     }
@@ -141,11 +141,11 @@
 
                             <ul style="margin-top: 20px;">
                             <li><i class="fa fa-map"></i> Address : <?php echo $customer_address; ?></li>
-                                <li><i class="fa fa-envelope-o"></i> E-mail: <?php echo $productinfo; ?></li>
+                                <li><i class="fa fa-envelope-o"></i> E-mail: <?php echo $customer_email; ?></li>
                                 <li><i class="fa fa-phone"></i>Phone: +91 <?php echo $customer_phone;?></li>
                             </ul>
                         </div>
-                    </div>
+                    </div>-->
                         <div class="col-lg-5 ml-auto">
                             <!-- Cart Calculation Area -->
                             <div class="cart-calculator-wrapper">
@@ -155,18 +155,17 @@
                                         <table class="table">
                                             <tr>
                                                 <td>Sub Total</td>
-                                                <td>Rs.<?php echo $total ?></td>
+                                                <td>Rs.<?php echo $totals ?></td>
                                             </tr>
-                                            <tr>
+                                           <!-- <tr>
                                                 <td>Shipping</td>
                                                 <td>$70</td>
-                                            </tr>
+                                            </tr>-->
                                             <tr class="total">
                                                 <td>Total</td>
-                                                <td class="total-amount">Rs.<?php echo $total ?></td>
+                                                <td class="total-amount">Rs.<?php echo $totals ?></td>
                                             </tr>
                                         </table>
-                                        
                                     </div>
                                 </div>
                                 <a href="index.php" class="btn btn-sqr d-block" style="margin-bottom: 50px;">Continue Shopping</a>

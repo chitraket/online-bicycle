@@ -1,6 +1,13 @@
 <?php
-    $active='contact';
+    $active='';
     include("includes/header.php");
+
+if(isset($_SESSION['customer_email']))
+{
+    //header('location:customer/myaccount.php');
+    echo "<script>window.open('myaccount.php','_self');</script>";
+}
+
 ?>
     <!-- Start Header Area -->
     
@@ -38,11 +45,11 @@
                                 <h5>Sign In</h5>
                                 <form action="customer_login.php" method="post" onsubmit="return submit_check()">
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Email or Username" name="c_email" id="email"/>
+                                        <input type="text" placeholder="Email or Username" name="c_email" id="email" required/>
                                         <span id="emailMsg"></span>
                                     </div>
                                     <div class="single-input-item">
-                                        <input type="password" placeholder="Enter your Password" name="c_pass" id="pass"/>
+                                        <input type="password" placeholder="Enter your Password" name="c_pass" id="pass" required/>
                                         <span id="passMsg"></span>
                                     </div>
                                     <div class="single-input-item">
@@ -87,7 +94,7 @@ if(isset($_POST['login'])){
     
     if($check_customer==0){
         
-        echo "<script>alert('Your email or password is wrong')</script>";
+        echo "<script type='text/javascript'>swal('Your email or password is wrong', '', 'error')</script>";
         
         exit();
     }
@@ -95,30 +102,43 @@ if(isset($_POST['login'])){
     if($check_customer==1 AND $check_cart==0){
         
         $_SESSION['customer_email']=$customer_email;
+        ?>
         
-       echo "<script>alert('You are Logged in')</script>"; 
-        
-       echo "<script>window.open('myaccount.php','_self')</script>";
-        
+        <script type="text/javascript">
+         swal({
+                   title: "You are login",
+                   text: "",
+                   icon: "success",
+                   buttons: true,
+                   successMode: true,
+           })
+           .then((willDelete) => {
+                   if (willDelete) {
+                       window.open('myaccount.php','_self');
+                   } 
+           });
+           </script>
+        <?php 
     }else{
         
         $_SESSION['customer_email']=$customer_email;
         ?>
         <script type="text/javascript">
-              swal({
-                        title: "You are Logged in.",
-                        text: "",
-                        icon: "success",
-                        buttons: true,
-                        successMode: true,
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('../checkout.php', '_self');
-                        }
-                });
-                </script>
-        <?php  
+         swal({
+                   title: "You are login",
+                   text: "",
+                   icon: "success",
+                   buttons: true,
+                   successMode: true,
+           })
+           .then((willDelete) => {
+                   if (willDelete) {
+                       window.open('../checkout.php','_self');
+                   } 
+           });
+           </script>
+           <?php
+          
     }
     
 }
@@ -303,6 +323,9 @@ if(isset($_POST['login'])){
         $('#email').keyup(function(){
             email_check();
         });
+        $('#email').focusout(function(){
+            email_check();
+        });
         $('#pass').keyup(function(){
             pass_check();
         });
@@ -312,7 +335,7 @@ if(isset($_POST['login'])){
             if(email.length=='')
             {
                 $("#email").css("border","1px solid red");
-                $("#emailMsg").html("<p class='text-danger'>Un-validated</p>");
+                $("#emailMsg").html("<p class='text-danger'>Please fill out this field.</p>");
                 $('#emailMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 email_err=false;
@@ -327,7 +350,7 @@ if(isset($_POST['login'])){
             if(!(reg.test(email)))
             {
                 $("#email").css("border","1px solid red");
-                $("#emailMsg").html("<p class='text-danger'>Username</p>");
+                $("#emailMsg").html("<p class='text-danger'>Invalid email.</p>");
                 $('#emailMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 email_err=false;
@@ -343,11 +366,11 @@ if(isset($_POST['login'])){
 
         function pass_check(){
             var pass=$('#pass').val();
-            var reg=/^[A-Za-z0-9]*$/
+            var reg=/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/
             if(pass.length=='')
             {
                 $("#pass").css("border","1px solid red");
-                $("#passMsg").html("<p class='text-danger'>Un-validated</p>");
+                $("#passMsg").html("<p class='text-danger'>Please fill out this field.</p>");
                 $('#passMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 pass_err=false;
@@ -361,7 +384,7 @@ if(isset($_POST['login'])){
             if(!(reg.test(pass)))
             {
                 $("#pass").css("border","1px solid red");
-                $("#passMsg").html("<p class='text-danger'>Username</p>");
+                $("#passMsg").html("<p class='text-danger'>Invalid password.</p>");
                 $('#passMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 pass_err=false;

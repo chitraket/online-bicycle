@@ -1,18 +1,18 @@
 <?php
-    $active='contact';
+    $active='';
     include("includes/header.php");
+   
 ?>
 
 <?php 
            
            if(!isset($_SESSION['customer_email'])){
-               
             echo "<script>window.open('customer/customer_login.php','_self')</script>";
               // include("customer/customer_login.php");
-               
            }
            
 ?> 
+
     <!-- Start Header Area -->
 
     <!-- end Header Area -->
@@ -289,8 +289,8 @@ $_SESSION['c_id']=$customer_id;
               ?>
                 <script type="text/javascript">
               swal({
-                        title: "Are you sure?",
-                        text: "Once deleted, you will not be able to recover this imaginary file!",
+                        title: "Order Successfully Placed",
+                        text: "Thank you for ordering. We received your order and will begin processing it soon. Your order information appears below.",
                         icon: "success",
                         buttons: true,
                         successMode: true,

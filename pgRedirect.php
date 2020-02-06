@@ -62,7 +62,7 @@ $paramList["CHANNEL_ID"] = $CHANNEL_ID;
 $paramList["TXN_AMOUNT"] = $TXN_AMOUNT;
 $paramList["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
 
-$paramList["CALLBACK_URL"] = "http://localhost:9126/m-dev-store/pgResponse.php";
+$paramList["CALLBACK_URL"] = "http://localhost/m-dev-store/pgResponse.php";
 /*
 $paramList["MSISDN"] = $MSISDN; //Mobile number of customer
 $paramList["EMAIL"] = $EMAIL; //Email ID of customer

@@ -119,7 +119,7 @@
                                                     {   
                                                                     $customer_name=$row_cart['customer_name'];
                                                                     $customer_address=$row_cart['customer_address'];
-                                                                 //   $customer_email=$row_cart['customer_email'];
+                                                                    $customer_email=$row_cart['customer_email'];
                                                                     $customer_phone=$row_cart['customer_contact'];
                                                            
                                                     }
@@ -128,7 +128,7 @@
 
                             <ul style="margin-top: 20px;">
                             <li><i class="fa fa-map"></i> Address : <?php echo $customer_address; ?></li>
-                                <li><i class="fa fa-envelope-o"></i> E-mail: <?php echo $productinfo; ?></li>
+                                <li><i class="fa fa-envelope-o"></i> E-mail: <?php echo $customer_email; ?></li>
                                 <li><i class="fa fa-phone"></i>Phone: +91 <?php echo $customer_phone;?></li>
                             </ul>
                         </div>

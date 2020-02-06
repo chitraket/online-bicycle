@@ -138,10 +138,10 @@
                                                 <td>Sub Total</td>
                                                 <td>Rs.<?php echo $total ?></td>
                                             </tr>
-                                            <tr>
+                                            <!--<tr>
                                                 <td>Shipping</td>
                                                 <td>$70</td>
-                                            </tr>
+                                            </tr>-->
                                             <tr class="total">
                                                 <td>Total</td>
                                                 <td class="total-amount">Rs.<?php echo $total ?></td>

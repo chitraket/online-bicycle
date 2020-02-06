@@ -22,20 +22,14 @@ $isValidChecksum = verifychecksum_e($paramList, PAYTM_MERCHANT_KEY, $paytmChecks
 
 
 if($isValidChecksum == "TRUE") {
-	if ($_POST["STATUS"] == "TXN_SUCCESS") {
-		
-			
+	if ($_POST["STATUS"] == "TXN_SUCCESS") {			
 			$_SESSION['order_id']=$_POST['ORDERID']	;
 			echo "<script>window.open('form_process1.php','_self')</script>";
-			
-		
-		
 	}
 	else {
 		echo "<b>Transaction status is failure</b>" . "<br/>";
 	}
 
-	
 	
 
 }

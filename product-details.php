@@ -169,7 +169,7 @@ include("includes/header.php");
                                         </div>
                                         <div class="price-box">
                                             <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
-                                            <span class="price-old"><del>$90.00</del></span>
+                                            <span class="price-old"><del>Rs.90.00</del></span>
                                         </div>
                                         <!--<h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
                                         <div class="product-countdown" data-countdown="2019/12/20"></div>-->
@@ -193,11 +193,21 @@ include("includes/header.php");
                                         
                                         <?php 
                                         
-                                        if(isset($_POST['add_cart'])){
-                                            $p_id = $_POST['product_id'];
-                                            $product_qty = $_POST['product_qty'];
-                                            add_cart($p_id,$product_qty,'product-details');
-                                        }
+                                        
+                                       
+                                            if (isset($_POST['add_cart'])) {
+                                                $p_id = $_POST['product_id'];
+                                                $product_qty = $_POST['product_qty'];
+                                                if ($product_qty>$pro_qty) 
+                                                {
+                                                    echo "<script type='text/javascript'>swal('Please enter lower quantity', '', 'warning')</script>";
+                                                }
+                                                else
+                                                {
+                                                    add_cart($p_id, $product_qty, 'product-details');
+                                                }
+                                            }
+                                            
                                         ?>
 
                                         <form action="#" method="POST">
@@ -218,14 +228,16 @@ include("includes/header.php");
                                         <h6 class="option-title">qty:</h6>
                                             <div class="quantity">
                                                 
-                                                <div class="pro-qty">
-                                                <input type="number" min="1" value="1" title="At Least Enter 1 Quantity" name="product_qty">
-                                                </div>
+                                                <div class="pro-qty"style="width: 110px;" >
+                                                
+                                                <input type="number" min="1" value="1"  name="product_qty" style="width: 40px;">
+                                                
+                                            </div>
                                             </div>
                     
                                             
                                         </div>
-                                       <?php  if($pro_qty<=0)
+                                       <?php  if($pro_qty=0)
                                        {
 
                                        }
@@ -425,8 +437,8 @@ include("includes/header.php");
                                     <div class="product-item">
                                     <figure class="product-thumb">
                                         <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                            <img class="pri-img" src="assets/img/product/<?php echo $pro_img1;?>" alt="product">
-                                            <img class="sec-img" src="assets/img/product/<?php echo $pro_img2;?>" alt="product">
+                                            <img class="pri-img" src="assets/img/product/<?php echo $pro_img1;?>" alt="product" style='height:180px;'>
+                                            <img class="sec-img" src="assets/img/product/<?php echo $pro_img2;?>" alt="product" style='height:180px;'>
                                         </a>
                                         <div class="product-badge">
                                             <div class="product-label new">
@@ -446,7 +458,7 @@ include("includes/header.php");
                                         </div>-->
                                   </figure>
                                         <div class="product-caption text-center">
-                            <div class="product-identity">
+                                            <div class="product-identity">
                                                                     <p class="manufacturer-name"><a href="product-details.html">Gold</a></p>
                                                                 </div>
                                             <h6 class="product-name">

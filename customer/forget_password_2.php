@@ -15,7 +15,7 @@
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="../index.php"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Forget password</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Change password</li>
                                 </ul>
                             </nav>
                         </div>
@@ -33,15 +33,15 @@
                         <!-- Login Content Start -->
                         <div class="col-lg-6">
                             <div class="login-reg-form-wrap">
-                                <h5>Froget Password</h5>
-                                <form action="customer_login.php" method="post" >
+                                <h5>change Password</h5>
+                                <form action="#" method="post" >
                                     <div class="single-input-item">
                                         <input type="password" placeholder="Enter new password" name="pass" id="pass" required/>
                                         <span id="passMsg"></span>
                                     </div>
                                     <div class="single-input-item">
                                         <input type="password" placeholder="Enter your Password" name="c_pass" id="c_pass" required/>
-                                        <span id="pass_c_Msg"></span>
+                                        <span id="c_passMsg"></span>
                                     </div>
                                     <div class="single-input-item">
                                         <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
@@ -54,7 +54,7 @@
                                         </div>
                                     </div>
                                     <div class="single-input-item">
-                                        <button type="submit" class="btn btn-sqr" name="login" id="btnsubmit">Login</button>
+                                        <button type="submit" class="btn btn-sqr" name="login" id="btnsubmit">Change password</button>
                                     </div>
                                 </form>
                             </div>
@@ -303,11 +303,11 @@ else{
         
         function pass_check(){
             var pass=$('#pass').val();
-            var reg=/^[A-Za-z0-9]*$/
+            var reg=/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/
             if(pass.length=='')
             {
                 $("#pass").css("border","1px solid red");
-                $("#passMsg").html("<p class='text-danger'>Un-validated</p>");
+                $("#passMsg").html("<p class='text-danger'>Please fill out this field.</p>");
                 $('#passMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 pass_err=false;
@@ -321,7 +321,7 @@ else{
             if(!(reg.test(pass)))
             {
                 $("#pass").css("border","1px solid red");
-                $("#passMsg").html("<p class='text-danger'>Username</p>");
+                $("#passMsg").html("<p class='text-danger'>Invalid password.</p>");
                 $('#passMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 pass_err=false;
@@ -340,7 +340,7 @@ else{
             if(c_pass.length=='')
             {
                 $("#c_pass").css("border","1px solid red");
-                $("#c_passMsg").html("<p class='text-danger'>Un-validated</p>");
+                $("#c_passMsg").html("<p class='text-danger'>Please fill out this field.</p>");
                 $('#c_passMsg').focus();
                 $("#btnsubmit").attr("disabled",true);
                 c_pass_err=false;
@@ -366,6 +366,7 @@ else{
                 $("#btnsubmit").attr("disabled",false);
             }
         }
+        
 
     });
      </script> 

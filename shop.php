@@ -135,7 +135,7 @@ include("includes/header.php");
                                                 <a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
                                             </h6>
                                             <div class="price-box">
-                                                <span class="price-regular"><?php echo $pro_price; ?></span>
+                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
                                                 <span class="price-old"><del>Rs.50000</del></span>
                                             </div>
                                         </div>
@@ -172,7 +172,7 @@ include("includes/header.php");
 
                                             <h5 class="product-name"><a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title; ?></a></h5>
                                             <div class="price-box">
-                                                <span class="price-regular"><?php echo $pro_price; ?></span>
+                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
                                                 <span class="price-old"><del>Rs.5000</del></span>
                                             </div>
                                             <p><?php echo $pro_desc; ?></p>
@@ -318,7 +318,7 @@ include("includes/header.php");
                                                 <a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
                                             </h6>
                                             <div class="price-box">
-                                                <span class="price-regular"><?php echo $pro_price; ?></span>
+                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
                                                 <span class="price-old"><del>Rs.5000</del></span>
                                             </div>
                                         </div>
@@ -355,7 +355,7 @@ include("includes/header.php");
 
                                             <h5 class="product-name"><a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo  $pro_title;?></a></h5>
                                             <div class="price-box">
-                                                <span class="price-regular"><?php echo $pro_price; ?></span>
+                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
                                                 <span class="price-old"><del>Rs.5000</del></span>
                                             </div>
                                             <p><?php echo $pro_desc; ?></p>
@@ -503,7 +503,7 @@ include("includes/header.php");
                                                 <a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
                                             </h6>
                                             <div class="price-box">
-                                                <span class="price-regular"><?php echo $pro_price; ?></span>
+                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
                                                 <span class="price-old"><del>Rs.5000</del></span>
                                             </div>
                                         </div>
@@ -540,7 +540,7 @@ include("includes/header.php");
 
                                             <h5 class="product-name"><a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo  $pro_title;?></a></h5>
                                             <div class="price-box">
-                                                <span class="price-regular"><?php echo $pro_price; ?></span>
+                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
                                                 <span class="price-old"><del>Rs.5000</del></span>
                                             </div>
                                             <p><?php echo $pro_desc; ?></p>

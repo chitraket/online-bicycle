@@ -14,7 +14,7 @@
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="../index.php"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Forget password</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Froget password</li>
                                 </ul>
                             </nav>
                         </div>
@@ -32,7 +32,7 @@
                         <!-- Login Content Start -->
                         <div class="col-lg-6">
                             <div class="login-reg-form-wrap">
-                                <h5>Froget Password</h5>
+                                <h5>Forget Password</h5>
                                 <form action="#" method="post" >
                                     <div class="single-input-item">
                                         <input type="text" placeholder="Enter Email" name="email" id="email" required/>
@@ -116,8 +116,6 @@ if(isset($_POST['otp']))
         //Recipients
         $mail->setFrom('chitraketsavani@gmail.com', 'chitraketsavani');
         $mail->addAddress($email, $email);     // Add a recipient
-        
-
         // Attachments
         // Optional name
 
