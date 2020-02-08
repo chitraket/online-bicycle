@@ -1,3 +1,4 @@
+
 <?php
     $active='';
     include("includes/header.php");
@@ -9,9 +10,8 @@
            if(!isset($_SESSION['customer_email'])){
             echo "<script>window.open('customer/customer_login.php','_self')</script>";
               // include("customer/customer_login.php");
-           }
-           
-?> 
+           }     
+?>
 
     <!-- Start Header Area -->
 

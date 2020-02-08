@@ -40,7 +40,7 @@ include("includes/validation.php");
     <!-- main style css -->
     <link rel="stylesheet" href="assets/css/style.css">
     <!--sweet alert-->
-    <script src="../assets/js/sweetalert.min.js"></script>
+    <script src="assets/js/sweetalert.min.js"></script>
 
 </head>
 <body>

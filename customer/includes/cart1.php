@@ -81,7 +81,7 @@
                     <?php
                     if(isset($_POST["close"]))
                     {
-                        echo "<script>window.open('cart.php?p_id=$pro_id ','_self')</script>";   
+                        echo "<script>window.open('../cart.php?p_id=$pro_id ','_self')</script>";   
                     } 
                     ?>
                     <div class="minicart-pricing-box">

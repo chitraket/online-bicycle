@@ -24,70 +24,38 @@
             </div>
         </div>
         <!-- breadcrumb area end -->
-
-        <!-- login register wrapper start -->
-        <div class="login-register-wrapper section-padding">
-            <div class="container">
-                <div class="member-area-from-wrap">
-                    <div class="row">
-                        <!-- Login Content Start -->
-                        <div class="col-lg-6">
-                            <div class="login-reg-form-wrap">
-                                <h5>change Password</h5>
-                                <form action="#" method="post" >
-                                    <div class="single-input-item">
-                                        <input type="password" placeholder="Enter new password" name="pass" id="pass" required/>
-                                        <span id="passMsg"></span>
-                                    </div>
-                                    <div class="single-input-item">
-                                        <input type="password" placeholder="Enter your Password" name="c_pass" id="c_pass" required/>
-                                        <span id="c_passMsg"></span>
-                                    </div>
-                                    <div class="single-input-item">
-                                        <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                           <!-- <div class="remember-meta">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="rememberMe">
-                                                    <label class="custom-control-label" for="rememberMe">Remember Me</label>
-                                                </div>
-                                            </div>-->
-                                        </div>
-                                    </div>
-                                    <div class="single-input-item">
-                                        <button type="submit" class="btn btn-sqr" name="login" id="btnsubmit">Change password</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- Login Content End -->
-     
-                        <!-- Register Content Start -->
-                        <!-- Register Content End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- login register wrapper end -->
-    </main>
-   
-    <!-- Scroll to top start -->
-    <div class="scroll-top not-visible">
-        <i class="fa fa-angle-up"></i>
-    </div>
-    <!-- Scroll to Top End -->
-
-    <!-- footer area start -->
-    <?php
-    include("includes/footer.php");
-    ?>
-    <!-- footer area end -->
-<?php
+        <?php
+        $error_pass="";
+        $error_c_pass="";
+        $errorresult=true;
 if(!isset($_SESSION['email']))
 {
     echo "<script>window.open('forget_password.php','_self')</script>";
 }
 else{
     if (isset($_POST['login'])) {
+        if(pass($_POST['c_pass']))
+        {
+            $error_pass = "Required..";
+            $errorresult=false;
+        }
+        else
+        {
+            $error_pass = "";
+        }
+        if(c_pass($_POST['c_c_pass']))
+        {
+            $error_c_pass = "Required..";
+            $errorresult=false;
+        }
+        else
+        {
+            $error_c_pass = "";
+        }
+        if($errorresult==false)
+        {
+            goto end;
+        }
         $email=$_SESSION['email'];
         $password=$_POST['pass'];
         $update_customer = "update customers set customer_pass='$password' where customer_email='$email' ";
@@ -137,7 +105,67 @@ else{
 
     }
 }
+end:
 ?>
+        <!-- login register wrapper start -->
+        <div class="login-register-wrapper section-padding">
+            <div class="container">
+                <div class="member-area-from-wrap">
+                    <div class="row">
+                        <!-- Login Content Start -->
+                        <div class="col-lg-6">
+                            <div class="login-reg-form-wrap">
+                                <h5>change Password</h5>
+                                <form action="#" method="post" >
+                                    <div class="single-input-item">
+                                        <input type="password" placeholder="Enter new password" name="pass" id="pass" required/>
+                                        <span id="passMsg"></span>
+                                        <span style="color: red;"><?php echo $error_pass; ?></span>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <input type="password" placeholder="Enter your Password" name="c_pass" id="c_pass" required/>
+                                        <span id="c_passMsg"></span>
+                                        <span style="color: red;"><?php echo $error_c_pass; ?></span>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                           <!-- <div class="remember-meta">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="rememberMe">
+                                                    <label class="custom-control-label" for="rememberMe">Remember Me</label>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <button type="submit" class="btn btn-sqr" name="login" id="btnsubmit">Change password</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Login Content End -->
+     
+                        <!-- Register Content Start -->
+                        <!-- Register Content End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- login register wrapper end -->
+    </main>
+   
+    <!-- Scroll to top start -->
+    <div class="scroll-top not-visible">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scroll to Top End -->
+
+    <!-- footer area start -->
+    <?php
+    include("includes/footer.php");
+    ?>
+    <!-- footer area end -->
+
     <!-- Quick view modal start -->
     <div class="modal" id="quick_view">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -297,10 +325,17 @@ else{
         $('#pass').keyup(function(){
             pass_check();
         });
+         
+        $('#pass').focusout(function(){
+            pass_check();
+        });
         $('#c_pass').keyup(function(){
             c_pass_check();
         });
-        
+         
+        $('#pass').focusout(function(){
+            pass_check();
+        });
         function pass_check(){
             var pass=$('#pass').val();
             var reg=/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/

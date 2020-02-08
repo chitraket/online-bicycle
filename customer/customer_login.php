@@ -33,47 +33,39 @@ if(isset($_SESSION['customer_email']))
             </div>
         </div>
         <!-- breadcrumb area end -->
+        <?php 
 
-        <!-- login register wrapper start -->
-        <div class="login-register-wrapper section-padding">
-            <div class="container">
-                <div class="member-area-from-wrap">
-                    <div class="row">
-                        <!-- Login Content Start -->
-                        <div class="col-lg-6">
-                            <div class="login-reg-form-wrap">
-                                <h5>Sign In</h5>
-                                <form action="customer_login.php" method="post" onsubmit="return submit_check()">
-                                    <div class="single-input-item">
-                                        <input type="text" placeholder="Email or Username" name="c_email" id="email" required/>
-                                        <span id="emailMsg"></span>
-                                    </div>
-                                    <div class="single-input-item">
-                                        <input type="password" placeholder="Enter your Password" name="c_pass" id="pass" required/>
-                                        <span id="passMsg"></span>
-                                    </div>
-                                    <div class="single-input-item">
-                                        <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                           <!-- <div class="remember-meta">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="rememberMe">
-                                                    <label class="custom-control-label" for="rememberMe">Remember Me</label>
-                                                </div>
-                                            </div>-->
-                                            <a href="forget_password.php" class="forget-pwd">Forget Password?</a>
-                                        </div>
-                                    </div>
-                                    <div class="single-input-item">
-                                        <button type="submit" class="btn btn-sqr" name="login" id="btnsubmit">Login</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- Login Content End -->
-                        <?php 
+$error_pass="";
+$error_email="";
+$errorresult=true;
 
 if(isset($_POST['login'])){
+
+    if(email($_POST['c_email']))
+    {
+        $error_email = "Required..";
+        $errorresult=false;
+    }
+    else
+    {
+        $error_email = "";
+    }
+    if(pass($_POST['c_pass']))
+    {
+        $error_pass = "Required..";
+        $errorresult=false;
+    }
+    else
+    {
+        $error_pass = "";
+    }
     
+    if($errorresult==false)
+    {
+        goto end;
+    }
+    
+
     $customer_email = $_POST['c_email'];
     
     $customer_pass = $_POST['c_pass'];
@@ -93,9 +85,22 @@ if(isset($_POST['login'])){
    $check_cart = mysqli_num_rows($run_cart);
     
     if($check_customer==0){
-        
-        echo "<script type='text/javascript'>swal('Your email or password is wrong', '', 'error')</script>";
-        
+        ?>
+         <script type="text/javascript">
+         swal({
+                   title: "Your email or password is wrong",
+                   text: "",
+                   icon: "error",
+                   buttons: true,
+                   successMode: true,
+           })
+           .then((willDelete) => {
+                   if (willDelete) {
+                       window.open('customer_login.php','_self');
+                   } 
+           });
+           </script>
+        <?php
         exit();
     }
     
@@ -142,8 +147,47 @@ if(isset($_POST['login'])){
     }
     
 }
-
+end:
 ?>
+        <!-- login register wrapper start -->
+        <div class="login-register-wrapper section-padding">
+            <div class="container">
+                <div class="member-area-from-wrap">
+                    <div class="row">
+                        <!-- Login Content Start -->
+                        <div class="col-lg-6">
+                            <div class="login-reg-form-wrap">
+                                <h5>Sign In</h5>
+                                <form action="customer_login.php" method="post" onsubmit="return submit_check()">
+                                    <div class="single-input-item">
+                                        <input type="text" placeholder="Email or Username" name="c_email" id="email" />
+                                        <span id="emailMsg"></span>
+                                        <span style="color: red;"><?php echo $error_email; ?></span>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <input type="password" placeholder="Enter your Password" name="c_pass" id="pass" />
+                                        <span id="passMsg"></span>
+                                        <span style="color: red;"><?php echo $error_pass; ?></span>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                           <!-- <div class="remember-meta">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="rememberMe">
+                                                    <label class="custom-control-label" for="rememberMe">Remember Me</label>
+                                                </div>
+                                            </div>-->
+                                            <a href="forget_password.php" class="forget-pwd">Forget Password?</a>
+                                        </div>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <button type="submit" class="btn btn-sqr" name="login" id="btnsubmit">Login</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Login Content End -->
+ 
                         <!-- Register Content Start -->
                         <!-- Register Content End -->
                     </div>
@@ -313,7 +357,7 @@ if(isset($_POST['login'])){
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
 
-    <script type="text/javascript">
+   <script type="text/javascript">
 	$(document).ready(function(){
         var email_err=true;
         var pass_err=true;
@@ -327,6 +371,9 @@ if(isset($_POST['login'])){
             email_check();
         });
         $('#pass').keyup(function(){
+            pass_check();
+        });
+        $('#pass').focusout(function(){
             pass_check();
         });
         function email_check(){

@@ -216,7 +216,7 @@ end:
                                 <div class="row">
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
-                                                    <input type="text" name="c_name" id="f_name" placeholder="Enter your First name" autocomplete="off" required>
+                                                    <input type="text" name="c_name" id="f_name" placeholder="Enter your First name" autocomplete="off" >
                                                     <span style="color: red;"><?php echo $error_c_name;?></span>
                                                     <span id="f_nameMsg"></span>
                                                     
@@ -224,7 +224,7 @@ end:
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
-                                                <input type="text" placeholder="Enter your Last name" name="c_lname" id="l_name"  autocomplete="off" required/>
+                                                <input type="text" placeholder="Enter your Last name" name="c_lname" id="l_name"  autocomplete="off" />
                                                 <span id="l_nameMsg"></span>
                                                 <span style="color: red;"><?php echo $error_l_name; ?></span>
                                             </div>
@@ -233,7 +233,7 @@ end:
 
                 
                                     <div class="single-input-item">
-                                        <input type="email" placeholder="Enter your Email" name="c_email"  id="email" autocomplete="off"   required/>
+                                        <input type="email" placeholder="Enter your Email" name="c_email"  id="email" autocomplete="off"/>
                                         <span id="emailMsg"></span>
                                         <span style="color: red;"><?php echo $error_email; ?></span>
                                     </div>
@@ -241,50 +241,50 @@ end:
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
-                                                <input type="password" placeholder="Enter your Password" id="pass" name="c_pass" required/>
+                                                <input type="password" placeholder="Enter your Password" id="pass" name="c_pass"/>
                                                 <span id="passMsg"></span>
                                                 <span style="color: red;"><?php echo $error_pass; ?></span>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
-                                                <input type="password" placeholder="Repeat your Password" id="c_pass" name="c_c_pass" required/>
+                                                <input type="password" placeholder="Repeat your Password" id="c_pass" name="c_c_pass" />
                                                 <span id="c_passMsg"></span>
                                                 <span style="color: red;"><?php echo $error_c_pass; ?></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Enter your state" name="c_state" id="state" required/>
+                                        <input type="text" placeholder="Enter your state" name="c_state" id="state"/>
                                         <span id="stateMsg"></span>
                                         <span style="color: red;"><?php echo $error_state; ?></span>
                                     </div>
                            
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Enter your City" name="c_city" id="city" required/>
+                                        <input type="text" placeholder="Enter your City" name="c_city" id="city" />
                                         <span id="cityMsg"></span>
                                         <span style="color: red;"><?php echo $error_city; ?></span>
                                     </div>
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Enter your contact " name="c_contact" id="contact" required/>
+                                        <input type="text" placeholder="Enter your contact " name="c_contact" id="contact"/>
                                         <span id="contactMsg"></span>
                                         <span style="color: red;"><?php echo $error_c_contact; ?></span>
                                     </div>
 
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Enter your Address" name="c_address"  id="address" required/>
+                                        <input type="text" placeholder="Enter your Address" name="c_address"  id="address"/>
                                         <span id="addressMsg"></span>
                                         <span style="color: red;"><?php echo $error_address; ?></span>
                                     </div>
 
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Enter your Pincode" name="c_pincode" id="pincode" required/>
+                                        <input type="text" placeholder="Enter your Pincode" name="c_pincode" id="pincode" />
                                         <span id="pincodeMsg"></span>
                                         <span style="color: red;"><?php echo $error_pincode; ?></span>
                                     </div>
 
                                     <div class="single-input-item">
-                                    <input type="file"  name="c_image"  required/>
+                                    <input type="file"  name="c_image" />
                                     </div>
                                    
                                     <div class="single-input-item">
@@ -457,7 +457,7 @@ end:
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
 
-   <script type="text/javascript">
+  <script type="text/javascript">
 	$(document).ready(function(){
 		// set initially button state hidden
         var f_name_err=true;
@@ -476,31 +476,70 @@ end:
         $('#f_name').keyup(function(){
             f_name_check();
         });
+        $('#f_name').focusout(function(){
+            f_name_check();
+        });
+
         $('#l_name').keyup(function(){
             l_name_check();
         });
+        $('#l_name').focusout(function(){
+            l_name_check();
+        });
+
         $('#email').keyup(function(){
             email_check();
         });
+        $('#email').focusout(function(){
+            email_check();
+        });
+
         $('#pass').keyup(function(){
             pass_check();
         });
+        $('#pass').focusout(function(){
+            pass_check();
+        });
+
         $('#c_pass').keyup(function(){
             c_pass_check();
         });
+        $('#c_pass').focusout(function(){
+            c_pass_check();
+        });
+
         $('#state').keyup(function(){
             state_check();
         });
+        $('#state').focusout(function(){
+            state_check();
+        });
+
         $('#city').keyup(function(){
             city_check();
         });
+        $('#city').focusout(function(){
+            city_check();
+        });
+
         $('#contact').keyup(function(){
             contact_check();
         });
+        $('#contact').focusout(function(){
+            contact_check();
+        });
+
         $('#pincode').keyup(function(){
             pincode_check();
         });
+        $('#pincode').focusout(function(){
+            pincode_check();
+        });
+
         $('#address').keyup(function(){
+            address_check();
+        });
+        $('#address').focusout(function(){
             address_check();
         });
 		// use keyup event on email field

@@ -297,6 +297,9 @@ else{
         $('#email').keyup(function(){
             email_check();
         });
+        $('#email').focusout(function(){
+            email_check();
+        }); 
        
         function email_check(){
             var email=$('#email').val();

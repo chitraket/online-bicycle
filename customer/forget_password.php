@@ -23,67 +23,28 @@
             </div>
         </div>
         <!-- breadcrumb area end -->
-
-        <!-- login register wrapper start -->
-        <div class="login-register-wrapper section-padding">
-            <div class="container">
-                <div class="member-area-from-wrap">
-                    <div class="row">
-                        <!-- Login Content Start -->
-                        <div class="col-lg-6">
-                            <div class="login-reg-form-wrap">
-                                <h5>Forget Password</h5>
-                                <form action="#" method="post" >
-                                    <div class="single-input-item">
-                                        <input type="text" placeholder="Enter Email" name="email" id="email" required/>
-                                        <span id="emailMsg"></span>
-                                    </div>
-                                    
-                                    <div class="single-input-item">
-                                        <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                           <!-- <div class="remember-meta">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="rememberMe">
-                                                    <label class="custom-control-label" for="rememberMe">Remember Me</label>
-                                                </div>
-                                            </div>-->
-                                        </div>
-                                    </div>
-                                    <div class="single-input-item">
-                                        <button type="submit" class="btn btn-sqr" name="otp" id="btnsubmit" onclick="send_otp()">Send OTP</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- Login Content End -->
-                        
-                        <!-- Register Content Start -->
-                        <!-- Register Content End -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- login register wrapper end -->
-    </main>
-   
-    <!-- Scroll to top start -->
-    <div class="scroll-top not-visible">
-        <i class="fa fa-angle-up"></i>
-    </div>
-    <!-- Scroll to Top End -->
-
-    <!-- footer area start -->
-    <?php
-    include("includes/footer.php");
-    ?>
-    <!-- footer area end -->
-   
-<?php
+        <?php
   use PHPMailer\PHPMailer\PHPMailer;
   use PHPMailer\PHPMailer\SMTP;
   use PHPMailer\PHPMailer\Exception;
+  $error_email="";
+  $errorresult=true;
 if(isset($_POST['otp']))
 {
+    if(email($_POST['email']))
+    {
+        $error_email = "Required..";
+        $errorresult=false;
+    }
+    else
+    {
+        $error_email = "";
+    }
+
+    if($errorresult==false)
+    {
+        goto end;
+    }
     $email=$_POST['email'];
     $get_products="select * from customers where customer_email='$email'";
     $run_products=mysqli_query($con,$get_products);
@@ -174,7 +135,64 @@ if(isset($_POST['otp']))
         }
 
 } 
+end:
 ?>
+        <!-- login register wrapper start -->
+        <div class="login-register-wrapper section-padding">
+            <div class="container">
+                <div class="member-area-from-wrap">
+                    <div class="row">
+                        <!-- Login Content Start -->
+                        <div class="col-lg-6">
+                            <div class="login-reg-form-wrap">
+                                <h5>Forget Password</h5>
+                                <form action="forget_password.php" method="post" >
+                                    <div class="single-input-item">
+                                        <input type="text" placeholder="Enter Email" name="email" id="email" />
+                                        <span id="emailMsg"></span>
+                                        <span style="color: red;"><?php echo $error_email; ?></span>
+                                    </div>
+                                    
+                                    <div class="single-input-item">
+                                        <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
+                                           <!-- <div class="remember-meta">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="rememberMe">
+                                                    <label class="custom-control-label" for="rememberMe">Remember Me</label>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="single-input-item">
+                                        <button type="submit" class="btn btn-sqr" name="otp" id="btnsubmit" onclick="send_otp()">Send OTP</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- Login Content End -->
+                        
+                        <!-- Register Content Start -->
+                        <!-- Register Content End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- login register wrapper end -->
+    </main>
+   
+    <!-- Scroll to top start -->
+    <div class="scroll-top not-visible">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scroll to Top End -->
+
+    <!-- footer area start -->
+    <?php
+    include("includes/footer.php");
+    ?>
+    <!-- footer area end -->
+   
+
     <!-- Quick view modal start -->
     <div class="modal" id="quick_view">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -325,7 +343,7 @@ if(isset($_POST['otp']))
     
     
 
-    <script type="text/javascript">
+   <script type="text/javascript">
 	$(document).ready(function(){
         var email_err=true;
         
@@ -335,7 +353,9 @@ if(isset($_POST['otp']))
         $('#email').keyup(function(){
             email_check();
         });
-       
+        $('#email').focusout(function(){
+            email_check();
+        });
         function email_check(){
             var email=$('#email').val();
             var reg=/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
