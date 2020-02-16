@@ -273,7 +273,7 @@ if(isset($_GET['pro_id']))
                         <div class="col-lg-2">
                             <div class="logo">
                                 <a href="index.php">
-                                    <img src="assets/img/logo/logo.png" alt="Brand Logo">
+                                    <img src="assets/img/logo/logo.png" alt="Brand Logo" style="height: 30px">
                                 </a>
                             </div>
                         </div>

@@ -41,7 +41,6 @@ function add_cart($p_id,$product_qty,$pagename){
         }
         echo "<script>window.open('$pagepath','_self')</script>"; 
 }
-
 function getPro(){
     global $db;
     $get_products="select * from products where p_cat_id='1'";

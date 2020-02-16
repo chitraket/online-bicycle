@@ -6,8 +6,8 @@
                         <div class="widget-item">
                             <div class="widget-title">
                                 <div class="widget-logo">
-                                    <a href="index.html">
-                                        <img src="assets/img/logo/logo.png" alt="brand logo">
+                                    <a href="index.php">
+                                        <img src="assets/img/logo/logo.png" alt="brand logo" style="height: 40px">
                                     </a>
                                 </div>
                             </div>

@@ -229,20 +229,17 @@ include("includes/header.php");
                                             <div class="quantity">
                                                 
                                                 <div class="pro-qty"style="width: 110px;" >
-                                                
-                                                <input type="number" min="1" value="1"  name="product_qty" style="width: 40px;">
-                                                
-                                            </div>
-                                            </div>
-                    
-                                            
+                                                    <input type="number" min="1" value="1"  name="product_qty" style="width: 40px;">
+                                                </div>
+                                            </div> 
                                         </div>
                                        <?php  if($pro_qty=0)
                                        {
 
                                        }
                                     else
-                                    {?>
+                                    {
+                                    ?>
                                         <input type="hidden" name="product_id" value="<?php echo $product_id; ?>"/>
                                             <div class="action_link" style="margin-top: -10px;">
                                                 <input type="submit" class="btn btn-cart2" name="add_cart" value="Add to cart" >

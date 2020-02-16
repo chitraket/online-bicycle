@@ -1,145 +1,98 @@
-<?php 
-
-    session_start();
-    include("includes/db.php");
-    
-    if(!isset($_SESSION['admin_email'])){
-        
-        echo "<script>window.open('login.php','_self')</script>";
-        
-    }else{
-        
-        $admin_session = $_SESSION['admin_email'];
-        
-        $get_admin = "select * from admins where admin_email='$admin_session'";
-        
-        $run_admin = mysqli_query($con,$get_admin);
-        
-        $row_admin = mysqli_fetch_array($run_admin);
-        
-        $admin_id = $row_admin['admin_id'];
-        
-        $admin_name = $row_admin['admin_name'];
-        
-        $admin_email = $row_admin['admin_email'];
-        
-        $admin_image = $row_admin['admin_image'];
-        
-        $admin_country = $row_admin['admin_country'];
-        
-        
-        
-        $admin_contact = $row_admin['admin_contact'];
-        
-       
-        
-        $get_products = "select * from products";
-        
-        $run_products = mysqli_query($con,$get_products);
-        
-        $count_products = mysqli_num_rows($run_products);
-        
-        $get_customers = "select * from customers";
-        
-        $run_customers = mysqli_query($con,$get_customers);
-        
-        $count_customers = mysqli_num_rows($run_customers);
-        
-        $get_p_categories = "select * from product_categories";
-        
-        $run_p_categories = mysqli_query($con,$get_p_categories);
-        
-        $count_p_categories = mysqli_num_rows($run_p_categories);
-        
-        
+<?php
+ session_start();
+ include("includes/db.php");
+ if(!isset($_SESSION['admin_email']))
+ {
+     echo "<script>window.open('auth-login.php','_self')</script>";
+ } 
+ else{
 
 ?>
+            <!-- ========== Left Sidebar Start ========== -->
+    <?php
+    include("includes/header.php");
+    include("includes/sidebar.php"); 
+    ?>
+<!-- Left Sidebar End -->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>M-Dev Store Admin Area</title>
-    <link rel="stylesheet" href="css/bootstrap-337.min.css">
-    <link rel="stylesheet" href="font-awsome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <?php
+            include("dashboard.php"); 
+            ?>
+            <!-- end main content-->
 
-    <div id="wrapper"><!-- #wrapper begin -->
-       
-       <?php include("includes/sidebar.php"); ?>
-       
-        <div id="page-wrapper"><!-- #page-wrapper begin -->
-            <div class="container-fluid"><!-- container-fluid begin -->
-                
-                <?php
-                
-                    if(isset($_GET['dashboard'])){
-                        
-                        include("dashboard.php");
-                        
-                }   if(isset($_GET['insert_product'])){
-                        
-                        include("insert_product.php");
-                        
-                }   if(isset($_GET['view_products'])){
-                        
-                        include("view_products.php");
-                        
-                }   if(isset($_GET['delete_product'])){
-                        
-                        include("delete_product.php");
-                        
-                }   if(isset($_GET['edit_product'])){
-                        
-                        include("edit_product.php");
-                        
-                }   if(isset($_GET['insert_p_cat'])){
-                        
-                        include("insert_p_cat.php");
-                        
-                }   if(isset($_GET['view_p_cats'])){
-                        
-                        include("view_p_cats.php");
-                        
-                }   if(isset($_GET['delete_p_cat'])){
-                        
-                        include("delete_p_cat.php");
-                        
-                }   if(isset($_GET['edit_p_cat'])){
-                        
-                        include("edit_p_cat.php");
-                        
-                }   if(isset($_GET['insert_cat'])){
-                        
-                        include("insert_cat.php");
-                        
-                }   if(isset($_GET['view_cats'])){
-                        
-                        include("view_cats.php");
-                        
-                }   if(isset($_GET['edit_cat'])){
-                        
-                        include("edit_cat.php");
-                        
-                }   if(isset($_GET['delete_cat'])){
-                        
-                        include("delete_cat.php");
-                        
-                }   
-        
-                ?>
-                
-            </div><!-- container-fluid finish -->
-        </div><!-- #page-wrapper finish -->
-    </div><!-- wrapper finish -->
+        </div>
+        <!-- END layout-wrapper -->
 
-<script src="js/jquery-331.min.js"></script>     
-<script src="js/bootstrap-337.min.js"></script>           
-</body>
+        <!-- Right Sidebar -->
+        <div class="right-bar">
+            <div data-simplebar class="h-100">
+                <div class="rightbar-title px-3 py-4">
+                    <a href="javascript:void(0);" class="right-bar-toggle float-right">
+                        <i class="mdi mdi-close noti-icon"></i>
+                    </a>
+                    <h5 class="m-0">Settings</h5>
+                </div>
+
+                <!-- Settings -->
+                <hr class="mt-0" />
+                <h6 class="text-center mb-0">Choose Layouts</h6>
+
+                <div class="p-4">
+                    <div class="mb-2">
+                        <img src="assets/images/layouts/layout-1.jpg" class="img-fluid img-thumbnail" alt="">
+                    </div>
+                    <div class="custom-control custom-switch mb-3">
+                        <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
+                        <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
+                    </div>
+    
+                    <div class="mb-2">
+                        <img src="assets/images/layouts/layout-2.jpg" class="img-fluid img-thumbnail" alt="">
+                    </div>
+                    <div class="custom-control custom-switch mb-3">
+                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="assets/css/bootstrap-dark.min.css" data-appStyle="assets/css/app-dark.min.css" />
+                        <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
+                    </div>
+    
+                    <div class="mb-2">
+                        <img src="assets/images/layouts/layout-3.jpg" class="img-fluid img-thumbnail" alt="">
+                    </div>
+                    <div class="custom-control custom-switch mb-5">
+                        <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appStyle="assets/css/app-rtl.min.css" />
+                        <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
+                    </div>
+
+            
+                </div>
+
+            </div> <!-- end slimscroll-menu-->
+        </div>
+        <!-- /Right-bar -->
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <!-- JAVASCRIPT -->
+        <script src="assets/libs/jquery/jquery.min.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="assets/libs/node-waves/waves.min.js"></script>
+
+        <!-- apexcharts -->
+        <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+        <script src="assets/js/pages/dashboard.init.js"></script>
+
+        <script src="assets/js/app.js"></script>
+    </body>
+
+
+<!-- Mirrored from themesbrand.com/skote/layouts/vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:43:03 GMT -->
 </html>
-
-
-<?php } ?>
+<?php 
+}
+?>

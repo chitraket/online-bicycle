@@ -31,7 +31,7 @@
                    <?php  
                    if(isset($_GET['txnid']))
                         {
-                            $txnids=$_GET['txnid'];
+                            $txnid=$_GET['txnid'];
                             //$_SESSION['txn_id']=$txnid;
                             echo "<p>Transaction ID:$txnid</p>";
                         }
@@ -94,9 +94,9 @@
                            
                                     <tbody>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="admin_areas/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
+                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
                                             <td class="pro-title"><a href="product-details.php?pro_id=<?php echo $pro_id ?>"><?php  echo $product_title ?></a></td>
-                                            <td class="pro-price"><span>Rs.<?php echo $product_prices ?></span></td>
+                                            <td class="pro-price"><span>Rs.<?php echo $product_price ?></span></td>
                                             <td class="pro-quantity">
                                             <span><?php echo $pro_qty ?></span>
                                             </td>
@@ -155,7 +155,7 @@
                                         <table class="table">
                                             <tr>
                                                 <td>Sub Total</td>
-                                                <td>Rs.<?php echo $totals ?></td>
+                                                <td>Rs.<?php echo $total ?></td>
                                             </tr>
                                            <!-- <tr>
                                                 <td>Shipping</td>
@@ -163,7 +163,7 @@
                                             </tr>-->
                                             <tr class="total">
                                                 <td>Total</td>
-                                                <td class="total-amount">Rs.<?php echo $totals ?></td>
+                                                <td class="total-amount">Rs.<?php echo $total ?></td>
                                             </tr>
                                         </table>
                                     </div>
