@@ -58,48 +58,50 @@
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-envelope"></i>
-                    <span>Email</span>
+                    <span>Product Category</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="email-inbox.html">Inbox</a></li>
-                    <li><a href="email-read.html">Read Email</a></li>
+                    <li><a href="add-product-category.php">Add Product Category</a></li>
+                    <li><a href="view-product-category.php">View Product Category</a></li>
                 </ul>
             </li>
 
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-receipt"></i>
-                    <span>Invoices</span>
+                    <span>Category</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="invoices-list.html">Invoice List</a></li>
-                    <li><a href="invoices-detail.html">Invoice Detail</a></li>
+                    <li><a href="add-category.php">Add Category</a></li>
+                    <li><a href="view-category.php">view Category</a></li>
                 </ul>
             </li>
 
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-briefcase-alt-2"></i>
-                    <span>Projects</span>
+                    <span>Slider</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="projects-grid.html">Projects Grid</a></li>
-                    <li><a href="projects-list.html">Projects List</a></li>
-                    <li><a href="projects-overview.html">Project Overview</a></li>
-                    <li><a href="projects-create.html">Create New</a></li>
+                    <li><a href="add-slider.php">Add slider</a></li>
+                    <li><a href="view-slider.php">View slider</a></li>
                 </ul>
             </li>
 
             <li>
-                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <a href="view-customer.php" >
                     <i class="bx bx-task"></i>
-                    <span>Tasks</span>
+                    <span>View customer</span>
                 </a>
-                <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="tasks-list.html">Task List</a></li>
-                    <li><a href="tasks-kanban.html">Kanban Board</a></li>
-                    <li><a href="tasks-create.html">Create Task</a></li>
-                </ul>
+               
+            </li>
+
+            <li>
+                <a href="view-order.php" >
+                    <i class="bx bx-task"></i>
+                    <span>View Orders</span>
+                </a>
+               
             </li>
 
             <li>

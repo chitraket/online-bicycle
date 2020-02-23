@@ -6,14 +6,12 @@
      echo "<script>window.open('auth-login.php','_self')</script>";
  } 
  else{
-    
-
-
      ?>
             <!-- ========== Left Sidebar Start ========== -->
     <?php
-    include("includes/header.php");
-     include("includes/sidebar.php"); ?>
+        include("includes/header.php");
+        include("includes/sidebar.php"); 
+    ?>
 
             <!-- Left Sidebar End -->
 
@@ -31,12 +29,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Data Tables</h4>
+                                    <h4 class="mb-0 font-size-18">View Product Category</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                                            <li class="breadcrumb-item active">Data Tables</li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Product Category</a></li>
+                                            <li class="breadcrumb-item active">View Product Category</li>
                                         </ol>
                                     </div>
                                     
@@ -48,17 +46,15 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">Default Datatable</h4>
+                                        
                                         
                                        
                                         <table id="employee_data" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
-                                                <th>Product img</th>
-                                                <th>Product Name</th>
-                                                <th>Product price</th>
-                                                <th>Product qty</th>
-                                                <th>Product available qty</th>
+                                                <th>Product Categories Title</th>
+                                                <th>Product categories Description</th>
+                                               
                                                 <th>Action</th>
                                                
                                                 
@@ -69,18 +65,16 @@
                                             
                                             <?php
                                             
-                                              $select_cat="SELECT * FROM products ORDER BY product_id DESC";
+                                              $select_cat="SELECT * FROM product_categories ORDER BY p_cat_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
                                                
                                                 echo'<tr>
-                                                <td>
-                                                <img src="product_images/'.$row_cart["product_img1"].'" width="50" height="50"></td>
-                                                <td>'.$row_cart["product_title"].'</td>
-                                                <td>'.$row_cart["product_price"].'</td>
-                                                <td>'.$row_cart["product_qty"].'</td>
-                                                <td>'.$row_cart["available_qty"].'</td>
-                                                <td><a href="delete-product.php?product_id='.$row_cart["product_id"].'"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-product.php?product_id='.$row_cart["product_id"].'" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
+                                                
+                                                
+                                                <td>'.$row_cart["p_cat_title"].'</td>
+                                                <td>'.$row_cart["p_cat_desc"].'</td>
+                                                <td><a href="delete-product-category.php?p_cat_id='.$row_cart["p_cat_id"].'"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-product-category.php?p_cat_id='.$row_cart["p_cat_id"].'" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>';
                                                  }?>
                                             </tbody>
@@ -99,11 +93,9 @@
                 
                
                 <!-- end modal -->
-                
                <?php 
-                include("includes/footer.php");
+               include("includes/footer.php");
                ?>
-
             </div>
             </form>
             <!-- end main content-->

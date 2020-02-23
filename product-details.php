@@ -193,8 +193,6 @@ include("includes/header.php");
                                         
                                         <?php 
                                         
-                                        
-                                       
                                             if (isset($_POST['add_cart'])) {
                                                 $p_id = $_POST['product_id'];
                                                 $product_qty = $_POST['product_qty'];
@@ -206,8 +204,7 @@ include("includes/header.php");
                                                 {
                                                     add_cart($p_id, $product_qty, 'product-details');
                                                 }
-                                            }
-                                            
+                                            }  
                                         ?>
 
                                         <form action="#" method="POST">

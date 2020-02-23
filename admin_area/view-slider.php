@@ -31,7 +31,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Data Tables</h4>
+                                    <h4 class="mb-0 font-size-18">View Slider</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
@@ -48,17 +48,17 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">Default Datatable</h4>
+                                        <h4 class="card-title">View Slider </h4>
                                         
                                        
                                         <table id="employee_data" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
-                                                <th>Product img</th>
-                                                <th>Product Name</th>
-                                                <th>Product price</th>
-                                                <th>Product qty</th>
-                                                <th>Product available qty</th>
+                                                <th>Slider img</th>
+                                                <th>Slider Name</th>
+                                                <th>Slider Row</th>
+                                                <th>Slider Row</th>
+                                                
                                                 <th>Action</th>
                                                
                                                 
@@ -69,18 +69,17 @@
                                             
                                             <?php
                                             
-                                              $select_cat="SELECT * FROM products ORDER BY product_id DESC";
+                                              $select_cat="SELECT * FROM slider ORDER BY slide_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
                                                
                                                 echo'<tr>
                                                 <td>
-                                                <img src="product_images/'.$row_cart["product_img1"].'" width="50" height="50"></td>
-                                                <td>'.$row_cart["product_title"].'</td>
-                                                <td>'.$row_cart["product_price"].'</td>
-                                                <td>'.$row_cart["product_qty"].'</td>
-                                                <td>'.$row_cart["available_qty"].'</td>
-                                                <td><a href="delete-product.php?product_id='.$row_cart["product_id"].'"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-product.php?product_id='.$row_cart["product_id"].'" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
+                                                <img src="slides_images/'.$row_cart["slide_image"].'" width="150" height="80"></td>
+                                                <td>'.$row_cart["slide_name"].'</td>
+                                                <td>'.$row_cart["slide_row"].'</td>
+                                                <td>'.$row_cart["slide_row_2"].'</td>
+                                                <td><a href="delete-slider.php?slide_id='.$row_cart["slide_id"].'"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-slider.php?slide_id='.$row_cart["slide_id"].'" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>';
                                                  }?>
                                             </tbody>

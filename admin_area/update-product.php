@@ -423,7 +423,7 @@ if(isset($_GET['product_id'])){
                             <div class="form-group row">
                                 <label for="example-number-input" class="col-md-3 col-form-label">Product Desc</label>
                                 <div class="col-md-9">
-                                <textarea required class="form-control" placeholder="Product Desc" name="product_desc" cols="19" rows="6" ></textarea>
+                                <textarea required class="form-control" placeholder="Product Desc" name="product_desc" cols="19" rows="6" ><?php echo $p_desc; ?></textarea>
                                 </div>
                             </div>
                             <div class="form-group mt-4">
@@ -444,6 +444,7 @@ if(isset($_GET['product_id'])){
     </div>
 </div>
 </div>
+
         <!-- JAVASCRIPT -->
         <script src="assets/libs/jquery/jquery.min.js"></script>
         <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>

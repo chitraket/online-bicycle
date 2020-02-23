@@ -115,7 +115,7 @@
                         </div>
                     </div>
                     <div class="row">
-                    <!--<div class="col-lg-6 mr-auto">
+                    <div class="col-lg-6 mr-auto">
                         <div class="contact-info">
                             <h4 class="contact-title"></h4>
                             <?php 
@@ -138,14 +138,13 @@
                                     }
                                        
                                 ?>                            
-
                             <ul style="margin-top: 20px;">
                             <li><i class="fa fa-map"></i> Address : <?php echo $customer_address; ?></li>
                                 <li><i class="fa fa-envelope-o"></i> E-mail: <?php echo $customer_email; ?></li>
                                 <li><i class="fa fa-phone"></i>Phone: +91 <?php echo $customer_phone;?></li>
                             </ul>
                         </div>
-                    </div>-->
+                    </div>
                         <div class="col-lg-5 ml-auto">
                             <!-- Cart Calculation Area -->
                             <div class="cart-calculator-wrapper">

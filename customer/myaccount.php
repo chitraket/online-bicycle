@@ -133,7 +133,7 @@ include("functions/functions.php");
                                                 else{
                                                 
                                                     echo"
-                                                    <li><a href='customer/myaccount.php'>My Account</a></li>";
+                                                    <li><a href='myaccount.php'>My Account</a></li>";
                                                     echo"
                                                     <li><a href='logout.php'>Log Out</a></li>";
                                                     

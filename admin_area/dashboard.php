@@ -175,7 +175,5 @@
                 </div>
                 <!-- end modal -->
 
-                <?php
-                 include("includes/footer.php"); 
-                ?>
+               
             </div>

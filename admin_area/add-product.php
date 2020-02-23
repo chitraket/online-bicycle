@@ -9,12 +9,11 @@
      ?>
             <!-- ========== Left Sidebar Start ========== -->
     <?php
-    include("includes/header.php");
-     include("includes/sidebar.php"); 
+        include("includes/header.php");
+        include("includes/sidebar.php"); 
      ?>
 
 <div class="main-content">
-
 <div class="page-content">
     <div class="container-fluid">
 
@@ -327,6 +326,9 @@
         </div>
         <!-- end row -->
         <?php 
+        include("includes/footer.php");
+        ?>
+        <?php 
 
         if(isset($_POST['submit'])){
             
@@ -358,7 +360,6 @@
             $product_brakeset=$_POST['product_brakeset'];
             $product_desc = $_POST['product_desc'];
 
-            
             $product_img1 = $_FILES['product_img1']['name'];
             $product_img2 = $_FILES['product_img2']['name'];
             $product_img3 = $_FILES['product_img3']['name'];
@@ -378,7 +379,7 @@
             if($run_product){
                 
                 echo "<script>alert('Product has been inserted sucessfully')</script>";
-                echo "<script>window.open('index.php?view_products','_self')</script>";
+                echo "<script>window.open('view-product.php','_self')</script>";
                 
             }
             

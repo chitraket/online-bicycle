@@ -108,8 +108,8 @@ include("includes/header.php");
                                     <div class="product-item">
                                         <figure class="product-thumb">
                                             <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                                <img class="pri-img" src="assets/img/product/<?php echo $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="assets/img/product/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
+                                                <img class="pri-img" src="admin_area/product_images/<?php echo $pro_img1; ?>" alt="product" style="height:180px;">
+                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
                                             </a>
                                             <div class="product-badge">
                                                 <div class="product-label new">
@@ -146,8 +146,8 @@ include("includes/header.php");
                                     <div class="product-list-item">
                                         <figure class="product-thumb">
                                             <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                                <img class="pri-img" src="assets/img/product/<?php echo  $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="assets/img/product/<?php echo $pro_img2; ?>" alt="product" style="height:180px;">
+                                                <img class="pri-img" src="admin_area/product_images/<?php echo  $pro_img1; ?>" alt="product" style="height:180px;">
+                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2; ?>" alt="product" style="height:180px;">
                                             </a>
                                             <div class="product-badge">
                                                 <div class="product-label new">
@@ -291,8 +291,8 @@ include("includes/header.php");
                                     <div class="product-item">
                                         <figure class="product-thumb">
                                             <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                                <img class="pri-img" src="assets/img/product/<?php echo $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="assets/img/product/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
+                                                <img class="pri-img" src="admin_area/product_images/<?php echo $pro_img1; ?>" alt="product" style="height:180px;">
+                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
                                             </a>
                                             <div class="product-badge">
                                                 <div class="product-label new">
@@ -329,8 +329,8 @@ include("includes/header.php");
                                     <div class="product-list-item">
                                         <figure class="product-thumb">
                                             <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                                <img class="pri-img" src="assets/img/product/<?php echo  $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="assets/img/product/<?php echo $pro_img2; ?>" alt="product" style="height:180px;">
+                                                <img class="pri-img" src="admin_area/product_images/<?php echo  $pro_img1; ?>" alt="product" style="height:180px;">
+                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2; ?>" alt="product" style="height:180px;">
                                             </a>
                                             <div class="product-badge">
                                                 <div class="product-label new">
@@ -476,8 +476,8 @@ include("includes/header.php");
                                     <div class="product-item">
                                         <figure class="product-thumb">
                                             <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                                <img class="pri-img" src="assets/img/product/<?php echo $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="assets/img/product/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
+                                                <img class="pri-img" src="admin_area/product_images/<?php echo $pro_img1; ?>" alt="product" style="height:180px;">
+                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
                                             </a>
                                             <div class="product-badge">
                                                 <div class="product-label new">
@@ -514,8 +514,8 @@ include("includes/header.php");
                                     <div class="product-list-item">
                                         <figure class="product-thumb">
                                             <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                                <img class="pri-img" src="assets/img/product/<?php echo  $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="assets/img/product/<?php echo $pro_img2; ?>" alt="product" style="height:180px;">
+                                                <img class="pri-img" src="admin_area/product_images/<?php echo  $pro_img1; ?>" alt="product" style="height:180px;">
+                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2; ?>" alt="product" style="height:180px;">
                                             </a>
                                             <div class="product-badge">
                                                 <div class="product-label new">

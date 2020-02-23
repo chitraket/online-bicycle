@@ -26,24 +26,24 @@ $active='Home';
                     $slide_row=$row_slides['slide_row'];
                     $slide_row_2=$row_slides['slide_row_2'];
                     $status=$row_slides['status'];
-                    echo"
+                ?>
                     
-                    <div class='hero-single-slide hero-overlay'>
-                    <div class='hero-slider-item bg-img' data-bg='assets/img/slider/$slide_image'>
-                   <div class='container'>
-                            <div class='row'>
-                                <div class='col-md-12'>
-                                    <div class='hero-slider-content slide-1 $status'>
-                                        <h2 class='slide-title'>$slide_row </h2>
-                                        <h4 class='slide-desc'>$slide_row_2</h4>
-                                        <a href='shop.php' class='btn btn-hero'>Shop Now</a>
+                    <div class="hero-single-slide hero-overlay">
+                    <div class="hero-slider-item bg-img" data-bg="admin_area/slides_images/<?php echo $slide_image; ?>">
+                   <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="hero-slider-content slide-1 <?php echo $status;?>">
+                                        <h2 class="slide-title"><?php echo  $slide_row; ?></h2>
+                                        <h4 class="slide-desc"><?php echo  $slide_row_2;?></h4>
+                                        <a href="shop.php" class="btn btn-hero">Shop Now</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                    ";
+                <?php 
                 }
                
                 

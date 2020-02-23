@@ -56,8 +56,8 @@ function getPro(){
         <div class='product-item'>
             <figure class='product-thumb'>
                 <a href='product-details.php?pro_id=$pro_id'>
-                    <img class='pri-img' src='assets/img/product/$pro_img1' alt='product' style='height:180px;'>
-                    <img class='sec-img' src='assets/img/product/$pro_img2' alt='product' style='height:180px;'>
+                    <img class='pri-img' src='admin_area/product_images/$pro_img1' alt='product' style='height:180px;'>
+                    <img class='sec-img' src='admin_area/product_images/$pro_img2' alt='product' style='height:180px;'>
                 </a>
                 <div class='product-badge'>
                     <div class='product-label new'>
@@ -103,8 +103,8 @@ function getPro_1(){
         <div class='product-item'>
             <figure class='product-thumb'>
                 <a href='product-details.php?pro_id=$pro_id'>
-                    <img class='pri-img' src='assets/img/product/$pro_img1' alt='product' style='height:180px;'>
-                    <img class='sec-img' src='assets/img/product/$pro_img2' alt='product' style='height:180px;'>
+                    <img class='pri-img' src='admin_area/product_images/$pro_img1' alt='product' style='height:180px;'>
+                    <img class='sec-img' src='admin_area/product_images/$pro_img2' alt='product' style='height:180px;'>
                 </a>
                 <div class='product-badge'>
                     <div class='product-label new'>
@@ -150,8 +150,8 @@ function getPro_2(){
         <div class='product-item'>
             <figure class='product-thumb'>
                 <a href='product-details.php?pro_id=$pro_id'>
-                    <img class='pri-img' src='assets/img/product/$pro_img1' alt='product' style='height:180px;'>
-                    <img class='sec-img' src='assets/img/product/$pro_img2' alt='product' style='height:180px;'>
+                    <img class='pri-img' src='admin_area/product_images/$pro_img1' alt='product' style='height:180px;'>
+                    <img class='sec-img' src='admin_area/product_images/$pro_img2' alt='product' style='height:180px;'>
                 </a>
                 <div class='product-badge'>
                     <div class='product-label new'>
@@ -196,8 +196,8 @@ function getPro_3(){
         <div class='product-item'>
             <figure class='product-thumb'>
                 <a href='product-details.php?pro_id=$pro_id'>
-                    <img class='pri-img' src='assets/img/product/$pro_img1' alt='product' style='height:180px;'>
-                    <img class='sec-img' src='assets/img/product/$pro_img2' alt='product' style='height:180px;'>
+                    <img class='pri-img' src='admin_area/product_images/$pro_img1' alt='product' style='height:180px;'>
+                    <img class='sec-img' src='admin_area/product_images/$pro_img2' alt='product' style='height:180px;'>
                 </a>
                 <div class='product-badge'>
                     <div class='product-label new'>
