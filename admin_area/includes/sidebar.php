@@ -107,27 +107,26 @@
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bxs-user-detail"></i>
-                    <span>Contacts</span>
+                    <span>Boxs</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="contacts-grid.html">User Grid</a></li>
-                    <li><a href="contacts-list.html">User List</a></li>
-                    <li><a href="contacts-profile.html">Profile</a></li>
+                    <li><a href="add-box.php">Add Boxs</a></li>
+                    <li><a href="view-box.php">View Boxs </a></li>
+                   
                 </ul>
             </li>
 
-            <li class="menu-title">Pages</li>
+            <!--<li class="menu-title">Pages</li>-->
 
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-user-circle"></i>
-                    <span>Authentication</span>
+                    <span>Terms & Conditions</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="auth-login.html">Login</a></li>
-                    <li><a href="auth-register.html">Register</a></li>
-                    <li><a href="auth-recoverpw.html">Recover Password</a></li>
-                    <li><a href="auth-lock-screen.html">Lock Screen</a></li>
+                    <li><a href="add-terms.php">Add Terms & Conditions</a></li>
+                    <li><a href="view-terms.php">View Terms & Conditions</a></li>
+                   
                 </ul>
             </li>
 

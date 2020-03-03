@@ -1,4 +1,5 @@
 <?php
+
 $db=mysqli_connect("localhost","root","","ecom_store");
 
 function getRealIpUser(){
@@ -13,33 +14,13 @@ function getRealIpUser(){
     }
     
 }
-function add_cart($p_id,$product_qty,$pagename){
-    
-    global $db;
-    
-        $ip_add = getRealIpUser();
-        
-        $check_product = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
-        
-        $run_check = mysqli_query($db,$check_product);
-        
-        if($pagename == 'product-details')
-        {
-            $pagepath = "product-details.php?pro_id=$p_id";
-        }
-        
-        if(mysqli_num_rows($run_check)>0){
-            
-            echo "<script type='text/javascript'>swal('Product is already add to the cart', '', 'warning')";
+function add_cart($p_id,$product_img,$product_qty,$product_name,$product_price){
 
-        }else{
-            
-            $query = "insert into cart (p_id,ip_add,qty) values ($p_id,'$ip_add','$product_qty')";
-            $run_query = mysqli_query($db,$query);
-            $querys="update products set available_qty=available_qty-$product_qty where product_id='$p_id' ";
-            $run_querys=mysqli_query($db,$querys);
-        }
-        echo "<script>window.open('$pagepath','_self')</script>"; 
+    
+   $product= array($product_img,$product_name,$product_price,$product_qty,$p_id);
+   $_SESSION[$product_name]=$product;
+   echo "<script>window.open('product-details.php?pro_id=$p_id ','_self')</script>";
+
 }
 function getPro(){
     global $db;
@@ -249,18 +230,23 @@ function getCats(){
         $cat_id=$row_cats['cat_id'];
         $cat_title=$row_cats['cat_title'];
         echo"
-       <!-- <li>
+       <li>
         <div class='custom-control custom-checkbox'>
-            <input type='checkbox' class='custom-control-input' id='customCheck2'>
-            <label class='custom-control-label' for='customCheck2'>Studio (3)</label>
+            <input type='checkbox' class='custom-control-input' id='customCheck3'>
+            <label class='custom-control-label' for='customCheck3'><a href='shop.php?cat=$cat_id'>$cat_title</a></label>
         </div>
-        </li>-->
-        <li><a href='shop.php?cat=$cat_id'>$cat_title </a></li> 
+        </li>
+        
         ";
     }
 
 }
 
+function getMCats(){
+    global $db;
+   
+
+}
 
 
 function items()

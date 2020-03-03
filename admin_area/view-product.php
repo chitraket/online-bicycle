@@ -58,10 +58,9 @@
                                                 <th>Product Name</th>
                                                 <th>Product price</th>
                                                 <th>Product qty</th>
-                                                <th>Product available qty</th>
+                                                <th>Available qty</th>
+                                                <th>View Details</th>
                                                 <th>Action</th>
-                                               
-                                                
                                             </tr>
                                             </thead>
                                             
@@ -80,6 +79,7 @@
                                                 <td>'.$row_cart["product_price"].'</td>
                                                 <td>'.$row_cart["product_qty"].'</td>
                                                 <td>'.$row_cart["available_qty"].'</td>
+                                                <td><input type="button" name="view" value="View Details" id="'.$row_cart["product_id"].'" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light view_data"  /></td>
                                                 <td><a href="delete-product.php?product_id='.$row_cart["product_id"].'"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-product.php?product_id='.$row_cart["product_id"].'" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>';
                                                  }?>
@@ -96,6 +96,26 @@
                 <!-- End Page-content -->
                
                 <!-- Modal -->
+
+
+                <div class="modal fade exampleModal" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="employee_detail">
+                             
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
                
                 <!-- end modal -->
@@ -161,7 +181,7 @@
         <div class="rightbar-overlay"></div>
 
         <!-- JAVASCRIPT -->
-       
+      
         <script src="assets/libs/jquery/jquery.min.js"></script>
         <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>
@@ -197,7 +217,23 @@
         $(document).ready(function(){  
             $('#employee_data').DataTable();  
         });  
-        </script> 
+        </script>
+          <script>  
+                    $(document).ready(function(){  
+                        $('.view_data').click(function(){  
+                            var product_id = $(this).attr("id");  
+                            $.ajax({  
+                                    url:"select.php",  
+                                    method:"post",  
+                                    data:{product_id:product_id},  
+                                    success:function(data){  
+                                        $('#employee_detail').html(data);  
+                                        $('#dataModal').modal("show");  
+                                    }  
+                            });  
+                        });  
+                    });  
+                </script> 
 <?php
  } 
 ?>

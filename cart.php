@@ -3,6 +3,21 @@
     <?php
        $active='Shop';
        include("includes/header.php");
+       if(isset($_POST['action']) && $_POST['action']=="remove")
+       {
+            unset($_SESSION[$_POST["p_name"]]);
+            
+       }
+       if(isset($_POST['action']) && $_POST['action']=="change")
+       {   
+        $product_qty=$_POST["product-qty"];
+        $product_img= $_POST["p_img"];
+        $product_name= $_POST["p_name"];
+        $product_price= $_POST["p_price"];
+        $p_id= $_POST["code"]; 
+        $product= array($product_img,$product_name,$product_price,$product_qty,$p_id);
+        $_SESSION[$product_name]=$product;
+        }
     ?>
     <!-- end Header Area -->
 
@@ -30,17 +45,8 @@
 
         <!-- cart main wrapper start -->
         <div class="cart-main-wrapper section-padding">
-            <?php
-
-            $ip_add=getRealIpUser();
-            $select_cat="select * from cart where ip_add='$ip_add'";
-            $run_cart=mysqli_query($con,$select_cat);
-            $count=mysqli_num_rows($run_cart);
-            if($count==0)
-            {
-               ?>
-               <div class="col-12">
-            <!-- section title start -->
+      
+         <div class="col-12" id="cart_empty">
             <div class="section-title text-center">
                 <h2 class="title">Your cart is empty</h2>
             </div>
@@ -48,12 +54,9 @@
             <a href="index.php"><input type="submit" class="btn btn-cart2" name="add_cart" value="Start shopping"></a>
         </div></center>  
         </div>
-            <?php
-            }
-            else{
-            ?>
+           
             <div class="container">
-                <div class="section-bg-color">
+                <div class="section-bg-color"  id="table_cart">
                     <div class="row">
                         <div class="col-lg-12">
                             <!-- Cart Table Area -->
@@ -66,63 +69,118 @@
                                             <th class="pro-price">Price</th>
                                             <th class="pro-quantity">Quantity</th>
                                             <th class="pro-subtotal">Total</th>
-                                            <th class="pro-remove">Remove</th>
+                                            <th class="pro-remove">Delete</th>
+
                                         </tr>
                                     </thead>
- 
-                                  
-                            <?php
-                                    
-                                    $total=0;
-                                    while($row_cart=mysqli_fetch_array($run_cart)){
-                                        $pro_id=$row_cart['p_id'];
-                                        $pro_qty=$row_cart['qty'];
-                                        $get_products="select * from products where product_id='$pro_id'";
-                                        $run_products=mysqli_query($con,$get_products);
-                                        while($row_products=mysqli_fetch_array($run_products)){
-                                            $product_title=$row_products['product_title'];
-                                            $product_img1=$row_products['product_img1'];
-                                            $product_price=$row_products['product_price'];
-                                            $sub_total=$row_products['product_price']*$pro_qty;
-                                            $total+=$sub_total;
-
-                                            ?>
-                           
                                     <tbody>
-                                        <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="product-details.php?pro_id=<?php echo $pro_id ?>"><?php  echo $product_title ?></a></td>
-                                            <td class="pro-price"><span>Rs.<?php echo $product_price ?></span></td>
-                                            <td class="pro-quantity">
-                                                <div class="pro-qty"><input type="number"  min="1" value="<?php echo $pro_qty ?>"></div>
-                                            </td>
-                                            <td class="pro-subtotal"><span>Rs. <?php echo $sub_total ?></span></td>
-                                            <td class="pro-remove"><a href="cart.php?p_id=<?php echo $pro_id ?>" ><i class="fa fa-trash-o" ></i></a></td>
-                                        </tr>
-                                        </tbody>
-                                        <?php 
-                                        }
+                                    <style>
+                                    #table_cart{
+                                        display: none;
                                     }
-                                       ?> 
+                                    </style>
+                               
+                                  <?php
+                                    $bill=0;
+                                    $p_id=0;
+                                    $total=0;
+                                    $p_img=0;
+                                    $p_name=0;
+                                  foreach($_SESSION as $product)
+                                  {
+                                    if(!is_array($product))
+                                    {
+                                        continue;
+                                    }
+                                    ?>
 
-                            <?php           
-                             update_cart();            
-                             ?>
+                                    <style>
+                                    #cart_empty{
+                                        display: none;
+                                    }
+
+                                    #table_cart{
+                                        display: block;
+                                    }
+                                    </style>
+                                    <?php 
+                                    $p=0;
+                                    $q=0;
+                                      ?>
+                                       <tr>
+                                      <?php 
+                                      foreach ($product as $key => $value) {
+                                          if($key==4)
+                                          {
+                                             $p_id=$value;
+                                          }
+                                        else  if ($key==3) {
+                                                $q=$value;
+                                          } elseif ($key==2) {
+                                            
+                                            $p=$value;
+                                          } elseif ($key==1) {
+                                              $p_name=$value;
+
+                                          } elseif ($key==0) {
+                                             
+                                                $p_img=$value;
+
+                                          } ?>
+                                           <!-- -->
+                                   <?php
+                                      }
+                                      $bill=($q*$p);
+                                      $total+=$bill; 
+                                      ?>
+                                    <td class="pro-thumbnail"><a href="product-details.php?pro_id=<?php echo $p_id ?>"><img class="img-fluid" src="admin_area/product_images/<?php echo $p_img ?>" alt="Product" /></a></td>
+                                   
+                                    <td class="pro-title">
+                                        
+                                        <a href="product-details.php?pro_id=<?php echo $p_id ?>"><?php  echo $p_name ?></a>
+                                    </td>
+                                   
+                                    <td class="pro-price"><span>Rs.<?php echo $p ?></span></td>  
+                                    
+                                    <form method="POST" action="">
+                                    <td class="pro-quantity" >
+                                            <input type="number" style="width: 90px;height: 40px;border: 1px solid #ddd;padding: 0 15px;float: left;" name="product-qty" min="1" value="<?php echo $q ?>"  onchange="this.form.submit()"> 
+                                    </td>
+                                                    <input type="hidden" name="action" value="change"/>
+                                                    <input type="hidden" name="code" value="<?php echo $p_id ?>">
+                                                    <input type="hidden" name="p_name" value="<?php echo $p_name ?>">
+                                                    <input type="hidden" name="p_img" value="<?php echo $p_img ?>">
+                                                    <input type="hidden" name="p_price" value="<?php echo $p?>">
+                                    </form>
+                                    <td class="pro-subtotal"><span>Rs. <?php echo $bill ?></span></td>
+                                     <form method="POST" action="">
+                                      <td class="pro-remove">
+                                          <input type="hidden" name="code" value="<?php echo $p_id?>">
+                                          <input type="hidden" name="p_name" value="<?php echo $p_name ?>">
+                                          <input type="submit" value="remove" name="action" class="btn btn-cart2">
+                                        </td>
+                                     </form>
+                                    </tr>
+                                      <?php
                                       
+                                    }
+                                  ?>
+                                </tbody>           
                                 </table>
                             </div>
                             
                             <!-- Cart Update Option -->
                             <div class="cart-update-option d-block d-md-flex justify-content-between">
+                                <div class="cart-update">
+                                    <a href="shop.php"><input type="submit" name="update" class="btn btn-sqr" value="Continue Shopping"></a>
+                                </div>
                                 <div class="apply-coupon-wrapper">
                                     <form action="#" method="post" class=" d-block d-md-flex">
                                         <input type="text" placeholder="Enter Your Coupon Code" required />
                                         <button class="btn btn-sqr">Apply Coupon</button>
                                     </form>
                                 </div>
-                                <div class="cart-update">
-                                    <input type="submit" name="update" class="btn btn-sqr" value="Update Cart">
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -158,9 +216,7 @@
                    
                 </div>
             </div>
-            <?php
-            } 
-            ?>
+          
         </div>
         <!-- cart main wrapper end -->
     </main>

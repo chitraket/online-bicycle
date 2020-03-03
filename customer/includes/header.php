@@ -4,20 +4,18 @@ include("includes/db.php");
 include("functions/functions.php");
 include("includes/validation.php");
 ?>
-
-
-
 <!doctype html>
 <html class="no-js" lang="en">
 <!-- Mirrored from demo.hasthemes.com/corano-preview/corano/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:19:45 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Corano - Jewellery Shop eCommerce Bootstrap 4 Template</title>
+    <title>Corano - Bikes Shop</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
+    <script src="assets/js/sweetalert.min.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
     <!-- CSS
 	============================================ -->
@@ -41,7 +39,9 @@ include("includes/validation.php");
     <link rel="stylesheet" href="assets/css/style.css">
     <!--sweet alert-->
     <script src="assets/js/sweetalert.min.js"></script>
-
+    <!--ajex-->
+    <script src="assert/js/jquery.min.js"></script>
+    
 </head>
 <body>
 <header class="header-area header-wide">
@@ -54,19 +54,15 @@ include("includes/validation.php");
                         <div class="col-lg-6">
                             <div class="welcome-message">
                                 <p>
-                                <?php 
-                   
-                                        if(!isset($_SESSION['customer_email'])){
-                                            
-                                            echo "Welcome: Guest";
-                                            
-                                        }else{
-                                            
-                                            echo "Welcome: " . $_SESSION['customer_email'] . "";
-                                            
-                                        }
-                                        
-                                ?>
+                                    <?php
+                                    if(!isset($_SESSION['customer_email'])){ 
+                                        echo "Welcome:Guest";
+                                    }
+                                    else{
+                                        echo"Welcome: " .$_SESSION['customer_email']. "";
+                                    }
+                                    
+                                    ?>
                                 </p>
                             </div>
                         </div>
@@ -118,24 +114,27 @@ include("includes/validation.php");
                                 </div>
                                 <div class="header-configure-area">
                                     <ul class="nav justify-content-end">
-                                        <li class="user-hover">
+                                        <li class="user-hover active">
                                             <a href="#">
-                                                <i class="pe-7s-user"></i>
+                                                <i class="pe-7s-user "></i>
                                             </a>
                                             <ul class="dropdown-list">
                                                 <?php 
+
                                                 if(!isset($_SESSION['customer_email']))
                                                 {
                                                     echo"
-                                                <li><a href='../checkout.php'>Login</a></li>
+                                                <li><a href='../customer/customer_login.php'>Login</a></li>
                                                 <li><a href='../register.php'>Register</a></li>
                                                 ";
                                                 }
                                                 else{
+                                                
                                                     echo"
-                                                    <li><a href='myaccount.php'>My Account</a></li>
-                                                    <li><a href='../logout.php'>Log Out</a></li>
-                                                    ";
+                                                    <li><a href='../customer/myaccount.php'>My Account</a></li>";
+                                                    echo"
+                                                    <li><a href='../logout.php'>Log Out</a></li>";
+                                                    
                                                 }
                                                 ?>
                                             </ul>
@@ -149,8 +148,29 @@ include("includes/validation.php");
                                         <li>
                                             <a href="#" class="minicart-btn">
                                                 <i class="pe-7s-shopbag"></i>
-                                                <div class="notification"><?php items(); ?>
-                                            </div>
+                                                <?php 
+
+                                                $sno=1;
+                                                $flag=0;
+                                                foreach($_SESSION as $products)
+                                                {
+                                                    if(!is_array($products))
+                                                    {
+                                                        continue;
+                                                    }
+                                                    $flag=1;
+                                                    ?>
+                                                         <div class="notification"><?php echo $sno++ ?></div>
+                                                        <?php 
+                                                }
+
+                                                if($flag==0)
+                                                {
+                                                    ?>
+                                                         <div class="notification">0</div>
+                                                        <?php
+                                                }
+                                                ?>
                                             </a>
                                         </li>
                                     </ul>
@@ -181,9 +201,31 @@ include("includes/validation.php");
                             </div>
                             <div class="mobile-menu-toggler">
                                 <div class="mini-cart-wrap">
-                                    <a href="../cart.php">
+                                    <a href="cart.php">
                                         <i class="pe-7s-shopbag"></i>
-                                        <div class="notification"><?php items();?></div>
+                                        <?php 
+
+                                                $sno=1;
+                                                $flag=0;
+                                                foreach($_SESSION as $products)
+                                                {
+                                                    if(!is_array($products))
+                                                    {
+                                                        continue;
+                                                    }
+                                                    $flag=1;
+                                                    ?>
+                                                         <div class="notification"><?php echo $sno++ ?></div>
+                                                        <?php 
+                                                }
+
+                                                if($flag==0)
+                                                {
+                                                    ?>
+                                                         <div class="notification">0</div>
+                                                        <?php
+                                                }
+                                                ?>
                                     </a>
                                 </div>
                                 <button class="mobile-menu-btn">
@@ -220,13 +262,13 @@ include("includes/validation.php");
                         <!-- mobile menu navigation start -->
                         <nav>
                             <ul class="mobile-menu">
-                                <li class="menu-item-has-children"><a href="#">Home</a>
+                                <li class="menu-item-has-children"><a href="../index.php">Home</a>
                                 </li>
                                
-                                <li class="menu-item-has-children "><a href="#">Shop</a>
+                                <li class="menu-item-has-children "><a href="../shop.php">Shop</a>
                                 </li>
                                 
-                                <li><a href="contact-us.html">Contact us</a></li>
+                                <li><a href="../contact.php">Contact us</a></li>
                             </ul>
                         </nav>
                         <!-- mobile menu navigation end -->
@@ -242,9 +284,22 @@ include("includes/validation.php");
                                         <i class="fa fa-angle-down"></i>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="myaccount">
-                                        <a class="dropdown-item" href="my-account.html">My Account</a>
-                                        <a class="dropdown-item" href="login-register.html"> Login</a>
-                                        <a class="dropdown-item" href="register.php">Register</a>
+                                    <?php 
+                                                if(!isset($_SESSION['customer_email']))
+                                                {
+                                                    echo"
+                                                <a class='dropdown-item' href='../customer/customer_login.php'>Login</a>
+                                                <a class='dropdown-item' href='../register.php'>Register</a>
+                                                ";
+                                                }
+                                                else{
+                                                
+                                                    echo"
+                                                    <a class='dropdown-item' href='../customer/myaccount.php'>My Account</a>
+                                                    <a class='dropdown-item' href='../logout.php'>Log Out</a>";
+                                                    
+                                                }
+                                                ?>
                                     </div>
                                 </div>
                             </li>
@@ -278,3 +333,5 @@ include("includes/validation.php");
         <!-- off-canvas menu end -->
         <!-- offcanvas mobile menu end -->
     </header>
+
+

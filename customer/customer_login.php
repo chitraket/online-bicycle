@@ -78,11 +78,7 @@ if(isset($_POST['login'])){
     
     $check_customer = mysqli_num_rows($run_customer);
     
-   $select_cart = "select * from cart where ip_add='$get_ip'";
-    
-    $run_cart = mysqli_query($con,$select_cart);
-    
-   $check_cart = mysqli_num_rows($run_cart);
+  
     
     if($check_customer==0){
         ?>
@@ -104,49 +100,60 @@ if(isset($_POST['login'])){
         exit();
     }
     
-    if($check_customer==1 AND $check_cart==0){
-        
-        $_SESSION['customer_email']=$customer_email;
-        ?>
-        
-        <script type="text/javascript">
-         swal({
-                   title: "You are login",
-                   text: "",
-                   icon: "success",
-                   buttons: true,
-                   successMode: true,
-           })
-           .then((willDelete) => {
-                   if (willDelete) {
-                       window.open('myaccount.php','_self');
-                   } 
-           });
-           </script>
-        <?php 
-    }else{
-        
-        $_SESSION['customer_email']=$customer_email;
-        ?>
-        <script type="text/javascript">
-         swal({
-                   title: "You are login",
-                   text: "",
-                   icon: "success",
-                   buttons: true,
-                   successMode: true,
-           })
-           .then((willDelete) => {
-                   if (willDelete) {
-                       window.open('../checkout.php','_self');
-                   } 
-           });
-           </script>
-           <?php
+    
+        if($check_customer==1){
+            $_SESSION['customer_email']=$customer_email;
+            foreach($_SESSION as $product)
+            {
+                if(!is_array($product))
+                {
+                 ?>
+                    <script type="text/javascript">
+                    swal({
+                            title: "You are login",
+                            text: "",
+                            icon: "success",
+                            buttons: true,
+                            successMode: true,
+                    })
+                    .then((willDelete) => {
+                            if (willDelete) {
+                                window.open('myaccount.php','_self');
+                            } 
+                    });
+                    </script>
+                 <?php  
+                }
+            }
           
+            ?>
+            
+        
+            <?php 
+        }else{
+            
+            $_SESSION['customer_email']=$customer_email;
+            ?>
+            <script type="text/javascript">
+            swal({
+                    title: "You are login",
+                    text: "",
+                    icon: "success",
+                    buttons: true,
+                    successMode: true,
+            })
+            .then((willDelete) => {
+                    if (willDelete) {
+                        window.open('../checkout.php','_self');
+                    } 
+            });
+            </script>
+            <?php
+            
+        }
     }
     
-}
+
 end:
 ?>
         <!-- login register wrapper start -->

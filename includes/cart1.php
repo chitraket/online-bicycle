@@ -1,3 +1,4 @@
+
 <div class="offcanvas-minicart-wrapper">
         <div class="minicart-inner">
         <div class="offcanvas-overlay"></div>
@@ -5,17 +6,10 @@
                     <div class="minicart-close">
                         <i class="pe-7s-close"></i>
                     </div>
-        <?php
-
-            $ip_add=getRealIpUser();
-            $select_cat="select * from cart where ip_add='$ip_add'";
-            $run_cart=mysqli_query($con,$select_cat);
-            $count=mysqli_num_rows($run_cart);
-            if($count==0)
-            {?>
+    
                     
                     
-                        <div class="minicart-content-box">
+                        <div class="minicart-content-box" id="cart_1_empty">
                             <div style="padding-top: 200px;">
                                         
                                 <div class='section-title text-center'>
@@ -28,62 +22,84 @@
                                 </center>       
                             </div>
                         </div>
-            <?php 
-            }
-            else{
-        ?>
+         
         
-                <div class="minicart-content-box">
+                <div class="minicart-content-box" id="table_carts">
                     <div class="minicart-item-wrapper">
+                    <style>
+                                    #table_carts{
+                                        display: none;
+                                    }
+                    </style>
                         <ul>
                         <?php
-                                    
-                                    $total=0;
-                                    while($row_cart=mysqli_fetch_array($run_cart)){
-                                        $pro_id=$row_cart['p_id'];
-                                        $pro_qty=$row_cart['qty'];
-                                        $get_products="select * from products where product_id='$pro_id'";
-                                        $run_products=mysqli_query($con,$get_products);
-                                        while($row_products=mysqli_fetch_array($run_products)){
-                                            $product_title=$row_products['product_title'];
-                                            $product_img1=$row_products['product_img1'];
-                                            $product_price=$row_products['product_price'];
-                                            $sub_total=$row_products['product_price']*$pro_qty;
-                                            $total+=$sub_total;
-                         ?>
+                                  $bill=0;
+                                  $p_id=0;
+                                  $p_img=0;
+                                  $p_name=0;
+                                  $p_qty=0;
+                                  $p_price=0;
+                                 $total=0;
+                            foreach ($_SESSION as $product) {
+                                 if(!is_array($product))
+                                    {
+                                        continue;
+                                    }
+                                    ?>
+                                    <style>
+                                    #cart_1_empty{
+                                        display: none;
+                                    }
 
+                                    #table_carts{
+                                        display: block;
+                                    }
+                                    </style>
+                                    <?php 
+                                      foreach ($product as $key => $value) {
+                                          if ($key==4) {
+                                              $p_id= $value;
+                                          } elseif ($key ==3) {
+                                              $p_qty= $value;
+                                          } elseif ($key ==2) {
+                                              $p_price= $value;
+                                          } elseif ($key==1) {
+                                              $p_name= $value;
+                                          } elseif ($key==0) {
+                                              $p_img= $value;
+                                          } 
+                                          
+                                         
+                                         }
+                                         $bill=$p_price*$p_qty;
+                                         $total+=$bill;
+                            ?>
                             <li class="minicart-item">
                                 <div class="minicart-thumb">
-                                    <a href="product-details.php?pro_id=<?php echo $pro_id ?>">
-                                        <img src="admin_area/product_images/<?php echo $product_img1 ?>" alt="product">
+                                    <a href="product-details.php?pro_id=<?php echo $p_id ?>">
+                                        <img src="admin_area/product_images/<?php echo $p_img ?>" alt="product">
                                     </a>
                                 </div>
                                 <div class="minicart-content">
                                     <h3 class="product-name">
-                                        <a href="product-details.php?pro_id=<?php echo $pro_id ?>"><?php echo $product_title ?></a>
+                                        <a href="product-details.php?pro_id=<?php echo $p_id ?>"><?php echo $p_name ?></a>
                                     </h3>
                                     <p>
-                                        <span class="cart-quantity"><?php echo $pro_qty ?> <strong> | </strong></span>
-                                        <span class="cart-price">Rs.<?php echo $sub_total ?>  </span>
+                                        <span class="cart-quantity"><?php echo $p_qty ?> <strong> | </strong></span>
+                                        <span class="cart-price">Rs.<?php echo $bill ?>  </span>
                                     </p>
                                 </div>
-                                <form method="POST">
-                                <button  name="close" class="minicart-remove"><i class="pe-7s-close"></i></button>
-                                </form>
+                                <!--<form action="edit-cart.php" method="POST">
+                                <button  name="event" value="Delete" class="minicart-remove"><i class="pe-7s-close"></i></button>
+                                </form>-->
                             </li>
-                            <?php     
-                                        }
-                                    }
-                                    
-                                    ?>
+                            <?php
+                                      
+                                  }
+                            ?>
                         </ul>
                     </div>
-                    <?php
-                    if(isset($_POST["close"]))
-                    {
-                        echo "<script>window.open('cart.php?p_id=$pro_id ','_self')</script>";   
-                    } 
-                    ?>
+                   
                     <div class="minicart-pricing-box">
                         <ul>
                             <!--<li>
@@ -109,14 +125,8 @@
                         <a href="cart.php"><i class="fa fa-shopping-cart"></i> View Cart</a>
                         <a href="checkout.php"><i class="fa fa-share"></i> Checkout</a>
                     </div>
-                </div>
-            <?php
-            } 
-            ?>
-
-            <?php           
-                update_cart();            
-            ?>
+                </div>-->
+         
         </div>
     </div>
 </div>

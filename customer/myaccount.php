@@ -2,16 +2,26 @@
 session_start();
 if(!isset($_SESSION['customer_email']))
 {
-    echo "<script>window.open('../checkout.php','_self')</script>";
+    echo "<script>window.open('customer_login.php','_self')</script>";
 }
 else{
+    $active="";
 
-
+    foreach($_SESSION as $product)
+    {
+        if(is_array($product))
+        {
+            ?>
+            <script>
+                window.open('../checkout.php','_self');
+                </script>
+            <?php 
+        }
+    }
 include("includes/db.php");
 include("functions/functions.php");
 ?>
     <!-- end Header Area -->
-
 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -24,6 +34,7 @@ include("functions/functions.php");
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
+    <script src="assets/js/sweetalert.min.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
     <!-- CSS
 	============================================ -->
@@ -45,6 +56,9 @@ include("functions/functions.php");
     <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
     <!-- main style css -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <!--sweet alert-->
+    <script src="assets/js/sweetalert.min.js"></script>
+    
 </head>
 <body>
 <header class="header-area header-wide">
@@ -96,11 +110,11 @@ include("functions/functions.php");
                                     <!-- main menu navbar start -->
                                      <nav class="desktop-menu">
                                         <ul>
-                                            <li class="active"><a href="../index.php">Home <i class="fa fa-angle"></i></a>   
+                                            <li class="<?php if($active=='Home') echo"active"?>"><a href="../index.php">Home <i class="fa fa-angle"></i></a>   
                                             </li>
-                                            <li ><a href="../shop.php">Shop<i class="fa fa-angle"></i></a>
+                                            <li class="<?php if($active=='Shop') echo"active"?>"><a href="../shop.php">Shop<i class="fa fa-angle"></i></a>
                                             </li>
-                                            <li ><a href="../contact.php">Contact us</a></li>
+                                            <li class="<?php if($active=='contact') echo"active"?>"><a href="../contact.php">Contact us</a></li>
                                         </ul>
                                     </nav>
                                     <!-- main menu navbar end -->
@@ -117,25 +131,25 @@ include("functions/functions.php");
                                 </div>
                                 <div class="header-configure-area">
                                     <ul class="nav justify-content-end">
-                                        <li class="user-hover">
+                                        <li class="user-hover active">
                                             <a href="#">
-                                                <i class="pe-7s-user"></i>
+                                                <i class="pe-7s-user "></i>
                                             </a>
                                             <ul class="dropdown-list">
                                                 <?php 
                                                 if(!isset($_SESSION['customer_email']))
                                                 {
                                                     echo"
-                                                <li><a href='customer/customer_login.php'>Login</a></li>
+                                                <li><a href='../customer/customer_login.php'>Login</a></li>
                                                 <li><a href='../register.php'>Register</a></li>
                                                 ";
                                                 }
                                                 else{
                                                 
                                                     echo"
-                                                    <li><a href='myaccount.php'>My Account</a></li>";
+                                                    <li><a href='../customer/myaccount.php'>My Account</a></li>";
                                                     echo"
-                                                    <li><a href='logout.php'>Log Out</a></li>";
+                                                    <li><a href='../logout.php'>Log Out</a></li>";
                                                     
                                                 }
                                                 ?>
@@ -150,8 +164,29 @@ include("functions/functions.php");
                                         <li>
                                             <a href="#" class="minicart-btn">
                                                 <i class="pe-7s-shopbag"></i>
-                                                <div class="notification"><?php items(); ?>
-                                            </div>
+                                                <?php 
+
+                                                $sno=1;
+                                                $flag=0;
+                                                foreach($_SESSION as $products)
+                                                {
+                                                    if(!is_array($products))
+                                                    {
+                                                        continue;
+                                                    }
+                                                    $flag=1;
+                                                    ?>
+                                                         <div class="notification"><?php echo $sno++ ?></div>
+                                                        <?php 
+                                                }
+
+                                                if($flag==0)
+                                                {
+                                                    ?>
+                                                         <div class="notification">0</div>
+                                                        <?php
+                                                }
+                                                ?>
                                             </a>
                                         </li>
                                     </ul>
@@ -184,7 +219,29 @@ include("functions/functions.php");
                                 <div class="mini-cart-wrap">
                                     <a href="cart.php">
                                         <i class="pe-7s-shopbag"></i>
-                                        <div class="notification"><?php items();?></div>
+                                        <?php 
+
+                                                $sno=1;
+                                                $flag=0;
+                                                foreach($_SESSION as $products)
+                                                {
+                                                    if(!is_array($products))
+                                                    {
+                                                        continue;
+                                                    }
+                                                    $flag=1;
+                                                    ?>
+                                                         <div class="notification"><?php echo $sno++ ?></div>
+                                                        <?php 
+                                                }
+
+                                                if($flag==0)
+                                                {
+                                                    ?>
+                                                         <div class="notification">0</div>
+                                                        <?php
+                                                }
+                                                ?>
                                     </a>
                                 </div>
                                 <button class="mobile-menu-btn">
@@ -221,13 +278,13 @@ include("functions/functions.php");
                         <!-- mobile menu navigation start -->
                         <nav>
                             <ul class="mobile-menu">
-                                <li class="menu-item-has-children"><a href="#">Home</a>
+                                <li class="menu-item-has-children"><a href="../index.php">Home</a>
                                 </li>
                                
-                                <li class="menu-item-has-children "><a href="#">Shop</a>
+                                <li class="menu-item-has-children "><a href="../shop.php">Shop</a>
                                 </li>
                                 
-                                <li><a href="contact-us.html">Contact us</a></li>
+                                <li><a href="../contact.php">Contact us</a></li>
                             </ul>
                         </nav>
                         <!-- mobile menu navigation end -->
@@ -243,9 +300,22 @@ include("functions/functions.php");
                                         <i class="fa fa-angle-down"></i>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="myaccount">
-                                        <a class="dropdown-item" href="my-account.html">My Account</a>
-                                        <a class="dropdown-item" href="login-register.html"> Login</a>
-                                        <a class="dropdown-item" href="register.php">Register</a>
+                                    <?php 
+                                                if(!isset($_SESSION['customer_email']))
+                                                {
+                                                    echo"
+                                                <a class='dropdown-item' href='../customer/customer_login.php'>Login</a>
+                                                <a class='dropdown-item' href='../register.php'>Register</a>
+                                                ";
+                                                }
+                                                else{
+                                                
+                                                    echo"
+                                                    <a class='dropdown-item' href='../customer/myaccount.php'>My Account</a>
+                                                    <a class='dropdown-item' href='../logout.php'>Log Out</a>";
+                                                    
+                                                }
+                                                ?>
                                     </div>
                                 </div>
                             </li>

@@ -8,12 +8,6 @@
                                       <?php 
                                         getPCats();
                                        ?>
-                                    <!--    <li><a href="#">fashionware <span>(10)</span></a></li>
-                                        <li><a href="#">kitchenware <span>(5)</span></a></li>
-                                        <li><a href="#">electronics <span>(8)</span></a></li>
-                                        <li><a href="#">accessories <span>(4)</span></a></li>
-                                        <li><a href="#">shoe <span>(5)</span></a></li>
-                                        <li><a href="#">toys <span>(2)</span></a></li>-->
                                     </ul>
                                 </div>
                             </div>
@@ -24,17 +18,64 @@
                                 <h5 class="sidebar-title">price</h5>
                                 <div class="sidebar-body">
                                     <div class="price-range-wrap">
-                                        <div class="price-range" data-min="1" data-max="1000"></div>
+                                        <div class="price-range" data-min="1" data-max="2000"></div>
                                         <div class="range-slider">
                                             <form action="#" class="d-flex align-items-center justify-content-between">
                                                 <div class="price-input">
-                                                    <label for="amount">Price: </label>
-                                                    <input type="text" id="amount">
+                                                <input type="hidden" id="hidden_minimum_price" value="0" />
+                                                <input type="hidden" id="hidden_maximum_price" value="65000" />    
+                                                <p id="price_show">1000 - 65000</p>
+                                                <div id="price_range"></div>
+                                                   
                                                 </div>
                                                 <button class="filter-btn">filter</button>
                                             </form>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <!-- single sidebar end -->
+                              <!-- single sidebar start -->
+                              <div class="sidebar-single">
+                                <h5 class="sidebar-title">Manufacturers</h5>
+                                <div class="sidebar-body">
+                                    <ul class="checkbox-container categories-list">
+                                    <?php 
+                                         $get_cats="select * from manufacturers where manufacturer_top='yes'";
+                                         $run_cats=mysqli_query($db,$get_cats);
+                                         while($row_cats=mysqli_fetch_array($run_cats))
+                                         {
+                                             $manufacturer_id=$row_cats['manufacturer_id'];
+                                             $manufacturer_title=$row_cats['manufacturer_title'];
+                                             echo"
+                                            <li>
+                                             <div class='custom-control custom-checkbox'>
+                                                 <input type='checkbox' class='custom-control-input' id='$manufacturer_id' name='ma'  value='$manufacturer_id'>
+                                                 <label class='custom-control-label' for='$manufacturer_id'><a href='shop.php?manufacturer_id=$manufacturer_id'>$manufacturer_title</a></label>
+                                             </div>
+                                             </li>
+                                             
+                                             ";
+                                         }
+                                         $get_cats="select * from manufacturers where manufacturer_top='no'";
+                                         $run_cats=mysqli_query($db,$get_cats);
+                                         while($row_cats=mysqli_fetch_array($run_cats))
+                                         {
+                                             $manufacturer_id=$row_cats['manufacturer_id'];
+                                             $manufacturer_title=$row_cats['manufacturer_title'];
+                                             echo"
+                                            <li>
+                                             <div class='custom-control custom-checkbox'>
+                                                 <input type='checkbox' class='custom-control-input' id='chit' value='$manufacturer_id'>
+                                                 <label class='custom-control-label' for='chit'><a href='shop.php?manufacturer_id=$manufacturer_id'>$manufacturer_title</a></label>
+                                             </div>
+                                             </li>
+                                             
+                                             ";
+                                         }
+                                    ?>
+                                     
+                                    </ul>
                                 </div>
                             </div>
                             <!-- single sidebar end -->
@@ -48,36 +89,7 @@
                                     <?php 
                                         getCats();
                                     ?>
-                                     <!--   <li>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                                <label class="custom-control-label" for="customCheck2">Studio (3)</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                                <label class="custom-control-label" for="customCheck3">Hastech (4)</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                                <label class="custom-control-label" for="customCheck4">Quickiin (15)</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                <label class="custom-control-label" for="customCheck1">Graphic corner (10)</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                                <label class="custom-control-label" for="customCheck5">devItems (12)</label>
-                                            </div>
-                                        </li>-->
+                                     
                                     </ul>
                                 </div>
                             </div>

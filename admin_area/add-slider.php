@@ -90,6 +90,12 @@
                                     <input class="form-control" type="text" placeholder="Slider Row 2" name="s_row_2"  id="example-text-input">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-md-3 col-form-label">Slider URL</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" placeholder="Slider URL" name="s_url"  id="example-text-input">
+                                </div>
+                            </div>
                                             </div>
                             </div>
                             <div class="form-group mt-4">
@@ -122,6 +128,7 @@
            
             $s_row_1=$_POST['s_row_1'];
             $s_row_2=$_POST['s_row_2'];
+            $s_url=$_POST['s_url'];
            if($_POST['customRadio']=="right")
            {
                 $s_row="float-md-right float-none";
@@ -135,7 +142,7 @@
                 if($count<4)
                 {
                     move_uploaded_file($temp_name1,"slides_images/$product_img1");
-                    $insert_cat = "insert into slider(slide_name,slide_image,slide_row,slide_row_2,status)  values('$s_name','$product_img1','$s_row_1','$s_row_2','$s_row')";
+                    $insert_cat = "insert into slider(slide_name,slide_image,slide_row,slide_row_2,status,slide_url)  values('$s_name','$product_img1','$s_row_1','$s_row_2','$s_row','$s_url')";
                     $run_cat = mysqli_query($con,$insert_cat);
                     echo "<script>alert('Your new slide image has been inserted')</script>";
                     echo "<script>window.open('view-slider.php','_self')</script>";

@@ -77,7 +77,7 @@
                                                 <td>'.$row_cart["customer_city"].'</td>
                                                 <td>'.$row_cart["customer_address"].'</td>
                                                 <td>'.$row_cart["customer_contact"].'</td>
-                                                <td><a href="delete-customer.php?customer_id='.$row_cart["id"].'"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a> </td>
+                                                <td><input type="button" name="view" value="View Details" id="'.$row_cart["id"].'" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light view_data"  /></td>
                                                 </tr>';
                                                  }?>
                                             </tbody>
@@ -94,7 +94,24 @@
                
                 <!-- Modal -->
                 
-               
+                <div class="modal fade exampleModal" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="employee_detail">
+                             
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- end modal -->
                 
                <?php 
@@ -195,6 +212,22 @@
             $('#employee_data').DataTable();  
         });  
         </script> 
+        <script>  
+                    $(document).ready(function(){  
+                        $('.view_data').click(function(){  
+                            var order_id = $(this).attr("id");  
+                            $.ajax({  
+                                    url:"select_1.php",  
+                                    method:"post",  
+                                    data:{order_id:order_id},  
+                                    success:function(data){  
+                                        $('#employee_detail').html(data);  
+                                        $('#dataModal').modal("show");  
+                                    }  
+                            });  
+                        });  
+                    });  
+                </script> 
 <?php
  } 
 ?>

@@ -25,12 +25,12 @@ if(isset($_GET['slide_id'])){
     $row_edit = mysqli_fetch_array($run_edit);
     
     $s_id = $row_edit['slide_id'];
-    
     $s_name = $row_edit['slide_name'];
-    
     $s_row = $row_edit['slide_row'];
     $s_row_2=$row_edit['slide_row_2'];
-    
+    $s_img=$row_edit['slide_image'];
+    $s_status=$row_edit['status'];
+    $s_url=$row_edit['slide_url'];
 }
 
 ?>
@@ -59,8 +59,69 @@ if(isset($_GET['slide_id'])){
                                     <input class="form-control" type="text" placeholder="Slider Name" name="s_name" value="<?php echo $s_name; ?>" id="example-text-input">
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label for="example-url-input" class="col-md-3 col-form-label">Product Image 1</label>
+                                <div class="col-md-9">
+                                <div class="custom-file">
+                                            <input type="file" name="slider_img" class="custom-file-input" id="customFile">
+                                            <label class="custom-file-label" id="customFiles">Choose file</label>
+                                           <br>
+                                            <br/>
+                                            <div class="form-group row">
+                                            <img class="col-md-12" src="slides_images/<?php echo $s_img; ?>" alt="<?php echo $s_img; ?>">  
+                                            </div>  
+                                            
+                                            <script type="text/javascript">
+                                            const realfileBtn=document.getElementById("customFile");
+                                            const customTxt=document.getElementById("customFiles");
+                                            realfileBtn.addEventListener("change",function(){
+                                                if(realfileBtn.value)
+                                                {
+                                                    customTxt.innerHTML=realfileBtn.value;
+                                                }
+                                                else{
+                                                    customTxt.innerHTML="Choose file";
+                                                }
+                                            });
+                                            </script>
+                                </div>
+                                </div>
+                            </div>
                             
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Slider Row</label>
+                                <?php
+                                    if($s_status=="float-md-right float-none")
+                                    { 
+                                ?>
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio1" name="customRadio"  value="left" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio1">left side</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio2" name="customRadio" value="right" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio2">right side</label>
+                                                    </div>
                             
+                                <?php 
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                                <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio1" name="customRadio"  value="left" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio1">left side</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio2" name="customRadio" value="right" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio2">right side</label>
+                                                    </div>
+                                                    
+                                                    <?php
+                                    }?>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="example-number-input" class="col-md-3 col-form-label">Slider Row</label>
                                 <div class="col-md-9">
@@ -71,6 +132,12 @@ if(isset($_GET['slide_id'])){
                                 <label for="example-number-input" class="col-md-3 col-form-label">Slider Row 2</label>
                                 <div class="col-md-9">
                                 <input class="form-control" type="text" placeholder="Slider Row 2" name="s_row_2" value="<?php echo $s_row_2; ?>" id="example-text-input">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-number-input" class="col-md-3 col-form-label">Slider URL</label>
+                                <div class="col-md-9">
+                                <input class="form-control" type="text" placeholder="Slider URL" name="s_url" value="<?php echo $s_url; ?>" id="example-text-input">
                                 </div>
                             </div>
                             <div class="form-group mt-4">
@@ -112,6 +179,7 @@ if(isset($_GET['slide_id'])){
 
 <?php  
 
+$s_rows="";
           if(isset($_POST['update'])){
               
               $s_name = $_POST['s_name'];
@@ -120,7 +188,24 @@ if(isset($_GET['slide_id'])){
 
               $s_row_2=$_POST['s_row_2'];
               
-              $update_p_cat = "update slider set slide_name='$s_name',slide_row='$s_row',slide_row_2='$s_row_2' where slide_id='$s_id'";
+              $s_urls=$_POST['s_url'];
+              $slider_img = $_FILES['slider_img']['name'];
+            
+              
+              $temp_name1 = $_FILES['slider_img']['tmp_name'];
+            
+              
+              move_uploaded_file($temp_name1,"slides_images/$slider_img");
+            
+              if($_POST['customRadio']=="right")
+              {
+                   $s_rows="float-md-right float-none";
+              }
+              else{
+                  $s_rows="";
+              }
+              
+              $update_p_cat = "update slider set slide_name='$s_name',slide_image='$slider_img',slide_row='$s_row',slide_row_2='$s_row_2',status='$s_rows',slide_url='$s_urls' where slide_id='$s_id'";
               
               $run_p_cat = mysqli_query($con,$update_p_cat);
               

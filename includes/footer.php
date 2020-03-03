@@ -38,7 +38,7 @@
                                     <li><a href="#">about us</a></li>
                                     <li><a href="#">Delivery Information</a></li>
                                     <li><a href="#">privet policy</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="terms.php">Terms & Conditions</a></li>
                                     <li><a href="#">contact us</a></li>
                                     <li><a href="#">site map</a></li>
                                 </ul>

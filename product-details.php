@@ -2,8 +2,202 @@
 <?php
 $active='Shop';
 include("includes/header.php");
-?>
 
+?>
+<?php
+if(isset($_GET['pro_id']))
+{
+    $product_id=$_GET['pro_id'];
+    $get_product="select * from products where product_id=$product_id";
+    $run_product=mysqli_query($con,$get_product);
+    $row_product=mysqli_fetch_array($run_product);
+    $p_cat_id=$row_product['p_cat_id'];
+    $pro_title=$row_product['product_title'];
+    $pro_qty=$row_product['available_qty'];
+    $pro_price=$row_product['product_price'];
+    $pro_desc=$row_product['product_desc'];
+    $pro_img1=$row_product['product_img1'];
+    $pro_img2=$row_product['product_img2'];
+    $pro_img3=$row_product['product_img3'];
+    
+   $pro_size=$row_product['product_size'];
+    if($pro_size==null )
+    {
+        $pro_size="N/A";
+    }
+    else
+    {
+        $pro_size=$row_product['product_size'];
+    }
+    $pro_frame=$row_product['product_frame'];
+    if($pro_frame==null )
+    {
+        $pro_frame="N/A";
+    }
+    else
+    {
+        $pro_frame=$row_product['product_frame'];
+    }
+
+    $pro_weight=$row_product['product_weight'];
+    if($pro_weight==null)
+    {
+        $pro_weight="N/A";
+    }
+    else
+    {
+        $pro_weight=$row_product['product_weight'];
+    }
+    $pro_front_suspension=$row_product['product_front_suspension'];
+    if($pro_front_suspension==null)
+    {
+        $pro_front_suspension="N/A";
+    }
+    else
+    {
+        $pro_front_suspension=$row_product['product_front_suspension'];
+    }
+    $pro_rear_suspension=$row_product['product_rear_suspension'];
+    if($pro_rear_suspension==null)
+    {
+        $pro_rear_suspension="N/A";
+    }else{
+        $pro_rear_suspension=$row_product['product_rear_suspension'];
+    }
+    $pro_front_derailleur=$row_product['product_front_derailleur'];
+    if($pro_front_suspension==null)
+    {
+        $pro_front_suspension="N/A";
+    }
+    else{
+        $pro_front_derailleur=$row_product['product_front_derailleur'];
+    }
+    $pro_rear_derailleur=$row_product['product_rear_derailleur'];
+    if($pro_rear_derailleur==null)
+    {
+        $pro_rear_derailleur="N/A";
+    }
+    else{
+        $pro_rear_derailleur=$row_product['product_rear_derailleur'];
+    }
+    $pro_wheels=$row_product['product_wheels'];
+    if($pro_wheels==null)
+    {
+        $pro_wheels="N/A";
+    }
+    else{
+        $pro_wheels=$row_product['product_wheels'];
+    }
+    $pro_tires=$row_product['product_tires'];
+    if($pro_tires==null)
+    {
+        $pro_tires="N/A";
+    }else{
+        $pro_tires=$row_product['product_tires'];
+    }
+    $pro_shifter=$row_product['product_shifter'];
+    if($pro_shifter==null)
+    {
+        $pro_shifter="N/A";
+    }
+    else
+    {
+        $pro_shifter=$row_product['product_shifter'];
+    }
+    $pro_crankset=$row_product['product_crankset'];
+    if($pro_crankset==null)
+    {
+        $pro_crankset="N/A";
+    }
+    else{
+        $pro_crankset=$row_product['product_crankset'];
+    }
+    $pro_freewheels=$row_product['product_freewheels'];
+    if($pro_freewheels==null)
+    {
+        $pro_freewheels="N/A";
+    }
+    else{
+        $pro_freewheels=$row_product['product_freewheels'];
+    }
+    $pro_bb_set=$row_product['product_bb_set'];
+    if($pro_bb_set==null)
+    {
+        $pro_bb_set="N/A";
+    }
+    else{
+        $pro_bb_set=$row_product['product_bb_set'];   
+    }
+    $pro_cassette=$row_product['product_cassette'];
+    if($pro_cassette==null)
+    {
+        $pro_cassette="N/A";
+    }
+    else{
+        $pro_cassette=$row_product['product_cassette'];   
+    }
+    $pro_colour=$row_product['product_colour'];
+    if($pro_colour==null)
+    {
+        $pro_colour="N/A";
+    }
+    else{
+        $pro_colour=$row_product['product_colour'];   
+    }
+    $pro_pedals=$row_product['product_pedals'];
+    if($pro_pedals==null)
+    {
+        $pro_pedals="N/A";
+    }
+    else{
+        $pro_pedals=$row_product['product_pedals'];
+    }
+    $pro_seat_post=$row_product['product_seat_post'];
+    if($pro_seat_post==null)
+    {
+        $pro_seat_post="N/A";
+    }
+    else{
+        $pro_seat_post=$row_product['product_seat_post'];
+    }
+    $pro_handleber=$row_product['product_handleber'];
+    if($pro_handleber==null)
+    {
+        $pro_handleber="N/A";
+    }
+    else{
+        $pro_handleber=$row_product['product_handleber'];
+    }
+    $pro_stem=$row_product['product_stem'];
+    if($pro_stem==null)
+    {
+        $pro_stem="N/A";
+    }else{
+        $pro_stem=$row_product['product_stem'];
+    }
+    $pro_headset=$row_product['product_headset'];
+    if($pro_headset==null)
+    {
+        $pro_headset="N/A";
+    }
+    else{
+        $pro_headset=$row_product['product_headset'];
+    }
+    $pro_brakeset=$row_product['product_brakeset'];
+    if($pro_brakeset==null)
+    {
+        $pro_brakeset="N/A";
+    }
+    else{
+        $pro_brakeset=$row_product['product_brakeset'];
+    }
+
+    $get_p_cat="select * from product_categories where p_cat_id='$p_cat_id'";
+    $run_p_cat=mysqli_query($con,$get_p_cat);
+    $row_p_cat=mysqli_fetch_array($run_p_cat);
+    $p_cat_title=$row_p_cat['p_cat_title'];
+}
+?>
 
     <!-- Start Header Area -->
    
@@ -169,7 +363,7 @@ include("includes/header.php");
                                         </div>
                                         <div class="price-box">
                                             <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
-                                            <span class="price-old"><del>Rs.90.00</del></span>
+                                            <span class="price-old"><del>$90.00</del></span>
                                         </div>
                                         <!--<h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
                                         <div class="product-countdown" data-countdown="2019/12/20"></div>-->
@@ -192,19 +386,34 @@ include("includes/header.php");
                                         
                                         
                                         <?php 
-                                        
-                                            if (isset($_POST['add_cart'])) {
-                                                $p_id = $_POST['product_id'];
-                                                $product_qty = $_POST['product_qty'];
+                                       
+                                        if(isset($_POST['add_cart'])){
+                                            
+                                            $p_id = $_POST['product_id'];
+                                            $product_qty = $_POST['product_qty'];
+                                            $product_img=$_POST['product_img'];
+                                            $product_price=$_POST['product_price'];
+                                            $product_name=$_POST['product_name'];
+
+                                                if(isset($_SESSION[$product_name]))
+                                                {
+                                                    echo "<script type='text/javascript'>swal('Your product is alrady added in cart', '', 'warning')</script>";
+                                                    goto end;
+                                                }
+
                                                 if ($product_qty>$pro_qty) 
                                                 {
                                                     echo "<script type='text/javascript'>swal('Please enter lower quantity', '', 'warning')</script>";
                                                 }
                                                 else
                                                 {
-                                                    add_cart($p_id, $product_qty, 'product-details');
+                                                    add_cart($p_id,$product_img,$product_qty,$product_name,$product_price);
                                                 }
-                                            }  
+                                              
+                                                
+                                            } 
+                                            
+                                            end:
                                         ?>
 
                                         <form action="#" method="POST">
@@ -228,21 +437,33 @@ include("includes/header.php");
                                                 <div class="pro-qty"style="width: 110px;" >
                                                     <input type="number" min="1" value="1"  name="product_qty" style="width: 40px;">
                                                 </div>
-                                            </div> 
+                                            </div>
+                    
+                                            
                                         </div>
-                                       <?php  if($pro_qty=0)
+                                       <?php  if($pro_qty<=0)
                                        {
 
                                        }
                                     else
                                     {
-                                    ?>
+                                       
+                                        ?>
+                                        
+                                        
                                         <input type="hidden" name="product_id" value="<?php echo $product_id; ?>"/>
+                                        <input type="hidden" name="product_img" value="<?php echo $pro_img1; ?>"/>
+                                        <input type="hidden" name="product_price" value="<?php echo $pro_price; ?>"/>
+                                        <input type="hidden" name="product_name" value="<?php echo $pro_title; ?>"/>
+                                      
                                             <div class="action_link" style="margin-top: -10px;">
-                                                <input type="submit" class="btn btn-cart2" name="add_cart" value="Add to cart" >
+                                          
+                                            <input type="submit" class="btn btn-cart2" name="add_cart" value="Add to cart" >
+                                    
                                             </div>
                                             <?php 
                                     }
+                                   
                                        ?>
                                     </form>
                                       <!--  -->
@@ -431,8 +652,8 @@ include("includes/header.php");
                                     <div class="product-item">
                                     <figure class="product-thumb">
                                         <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                            <img class="pri-img" src="assets/img/product/<?php echo $pro_img1;?>" alt="product" style='height:180px;'>
-                                            <img class="sec-img" src="assets/img/product/<?php echo $pro_img2;?>" alt="product" style='height:180px;'>
+                                            <img class="pri-img" src="assets/img/product/<?php echo $pro_img1;?>" alt="product">
+                                            <img class="sec-img" src="assets/img/product/<?php echo $pro_img2;?>" alt="product">
                                         </a>
                                         <div class="product-badge">
                                             <div class="product-label new">
@@ -452,7 +673,7 @@ include("includes/header.php");
                                         </div>-->
                                   </figure>
                                         <div class="product-caption text-center">
-                                            <div class="product-identity">
+                            <div class="product-identity">
                                                                     <p class="manufacturer-name"><a href="product-details.html">Gold</a></p>
                                                                 </div>
                                             <h6 class="product-name">

@@ -26,6 +26,7 @@ $active='Home';
                     $slide_row=$row_slides['slide_row'];
                     $slide_row_2=$row_slides['slide_row_2'];
                     $status=$row_slides['status'];
+                    $slide_url=$row_slides['slide_url'];
                 ?>
                     
                     <div class="hero-single-slide hero-overlay">
@@ -36,7 +37,7 @@ $active='Home';
                                     <div class="hero-slider-content slide-1 <?php echo $status;?>">
                                         <h2 class="slide-title"><?php echo  $slide_row; ?></h2>
                                         <h4 class="slide-desc"><?php echo  $slide_row_2;?></h4>
-                                        <a href="shop.php" class="btn btn-hero">Shop Now</a>
+                                        <a href="<?php echo $slide_url; ?>" class="btn btn-hero">Shop Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -60,50 +61,28 @@ $active='Home';
         <div class="service-policy section-padding">
             <div class="container">
                 <div class="row mtn-30">
+                <?php
+                $get_boxs="select * from boxes_section";
+                $run_box=mysqli_query($con,$get_boxs);
+                while($row_boxs=mysqli_fetch_array($run_box))
+                {
+
+                    ?>
                     <div class="col-sm-6 col-lg-3">
                         <div class="policy-item">
                             <div class="policy-icon">
-                                <i class="pe-7s-plane"></i>
+                                <i class="pe-7s-<?php echo $row_boxs["box_icon"] ?>"></i>
                             </div>
                             <div class="policy-content">
-                                <h6>Free Shipping</h6>
-                                <p>Free shipping all order</p>
+                                <h6><?php echo $row_boxs["box_title"]; ?></h6>
+                                <p><?php echo $row_boxs["box_desc"]; ?></p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="policy-item">
-                            <div class="policy-icon">
-                                <i class="pe-7s-help2"></i>
-                            </div>
-                            <div class="policy-content">
-                                <h6>Support 24/7</h6>
-                                <p>Support 24 hours a day</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="policy-item">
-                            <div class="policy-icon">
-                                <i class="pe-7s-back"></i>
-                            </div>
-                            <div class="policy-content">
-                                <h6>Money Return</h6>
-                                <p>30 days for free return</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="policy-item">
-                            <div class="policy-icon">
-                                <i class="pe-7s-credit"></i>
-                            </div>
-                            <div class="policy-content">
-                                <h6>100% Payment Secure</h6>
-                                <p>We ensure secure payment</p>
-                            </div>
-                        </div>
-                    </div>
+                   <?php 
+                }
+                ?>
+                    
                 </div>
             </div>
         </div>

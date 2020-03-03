@@ -42,6 +42,34 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="example-search-input" class="col-md-3 col-form-label">Manufacturer</label>
+                                <div class="col-md-9">
+                                <select class="form-control" name="manufacturer_cat">
+                                        <option>Select</option>
+                                        <?php 
+                              
+                                                $get_p_cats = "select * from manufacturers";
+                                                $run_p_cats = mysqli_query($con,$get_p_cats);
+                                                
+                                                while ($row_p_cats=mysqli_fetch_array($run_p_cats)){
+                                                    
+                                                    $manufacturer_id = $row_p_cats['manufacturer_id'];
+                                                    $manufacturer_title = $row_p_cats['manufacturer_title'];
+                                                    
+                                                    
+                                                    echo "
+                                                    
+                                                    <option value='$manufacturer_title'> $manufacturer_title </option>
+                                                    
+                                                    ";
+                                                    
+                                                }
+                                    
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="example-search-input" class="col-md-3 col-form-label">Product Category</label>
                                 <div class="col-md-9">
                                 <select class="form-control" name="product_cat">
@@ -59,7 +87,7 @@
                                                     
                                                     echo "
                                                     
-                                                    <option value='$p_cat_id'> $p_cat_title </option>
+                                                    <option value='$p_cat_title'> $p_cat_title </option>
                                                     
                                                     ";
                                                     
@@ -86,7 +114,7 @@
                                         
                                         echo "
                                         
-                                        <option value='$cat_id'> $cat_title </option>
+                                        <option value='$cat_title'> $cat_title </option>
                                         
                                         ";
                                         
@@ -333,6 +361,7 @@
         if(isset($_POST['submit'])){
             
             $product_title = $_POST['product_title'];
+            $manufacturer_cat=$_POST['manufacturer_cat'];
             $product_cat = $_POST['product_cat'];
             $cat = $_POST['cat'];
             $product_price = $_POST['product_price'];
@@ -372,7 +401,7 @@
             move_uploaded_file($temp_name2,"product_images/$product_img2");
             move_uploaded_file($temp_name3,"product_images/$product_img3");
             
-            $insert_product = "insert into products (p_cat_id,cat_id,date,product_title,product_img1,product_img2,product_img3,product_price,product_desc,product_qty,available_qty,product_size,product_frame,product_weight,product_front_suspension,product_rear_suspension,product_front_derailleur,product_rear_derailleur,product_wheels,product_tires,product_shifter,product_crankset,product_freewheels,product_bb_set,product_cassette,product_colour,product_pedals,product_seat_post,product_handleber,product_stem,product_headset,product_brakeset) values ('$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_price','$product_desc','$product_qty','$product_qty','$product_size','$product_frame','$product_weight','$product_front_suspension','$product_rear_suspension','$product_front_derailleur','$product_rear_derailleur','$product_wheels','$product_tires','$product_shifter','$product_crankset','$product_freewheels','$product_bb_set','$product_cassette','$product_colour','$product_pedals','$product_seat_post','$product_handleber','$product_stem','$product_headset','$product_brakeset')";
+            $insert_product = "insert into products (manufacturer_id,p_cat_id,cat_id,date,product_title,product_img1,product_img2,product_img3,product_price,product_desc,product_qty,available_qty,product_size,product_frame,product_weight,product_front_suspension,product_rear_suspension,product_front_derailleur,product_rear_derailleur,product_wheels,product_tires,product_shifter,product_crankset,product_freewheels,product_bb_set,product_cassette,product_colour,product_pedals,product_seat_post,product_handleber,product_stem,product_headset,product_brakeset) values ('$manufacturer_cat','$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_price','$product_desc','$product_qty','$product_qty','$product_size','$product_frame','$product_weight','$product_front_suspension','$product_rear_suspension','$product_front_derailleur','$product_rear_derailleur','$product_wheels','$product_tires','$product_shifter','$product_crankset','$product_freewheels','$product_bb_set','$product_cassette','$product_colour','$product_pedals','$product_seat_post','$product_handleber','$product_stem','$product_headset','$product_brakeset')";
             
             $run_product = mysqli_query($con,$insert_product);
             

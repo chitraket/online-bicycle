@@ -192,32 +192,51 @@ $_SESSION['c_id']=$customer_id;
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $total=0;
-                                            $ip_add=getRealIpUser();
-                                            $select_cat="select * from cart where ip_add='$ip_add'";
-                                            $run_cart=mysqli_query($con,$select_cat);
-                                            while($row_cart=mysqli_fetch_array($run_cart)){
-                                                $pro_id=$row_cart['p_id'];
-                                                $pro_qty=$row_cart['qty'];
-                                                $get_products="select * from products where product_id='$pro_id'";
-                                                $run_products=mysqli_query($con,$get_products);
-                                                while($row_products=mysqli_fetch_array($run_products)){
-                                                    $product_title=$row_products['product_title'];
-                                                    $product_img1=$row_products['product_img1'];
-                                                    $product_price=$row_products['product_price'];
-                                                    $sub_total=$row_products['product_price']*$pro_qty;
-                                                    $total+=$sub_total;
+                                              $bill=0;
+                                              $p_id=0;
+                                              $p_img=0;
+                                              $p_name=0;
+                                              $p_qty=0;
+                                              $p_price=0;
+                                             $total=0;
+                                              foreach ($_SESSION as $product) {
+                                                if(!is_array($product))
+                                                {
+                                                    continue;
+                                                }
+                                                  foreach ($product as $key => $value) {
+                                                      if ($key==4) {
+                                                        $p_id= $value;
+                                                      }
+                                                      else if($key ==3)
+                                                      {
+                                                          $p_qty= $value;
+                                                      }
+                                                      else if($key ==2)
+                                                      {
+                                                          $p_price= $value;
+                                                      }
+                                                      else if($key==1)
+                                                      {
+                                                          $p_name= $value;
+                                                      }
+                                                      else if($key==0)
+                                                      {
+                                                          $p_img= $value;
+                                                      }
+                                                  }
+                                                  $bill=$p_qty*$p_price;
+                                                  $total+=$bill;
                                             ?>
                                             <tr>
-                                                <td><a href="product-details.php?pro_id=<?php echo $pro_id ?>"><?php echo $product_title; ?> <strong> × <?php echo $pro_qty; ?></strong></a>
+                                                <td><a href="product-details.php?pro_id=<?php echo $p_id ?>"><?php echo $p_name; ?> <strong> × <?php echo $p_qty; ?></strong></a>
                                                 </td>
-                                                <td><?php echo $sub_total; ?></td>
+                                                <td><?php echo $bill; ?></td>
                                             </tr>
                                            
                                         </tbody>
                                         <?php 
                                                 }
-                                            }
                                         ?>
                                         <tfoot>
                                             <tr>

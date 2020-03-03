@@ -17,12 +17,15 @@ else{
     $ip_add=getRealIpUser();
     $invoice_no=mt_rand();
     $pro_size="m";
-    $select_cart = "select * from cart where ip_add='$ip_add'";
-    $run_cart = mysqli_query($con,$select_cart);
-    while($row_cart = mysqli_fetch_array($run_cart))
-    {
-        $pro_id = $row_cart['p_id'];
-        $pro_qty = $row_cart['qty'];                
+
+    $pro_qty=0;
+    $pro_id=0;
+    $pro_name=0;
+    
+       
+    
+
+                
         
                 $get_customer="select * from customers where customer_id='$c_id'";
                 $run_customer=mysqli_query($con,$get_customer);
@@ -47,10 +50,27 @@ else{
                     }
                    
                 }
+                foreach ($_SESSION as $product) {
+                    if (!is_array($product)) {
+                        continue;
+                    }
+                foreach ($product as $key => $value) {
+                    if ($key==4) {
+                        $pro_id= $value;
+                    } elseif ($key ==3) {
+                        $pro_qty= $value;
+                    }
+                    elseif($key==1)
+                    {
+                        $pro_name=$value;
+                    }
+
+                }
                 $insert_customer_orders="insert into customer_orders(order_id,product_id,txnid,invoice_no,qty,size,order_date,order_status) values('$order_id','$pro_id','','$invoice_no','$pro_qty','$pro_size',NOW(),'$status')";
                 $run_customer_orders=mysqli_query($con,$insert_customer_orders);
-                $delete_cart = "delete from cart where ip_add='$ip_add'";
-                $run_delete = mysqli_query($con,$delete_cart);            
+                $querys="update products set available_qty=available_qty-$pro_qty where product_id='$pro_id' ";
+                $run_querys=mysqli_query($db,$querys);   
+                unset($_SESSION[$pro_name]);         
                 echo "<script>window.open('success1.php?c_id=$order_id','_self')</script>";
         }
 

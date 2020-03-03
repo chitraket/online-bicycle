@@ -2,8 +2,6 @@
 $active='Shop';
 include("includes/header.php");
 ?>
-
-
 <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
@@ -43,7 +41,9 @@ include("includes/header.php");
                                 if(!isset($_GET['p_cat'])){
                                     
                                     if(!isset($_GET['cat'])){
-                                        ?>
+                                        
+                                        if (!isset($_GET['manufacturer_id'])) {
+                                            ?>
                                         
                                         <div class="col-12">
                                             <!-- section title start -->
@@ -53,7 +53,8 @@ include("includes/header.php");
                                             <!-- section title start -->
                                         </div>
 
-                                       <?php 
+                                       <?php
+                                        }
                                         
                                     }
                                     
@@ -61,23 +62,18 @@ include("includes/header.php");
                     
                         ?>
                         <?php
-                                if(!isset($_GET['p_cat']))
-                                    {
-                                        if(!isset($_GET['cat']))
-                                        {
+                                if (!isset($_GET['p_cat'])) {
+                                    if (!isset($_GET['cat'])) {
+                                        if (!isset($_GET['manufacturer_id'])) {
                                             $per_page=15;
-                                            if(isset($_GET['page']))
-                                            {
+                                            if (isset($_GET['page'])) {
                                                 $page=$_GET['page'];
-                                            }
-                                            else
-                                                {
+                                            } else {
                                                 $page=1;
-                                                }
-                                                $start_from=($page-1) * $per_page;
-                                                $get_products="select * from products order by 1  DESC LIMIT $start_from,$per_page";
-                                                $run_products=mysqli_query($con,$get_products);
-                        ?>    
+                                            }
+                                            $start_from=($page-1) * $per_page;
+                                            $get_products="select * from products order by 1  DESC LIMIT $start_from,$per_page";
+                                            $run_products=mysqli_query($con, $get_products); ?>    
                             <!-- shop product top wrap start -->
                             <div class="shop-top-bar">
                                 <div class="row align-items-center">
@@ -93,23 +89,23 @@ include("includes/header.php");
                             </div>
                         <div class="shop-product-wrap grid-view row mbn-30">
                         <?php
-                                        while($row_products=mysqli_fetch_array($run_products))
-                                                {
-                                                    $pro_id=$row_products['product_id'];
-                                                    $pro_title=$row_products['product_title'];
-                                                    $pro_price=$row_products['product_price'];
-                                                    $pro_img1=$row_products['product_img1'];
-                                                    $pro_img2=$row_products['product_img2'];
-                                                    $pro_desc=$row_products['product_desc'];              
-                        ?> 
+                                        while ($row_products=mysqli_fetch_array($run_products)) {
+                                            $pro_id=$row_products['product_id'];
+                                            $manufacturer_id=$row_products['manufacturer_id'];
+                                            $pro_title=$row_products['product_title'];
+                                            $pro_price=$row_products['product_price'];
+                                            $pro_img1=$row_products['product_img1'];
+                                            $pro_img2=$row_products['product_img2'];
+                                            $pro_desc=$row_products['product_desc']; 
+                                            ?> 
 
                                 <div class="col-md-4 col-sm-6">
                                     <!-- product grid start -->
                                     <div class="product-item">
                                         <figure class="product-thumb">
-                                            <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
+                                            <a href="product-details.php?pro_id=<?php echo $pro_id; ?>">
                                                 <img class="pri-img" src="admin_area/product_images/<?php echo $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
+                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2; ?>" alt="product" style="height:180px;">
                                             </a>
                                             <div class="product-badge">
                                                 <div class="product-label new">
@@ -124,15 +120,23 @@ include("includes/header.php");
                                                 <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
                                             </div>
                                             <div class="cart-hover">
-                                           <!-- <a href='product-details.php?pro_id=<?php echo $pro_id;?>' class='btn btn-cart'>add to cart</a>-->
+                                           <!-- <a href='product-details.php?pro_id=<?php echo $pro_id; ?>' class='btn btn-cart'>add to cart</a>-->
                                             </div>
                                         </figure>
                                         <div class="product-caption text-center">
                                             <div class="product-identity">
-                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id;?>">Platinum</a></p>
+                                            <?php 
+                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
+                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
+                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
+                                                ?>
+                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
+                                            <?php
+                                            } 
+                                            ?>
                                             </div>
                                             <h6 class="product-name">
-                                                <a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
+                                                <a href="product-details.php?pro_id=<?php echo $pro_id; ?>"><?php echo $pro_title; ?></a>
                                             </h6>
                                             <div class="price-box">
                                                 <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
@@ -145,7 +149,7 @@ include("includes/header.php");
                                     <!-- product list item end -->
                                     <div class="product-list-item">
                                         <figure class="product-thumb">
-                                            <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
+                                            <a href="product-details.php?pro_id=<?php echo $pro_id; ?>">
                                                 <img class="pri-img" src="admin_area/product_images/<?php echo  $pro_img1; ?>" alt="product" style="height:180px;">
                                                 <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2; ?>" alt="product" style="height:180px;">
                                             </a>
@@ -162,15 +166,23 @@ include("includes/header.php");
                                                 <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
                                             </div>
                                             <div class="cart-hover">
-                                           <!-- <a href='product-details.php?pro_id=<?php echo $pro_id;?>' class='btn btn-cart'>add to cart</a>-->
+                                           <!-- <a href='product-details.php?pro_id=<?php echo $pro_id; ?>' class='btn btn-cart'>add to cart</a>-->
                                             </div>
                                         </figure>
                                         <div class="product-content-list">
                                             <div class="manufacturer-name">
-                                                <a href="product-details.php?pro_id=<?php echo $pro_id;?>">Platinum</a>
+                                            <?php 
+                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
+                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
+                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
+                                                ?>
+                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
+                                            <?php
+                                            } 
+                                            ?>
                                             </div>
 
-                                            <h5 class="product-name"><a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title; ?></a></h5>
+                                            <h5 class="product-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"><?php echo $pro_title; ?></a></h5>
                                             <div class="price-box">
                                                 <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
                                                 <span class="price-old"><del>Rs.5000</del></span>
@@ -181,8 +193,7 @@ include("includes/header.php");
                                     <!-- product list item end -->
                                 </div> 
                               <?php
-                                                }
-                              ?>
+                                        } ?>
                              
                             
                         </div>
@@ -193,24 +204,24 @@ include("includes/header.php");
                                 <?php
                             
                                         $query="select * from products";
-                                        $result=mysqli_query($con,$query);
-                                        $total_records=mysqli_num_rows($result);
-                                        $total_pages=ceil($total_records/$per_page);
-                                        echo"
+                                            $result=mysqli_query($con, $query);
+                                            $total_records=mysqli_num_rows($result);
+                                            $total_pages=ceil($total_records/$per_page);
+                                            echo"
                                         <li><a class='previous' href='shop.php?page=1'><i class='pe-7s-angle-left'></i></a></li>
                                         ";
-                                        for($i=1;$i<=$total_pages;$i++)
-                                        {
-                                            echo"
+                                            for ($i=1;$i<=$total_pages;$i++) {
+                                                echo"
                                             <li class='active'><a href='shop.php?page=".$i."'>".$i."</a></li>
                                             ";
-                                        }
-                                        echo"
+                                            }
+                                            echo"
                                         <li><a class='next' href='shop.php?page=$total_pages'><i class='pe-7s-angle-right'></i></a></li>
                                         
                                         ";
-                                                    }
-                                            }
+                                        }
+                                    }
+                                }
                             
                             ?>
                                 </ul>
@@ -219,7 +230,7 @@ include("includes/header.php");
                     <?php
                                 if(isset($_GET['p_cat']))
                                     {
-                                             $p_cat_id = $_GET['p_cat'];
+                                            $p_cat_id = $_GET['p_cat'];
                                             $per_page=15;
                                             if(isset($_GET['page']))
                                             {
@@ -279,6 +290,7 @@ include("includes/header.php");
                                         while($row_products=mysqli_fetch_array($run_products))
                                                 {
                                                     $pro_id=$row_products['product_id'];
+                                                    $manufacturer_id=$row_products['manufacturer_id'];
                                                     $pro_title=$row_products['product_title'];
                                                     $pro_price=$row_products['product_price'];
                                                     $pro_img1=$row_products['product_img1'];
@@ -312,7 +324,15 @@ include("includes/header.php");
                                         </figure>
                                         <div class="product-caption text-center">
                                             <div class="product-identity">
-                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id;?>">Platinum</a></p>
+                                            <?php 
+                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
+                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
+                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
+                                                ?>
+                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
+                                            <?php
+                                            } 
+                                            ?>
                                             </div>
                                             <h6 class="product-name">
                                                 <a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
@@ -350,7 +370,15 @@ include("includes/header.php");
                                         </figure>
                                         <div class="product-content-list">
                                             <div class="manufacturer-name">
-                                                <a href="product-details.php?pro_id=<?php echo $pro_id;?>">Platinum</a>
+                                            <?php 
+                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
+                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
+                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
+                                                ?>
+                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
+                                            <?php
+                                            } 
+                                            ?>
                                             </div>
 
                                             <h5 class="product-name"><a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo  $pro_title;?></a></h5>
@@ -405,7 +433,7 @@ include("includes/header.php");
                         <?php
                                 if(isset($_GET['cat']))
                                     {
-                                             $cat_id = $_GET['cat'];
+                                            $cat_id = $_GET['cat'];
                                             $per_page=15;
                                             if(isset($_GET['page']))
                                             {
@@ -464,6 +492,7 @@ include("includes/header.php");
                                         while($row_products=mysqli_fetch_array($run_products))
                                                 {
                                                     $pro_id=$row_products['product_id'];
+                                                    $manufacturer_id=$row_products['manufacturer_id'];
                                                     $pro_title=$row_products['product_title'];
                                                     $pro_price=$row_products['product_price'];
                                                     $pro_img1=$row_products['product_img1'];
@@ -497,7 +526,15 @@ include("includes/header.php");
                                         </figure>
                                         <div class="product-caption text-center">
                                             <div class="product-identity">
-                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id;?>">Platinum</a></p>
+                                            <?php 
+                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
+                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
+                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
+                                                ?>
+                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
+                                            <?php
+                                            } 
+                                            ?>
                                             </div>
                                             <h6 class="product-name">
                                                 <a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
@@ -535,7 +572,15 @@ include("includes/header.php");
                                         </figure>
                                         <div class="product-content-list">
                                             <div class="manufacturer-name">
-                                                <a href="product-details.php?pro_id=<?php echo $pro_id;?>">Platinum</a>
+                                            <?php 
+                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
+                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
+                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
+                                                ?>
+                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
+                                            <?php
+                                            } 
+                                            ?>
                                             </div>
 
                                             <h5 class="product-name"><a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo  $pro_title;?></a></h5>
@@ -586,6 +631,207 @@ include("includes/header.php");
                                                     <?php
                                     } 
                                                     ?>
+
+                        
+                                <?php
+                                if(isset($_GET['manufacturer_id']))
+                                    {
+                                            $manufacturer_id = $_GET['manufacturer_id'];
+                                            $per_page=15;
+                                            if(isset($_GET['page']))
+                                            {
+                                                $page=$_GET['page'];
+                                            }
+                                            else
+                                                {
+                                                $page=1;
+                                                }
+                                                $start_from=($page-1) * $per_page;
+                                                $get_manufacturer ="select * from manufacturers where manufacturer_id='$manufacturer_id'";
+                                                $run_manufacturer = mysqli_query($db,$get_manufacturer);
+                                                $row_manufacturer = mysqli_fetch_array($run_manufacturer);
+                                                $manufacturer_title = $row_manufacturer['manufacturer_title'];
+                                                $get_manufacturer="select * from products where manufacturer_id='$manufacturer_id' order by 1  DESC LIMIT $start_from,$per_page ";
+                                                $run_manufacturer=mysqli_query($con,$get_manufacturer);
+                                                $count = mysqli_num_rows($run_manufacturer);
+                                                if($count==0){
+                                                  ?>
+                                                            <div class="col-12">
+                                                            <!-- section title start -->
+                                                            <div class="section-title text-center">
+                                                                <h2 class="title">No Product Found In This Product Categories</h2>
+                                                            </div>
+                                                            <!-- section title start -->
+                                                             </div>
+                                                            
+                                                        <?php 
+            
+                                                }else{
+                                                    ?>
+                                                
+                                                        <div class="col-12">
+                                                                <!-- section title start -->
+                                                                <div class="section-title text-center">
+                                                                    <h2 class="title"><?php echo $manufacturer_title; ?></h2>
+                                                                </div>
+                                                                <!-- section title start -->
+                                                            </div>  
+                            <!-- shop product top wrap start -->
+                            <div class="shop-top-bar">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-7 col-md-6 order-2 order-md-1">
+                                        <div class="top-bar-left">
+                                            <div class="product-view-mode">
+                                                <a class="active" href="#" data-target="grid-view" data-toggle="tooltip" title="Grid View"><i class="fa fa-th"></i></a>
+                                                <a href="#" data-target="list-view" data-toggle="tooltip" title="List View"><i class="fa fa-list"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="shop-product-wrap grid-view row mbn-30">
+                        <?php
+                                        while($row_manufacturer=mysqli_fetch_array($run_manufacturer))
+                                                {
+                                                    $pro_id=$row_manufacturer['product_id'];
+                                                    $pro_title=$row_manufacturer['product_title'];
+                                                    $pro_price=$row_manufacturer['product_price'];
+                                                    $pro_img1=$row_manufacturer['product_img1'];
+                                                    $pro_img2=$row_manufacturer['product_img2'];
+                                                    $pro_desc=$row_manufacturer['product_desc'];              
+                        ?> 
+
+                                <div class="col-md-4 col-sm-6">
+                                    <!-- product grid start -->
+                                    <div class="product-item">
+                                        <figure class="product-thumb">
+                                            <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
+                                                <img class="pri-img" src="admin_area/product_images/<?php echo $pro_img1; ?>" alt="product" style="height:180px;">
+                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
+                                            </a>
+                                            <div class="product-badge">
+                                                <div class="product-label new">
+                                                    <span>new</span>
+                                                </div>
+                                                <div class="product-label discount">
+                                                    <span>10%</span>
+                                                </div>
+                                            </div>
+                                            <div class="button-group">
+                                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
+                                                <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
+                                            </div>
+                                            <div class="cart-hover">
+                                           <!-- <a href='product-details.php?pro_id=<?php echo $pro_id;?>' class='btn btn-cart'>add to cart</a>-->
+                                            </div>
+                                        </figure>
+                                        <div class="product-caption text-center">
+                                            <div class="product-identity">
+                                            <?php 
+                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
+                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
+                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
+                                                ?>
+                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
+                                            <?php
+                                            } 
+                                            ?>
+                                            </div>
+                                            <h6 class="product-name">
+                                                <a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
+                                            </h6>
+                                            <div class="price-box">
+                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
+                                                <span class="price-old"><del>Rs.5000</del></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- product grid end -->
+
+                                    <!-- product list item end -->
+                                    <div class="product-list-item">
+                                        <figure class="product-thumb">
+                                            <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
+                                                <img class="pri-img" src="admin_area/product_images/<?php echo  $pro_img1; ?>" alt="product" style="height:180px;">
+                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2; ?>" alt="product" style="height:180px;">
+                                            </a>
+                                            <div class="product-badge">
+                                                <div class="product-label new">
+                                                    <span>new</span>
+                                                </div>
+                                                <div class="product-label discount">
+                                                    <span>10%</span>
+                                                </div>
+                                            </div>
+                                            <div class="button-group">
+                                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
+                                                <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
+                                            </div>
+                                            <div class="cart-hover">
+                                          <!--  <a href='product-details.php?pro_id= <?php echo $pro_id;?>' class='btn btn-cart'>add to cart</a>-->
+                                            </div>
+                                        </figure>
+                                        <div class="product-content-list">
+                                            <div class="manufacturer-name">
+                                            <?php 
+                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
+                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
+                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
+                                                ?>
+                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
+                                            <?php
+                                            } 
+                                            ?>
+                                            </div>
+
+                                            <h5 class="product-name"><a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo  $pro_title;?></a></h5>
+                                            <div class="price-box">
+                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
+                                                <span class="price-old"><del>Rs.5000</del></span>
+                                            </div>
+                                            <p><?php echo $pro_desc; ?></p>
+                                        </div>
+                                    </div>
+                                    <!-- product list item end -->
+                                </div> 
+                              <?php
+                                                }
+                              ?>
+                             
+                            
+                        </div>
+                       
+                       
+                         <div class="paginatoin-area text-center">
+                                <ul class="pagination-box">
+                                <?php
+                            
+                                        $query="select * from products";
+                                        $result=mysqli_query($con,$query);
+                                        $total_records=mysqli_num_rows($result);
+                                        $total_pages=ceil($total_records/$per_page);
+                                        echo"
+                                        <li><a class='previous' href='shop.php?page=1'><i class='pe-7s-angle-left'></i></a></li>
+                                        ";
+                                        for($i=1;$i<=$total_pages;$i++)
+                                        {
+                                            echo"
+                                            <li class='active'><a href='shop.php?page=".$i."'>".$i."</a></li>
+                                            ";
+                                        }
+                                        echo"
+                                        <li><a class='next' href='shop.php?page=$total_pages'><i class='pe-7s-angle-right'></i></a></li>
+                                        
+                                        ";
+                                                    }
+                            
+                            ?>
+                                </ul>
+                            </div>
+                          
+                                                    <?php
+                                    } 
+                                                    ?>                                                    
                         </div> 
                        
                     </div> 

@@ -23,8 +23,10 @@ if(isset($_GET['product_id'])){
     $run_edit = mysqli_query($con,$get_p);
     
     $row_edit = mysqli_fetch_array($run_edit);
-    
+
     $p_id = $row_edit['product_id'];
+
+    $manufacturer_id=$row_edit['manufacturer_id'];
     
     $p_title = $row_edit['product_title'];
     
@@ -91,6 +93,7 @@ if(isset($_GET['product_id'])){
    // $p_desc = $row_edit['product_desc'];
     
 }
+
     
     $get_p_cat = "select * from product_categories where p_cat_id='$p_cat'";
     
@@ -107,6 +110,14 @@ if(isset($_GET['product_id'])){
     $row_cat = mysqli_fetch_array($run_cat);
     
     $cat_title = $row_cat['cat_title'];
+
+    $get_manufacturer = "select * from 	manufacturers where manufacturer_id='$manufacturer_id'";
+    
+    $run_manufacturer = mysqli_query($con,$get_manufacturer);
+    
+    $row_manufacturer = mysqli_fetch_array($run_manufacturer);
+    
+    $manufacturer_title = $row_manufacturer['manufacturer_title'];
 
 ?>
 
@@ -138,6 +149,36 @@ if(isset($_GET['product_id'])){
                                 <label for="example-text-input" class="col-md-3 col-form-label">Product Title</label>
                                 <div class="col-md-9">
                                     <input class="form-control" type="text" placeholder="Product Title" name="product_title" value="<?php echo $p_title; ?>" id="example-text-input">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="example-search-input" class="col-md-3 col-form-label">Manufacturer</label>
+                                <div class="col-md-9">
+                                <select class="form-control" name="manufacturer_cat">
+                                <option value="<?php echo $manufacturer_id; ?>"> <?php echo $manufacturer_title; ?> </option>
+                              
+                              <?php 
+                              
+                              $get_manufacturers = "select * from manufacturers";
+                              $run_manufacturers = mysqli_query($con,$get_manufacturers);
+                              
+                              while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)){
+                                  
+                                  $manufacturer_id = $row_manufacturers['manufacturer_id'];
+                                  $manufacturer_title = $row_manufacturers['manufacturer_title'];
+                                  
+                                  echo "
+                                  
+                                  <option value='$manufacturer_id'> $manufacturer_title </option>
+                                  
+                                  ";
+                                  
+                              }
+                              
+                              ?>
+                              
+                          </select>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -472,6 +513,7 @@ if(isset($_POST['update'])){
     $product_cat = $_POST['product_cat'];
     $cat = $_POST['cat'];
     $product_price = $_POST['product_price'];
+    $manufacturer_cat=$_POST['manufacturer_cat'];
    // $product_keywords = $_POST['product_keywords'];
     $product_desc = $_POST['product_desc'];
     $product_size=$_POST['product_size'];
@@ -510,8 +552,8 @@ if(isset($_POST['update'])){
     move_uploaded_file($temp_name1,"product_images/$product_img1");
     move_uploaded_file($temp_name2,"product_images/$product_img2");
     move_uploaded_file($temp_name3,"product_images/$product_img3");
-    
-    $update_product = "update products set p_cat_id='$product_cat',cat_id='$cat',date=NOW(),product_title='$product_title',product_img1='$product_img1',product_img2='$product_img2',product_img3='$product_img3',product_price='$product_price',product_desc='$product_desc',product_qty='$product_qty',available_qty='$product_qty',product_size='$product_size',product_frame='$product_frame',product_weight='$product_weight',product_front_suspension='$product_front_suspension',product_rear_suspension='$product_rear_suspension',product_front_derailleur='$product_front_derailleur',product_rear_derailleur='$product_rear_derailleur',product_wheels='$product_wheels',product_tires='$product_title',product_shifter='$product_shifter',product_crankset='$product_crankset',product_freewheels='$product_freewheels',product_bb_set='$product_bb_set',product_cassette='$product_cassette',product_colour='$product_colour',product_pedals='$product_pedals',product_seat_post='$product_seat_post',product_handleber='$product_handleber',product_stem='$product_stem',product_headset='$product_headset',product_brakeset='$product_brakeset' where product_id='$p_id'";
+
+    $update_product = "update products set manufacturer_id='$manufacturer_cat', p_cat_id='$product_cat',cat_id='$cat',date=NOW(),product_title='$product_title',product_img1='$product_img1',product_img2='$product_img2',product_img3='$product_img3',product_price='$product_price',product_desc='$product_desc',product_qty='$product_qty',available_qty='$product_qty',product_size='$product_size',product_frame='$product_frame',product_weight='$product_weight',product_front_suspension='$product_front_suspension',product_rear_suspension='$product_rear_suspension',product_front_derailleur='$product_front_derailleur',product_rear_derailleur='$product_rear_derailleur',product_wheels='$product_wheels',product_tires='$product_tires',product_shifter='$product_shifter',product_crankset='$product_crankset',product_freewheels='$product_freewheels',product_bb_set='$product_bb_set',product_cassette='$product_cassette',product_colour='$product_colour',product_pedals='$product_pedals',product_seat_post='$product_seat_post',product_handleber='$product_handleber',product_stem='$product_stem',product_headset='$product_headset',product_brakeset='$product_brakeset' where product_id='$p_id'";
     
     $run_product = mysqli_query($con,$update_product);
     

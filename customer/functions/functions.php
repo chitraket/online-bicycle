@@ -14,32 +14,14 @@ function getRealIpUser(){
     
 }
 
-function add_cart($p_id,$product_qty){
+function add_cart($p_id,$product_img,$product_qty,$product_name,$product_price){
+
     
-    global $db;
-    
-        $ip_add = getRealIpUser();
-        
-        $check_product = "select * from cart where ip_add='$ip_add' AND p_id='$p_id'";
-        
-        $run_check = mysqli_query($db,$check_product);
-        
-        if(mysqli_num_rows($run_check)>0){
-            
-            echo "<script>alert('This product has already added in cart')</script>";
-            echo "<script>window.open('product-details.php?pro_id=$p_id','_self')</script>";
-            
-        }
-        else{
-            
-            $query = "insert into cart (p_id,ip_add,qty) values ('$p_id','$ip_add','$product_qty')";
-            
-            $run_query = mysqli_query($db,$query);
-            
-            echo "<script>window.open('product-details.php?pro_id=$p_id','_self')</script>";   
-        } 
-        
-}
+    $product= array($product_img,$product_name,$product_price,$product_qty,$p_id);
+    $_SESSION[$product_name]=$product;
+    echo "<script>window.open('product-details.php?pro_id=$p_id ','_self')</script>";
+ 
+ }
 
 function getPro(){
     global $db;
