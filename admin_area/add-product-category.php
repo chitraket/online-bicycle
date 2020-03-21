@@ -42,12 +42,7 @@
                                     <input class="form-control" type="text" placeholder="Product Category Title" name="p_cat_title"  id="example-text-input">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="example-number-input" class="col-md-3 col-form-label">Product Category Description</label>
-                                <div class="col-md-9">
-                                <textarea required class="form-control" placeholder="Product Category Description" name="p_cat_desc" cols="19" rows="6"></textarea>
-                                </div>
-                            </div>
+
                             <div class="form-group mt-4">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="submit">
@@ -76,7 +71,7 @@
               
               $p_cat_desc = $_POST['p_cat_desc'];
               
-              $insert_p_cat = "insert into product_categories (p_cat_title,p_cat_desc) values ('$p_cat_title','$p_cat_desc')";
+              $insert_p_cat = "insert into product_categories (p_cat_title) values ('$p_cat_title')";
               
               $run_p_cat = mysqli_query($con,$insert_p_cat);
               

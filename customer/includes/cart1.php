@@ -5,13 +5,35 @@
                     <div class="minicart-close">
                         <i class="pe-7s-close"></i>
                     </div>
-        
     
+                    
+                    
+                        <div class="minicart-content-box" id="cart_1_empty">
+                            <div style="padding-top: 200px;">
+                                        
+                                <div class='section-title text-center'>
+                                    <h2 class='title'>Your cart is empty</h2>
+                                </div>
+                                <center>
+                                    <div class="action_link" style="margin-top: -10px;">
+                                        <a href="../index.php"><input type="submit" class="btn btn-cart2" name="add_cart" value="Start shopping" ></a>
+                                    </div>   
+                                </center>       
+                            </div>
+                        </div>
+         
         
-                <div class="minicart-content-box">
+                <div class="minicart-content-box" id="table_carts">
                     <div class="minicart-item-wrapper">
+                    <style>
+                                    #table_carts{
+                                        display: none;
+                                    }
+                    </style>
                         <ul>
-                        <?php
+                            <?php
+                                    $size=0;
+                                    $papage=0;
                                   $bill=0;
                                   $p_id=0;
                                   $p_img=0;
@@ -19,37 +41,52 @@
                                   $p_qty=0;
                                   $p_price=0;
                                  $total=0;
-                                  foreach ($_SESSION as $product) {
-try {
+                            foreach ($_SESSION as $product) {
+                                 if(!is_array($product))
+                                    {
+                                        continue;
+                                    }
+                                    ?>
+                                    <style>
+                                    #cart_1_empty{
+                                        display: none;
+                                    }
 
-    if(!is_array($product))
-    {
-        continue;
-    }
+                                    #table_carts{
+                                        display: block;
+                                    }
+                                    </style>
+                                    <?php 
+                                      foreach ($product as $key => $value) {
 
-    foreach ($product as $key => $value) {
-        if ($key==4) {
-            $p_id= $value;
-        } elseif ($key ==3) {
-            $p_qty= $value;
-        } elseif ($key ==2) {
-            $p_price= $value;
-        } elseif ($key==1) {
-            $p_name= $value;
-        } elseif ($key==0) {
-            $p_img= $value;
-        }
-    }
-}
-catch(Exception $ex)
-{
-    continue;
-}
-                                      $bill=$p_qty*$p_price;
-                                      $total+=$bill;
-                                      ?>
-                                    
-
+                                        if($key==6)
+                                        {
+                                            $papage=$value;
+                                        }
+                                            if($key==5)
+                                            {
+                                                $size=$value;
+                                            }
+                                          else if ($key==4) {
+                                              $p_id= $value;
+                                          } elseif ($key ==3) {
+                                              $p_qty= $value;
+                                          } elseif ($key ==2) {
+                                              $p_price= $value;
+                                          } elseif ($key==1) {
+                                              $p_name= $value;
+                                          } elseif ($key==0) {
+                                              $p_img= $value;
+                                          } 
+                                          
+                                         
+                                         }
+                                         $bill=$p_price*$p_qty;
+                                         $total+=$bill;
+                            ?>
+                            <?php
+                            if ($papage==0) {
+                                ?>
                             <li class="minicart-item">
                                 <div class="minicart-thumb">
                                     <a href="../product-details.php?pro_id=<?php echo $p_id ?>">
@@ -65,15 +102,39 @@ catch(Exception $ex)
                                         <span class="cart-price">Rs.<?php echo $bill ?>  </span>
                                     </p>
                                 </div>
-                                <!--
-                                <form method="POST">
-                                <button  name="close" class="minicart-remove"><i class="pe-7s-close"></i></button>
+                                <!--<form action="edit-cart.php" method="POST">
+                                <button  name="event" value="Delete" class="minicart-remove"><i class="pe-7s-close"></i></button>
                                 </form>-->
                             </li>
-                            <?php     
-                                        }
-                                    
-                                    ?>
+                            <?php
+                            }
+                            if ($papage==1) {
+                                ?>
+                                <li class="minicart-item">
+                                <div class="minicart-thumb">
+                                    <a href="../accessories-details.php?accessories_id=<?php echo $p_id ?>">
+                                        <img src="../admin_area/accessories_images/<?php echo $p_img ?>" alt="product">
+                                    </a>
+                                </div>
+                                <div class="minicart-content">
+                                    <h3 class="product-name">
+                                        <a href="../accessories-details.php?accessories_id=<?php echo $p_id ?>"><?php echo $p_name ?></a>
+                                    </h3>
+                                    <p>
+                                        <span class="cart-quantity"><?php echo $p_qty ?> <strong> | </strong></span>
+                                        <span class="cart-price">Rs.<?php echo $bill ?>  </span>
+                                    </p>
+                                </div>
+                                <!--<form action="edit-cart.php" method="POST">
+                                <button  name="event" value="Delete" class="minicart-remove"><i class="pe-7s-close"></i></button>
+                                </form>-->
+                            </li>
+                            
+                             
+                            <?php
+                            } 
+                                  }
+                            ?>
                         </ul>
                     </div>
                    
@@ -103,7 +164,7 @@ catch(Exception $ex)
                         <a href="../checkout.php"><i class="fa fa-share"></i> Checkout</a>
                     </div>
                 </div>
-           
+         
         </div>
     </div>
 </div>

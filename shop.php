@@ -12,7 +12,7 @@ include("includes/header.php");
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">shop</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Bikes</li>
                                 </ul>
                             </nav>
                         </div>
@@ -25,821 +25,28 @@ include("includes/header.php");
             <div class="container">
                 <div class="row">
                     <!-- sidebar area start -->
-                    <?php
-                        include("includes/sidebar.php");
-                    ?>
+                   <?php
+                   include("includes/sidebar.php"); 
+                   ?>
+
                     <!-- sidebar area end -->
-                  
-                    
-                    
                     <div class="col-lg-9 order-1 order-lg-2">
-                   
-                        <div class="shop-product-wrapper">
-
-                        <?php 
-               
-                                if(!isset($_GET['p_cat'])){
-                                    
-                                    if(!isset($_GET['cat'])){
-                                        
-                                        if (!isset($_GET['manufacturer_id'])) {
-                                            ?>
-                                        
-                                        <div class="col-12">
-                                            <!-- section title start -->
-                                            <div class="section-title text-center">
-                                                <h2 class="title">our products</h2>
-                                            </div>
-                                            <!-- section title start -->
-                                        </div>
-
-                                       <?php
-                                        }
-                                        
-                                    }
-                                    
-                                }
+                    <div class="shop-product-wrapper">
                     
-                        ?>
-                        <?php
-                                if (!isset($_GET['p_cat'])) {
-                                    if (!isset($_GET['cat'])) {
-                                        if (!isset($_GET['manufacturer_id'])) {
-                                            $per_page=15;
-                                            if (isset($_GET['page'])) {
-                                                $page=$_GET['page'];
-                                            } else {
-                                                $page=1;
-                                            }
-                                            $start_from=($page-1) * $per_page;
-                                            $get_products="select * from products order by 1  DESC LIMIT $start_from,$per_page";
-                                            $run_products=mysqli_query($con, $get_products); ?>    
-                            <!-- shop product top wrap start -->
-                            <div class="shop-top-bar">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-7 col-md-6 order-2 order-md-1">
-                                        <div class="top-bar-left">
-                                            <div class="product-view-mode">
-                                                <a class="active" href="#" data-target="grid-view" data-toggle="tooltip" title="Grid View"><i class="fa fa-th"></i></a>
-                                                <a href="#" data-target="list-view" data-toggle="tooltip" title="List View"><i class="fa fa-list"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <div class="shop-product-wrap grid-view row mbn-30">
-                        <?php
-                                        while ($row_products=mysqli_fetch_array($run_products)) {
-                                            $pro_id=$row_products['product_id'];
-                                            $manufacturer_id=$row_products['manufacturer_id'];
-                                            $pro_title=$row_products['product_title'];
-                                            $pro_price=$row_products['product_price'];
-                                            $pro_img1=$row_products['product_img1'];
-                                            $pro_img2=$row_products['product_img2'];
-                                            $pro_desc=$row_products['product_desc']; 
-                                            ?> 
-
-                                <div class="col-md-4 col-sm-6">
-                                    <!-- product grid start -->
-                                    <div class="product-item">
-                                        <figure class="product-thumb">
-                                            <a href="product-details.php?pro_id=<?php echo $pro_id; ?>">
-                                                <img class="pri-img" src="admin_area/product_images/<?php echo $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2; ?>" alt="product" style="height:180px;">
-                                            </a>
-                                            <div class="product-badge">
-                                                <div class="product-label new">
-                                                    <span>new</span>
-                                                </div>
-                                                <div class="product-label discount">
-                                                    <span>10%</span>
-                                                </div>
-                                            </div>
-                                            <div class="button-group">
-                                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            </div>
-                                            <div class="cart-hover">
-                                           <!-- <a href='product-details.php?pro_id=<?php echo $pro_id; ?>' class='btn btn-cart'>add to cart</a>-->
-                                            </div>
-                                        </figure>
-                                        <div class="product-caption text-center">
-                                            <div class="product-identity">
-                                            <?php 
-                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
-                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
-                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
-                                                ?>
-                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
-                                            <?php
-                                            } 
-                                            ?>
-                                            </div>
-                                            <h6 class="product-name">
-                                                <a href="product-details.php?pro_id=<?php echo $pro_id; ?>"><?php echo $pro_title; ?></a>
-                                            </h6>
-                                            <div class="price-box">
-                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
-                                                <span class="price-old"><del>Rs.50000</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- product grid end -->
-
-                                    <!-- product list item end -->
-                                    <div class="product-list-item">
-                                        <figure class="product-thumb">
-                                            <a href="product-details.php?pro_id=<?php echo $pro_id; ?>">
-                                                <img class="pri-img" src="admin_area/product_images/<?php echo  $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2; ?>" alt="product" style="height:180px;">
-                                            </a>
-                                            <div class="product-badge">
-                                                <div class="product-label new">
-                                                    <span>new</span>
-                                                </div>
-                                                <div class="product-label discount">
-                                                    <span>10%</span>
-                                                </div>
-                                            </div>
-                                            <div class="button-group">
-                                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            </div>
-                                            <div class="cart-hover">
-                                           <!-- <a href='product-details.php?pro_id=<?php echo $pro_id; ?>' class='btn btn-cart'>add to cart</a>-->
-                                            </div>
-                                        </figure>
-                                        <div class="product-content-list">
-                                            <div class="manufacturer-name">
-                                            <?php 
-                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
-                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
-                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
-                                                ?>
-                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
-                                            <?php
-                                            } 
-                                            ?>
-                                            </div>
-
-                                            <h5 class="product-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"><?php echo $pro_title; ?></a></h5>
-                                            <div class="price-box">
-                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
-                                                <span class="price-old"><del>Rs.5000</del></span>
-                                            </div>
-                                            <p><?php echo $pro_desc; ?></p>
-                                        </div>
-                                    </div>
-                                    <!-- product list item end -->
-                                </div> 
-                              <?php
-                                        } ?>
-                             
-                            
+                    <div class="filter_data">
+                    
                         </div>
-                       
-                       
-                         <div class="paginatoin-area text-center">
-                                <ul class="pagination-box">
-                                <?php
-                            
-                                        $query="select * from products";
-                                            $result=mysqli_query($con, $query);
-                                            $total_records=mysqli_num_rows($result);
-                                            $total_pages=ceil($total_records/$per_page);
-                                            echo"
-                                        <li><a class='previous' href='shop.php?page=1'><i class='pe-7s-angle-left'></i></a></li>
-                                        ";
-                                            for ($i=1;$i<=$total_pages;$i++) {
-                                                echo"
-                                            <li class='active'><a href='shop.php?page=".$i."'>".$i."</a></li>
-                                            ";
-                                            }
-                                            echo"
-                                        <li><a class='next' href='shop.php?page=$total_pages'><i class='pe-7s-angle-right'></i></a></li>
-                                        
-                                        ";
-                                        }
-                                    }
-                                }
-                            
-                            ?>
-                                </ul>
-                            </div>
-
-                    <?php
-                                if(isset($_GET['p_cat']))
-                                    {
-                                            $p_cat_id = $_GET['p_cat'];
-                                            $per_page=15;
-                                            if(isset($_GET['page']))
-                                            {
-                                                $page=$_GET['page'];
-                                            }
-                                            else
-                                                {
-                                                $page=1;
-                                                }
-                                                $start_from=($page-1) * $per_page;
-                                                $get_p_cat ="select * from product_categories where p_cat_id='$p_cat_id'";
-                                                $run_p_cat = mysqli_query($db,$get_p_cat);
-                                                $row_p_cat = mysqli_fetch_array($run_p_cat);
-                                                $p_cat_title = $row_p_cat['p_cat_title'];
-                                                $get_products="select * from products where p_cat_id='$p_cat_id' order by 1  DESC LIMIT $start_from,$per_page ";
-                                                $run_products=mysqli_query($con,$get_products);
-                                                $count = mysqli_num_rows($run_products);
-        
-                                                if($count==0){
-                                                    ?>
-                                                            <div class="col-12">
-                                                            <!-- section title start -->
-                                                            <div class="section-title text-center">
-                                                                <h2 class="title">No Product Found In This Product Categories</h2>
-                                                            </div>
-                                                            <!-- section title start -->
-                                                             </div>
-                                                            
-                                                      <?php      
-            
-                                                }else{
-                                                    
-                                                   ?>
-                                                        <div class="col-12">
-                                                                <!-- section title start -->
-                                                                <div class="section-title text-center">
-                                                                    <h2 class="title"><?php echo $p_cat_title;?></h2>
-                                                                </div>
-                                                                <!-- section title start -->
-                                                            </div>
-                                                   
-                            <!-- shop product top wrap start -->
-                            <div class="shop-top-bar">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-7 col-md-6 order-2 order-md-1">
-                                        <div class="top-bar-left">
-                                            <div class="product-view-mode">
-                                                <a class="active" href="#" data-target="grid-view" data-toggle="tooltip" title="Grid View"><i class="fa fa-th"></i></a>
-                                                <a href="#" data-target="list-view" data-toggle="tooltip" title="List View"><i class="fa fa-list"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <div class="shop-product-wrap grid-view row mbn-30">
-                        <?php
-                                        while($row_products=mysqli_fetch_array($run_products))
-                                                {
-                                                    $pro_id=$row_products['product_id'];
-                                                    $manufacturer_id=$row_products['manufacturer_id'];
-                                                    $pro_title=$row_products['product_title'];
-                                                    $pro_price=$row_products['product_price'];
-                                                    $pro_img1=$row_products['product_img1'];
-                                                    $pro_img2=$row_products['product_img2'];
-                                                    $pro_desc=$row_products['product_desc'];              
-                        ?> 
-
-                                <div class="col-md-4 col-sm-6">
-                                    <!-- product grid start -->
-                                    <div class="product-item">
-                                        <figure class="product-thumb">
-                                            <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                                <img class="pri-img" src="admin_area/product_images/<?php echo $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
-                                            </a>
-                                            <div class="product-badge">
-                                                <div class="product-label new">
-                                                    <span>new</span>
-                                                </div>
-                                                <div class="product-label discount">
-                                                    <span>10%</span>
-                                                </div>
-                                            </div>
-                                            <div class="button-group">
-                                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            </div>
-                                           <!-- <div class="cart-hover">
-                                            <a href='product-details.php?pro_id=<?php echo $pro_id;?>' class='btn btn-cart'>add to cart</a>
-                                            </div>-->
-                                        </figure>
-                                        <div class="product-caption text-center">
-                                            <div class="product-identity">
-                                            <?php 
-                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
-                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
-                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
-                                                ?>
-                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
-                                            <?php
-                                            } 
-                                            ?>
-                                            </div>
-                                            <h6 class="product-name">
-                                                <a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
-                                            </h6>
-                                            <div class="price-box">
-                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
-                                                <span class="price-old"><del>Rs.5000</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- product grid end -->
-
-                                    <!-- product list item end -->
-                                    <div class="product-list-item">
-                                        <figure class="product-thumb">
-                                            <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                                <img class="pri-img" src="admin_area/product_images/<?php echo  $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2; ?>" alt="product" style="height:180px;">
-                                            </a>
-                                            <div class="product-badge">
-                                                <div class="product-label new">
-                                                    <span>new</span>
-                                                </div>
-                                                <div class="product-label discount">
-                                                    <span>10%</span>
-                                                </div>
-                                            </div>
-                                            <div class="button-group">
-                                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            </div>
-                                            <div class="cart-hover">
-                                            <!--<a href='product-details.php?pro_id= <?php echo $pro_id;?>' class='btn btn-cart'>add to cart</a>-->
-                                            </div>
-                                        </figure>
-                                        <div class="product-content-list">
-                                            <div class="manufacturer-name">
-                                            <?php 
-                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
-                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
-                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
-                                                ?>
-                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
-                                            <?php
-                                            } 
-                                            ?>
-                                            </div>
-
-                                            <h5 class="product-name"><a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo  $pro_title;?></a></h5>
-                                            <div class="price-box">
-                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
-                                                <span class="price-old"><del>Rs.5000</del></span>
-                                            </div>
-                                            <p><?php echo $pro_desc; ?></p>
-                                        </div>
-                                    </div>
-                                    <!-- product list item end -->
-                                </div> 
-                              <?php
-                                                }
-                              ?>
-                             
-                            
-                        </div>
-                       
-                       
-                         <div class="paginatoin-area text-center">
-                                <ul class="pagination-box">
-                                <?php
-                            
-                                        $query="select * from products";
-                                        $result=mysqli_query($con,$query);
-                                        $total_records=mysqli_num_rows($result);
-                                        $total_pages=ceil($total_records/$per_page);
-                                        echo"
-                                        <li><a class='previous' href='shop.php?page=1'><i class='pe-7s-angle-left'></i></a></li>
-                                        ";
-                                        for($i=1;$i<=$total_pages;$i++)
-                                        {
-                                            echo"
-                                            <li class='active'><a href='shop.php?page=".$i."'>".$i."</a></li>
-                                            ";
-                                        }
-                                        echo"
-                                        <li><a class='next' href='shop.php?page=$total_pages'><i class='pe-7s-angle-right'></i></a></li>
-                                        
-                                        ";
-                                                    }
-                            
-                            ?>
-                                </ul>
-                            </div>
-                          
-                                                    <?php
-                                    } 
-                                                    ?>
-
-                        <?php
-                                if(isset($_GET['cat']))
-                                    {
-                                            $cat_id = $_GET['cat'];
-                                            $per_page=15;
-                                            if(isset($_GET['page']))
-                                            {
-                                                $page=$_GET['page'];
-                                            }
-                                            else
-                                                {
-                                                $page=1;
-                                                }
-                                                $start_from=($page-1) * $per_page;
-                                                $get_p_cat ="select * from categories where cat_id='$cat_id'";
-                                                $run_p_cat = mysqli_query($db,$get_p_cat);
-                                                $row_p_cat = mysqli_fetch_array($run_p_cat);
-                                                $cat_title = $row_p_cat['cat_title'];
-                                                $get_products="select * from products where cat_id='$cat_id' order by 1  DESC LIMIT $start_from,$per_page ";
-                                                $run_products=mysqli_query($con,$get_products);
-                                                $count = mysqli_num_rows($run_products);
-        
-                                                if($count==0){
-                                                  ?>
-                                                            <div class="col-12">
-                                                            <!-- section title start -->
-                                                            <div class="section-title text-center">
-                                                                <h2 class="title">No Product Found In This Product Categories</h2>
-                                                            </div>
-                                                            <!-- section title start -->
-                                                             </div>
-                                                            
-                                                        <?php 
-            
-                                                }else{
-                                                    ?>
-                                                
-                                                        <div class="col-12">
-                                                                <!-- section title start -->
-                                                                <div class="section-title text-center">
-                                                                    <h2 class="title"><?php echo $cat_title; ?></h2>
-                                                                </div>
-                                                                <!-- section title start -->
-                                                            </div>  
-                            <!-- shop product top wrap start -->
-                            <div class="shop-top-bar">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-7 col-md-6 order-2 order-md-1">
-                                        <div class="top-bar-left">
-                                            <div class="product-view-mode">
-                                                <a class="active" href="#" data-target="grid-view" data-toggle="tooltip" title="Grid View"><i class="fa fa-th"></i></a>
-                                                <a href="#" data-target="list-view" data-toggle="tooltip" title="List View"><i class="fa fa-list"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <div class="shop-product-wrap grid-view row mbn-30">
-                        <?php
-                                        while($row_products=mysqli_fetch_array($run_products))
-                                                {
-                                                    $pro_id=$row_products['product_id'];
-                                                    $manufacturer_id=$row_products['manufacturer_id'];
-                                                    $pro_title=$row_products['product_title'];
-                                                    $pro_price=$row_products['product_price'];
-                                                    $pro_img1=$row_products['product_img1'];
-                                                    $pro_img2=$row_products['product_img2'];
-                                                    $pro_desc=$row_products['product_desc'];              
-                        ?> 
-
-                                <div class="col-md-4 col-sm-6">
-                                    <!-- product grid start -->
-                                    <div class="product-item">
-                                        <figure class="product-thumb">
-                                            <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                                <img class="pri-img" src="admin_area/product_images/<?php echo $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
-                                            </a>
-                                            <div class="product-badge">
-                                                <div class="product-label new">
-                                                    <span>new</span>
-                                                </div>
-                                                <div class="product-label discount">
-                                                    <span>10%</span>
-                                                </div>
-                                            </div>
-                                            <div class="button-group">
-                                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            </div>
-                                            <div class="cart-hover">
-                                           <!-- <a href='product-details.php?pro_id=<?php echo $pro_id;?>' class='btn btn-cart'>add to cart</a>-->
-                                            </div>
-                                        </figure>
-                                        <div class="product-caption text-center">
-                                            <div class="product-identity">
-                                            <?php 
-                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
-                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
-                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
-                                                ?>
-                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
-                                            <?php
-                                            } 
-                                            ?>
-                                            </div>
-                                            <h6 class="product-name">
-                                                <a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
-                                            </h6>
-                                            <div class="price-box">
-                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
-                                                <span class="price-old"><del>Rs.5000</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- product grid end -->
-
-                                    <!-- product list item end -->
-                                    <div class="product-list-item">
-                                        <figure class="product-thumb">
-                                            <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                                <img class="pri-img" src="admin_area/product_images/<?php echo  $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2; ?>" alt="product" style="height:180px;">
-                                            </a>
-                                            <div class="product-badge">
-                                                <div class="product-label new">
-                                                    <span>new</span>
-                                                </div>
-                                                <div class="product-label discount">
-                                                    <span>10%</span>
-                                                </div>
-                                            </div>
-                                            <div class="button-group">
-                                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            </div>
-                                            <div class="cart-hover">
-                                          <!--  <a href='product-details.php?pro_id= <?php echo $pro_id;?>' class='btn btn-cart'>add to cart</a>-->
-                                            </div>
-                                        </figure>
-                                        <div class="product-content-list">
-                                            <div class="manufacturer-name">
-                                            <?php 
-                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
-                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
-                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
-                                                ?>
-                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
-                                            <?php
-                                            } 
-                                            ?>
-                                            </div>
-
-                                            <h5 class="product-name"><a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo  $pro_title;?></a></h5>
-                                            <div class="price-box">
-                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
-                                                <span class="price-old"><del>Rs.5000</del></span>
-                                            </div>
-                                            <p><?php echo $pro_desc; ?></p>
-                                        </div>
-                                    </div>
-                                    <!-- product list item end -->
-                                </div> 
-                              <?php
-                                                }
-                              ?>
-                             
-                            
-                        </div>
-                       
-                       
-                         <div class="paginatoin-area text-center">
-                                <ul class="pagination-box">
-                                <?php
-                            
-                                        $query="select * from products";
-                                        $result=mysqli_query($con,$query);
-                                        $total_records=mysqli_num_rows($result);
-                                        $total_pages=ceil($total_records/$per_page);
-                                        echo"
-                                        <li><a class='previous' href='shop.php?page=1'><i class='pe-7s-angle-left'></i></a></li>
-                                        ";
-                                        for($i=1;$i<=$total_pages;$i++)
-                                        {
-                                            echo"
-                                            <li class='active'><a href='shop.php?page=".$i."'>".$i."</a></li>
-                                            ";
-                                        }
-                                        echo"
-                                        <li><a class='next' href='shop.php?page=$total_pages'><i class='pe-7s-angle-right'></i></a></li>
-                                        
-                                        ";
-                                                    }
-                            
-                            ?>
-                                </ul>
-                            </div>
-                          
-                                                    <?php
-                                    } 
-                                                    ?>
-
-                        
-                                <?php
-                                if(isset($_GET['manufacturer_id']))
-                                    {
-                                            $manufacturer_id = $_GET['manufacturer_id'];
-                                            $per_page=15;
-                                            if(isset($_GET['page']))
-                                            {
-                                                $page=$_GET['page'];
-                                            }
-                                            else
-                                                {
-                                                $page=1;
-                                                }
-                                                $start_from=($page-1) * $per_page;
-                                                $get_manufacturer ="select * from manufacturers where manufacturer_id='$manufacturer_id'";
-                                                $run_manufacturer = mysqli_query($db,$get_manufacturer);
-                                                $row_manufacturer = mysqli_fetch_array($run_manufacturer);
-                                                $manufacturer_title = $row_manufacturer['manufacturer_title'];
-                                                $get_manufacturer="select * from products where manufacturer_id='$manufacturer_id' order by 1  DESC LIMIT $start_from,$per_page ";
-                                                $run_manufacturer=mysqli_query($con,$get_manufacturer);
-                                                $count = mysqli_num_rows($run_manufacturer);
-                                                if($count==0){
-                                                  ?>
-                                                            <div class="col-12">
-                                                            <!-- section title start -->
-                                                            <div class="section-title text-center">
-                                                                <h2 class="title">No Product Found In This Product Categories</h2>
-                                                            </div>
-                                                            <!-- section title start -->
-                                                             </div>
-                                                            
-                                                        <?php 
-            
-                                                }else{
-                                                    ?>
-                                                
-                                                        <div class="col-12">
-                                                                <!-- section title start -->
-                                                                <div class="section-title text-center">
-                                                                    <h2 class="title"><?php echo $manufacturer_title; ?></h2>
-                                                                </div>
-                                                                <!-- section title start -->
-                                                            </div>  
-                            <!-- shop product top wrap start -->
-                            <div class="shop-top-bar">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-7 col-md-6 order-2 order-md-1">
-                                        <div class="top-bar-left">
-                                            <div class="product-view-mode">
-                                                <a class="active" href="#" data-target="grid-view" data-toggle="tooltip" title="Grid View"><i class="fa fa-th"></i></a>
-                                                <a href="#" data-target="list-view" data-toggle="tooltip" title="List View"><i class="fa fa-list"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <div class="shop-product-wrap grid-view row mbn-30">
-                        <?php
-                                        while($row_manufacturer=mysqli_fetch_array($run_manufacturer))
-                                                {
-                                                    $pro_id=$row_manufacturer['product_id'];
-                                                    $pro_title=$row_manufacturer['product_title'];
-                                                    $pro_price=$row_manufacturer['product_price'];
-                                                    $pro_img1=$row_manufacturer['product_img1'];
-                                                    $pro_img2=$row_manufacturer['product_img2'];
-                                                    $pro_desc=$row_manufacturer['product_desc'];              
-                        ?> 
-
-                                <div class="col-md-4 col-sm-6">
-                                    <!-- product grid start -->
-                                    <div class="product-item">
-                                        <figure class="product-thumb">
-                                            <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                                <img class="pri-img" src="admin_area/product_images/<?php echo $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
-                                            </a>
-                                            <div class="product-badge">
-                                                <div class="product-label new">
-                                                    <span>new</span>
-                                                </div>
-                                                <div class="product-label discount">
-                                                    <span>10%</span>
-                                                </div>
-                                            </div>
-                                            <div class="button-group">
-                                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            </div>
-                                            <div class="cart-hover">
-                                           <!-- <a href='product-details.php?pro_id=<?php echo $pro_id;?>' class='btn btn-cart'>add to cart</a>-->
-                                            </div>
-                                        </figure>
-                                        <div class="product-caption text-center">
-                                            <div class="product-identity">
-                                            <?php 
-                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
-                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
-                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
-                                                ?>
-                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
-                                            <?php
-                                            } 
-                                            ?>
-                                            </div>
-                                            <h6 class="product-name">
-                                                <a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
-                                            </h6>
-                                            <div class="price-box">
-                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
-                                                <span class="price-old"><del>Rs.5000</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- product grid end -->
-
-                                    <!-- product list item end -->
-                                    <div class="product-list-item">
-                                        <figure class="product-thumb">
-                                            <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                                <img class="pri-img" src="admin_area/product_images/<?php echo  $pro_img1; ?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2; ?>" alt="product" style="height:180px;">
-                                            </a>
-                                            <div class="product-badge">
-                                                <div class="product-label new">
-                                                    <span>new</span>
-                                                </div>
-                                                <div class="product-label discount">
-                                                    <span>10%</span>
-                                                </div>
-                                            </div>
-                                            <div class="button-group">
-                                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            </div>
-                                            <div class="cart-hover">
-                                          <!--  <a href='product-details.php?pro_id= <?php echo $pro_id;?>' class='btn btn-cart'>add to cart</a>-->
-                                            </div>
-                                        </figure>
-                                        <div class="product-content-list">
-                                            <div class="manufacturer-name">
-                                            <?php 
-                                            $get_manufacturers="select * from manufacturers where manufacturer_id='$manufacturer_id'";
-                                            $run_manufacturers=mysqli_query($con,$get_manufacturers);
-                                            while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)) {
-                                                ?>
-                                                <p class="manufacturer-name"><a href="product-details.php?pro_id=<?php echo $pro_id; ?>"></a><?php echo $row_manufacturers['manufacturer_title']; ?></p>
-                                            <?php
-                                            } 
-                                            ?>
-                                            </div>
-
-                                            <h5 class="product-name"><a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo  $pro_title;?></a></h5>
-                                            <div class="price-box">
-                                                <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
-                                                <span class="price-old"><del>Rs.5000</del></span>
-                                            </div>
-                                            <p><?php echo $pro_desc; ?></p>
-                                        </div>
-                                    </div>
-                                    <!-- product list item end -->
-                                </div> 
-                              <?php
-                                                }
-                              ?>
-                             
-                            
-                        </div>
-                       
-                       
-                         <div class="paginatoin-area text-center">
-                                <ul class="pagination-box">
-                                <?php
-                            
-                                        $query="select * from products";
-                                        $result=mysqli_query($con,$query);
-                                        $total_records=mysqli_num_rows($result);
-                                        $total_pages=ceil($total_records/$per_page);
-                                        echo"
-                                        <li><a class='previous' href='shop.php?page=1'><i class='pe-7s-angle-left'></i></a></li>
-                                        ";
-                                        for($i=1;$i<=$total_pages;$i++)
-                                        {
-                                            echo"
-                                            <li class='active'><a href='shop.php?page=".$i."'>".$i."</a></li>
-                                            ";
-                                        }
-                                        echo"
-                                        <li><a class='next' href='shop.php?page=$total_pages'><i class='pe-7s-angle-right'></i></a></li>
-                                        
-                                        ";
-                                                    }
-                            
-                            ?>
-                                </ul>
-                            </div>
-                          
-                                                    <?php
-                                    } 
-                                                    ?>                                                    
+                    
+                    </div>
+                    </div>                                               
                         </div> 
-                       
-                    </div> 
+                        </div> 
                    
-                </div>
-            </div>
-        </div>
-</main>
+                   </div>
+               
+           
+   </main>
+  
 
     <!-- Scroll to top start -->
     <div class="scroll-top not-visible">
@@ -873,7 +80,8 @@ include("includes/header.php");
                                         <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
+                               
+                                    <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
                                         <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
@@ -965,6 +173,7 @@ include("includes/header.php");
      include("includes/cart1.php");
      
     ?>
+
     <!-- JS
 ============================================ -->
 
@@ -1000,6 +209,66 @@ include("includes/header.php");
     <script src="assets/js/plugins/google-map.js"></script>
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+
+    <script>
+$(document).ready(function(){
+
+    filter_data(1);
+
+    function filter_data(firsttime,page)
+    {
+        var action = 'fetch_data';
+        var minimum_price = $('#hidden_minimum_price').val();
+        var maximum_price = $('#hidden_maximum_price').val();
+        var brand = get_filter('manufacturer_id');
+        var ram = get_filter('cat_id');
+        var storage = get_filter('p_cat_id');
+        $.ajax({
+            url:"fetch_data.php",
+            method:"POST",
+            data:{action:action, minimum_price:minimum_price, maximum_price:maximum_price, brand:brand, ram:ram, storage:storage,page:page,firsttime:firsttime},
+            success:function(data){
+                $('.filter_data').html(data);
+            }
+        });
+    }
+    $(document).on('click', '.pagination_link', function(){  
+           var page = $(this).attr("id");  
+          
+           filter_data($('#firsttime'+page).val(),page);  
+      });  
+
+    function get_filter(class_name)
+    {
+        var filter = [];
+        $('.'+class_name+':checked').each(function(){
+            filter.push($(this).val());
+        });
+        return filter;
+    }
+
+    $('.common_selector').click(function(){
+        filter_data(0);
+    });
+
+    $('#price_range').slider({
+        range:true,
+        min:1000,
+        max:65000,
+        values:[1000, 65000],
+        step:500,
+        stop:function(event, ui)
+        {
+            $('#price_show').html(ui.values[0] + ' - ' + ui.values[1]);
+            $('#hidden_minimum_price').val(ui.values[0]);
+            $('#hidden_maximum_price').val(ui.values[1]);
+            filter_data(0);
+        }
+    });
+
+});
+</script>
+
 </body>
 
 

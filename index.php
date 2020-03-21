@@ -89,7 +89,7 @@ $active='Home';
         <!-- service policy area end -->
 
         <!-- banner statistics area start -->
-        <div class="banner-statistics-area">
+        <!--<div class="banner-statistics-area">
             <div class="container">
                 <div class="row row-20 mtn-20">
                     <div class="col-sm-6">
@@ -116,7 +116,7 @@ $active='Home';
                             </div>
                         </figure>
                     </div>
-                   <!-- <div class="col-sm-6">
+                   <div class="col-sm-6">
                         <figure class="banner-statistics mt-20">
                                 <a href="#">
                                 <img src="assets/img/banner/img3-top.jpg" alt="product banner">
@@ -139,10 +139,10 @@ $active='Home';
                                 <a href="shop.html" class="btn btn-text">Shop Now</a>
                             </div>
                         </figure>
-                    </div>-->
+                    </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!-- banner statistics area end -->
 
         <!-- product area start -->
@@ -162,53 +162,16 @@ $active='Home';
                     <div class="col-12">
                         <div class="product-container">
                             <!-- product tab menu start -->
-                            <div class="product-tab-menu">   
-                                <ul class="nav justify-content-center">
-                                    <li><a href="#tab1" class="active" data-toggle="tab">Mountain Bikes</a></li>
-                                    <li><a href="#tab2" data-toggle="tab">City Bikes</a></li>
-                                    <li><a href="#tab3" data-toggle="tab">Road Bikes</a></li>
-                                    <li><a href="#tab4" data-toggle="tab">Speciality Bikes</a></li>
-                                </ul>
-                            </div>
+                            
                             <!-- product tab menu end -->
 
                             <!-- product tab content start -->
                             <div class="tab-content">
-                                <div class="tab-pane fade show active" id="tab1">
+                                <div class="tab-pane fade show active" >
                                     <div class="product-carousel-4 slick-row-10 slick-arrow-style">
                                        <?php 
                                         getPro();
                                         ?>
-                                        <!-- product item start -->
-                                        
-                                        <!-- product item end -->
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="tab2">
-                                    <div class="product-carousel-4 slick-row-10 slick-arrow-style">
-                                        <!-- product item start -->
-                                        <?php
-                                        getPro_1(); 
-                                        ?>
-                                        <!-- product item end -->
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="tab3">
-                                    <div class="product-carousel-4 slick-row-10 slick-arrow-style">
-                                        <!-- product item start -->
-                                   <?php
-                                        getPro_2();
-                                   ?>
-                                        <!-- product item end -->
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="tab4">
-                                    <div class="product-carousel-4 slick-row-10 slick-arrow-style">
-                                        <!-- product item start -->
-                                       <?php 
-                                            getPro_3();
-                                       ?>
-                                        <!-- product item end -->
                                     </div>
                                 </div>
                             </div>

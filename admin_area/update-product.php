@@ -165,12 +165,12 @@ if(isset($_GET['product_id'])){
                               
                               while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)){
                                   
-                                  $manufacturer_id = $row_manufacturers['manufacturer_id'];
+                                $manufacturer_id = $row_manufacturers['manufacturer_id'];
                                   $manufacturer_title = $row_manufacturers['manufacturer_title'];
                                   
                                   echo "
                                   
-                                  <option value='$manufacturer_id'> $manufacturer_title </option>
+                                  <option value='$manufacturer_title'> $manufacturer_title </option>
                                   
                                   ";
                                   
@@ -185,7 +185,7 @@ if(isset($_GET['product_id'])){
                                 <label for="example-search-input" class="col-md-3 col-form-label">Product Category</label>
                                 <div class="col-md-9">
                                 <select class="form-control" name="product_cat">
-                                <option value="<?php echo $p_cat; ?>"> <?php echo $p_cat_title; ?> </option>
+                                <option value="<?php echo $p_cat; ?>"> <?php echo $p_cat_title ?> </option>
                               
                               <?php 
                               
@@ -194,12 +194,12 @@ if(isset($_GET['product_id'])){
                               
                               while ($row_p_cats=mysqli_fetch_array($run_p_cats)){
                                   
-                                  $p_cat_id = $row_p_cats['p_cat_id'];
+                                $p_cat = $row_p_cats['p_cat_id'];
                                   $p_cat_title = $row_p_cats['p_cat_title'];
                                   
                                   echo "
                                   
-                                  <option value='$p_cat_id'> $p_cat_title </option>
+                                  <option value='$p_cat'> $p_cat_title </option>
                                   
                                   ";
                                   
@@ -225,12 +225,12 @@ if(isset($_GET['product_id'])){
                               
                               while ($row_cat=mysqli_fetch_array($run_cat)){
                                   
-                                  $cat_id = $row_cat['cat_id'];
+                                $cat = $row_cat['cat_id'];
                                   $cat_title = $row_cat['cat_title'];
                                   
                                   echo "
                                   
-                                  <option value='$cat_id'> $cat_title </option>
+                                  <option value='$cat'> $cat_title </option>
                                   
                                   ";
                                   

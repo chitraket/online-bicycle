@@ -45,6 +45,8 @@ include("functions/functions.php");
     <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
     <!-- main style css -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <!--status css-->
+    <link rel="stylesheet" href="assets/css/status.css">
 </head>
 <body>
 <header class="header-area header-wide">
@@ -315,6 +317,7 @@ include("functions/functions.php");
                                         <tr>
                                             <th class="pro-thumbnail">Thumbnail</th>
                                             <th class="pro-title">Product</th>
+                                            <th class="pro-price">Size</th>
                                             <th class="pro-price">Price</th>
                                             <th class="pro-quantity">Quantity</th>
                                             <th class="pro-subtotal">Total</th>
@@ -335,31 +338,62 @@ include("functions/functions.php");
                                         while($row_cart=mysqli_fetch_array($run_cart)){
                                         $pro_id=$row_cart['product_id'];
                                         $pro_qty=$row_cart['qty'];
-                                        $get_products="select * from products where product_id='$pro_id'";
-                                        $run_products=mysqli_query($con,$get_products);
-                                        while($row_products=mysqli_fetch_array($run_products)){
-                                            $product_title=$row_products['product_title'];
-                                            $product_img1=$row_products['product_img1'];
-                                            $product_price=$row_products['product_price'];
-                                            $sub_total=$row_products['product_price']*$pro_qty;
-                                            $total+=$sub_total;
-
-                                            ?>
+                                        $pro_size=$row_cart['size'];
+                                        $papage=$row_cart['papage_number'];
+                                        if ($papage==0) {
+                                            $get_products="select * from products where product_id='$pro_id'";
+                                            $run_products=mysqli_query($con, $get_products);
+                                            while ($row_products=mysqli_fetch_array($run_products)) {
+                                                $product_title=$row_products['product_title'];
+                                                $product_img1=$row_products['product_img1'];
+                                                $product_price=$row_products['product_price'];
+                                                $sub_total=$row_products['product_price']*$pro_qty;
+                                                $total+=$sub_total; ?>
                            
                                     <tbody>
                                         <tr>
                                             <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="../admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
                                             <td class="pro-title"><a href="../product-details.php?pro_id=<?php echo $pro_id ?>"><?php  echo $product_title ?></a></td>
+                                            <td class="pro-price"><span><?php echo $pro_size ?></span></td>
                                             <td class="pro-price"><span>Rs.<?php echo $product_price ?></span></td>
                                             <td class="pro-quantity">
                                             <span><?php echo $pro_qty ?></span>
                                             </td>
                                             <td class="pro-subtotal"><span>Rs. <?php echo $sub_total ?></span></td>
-                                           
+                                            
                                         </tr>
                                         </tbody>
-                                        <?php 
+                                        <?php
+                                            }
                                         }
+                                        if($papage==1)
+                                        {
+                                            $get_accessories="select * from accessories where accessories_id='$pro_id'";
+                                            $run_accessories=mysqli_query($con, $get_accessories);
+                                            while ($row_accessories=mysqli_fetch_array($run_accessories)) {
+                                                $accessories_name=$row_accessories['accessories_name'];
+                                                $accessories_price=$row_accessories['accessories_prices'];
+                                                $accessories_img1=$row_accessories['accessories_image_1'];
+                                                $sub_total=$row_accessories['accessories_prices']*$pro_qty;
+                                                $total+=$sub_total; ?>
+                                        <tbody>
+                                        <tr>
+                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="../admin_area/accessories_images/<?php echo $accessories_img1; ?>" alt="Product" /></a></td>
+                                            <td class="pro-title"><a href="../accessories-details.php?accessories_id=<?php echo $pro_id ?>"><?php  echo $accessories_name; ?></a></td>
+                                            <td class="pro-price"><span><?php echo $pro_size ?></span></td>
+                                            <td class="pro-price"><span>Rs.<?php echo $accessories_price; ?></span></td>
+                                            <td class="pro-quantity">
+                                            <span><?php echo $pro_qty ?></span>
+                                            </td>
+                                            <td class="pro-subtotal"><span>Rs. <?php echo $sub_total ?></span></td>
+                                            
+                                        </tr>
+                                        </tbody>
+
+                                                <?php
+                                            }
+                                        }
+
                                     }
                                        ?> 
      
@@ -421,10 +455,66 @@ include("functions/functions.php");
                                             <tr class="total">
                                                 <td>Total</td>
                                                 <td class="total-amount">Rs.<?php echo $total ?></td>
+                                               
                                             </tr>
                                         </table>
-                                        
+                                        <div class="mb-4">
+                                        <div class="card-body" > 
+                                        <div class="track">
+                                            <?php
+                                            $select_status="select DISTINCT order_status from customer_orders where order_id='$o_id' ";
+                                            $run_status = mysqli_query($con,$select_status);
+                                            while ($row_status = mysqli_fetch_array($run_status)) {
+                                            $order_status=$row_status['order_status']; 
+                                                if($order_status=="o")
+                                                {
+                                                    ?>
+                                                    <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
+                                                    <div class="step"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Picked by courier</span> </div>
+                                                    <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
+                                                    <div class="step"> <span class="icon"> <i class="fa fa-map"></i> </span> <span class="text">Ready for pickup</span> </div>
+                                                    <?php 
+                                                    
+                                                }
+                                                if($order_status=="p")
+                                                {
+                                                    ?>
+                                                    <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
+                                                    <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Picked by courier</span> </div>
+                                                    <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
+                                                    <div class="step"> <span class="icon"> <i class="fa fa-map"></i> </span> <span class="text">Ready for pickup</span> </div>
+                                                    <?php 
+                                                }
+                                                if($order_status=="s")
+                                                {
+                                                    ?>
+                                                    <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
+                                                    <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Picked by courier</span> </div>
+                                                    <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
+                                                    <div class="step"> <span class="icon"> <i class="fa fa-map"></i> </span> <span class="text">Ready for pickup</span> </div>
+                                                    <?php 
+                                                }
+                                                if($order_status=="d")
+                                                {
+                                                    ?>
+                                                    <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
+                                                    <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Picked by courier</span> </div>
+                                                    <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
+                                                    <div class="step active"> <span class="icon"> <i class="fa fa-map"></i> </span> <span class="text">Ready for pickup</span> </div>
+                                                    <?php 
+                                                }
+                                                
+                                            }
+                                                ?>
+                                            
+                                            
+                                        </div>
                                     </div>
+                                        </div>
+                                    <div class="m-2 mb-2">
+                                    <td class="pro-subtotal"><a href="Generate_bill.php?o_id=<?php echo $o_id; ?>" class="btn btn-sqr">Generate bill</a></td>
+                                    </div>    
+                                </div>
                                 </div>
                               <!--  <a href="checkout.php" class="btn btn-sqr d-block">Proceed Checkout</a>-->
                             </div>
@@ -438,6 +528,10 @@ include("functions/functions.php");
         </div>
         <!-- cart main wrapper end -->
     </main>
+
+       
+      
+   
 
     <!-- Scroll to top start -->
     <div class="scroll-top not-visible">

@@ -59,7 +59,7 @@
                                                     
                                                     echo "
                                                     
-                                                    <option value='$manufacturer_title'> $manufacturer_title </option>
+                                                    <option value='$manufacturer_id'> $manufacturer_title </option>
                                                     
                                                     ";
                                                     
@@ -87,7 +87,7 @@
                                                     
                                                     echo "
                                                     
-                                                    <option value='$p_cat_title'> $p_cat_title </option>
+                                                    <option value='$p_cat_id'> $p_cat_title </option>
                                                     
                                                     ";
                                                     
@@ -114,7 +114,7 @@
                                         
                                         echo "
                                         
-                                        <option value='$cat_title'> $cat_title </option>
+                                        <option value='$cat_id'> $cat_title </option>
                                         
                                         ";
                                         

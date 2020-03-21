@@ -39,29 +39,21 @@ $error_pass="";
 $error_email="";
 $errorresult=true;
 
-if(isset($_POST['login'])){
-
-    if(email($_POST['c_email']))
-    {
+if (isset($_POST['login'])) {
+    if (email($_POST['c_email'])) {
         $error_email = "Required..";
         $errorresult=false;
-    }
-    else
-    {
+    } else {
         $error_email = "";
     }
-    if(pass($_POST['c_pass']))
-    {
+    if (pass($_POST['c_pass'])) {
         $error_pass = "Required..";
         $errorresult=false;
-    }
-    else
-    {
+    } else {
         $error_pass = "";
     }
     
-    if($errorresult==false)
-    {
+    if ($errorresult==false) {
         goto end;
     }
     
@@ -72,15 +64,15 @@ if(isset($_POST['login'])){
     
     $select_customer = "select * from customers where customer_email='$customer_email' AND customer_pass='$customer_pass'";
     
-    $run_customer = mysqli_query($con,$select_customer);
+    $run_customer = mysqli_query($con, $select_customer);
     
-    $get_ip = getRealIpUser();
+   // $get_ip = getRealIpUser();
     
     $check_customer = mysqli_num_rows($run_customer);
     
   
     
-    if($check_customer==0){
+    if ($check_customer==0) {
         ?>
          <script type="text/javascript">
          swal({
@@ -94,6 +86,7 @@ if(isset($_POST['login'])){
                    if (willDelete) {
                        window.open('customer_login.php','_self');
                    } 
+                   window.open('customer_login.php','_self');     
            });
            </script>
         <?php
@@ -101,58 +94,29 @@ if(isset($_POST['login'])){
     }
     
     
-        if($check_customer==1){
-            $_SESSION['customer_email']=$customer_email;
-            foreach($_SESSION as $product)
-            {
-                if(!is_array($product))
-                {
-                 ?>
+    if ($check_customer==1) {
+        $_SESSION['customer_email']=$customer_email;
+        foreach ($_SESSION as $product) {
+            if (!is_array($product)) {
+                ?>
                     <script type="text/javascript">
-                    swal({
-                            title: "You are login",
-                            text: "",
-                            icon: "success",
-                            buttons: true,
-                            successMode: true,
-                    })
-                    .then((willDelete) => {
-                            if (willDelete) {
+                    
                                 window.open('myaccount.php','_self');
-                            } 
-                    });
                     </script>
-                 <?php  
-                }
+                 <?php
+            } else {
+                ?>
+                <script type="text/javascript">
+                    window.open('../checkout.php','_self');
+        </script> 
+        <?php
             }
-          
-            ?>
+        } ?>
             
         
-            <?php 
-        }else{
-            
-            $_SESSION['customer_email']=$customer_email;
-            ?>
-            <script type="text/javascript">
-            swal({
-                    title: "You are login",
-                    text: "",
-                    icon: "success",
-                    buttons: true,
-                    successMode: true,
-            })
-            .then((willDelete) => {
-                    if (willDelete) {
-                        window.open('../checkout.php','_self');
-                    } 
-            });
-            </script>
             <?php
-            
-        }
     }
-    
+}
 
 end:
 ?>

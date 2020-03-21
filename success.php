@@ -65,6 +65,7 @@
                                         <tr>
                                             <th class="pro-thumbnail">Thumbnail</th>
                                             <th class="pro-title">Product</th>
+                                            <th class="pro-price">Size</th>
                                             <th class="pro-price">Price</th>
                                             <th class="pro-quantity">Quantity</th>
                                             <th class="pro-subtotal">Total</th>
@@ -79,23 +80,25 @@
                                         $run_carts=mysqli_query($con,$select_carts);
                                         while($row_carts=mysqli_fetch_array($run_carts))
                                         {
+                                        $papage_number=$row_carts['papage_number'];
                                         $pro_id=$row_carts['product_id'];
                                         $pro_qty=$row_carts['qty'];
+                                        $product_size=$row_carts['size'];
+                                        if ($papage_number==0) {
                                         $get_products="select * from products where product_id='$pro_id'";
                                         $run_products=mysqli_query($con,$get_products);
-                                        while($row_products=mysqli_fetch_array($run_products)){
+                                        while ($row_products=mysqli_fetch_array($run_products)) {
                                             $product_title=$row_products['product_title'];
                                             $product_img1=$row_products['product_img1'];
                                             $product_price=$row_products['product_price'];
                                             $sub_total=$row_products['product_price']*$pro_qty;
-                                            $total+=$sub_total;
-
-                                            ?>
+                                            $total+=$sub_total; ?>
                            
                                     <tbody>
                                         <tr>
                                             <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
                                             <td class="pro-title"><a href="product-details.php?pro_id=<?php echo $pro_id ?>"><?php  echo $product_title ?></a></td>
+                                            <td class="pro-price"><span><?php echo  $product_size ?></span></td>
                                             <td class="pro-price"><span>Rs.<?php echo $product_price ?></span></td>
                                             <td class="pro-quantity">
                                             <span><?php echo $pro_qty ?></span>
@@ -103,7 +106,34 @@
                                             <td class="pro-subtotal"><span>Rs. <?php echo $sub_total ?></span></td>
                                         </tr>
                                         </tbody>
-                                        <?php 
+                                        <?php
+                                        }
+
+                                        }
+                                        if($papage_number==1)
+                                        {
+                                        $get_accessories="select * from accessories where accessories_id='$pro_id'";
+                                        $run_accessories=mysqli_query($con, $get_accessories);
+                                        while ($row_acessories=mysqli_fetch_array($run_accessories)) {
+                                            $accessoires_name=$row_acessories['accessories_name'];
+                                            $accessories_img1=$row_acessories['accessories_image_1'];
+                                            $accessories_prices=$row_acessories['accessories_prices'];
+                                            $sub_total=$row_acessories['accessories_prices']*$pro_qty;
+                                            $total+=$sub_total; ?>
+                                              <tbody>
+                                        <tr>
+                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="admin_area/accessories_images/<?php echo $accessories_img1?>" alt="Product" /></a></td>
+                                            <td class="pro-title"><a href="accessories-details.php?accessories_id=<?php echo $pro_id ?>"><?php  echo $accessoires_name ?></a></td>
+                                            <td class="pro-price"><span><?php echo  $product_size ?></span></td>
+                                            <td class="pro-price"><span>Rs.<?php echo $accessories_prices ?></span></td>
+                                            <td class="pro-quantity">
+                                               <span><?php echo $pro_qty ?></span>
+                                            </td>
+                                            <td class="pro-subtotal"><span>Rs. <?php echo $sub_total ?></span></td>
+                                        </tr>
+                                        </tbody>
+                                            <?php
+                                        }
                                         }
                                     }
                                 }

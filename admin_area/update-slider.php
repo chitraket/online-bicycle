@@ -70,8 +70,7 @@ if(isset($_GET['slide_id'])){
                                             <br/>
                                             <div class="form-group row">
                                             <img class="col-md-12" src="slides_images/<?php echo $s_img; ?>" alt="<?php echo $s_img; ?>">  
-                                            </div>  
-                                            
+                                            </div>
                                             <script type="text/javascript">
                                             const realfileBtn=document.getElementById("customFile");
                                             const customTxt=document.getElementById("customFiles");
@@ -190,11 +189,7 @@ $s_rows="";
               
               $s_urls=$_POST['s_url'];
               $slider_img = $_FILES['slider_img']['name'];
-            
-              
               $temp_name1 = $_FILES['slider_img']['tmp_name'];
-            
-              
               move_uploaded_file($temp_name1,"slides_images/$slider_img");
             
               if($_POST['customRadio']=="right")

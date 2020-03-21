@@ -13,7 +13,8 @@
             <!-- ========== Left Sidebar Start ========== -->
     <?php
     include("includes/header.php");
-     include("includes/sidebar.php"); ?>
+     include("includes/sidebar.php"); 
+    ?>
 
             <!-- Left Sidebar End -->
 
@@ -21,7 +22,7 @@
             <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
-            <form action="#" method="POST">
+            <form action="view-order.php" method="POST">
             <div class="main-content">
 
                 <div class="page-content">
@@ -52,11 +53,11 @@
                                         <table id="employee_data" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>E-Mail</th>
-                                                <th>City</th>
-                                                <th>Address</th>
-                                                <th>Contact</th>
+                                                <th>Order ID</th>
+                                                <th>Billing Name</th>
+                                                <th>Date</th>
+                                                <th>Total</th>
+                                                <th>Payment Method</th>
                                                 <th>Action</th>
                                                
                                                 
@@ -66,19 +67,79 @@
                                             <tbody>
                                             
                                             <?php
-                                            
-                                              $select_cat="SELECT * FROM orders ORDER BY id DESC";
+                                        
+                                              $select_cat="SELECT * FROM orders ";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
-                                               
-                                                echo'<tr>
-                                                <td>'.$row_cart["customer_name"].' </td>
-                                                <td>'.$row_cart["customer_email"].'</td>
-                                                <td>'.$row_cart["customer_city"].'</td>
-                                                <td>'.$row_cart["customer_address"].'</td>
-                                                <td>'.$row_cart["customer_contact"].'</td>
-                                                <td><input type="button" name="view" value="View Details" id="'.$row_cart["id"].'" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light view_data"  /></td>
-                                                </tr>';
+                                                $id=$row_cart["id"];
+                                                    ?>
+                                                    <tr>
+                                                <td><?php echo $row_cart["id"]?> </td>
+                                                <td><?php echo $row_cart["customer_name"]?></td>
+                                                
+                                                <?php 
+                                                $select_cats="SELECT DISTINCT order_date FROM customer_orders WHERE order_id='$id'";
+                                                $run_carts=mysqli_query($con, $select_cats);
+                                                while ($row_carts=mysqli_fetch_array($run_carts)) {
+                                                    $date=$row_carts["order_date"]; 
+                                                    $orgDate = $date;  
+                                                    $newDate = date("d-M-Y", strtotime($orgDate));  
+                                                ?>
+                                                <td><?php echo $newDate; ?></td>
+                                                <?php
+                                                } 
+                                                ?>
+
+                                                <?php
+                                                //$bill=0;
+                                                $select_total="SELECT * FROM customer_orders WHERE order_id='$id'";
+                                                $run_total=mysqli_query($con,$select_total);
+                                                while ($row_total=mysqli_fetch_array($run_total)) {
+                                                    $total=0;
+                                                    $qty=$row_total['qty'];
+                                                    $product_id=$row_total['product_id'];
+                                                    $select_totals="SELECT * FROM products WHERE product_id='$product_id'";
+                                                    $run_totals=mysqli_query($con,$select_totals);
+                                                    while ($row_totals=mysqli_fetch_array($run_totals)) {
+                                                        $bill=$row_totals['product_price']*$qty;
+                                                        $total+=$bill;
+                                                        $total=$total+$bill;
+                                                        
+
+                                                    }
+                                                    echo $total;
+                                                }
+                                                
+                                                ?>
+                                                <td></td> 
+                                                <?php 
+                                                $select_pays="SELECT DISTINCT txnid FROM customer_orders WHERE order_id='$id'";
+                                                $run_pays=mysqli_query($con, $select_pays);
+                                                while ($row_pays=mysqli_fetch_array($run_pays)) {
+                                                    $pay=$row_pays["txnid"]; 
+                                                    if($pay=="")
+                                                    {
+                                                        ?>
+                                                        
+                                                        <td><span class="badge badge-pill badge-soft-success font-size-10" ><img src="icon/cash-on-delivery.png" style="height:25px;"/>Cash On Delivery</span></td>
+                                                        <?php 
+                                                    }
+                                                    else
+                                                    {
+                                                        ?>
+                                                    <td><span class="badge badge-pill badge-soft-success font-size-10" ><img src="icon/icons8-paytm-32.png" style="height:25px;"/> Online Payment</span></td>
+                                                      <?php
+                                                    } 
+                                                      ?>  
+                                                <?php
+                                                } 
+                                                ?> 
+
+
+                                                <td><input type="button" name="view" value="View Details" id="<?php echo $row_cart["id"]?>" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light view_data"  /></td>
+                                                </tr>
+                                                <?php 
+                                                
                                                  }?>
                                             </tbody>
                                         </table>
@@ -104,11 +165,14 @@
                                 </button>
                             </div>
                             <div class="modal-body" id="employee_detail">
-                             
+                            
                             </div>
+
+                            
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
+                            </div>                                
+                           
                         </div>
                     </div>
                 </div>
@@ -121,8 +185,23 @@
             </div>
             </form>
             <!-- end main content-->
+          <?php
+          if(isset($_POST['submit']))
+          {
+            $update_p_cat = "update customer_orders set order_status='mmmm' where order_id='$id'";
+              
+            $run_p_cat = mysqli_query($con,$update_p_cat);
+            
+            if($run_p_cat){
 
+                echo "<script>alert('Your Product Category Has Been Updated')</script>";
+                echo "<script>window.open('view-slider.php','_self')</script>";
+                
+            }
+          }
+          ?>
         </div>
+        
         <!-- END layout-wrapper -->
           
         <!-- Right Sidebar -->

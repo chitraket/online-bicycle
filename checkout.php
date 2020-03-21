@@ -17,7 +17,6 @@
 
     <!-- end Header Area -->
 
-
     <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
@@ -45,6 +44,7 @@ $run_customers=mysqli_query($con,$select_customer);
 $row_customer=mysqli_fetch_array($run_customers);
 $customer_id=$row_customer['customer_id'];
 $_SESSION['c_id']=$customer_id;
+
 ?>
 
         <!-- checkout main wrapper start -->
@@ -64,6 +64,145 @@ $_SESSION['c_id']=$customer_id;
             <input type="hidden" name="surl" value="http://localhost:9126/m-dev-store/form_process1.php?c_id=<?php echo $customer_id; ?>&txnid=<?php echo $txnid; ?>" size="64" />
             <input type="hidden" name="furl" value="http://localhost:9126/m-dev-store/checkout.php" size="64" />-->
                 <div class="row">
+                <?php 
+                 $error_c_name = ""; 
+                 $error_l_name="";
+                 $error_pass="";
+                 $error_email="";
+                 $error_c_pass="";
+                 $error_c_contact="";
+                 $error_city="";
+                 $error_state="";
+                 $error_address="";
+                 $error_pincode="";
+                 $errorresult=true;
+        if(isset($_POST['place_order']))
+        {
+
+            if(firstname($_POST['c_name']))
+    {
+        $error_c_name = "Required..";
+        $errorresult=false;
+    }
+    else
+    {
+        $error_c_name = "";
+    }
+    if(lastname($_POST['c_lname']))
+    {
+        $error_l_name = "Required..";
+        $errorresult=false;
+    }
+    else
+    {
+        $error_l_name = "";
+    }
+    if(email($_POST['c_email']))
+    {
+        $error_email = "Required..";
+        $errorresult=false;
+    }
+    else
+    {
+        $error_email = "";
+    }
+    
+
+    if(city($_POST['c_city']))
+    {
+        $error_city = "Required..";
+        $errorresult=false;
+    }
+    else
+    {
+        $error_city = "";
+    }
+    if(state($_POST['c_state']))
+    {
+        $error_state = "Required..";
+        $errorresult=false;
+    }
+    else
+    {
+        $error_state = "";
+    }
+    if(contact($_POST['c_contact']))
+    {
+        $error_c_contact = "Required..";
+        $errorresult=false;
+    }
+    else
+    {
+        $error_c_contact = "";
+    }
+    if(address($_POST['c_address']))
+    {
+        $error_address = "Required..";
+        $errorresult=false;
+    }
+    else
+    {
+        $error_address = "";
+    }
+    if(pincode($_POST['c_pincode']))
+    {
+        $error_pincode = "Required..";
+        $errorresult=false;
+    }
+    else
+    {
+        $error_pincode = "";
+    }
+    if($errorresult==false)
+    {
+        goto end;
+    }
+            if($_POST['paymentmethod']=="cash")
+            {
+                $_SESSION['CUST_ID']=$_POST['CUST_ID'];
+              ?>
+                <script type="text/javascript">
+              swal({
+                        title: "Order Successfully Placed",
+                        text: "Thank you for ordering. We received your order and will begin processing it soon. Your order information appears below.",
+                        icon: "success",
+                        buttons: true,
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('form_process2.php','_self');
+                        } else {
+                        
+                        }
+                });
+                </script>
+                <?php
+                
+            }
+            else{  
+                $_SESSION['ORDER_ID']=$_POST['ORDER_ID'];
+                $_SESSION['CUST_ID']=$_POST['CUST_ID'];
+               // $_SESSION['c_id']=$customer_id;
+                $_SESSION['INDUSTRY_TYPE_ID']=$_POST['INDUSTRY_TYPE_ID'];
+                $_SESSION['CHANNEL_ID']=$_POST['CHANNEL_ID'];
+                $_SESSION['TXN_AMOUNT']=$_POST['TXN_AMOUNT'];
+            echo "<script>window.open('pgRedirect.php','_self')</script>";
+            }
+            $customer_emails=$_SESSION['customer_email'];
+            $f_names=$_POST['c_name'];
+            $email=$_POST['c_email'];
+            $country=$_POST['c_state'];
+            $city=$_POST['c_city'];
+            $phone=$_POST['c_contact'];
+            $address=$_POST['c_address'];
+            $update_order="update customers set customer_name='$f_names',customer_email='$email',customer_state='$country',customer_city='$city',customer_contact='$phone',customer_address='$address' where customer_email='$customer_emails'";
+            $run_querys=mysqli_query($db,$update_order);
+
+          
+        }
+        end:
+        ?>
                 <?php
                 
                 if(isset($_SESSION['customer_email'])){
@@ -91,39 +230,33 @@ $_SESSION['c_id']=$customer_id;
                                         <div class="col-md-6">
                                             <div class="single-input-item">
                                                 <label for="f_name" class="required">First Name</label>
-                                                <input type="text"  name="firstname" placeholder="First Name" value="<?php echo $customer_name; ?>" required />
+                                                <input type="text" name="c_name" id="f_name" placeholder="Enter your First name" value="<?php echo $customer_name; ?>" required />
+                                                <span style="color: red;"><?php echo $error_c_name;?></span>
+                                                <span id="f_nameMsg"></span>
                                             </div>
                                         </div>
                                             <div class="col-md-6">
                                             <div class="single-input-item">
                                                 <label for="f_name" class="required">Last Name</label>
-                                                <input type="text"  name="lastname" placeholder="Last Name" value="<?php echo $customer_lname; ?>" required />
+                                                <input type="text"  name="c_lname" id="l_name" placeholder="Enter your Last name" value="<?php echo $customer_lname; ?>" required />
+                                                <span id="l_nameMsg"></span>
+                                                <span style="color: red;"><?php echo $error_l_name; ?></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="single-input-item">
-                                        <label for="email" class="required">Email Address</label>
-                                        <input type="email" name="email" placeholder="Email Address" value="<?php echo $customer_email; ?>" required />
+                                        <label for="email"  class="required ">Email Address</label>
+                                        <input type="email" placeholder="Enter your Email" name="c_email"  id="email" value="<?php echo $customer_email; ?>" required />
+                                        <span id="emailMsg"></span>
+                                        <span style="color: red;"><?php echo $error_email; ?></span>
                                     </div>
-                                    
-                                       <!-- <select name="country nice-select" id="country">
-                                            <option value="Afghanistan">Afghanistan</option>
-                                            <option value="Albania">Albania</option>
-                                            <option value="Algeria">Algeria</option>
-                                            <option value="Armenia">Armenia</option>
-                                            <option value="Bangladesh">Bangladesh</option>
-                                            <option value="India">India</option>
-                                            <option value="Pakistan">Pakistan</option>
-                                            <option value="England">England</option>
-                                            <option value="London">London</option>
-                                            <option value="London">London</option>
-                                            <option value="Chaina">China</option>
-                                        </select>-->
                                     
 
                                     <div class="single-input-item">
-                                        <label for="street-address" class="required mt-20">Street address</label>
-                                        <input type="text" name="address" placeholder="Street address Line 1" value="<?php echo $customer_address; ?>" required />
+                                        <label for="street-address" class="required ">Street address</label>
+                                        <input type="text" placeholder="Enter your Address" name="c_address"  id="address" value="<?php echo $customer_address; ?>" required />
+                                        <span id="addressMsg"></span>
+                                        <span style="color: red;"><?php echo $error_address; ?></span>
                                     </div>
 
                                   <!--  <div class="checkout-box-wrap">
@@ -147,22 +280,30 @@ $_SESSION['c_id']=$customer_id;
                                     </div>-->
                                     <div class="single-input-item">
                                         <label for="town" class="required">Town / City</label>
-                                        <input type="text" name="city" placeholder="Town / City" value="<?php echo $customer_city; ?>" required />
+                                        <input type="text" placeholder="Enter your City" name="c_city" id="city" value="<?php echo $customer_city; ?>" required />
+                                        <span id="cityMsg"></span>
+                                        <span style="color: red;"><?php echo $error_city; ?></span>
                                     </div>
 
                                     <div class="single-input-item">
                                         <label for="state">State / Divition</label>
-                                        <input type="text" name="country" placeholder="State / Divition" value="<?php echo $customer_country; ?>" />
+                                        <input type="text" placeholder="Enter your state" name="c_state" id="state" value="<?php echo $customer_country; ?>" />
+                                        <span id="stateMsg"></span>
+                                        <span style="color: red;"><?php echo $error_state; ?></span>
                                     </div>
 
                                     <div class="single-input-item">
                                         <label for="postcode" class="required">Postcode / ZIP</label>
-                                        <input type="text" name="postcode" placeholder="Postcode / ZIP" value="<?php echo $customer_pincode; ?>" required />
+                                        <input type="text" placeholder="Enter your Pincode" name="c_pincode" id="pincode"  value="<?php echo $customer_pincode; ?>" required />
+                                        <span id="pincodeMsg"></span>
+                                        <span style="color: red;"><?php echo $error_pincode; ?></span>
                                     </div>
 
                                     <div class="single-input-item">
                                         <label for="phone">Phone</label>
-                                        <input type="text" name="phone" placeholder="Phone" value="<?php echo $customer_contact; ?>" required/>
+                                        <input type="text" placeholder="Enter your contact " name="c_contact" id="contact" value="<?php echo $customer_contact; ?>" required/>
+                                        <span id="contactMsg"></span>
+                                        <span style="color: red;"><?php echo $error_c_contact; ?></span>
                                     </div>
 
                                    <!-- <div class="single-input-item">
@@ -192,6 +333,8 @@ $_SESSION['c_id']=$customer_id;
                                         </thead>
                                         <tbody>
                                             <?php
+                                            $size=0;
+                                            $papage=0;
                                               $bill=0;
                                               $p_id=0;
                                               $p_img=0;
@@ -205,6 +348,14 @@ $_SESSION['c_id']=$customer_id;
                                                     continue;
                                                 }
                                                   foreach ($product as $key => $value) {
+                                                    if($key==6)
+                                                    {
+                                                        $papage=$value;
+                                                    }  
+                                                    if($key==5)
+                                                      {
+                                                          $size=$value;
+                                                      }
                                                       if ($key==4) {
                                                         $p_id= $value;
                                                       }
@@ -229,9 +380,21 @@ $_SESSION['c_id']=$customer_id;
                                                   $total+=$bill;
                                             ?>
                                             <tr>
+                                                <?php if($papage==0)
+                                                {?>
                                                 <td><a href="product-details.php?pro_id=<?php echo $p_id ?>"><?php echo $p_name; ?> <strong> × <?php echo $p_qty; ?></strong></a>
                                                 </td>
                                                 <td><?php echo $bill; ?></td>
+                                                <?php
+                                                }
+                                                if ($papage==1) {
+                                                    ?>
+                                                <td><a href="accessories-details.php?accessories_id=<?php echo $p_id ?>"><?php echo $p_name; ?> <strong> × <?php echo $p_qty; ?></strong></a>
+                                                </td>
+                                                <td><?php echo $bill; ?></td>
+                                                    <?php
+                                                }
+                                                ?>
                                             </tr>
                                            
                                         </tbody>
@@ -242,6 +405,9 @@ $_SESSION['c_id']=$customer_id;
                                             <tr>
                                                 <td>Sub Total</td>
                                                 <td><strong><?php echo $total; ?></strong></td>
+                                                <?php 
+                                                $_SESSION['total']=$total;
+                                                ?>
                                             </tr>
                                             <tr>
                                                 <td>Total Amount</td>
@@ -298,54 +464,7 @@ $_SESSION['c_id']=$customer_id;
             </div>
                                        
         </div>
-        <?php 
-        if(isset($_POST['place_order']))
-        {
-
-            if($_POST['paymentmethod']=="cash")
-            {
-                $_SESSION['CUST_ID']=$_POST['CUST_ID'];
-              ?>
-                <script type="text/javascript">
-              swal({
-                        title: "Order Successfully Placed",
-                        text: "Thank you for ordering. We received your order and will begin processing it soon. Your order information appears below.",
-                        icon: "success",
-                        buttons: true,
-                        successMode: true,
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('form_process2.php','_self');
-                        } else {
-                        
-                        }
-                });
-                </script>
-                <?php
-                
-            }
-            else{  
-                $_SESSION['ORDER_ID']=$_POST['ORDER_ID'];
-                $_SESSION['CUST_ID']=$_POST['CUST_ID'];
-                $_SESSION['INDUSTRY_TYPE_ID']=$_POST['INDUSTRY_TYPE_ID'];
-                $_SESSION['CHANNEL_ID']=$_POST['CHANNEL_ID'];
-                $_SESSION['TXN_AMOUNT']=$_POST['TXN_AMOUNT'];
-            echo "<script>window.open('pgRedirect.php','_self')</script>";
-            }
-            $customer_emails=$_SESSION['customer_email'];
-            $f_names=$_POST['firstname'];
-            $email=$_POST['email'];
-            $country=$_POST['country'];
-            $city=$_POST['city'];
-            $phone=$_POST['phone'];
-            $address=$_POST['address'];
-            $update_order="update customers set customer_name='$f_names',customer_email='$email',customer_state='$country',customer_city='$city',customer_contact='$phone',customer_address='$address' where customer_email='$customer_emails'";
-            $run_querys=mysqli_query($db,$update_order);
-
-          
-        }
-        ?>
+     
         <!-- checkout main wrapper end -->
     </main>
 
@@ -507,6 +626,340 @@ $_SESSION['c_id']=$customer_id;
     <script src="assets/js/plugins/google-map.js"></script>
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+
+    <script type="text/javascript">
+	$(document).ready(function(){
+		// set initially button state hidden
+        var f_name_err=true;
+        var l_name_err=true;
+        var email_err=true;
+        var pass_err=true;
+        var c_pass_err=true;
+        var state_err=true;
+        var city_err=true;
+        var contact_err=true;
+        var pincode_err=true;
+        var address_err=true;
+
+        $("#btnsubmit").attr("disabled",true);
+
+        $('#f_name').keyup(function(){
+            f_name_check();
+        });
+        $('#f_name').focusout(function(){
+            f_name_check();
+        });
+
+        $('#l_name').keyup(function(){
+            l_name_check();
+        });
+        $('#l_name').focusout(function(){
+            l_name_check();
+        });
+
+        $('#email').keyup(function(){
+            email_check();
+        });
+        $('#email').focusout(function(){
+            email_check();
+        });
+
+        $('#state').keyup(function(){
+            state_check();
+        });
+        $('#state').focusout(function(){
+            state_check();
+        });
+
+        $('#city').keyup(function(){
+            city_check();
+        });
+        $('#city').focusout(function(){
+            city_check();
+        });
+
+        $('#contact').keyup(function(){
+            contact_check();
+        });
+        $('#contact').focusout(function(){
+            contact_check();
+        });
+
+        $('#pincode').keyup(function(){
+            pincode_check();
+        });
+        $('#pincode').focusout(function(){
+            pincode_check();
+        });
+
+        $('#address').keyup(function(){
+            address_check();
+        });
+        $('#address').focusout(function(){
+            address_check();
+        });
+		// use keyup event on email field
+        function f_name_check(){
+            var f_name=$('#f_name').val();
+            var reg=/^[A-Za-z]*$/
+            if(f_name.length=='')
+            {
+                $("#f_name").css("border","1px solid red");
+                $("#f_nameMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+                $('#f_nameMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                f_name_err=false;
+                return false;
+            }
+            else{
+                $("#f_name").css("border","1px solid green");
+                $("#f_nameMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+
+            }
+            if(!(reg.test(f_name)))
+            {
+                $("#f_name").css("border","1px solid red");
+                $("#f_nameMsg").html("<p class='text-danger'>Invalid first name.</p>");
+                $('#f_nameMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                f_name_err=false;
+                return false;
+            }
+            else{
+                $("#f_name").css("border","1px solid green");
+                $("#f_nameMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+            }
+
+        }
+        function l_name_check(){
+            var l_name=$('#l_name').val();
+            var reg=/^[A-Za-z]*$/
+            if(l_name.length=='')
+            {
+                $("#l_name").css("border","1px solid red");
+                $("#l_nameMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+                $('#l_nameMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                l_name_err=false;
+                return false;
+            }
+            else{
+                $("#l_name").css("border","1px solid green");
+                $("#l_nameMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+
+            }
+            if(!(reg.test(l_name)))
+            {
+                $("#l_name").css("border","1px solid red");
+                $("#l_nameMsg").html("<p class='text-danger'>Invalid last name.</p>");
+                $('#l_nameMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                l_name_err=false;
+                return false;
+            }
+            else{
+                $("#l_name").css("border","1px solid green");
+                $("#l_nameMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+            }
+
+        }
+        function email_check(){
+            var email=$('#email').val();
+            var reg=/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+            if(email.length=='')
+            {
+                $("#email").css("border","1px solid red");
+                $("#emailMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+                $('#emailMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                email_err=false;
+                return false;
+            }
+            else{
+                $("#email").css("border","1px solid green");
+                $("#emailMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+            }
+
+            if(!(reg.test(email)))
+            {
+                $("#email").css("border","1px solid red");
+                $("#emailMsg").html("<p class='text-danger'>Invalid email id.</p>");
+                $('#emailMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                email_err=false;
+                return false;
+            }
+            else{
+                $("#email").css("border","1px solid green");
+                $("#emailMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+            }
+
+        }
+        function state_check(){
+            var state=$('#state').val();
+            var reg=/^[A-Za-z]*$/
+            if(state.length=='')
+            {
+                $("#state").css("border","1px solid red");
+                $("#stateMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+                $('#stateMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                state_err=false;
+                return false;
+            }
+            else{
+                $("#state").css("border","1px solid green");
+                $("#stateMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+            }
+            if(!(reg.test(state)))
+            {
+                $("#state").css("border","1px solid red");
+                $("#stateMsg").html("<p class='text-danger'>Invalid state.</p>");
+                $('#stateMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                state_err=false;
+                return false;
+            }
+            else{
+                $("#state").css("border","1px solid green");
+                $("#stateMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+            }
+
+        }
+        function city_check(){
+            var city=$('#city').val();
+            var reg=/^[A-Za-z]*$/
+            if(city.length=='')
+            {
+                $("#city").css("border","1px solid red");
+                $("#cityMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+                $('#cityMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                city_err=false;
+                return false;
+            }
+            else{
+                $("#city").css("border","1px solid green");
+                $("#cityMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+            }
+            if(!(reg.test(city)))
+            {
+                $("#city").css("border","1px solid red");
+                $("#cityMsg").html("<p class='text-danger'>Invalid city.</p>");
+                $('#cityMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                city_err=false;
+                return false;
+            }
+            else{
+                $("#city").css("border","1px solid green");
+                $("#cityMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+            }
+
+        }
+        
+        function contact_check(){
+            var contact=$('#contact').val();
+            var reg=/^[9876][0-9]{9}$/
+            if(contact.length=='')
+            {
+                $("#contact").css("border","1px solid red");
+                $("#contactMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+                $('#contactMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                contact_err=false;
+                
+                return false;
+            }
+            else{
+                $("#contact").css("border","1px solid green");
+                $("#contactMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+            }
+            if(!(reg.test(contact)))
+            {
+                $("#contact").css("border","1px solid red");
+                $("#contactMsg").html("<p class='text-danger'>Invalid contact number.</p>");
+                $('#contactMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                contact_err=false;
+                return false;
+            }
+            else{
+                $("#contact").css("border","1px solid green");
+                $("#contactMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+            }
+
+        }
+        function pincode_check(){
+            var pincode=$('#pincode').val();
+            var reg=/^[1-9][0-9]{5}$/
+            if(pincode.length=='')
+            {
+                $("#pincode").css("border","1px solid red");
+                $("#pincodeMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+                $('#pincodeMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                pincode_err=false;
+                return false;
+            }
+            else
+            {
+                $("#pincode").css("border","1px solid green");
+                $("#pincodeMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+            }
+            if(!(reg.test(pincode)))
+            {
+                $("#pincode").css("border","1px solid red");
+                $("#pincodeMsg").html("<p class='text-danger'>Invalid pincode.</p>");
+                $('#pincodeMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                pincode_err=false;
+                return false;
+            }
+            else
+            {
+                $("#pincode").css("border","1px solid green");
+                $("#pincodeMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+            }
+
+        }
+        function address_check(){
+            var pass=$('#address').val();
+            if(pass.length=='')
+            {
+                $("#address").css("border","1px solid red");
+                $("#addressMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+                $('#addressMsg').focus();
+                $("#btnsubmit").attr("disabled",true);
+                pass_err=false;
+                return false;
+            }
+            else{
+                $("#address").css("border","1px solid green");
+                $("#addressMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+            }
+           
+
+        }
+
+	
+	});
+</script>
 </body>
 
 

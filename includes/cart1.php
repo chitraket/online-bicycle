@@ -6,7 +6,6 @@
                     <div class="minicart-close">
                         <i class="pe-7s-close"></i>
                     </div>
-    
                     
                     
                         <div class="minicart-content-box" id="cart_1_empty">
@@ -33,6 +32,8 @@
                     </style>
                         <ul>
                         <?php
+                        $size=0;
+                                $papage=0;
                                   $bill=0;
                                   $p_id=0;
                                   $p_img=0;
@@ -57,7 +58,16 @@
                                     </style>
                                     <?php 
                                       foreach ($product as $key => $value) {
-                                          if ($key==4) {
+
+                                        if($key==6)
+                                        {
+                                            $papage=$value;
+                                        }
+                                        elseif($key==5)
+                                        {
+                                            $size=$value;
+                                        }
+                                         elseif ($key==4) {
                                               $p_id= $value;
                                           } elseif ($key ==3) {
                                               $p_qty= $value;
@@ -69,34 +79,59 @@
                                               $p_img= $value;
                                           } 
                                           
-                                         
                                          }
                                          $bill=$p_price*$p_qty;
                                          $total+=$bill;
-                            ?>
-                            <li class="minicart-item">
-                                <div class="minicart-thumb">
-                                    <a href="product-details.php?pro_id=<?php echo $p_id ?>">
-                                        <img src="admin_area/product_images/<?php echo $p_img ?>" alt="product">
-                                    </a>
-                                </div>
-                                <div class="minicart-content">
-                                    <h3 class="product-name">
-                                        <a href="product-details.php?pro_id=<?php echo $p_id ?>"><?php echo $p_name ?></a>
-                                    </h3>
-                                    <p>
-                                        <span class="cart-quantity"><?php echo $p_qty ?> <strong> | </strong></span>
-                                        <span class="cart-price">Rs.<?php echo $bill ?>  </span>
-                                    </p>
-                                </div>
-                                <!--<form action="edit-cart.php" method="POST">
-                                <button  name="event" value="Delete" class="minicart-remove"><i class="pe-7s-close"></i></button>
-                                </form>-->
-                            </li>
+                                         if ($papage==0) {
+                                             ?>
+                                        <li class="minicart-item">
+                                            <div class="minicart-thumb">
+                                                <a href="product-details.php?pro_id=<?php echo $p_id ?>">
+                                                    <img src="admin_area/product_images/<?php echo $p_img ?>" alt="product">
+                                                </a>
+                                            </div>
+                                            <div class="minicart-content">
+                                                <h3 class="product-name">
+                                                    <a href="product-details.php?pro_id=<?php echo $p_id ?>"><?php echo $p_name ?></a>
+                                                </h3>
+                                                <p>
+                                                    <span class="cart-quantity"><?php echo $p_qty ?> <strong> | </strong></span>
+                                                    <span class="cart-price">Rs.<?php echo $bill ?>  </span>
+                                                </p>
+                                            </div>
+                                            <!--<form action="edit-cart.php" method="POST">
+                                            <button  name="event" value="Delete" class="minicart-remove"><i class="pe-7s-close"></i></button>
+                                            </form>-->
+                                        </li>
                             <?php
-                                      
+                                         }
+                                         if ($papage==1) {
+                                             ?>
+                                             <li class="minicart-item">
+                                            <div class="minicart-thumb">
+                                                <a href="accessories-details.php?accessories_id=<?php echo $p_id ?>">
+                                                    <img src="admin_area/accessories_images/<?php echo $p_img ?>" alt="product">
+                                                </a>
+                                            </div>
+                                            <div class="minicart-content">
+                                                <h3 class="product-name">
+                                                    <a href="accessories-details.php?accessories_id=<?php echo $p_id ?>"><?php echo $p_name ?></a>
+                                                </h3>
+                                                <p>
+                                                    <span class="cart-quantity"><?php echo $p_qty ?> <strong> | </strong></span>
+                                                    <span class="cart-price">Rs.<?php echo $bill ?>  </span>
+                                                </p>
+                                            </div>
+                                            <!--<form action="edit-cart.php" method="POST">
+                                            <button  name="event" value="Delete" class="minicart-remove"><i class="pe-7s-close"></i></button>
+                                            </form>-->
+                                        </li>
+                            <?php
+                                         }        
+
                                   }
                             ?>
+                            
                         </ul>
                     </div>
                    
@@ -125,7 +160,7 @@
                         <a href="cart.php"><i class="fa fa-shopping-cart"></i> View Cart</a>
                         <a href="checkout.php"><i class="fa fa-share"></i> Checkout</a>
                     </div>
-                </div>-->
+                </div>
          
         </div>
     </div>

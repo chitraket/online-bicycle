@@ -1,0 +1,275 @@
+<?php
+$active='Accessories';
+include("includes/header.php");
+?>
+<main>
+        <!-- breadcrumb area start -->
+        <div class="breadcrumb-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breadcrumb-wrap">
+                            <nav aria-label="breadcrumb">
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.php"><i class="fa fa-home"></i></a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Accessories</li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- breadcrumb area end -->
+        <div class="shop-main-wrapper section-padding">
+            <div class="container">
+                <div class="row">
+                    <!-- sidebar area start -->
+                   <?php
+                   include("includes/accessories_sidebar.php"); 
+                   ?>
+
+                    <!-- sidebar area end -->
+                    <div class="col-lg-9 order-1 order-lg-2">
+                    <div class="shop-product-wrapper">
+                    
+                    <div class="filter_data">
+                    
+                        </div>
+                    
+                    </div>
+                    </div>                                               
+                        </div> 
+                        </div> 
+                   
+                   </div>
+               
+           
+   </main>
+  
+
+    <!-- Scroll to top start -->
+    <div class="scroll-top not-visible">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scroll to Top End -->
+
+    <!-- footer area start -->
+    <?php
+    include("includes/footer.php");
+    ?>
+    <!-- footer area end -->
+
+    <!-- Quick view modal start -->
+    <div class="modal" id="quick_view">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- product details inner end -->
+                    <div class="product-details-inner">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="product-large-slider">
+                                    <div class="pro-large-img img-zoom">
+                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
+                                    </div>
+                                    <div class="pro-large-img img-zoom">
+                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
+                                    </div>
+                                    <div class="pro-large-img img-zoom">
+                               
+                                    <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
+                                    </div>
+                                    <div class="pro-large-img img-zoom">
+                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
+                                    </div>
+                                    <div class="pro-large-img img-zoom">
+                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
+                                    </div>
+                                </div>
+                                <div class="pro-nav slick-row-10 slick-arrow-style">
+                                    <div class="pro-nav-thumb">
+                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
+                                    </div>
+                                    <div class="pro-nav-thumb">
+                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
+                                    </div>
+                                    <div class="pro-nav-thumb">
+                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
+                                    </div>
+                                    <div class="pro-nav-thumb">
+                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
+                                    </div>
+                                    <div class="pro-nav-thumb">
+                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="product-details-des">
+                                    <div class="manufacturer-name">
+                                        <a href="product-details.html">HasTech</a>
+                                    </div>
+                                    <h3 class="product-name">Handmade Golden Necklace</h3>
+                                    <div class="ratings d-flex">
+                                        <span><i class="fa fa-star-o"></i></span>
+                                        <span><i class="fa fa-star-o"></i></span>
+                                        <span><i class="fa fa-star-o"></i></span>
+                                        <span><i class="fa fa-star-o"></i></span>
+                                        <span><i class="fa fa-star-o"></i></span>
+                                        <div class="pro-review">
+                                            <span>1 Reviews</span>
+                                        </div>
+                                    </div>
+                                    <div class="price-box">
+                                        <span class="price-regular">$70.00</span>
+                                        <span class="price-old"><del>$90.00</del></span>
+                                    </div>
+                                    <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
+                                    <div class="product-countdown" data-countdown="2022/02/20"></div>
+                                    <div class="availability">
+                                        <i class="fa fa-check-circle"></i>
+                                        <span>200 in stock</span>
+                                    </div>
+                                    <p class="pro-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                                        eirmod tempor invidunt ut labore et dolore magna.</p>
+                                    <div class="quantity-cart-box d-flex align-items-center">
+                                        <h6 class="option-title">qty:</h6>
+                                        <div class="quantity">
+                                            <div class="pro-qty"><input type="text" value="1"></div>
+                                        </div>
+                                        <div class="action_link">
+                                            <a class="btn btn-cart2" href="#">Add to cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="useful-links">
+                                        <a href="#" data-toggle="tooltip" title="Compare"><i
+                                            class="pe-7s-refresh-2"></i>compare</a>
+                                        <a href="#" data-toggle="tooltip" title="Wishlist"><i
+                                            class="pe-7s-like"></i>wishlist</a>
+                                    </div>
+                                    <div class="like-icon">
+                                        <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
+                                        <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
+                                        <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
+                                        <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- product details inner end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick view modal end -->
+
+    <!-- offcanvas mini cart start -->
+    <!-- offcanvas mini cart end -->
+    <?php
+     include("includes/cart1.php");
+     
+    ?>
+
+    <!-- JS
+============================================ -->
+
+    <!-- Modernizer JS -->
+    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <!-- jQuery JS -->
+    <script src="assets/js/vendor/jquery-3.3.1.min.js"></script>
+    <!-- Popper JS -->
+    <script src="assets/js/vendor/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="assets/js/vendor/bootstrap.min.js"></script>
+    <!-- slick Slider JS -->
+    <script src="assets/js/plugins/slick.min.js"></script>
+    <!-- Countdown JS -->
+    <script src="assets/js/plugins/countdown.min.js"></script>
+    <!-- Nice Select JS -->
+    <script src="assets/js/plugins/nice-select.min.js"></script>
+    <!-- jquery UI JS -->
+    <script src="assets/js/plugins/jqueryui.min.js"></script>
+    <!-- Image zoom JS -->
+    <script src="assets/js/plugins/image-zoom.min.js"></script>
+    <!-- Imagesloaded JS -->
+    <script src="assets/js/plugins/imagesloaded.pkgd.min.js"></script>
+    <!-- Instagram feed JS -->
+    <script src="assets/js/plugins/instagramfeed.min.js"></script>
+    <!-- mailchimp active js -->
+    <script src="assets/js/plugins/ajaxchimp.js"></script>
+    <!-- contact form dynamic js -->
+    <script src="assets/js/plugins/ajax-mail.js"></script>
+    <!-- google map api -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8"></script>
+    <!-- google map active js -->
+    <script src="assets/js/plugins/google-map.js"></script>
+    <!-- Main JS -->
+    <script src="assets/js/main.js"></script>
+
+    <script>
+$(document).ready(function(){
+
+    filter_data(1);
+
+    function filter_data(firsttime,page)
+    {
+        var action = 'fetch_data';
+        var minimum_price = $('#hidden_minimum_price').val();
+        var maximum_price = $('#hidden_maximum_price').val();
+        var brand = get_filter('accessories_brand_id');
+        var ram = get_filter('accessories_category');
+        $.ajax({
+            url:"accessories_fetch_data.php",
+            method:"POST",
+            data:{action:action, minimum_price:minimum_price, maximum_price:maximum_price, brand:brand, ram:ram, page:page,firsttime:firsttime},
+            success:function(data){
+                $('.filter_data').html(data);
+            }
+        });
+    }
+    $(document).on('click', '.pagination_link', function(){  
+           var page = $(this).attr("id");  
+          
+           filter_data($('#firsttime'+page).val(),page);  
+      });  
+
+    function get_filter(class_name)
+    {
+        var filter = [];
+        $('.'+class_name+':checked').each(function(){
+            filter.push($(this).val());
+        });
+        return filter;
+    }
+
+    $('.common_selector').click(function(){
+        filter_data(0);
+    });
+
+    $('#price_range').slider({
+        range:true,
+        min:1000,
+        max:65000,
+        values:[1000, 65000],
+        step:500,
+        stop:function(event, ui)
+        {
+            $('#price_show').html(ui.values[0] + ' - ' + ui.values[1]);
+            $('#hidden_minimum_price').val(ui.values[0]);
+            $('#hidden_maximum_price').val(ui.values[1]);
+            filter_data(0);
+        }
+    });
+
+});
+</script>
+
+</body>
+
+
+<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/shop.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:04 GMT -->
+</html>

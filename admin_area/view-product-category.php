@@ -53,8 +53,6 @@
                                             <thead>
                                             <tr>
                                                 <th>Product Categories Title</th>
-                                                <th>Product categories Description</th>
-                                               
                                                 <th>Action</th>
                                                
                                                 
@@ -73,7 +71,6 @@
                                                 
                                                 
                                                 <td>'.$row_cart["p_cat_title"].'</td>
-                                                <td>'.$row_cart["p_cat_desc"].'</td>
                                                 <td><a href="delete-product-category.php?p_cat_id='.$row_cart["p_cat_id"].'"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-product-category.php?p_cat_id='.$row_cart["p_cat_id"].'" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>';
                                                  }?>

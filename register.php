@@ -110,7 +110,7 @@ if(isset($_POST['register'])){
     {
         $error_state = "";
     }
-    if(contact($_POST['c_c_pass']))
+    if(contact($_POST['c_contact']))
     {
         $error_c_contact = "Required..";
         $errorresult=false;
@@ -523,10 +523,34 @@ end:
         });
 
         $('#contact').keyup(function(){
-            contact_check();
+            contact_check();           
         });
         $('#contact').focusout(function(){
-            contact_check();
+            contact_check();  
+        });
+        $('#contact').keyup(function(){
+            var phone=$("#contact").val();
+            $.ajax({
+            url:"registers.php",
+            method:"POST",
+            data:{phone:phone},
+            success:function(data){
+               if(data!='0')
+               {
+                    $("#contact").css("border","1px solid red");
+                    $("#contactMsg").html("<p class='text-danger'>Invalid contact numberss.</p>");
+                    $('#contactMsg').focus();
+                    $("#btnsubmit").attr("disabled",true);
+                    contact_err=false;
+                    return false;
+               }
+               else{
+                $("#contact").css("border","1px solid green");
+                $("#contactMsg").html("<p class='text-danger'></p>");
+                $("#btnsubmit").attr("disabled",false);
+               }
+            }
+        });
         });
 
         $('#pincode').keyup(function(){

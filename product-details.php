@@ -12,6 +12,7 @@ if(isset($_GET['pro_id']))
     $run_product=mysqli_query($con,$get_product);
     $row_product=mysqli_fetch_array($run_product);
     $p_cat_id=$row_product['p_cat_id'];
+    $manufacturer_id=$row_product['manufacturer_id'];
     $pro_title=$row_product['product_title'];
     $pro_qty=$row_product['available_qty'];
     $pro_price=$row_product['product_price'];
@@ -192,10 +193,6 @@ if(isset($_GET['pro_id']))
         $pro_brakeset=$row_product['product_brakeset'];
     }
 
-    $get_p_cat="select * from product_categories where p_cat_id='$p_cat_id'";
-    $run_p_cat=mysqli_query($con,$get_p_cat);
-    $row_p_cat=mysqli_fetch_array($run_p_cat);
-    $p_cat_title=$row_p_cat['p_cat_title'];
 }
 ?>
 
@@ -212,9 +209,7 @@ if(isset($_GET['pro_id']))
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="shop.php">shop</a></li>
-                                    <li class="breadcrumb-item" >
-                                        <a href="shop.php?p_cat=<?php echo $p_cat_id; ?>"><?php echo $p_cat_title; ?> </a></li>
+                                    <li class="breadcrumb-item"><a href="shop.php">Bikes</a></li>
                                     <li class="breadcrumb-item active" >
                                        <?php echo $pro_title; ?> 
                                     </li>                                
@@ -226,7 +221,6 @@ if(isset($_GET['pro_id']))
             </div>
         </div>
         <!-- breadcrumb area end -->
-
         <!-- page main wrapper start -->
         <div class="shop-main-wrapper section-padding pb-0">
             <div class="container">
@@ -348,7 +342,7 @@ if(isset($_GET['pro_id']))
                                     <div class="product-details-des">
                                         
                                         <div class="manufacturer-name">
-                                            <a href="product-details.html">HasTech</a>
+                                           <?php echo $manufacturer_id;?>
                                         </div>
                                         <h3 class="product-name"><?php  echo $pro_title; ?></h3>
                                         <div class="ratings d-flex">
@@ -363,7 +357,7 @@ if(isset($_GET['pro_id']))
                                         </div>
                                         <div class="price-box">
                                             <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
-                                            <span class="price-old"><del>$90.00</del></span>
+                                            <span class="price-old"><del>Rs.50000</del></span>
                                         </div>
                                         <!--<h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
                                         <div class="product-countdown" data-countdown="2019/12/20"></div>-->
@@ -394,7 +388,8 @@ if(isset($_GET['pro_id']))
                                             $product_img=$_POST['product_img'];
                                             $product_price=$_POST['product_price'];
                                             $product_name=$_POST['product_name'];
-
+                                            $product_size=$_POST['pro_sizes'];
+                                            echo $product_size;
                                                 if(isset($_SESSION[$product_name]))
                                                 {
                                                     echo "<script type='text/javascript'>swal('Your product is alrady added in cart', '', 'warning')</script>";
@@ -407,7 +402,8 @@ if(isset($_GET['pro_id']))
                                                 }
                                                 else
                                                 {
-                                                    add_cart($p_id,$product_img,$product_qty,$product_name,$product_price);
+                                                    $papage=0;
+                                                    add_cart($p_id,$product_img,$product_qty,$product_name,$product_price,$product_size,$papage);
                                                 }
                                               
                                                 
@@ -422,7 +418,7 @@ if(isset($_GET['pro_id']))
                                             <div class="quantity" style="padding-top: 17px;">
                                                 
                                             <div class="pro-size">
-                                                <select class="nice-select">
+                                                <select class="nice-select" name="pro_sizes">
                                                 <option>S</option>
                                                 <option>M</option>
                                                 <option>L</option>

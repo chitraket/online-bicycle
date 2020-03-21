@@ -35,8 +35,11 @@ include("includes/validation.php");
     <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
     <!-- jquery UI css -->
     <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
+    
     <!-- main style css -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- main status css -->
+    <link rel="stylesheet" href="assets/css/status.css">
     <!--sweet alert-->
     <script src="assets/js/sweetalert.min.js"></script>
     <!--ajex-->
@@ -95,7 +98,9 @@ include("includes/validation.php");
                                         <ul>
                                             <li class="<?php if($active=='Home') echo"active"?>"><a href="../index.php">Home <i class="fa fa-angle"></i></a>   
                                             </li>
-                                            <li class="<?php if($active=='Shop') echo"active"?>"><a href="../shop.php">Shop<i class="fa fa-angle"></i></a>
+                                            <li class="<?php if($active=='Shop') echo"active"?>"><a href="../shop.php">Bikes<i class="fa fa-angle"></i></a>
+                                            </li>
+                                            <li class="<?php if($active=='Accessories') echo"active"?>"><a href="../accessories.php">Accessories<i class="fa fa-angle"></i></a>
                                             </li>
                                             <li class="<?php if($active=='contact') echo"active"?>"><a href="../contact.php">Contact us</a></li>
                                         </ul>
@@ -265,7 +270,10 @@ include("includes/validation.php");
                                 <li class="menu-item-has-children"><a href="../index.php">Home</a>
                                 </li>
                                
-                                <li class="menu-item-has-children "><a href="../shop.php">Shop</a>
+                                <li class="menu-item-has-children "><a href="../shop.php">Bikes</a>
+                                </li>
+
+                                <li class="menu-item-has-children "><a href="../accessories.php">Accessories</a>
                                 </li>
                                 
                                 <li><a href="../contact.php">Contact us</a></li>

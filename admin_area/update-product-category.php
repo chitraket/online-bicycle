@@ -28,7 +28,7 @@ if(isset($_GET['p_cat_id'])){
     
     $p_cat_title = $row_edit['p_cat_title'];
     
-    $p_cat_desc = $row_edit['p_cat_desc'];
+   
     
 }
 
@@ -64,12 +64,7 @@ if(isset($_GET['p_cat_id'])){
                             </div>
                             
                             
-                            <div class="form-group row">
-                                <label for="example-number-input" class="col-md-3 col-form-label">Product Desc</label>
-                                <div class="col-md-9">
-                                <textarea required class="form-control" placeholder="Product Desc" name="p_cat_desc" cols="19" rows="6" ><?php echo $p_cat_desc; ?></textarea>
-                                </div>
-                            </div>
+                            
                             <div class="form-group mt-4">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="update">
@@ -113,9 +108,9 @@ if(isset($_GET['p_cat_id'])){
               
               $p_cat_title = $_POST['p_cat_title'];
               
-              $p_cat_desc = $_POST['p_cat_desc'];
+
               
-              $update_p_cat = "update product_categories set p_cat_title='$p_cat_title',p_cat_desc='$p_cat_desc' where p_cat_id='$p_cat_id'";
+              $update_p_cat = "update product_categories set p_cat_title='$p_cat_title' where p_cat_id='$p_cat_id'";
               
               $run_p_cat = mysqli_query($con,$update_p_cat);
               

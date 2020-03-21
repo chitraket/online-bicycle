@@ -1,7 +1,7 @@
 
     <!-- Start Header Area -->
     <?php
-       $active='Shop';
+       $active='';
        include("includes/header.php");
        if(isset($_POST['action']) && $_POST['action']=="remove")
        {
@@ -10,13 +10,26 @@
        }
        if(isset($_POST['action']) && $_POST['action']=="change")
        {   
+        
         $product_qty=$_POST["product-qty"];
         $product_img= $_POST["p_img"];
         $product_name= $_POST["p_name"];
         $product_price= $_POST["p_price"];
-        $p_id= $_POST["code"]; 
-        $product= array($product_img,$product_name,$product_price,$product_qty,$p_id);
-        $_SESSION[$product_name]=$product;
+        $p_id= $_POST["code"];
+        $p_size=$_POST["p_size"]; 
+        $papage=$_POST["papage"];
+        $get_product="select * from products where product_id=$p_id";
+        $run_product=mysqli_query($con,$get_product);
+        $row_product=mysqli_fetch_array($run_product);
+        $pro_qty=$row_product['available_qty'];
+        if ($product_qty>$pro_qty) 
+        {
+            echo "<script type='text/javascript'>swal('Please enter lower quantity', '', 'warning')</script>";
+        }
+        else{
+            $product= array($product_img,$product_name,$product_price,$product_qty,$p_id,$p_size,$papage);
+            $_SESSION[$product_name]=$product;
+        }
         }
     ?>
     <!-- end Header Area -->
@@ -66,6 +79,7 @@
                                         <tr>
                                             <th class="pro-thumbnail">Thumbnail</th>
                                             <th class="pro-title">Product</th>
+                                            <th class="pro-price">Size</th>
                                             <th class="pro-price">Price</th>
                                             <th class="pro-quantity">Quantity</th>
                                             <th class="pro-subtotal">Total</th>
@@ -81,6 +95,8 @@
                                     </style>
                                
                                   <?php
+                                  $papage=0;
+                                  $size=0;
                                     $bill=0;
                                     $p_id=0;
                                     $total=0;
@@ -110,11 +126,19 @@
                                        <tr>
                                       <?php 
                                       foreach ($product as $key => $value) {
-                                          if($key==4)
+                                          if($key==6)
+                                          {
+                                              $papage=$value;
+                                          }
+                                          elseif($key==5)
+                                          {
+                                              $size=$value;
+                                          }
+                                          elseif($key==4)
                                           {
                                              $p_id=$value;
                                           }
-                                        else  if ($key==3) {
+                                        elseif ($key==3) {
                                                 $q=$value;
                                           } elseif ($key==2) {
                                             
@@ -131,15 +155,18 @@
                                    <?php
                                       }
                                       $bill=($q*$p);
-                                      $total+=$bill; 
-                                      ?>
+                                      $total+=$bill;
+                                      if ($papage==0) {
+                                          ?>
+
                                     <td class="pro-thumbnail"><a href="product-details.php?pro_id=<?php echo $p_id ?>"><img class="img-fluid" src="admin_area/product_images/<?php echo $p_img ?>" alt="Product" /></a></td>
                                    
                                     <td class="pro-title">
                                         
                                         <a href="product-details.php?pro_id=<?php echo $p_id ?>"><?php  echo $p_name ?></a>
                                     </td>
-                                   
+                                    <td class="pro-price"><span><?php echo $size ?></span></td>  
+
                                     <td class="pro-price"><span>Rs.<?php echo $p ?></span></td>  
                                     
                                     <form method="POST" action="">
@@ -151,6 +178,8 @@
                                                     <input type="hidden" name="p_name" value="<?php echo $p_name ?>">
                                                     <input type="hidden" name="p_img" value="<?php echo $p_img ?>">
                                                     <input type="hidden" name="p_price" value="<?php echo $p?>">
+                                                    <input type="hidden" name="p_size" value="<?php echo $size?>">
+                                                    <input type="hidden" name="papage" value="<?php echo $papage?>">
                                     </form>
                                     <td class="pro-subtotal"><span>Rs. <?php echo $bill ?></span></td>
                                      <form method="POST" action="">
@@ -160,9 +189,48 @@
                                           <input type="submit" value="remove" name="action" class="btn btn-cart2">
                                         </td>
                                      </form>
+                                     <?php
+                                      }
+                                      if ($papage==1) {
+                                          ?>
+                                    
+                                  
+                                    <td class="pro-thumbnail"><a href="accessories-details.php?accessories_id=<?php echo $p_id ?>"><img class="img-fluid" src="admin_area/accessories_images/<?php echo $p_img ?>" alt="Product" /></a></td>
+                                    
+                                    <td class="pro-title">
+                                        
+                                        <a href="accessories-details.php?accessories_id=<?php echo $p_id ?>"><?php  echo $p_name ?></a>
+                                    </td>
+                                    
+                                    <td class="pro-price"><span><?php echo $size ?></span></td>
+
+                                    <td class="pro-price"><span>Rs.<?php echo $p ?></span></td>  
+                                    
+                                    <form method="POST" action="">
+                                    <td class="pro-quantity" >
+                                            <input type="number" style="width: 90px;height: 40px;border: 1px solid #ddd;padding: 0 15px;float: left;" name="product-qty" min="1" value="<?php echo $q ?>"  onchange="this.form.submit()"> 
+                                    </td>
+                                                    <input type="hidden" name="action" value="change"/>
+                                                    <input type="hidden" name="code" value="<?php echo $p_id ?>">
+                                                    <input type="hidden" name="p_name" value="<?php echo $p_name ?>">
+                                                    <input type="hidden" name="p_img" value="<?php echo $p_img ?>">
+                                                    <input type="hidden" name="p_price" value="<?php echo $p?>">
+                                                    <input type="hidden" name="p_size" value="<?php echo $size?>">
+                                                    <input type="hidden" name="papage" value="<?php echo $papage?>">
+                                    </form>
+                                    <td class="pro-subtotal"><span>Rs. <?php echo $bill ?></span></td>
+                                        <form method="POST" action="">
+                                        <td class="pro-remove">
+                                            <input type="hidden" name="code" value="<?php echo $p_id?>">
+                                            <input type="hidden" name="p_name" value="<?php echo $p_name ?>">
+                                            <input type="submit" value="remove" name="action" class="btn btn-cart2">
+                                        </td>
+                                        </form>
+                                        <?php
+                                      }
+                                      ?>
                                     </tr>
                                       <?php
-                                      
                                     }
                                   ?>
                                 </tbody>           

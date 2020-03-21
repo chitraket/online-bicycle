@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0 font-size-18">Add Category</h4>
+                    <h4 class="mb-0 font-size-18">Add </h4>
 
                    
                     
@@ -42,12 +42,7 @@
                                     <input class="form-control" type="text" placeholder="Category Title" name="cat_title"  id="example-text-input">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="example-number-input" class="col-md-3 col-form-label">Category Description</label>
-                                <div class="col-md-9">
-                                <textarea required class="form-control" placeholder="Category Description" name="cat_desc" cols="19" rows="6"></textarea>
-                                </div>
-                            </div>
+                           
                             <div class="form-group mt-4">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="submit">
@@ -76,7 +71,7 @@
                 
                 $cat_desc = $_POST['cat_desc'];
                 
-                $insert_cat = "insert into categories (cat_title,cat_desc) values ('$cat_title','$cat_desc')";
+                $insert_cat = "insert into categories (cat_title) values ('$cat_title')";
                 
                 $run_cat = mysqli_query($con,$insert_cat);
                 

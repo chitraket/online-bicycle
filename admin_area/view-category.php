@@ -47,7 +47,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Categories Title</th>
-                                                <th>Categories Description</th>
+                                                
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -62,7 +62,7 @@
                                                
                                                 echo'<tr>
                                                 <td>'.$row_cart["cat_title"].'</td>
-                                                <td>'.$row_cart["cat_desc"].'</td>
+                                               
                                                 <td><a href="delete-category.php?cat_id='.$row_cart["cat_id"].'"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-category.php?cat_id='.$row_cart["cat_id"].'" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>';
                                                  }?>
