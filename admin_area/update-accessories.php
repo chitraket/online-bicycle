@@ -35,6 +35,7 @@ if(isset($_GET['accessories_id'])){
     $accessories_color=$row_accessories['accessories_color'];
     $accessories_prices=$row_accessories['accessories_prices'];
     $accessories_desc=$row_accessories['accessories_desc'];
+    $p_cat_top=$row_accessories['accessories_status'];
    
    
 }
@@ -255,6 +256,38 @@ while ($row_accessories_categorys=mysqli_fetch_array($run_accessories_categorys)
                                 <textarea required class="form-control" placeholder="Accessories Desc" name="accessories_desc" cols="19" rows="6" ><?php echo $accessories_desc; ?></textarea>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Manufacturer Top</label>
+                                <?php
+                                    if($p_cat_top=="no")
+                                    { 
+                                ?>
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio1">yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio2">no</label>
+                                                    </div>
+                            
+                                <?php 
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                                <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio1">yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio2">no</label>
+                                                    </div>
+                                                    
+                                                    <?php
+                                    }?>
+                            </div> 
                             <div class="form-group mt-4">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="update">
@@ -306,7 +339,7 @@ if(isset($_POST['update'])){
     $accessoriess_material=$_POST['accessories_material'];
     $accessoriess_color=$_POST['accessories_color'];
     $accessoriess_desc=$_POST['accessories_desc'];
-   
+    $accessories_status=$_POST['customRadio'];
 
     if (is_uploaded_file($_FILES['file']['tmp_name'])) {
 
@@ -323,7 +356,7 @@ if(isset($_POST['update'])){
         move_uploaded_file($temp_name3, "accessories_images/$accessoriess_img3");
 
     
-        $update_accessories= "update accessories set accessories_brand='$accessoriess_manufacturer',accessories_category='$accessoriess_cat',accessories_name='$accessoriess_name',accessories_image_1='$accessoriess_img1',accessories_image_2='$accessoriess_img2',accessories_image_3='$accessoriess_img3',accessories_qty='$accessoriess_qty',available_qty='$accessoriess_qty',accessories_material='$accessories_material',accessories_color='$accessoriess_color',accessories_prices='$accessoriess_price',accessories_date=NOW(),accessories_desc='$accessoriess_desc' where accessories_id='$accessoriess_id'";
+        $update_accessories= "update accessories set accessories_brand='$accessoriess_manufacturer',accessories_category='$accessoriess_cat',accessories_name='$accessoriess_name',accessories_image_1='$accessoriess_img1',accessories_image_2='$accessoriess_img2',accessories_image_3='$accessoriess_img3',accessories_qty='$accessoriess_qty',available_qty='$accessoriess_qty',accessories_material='$accessories_material',accessories_color='$accessoriess_color',accessories_prices='$accessoriess_price',accessories_date=NOW(),accessories_desc='$accessoriess_desc',accessories_status='$accessories_status' where accessories_id='$accessoriess_id'";
     
         $run_accessoriess = mysqli_query($con, $update_accessories);
     
@@ -334,7 +367,7 @@ if(isset($_POST['update'])){
         }
     }
     else{
-        $update_accessories= "update accessories set accessories_brand='$accessoriess_manufacturer',accessories_category='$accessoriess_cat',accessories_name='$accessoriess_name',accessories_qty='$accessoriess_qty',available_qty='$accessoriess_qty',accessories_material='$accessories_material',accessories_color='$accessoriess_color',accessories_prices='$accessoriess_price',accessories_date=NOW(),accessories_desc='$accessoriess_desc' where accessories_id='$accessoriess_id'";
+        $update_accessories= "update accessories set accessories_brand='$accessoriess_manufacturer',accessories_category='$accessoriess_cat',accessories_name='$accessoriess_name',accessories_qty=accessories_qty+'$accessoriess_qty',available_qty=available_qty+'$accessoriess_qty',accessories_material='$accessories_material',accessories_color='$accessoriess_color',accessories_prices='$accessoriess_price',accessories_date=NOW(),accessories_desc='$accessoriess_desc' where accessories_id='$accessoriess_id'";
     
         $run_accessoriess = mysqli_query($con, $update_accessories);
     
@@ -343,13 +376,9 @@ if(isset($_POST['update'])){
         
             echo "<script>window.open('view-accessories.php','_self')</script>";
         }
-
     }
-    
 }
-
 ?>
-
     <?php
  }
     ?>

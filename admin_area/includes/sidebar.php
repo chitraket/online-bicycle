@@ -152,6 +152,14 @@
             </li>
 
             <li>
+                <a href="view-payment.php" >
+                    <i class="bx bx-task"></i>
+                    <span>View Payment</span>
+                </a>
+               
+            </li>
+
+            <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bxs-user-detail"></i>
                     <span>Boxs</span>

@@ -23,13 +23,13 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="breadcrumb-wrap">
-                        <div class="success-text">
-                        <div class="section-title text-center" style="margin-top: 25px;">
-                    <h2 class="title" >Thank you</h2>
-                    
-                    <p style="margin-top: 10px;">Payment is successfully processsed and your order is on the way</p>
-                    </div>
-                </div>
+                            <div class="success-text">
+                                    <div class="section-title text-center" >
+                                        <img src="assets/img/icon/check.png" style="height: 50px;"> 
+                                        <h2 class="title" style="margin-top: 10px;">Thank you</h2>
+                                        <p style="margin-top: 10px;">Payment is successfully processsed and your order is on the way</p>
+                                    </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -168,7 +168,7 @@
                             <!-- Cart Calculation Area -->
                             <div class="cart-calculator-wrapper">
                                 <div class="cart-calculate-items">
-                                    <h6>Cart Totals</h6>
+                                    <h6> Totals</h6>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tr>
@@ -187,7 +187,7 @@
                                         
                                     </div>
                                 </div>
-                                <a href="index.php" class="btn btn-sqr d-block" style="margin-bottom: 50px;">Continue Shopping</a>
+                                <a href="index.php" class="btn btn-sqr d-block " style="margin-bottom: 50px;">Continue Shopping</a>
                             </div>
                         </div>
                       

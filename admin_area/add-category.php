@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0 font-size-18">Add </h4>
+                    <h4 class="mb-0 font-size-18">Add Category</h4>
 
                    
                     
@@ -43,6 +43,18 @@
                                 </div>
                             </div>
                            
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Manufacturer Top</label>
+                                                    
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked />
+                                                        <label class="custom-control-label" for="customRadio1">Yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" />
+                                                        <label class="custom-control-label" for="customRadio2">No</label>
+                                                    </div>
+                            </div>
                             <div class="form-group mt-4">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="submit">
@@ -69,9 +81,9 @@
                 
                 $cat_title = $_POST['cat_title'];
                 
-                $cat_desc = $_POST['cat_desc'];
+                $cat_top=$_POST['customRadio'];
                 
-                $insert_cat = "insert into categories (cat_title) values ('$cat_title')";
+                $insert_cat = "insert into categories (cat_title,cat_top) values ('$cat_title','$cat_top')";
                 
                 $run_cat = mysqli_query($con,$insert_cat);
                 

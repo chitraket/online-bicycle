@@ -336,6 +336,18 @@
                                 <textarea required class="form-control" placeholder="Product Desc" name="product_desc" cols="19" rows="6"></textarea>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Product Top</label>
+                                                    
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked />
+                                                        <label class="custom-control-label" for="customRadio1">Yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" />
+                                                        <label class="custom-control-label" for="customRadio2">No</label>
+                                                    </div>
+                            </div>
                             <div class="form-group mt-4">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="submit">
@@ -388,7 +400,7 @@
             $product_headset=$_POST['product_headset'];
             $product_brakeset=$_POST['product_brakeset'];
             $product_desc = $_POST['product_desc'];
-
+            $product_top=$_POST['customRadio'];
             $product_img1 = $_FILES['product_img1']['name'];
             $product_img2 = $_FILES['product_img2']['name'];
             $product_img3 = $_FILES['product_img3']['name'];
@@ -401,7 +413,7 @@
             move_uploaded_file($temp_name2,"product_images/$product_img2");
             move_uploaded_file($temp_name3,"product_images/$product_img3");
             
-            $insert_product = "insert into products (manufacturer_id,p_cat_id,cat_id,date,product_title,product_img1,product_img2,product_img3,product_price,product_desc,product_qty,available_qty,product_size,product_frame,product_weight,product_front_suspension,product_rear_suspension,product_front_derailleur,product_rear_derailleur,product_wheels,product_tires,product_shifter,product_crankset,product_freewheels,product_bb_set,product_cassette,product_colour,product_pedals,product_seat_post,product_handleber,product_stem,product_headset,product_brakeset) values ('$manufacturer_cat','$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_price','$product_desc','$product_qty','$product_qty','$product_size','$product_frame','$product_weight','$product_front_suspension','$product_rear_suspension','$product_front_derailleur','$product_rear_derailleur','$product_wheels','$product_tires','$product_shifter','$product_crankset','$product_freewheels','$product_bb_set','$product_cassette','$product_colour','$product_pedals','$product_seat_post','$product_handleber','$product_stem','$product_headset','$product_brakeset')";
+            $insert_product = "insert into products (manufacturer_id,p_cat_id,cat_id,date,product_title,product_img1,product_img2,product_img3,product_price,product_desc,product_qty,available_qty,product_size,product_frame,product_weight,product_front_suspension,product_rear_suspension,product_front_derailleur,product_rear_derailleur,product_wheels,product_tires,product_shifter,product_crankset,product_freewheels,product_bb_set,product_cassette,product_colour,product_pedals,product_seat_post,product_handleber,product_stem,product_headset,product_brakeset,product_status) values ('$manufacturer_cat','$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_price','$product_desc','$product_qty','$product_qty','$product_size','$product_frame','$product_weight','$product_front_suspension','$product_rear_suspension','$product_front_derailleur','$product_rear_derailleur','$product_wheels','$product_tires','$product_shifter','$product_crankset','$product_freewheels','$product_bb_set','$product_cassette','$product_colour','$product_pedals','$product_seat_post','$product_handleber','$product_stem','$product_headset','$product_brakeset','$product_top')";
             
             $run_product = mysqli_query($con,$insert_product);
             

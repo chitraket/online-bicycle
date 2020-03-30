@@ -1,4 +1,6 @@
 <div class="col-lg-3 order-2 order-lg-1">
+
+
                         <aside class="sidebar-wrapper">
                             <!-- single sidebar start -->
                             <div class="sidebar-single">
@@ -59,9 +61,8 @@
                                 </div>
                             </div>
                             <!-- single sidebar end -->
-
-                         
-
+           
+                                
                             <!-- single sidebar start -->
                             <!--<div class="sidebar-banner">
                                 <div class="img-container">
@@ -71,5 +72,7 @@
                                 </div>
                             </div>-->
                             <!-- single sidebar end -->
+                            
                         </aside>
+                        
                     </div>

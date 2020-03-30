@@ -6,11 +6,14 @@
      echo "<script>window.open('auth-login.php','_self')</script>";
  } 
  else{
+    
+
+
      ?>
             <!-- ========== Left Sidebar Start ========== -->
     <?php
-        include("includes/header.php");
-        include("includes/sidebar.php"); 
+    include("includes/header.php");
+     include("includes/sidebar.php"); 
     ?>
 
             <!-- Left Sidebar End -->
@@ -19,7 +22,7 @@
             <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
-            <form action="#" method="POST">
+            <form action="view-order.php" method="POST">
             <div class="main-content">
 
                 <div class="page-content">
@@ -29,12 +32,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">View Accessories Category</h4>
+                                    <h4 class="mb-0 font-size-18">View Payment</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);"></a></li>
-                                            <li class="breadcrumb-item active"></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                            <li class="breadcrumb-item active">View Payment</li>
                                         </ol>
                                     </div>
                                     
@@ -46,14 +49,15 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        
-                                        
-                                       
+                                        <h4 class="card-title">View Payment</h4>
                                         <table id="employee_data" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
-                                                <th>Accessories Category Title</th>
-                                                <th>Action</th>
+                                                <th>Invoice ID</th>
+                                                <th>Transaction ID</th>
+                                                <th>Amount</th>
+                                                <th>Payment Method</th>
+                                                <th>Date</th>
                                                
                                                 
                                             </tr>
@@ -62,15 +66,54 @@
                                             <tbody>
                                             
                                             <?php
-                                            
-                                              $select_cat="SELECT * FROM accessories_category ORDER BY accessories_category_id DESC";
+                                        
+                                              $select_cat="SELECT * FROM payments ORDER BY payment_id";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
+                                                if($row_cart["txnid"]=="")
+                                                {
+                                                    $txnid="N/A";
+                                                }
+                                                else
+                                                {
+                                                    $txnid=$row_cart["txnid"];
+                                                }
+                                                    ?>
+                                                    <tr>
+                                                <td><?php echo $row_cart["invoice_no"]?> </td>
+                                                <td><?php echo $txnid?></td>
+                                                <td>Rs.<?php echo $row_cart["amount"]?></td>
                                                
-                                                echo'<tr>
-                                                <td>'.$row_cart["accessories_category"].'</td>
-                                                <td><a href="delete-accessories-category.php?accessories_id='.$row_cart["accessories_category_id"].'"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-accessories-category.php?accessories_id='.$row_cart["accessories_category_id"].'" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
-                                                </tr>';
+                                                <?php 
+                                               
+                                                    $pay=$row_cart["txnid"]; 
+                                                    if($pay=="")
+                                                    {
+                                                        ?>
+                                                        
+                                                        <td><span class="badge badge-pill badge-soft-success font-size-10" ><img src="icon/cash-on-delivery.png" style="height:25px;"/>Cash On Delivery</span></td>
+                                                        <?php 
+                                                    }
+                                                    else
+                                                    {
+                                                        ?>
+                                                    <td><span class="badge badge-pill badge-soft-success font-size-10" ><img src="icon/icons8-paytm-32.png" style="height:25px;"/> Online Payment</span></td>
+                                                      <?php
+                                                    } 
+                                                      ?> 
+                                                                                                      <?php 
+                                                
+                                                $date=$row_cart["payment_date"]; 
+                                                $orgDate = $date;  
+                                                $newDate = date("d-M-Y", strtotime($orgDate));  
+                                            ?>
+                                            <td><?php echo $newDate; ?></td>
+                                           
+
+
+                                                </tr>
+                                                <?php 
+                                                
                                                  }?>
                                             </tbody>
                                         </table>
@@ -88,14 +131,31 @@
                 
                
                 <!-- end modal -->
+                
                <?php 
-               include("includes/footer.php");
+                include("includes/footer.php");
                ?>
+
             </div>
             </form>
             <!-- end main content-->
+          <?php
+          if(isset($_POST['submit']))
+          {
+            $update_p_cat = "update customer_orders set order_status='mmmm' where order_id='$id'";
+              
+            $run_p_cat = mysqli_query($con,$update_p_cat);
+            
+            if($run_p_cat){
 
+                echo "<script>alert('Your Product Category Has Been Updated')</script>";
+                echo "<script>window.open('view-slider.php','_self')</script>";
+                
+            }
+          }
+          ?>
         </div>
+        
         <!-- END layout-wrapper -->
           
         <!-- Right Sidebar -->
@@ -185,6 +245,7 @@
             $('#employee_data').DataTable();  
         });  
         </script> 
+        
 <?php
  } 
 ?>

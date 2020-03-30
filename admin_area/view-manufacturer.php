@@ -7,7 +7,7 @@
  } 
  else{
      ?>
-            <!-- ========== Left Sidebar Start ========== -->
+<!-- ========== Left Sidebar Start ========== -->
     <?php
         include("includes/header.php");
         include("includes/sidebar.php"); 
@@ -16,7 +16,8 @@
             <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
-            <form action="#" method="POST">
+            
+            
             <div class="main-content">
 
                 <div class="page-content">
@@ -47,6 +48,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Manufacturer Title</th>
+                                                <!--<th>Manufacturer Top</th>-->
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -58,15 +60,39 @@
                                               $select_cat="SELECT * FROM manufacturers ORDER BY manufacturer_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
+                                               ?>
+                                                <tr>
+                                                <td><?php echo $row_cart["manufacturer_title"] ?></td>
                                                
-                                                echo'<tr>
-                                                <td>'.$row_cart["manufacturer_title"].'</td>
-                                                <td><a href="delete-manufacturer.php?manufacturer_id='.$row_cart["manufacturer_id"].'"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-manufacturer.php?manufacturer_id='.$row_cart["manufacturer_id"].'" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
-                                                </tr>';
+                                               <!-- <td>
+                                                <input type="hidden" name="action" id="action" value="change"/>
+                                                <input type="hidden" name="code" id="code" value="<?php echo $row_cart["manufacturer_id"] ?>">
+                                                <?php
+                                                if ($row_cart["manufacturer_top"]=="yes") {
+                                                    ?>
+                                                    
+                                                <input type="checkbox" id="select1"  switch="none" name="manufacturer_top" value="yes" class="get_value"  onchange="check()" checked/>
+                                                <label for="select1" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else
+                                                {
+                                                    ?> 
+                                                    <input type="checkbox" id="select1"  switch="none"   name="manufacturer_top"  value="no"  class="get_value"  onchange="check()"/>
+                                                <label for="select1" data-on-label="On"
+                                                    data-off-label="Off"></label>
+
+                                                    <?php
+                                                }
+                                                ?>
+                                                    </td>-->
+                                                    <td><a href="delete-manufacturer.php?manufacturer_id=<?php echo $row_cart["manufacturer_id"]?>"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-manufacturer.php?manufacturer_id=<?php echo $row_cart["manufacturer_id"]?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
+                                                </tr>
+                                                <?php 
                                                  }?>
                                             </tbody>
                                         </table>
-                                        
                                     </div>
                                    
                                 </div>
@@ -77,19 +103,20 @@
                 <!-- End Page-content -->
                
                 <!-- Modal -->
-                
+
                
                 <!-- end modal -->
                <?php 
                include("includes/footer.php");
                ?>
             </div>
-            </form>
+            
             <!-- end main content-->
 
         </div>
         <!-- END layout-wrapper -->
-          
+      
+                
         <!-- Right Sidebar -->
         <div class="right-bar">
             <div data-simplebar class="h-100">
@@ -140,7 +167,24 @@
         <div class="rightbar-overlay"></div>
 
         <!-- JAVASCRIPT -->
-       
+        <!--<script>
+
+                function check()
+                {
+                    var code = $('#code').val();
+                    var action = $('#action').val();
+                    var checkbox=document.getElementById('select1');
+                    if(checkbox.checked == true)
+                    {
+                        var checkboxs="yes";
+                    }
+                    else{
+                        var checkboxs="no";
+                    }
+                    alert(checkboxs);
+                }
+
+           </script>-->
         <script src="assets/libs/jquery/jquery.min.js"></script>
         <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>

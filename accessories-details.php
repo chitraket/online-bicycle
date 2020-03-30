@@ -58,6 +58,10 @@ if(isset($_GET['accessories_id']))
     // else{
     //     $pro_brakeset=$row_product['product_brakeset'];
     // }
+    $get_manufacturer="select * from accessories_brand where accessories_brand_id=$accessories_brand";
+    $run_manufacturer=mysqli_query($con,$get_manufacturer);
+    $row_manufacturer=mysqli_fetch_array($run_manufacturer);
+    $accessories_brand=$row_manufacturer['accessories_brand'];
 
 }
 ?>
@@ -410,8 +414,7 @@ if(isset($_GET['accessories_id']))
                     <div class="col-12">
                         <!-- section title start -->
                         <div class="section-title text-center">
-                            <h2 class="title">Related Products</h2>
-                            <p class="sub-title">Add related products to weekly lineup</p>
+                            <h2 class="title">Related Accessories</h2>
                         </div>
                         <!-- section title start -->
                     </div>
@@ -422,22 +425,22 @@ if(isset($_GET['accessories_id']))
 
                             <?php
                             
-                                $get_products="select * from products order by rand() DESC LIMIT 0,8"; 
+                                $get_products="select * from accessories order by rand() DESC LIMIT 0,8"; 
                                 $run_products=mysqli_query($con,$get_products);
                                 while($row_products=mysqli_fetch_array($run_products))
                                 {
-                                    $pro_id=$row_products['product_id'];
-                                    $pro_title=$row_products['product_title'];
-                                    $pro_price=$row_products['product_price'];
-                                    $pro_img1=$row_products['product_img1'];
-                                    $pro_img2=$row_products['product_img2'];
+                                    $pro_id=$row_products['accessories_id'];
+                                    $pro_title=$row_products['accessories_name'];
+                                    $pro_price=$row_products['accessories_prices'];
+                                    $pro_img1=$row_products['accessories_image_1'];
+                                    $pro_img2=$row_products['accessories_image_2'];
                                     ?>
                                     
                                     <div class="product-item">
                                     <figure class="product-thumb">
-                                        <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                            <img class="pri-img" src="assets/img/product/<?php echo $pro_img1;?>" alt="product">
-                                            <img class="sec-img" src="assets/img/product/<?php echo $pro_img2;?>" alt="product">
+                                        <a href="accessories-details.php?accessories_id=<?php echo $pro_id;?>">
+                                            <img class="pri-img" src="admin_area/accessories_images/<?php echo $pro_img1;?>" alt="product">
+                                            <img class="sec-img" src="admin_area/accessories_images/<?php echo $pro_img2;?>" alt="product">
                                         </a>
                                         <div class="product-badge">
                                             <div class="product-label new">
@@ -457,11 +460,8 @@ if(isset($_GET['accessories_id']))
                                         </div>-->
                                   </figure>
                                         <div class="product-caption text-center">
-                            <div class="product-identity">
-                                                                    <p class="manufacturer-name"><a href="product-details.html">Gold</a></p>
-                                                                </div>
                                             <h6 class="product-name">
-                                                <a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
+                                                <a href="accessories-details.php?accessories_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
                                             </h6>
                                             <div class="price-box">
                                                 <span class="price-regular">Rs.<?php echo  $pro_price;?></span>

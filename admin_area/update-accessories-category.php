@@ -14,21 +14,21 @@
      ?>
     <?php 
 
-if(isset($_GET['cat_id'])){
+if(isset($_GET['accessories_id'])){
     
-    $edit_p_cat_id = $_GET['cat_id'];
+    $edit_p_cat_id = $_GET['accessories_id'];
     
-    $edit_p_cat_query = "select * from categories where cat_id='$edit_p_cat_id'";
+    $edit_p_cat_query = "select * from accessories_category where accessories_category_id='$edit_p_cat_id'";
     
     $run_edit = mysqli_query($con,$edit_p_cat_query);
     
     $row_edit = mysqli_fetch_array($run_edit);
     
-    $p_cat_id = $row_edit['cat_id'];
+    $p_cat_id = $row_edit['accessories_category_id'];
     
-    $p_cat_title = $row_edit['cat_title'];
-    
-    $p_cat_top=$row_edit['cat_top'];
+    $p_cat_title = $row_edit['accessories_category'];
+
+    $p_cat_top=$row_edit['accessories_category_top'];
 }
 
 ?>
@@ -41,7 +41,7 @@ if(isset($_GET['cat_id'])){
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0 font-size-18">Update Category</h4>
+                    <h4 class="mb-0 font-size-18">Update Accessories Category</h4> 
                 </div>
             </div>
         </div>     
@@ -53,13 +53,13 @@ if(isset($_GET['cat_id'])){
                     <div class="card-body">
                        <form method="POST" enctype="multipart/form-data"> 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-md-3 col-form-label">Category Title </label>
+                                <label for="example-text-input" class="col-md-3 col-form-label">Category Title</label>
                                 <div class="col-md-9">
                                     <input class="form-control" type="text" placeholder="Category Title " name="p_cat_title" value="<?php echo $p_cat_title; ?>" id="example-text-input">
                                 </div>
                             </div>
                             <div class="form-group row">
-                            <label for="example-text-input" class="col-md-3 col-form-label">Manufacturer Top</label>
+                            <label for="example-text-input" class="col-md-3 col-form-label">Category Top</label>
                                 <?php
                                     if($p_cat_top=="no")
                                     { 
@@ -90,6 +90,7 @@ if(isset($_GET['cat_id'])){
                                                     <?php
                                     }?>
                             </div> 
+
                             <div class="form-group mt-4">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="update">
@@ -99,6 +100,7 @@ if(isset($_GET['cat_id'])){
                                 </div>
                             </div>                                        
                        </form>
+
 
                     </div>
                 </div>
@@ -128,20 +130,21 @@ if(isset($_GET['cat_id'])){
 </html>
 
 <?php  
+
           if(isset($_POST['update'])){
               
               $p_cat_title = $_POST['p_cat_title'];
               
               $p_cat_tops=$_POST['customRadio'];
               
-              $update_p_cat = "update categories set cat_title='$p_cat_title',cat_top='$p_cat_tops' where cat_id='$p_cat_id'";
+              $update_p_cat = "update accessories_category set accessories_category='$p_cat_title',accessories_category_top='$p_cat_tops' where accessories_category_id='$p_cat_id'";
               
               $run_p_cat = mysqli_query($con,$update_p_cat);
               
               if($run_p_cat){
 
                   echo "<script>alert('Your Product Category Has Been Updated')</script>";
-                  echo "<script>window.open('view-category.php','_self')</script>";
+                  echo "<script>window.open('view-accessories-category.php','_self')</script>";
                   
               }
               

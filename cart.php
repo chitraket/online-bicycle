@@ -449,36 +449,7 @@
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
 
-    <script>
     
-       $(document).ready(function(data){
-
-           $(document).on('keyup','.quantity',function(){
-
-                var id = $ (this).data("product_id");
-                var quantity = $(this).val();
-
-                if(quantity !=''){
-
-                    $.ajax({
-
-                        url: "change.php",
-                        method: "POST",
-                        data:{id:id, quantity:quantity},
-
-                        success:function(){
-                            $("body").load("cart_body.php");
-                        }
-
-                    });
-
-                }
-
-           });
-
-       });
-    
-    </script>
     
 </body>
 

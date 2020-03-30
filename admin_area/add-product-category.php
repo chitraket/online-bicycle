@@ -43,6 +43,18 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Product Category Top</label>
+                                                    
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked />
+                                                        <label class="custom-control-label" for="customRadio1">Yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" />
+                                                        <label class="custom-control-label" for="customRadio2">No</label>
+                                                    </div>
+                            </div>
                             <div class="form-group mt-4">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="submit">
@@ -69,9 +81,9 @@
               
               $p_cat_title = $_POST['p_cat_title'];
               
-              $p_cat_desc = $_POST['p_cat_desc'];
+              $p_cat_top=$_POST['customRadio'];
               
-              $insert_p_cat = "insert into product_categories (p_cat_title) values ('$p_cat_title')";
+              $insert_p_cat = "insert into product_categories (p_cat_title,p_cat_top) values('$p_cat_title','$p_cat_top')";
               
               $run_p_cat = mysqli_query($con,$insert_p_cat);
               

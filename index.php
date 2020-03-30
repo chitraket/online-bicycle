@@ -182,6 +182,43 @@ $active='Home';
             </div>
         </section>
         <!-- product area end -->
+        <section class="product-area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- section title start -->
+                        <div class="section-title text-center">
+                            <h2 class="title">New products</h2>
+                          <!--  <p class="sub-title">Add our products to weekly lineup</p>-->
+                        </div>
+                        <!-- section title start -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="product-container">
+                            <!-- product tab menu start -->
+                            
+                            <!-- product tab menu end -->
+
+                            <!-- product tab content start -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" >
+                                    <div class="product-carousel-4 slick-row-10 slick-arrow-style">
+                                       <?php 
+                                        getAcc();
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- product tab content end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
 
         <!-- product banner statistics area start -->
         <!-- product banner statistics area end -->
@@ -205,49 +242,10 @@ $active='Home';
                     <div class="col-12">
                         <div class="brand-logo-carousel slick-row-10 slick-arrow-style">
                             <!-- single brand start -->
-                            <div class="brand-item">
-                                <a href="#">
-                                    <img src="assets/img/brand/2.png" alt="">
-                                </a>
-                            </div>
-                            <div class="brand-item">
-                                <a href="#">
-                                    <img src="assets/img/brand/2.png" alt="">
-                                </a>
-                            </div>
-                            <div class="brand-item">
-                                <a href="#">
-                                    <img src="assets/img/brand/2.png" alt="">
-                                </a>
-                            </div>
+                            <?php
+                            logo(); 
+                            ?>
                             <!-- single brand end -->
-
-                            <!-- single brand start -->
-                            <div class="brand-item">
-                                <a href="#">
-                                    <img src="assets/img/brand/2.png" alt="">
-                                </a>
-                            </div>
-                            <!-- single brand end -->
-
-                            <!-- single brand start -->
-                            <div class="brand-item">
-                                <a href="#">
-                                    <img src="assets/img/brand/3.png" alt="">
-                                </a>
-                            </div>
-                            <!-- single brand end -->
-
-                            <!-- single brand start -->
-                            <div class="brand-item">
-                                <a href="#">
-                                    <img src="assets/img/brand/4.png" alt="">
-                                </a>
-                            </div>
-                            <!-- single brand end -->
-
-                            
-                            
                         </div>
                     </div>
                 </div>

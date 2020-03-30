@@ -39,6 +39,18 @@
                                     <input class="form-control" type="text" placeholder="Manufacturer Title" name="manufacturer_title"  id="example-text-input">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Manufacturer Top</label>
+                                                    
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked />
+                                                        <label class="custom-control-label" for="customRadio1">Yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" />
+                                                        <label class="custom-control-label" for="customRadio2">No</label>
+                                                    </div>
+                            </div>
                             <div class="form-group mt-4">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="submit">
@@ -65,7 +77,9 @@
                 
                 $manufacturer_title = $_POST['manufacturer_title'];
               
-                $insert_cat = "insert into accessories_brand (accessories_brand) values ('$manufacturer_title')";
+                $cat_top=$_POST['customRadio'];
+
+                $insert_cat = "insert into accessories_brand(accessories_brand,accessories_brand_top) values('$manufacturer_title','$cat_top')";
                 
                 $run_cat = mysqli_query($con,$insert_cat);
                 

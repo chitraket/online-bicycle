@@ -119,11 +119,12 @@
                                         </tbody>
                                     </table>
                                     <?php
-                                     $get_status="select DISTINCT order_status,invoice_no from customer_orders where order_id=$order_id";
+                                     $get_status="select DISTINCT order_status,invoice_no,txnid from customer_orders where order_id=$order_id";
                                      $run_status=mysqli_query($con,$get_status);
                                      while ($row_status=mysqli_fetch_array($run_status)) {
                                          $product_status=$row_status['order_status']; 
-                                         $product_invoice=$row_status['invoice_no'];?>
+                                         $product_invoice=$row_status['invoice_no'];
+                                         $txnid=$row_status['txnid'];?>
                                     <div class="text-left m-2">
                                     <?php
                                     if ($product_status=="o") {
@@ -146,9 +147,12 @@
                                     <?php
                                     } 
                                     if ($product_status=="d") {
-                                        $payment_mode="Cash on Delivery";
-                                        $insert_payment="insert into payments(invoice_no,txnid,amount,payment_mode,code_name,code,payment_date) values('$product_invoice','','$total','$payment_mode','','',NOW())"; 
-                                        mysqli_query($con,$insert_payment);
+                                        if ($txnid==" ") {
+                                            $payment_mode="Cash on Delivery";
+                                            $insert_payment="insert into payments(invoice_no,txnid,amount,payment_mode,code_name,code,payment_date) values('$product_invoice','','$total','$payment_mode','','',NOW())";
+                                            $run_payment=mysqli_query($con, $insert_payment);
+                                          
+                                        }
                                                                          
                                         ?>
 

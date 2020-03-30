@@ -196,6 +196,18 @@
                                 <textarea required class="form-control" placeholder="Accessories Desc" name="accessories_desc" cols="19" rows="6"></textarea>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Accessories Top</label>
+                                                    
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked />
+                                                        <label class="custom-control-label" for="customRadio1">Yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" />
+                                                        <label class="custom-control-label" for="customRadio2">No</label>
+                                                    </div>
+                            </div>
                             <div class="form-group mt-4">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="submit">
@@ -230,7 +242,7 @@
             $accessories_material=$_POST['accessories_material'];
             $accessories_color=$_POST['accessories_color'];
             $accessories_desc=$_POST['accessories_desc'];
-
+            $accessories_status=$_POST['customRadio'];
             $accessories_img1=$_FILES['accessories_img1']['name'];
             $accessories_img2=$_FILES['accessories_img2']['name'];
             $accessories_img3=$_FILES['accessories_img3']['name'];
@@ -243,10 +255,8 @@
             move_uploaded_file($temp_name1,"accessories_images/$accessories_img1");
             move_uploaded_file($temp_name2,"accessories_images/$accessories_img2");
             move_uploaded_file($temp_name3,"accessories_images/$accessories_img3");
-            
-
-
-            $insert_accessories = "insert into accessories(accessories_brand,accessories_category,accessories_name,accessories_image_1,accessories_image_2,accessories_image_3,accessories_qty,available_qty,accessories_material,accessories_color,accessories_prices,accessories_date,accessories_desc) values ('$accessories_brand','$accessories_category','$accessories_name','$accessories_img1','$accessories_img2','$accessories_img3','$accessories_qty','$accessories_qty','$accessories_material','$accessories_color','$accessories_price',NOW(),'$accessories_desc')";
+        
+            $insert_accessories = "insert into accessories(accessories_brand,accessories_category,accessories_name,accessories_image_1,accessories_image_2,accessories_image_3,accessories_qty,available_qty,accessories_material,accessories_color,accessories_prices,accessories_date,accessories_desc,accessories_status) values ('$accessories_brand','$accessories_category','$accessories_name','$accessories_img1','$accessories_img2','$accessories_img3','$accessories_qty','$accessories_qty','$accessories_material','$accessories_color','$accessories_price',NOW(),'$accessories_desc','$accessories_status')";
             $run_accessories = mysqli_query($con,$insert_accessories);
             if($run_accessories){
                 

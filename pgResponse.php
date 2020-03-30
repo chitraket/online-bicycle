@@ -27,10 +27,8 @@ if($isValidChecksum == "TRUE") {
 			echo "<script>window.open('form_process1.php','_self')</script>";
 	}
 	else {
-		echo "<b>Transaction status is failure</b>" . "<br/>";
+		echo "<script>window.open('fail.php','_self')</script>";
 	}
-
-	
 
 }
 else {

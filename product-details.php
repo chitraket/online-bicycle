@@ -65,10 +65,11 @@ if(isset($_GET['pro_id']))
     }else{
         $pro_rear_suspension=$row_product['product_rear_suspension'];
     }
+
     $pro_front_derailleur=$row_product['product_front_derailleur'];
-    if($pro_front_suspension==null)
+    if($pro_front_derailleur==null)
     {
-        $pro_front_suspension="N/A";
+        $pro_front_derailleur="N/A";
     }
     else{
         $pro_front_derailleur=$row_product['product_front_derailleur'];
@@ -192,6 +193,10 @@ if(isset($_GET['pro_id']))
     else{
         $pro_brakeset=$row_product['product_brakeset'];
     }
+    $get_manufacturer="select * from manufacturers where manufacturer_id=$manufacturer_id";
+    $run_manufacturer=mysqli_query($con,$get_manufacturer);
+    $row_manufacturer=mysqli_fetch_array($run_manufacturer);
+    $manufacturer_title=$row_manufacturer['manufacturer_title'];
 
 }
 ?>
@@ -342,7 +347,7 @@ if(isset($_GET['pro_id']))
                                     <div class="product-details-des">
                                         
                                         <div class="manufacturer-name">
-                                           <?php echo $manufacturer_id;?>
+                                           <?php echo $manufacturer_title;?>
                                         </div>
                                         <h3 class="product-name"><?php  echo $pro_title; ?></h3>
                                         <div class="ratings d-flex">
@@ -623,7 +628,7 @@ if(isset($_GET['pro_id']))
                         <!-- section title start -->
                         <div class="section-title text-center">
                             <h2 class="title">Related Products</h2>
-                            <p class="sub-title">Add related products to weekly lineup</p>
+                            <!--<p class="sub-title">Add related products to weekly lineup</p>-->
                         </div>
                         <!-- section title start -->
                     </div>
@@ -648,8 +653,8 @@ if(isset($_GET['pro_id']))
                                     <div class="product-item">
                                     <figure class="product-thumb">
                                         <a href="product-details.php?pro_id=<?php echo $pro_id;?>">
-                                            <img class="pri-img" src="assets/img/product/<?php echo $pro_img1;?>" alt="product">
-                                            <img class="sec-img" src="assets/img/product/<?php echo $pro_img2;?>" alt="product">
+                                            <img class="pri-img" src="admin_area/product_images/<?php echo $pro_img1;?>" alt="product" style="height:180px;">
+                                            <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
                                         </a>
                                         <div class="product-badge">
                                             <div class="product-label new">
@@ -669,9 +674,9 @@ if(isset($_GET['pro_id']))
                                         </div>-->
                                   </figure>
                                         <div class="product-caption text-center">
-                            <div class="product-identity">
+                            <!--<div class="product-identity">
                                                                     <p class="manufacturer-name"><a href="product-details.html">Gold</a></p>
-                                                                </div>
+                                                                </div>-->
                                             <h6 class="product-name">
                                                 <a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
                                             </h6>

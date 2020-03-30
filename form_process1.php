@@ -21,13 +21,7 @@ include("functions/functions.php");
  {
     echo "<script>window.open('checkout.php','_self')</script>";   
  }
-if(isset($_SESSION['total']))
-{
-    $total=$_SESSION['total'];
-}
-else{
-    echo "<script>window.open('checkout.php','_self')</script>";  
-}
+
                 $status="successful";
                 $o_status="o";
                 $invoice_no=mt_rand();
@@ -35,6 +29,9 @@ else{
                 $pro_qty=0;
                 $pro_id=0;
                 $pro_name=0;
+                $sub_total=0;
+                $total=0;
+                $pro_price=0;
                 //$c_id=49;
                             
                 $get_customer="select * from customers where customer_id='$c_id'";
@@ -77,6 +74,8 @@ else{
                         $pro_id= $value;
                     } elseif ($key ==3) {
                         $pro_qty= $value;
+                    } elseif ($key ==2) {
+                        $pro_price= $value;
                     }
                     elseif($key==1)
                     {
@@ -84,12 +83,14 @@ else{
                     }
 
                 }
+                $sub_total=$pro_price*$pro_qty;
+                $total+=$sub_total;
                  $insert_customer_orders="insert into customer_orders(order_id,product_id,txnid,invoice_no,qty,size,order_date,order_status,payment_status,papage_number) values('$order_id','$pro_id','$txnid','$invoice_no','$pro_qty','$pro_size',NOW(),'$o_status','$status','$papage')";
-                mysqli_query($con,$insert_customer_orders);
+                $run_customer_orders=mysqli_query($con,$insert_customer_orders);
 
                 $paytm="Paytm";
                 $insert_payment="insert into payments(invoice_no,txnid,amount,payment_mode,code_name,code,payment_date) values('$invoice_no','$txnid','$total','$paytm','','',NOW())";
-                mysqli_query($con,$insert_payment);
+                $run_payments=mysqli_query($con,$insert_payment);
 
                  if ($papage==0) {
                      $querys="update products set available_qty=available_qty-$pro_qty where product_id='$pro_id' ";

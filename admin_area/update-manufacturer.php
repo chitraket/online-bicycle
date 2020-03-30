@@ -27,9 +27,8 @@ if(isset($_GET['manufacturer_id'])){
     $p_cat_id = $row_edit['manufacturer_id'];
     
     $p_cat_title = $row_edit['manufacturer_title'];
-    
-   
-    
+
+    $p_cat_top=$row_edit['manufacturer_top'];   
 }
 
 ?>
@@ -42,10 +41,7 @@ if(isset($_GET['manufacturer_id'])){
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0 font-size-18">Add Manufacturer</h4>
-
-                   
-                    
+                    <h4 class="mb-0 font-size-18">Update Manufacturer</h4>
                 </div>
             </div>
         </div>     
@@ -62,7 +58,38 @@ if(isset($_GET['manufacturer_id'])){
                                     <input class="form-control" type="text" placeholder="Manufacturer Title " name="p_cat_title" value="<?php echo $p_cat_title; ?>" id="example-text-input">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Manufacturer Top</label>
+                                <?php
+                                    if($p_cat_top=="no")
+                                    { 
+                                ?>
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio1">yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio2">no</label>
+                                                    </div>
                             
+                                <?php 
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                                <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio1">yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio2">no</label>
+                                                    </div>
+                                                    
+                                                    <?php
+                                    }?>
+                            </div>
                             
                             
                             <div class="form-group mt-4">
@@ -108,9 +135,9 @@ if(isset($_GET['manufacturer_id'])){
               
               $p_cat_title = $_POST['p_cat_title'];
               
+              $p_cat_top=$_POST['customRadio'];
 
-              
-              $update_p_cat = "update manufacturers set manufacturer_title='$p_cat_title' where manufacturer_id='$p_cat_id'";
+              $update_p_cat = "update manufacturers set manufacturer_title='$p_cat_title',manufacturer_top='$p_cat_top' where manufacturer_id='$p_cat_id'";
               
               $run_p_cat = mysqli_query($con,$update_p_cat);
               
