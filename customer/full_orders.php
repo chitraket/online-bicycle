@@ -1,286 +1,14 @@
 <?php
-session_start();
+$active='';
+include("includes/db.php");
+include("includes/header.php");
 if(!isset($_SESSION['customer_email']))
 {
-    echo "<script>window.open('../checkout.php','_self')</script>";
+    echo "<script>window.open('customer_login.php','_self')</script>";
 }
-else{
-
-
-include("includes/db.php");
-include("functions/functions.php");
 ?>
     <!-- end Header Area -->
 
-
-<!doctype html>
-<html class="no-js" lang="en">
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:19:45 GMT -->
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Corano - Bikes Shop</title>
-    <meta name="robots" content="noindex, follow" />
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <!-- CSS
-	============================================ -->
-    <!-- google fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
-    <!-- Pe-icon-7-stroke CSS -->
-    <link rel="stylesheet" href="assets/css/vendor/pe-icon-7-stroke.css">
-    <!-- Font-awesome CSS -->
-    <link rel="stylesheet" href="assets/css/vendor/font-awesome.min.css">
-    <!-- Slick slider css -->
-    <link rel="stylesheet" href="assets/css/plugins/slick.min.css">
-    <!-- animate css -->
-    <link rel="stylesheet" href="assets/css/plugins/animate.css">
-    <!-- Nice Select css -->
-    <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
-    <!-- jquery UI css -->
-    <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
-    <!-- main style css -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!--status css-->
-    <link rel="stylesheet" href="assets/css/status.css">
-</head>
-<body>
-<header class="header-area header-wide">
-        <!-- main header start -->
-        <div class="main-header d-none d-lg-block">
-            <!-- header top start -->
-            <div class="header-top bdr-bottom">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="welcome-message">
-                                <p>
-                                    <?php
-                                    if(!isset($_SESSION['customer_email'])){ 
-                                        echo "Welcome:Guest";
-                                    }
-                                    else{
-                                        echo"Welcome: " .$_SESSION['customer_email']. "";
-                                    }
-                                    
-                                    ?>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- header top end -->
-
-            <!-- header middle area start -->
-            <div class="header-main-area sticky">
-                <div class="container">
-                    <div class="row align-items-center position-relative">
-
-                        <!-- start logo area -->
-                        <div class="col-lg-2">
-                            <div class="logo">
-                                <a href="index.php">
-                                    <img src="assets/img/logo/logo.png" alt="Brand Logo">
-                                </a>
-                            </div>
-                        </div>
-                        <!-- start logo area -->
-
-                        <!-- main menu area start -->
-                        <div class="col-lg-6 position-static">
-                            <div class="main-menu-area">
-                                <div class="main-menu">
-                                    <!-- main menu navbar start -->
-                                     <nav class="desktop-menu">
-                                        <ul>
-                                            <li class="active"><a href="../index.php">Home <i class="fa fa-angle"></i></a>   
-                                            </li>
-                                            <li ><a href="../shop.php">Shop<i class="fa fa-angle"></i></a>
-                                            </li>
-                                            <li ><a href="../contact.php">Contact us</a></li>
-                                        </ul>
-                                    </nav>
-                                    <!-- main menu navbar end -->
-                                </div>
-                            </div>
-                        </div>
-                        <!-- main menu area end -->
-
-                        <!-- mini cart area start -->
-                        <div class="col-lg-4">
-                            <div class="header-right d-flex align-items-center justify-content-xl-between justify-content-lg-end">
-                              <div class="header-search-container">
-                                    
-                                </div>
-                                <div class="header-configure-area">
-                                    <ul class="nav justify-content-end">
-                                        <li class="user-hover">
-                                            <a href="#">
-                                                <i class="pe-7s-user"></i>
-                                            </a>
-                                            <ul class="dropdown-list">
-                                                <?php 
-                                                if(!isset($_SESSION['customer_email']))
-                                                {
-                                                    echo"
-                                                <li><a href='customer/customer_login.php'>Login</a></li>
-                                                <li><a href='../register.php'>Register</a></li>
-                                                ";
-                                                }
-                                                else{
-                                                
-                                                    echo"
-                                                    <li><a href='customer/myaccount.php'>My Account</a></li>";
-                                                    echo"
-                                                    <li><a href='logout.php'>Log Out</a></li>";
-                                                    
-                                                }
-                                                ?>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="wishlist.html">
-                                                <i class="pe-7s-like"></i>
-                                                <div class="notification">0</div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="minicart-btn">
-                                                <i class="pe-7s-shopbag"></i>
-                                                <div class="notification"><?php items(); ?>
-                                            </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- mini cart area end -->
-
-                    </div>
-                </div>
-            </div>
-            <!-- header middle area end -->
-        </div>
-        <!-- main header start -->
-
-        <!-- mobile header start -->
-        <!-- mobile header start -->
-        <div class="mobile-header d-lg-none d-md-block sticky">
-            <!--mobile header top start -->
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <div class="col-12">
-                        <div class="mobile-main-header">
-                            <div class="mobile-logo">
-                                <a href="index.php">
-                                    <img src="assets/img/logo/logo.png" alt="Brand Logo">
-                                </a>
-                            </div>
-                            <div class="mobile-menu-toggler">
-                                <div class="mini-cart-wrap">
-                                    <a href="cart.php">
-                                        <i class="pe-7s-shopbag"></i>
-                                        <div class="notification"><?php items();?></div>
-                                    </a>
-                                </div>
-                                <button class="mobile-menu-btn">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- mobile header top start -->
-        </div>
-        <!-- mobile header end -->
-        <!-- mobile header end -->
-
-        <!-- offcanvas mobile menu start -->
-        <!-- off-canvas menu start -->
-        <aside class="off-canvas-wrapper">
-            <div class="off-canvas-overlay"></div>
-            <div class="off-canvas-inner-content">
-                <div class="btn-close-off-canvas">
-                    <i class="pe-7s-close"></i>
-                </div>
-
-                <div class="off-canvas-inner">
-                    <!-- search box start -->
-                    <!-- search box end -->
-
-                    <!-- mobile menu start -->
-                    <div class="mobile-navigation">
-
-                        <!-- mobile menu navigation start -->
-                        <nav>
-                            <ul class="mobile-menu">
-                                <li class="menu-item-has-children"><a href="#">Home</a>
-                                </li>
-                               
-                                <li class="menu-item-has-children "><a href="#">Shop</a>
-                                </li>
-                                
-                                <li><a href="contact-us.html">Contact us</a></li>
-                            </ul>
-                        </nav>
-                        <!-- mobile menu navigation end -->
-                    </div>
-                    <!-- mobile menu end -->
-
-                    <div class="mobile-settings">
-                        <ul class="nav">
-                            <li>
-                                <div class="dropdown mobile-top-dropdown">
-                                    <a href="#" class="dropdown-toggle" id="myaccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        My Account
-                                        <i class="fa fa-angle-down"></i>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="myaccount">
-                                        <a class="dropdown-item" href="my-account.html">My Account</a>
-                                        <a class="dropdown-item" href="login-register.html"> Login</a>
-                                        <a class="dropdown-item" href="register.php">Register</a>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- offcanvas widget area start -->
-                    <div class="offcanvas-widget-area">
-                        <div class="off-canvas-contact-widget">
-                            <ul>
-                                <li><i class="fa fa-mobile"></i>
-                                    <a href="#"></a>
-                                </li>
-                                <li><i class="fa fa-envelope-o"></i>
-                                    <a href="#"></a>
-                                </li>
-                            </ul>
-                        </div>
-                      <!--<div class="off-canvas-social-widget">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        </div>-->
-                    </div>
-                    <!-- offcanvas widget area end -->
-                </div>
-            </div>
-        </aside>
-        <!-- off-canvas menu end -->
-        <!-- offcanvas mobile menu end -->
-    </header>
 
     <main>
         <!-- breadcrumb area start -->
@@ -312,7 +40,7 @@ include("functions/functions.php");
                         <div class="col-lg-12">
                             <!-- Cart Table Area -->
                             <div class="cart-table table-responsive">
-                                <table class="table table-bordered">
+                                <table  class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th class="pro-thumbnail">Thumbnail</th>
@@ -426,10 +154,8 @@ include("functions/functions.php");
                                                                     $customer_phone=$row_cart['customer_contact'];
                                                            
                                                     }
-                                    }
-                                       
+                                    } 
                                 ?>                            
-
                             <ul style="margin-top: 20px;">
                             <li><i class="fa fa-map"></i> Address : <?php echo $customer_address; ?></li>
                                 <li><i class="fa fa-envelope-o"></i> E-mail: <?php echo $customer_email; ?></li>
@@ -458,14 +184,37 @@ include("functions/functions.php");
                                                
                                             </tr>
                                         </table>
+                                        <?php 
+                                        $select_status="select DISTINCT order_status,payment_status,invoice_no from customer_orders where order_id='$o_id' ";
+                                            $run_status = mysqli_query($con,$select_status);
+                                            while ($row_status = mysqli_fetch_array($run_status)) {
+                                            $order_status=$row_status['order_status']; 
+                                            $payment_status=$row_status['payment_status'];
+                                            $_SESSION['invoice_no']=$row_status['invoice_no'];
+                                            if($order_status=="c" || $payment_status=="cancel")
+                                            {
+                                               ?> 
+                                               <div class="section-title text-center mt-2">
+                                                 <h2 class="title">Order cancel</h2>
+                                                </div> 
+                                                <?php    
+                                            }
+                                            else if($order_status=="r" || $payment_status=="returned")
+                                            {
+                                                ?>
+                                                <div class="section-title text-center mt-2">
+                                                <h2 class="title">Order returned</h2>
+                                               </div>  
+                                                <?php 
+                                            }
+                                            else
+                                            {
+                                            ?>
                                         <div class="mb-4">
                                         <div class="card-body" > 
                                         <div class="track">
                                             <?php
-                                            $select_status="select DISTINCT order_status from customer_orders where order_id='$o_id' ";
-                                            $run_status = mysqli_query($con,$select_status);
-                                            while ($row_status = mysqli_fetch_array($run_status)) {
-                                            $order_status=$row_status['order_status']; 
+                                            
                                                 if($order_status=="o")
                                                 {
                                                     ?>
@@ -473,8 +222,8 @@ include("functions/functions.php");
                                                     <div class="step"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Picked by courier</span> </div>
                                                     <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> On the way </span> </div>
                                                     <div class="step"> <span class="icon"> <i class="fa fa-map"></i> </span> <span class="text">Ready for pickup</span> </div>
-                                                    <?php 
-                                                    
+                                                  
+                                                    <?php     
                                                 }
                                                 if($order_status=="p")
                                                 {
@@ -504,16 +253,69 @@ include("functions/functions.php");
                                                     <?php 
                                                 }
                                                 
-                                            }
                                                 ?>
-                                            
-                                            
                                         </div>
                                     </div>
                                         </div>
-                                    <div class="m-2 mb-2">
-                                    <td class="pro-subtotal"><a href="Generate_bill.php?o_id=<?php echo $o_id; ?>" class="btn btn-sqr">Generate bill</a></td>
-                                    </div>    
+                                        <div class="m-2 mb-2">
+                                        <?php
+                                        if($order_status=="o")
+                                        {
+                                            ?>
+                                                <td class="pro-subtotal"><a href="orders_delete.php?o_id=<?php echo $o_id; ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
+                                            <?php 
+                                        }
+                                        if($order_status=="p")
+                                        {
+                                            ?>
+                                                <td class="pro-subtotal"><a href="orders_delete.php?o_id=<?php echo $o_id; ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
+                                           
+                                            <?php 
+                                        }
+                                        if($order_status=="s")
+                                        {
+                                            ?>
+                                             
+                                                <td class="pro-subtotal"><a href="orders_delete.php?o_id=<?php echo $o_id; ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
+                                           
+                                            <?php 
+                                        }
+                                        if($order_status=="d")
+                                        {
+                                               ?>
+                                               <td class="pro-subtotal"><a href="orders_returned.php?o_id=<?php echo $o_id; ?>" class="btn btn-sqr" id="btn-returned">Returned Order</a></td>
+                                               <?php     
+                                        }
+                                        
+                                        if($order_status=="o" && $payment_status=="pending")
+                                        {
+                                            ?>
+                                                <td class="pro-subtotal"><a href="payment.php?o_id=<?php echo $productinfo; ?>&amount=<?php echo $total; ?>" class="btn  btn-sqr">Payment</a></td>
+                                            <?php 
+                                        }
+                                        if($order_status=="p" && $payment_status=="pending")
+                                        {
+                                            ?>
+                                                <td class="pro-subtotal"><a href="payment.php?o_id=<?php echo $productinfo; ?>&amount=<?php echo $total; ?>" class="btn btn-sqr">Payment</a></td>
+                                            <?php 
+                                        }
+                                        if($order_status=="s" && $payment_status=="pending")
+                                        {
+                                            ?>
+                                                <td class="pro-subtotal"><a href="payment.php?o_id=<?php echo $productinfo; ?>&amount=<?php echo $total; ?>" class="btn btn-sqr">Payment</a></td>
+                                            <?php 
+                                        }
+                                        ?>
+                                        
+                                                <td class="pro-subtotal"><a href="Generate_bill.php?o_id=<?php echo $o_id; ?>" class="btn btn-sqr">Generate bill</a></td>
+                                            </div>
+                                 
+                                <?php 
+                                            }
+                                        }
+                                        
+                                            ?>
+
                                 </div>
                                 </div>
                               <!--  <a href="checkout.php" class="btn btn-sqr d-block">Proceed Checkout</a>-->
@@ -528,9 +330,23 @@ include("functions/functions.php");
         </div>
         <!-- cart main wrapper end -->
     </main>
-
-       
-      
+<?php
+if(isset($_GET['m']))
+{ 
+?>
+<div class="flash-data" data-flashdata="<?php echo $_GET['m'] ?>"></div>
+<?php
+} 
+?>
+ <?php
+if(isset($_GET['n']))
+{ 
+?>
+<div class="flash-datas" data-flashdata="<?php echo $_GET['n'] ?>"></div>
+<?php
+} 
+?>      
+     
    
 
     <!-- Scroll to top start -->
@@ -546,109 +362,7 @@ include("functions/functions.php");
     <!-- footer area end -->
 
     <!-- Quick view modal start -->
-    <div class="modal" id="quick_view">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <!-- product details inner end -->
-                    <div class="product-details-inner">
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="product-large-slider">
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                    </div>
-                                </div>
-                                <div class="pro-nav slick-row-10 slick-arrow-style">
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="product-details-des">
-                                    <div class="manufacturer-name">
-                                        <a href="product-details.html">HasTech</a>
-                                    </div>
-                                    <h3 class="product-name">Handmade Golden Necklace</h3>
-                                    <div class="ratings d-flex">
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <div class="pro-review">
-                                            <span>1 Reviews</span>
-                                        </div>
-                                    </div>
-                                    <div class="price-box">
-                                        <span class="price-regular">$70.00</span>
-                                        <span class="price-old"><del>$90.00</del></span>
-                                    </div>
-                                    <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
-                                    <div class="product-countdown" data-countdown="2022/02/20"></div>
-                                    <div class="availability">
-                                        <i class="fa fa-check-circle"></i>
-                                        <span>200 in stock</span>
-                                    </div>
-                                    <p class="pro-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                        eirmod tempor invidunt ut labore et dolore magna.</p>
-                                    <div class="quantity-cart-box d-flex align-items-center">
-                                        <h6 class="option-title">qty:</h6>
-                                        <div class="quantity">
-                                            <div class="pro-qty"><input type="text" value="1"></div>
-                                        </div>
-                                        <div class="action_link">
-                                            <a class="btn btn-cart2" href="#">Add to cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="useful-links">
-                                        <a href="#" data-toggle="tooltip" title="Compare"><i
-                                            class="pe-7s-refresh-2"></i>compare</a>
-                                        <a href="#" data-toggle="tooltip" title="Wishlist"><i
-                                            class="pe-7s-like"></i>wishlist</a>
-                                    </div>
-                                    <div class="like-icon">
-                                        <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
-                                        <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
-                                        <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
-                                        <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- product details inner end -->
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- Quick view modal end -->
 
     <!-- offcanvas mini cart start -->
@@ -692,10 +406,72 @@ include("functions/functions.php");
     <script src="assets/js/plugins/google-map.js"></script>
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+    <script>
+           $('#btn-delete').on('click',function(e){
+               e.preventDefault();
+               const href =$(this).attr('href')
+               swal({
+                        title: "Are you sure?",
+                        text: "Order cancel.",
+                        icon: "warning",
+                        buttons: true,
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                           document.location.href=href;
+                        } else {
+                        
+                        }
+                });
+              
+           })
+           
+           $('#btn-returned').on('click',function(e){
+               e.preventDefault();
+               const href =$(this).attr('href')
+               swal({
+                        title: "Are you sure?",
+                        text: "Order returned.",
+                        icon: "warning",
+                        buttons: true,
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                           document.location.href=href;
+                        } else {
+                        
+                        }
+                });
+              
+           })
+           const flashdata=$('.flash-data').data('flashdata')
+           if(flashdata){
+            swal({
+                        title: "successful order cancel.",
+                        text: "",
+                        icon: "success",
+                        buttons: true,
+                        successMode: true,
+                })
+           }
+           const flashdatas=$('.flash-datas').data('flashdata')
+           if(flashdatas){
+            swal({
+                        title: "successful order returned.",
+                        text: "",
+                        icon: "success",
+                        buttons: true,
+                        successMode: true,
+                })
+           }
+   </script> 
+
 </body>
 
 
 <!-- Mirrored from demo.hasthemes.com/corano-preview/corano/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:06 GMT -->
 </html>
-<?php 
-}?>
+
+

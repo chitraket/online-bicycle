@@ -15,10 +15,12 @@
         
         $run_delete = mysqli_query($con, $delete_pro);
         
-        if ($run_delete) {
-            echo "<script>alert('One of your categories has been Deleted')</script>";
-            
-            echo "<script>window.open('view-accessories-category.php','_self')</script>";
+        $delete_product = "delete from accessories where accessories_category='$delete_id'";
+        
+        mysqli_query($con, $delete_product);
+
+        if ($run_delete) {            
+            echo "<script>window.open('view-accessories-category.php?m=1','_self')</script>";
         }
     } ?>
 <?php

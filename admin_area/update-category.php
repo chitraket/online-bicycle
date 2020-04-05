@@ -41,7 +41,7 @@ if(isset($_GET['cat_id'])){
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0 font-size-18">Update Category</h4>
+                    <h4 class="mb-0 font-size-18">Update Filter</h4>
                 </div>
             </div>
         </div>     
@@ -139,9 +139,25 @@ if(isset($_GET['cat_id'])){
               $run_p_cat = mysqli_query($con,$update_p_cat);
               
               if($run_p_cat){
-
-                  echo "<script>alert('Your Product Category Has Been Updated')</script>";
-                  echo "<script>window.open('view-category.php','_self')</script>";
+                ?>
+                <script>
+                    swal({
+                        title:"Your Filter Has Been Updated",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-category.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+                  <?php 
                   
               }
               

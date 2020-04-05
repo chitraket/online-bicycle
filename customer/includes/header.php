@@ -14,9 +14,8 @@ include("includes/validation.php");
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Favicon -->
-    <script src="assets/js/sweetalert.min.js"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+     <!-- Favicon -->
+     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
     <!-- CSS
 	============================================ -->
     <!-- google fonts -->
@@ -33,17 +32,23 @@ include("includes/validation.php");
     <link rel="stylesheet" href="assets/css/plugins/animate.css">
     <!-- Nice Select css -->
     <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
+    
     <!-- jquery UI css -->
     <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
-    
+    <link rel="stylesheet" href="assets/js/plugins/jquery.min.js">
+    <link rel="stylesheet" href="assets/js/main.js">
+    <link rel="stylesheet" href="assets/js/plugins/jqueryui.min.js">
+    <link rel="stylesheet" href="assets/js/jquerys.min.js">
+    <link rel="stylesheet" href="assets/js/bootstrap.min.js">
     <!-- main style css -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- main status css -->
-    <link rel="stylesheet" href="assets/css/status.css">
+     <!-- main status css -->
+     <link rel="stylesheet" href="../assets/css/status.css">
     <!--sweet alert-->
     <script src="assets/js/sweetalert.min.js"></script>
-    <!--ajex-->
-    <script src="assert/js/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
     
 </head>
 <body>
@@ -143,12 +148,6 @@ include("includes/validation.php");
                                                 }
                                                 ?>
                                             </ul>
-                                        </li>
-                                        <li>
-                                            <a href="wishlist.html">
-                                                <i class="pe-7s-like"></i>
-                                                <div class="notification">0</div>
-                                            </a>
                                         </li>
                                         <li>
                                             <a href="#" class="minicart-btn">

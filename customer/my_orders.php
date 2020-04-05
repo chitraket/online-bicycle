@@ -2,7 +2,7 @@
                                                 <div class="myaccount-content">
                                                     <h5>Orders</h5>
                                                     <div class="myaccount-table table-responsive text-center">
-                                                        <table class="table table-bordered">
+                                                        <table class="table table-bordered" id="example">
                                                             <thead class="thead-light">
                                                                 <tr>
                                                                     <th>Order</th>

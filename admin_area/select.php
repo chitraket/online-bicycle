@@ -60,9 +60,9 @@ if (isset($_POST["product_id"])) {
         $pro_rear_suspension=$row_product['product_rear_suspension'];
     }
     $pro_front_derailleur=$row_product['product_front_derailleur'];
-    if($pro_front_suspension==null)
+    if($pro_front_derailleur==null)
     {
-        $pro_front_suspension="N/A";
+        $pro_front_derailleur="N/A";
     }
     else{
         $pro_front_derailleur=$row_product['product_front_derailleur'];

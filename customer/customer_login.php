@@ -76,7 +76,7 @@ if (isset($_POST['login'])) {
         ?>
          <script type="text/javascript">
          swal({
-                   title: "Your email or password is wrong",
+                   title: "Your Email Or Password Is Wrong.",
                    text: "",
                    icon: "error",
                    buttons: true,
@@ -97,14 +97,14 @@ if (isset($_POST['login'])) {
     if ($check_customer==1) {
         $_SESSION['customer_email']=$customer_email;
         foreach ($_SESSION as $product) {
-            if (!is_array($product)) {
+            if (!(is_array($product))) {
                 ?>
                     <script type="text/javascript">
                     
                                 window.open('myaccount.php','_self');
                     </script>
                  <?php
-            } else {
+            } else{
                 ?>
                 <script type="text/javascript">
                     window.open('../checkout.php','_self');
@@ -115,6 +115,18 @@ if (isset($_POST['login'])) {
             
         
             <?php
+    }
+    else{
+            
+        $_SESSION['customer_email']=$customer_email;
+        ?>
+        <script type="text/javascript">
+       
+             window.open('../checkout.php','_self');
+               
+        </script>
+        <?php
+        
     }
 }
 

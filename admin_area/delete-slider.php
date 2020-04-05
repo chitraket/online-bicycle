@@ -15,10 +15,8 @@
         
         $run_delete = mysqli_query($con, $delete_pro);
         
-        if ($run_delete) {
-            echo "<script>alert('One of your product has been Deleted')</script>";
-            
-            echo "<script>window.open('view-slider.php','_self')</script>";
+        if ($run_delete) {   
+            echo "<script>window.open('view-slider.php?m=1','_self')</script>";
         }
     } ?>
 <?php

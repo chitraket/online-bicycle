@@ -44,8 +44,8 @@
                             <div class="form-group row">
                                 <label for="example-search-input" class="col-md-3 col-form-label">Manufacturer</label>
                                 <div class="col-md-9">
-                                <select class="form-control" name="accessories_brand">
-                                        <option>Select</option>
+                                <select class="form-control select2" name="accessories_brand">
+                                        <option disabled selected value>Select</option>
                                         <?php 
                               
                                                 $get_p_cats = "select * from accessories_brand";
@@ -71,8 +71,8 @@
                             <div class="form-group row">
                                 <label for="example-search-input" class="col-md-3 col-form-label">Accessories Category</label>
                                 <div class="col-md-9">
-                                <select class="form-control" name="accessories_category">
-                                        <option>Select</option>
+                                <select class="form-control select2" name="accessories_category">
+                                        <option disabled selected value>Select</option>
                                         <?php 
                               
                                                 $get_p_cats = "select * from accessories_category";
@@ -166,9 +166,53 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="example-tel-input" class="col-md-3 col-form-label">Accessories Image 4</label>
+                                <div class="col-md-9">
+                                <div class="custom-file">
+                                            <input type="file" name="accessories_img4" class="custom-file-input" id="customFilewc">
+                                            <label class="custom-file-label" id="customFileswc">Choose file</label>
+                                            <script type="text/javascript">
+                                            const realfileBtnwc=document.getElementById("customFilewc");
+                                            const customTxtwc=document.getElementById("customFileswc");
+                                            realfileBtnwc.addEventListener("change",function(){
+                                                if(realfileBtnwc.value)
+                                                {
+                                                    customTxtwc.innerHTML=realfileBtnwc.value;
+                                                }
+                                                else{
+                                                    customTxtwc.innerHTML="Choose file";
+                                                }
+                                            });
+                                            </script>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-email-input" class="col-md-3 col-form-label">Accessories label</label>
+                                <div class="col-md-9">
+                                <select class="form-control" name="accessories_label" required>
+                                        <option disabled selected value>Select</option>
+                                        <option value="new">new</option>
+                                        <option value="sale">sale</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="example-password-input" class="col-md-3 col-form-label">Accessories Price</label>
                                 <div class="col-md-9">
                                     <input class="form-control" type="text" placeholder="Accessories Price" id="example-password-input" name="accessories_price">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-password-input" class="col-md-3 col-form-label">Accessories Discount</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" placeholder="Accessories Discount" id="example-password-input" name="accessories_discount">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-password-input" class="col-md-3 col-form-label">Accessories Discount Price</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" placeholder="Accessories Discount Price" id="example-password-input" name="accessories_discount_price">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -246,23 +290,44 @@
             $accessories_img1=$_FILES['accessories_img1']['name'];
             $accessories_img2=$_FILES['accessories_img2']['name'];
             $accessories_img3=$_FILES['accessories_img3']['name'];
+            $accessories_img4=$_FILES['accessories_img4']['name'];
           
-            
+            $accessories_label=$_POST['accessories_label'];
+            $accessories_discount=$_POST['accessories_discount'];
+            $accessories_discount_price=$_POST['accessories_discount_price'];
+           // $product_price = $_POST['product_price'];
             $temp_name1 = $_FILES['accessories_img1']['tmp_name'];
             $temp_name2 = $_FILES['accessories_img2']['tmp_name'];
             $temp_name3 = $_FILES['accessories_img3']['tmp_name'];
+            $temp_name4 = $_FILES['accessories_img4']['tmp_name'];
             
             move_uploaded_file($temp_name1,"accessories_images/$accessories_img1");
             move_uploaded_file($temp_name2,"accessories_images/$accessories_img2");
             move_uploaded_file($temp_name3,"accessories_images/$accessories_img3");
+            move_uploaded_file($temp_name4,"accessories_images/$accessories_img4");
         
-            $insert_accessories = "insert into accessories(accessories_brand,accessories_category,accessories_name,accessories_image_1,accessories_image_2,accessories_image_3,accessories_qty,available_qty,accessories_material,accessories_color,accessories_prices,accessories_date,accessories_desc,accessories_status) values ('$accessories_brand','$accessories_category','$accessories_name','$accessories_img1','$accessories_img2','$accessories_img3','$accessories_qty','$accessories_qty','$accessories_material','$accessories_color','$accessories_price',NOW(),'$accessories_desc','$accessories_status')";
+            $insert_accessories = "insert into accessories(accessories_brand,accessories_category,accessories_name,accessories_image_1,accessories_image_2,accessories_image_3,accessories_image_4,accessories_qty,available_qty,accessories_material,accessories_color,accessories_prices,accessories_discount_price,accessories_discount,accessories_label,accessories_date,accessories_desc,accessories_status) values ('$accessories_brand','$accessories_category','$accessories_name','$accessories_img1','$accessories_img2','$accessories_img3','$accessories_img4','$accessories_qty','$accessories_qty','$accessories_material','$accessories_color','$accessories_price','$accessories_discount_price','$accessories_discount','$accessories_label',NOW(),'$accessories_desc','$accessories_status')";
             $run_accessories = mysqli_query($con,$insert_accessories);
             if($run_accessories){
-                
-                echo "<script>alert('Product has been inserted sucessfully')</script>";
-                echo "<script>window.open('view-accessories.php','_self')</script>";
-                
+                ?>
+                <script>
+                    swal({
+                        title:"Your New Accessories Has Been Inserted.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-accessories.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+            <?php     
             }
             
         }
@@ -279,6 +344,10 @@
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
+
+        <!-- select 2 plugin -->
+        <script src="assets/libs/select2/js/select2.min.js"></script>
+        <script src="assets/js/pages/ecommerce-select2.init.js"></script>
 
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>

@@ -30,12 +30,16 @@ if(isset($_GET['accessories_id'])){
     $accessories_image_1=$row_accessories['accessories_image_1'];
     $accessories_image_2=$row_accessories['accessories_image_2'];
     $accessories_image_3=$row_accessories['accessories_image_3'];
+    $accessories_image_4=$row_accessories['accessories_image_4'];
     $accessories_qty=$row_accessories['accessories_qty'];
     $accessories_material=$row_accessories['accessories_material'];
     $accessories_color=$row_accessories['accessories_color'];
     $accessories_prices=$row_accessories['accessories_prices'];
     $accessories_desc=$row_accessories['accessories_desc'];
     $p_cat_top=$row_accessories['accessories_status'];
+    $accessories_discount_price=$row_accessories['accessories_discount_price'];
+    $accessories_discount=$row_accessories['accessories_discount'];
+    $accessories_label=$row_accessories['accessories_label'];
    
    
 }
@@ -65,7 +69,7 @@ while ($row_accessories_categorys=mysqli_fetch_array($run_accessories_categorys)
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0 font-size-18">Add Accessories</h4>
+                    <h4 class="mb-0 font-size-18">Update Accessories</h4>
 
                    
                     
@@ -226,15 +230,64 @@ while ($row_accessories_categorys=mysqli_fetch_array($run_accessories_categorys)
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="example-tel-input" class="col-md-3 col-form-label">Accessories Image 4</label>
+                                <div class="col-md-9">
+                                <div class="custom-file">
+                                            <input type="file" name="accessories_img4" class="custom-file-input" id="customFilewas">
+                                            <label class="custom-file-label" id="customFileswas">Choose file</label>
+                                            <br>
+                                            <br/>
+                                            <img   width="70" height="70" src="accessories_images/<?php echo $accessories_image_4; ?>" alt="<?php echo $accessories_image_4; ?>">  
+                                              <br>
+                                              <br/>
+                                            <script type="text/javascript">
+                                            const realfileBtnwas=document.getElementById("customFilewas");
+                                            const customTxtwa=document.getElementById("customFileswas");
+                                            realfileBtnwas.addEventListener("change",function(){
+                                                if(realfileBtnwas.value)
+                                                {
+                                                    customTxtwas.innerHTML=realfileBtnwas.value;
+                                                }
+                                                else{
+                                                    customTxtwas.innerHTML="Choose file";
+                                                }
+                                            });
+                                            </script>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-email-input" class="col-md-3 col-form-label">Accessories label</label>
+                                <div class="col-md-9">
+                                <select class="form-control" name="accessories_label">
+                                        <option><?php echo $accessories_label; ?></option>
+                                        <option value="new">new</option>
+                                        <option value="sale">sale</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="example-password-input" class="col-md-3 col-form-label">Accessories Price</label>
                                 <div class="col-md-9">
                                     <input class="form-control" type="text" placeholder="Accessories Price" id="example-password-input" value="<?php echo $accessories_prices; ?>" name="accessories_price">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-number-input" class="col-md-3 col-form-label">Accessories qty</label>
+                                <label for="example-password-input" class="col-md-3 col-form-label">Accessories Discount</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" id="example-number-input" placeholder="Accessories Qty" value="<?php echo $accessories_qty;?> " name="accessories_qty" >
+                                    <input class="form-control" type="text" placeholder="Accessories Discount" id="example-password-input" value="<?php echo $accessories_discount; ?>" name="accessories_discount">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-password-input" class="col-md-3 col-form-label">Accessories Discount Price</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" placeholder="Accessories Discount Price" id="example-password-input" value="<?php echo $accessories_discount_price; ?>" name="accessories_discount_price">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-number-input" class="col-md-3 col-form-label">Available Quantity<span class="badge badge-pill badge-soft-success font-size-12" ><?php echo $accessories_qty; ?></span></label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" id="example-number-input" placeholder="Accessories Quantity" value="0" name="accessories_qty" >
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -339,42 +392,75 @@ if(isset($_POST['update'])){
     $accessoriess_material=$_POST['accessories_material'];
     $accessoriess_color=$_POST['accessories_color'];
     $accessoriess_desc=$_POST['accessories_desc'];
+    $accessoriess_label=$_POST['accessories_label'];
+    $accessoriess_discount_price=$_POST['accessories_discount_price'];
+    $accessoriess_discount=$_POST['accessories_discount'];
     $accessories_status=$_POST['customRadio'];
-
-    if (is_uploaded_file($_FILES['file']['tmp_name'])) {
-
-        $accessoriess_img1 = $_FILES['accessories_img1']['name'];
-        $accessoriess_img2 = $_FILES['accessories_img2']['name'];
-        $accessoriess_img3 = $_FILES['accessories_img3']['name'];
+    $accessoriess_img1 = $_FILES['accessories_img1']['name'];
+    $accessoriess_img2 = $_FILES['accessories_img2']['name'];
+    $accessoriess_img3 = $_FILES['accessories_img3']['name'];
+    $accessoriess_img4 = $_FILES['accessories_img4']['name'];
+    if (!($accessoriess_img1=="" || $accessoriess_img2=="" || $accessoriess_img3=="" || $accessoriess_img4=="")){
 
         $temp_name1 = $_FILES['accessories_img1']['tmp_name'];
         $temp_name2 = $_FILES['accessories_img2']['tmp_name'];
         $temp_name3 = $_FILES['accessories_img3']['tmp_name'];
-    
+        $temp_name4 = $_FILES['accessories_img4']['tmp_name'];
         move_uploaded_file($temp_name1, "accessories_images/$accessoriess_img1");
         move_uploaded_file($temp_name2, "accessories_images/$accessoriess_img2");
         move_uploaded_file($temp_name3, "accessories_images/$accessoriess_img3");
-
-    
-        $update_accessories= "update accessories set accessories_brand='$accessoriess_manufacturer',accessories_category='$accessoriess_cat',accessories_name='$accessoriess_name',accessories_image_1='$accessoriess_img1',accessories_image_2='$accessoriess_img2',accessories_image_3='$accessoriess_img3',accessories_qty='$accessoriess_qty',available_qty='$accessoriess_qty',accessories_material='$accessories_material',accessories_color='$accessoriess_color',accessories_prices='$accessoriess_price',accessories_date=NOW(),accessories_desc='$accessoriess_desc',accessories_status='$accessories_status' where accessories_id='$accessoriess_id'";
+        move_uploaded_file($temp_name4, "accessories_images/$accessoriess_img4");
+        $update_accessories= "update accessories set accessories_brand='$accessoriess_manufacturer',accessories_category='$accessoriess_cat',accessories_name='$accessoriess_name',accessories_image_1='$accessoriess_img1',accessories_image_2='$accessoriess_img2',accessories_image_3='$accessoriess_img3',accessories_image_4='$accessoriess_img4',accessories_qty=accessories_qty+'$accessoriess_qty',available_qty=available_qty+'$accessoriess_qty',accessories_material='$accessories_material',accessories_color='$accessoriess_color',accessories_prices='$accessoriess_price',accessories_discount_price='$accessoriess_discount_price',accessories_discount='$accessoriess_discount',accessories_label='$accessoriess_label',accessories_date=NOW(),accessories_desc='$accessoriess_desc',accessories_status='$accessories_status' where accessories_id='$accessoriess_id'";
     
         $run_accessoriess = mysqli_query($con, $update_accessories);
     
         if ($run_accessoriess) {
-            echo "<script>alert('Your product has been updated Successfully')</script>";
-        
-            echo "<script>window.open('view-accessories.php','_self')</script>";
+            ?>
+              <script>
+                    swal({
+                        title: "Your accessories has been updated Successfully.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-accessories.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+            <?php 
         }
     }
     else{
-        $update_accessories= "update accessories set accessories_brand='$accessoriess_manufacturer',accessories_category='$accessoriess_cat',accessories_name='$accessoriess_name',accessories_qty=accessories_qty+'$accessoriess_qty',available_qty=available_qty+'$accessoriess_qty',accessories_material='$accessories_material',accessories_color='$accessoriess_color',accessories_prices='$accessoriess_price',accessories_date=NOW(),accessories_desc='$accessoriess_desc' where accessories_id='$accessoriess_id'";
+        $update_accessories= "update accessories set accessories_brand='$accessoriess_manufacturer',accessories_category='$accessoriess_cat',accessories_name='$accessoriess_name',accessories_qty=accessories_qty+'$accessoriess_qty',available_qty=available_qty+'$accessoriess_qty',accessories_material='$accessories_material',accessories_color='$accessoriess_color',accessories_prices='$accessoriess_price',accessories_discount_price='$accessoriess_discount_price',accessories_discount='$accessoriess_discount',accessories_label='$accessoriess_label',accessories_date=NOW(),accessories_desc='$accessoriess_desc' where accessories_id='$accessoriess_id'";
     
         $run_accessoriess = mysqli_query($con, $update_accessories);
     
         if ($run_accessoriess) {
-            echo "<script>alert('Your product has been updated Successfully')</script>";
-        
-            echo "<script>window.open('view-accessories.php','_self')</script>";
+            ?>
+            <script>
+                    swal({
+                        title: "Your accessories has been updated Successfully.",
+                        text: "",
+                        icon: "success",
+                        buttons:[,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-accessories.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+            <?php 
         }
     }
 }

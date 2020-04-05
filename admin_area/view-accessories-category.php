@@ -30,14 +30,6 @@
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
                                     <h4 class="mb-0 font-size-18">View Accessories Category</h4>
-
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);"></a></li>
-                                            <li class="breadcrumb-item active"></li>
-                                        </ol>
-                                    </div>
-                                    
                                 </div>
                             </div>
                         </div>     
@@ -66,11 +58,12 @@
                                               $select_cat="SELECT * FROM accessories_category ORDER BY accessories_category_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
-                                               
-                                                echo'<tr>
-                                                <td>'.$row_cart["accessories_category"].'</td>
-                                                <td><a href="delete-accessories-category.php?accessories_id='.$row_cart["accessories_category_id"].'"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-accessories-category.php?accessories_id='.$row_cart["accessories_category_id"].'" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
-                                                </tr>';
+                                               ?>
+                                                <tr>
+                                                <td><?php echo $row_cart["accessories_category"];?></td>
+                                                <td><a href="delete-accessories-category.php?accessories_id=<?php echo $row_cart["accessories_category_id"];?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-accessories-category.php?accessories_id=<?php echo $row_cart["accessories_category_id"];?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
+                                                </tr>
+                                                <?php
                                                  }?>
                                             </tbody>
                                         </table>
@@ -85,7 +78,14 @@
                 <!-- End Page-content -->
                
                 <!-- Modal -->
-                
+                <?php
+                if(isset($_GET['m']))
+                { 
+                ?>
+                <div class="flash-data" data-flashdata="<?php echo $_GET['m'] ?>"></div>
+                <?php
+                } 
+                ?>
                
                 <!-- end modal -->
                <?php 
@@ -184,6 +184,45 @@
         $(document).ready(function(){  
             $('#employee_data').DataTable();  
         });  
+        </script>
+        <script>
+           $('.btn-delete').on('click',function(e){
+               e.preventDefault();
+               const href =$(this).attr('href')
+               swal({
+                        title: "Are you sure?",
+                        text: "Delete accessories category.",
+                        icon: "warning",
+                        buttons: true,
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                           document.location.href=href;
+                        } else {
+                        
+                        }
+                });
+              
+           })
+           const flashdata=$('.flash-data').data('flashdata')
+           if(flashdata){
+            swal({
+                        title: "successful delete box.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"Ok"],
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-accessories-category.php','_self'); 
+                        } else {
+                        
+                        }
+                });
+                
+           }    
         </script> 
 <?php
  } 

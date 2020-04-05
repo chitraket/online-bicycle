@@ -102,7 +102,7 @@ else{
                   title: "OTP is correct ",
                   text: "",
                   icon: "success",
-                  buttons: true,
+                  buttons: [,"OK"],
                   successMode: true,
           })
           .then((willDelete) => {
@@ -115,6 +115,7 @@ else{
           </script>
 
         <?php 
+        unset($_SESSION['otp']);
         }
         else{
             ?>
@@ -123,7 +124,7 @@ else{
                   title: "OTP is wrong",
                   text: "",
                   icon: "error",
-                  buttons: true,
+                  buttons: [,"OK"],
                   successMode: true,
           })
           .then((willDelete) => {

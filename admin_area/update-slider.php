@@ -185,13 +185,6 @@ $s_rows="";
               
               $s_row = $_POST['s_row'];
 
-              $s_row_2=$_POST['s_row_2'];
-              
-              $s_urls=$_POST['s_url'];
-              $slider_img = $_FILES['slider_img']['name'];
-              $temp_name1 = $_FILES['slider_img']['tmp_name'];
-              move_uploaded_file($temp_name1,"slides_images/$slider_img");
-            
               if($_POST['customRadio']=="right")
               {
                    $s_rows="float-md-right float-none";
@@ -199,23 +192,72 @@ $s_rows="";
               else{
                   $s_rows="";
               }
+              $s_row_2=$_POST['s_row_2'];
               
+              $s_urls=$_POST['s_url'];
+
+              $slider_img = $_FILES['slider_img']['name'];
+
+              if(!($slider_img==""))
+              {
+              $temp_name1 = $_FILES['slider_img']['tmp_name'];
+              move_uploaded_file($temp_name1,"slides_images/$slider_img");
+        
               $update_p_cat = "update slider set slide_name='$s_name',slide_image='$slider_img',slide_row='$s_row',slide_row_2='$s_row_2',status='$s_rows',slide_url='$s_urls' where slide_id='$s_id'";
               
               $run_p_cat = mysqli_query($con,$update_p_cat);
-              
               if($run_p_cat){
+                ?>
+                <script>
+                    swal({
+                        title:"Your Slides Has Been Updated",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-slider.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+                  <?php 
 
-                  echo "<script>alert('Your Product Category Has Been Updated')</script>";
-                  echo "<script>window.open('view-slider.php','_self')</script>";
-                  
+              }
+            }
+              else{
+                $update_p_cat = "update slider set slide_name='$s_name',slide_row='$s_row',slide_row_2='$s_row_2',status='$s_rows',slide_url='$s_urls' where slide_id='$s_id'";
+              
+                $run_p_cat = mysqli_query($con,$update_p_cat);
+                if($run_p_cat){
+                  ?>
+                  <script>
+                      swal({
+                          title:"Your Slides Has Been Updated",
+                          text: "",
+                          icon: "success",
+                          buttons: [,"OK"],
+                          successMode: true,
+                         
+                  })
+                  .then((willDelete) => {
+                          if (willDelete) {
+                              window.open('view-slider.php','_self');
+                          } 
+                          else {
+                          }
+                  });
+              </script>
+                    <?php 
+              }
+              
+              
               }
               
           }
-
+        }
 ?>
-
-
-    <?php
- }
-    ?>

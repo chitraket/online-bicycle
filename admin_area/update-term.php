@@ -126,9 +126,25 @@ if(isset($_GET['term_id'])){
               $run_term = mysqli_query($con,$update_term);
               
               if($run_term){
-                  
-                  echo "<script>alert('Your Product Category Has Been Updated')</script>";
-                  echo "<script>window.open('view-terms.php','_self')</script>";
+                  ?>
+                  <script>
+                    swal({
+                        title:"Your Term Has Been Updated",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-term.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+                  <?php 
                   
               }
               

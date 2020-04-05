@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0 font-size-18">Add Category</h4>
+                    <h4 class="mb-0 font-size-18">Add Filter</h4>
 
                    
                     
@@ -89,10 +89,25 @@
                 
                 if($run_cat){
                     
-                    echo "<script>alert('Your New Category Has Been Inserted')</script>";
-                    
-                    echo "<script>window.open('view-category.php','_self')</script>";
-                    
+                    ?>
+                <script>
+                    swal({
+                        title:"Your New Filter Has Been Inserted.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-category.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+                   <?php  
                 }
                 
             }

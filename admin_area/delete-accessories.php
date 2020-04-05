@@ -16,9 +16,8 @@
         $run_delete = mysqli_query($con, $delete_pro);
         
         if ($run_delete) {
-            echo "<script>alert('One of your categories has been Deleted')</script>";
             
-            echo "<script>window.open('view-accessories.php','_self')</script>";
+            echo "<script>window.open('view-accessories.php?m=1','_self')</script>";
         }
     } ?>
 <?php

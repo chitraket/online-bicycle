@@ -31,15 +31,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">Data Tables</h4>
+                                    <h4 class="mb-0 font-size-18">View Product</h4>
 
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                                            <li class="breadcrumb-item active">Data Tables</li>
-                                        </ol>
-                                    </div>
-                                    
                                 </div>
                             </div>
                         </div>     
@@ -48,16 +41,16 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">Default Datatable</h4>
                                         
                                         <table id="employee_data" class="table table-bordered dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
-                                                <th>Product img</th>
-                                                <th>Product Name</th>
-                                                <th>Product price</th>
-                                                <th>Product qty</th>
-                                                <th>Available qty</th>
+                                                <th>Image</th>
+                                                <th>Name</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Available Quantity</th>
+                                                <th>Sold Out</th>
                                                 <th>View Details</th>
                                                 <th>Action</th>
                                             </tr>
@@ -70,17 +63,19 @@
                                               $select_cat="SELECT * FROM products ORDER BY product_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
-                                               
-                                                echo'<tr>
+                                               ?>
+                                                <tr>
                                                 <td>
-                                                <img src="product_images/'.$row_cart["product_img1"].'" width="50" height="50"></td>
-                                                <td>'.$row_cart["product_title"].'</td>
-                                                <td>'.$row_cart["product_price"].'</td>
-                                                <td>'.$row_cart["product_qty"].'</td>
-                                                <td>'.$row_cart["available_qty"].'</td>
-                                                <td><input type="button" name="view" value="View Details" id="'.$row_cart["product_id"].'" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light view_data"  /></td>
-                                                <td><a href="delete-product.php?product_id='.$row_cart["product_id"].'"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-product.php?product_id='.$row_cart["product_id"].'" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
-                                                </tr>';
+                                                <img src="product_images/<?php echo $row_cart["product_img1"]; ?>" width="50" height="50"></td>
+                                                <td><?php echo $row_cart["product_title"]; ?></td>
+                                                <td><?php echo $row_cart["product_price"]; ?></td>
+                                                <td><?php echo $row_cart["product_qty"]; ?></td>
+                                                <td><?php echo $row_cart["available_qty"]; ?></td>
+                                                <td><?php echo $sold_out=$row_cart['product_qty']-$row_cart['available_qty'];?></td>
+                                                <td><input type="button" name="view" value="View Details" id="<?php echo $row_cart["product_id"];?>" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light view_data"  /></td>
+                                                <td><a href="delete-product.php?product_id=<?php echo $row_cart["product_id"]; ?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-product.php?product_id=<?php echo $row_cart["product_id"]; ?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
+                                                </tr>
+                                                <?php 
                                                  }?>
                                             </tbody>
                                         </table>
@@ -118,6 +113,14 @@
                 
                
                 <!-- end modal -->
+                <?php
+                if(isset($_GET['m']))
+                { 
+                ?>
+                <div class="flash-data" data-flashdata="<?php echo $_GET['m'] ?>"></div>
+                <?php
+                } 
+                ?>
                 
                <?php 
                 include("includes/footer.php");
@@ -131,53 +134,9 @@
         <!-- END layout-wrapper -->
           
         <!-- Right Sidebar -->
-        <div class="right-bar">
-            <div data-simplebar class="h-100">
-                <div class="rightbar-title px-3 py-4">
-                    <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                        <i class="mdi mdi-close noti-icon"></i>
-                    </a>
-                    <h5 class="m-0">Settings</h5>
-                </div>
-
-                <!-- Settings -->
-                <hr class="mt-0" />
-                <h6 class="text-center mb-0">Choose Layouts</h6>
-
-                <div class="p-4">
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-1.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
-                        <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
-                    </div>
-    
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-2.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="assets/css/bootstrap-dark.min.css" data-appStyle="assets/css/app-dark.min.css" />
-                        <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
-                    </div>
-    
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-3.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-5">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appStyle="assets/css/app-rtl.min.css" />
-                        <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
-                    </div>
-
-            
-                </div>
-
-            </div> <!-- end slimscroll-menu-->
-        </div>
         <!-- /Right-bar -->
 
         <!-- Right bar overlay-->
-        <div class="rightbar-overlay"></div>
 
         <!-- JAVASCRIPT -->
       
@@ -234,6 +193,46 @@
                         });  
                     });  
                 </script> 
+        <script>
+           $('.btn-delete').on('click',function(e){
+               e.preventDefault();
+               const href =$(this).attr('href')
+               swal({
+                        title: "Are you sure?",
+                        text: "Delete product.",
+                        icon: "warning",
+                        buttons: true,
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                           document.location.href=href;
+                        } else {
+                        
+                        }
+                });
+              
+           })
+           const flashdata=$('.flash-data').data('flashdata')
+           if(flashdata){
+            swal({
+                        title: "successful delete product.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"Ok"],
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-product.php','_self'); 
+                        } else {
+                        
+                        }
+                });
+                
+           }    
+        </script> 
+        
 <?php
  } 
 ?>

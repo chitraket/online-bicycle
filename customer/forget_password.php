@@ -24,11 +24,8 @@
         </div>
         <!-- breadcrumb area end -->
         <?php
-  use PHPMailer\PHPMailer\PHPMailer;
-  use PHPMailer\PHPMailer\SMTP;
-  use PHPMailer\PHPMailer\Exception;
-  $error_email="";
-  $errorresult=true;
+ $error_email="";
+ $errorresult=true;
 if(isset($_POST['otp']))
 {
     if(email($_POST['email']))
@@ -54,18 +51,12 @@ if(isset($_POST['otp']))
 
         $otp=rand(1111,9999);
         $_SESSION['otp']=$otp;
-        //echo "$otp";
       $_SESSION['email']=$email;
 
-// Load Composer's autoloader
-        require '../vendor/autoload.php';
 
-// Instantiation and passing `true` enables exceptions
-        $mail = new PHPMailer(true);
-
+      require '../PHPMailer/PHPMailerAutoload.php';
+      $mail=new PHPMailer;
     try {
-        //Server settings
-        $mail->SMTPDebug = 2;                      // Enable verbose debug output
         $mail->isSMTP();                                            // Send using SMTP
         $mail->Host       = 'ssl://smtp.gmail.com';                    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -77,17 +68,177 @@ if(isset($_POST['otp']))
         //Recipients
         $mail->setFrom('chitraketsavani@gmail.com', 'chitraketsavani');
         $mail->addAddress($email, $email);     // Add a recipient
-        // Attachments
-        // Optional name
-
+    
+        $html='<!DOCTYPE html>
+        <html lang="en">
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="icon" href="../assets/images/favicon/1.png" type="image/x-icon">
+                <link rel="shortcut icon" href="../assets/images/favicon/1.png" type="image/x-icon">
+                <title>Multikart | Email template </title>
+                <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+                <style type="text/css">
+                    body{
+                        text-align: center;
+                        margin: 0 auto;
+                        width: 650px;
+                        font-family: "Open Sans", sans-serif;
+                        background-color: #e2e2e2;		      	
+                        display: block;
+                    }
+                    ul{
+                        margin:0;
+                        padding: 0;
+                    }
+                    li{
+                        display: inline-block;
+                        text-decoration: unset;
+                    }
+                    a{
+                        text-decoration: none;
+                    }
+                    p{
+                        margin: 15px 0;
+                    }
+        
+                    h5{
+                        color:#444;
+                        text-align:left;
+                        font-weight:400;
+                    }
+                    .text-center{
+                        text-align: center
+                    }
+                    .main-bg-light{
+                        background-color: #fafafa;
+                    }
+                    .title{
+                        color: #444444;
+                        font-size: 22px;
+                        font-weight: bold;
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                        padding-bottom: 0;
+                        text-transform: uppercase;
+                        display: inline-block;
+                        line-height: 1;
+                    }
+                    table{
+                        margin-top:30px
+                    }
+                    table.top-0{
+                        margin-top:0;
+                    }
+                    table.order-detail , .order-detail th , .order-detail td {
+                        border: 1px solid #ddd;
+                        border-collapse: collapse;
+                    }
+                    .order-detail th{
+                        font-size:16px;
+                        padding:15px;
+                        text-align:center;
+                    }
+                    .footer-social-icon tr td img{
+                        margin-left:5px;
+                        margin-right:5px;
+                    }
+                </style>
+            </head>
+            <body style="margin: 20px auto;">
+                
+                <table align="center" border="0" cellpadding="0" cellspacing="0" style="padding: 0 30px;background-color: #fff; -webkit-box-shadow: 0px 0px 14px -4px rgba(0, 0, 0, 0.2705882353);box-shadow: 0px 0px 14px -4px rgba(0, 0, 0, 0.2705882353);width: 100%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr class="header">
+                                        <td align="left" valign="top" >
+                                            <img src="cid:1001" class="main-logo" style="width: 150px;">
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table align="center" border="0" cellpadding="0" cellspacing="0" >
+                                    <tr>
+                                        <td>
+                                            <h2 class="title">Forget Password</h2>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>'.$otp.' is your SKOTE verification code. Enjoy shopping ! </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="border-top:1px solid #777;height:1px;margin-top: 30px;">
+                                        </td>
+                                    </tr>
+                                </table>                        
+        <table class="main-bg-light text-center top-0"  align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td style="padding: 30px;">
+                                    <div>
+                                        <h4 class="title" style="margin:0;text-align: center;">Follow us</h4>
+                                    </div>
+                                    <table border="0" cellpadding="0" cellspacing="0" class="footer-social-icon" align="center" class="text-center" style="margin-top:20px;">
+                                        <tr>
+                                            <td>
+                                                <a href="#"><img src="cid:1004" alt="">
+                                                
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="#"><img src="cid:1005" alt=""></a>
+                                            </td>
+                                            <td>
+                                                <a href="#"><img src="cid:1006" alt=""></a>
+                                            </td>
+                                            <td>
+                                                <a href="#"><img src="cid:1007" alt=""></a>
+                                            </td>
+                                        </tr>                                    
+                                    </table>
+                                    <div style="border-top: 1px solid #ddd; margin: 20px auto 0;"></div>
+                                    <table  border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 20px auto 0;" >
+                                        <tr>
+                                            <td>
+                                                <a href="#" style="font-size:13px">Want to change how you receive these emails?</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p style="font-size:13px; margin:0;">2018 - 19 Copy Right by Themeforest powerd by Pixel Strap</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="#" style="font-size:13px; margin:0;text-decoration: underline;">Unsubscribe</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+    </body>
+</html>';
+                                       
         // Content
+           $mail->AddEmbeddedImage("assets/img/email-temp/logo.png",1001,'logo.png');
+        
+        $mail->AddEmbeddedImage("assets/img/email-temp/facebook.png",1004, 'facebook.png');
+        $mail->AddEmbeddedImage("assets/img/email-temp/youtube.png", 1005, 'youtube.png');
+        $mail->AddEmbeddedImage("assets/img/email-temp/twitter.png",1006,  'twitter.png');
+        $mail->AddEmbeddedImage("assets/img/email-temp/pinterest.png",1007,  'pinterest.png');          
+
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = "Forget Password";
-        $mail->Body    = "hi $email your otp is $otp";
-        $mail->AltBody = "hi $email your otp is $otp";
+        $mail->Body    = "$html";
+        $mail->AltBody = "";
 
-        $mail->send();
-
+        if($mail->send())
+        {
         
         ?>
         <script type="text/javascript">
@@ -95,7 +246,7 @@ if(isset($_POST['otp']))
                   title: "OTP send successful",
                   text: "OTP has been sent to your email address",
                   icon: "success",
-                  buttons: true,
+                  buttons: [,"OK"],
                   successMode: true,
           })
           .then((willDelete) => {
@@ -107,6 +258,7 @@ if(isset($_POST['otp']))
           });
           </script>
           <?php 
+        }
     } 
     catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
@@ -121,7 +273,7 @@ if(isset($_POST['otp']))
                    title: "Email id is not registered",
                    text: "",
                    icon: "error",
-                   buttons: true,
+                   buttons: [,"OK"],
                    successMode: true,
            })
            .then((willDelete) => {
@@ -192,112 +344,6 @@ end:
     ?>
     <!-- footer area end -->
    
-
-    <!-- Quick view modal start -->
-    <div class="modal" id="quick_view">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <!-- product details inner end -->
-                    <div class="product-details-inner">
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="product-large-slider">
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                    </div>
-                                </div>
-                                <div class="pro-nav slick-row-10 slick-arrow-style">
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="product-details-des">
-                                    <div class="manufacturer-name">
-                                        <a href="product-details.html">HasTech</a>
-                                    </div>
-                                    <h3 class="product-name">Handmade Golden Necklace</h3>
-                                    <div class="ratings d-flex">
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <div class="pro-review">
-                                            <span>1 Reviews</span>
-                                        </div>
-                                    </div>
-                                    <div class="price-box">
-                                        <span class="price-regular">$70.00</span>
-                                        <span class="price-old"><del>$90.00</del></span>
-                                    </div>
-                                    <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
-                                    <div class="product-countdown" data-countdown="2022/02/20"></div>
-                                    <div class="availability">
-                                        <i class="fa fa-check-circle"></i>
-                                        <span>200 in stock</span>
-                                    </div>
-                                    <p class="pro-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                        eirmod tempor invidunt ut labore et dolore magna.</p>
-                                    <div class="quantity-cart-box d-flex align-items-center">
-                                        <h6 class="option-title">qty:</h6>
-                                        <div class="quantity">
-                                            <div class="pro-qty"><input type="text" value="1"></div>
-                                        </div>
-                                        <div class="action_link">
-                                            <a class="btn btn-cart2" href="#">Add to cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="useful-links">
-                                        <a href="#" data-toggle="tooltip" title="Compare"><i
-                                            class="pe-7s-refresh-2"></i>compare</a>
-                                        <a href="#" data-toggle="tooltip" title="Wishlist"><i
-                                            class="pe-7s-like"></i>wishlist</a>
-                                    </div>
-                                    <div class="like-icon">
-                                        <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
-                                        <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
-                                        <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
-                                        <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- product details inner end -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Quick view modal end -->
 
     <!-- offcanvas mini cart start -->
     <?php

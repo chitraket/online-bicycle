@@ -152,42 +152,17 @@ if(isset($_POST['register'])){
     $c_pincode=$_POST['c_pincode'];
     $c_image = uniqid().$_FILES['c_image']['name'];
     $c_image_tmp = $_FILES['c_image']['tmp_name'];
-    $c_ip = getRealIpUser();
     move_uploaded_file($c_image_tmp,"customer/customer_images/".$c_image);
-    $insert_customer = "insert into customers (customer_name,customer_lname,customer_email,customer_pass,customer_state,customer_city,customer_contact,customer_address,customer_pincode,customer_image,customer_ip) values ('$c_name','$c_lname','$c_email','$c_pass','$c_state','$c_city','$c_contact','$c_address','$c_pincode','$c_image','$c_ip')";
+    $insert_customer = "insert into customers (customer_name,customer_lname,customer_email,customer_pass,customer_state,customer_city,customer_contact,customer_address,customer_pincode,customer_image) values ('$c_name','$c_lname','$c_email','$c_pass','$c_state','$c_city','$c_contact','$c_address','$c_pincode','$c_image')";
     $run_customer = mysqli_query($con,$insert_customer);
-    $sel_cart = "select * from cart where ip_add='$c_ip'";
-    $run_cart = mysqli_query($con,$sel_cart);
-    $check_cart = mysqli_num_rows($run_cart);
-    if($check_cart>0){
+    
         /// If register have items in cart ///
         $_SESSION['customer_email']=$c_email;
-      ?>
-      <script type="text/javascript">
-              swal({
-                        title: "Registration successful.",
-                        text: "",
-                        icon: "success",
-                        buttons: true,
-                        successMode: true,
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('checkout.php','_self');
-                        } else {
-                        
-                        }
-                });
-                </script>
-      <?php
-        
-    }
-    else{
-        /// If register without items in cart ///
-        $_SESSION['customer_email']=$c_email;
-        ?>
-        <script type="text/javascript">
-              swal({
+        foreach ($_SESSION as $product) {
+            if (!is_array($product)) {
+                ?>
+                    <script type="text/javascript">
+                    swal({
                         title: "Registration successful.",
                         text: "",
                         icon: "success",
@@ -198,12 +173,35 @@ if(isset($_POST['register'])){
                         if (willDelete) {
                             window.open('index.php','_self');
                         } else {
+                        
                         }
                 });
-                </script>
-        <?php 
-    }
-    
+                    </script>
+
+                 <?php
+                 continue;
+            } 
+            else {
+                ?>
+                <script type="text/javascript">
+                    swal({
+                        title: "Registration successful.",
+                        text: "",
+                        icon: "success",
+                        buttons: true,
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('checkout.php','_self');
+                        } else {
+                        }
+                });
+        </script> 
+        <?php
+            }
+        } ?>
+      <?php
 }
 end:
 ?>

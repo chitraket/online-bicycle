@@ -184,8 +184,26 @@ if(isset($_GET['box_id'])){
               
               if($run_p_cat){
 
-                  echo "<script>alert('Your Product Category Has Been Updated')</script>";
-                  echo "<script>window.open('view-box.php','_self')</script>";
+                ?>
+
+                <script>
+                    swal({
+                        title: "successful update box.",
+                        text: "",
+                        icon: "success",
+                        buttons:[,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-box.php','_self');
+                        } 
+                        else {  
+                        }
+                });
+            </script>
+                  <?php 
                   
               }
               

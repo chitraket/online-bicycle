@@ -35,16 +35,22 @@
                 </div>
             </div>
         </div>
+
+        
         <div class="container">
                 <div class="section-bg-color">
+                
                 <?php 
+
                                     if(isset($_GET['c_id']))
                                     {
                                         $customer_address='';
                                         $customer_email='';
                                         $customer_phone='';
                                         $productinfo=$_GET['c_id'];
-                                    ?>
+                                        
+                                        ?>
+                                        
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-lg-12">
                             <!-- Cart Table Area -->
@@ -199,6 +205,7 @@
   
     </main>
     
+
     <div class="scroll-top not-visible">
         <i class="fa fa-angle-up"></i>
     </div>

@@ -27,14 +27,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">View Category</h4>
-
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Product Category</a></li>
-                                            <li class="breadcrumb-item active">View Manufacturer</li>
-                                        </ol>
-                                    </div>
+                                    <h4 class="mb-0 font-size-18">View Manufacturer</h4>
                                 </div>
                             </div>
                         </div>     
@@ -87,7 +80,7 @@
                                                 }
                                                 ?>
                                                     </td>-->
-                                                    <td><a href="delete-manufacturer.php?manufacturer_id=<?php echo $row_cart["manufacturer_id"]?>"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-manufacturer.php?manufacturer_id=<?php echo $row_cart["manufacturer_id"]?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
+                                                    <td><a href="delete-manufacturer.php?manufacturer_id=<?php echo $row_cart["manufacturer_id"]?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-manufacturer.php?manufacturer_id=<?php echo $row_cart["manufacturer_id"]?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>
                                                 <?php 
                                                  }?>
@@ -118,49 +111,6 @@
       
                 
         <!-- Right Sidebar -->
-        <div class="right-bar">
-            <div data-simplebar class="h-100">
-                <div class="rightbar-title px-3 py-4">
-                    <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                        <i class="mdi mdi-close noti-icon"></i>
-                    </a>
-                    <h5 class="m-0">Settings</h5>
-                </div>
-
-                <!-- Settings -->
-                <hr class="mt-0" />
-                <h6 class="text-center mb-0">Choose Layouts</h6>
-
-                <div class="p-4">
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-1.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
-                        <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
-                    </div>
-    
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-2.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="assets/css/bootstrap-dark.min.css" data-appStyle="assets/css/app-dark.min.css" />
-                        <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
-                    </div>
-    
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-3.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-5">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appStyle="assets/css/app-rtl.min.css" />
-                        <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
-                    </div>
-
-            
-                </div>
-
-            </div> <!-- end slimscroll-menu-->
-        </div>
         <!-- /Right-bar -->
 
         <!-- Right bar overlay-->
@@ -216,10 +166,49 @@
 
 <!-- Mirrored from themesbrand.com/skote/layouts/vertical/tables-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:43:50 GMT -->
 </html>
-<script>  
+    <script>  
         $(document).ready(function(){  
             $('#employee_data').DataTable();  
         });  
+        </script> 
+        <script>
+           $('.btn-delete').on('click',function(e){
+               e.preventDefault();
+               const href =$(this).attr('href')
+               swal({
+                        title:"Are you sure?",
+                        text:"Delete Product Manufacturer.",
+                        icon:"warning",
+                        buttons: true,
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                           document.location.href=href;
+                        } else {
+                        
+                        }
+                });
+              
+           })
+           const flashdata=$('.flash-data').data('flashdata')
+           if(flashdata){
+            swal({
+                        title:"successful delete Manufacturer.",
+                        text: "",
+                        icon:"success",
+                        buttons: [,"Ok"],
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-manufacturer.php','_self'); 
+                        } 
+                        else {
+                        
+                        }
+                });
+           }    
         </script> 
 <?php
  } 

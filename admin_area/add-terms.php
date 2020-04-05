@@ -90,11 +90,25 @@
                 $run_terms = mysqli_query($con,$insert_terms);
                 
                 if($run_terms){
-                    
-                    echo "<script>alert('Your New Category Has Been Inserted')</script>";
-                    
-                    echo "<script>window.open('view-terms.php','_self')</script>";
-                    
+                    ?>
+                     <script>
+                    swal({
+                        title:"Your New Terms Has Been Inserted.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-terms.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+                  <?php  
                 }
                 
             }

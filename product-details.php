@@ -20,6 +20,9 @@ if(isset($_GET['pro_id']))
     $pro_img1=$row_product['product_img1'];
     $pro_img2=$row_product['product_img2'];
     $pro_img3=$row_product['product_img3'];
+    $pro_label=$row_product['product_label'];
+    $pro_discount_price=$row_product['product_discount_price'];
+    $pro_discount=$row_product['product_discount'];
     
    $pro_size=$row_product['product_size'];
     if($pro_size==null )
@@ -340,7 +343,31 @@ if(isset($_GET['pro_id']))
                                             </div>
                                         <?php 
                                         }?>
+                                         
                                     </div>
+                                    <div class="product-badge">
+                                        <?php
+                                        if($pro_label=="new")
+                                        { 
+                                        ?>
+                                            <div class="product-label new">
+                                                <span>New</span>
+                                            </div>
+                                            <?php
+                                        } 
+                                        if($pro_label=="sale")
+                                        {
+                                            ?>
+                                            <div class="product-label new">
+                                                <span>Sale</span>
+                                            </div>
+                                            <div class='product-label discount'>
+                                                <span><?php echo $pro_discount; ?>%</span>
+                                            </div>
+                                            <?php
+                                        } 
+                                            ?>
+                                         </div>
                                 </div>
                                 <div class="col-lg-7">
                               
@@ -350,7 +377,7 @@ if(isset($_GET['pro_id']))
                                            <?php echo $manufacturer_title;?>
                                         </div>
                                         <h3 class="product-name"><?php  echo $pro_title; ?></h3>
-                                        <div class="ratings d-flex">
+                                       <!-- <div class="ratings d-flex">
                                             <span><i class="fa fa-star-o"></i></span>
                                             <span><i class="fa fa-star-o"></i></span>
                                             <span><i class="fa fa-star-o"></i></span>
@@ -359,12 +386,26 @@ if(isset($_GET['pro_id']))
                                             <div class="pro-review">
                                                 <span>1 Reviews</span>
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <div class="price-box">
+                                        <?php
+                                        if($pro_label=="new")
+                                        {
+                                        ?>
                                             <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
-                                            <span class="price-old"><del>Rs.50000</del></span>
+                                            <span class="price-old"><del></del></span>
+                                        <?php
+                                        } 
+                                        if($pro_label=="sale")
+                                        {
+                                            ?>
+                                            <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
+                                            <span class="price-old"><del>Rs.<?php echo $pro_discount_price; ?></del></span>
+                                            <?php 
+                                        }
+                                        ?>
                                         </div>
-                                        <!--<h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
+                                       <!-- <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
                                         <div class="product-countdown" data-countdown="2019/12/20"></div>-->
                                         <div class="availability">
                                            <?php  
@@ -409,9 +450,7 @@ if(isset($_GET['pro_id']))
                                                 {
                                                     $papage=0;
                                                     add_cart($p_id,$product_img,$product_qty,$product_name,$product_price,$product_size,$papage);
-                                                }
-                                              
-                                                
+                                                }  
                                             } 
                                             
                                             end:
@@ -648,6 +687,9 @@ if(isset($_GET['pro_id']))
                                     $pro_price=$row_products['product_price'];
                                     $pro_img1=$row_products['product_img1'];
                                     $pro_img2=$row_products['product_img2'];
+                                    $pro_label=$row_products['product_label'];
+                                    $pro_discount=$row_products['product_discount'];
+                                    $pro_discount_price=$row_products['product_discount_price'];
                                     ?>
                                     
                                     <div class="product-item">
@@ -656,33 +698,62 @@ if(isset($_GET['pro_id']))
                                             <img class="pri-img" src="admin_area/product_images/<?php echo $pro_img1;?>" alt="product" style="height:180px;">
                                             <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
                                         </a>
+                                       
                                         <div class="product-badge">
+                                        <?php 
+                                        if($pro_label=="new")
+                                        {
+                                        ?>
+                                                <div class="product-label new">
+                                                    <span>New</span>
+                                                </div>
+                                                <?php 
+                                        }
+                                        if($pro_label=="sale")
+                                        {
+                                        ?>
                                             <div class="product-label new">
-                                                <span>new</span>
-                                            </div>
-                                          <!--  <div class='product-label discount'>
-                                                <span>10%</span>
-                                            </div>-->
+                                                    <span>Sale</span>
+                                                </div>
+                                            <div class='product-label discount'>
+                                                    <span><?php echo $pro_discount; ?>%</span>
+                                                </div>
+                                        <?php
+                                        } 
+                                        ?>
                                         </div>
-                                        <div class="button-group">
+                                        <!--<div class="button-group">
                                             <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
                                             <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
                                             
-                                        </div>
+                                        </div>-->
                                         <!--<div class='cart-hover'>
                                             <button class='btn btn-cart'>add to cart</button>
                                         </div>-->
                                   </figure>
                                         <div class="product-caption text-center">
-                            <!--<div class="product-identity">
-                                                                    <p class="manufacturer-name"><a href="product-details.html">Gold</a></p>
-                                                                </div>-->
+                                        <!--<div class="product-identity">
+                                                <p class="manufacturer-name"><a href="product-details.html">Gold</a></p>
+                                            </div>-->
                                             <h6 class="product-name">
                                                 <a href="product-details.php?pro_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
                                             </h6>
                                             <div class="price-box">
+                                                <?php
+                                                if($pro_label=="new")
+                                                { 
+                                                ?>
                                                 <span class="price-regular">Rs.<?php echo  $pro_price;?></span>
-                                                <span class="price-old"><del></del></span>
+                                                <?php
+                                                }
+                                                if($pro_label=="sale")
+                                                { 
+                                                ?>
+                                                <span class="price-regular">Rs.<?php echo  $pro_price;?></span>
+                                                <span class="price-old"><del>Rs.<?php echo $pro_discount_price; ?></del></span>
+                                                <?php
+                                                } 
+                                                ?>
                                             </div>
                                         </div>
                             </div>

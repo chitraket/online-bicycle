@@ -10,13 +10,21 @@ if (isset($_POST["accessories_id"])) {
    $accessories_material=$row_accessories['accessories_material'];
    $accessories_color=$row_accessories['accessories_color'];
    $accessories_desc=$row_accessories['accessories_desc'];
+$get_accessories_manufacturerss = "select * from accessories_brand where accessories_brand_id='$accessories_brand'";
+$run_accessories_manufacturerss = mysqli_query($con,$get_accessories_manufacturerss);
+
+while ($row_accessories_manufacturerss=mysqli_fetch_array($run_accessories_manufacturerss)) {
+    $manufacturer_accessories_ids=$row_accessories_manufacturerss['accessories_brand_id'];
+    $manufacturer_accessories_titles = $row_accessories_manufacturerss['accessories_brand'];
+}  
+
     ?>
                 <div class="table-responsive">
                                                 <table class="table table-bordered mb-0">
                                                     <tbody>
                                                         <tr>
                                                             <td>Brand</td>
-                                                            <td><?php echo $accessories_brand; ?></td>
+                                                            <td><?php echo $manufacturer_accessories_titles; ?></td>
                                                         </tr>
                                                         <tr>
                                                             <td>Material</td>

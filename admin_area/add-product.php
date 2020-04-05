@@ -22,9 +22,6 @@
             <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
                     <h4 class="mb-0 font-size-18">Add Product</h4>
-
-                   
-                    
                 </div>
             </div>
         </div>     
@@ -44,8 +41,8 @@
                             <div class="form-group row">
                                 <label for="example-search-input" class="col-md-3 col-form-label">Manufacturer</label>
                                 <div class="col-md-9">
-                                <select class="form-control" name="manufacturer_cat">
-                                        <option>Select</option>
+                                <select class="form-control select2" name="manufacturer_cat" required>
+                                        <option disabled selected value>Select</option>
                                         <?php 
                               
                                                 $get_p_cats = "select * from manufacturers";
@@ -72,8 +69,8 @@
                             <div class="form-group row">
                                 <label for="example-search-input" class="col-md-3 col-form-label">Product Category</label>
                                 <div class="col-md-9">
-                                <select class="form-control" name="product_cat">
-                                        <option>Select</option>
+                                <select class="form-control select2" name="product_cat" required>
+                                        <option disabled selected value>Select</option>
                                         <?php 
                               
                                                 $get_p_cats = "select * from product_categories";
@@ -100,8 +97,8 @@
                             <div class="form-group row">
                                 <label for="example-email-input" class="col-md-3 col-form-label">Category</label>
                                 <div class="col-md-9">
-                                <select class="form-control" name="cat">
-                                        <option>Select</option>
+                                <select class="form-control select2" name="cat" required>
+                                        <option disabled selected value>Select</option>
                                         <?php 
                               
                                     $get_cat = "select * from categories";
@@ -193,11 +190,56 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="example-tel-input" class="col-md-3 col-form-label">Product Image 4</label>
+                                <div class="col-md-9">
+                                <div class="custom-file">
+                                            <input type="file" name="product_img4" class="custom-file-input" id="customFilewas">
+                                            <label class="custom-file-label" id="customFileswas">Choose file</label>
+                                            <script type="text/javascript">
+                                            const realfileBtnwas=document.getElementById("customFilewas");
+                                            const customTxtwas=document.getElementById("customFileswas");
+                                            realfileBtnwas.addEventListener("change",function(){
+                                                if(realfileBtnwas.value)
+                                                {
+                                                    customTxtwas.innerHTML=realfileBtnwas.value;
+                                                }
+                                                else{
+                                                    customTxtwas.innerHTML="Choose file";
+                                                }
+                                            });
+                                            </script>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-email-input" class="col-md-3 col-form-label">Product label</label>
+                                <div class="col-md-9">
+                                <select class="form-control" name="product_label" required>
+                                        <option disabled selected value>Select</option>
+                                        <option value="new">new</option>
+                                        <option value="sale">sale</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="example-password-input" class="col-md-3 col-form-label">Product Price</label>
                                 <div class="col-md-9">
                                     <input class="form-control" type="text" placeholder="Prodcut Price" id="example-password-input" name="product_price">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="example-password-input" class="col-md-3 col-form-label">Product Discount</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" placeholder="Prodcut Discount" id="example-password-input" name="product_discount">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-password-input" class="col-md-3 col-form-label">Product Discount Price</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" placeholder="Prodcut Discount Price" id="example-password-input" name="product_discount_price">
+                                </div>
+                            </div>
+                            
                             <div class="form-group row">
                                 <label for="example-number-input" class="col-md-3 col-form-label">Product qty</label>
                                 <div class="col-md-9">
@@ -376,6 +418,9 @@
             $manufacturer_cat=$_POST['manufacturer_cat'];
             $product_cat = $_POST['product_cat'];
             $cat = $_POST['cat'];
+            $product_label=$_POST['product_label'];
+            $product_discount=$_POST['product_discount'];
+            $product_discount_price=$_POST['product_discount_price'];
             $product_price = $_POST['product_price'];
             $product_size=$_POST['product_size'];
             $product_frame=$_POST['product_frame'];
@@ -404,24 +449,42 @@
             $product_img1 = $_FILES['product_img1']['name'];
             $product_img2 = $_FILES['product_img2']['name'];
             $product_img3 = $_FILES['product_img3']['name'];
+            $product_img4 = $_FILES['product_img4']['name'];
             
             $temp_name1 = $_FILES['product_img1']['tmp_name'];
             $temp_name2 = $_FILES['product_img2']['tmp_name'];
             $temp_name3 = $_FILES['product_img3']['tmp_name'];
+            $temp_name4 = $_FILES['product_img4']['tmp_name'];
             
             move_uploaded_file($temp_name1,"product_images/$product_img1");
             move_uploaded_file($temp_name2,"product_images/$product_img2");
             move_uploaded_file($temp_name3,"product_images/$product_img3");
+            move_uploaded_file($temp_name4,"product_images/$product_img4");
             
-            $insert_product = "insert into products (manufacturer_id,p_cat_id,cat_id,date,product_title,product_img1,product_img2,product_img3,product_price,product_desc,product_qty,available_qty,product_size,product_frame,product_weight,product_front_suspension,product_rear_suspension,product_front_derailleur,product_rear_derailleur,product_wheels,product_tires,product_shifter,product_crankset,product_freewheels,product_bb_set,product_cassette,product_colour,product_pedals,product_seat_post,product_handleber,product_stem,product_headset,product_brakeset,product_status) values ('$manufacturer_cat','$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_price','$product_desc','$product_qty','$product_qty','$product_size','$product_frame','$product_weight','$product_front_suspension','$product_rear_suspension','$product_front_derailleur','$product_rear_derailleur','$product_wheels','$product_tires','$product_shifter','$product_crankset','$product_freewheels','$product_bb_set','$product_cassette','$product_colour','$product_pedals','$product_seat_post','$product_handleber','$product_stem','$product_headset','$product_brakeset','$product_top')";
+            $insert_product = "insert into products (manufacturer_id,p_cat_id,cat_id,date,product_title,product_img1,product_img2,product_img3,product_img4,product_price,product_discount_price,product_discount,product_label,product_desc,product_qty,available_qty,product_size,product_frame,product_weight,product_front_suspension,product_rear_suspension,product_front_derailleur,product_rear_derailleur,product_wheels,product_tires,product_shifter,product_crankset,product_freewheels,product_bb_set,product_cassette,product_colour,product_pedals,product_seat_post,product_handleber,product_stem,product_headset,product_brakeset,product_status) values ('$manufacturer_cat','$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_img4','$product_price','$product_discount_price','$product_discount','$product_label','$product_desc','$product_qty','$product_qty','$product_size','$product_frame','$product_weight','$product_front_suspension','$product_rear_suspension','$product_front_derailleur','$product_rear_derailleur','$product_wheels','$product_tires','$product_shifter','$product_crankset','$product_freewheels','$product_bb_set','$product_cassette','$product_colour','$product_pedals','$product_seat_post','$product_handleber','$product_stem','$product_headset','$product_brakeset','$product_top')";
             
             $run_product = mysqli_query($con,$insert_product);
             
             if($run_product){
-                
-                echo "<script>alert('Product has been inserted sucessfully')</script>";
-                echo "<script>window.open('view-product.php','_self')</script>";
-                
+                ?>
+                <script>
+                    swal({
+                        title:"Your New Product Has Been Inserted.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-product.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+            <?php     
             }
             
         }
@@ -439,6 +502,9 @@
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
 
+         <!-- select 2 plugin -->
+         <script src="assets/libs/select2/js/select2.min.js"></script>
+        <script src="assets/js/pages/ecommerce-select2.init.js"></script>
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 

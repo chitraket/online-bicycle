@@ -32,15 +32,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">View Order</h4>
-
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                                            <li class="breadcrumb-item active">View Order</li>
-                                        </ol>
-                                    </div>
-                                    
+                                    <h4 class="mb-0 font-size-18">View Order</h4> 
                                 </div>
                             </div>
                         </div>     
@@ -49,7 +41,6 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">View Order</h4>
                                         <table id="employee_data" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
@@ -58,6 +49,7 @@
                                                 <th>Date</th>
                                                 <th>Total</th>
                                                 <th>Payment Method</th>
+                                                <th>Order Status</th>
                                                 <th>Action</th>
                                                
                                                 
@@ -91,53 +83,92 @@
                                                 ?>
 
                                                 <?php
-                                                //$bill=0;
+                                                $bill=0;
+                                                $total=0;
                                                 $select_total="SELECT * FROM customer_orders WHERE order_id='$id'";
                                                 $run_total=mysqli_query($con,$select_total);
                                                 while ($row_total=mysqli_fetch_array($run_total)) {
-                                                    $total=0;
+                                                    
                                                     $qty=$row_total['qty'];
                                                     $product_id=$row_total['product_id'];
                                                     $select_totals="SELECT * FROM products WHERE product_id='$product_id'";
                                                     $run_totals=mysqli_query($con,$select_totals);
                                                     while ($row_totals=mysqli_fetch_array($run_totals)) {
                                                         $bill=$row_totals['product_price']*$qty;
-                                                        $total+=$bill;
-                                                        $total=$total+$bill;
-                                                        
-
+                                                        //$total=$total+$bill;
                                                     }
-                                                    //echo $total;
+                                                    $total+=$bill;
                                                 }
                                                 
                                                 ?>
-                                                <td></td> 
+                                                <td>Rs.<?php echo  $total; ?></td> 
                                                 <?php 
-                                                $select_pays="SELECT DISTINCT txnid FROM customer_orders WHERE order_id='$id'";
+                                                $select_pays="SELECT DISTINCT txnid,payment_status FROM customer_orders WHERE order_id='$id'";
                                                 $run_pays=mysqli_query($con, $select_pays);
                                                 while ($row_pays=mysqli_fetch_array($run_pays)) {
                                                     $pay=$row_pays["txnid"]; 
-                                                    if($pay=="")
-                                                    {
+                                                   // $payment=$row_pays['payment_status'];
+                                                    
+                                                        if($pay=="")
+                                                        {
                                                         ?>
                                                         
                                                         <td><span class="badge badge-pill badge-soft-success font-size-10" ><img src="icon/cash-on-delivery.png" style="height:25px;"/>Cash On Delivery</span></td>
-                                                        <?php 
+                                                        <?php
+                                                        
+                                                        }
+                                                        else{
+                                                            ?>
+                                                            <td><span class="badge badge-pill badge-soft-success font-size-10" ><img src="icon/icons8-paytm-32.png" style="height:25px;"/> Online Payment</span></td>
+                                                              <?php
+                                                        }
+
+                                            }
+                                                ?> 
+                                                 <?php 
+                                                $select_payss="SELECT DISTINCT order_status FROM customer_orders WHERE order_id='$id'";
+                                                $run_payss=mysqli_query($con, $select_payss);
+                                                while ($row_payss=mysqli_fetch_array($run_payss)) {
+                                                    $order_status=$row_payss["order_status"]; 
+                                                    if ($order_status=="o") {
+                                                        ?>
+                                                           <td><span class=" badge badge-pill badge-soft-success font-size-10" ><img src="icon/tick.png" style="height:25px;"/> Ordered And Approved</span></td>
+                                                    <?php
+                                                        }
+                                                    else if($order_status=="p")
+                                                    {
+                                                    ?>
+                                                          <td><span class=" badge badge-pill badge-soft-success font-size-10" ><img src="icon/packing.png" style="height:25px;"/> Packed</span>  </td>
+                                                    <?php 
                                                     }
-                                                    else
+                                                    else if($order_status=="s") {
+                                                        ?>
+                                                           <td><span class=" badge badge-pill badge-soft-success font-size-10" ><img src="icon/truck.png" style="height:25px;"/> Shipped</span> </td>
+                                                    <?php
+                                                    }
+                                                    else if($order_status=="d")
                                                     {
                                                         ?>
-                                                    <td><span class="badge badge-pill badge-soft-success font-size-10" ><img src="icon/icons8-paytm-32.png" style="height:25px;"/> Online Payment</span></td>
-                                                      <?php
-                                                    } 
+                                                         <td> <span class=" badge badge-pill badge-soft-success font-size-10" ><img src="icon/delivery-man.png" style="height:25px;"/> Delivered</span> </td>
+                                                        <?php
+                                                    }
+                                                    else if($order_status=="c")
+                                                    { 
                                                       ?>  
-                                                <?php
-                                                } 
-                                                ?> 
-
-
+                                                      <td><span class="badge badge-pill badge-soft-danger font-size-10"> <img src="icon/close.png" style="height:25px;"/> Cancal Order</span></td>
+                                                    <?php
+                                                    } 
+                                                    else if($order_status=="r")
+                                                    {
+                                                        ?>  
+                                                      <td><span class="badge badge-pill badge-soft-warning font-size-10" ><img src="icon/return.png" style="height:25px;"/> Returned  Order</span></td>
+                                                    <?php
+                                                    }
+                                                    } 
+                                                    ?>
                                                 <td><input type="button" name="view" value="View Details" id="<?php echo $row_cart["id"]?>" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light view_data"  /></td>
-                                                </tr>
+                                               
+                                            </tr>
                                                 <?php 
                                                 
                                                  }?>
@@ -185,73 +216,15 @@
             </div>
             </form>
             <!-- end main content-->
-          <?php
-          if(isset($_POST['submit']))
-          {
-            $update_p_cat = "update customer_orders set order_status='mmmm' where order_id='$id'";
-              
-            $run_p_cat = mysqli_query($con,$update_p_cat);
-            
-            if($run_p_cat){
-
-                echo "<script>alert('Your Product Category Has Been Updated')</script>";
-                echo "<script>window.open('view-slider.php','_self')</script>";
-                
-            }
-          }
-          ?>
+         
         </div>
         
         <!-- END layout-wrapper -->
           
         <!-- Right Sidebar -->
-        <div class="right-bar">
-            <div data-simplebar class="h-100">
-                <div class="rightbar-title px-3 py-4">
-                    <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                        <i class="mdi mdi-close noti-icon"></i>
-                    </a>
-                    <h5 class="m-0">Settings</h5>
-                </div>
-
-                <!-- Settings -->
-                <hr class="mt-0" />
-                <h6 class="text-center mb-0">Choose Layouts</h6>
-
-                <div class="p-4">
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-1.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
-                        <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
-                    </div>
-    
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-2.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="assets/css/bootstrap-dark.min.css" data-appStyle="assets/css/app-dark.min.css" />
-                        <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
-                    </div>
-    
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-3.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-5">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appStyle="assets/css/app-rtl.min.css" />
-                        <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
-                    </div>
-
-            
-                </div>
-
-            </div> <!-- end slimscroll-menu-->
-        </div>
         <!-- /Right-bar -->
 
         <!-- Right bar overlay-->
-        <div class="rightbar-overlay"></div>
 
         <!-- JAVASCRIPT -->
        

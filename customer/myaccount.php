@@ -280,4 +280,8 @@ if(!isset($_SESSION['customer_email']))
 
 <!-- Mirrored from demo.hasthemes.com/corano-preview/corano/my-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:08 GMT -->
 </html>
-                                        
+<script>
+    $(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>

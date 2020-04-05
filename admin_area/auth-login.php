@@ -16,6 +16,8 @@ include("includes/db.php");
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
 
+        <!-- Sweet Alert-->
+        <script src="../assets/js/sweetalert.min.js"></script>
         <!-- Bootstrap Css -->
         <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
@@ -90,11 +92,29 @@ include("includes/db.php");
                              if($count==1)
                              {
                                     $_SESSION['admin_email']=$admin_email;
-                                    echo"<script>alert('login')</script>";
+                                    
                                     echo "<script>window.open('index.php','_self')</script>";
                              }
                              else{
-                                 echo "<script>alert('hii')</script>";
+                                 ?>
+                                  <script>
+                                        swal({
+                                            title:"Your Email Or Password Is Wrong.",
+                                            text: "",
+                                            icon: "error",
+                                            buttons: [,"OK"],
+                                            successMode: true,
+                                        
+                                    })
+                                    .then((willDelete) => {
+                                            if (willDelete) {
+                                                window.open('auth-login.php','_self');
+                                            } 
+                                            else {
+                                            }
+                                    });
+                                </script>
+                                 <?php 
                              }
                          } 
                         ?>

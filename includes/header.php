@@ -4,8 +4,6 @@ include("includes/db.php");
 include("functions/functions.php");
 include("includes/validation.php");
  ?>
-
-
 <!doctype html>
 <html class="no-js" lang="en">
 <!-- Mirrored from demo.hasthemes.com/corano-preview/corano/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:19:45 GMT -->
@@ -147,12 +145,6 @@ include("includes/validation.php");
                                                 }
                                                 ?>
                                             </ul>
-                                        </li>
-                                        <li>
-                                            <a href="wishlist.html">
-                                                <i class="pe-7s-like"></i>
-                                                <div class="notification">0</div>
-                                            </a>
                                         </li>
                                         <li>
                                             <a href="#" class="minicart-btn">

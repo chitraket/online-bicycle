@@ -144,12 +144,47 @@
                     move_uploaded_file($temp_name1,"slides_images/$product_img1");
                     $insert_cat = "insert into slider(slide_name,slide_image,slide_row,slide_row_2,status,slide_url)  values('$s_name','$product_img1','$s_row_1','$s_row_2','$s_row','$s_url')";
                     $run_cat = mysqli_query($con,$insert_cat);
-                    echo "<script>alert('Your new slide image has been inserted')</script>";
-                    echo "<script>window.open('view-slider.php','_self')</script>";
+                    ?>
+                    <script>
+                    swal({
+                        title:"Your New Slides Image Has Been Inserted.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-slider.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+                    <?php
                 }
                else
                {
-                echo "<script>alert('You have already inserted 4 slides')</script>";    
+                ?>
+                <script>
+                    swal({
+                        title:"You Have Already Inserted 4 Slides.",
+                        text: "",
+                        icon: "warning",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-slider.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script> 
+                <?php   
                }
           }
 

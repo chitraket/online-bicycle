@@ -14,11 +14,13 @@
         $delete_pro = "delete from categories where cat_id='$delete_id'";
         
         $run_delete = mysqli_query($con, $delete_pro);
+
+        $delete_product = "delete from products where cat_id='$delete_id'";
         
-        if ($run_delete) {
-            echo "<script>alert('One of your categories has been Deleted')</script>";
-            
-            echo "<script>window.open('view-category.php','_self')</script>";
+        mysqli_query($con, $delete_product);        
+        
+        if ($run_delete) {  
+            echo "<script>window.open('view-category.php?m=1','_self')</script>";
         }
     } ?>
 <?php

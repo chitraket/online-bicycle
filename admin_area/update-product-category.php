@@ -141,11 +141,25 @@ if(isset($_GET['p_cat_id'])){
               $run_p_cat = mysqli_query($con,$update_p_cat);
               
               if($run_p_cat){
-                  
-                  echo "<script>alert('Your Product Category Has Been Updated')</script>";
-                  
-                  echo "<script>window.open('view-product-category.php','_self')</script>";
-                  
+                  ?>
+                  <script>
+                    swal({
+                        title:"Your Product Category Has Been Updated",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-product-category.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+                  <?php 
               }
               
           }

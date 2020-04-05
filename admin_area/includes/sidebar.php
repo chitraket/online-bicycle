@@ -84,7 +84,7 @@
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
                     <li><a href="add-category.php">Add Filter</a></li>
-                    <li><a href="view-category.php">view Filter</a></li>
+                    <li><a href="view-category.php">View Filter</a></li>
                 </ul>
             </li>
 

@@ -15,7 +15,7 @@
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="../index.php"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Change password</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Change Password</li>
                                 </ul>
                             </nav>
                         </div>
@@ -34,7 +34,7 @@ if(!isset($_SESSION['email']))
 }
 else{
     if (isset($_POST['login'])) {
-        if(pass($_POST['c_pass']))
+        if(pass($_POST['pass']))
         {
             $error_pass = "Required..";
             $errorresult=false;
@@ -43,7 +43,7 @@ else{
         {
             $error_pass = "";
         }
-        if(c_pass($_POST['c_c_pass']))
+        if(c_pass($_POST['c_pass']))
         {
             $error_c_pass = "Required..";
             $errorresult=false;
@@ -68,7 +68,7 @@ else{
                         title: "Your password has been changed.",
                         text: "",
                         icon: "success",
-                        buttons: true,
+                        buttons: [,"OK"],
                         successMode: true,
                 })
                 .then((willDelete) => {
@@ -80,6 +80,7 @@ else{
                 });
                 </script>
          <?php   
+         unset($_SESSION['email']);
         }
         else{
         ?>

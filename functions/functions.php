@@ -2,21 +2,8 @@
 
 $db=mysqli_connect("localhost","root","","ecom_store");
 
-function getRealIpUser(){
-    
-    switch(true){
-            
-            case(!empty($_SERVER['HTTP_X_REAL_IP'])) : return $_SERVER['HTTP_X_REAL_IP'];
-            case(!empty($_SERVER['HTTP_CLIENT_IP'])) : return $_SERVER['HTTP_CLIENT_IP'];
-            case(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) : return $_SERVER['HTTP_X_FORWARDED_FOR']; 
-            default : return $_SERVER['REMOTE_ADDR'];
-            
-    }
-}
-function add_cart($p_id,$product_img,$product_qty,$product_name,$product_price,$product_size,$papage){
 
-    
-   
+function add_cart($p_id,$product_img,$product_qty,$product_name,$product_price,$product_size,$papage){
    if ($papage==0) {
         $product= array($product_img,$product_name,$product_price,$product_qty,$p_id,$product_size,$papage);
         $_SESSION[$product_name]=$product;
@@ -30,9 +17,10 @@ function add_cart($p_id,$product_img,$product_qty,$product_name,$product_price,$
    }
 
 }
+
 function getPro(){
     global $db;
-    $get_products="select * from products where product_status='yes'";
+    $get_products="select * from products where product_status='yes' and product_label='new'";
     $run_products=mysqli_query($db,$get_products);
     while($row_products=mysqli_fetch_array($run_products))
     {
@@ -41,38 +29,80 @@ function getPro(){
         $pro_price=$row_products['product_price'];
         $pro_img1=$row_products['product_img1'];
         $pro_img2=$row_products['product_img2'];
-        echo"
+        $pro_label=$row_products['product_label'];
+        $pro_discount=$row_products['product_discount'];
+        $pro_d_price=$row_products['product_discount_price'];
+        $manufacturer_id=$row_products['manufacturer_id'];
+      ?>
         <div class='product-item'>
             <figure class='product-thumb'>
-                <a href='product-details.php?pro_id=$pro_id'>
-                    <img class='pri-img' src='admin_area/product_images/$pro_img1' alt='product' style='height:180px;'>
-                    <img class='sec-img' src='admin_area/product_images/$pro_img2' alt='product' style='height:180px;'>
+                <a href='product-details.php?pro_id=<?php echo $pro_id;?>'>
+                    <img class='pri-img' src='admin_area/product_images/<?php echo $pro_img1;?>' alt='product' style='height:180px;'>
+                    <img class='sec-img' src='admin_area/product_images/<?php echo $pro_img2;?>' alt='product' style='height:180px;'>
                 </a>
                 <div class='product-badge'>
+                    <?php
+                    if($pro_label=="new")
+                    { 
+                    ?>
+                        <div class='product-label new'>
+                            <span>New</span>
+                        </div>
+                    <?php 
+                    }
+                    if($pro_label=="sale")
+                    {
+                    ?>
                     <div class='product-label new'>
-                        <span>new</span>
+                            <span>Sale</span>
+                        </div>
+                    <div class='product-label discount'>
+                        <span><?php echo $pro_discount; ?>%</span>
                     </div>
-                  <!--  <div class='product-label discount'>
-                        <span>10%</span>
-                    </div>-->
+                    <?php
+                    }
+                    ?>
                 </div>
-                <div class='button-group'>
+               <!-- <div class='button-group'>
                     <a href='wishlist.html' data-toggle='tooltip' data-placement='left' title='Add to wishlist'><i class='pe-7s-like'></i></a>
-                    <a href='compare.html' data-toggle='tooltip' data-placement='left' title='Add to Compare'><i class='pe-7s-refresh-2'></i></a>
                     
-                </div>
+                </div>-->
           </figure>
                 <div class='product-caption text-center'>
+                <div class="manufacturer-name">
+                    <?php
+                            $query3="select * from manufacturers where manufacturer_id='$manufacturer_id'";
+                            $run_carts=mysqli_query($db, $query3);
+                            while ($row_carts=mysqli_fetch_array($run_carts)) { 
+                    ?>
+                            <a href="product-details.php?pro_id=<?php echo  $pro_id; ?>"><?php echo $row_carts['manufacturer_title']; ?></a>
+                                    <?php 
+                        }
+                                                ?>
+                                            </div>
                     <h6 class='product-name'>
-                        <a href='product-details.php?pro_id=$pro_id'>$pro_title</a>
+                        <a href='product-details.php?pro_id=<?php echo $pro_id;?>'><?php echo $pro_title;?></a>
                     </h6>
                     <div class='price-box'>
-                        <span class='price-regular'>Rs.$pro_price</span>
-                        <span class='price-old'><del></del></span>
+                        <?php
+                        if($pro_label=="new") 
+                        {
+                        ?>
+                        <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
+                        <?php 
+                        }
+                        if($pro_label=="sale")
+                        {
+                        ?>
+                        <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
+                        <span class='price-old'><del>Rs.<?php echo $pro_d_price; ?></del></span>
+                        <?php 
+                        }
+                        ?>
                     </div>
                 </div>
     </div>
-        ";
+        <?php
     }
     
 }
@@ -89,38 +119,82 @@ function getAcc()
         $pro_price=$row_accessories['accessories_prices'];
         $pro_img1=$row_accessories['accessories_image_1'];
         $pro_img2=$row_accessories['accessories_image_2'];
-        echo"
+        $pro_label=$row_accessories['accessories_label'];
+        $pro_discount=$row_accessories['accessories_discount'];
+        $pro_d_price=$row_accessories['accessories_discount_price'];
+        $accessories_brand=$row_accessories['accessories_brand'];
+        
+
+        ?>
         <div class='product-item'>
             <figure class='product-thumb'>
-                <a href='accessories-details.php?accessories_id=$pro_id'>
-                    <img class='pri-img' src='admin_area/accessories_images/$pro_img1' alt='product' style='height:180px;'>
-                    <img class='sec-img' src='admin_area/accessories_images/$pro_img2' alt='product' style='height:180px;'>
+                <a href='accessories-details.php?accessories_id=<?php echo $pro_id;?>'>
+                    <img class='pri-img' src='admin_area/accessories_images/<?php echo $pro_img1;?>' alt='product' style='height:180px;'>
+                    <img class='sec-img' src='admin_area/accessories_images/<?php echo $pro_img2;?>' alt='product' style='height:180px;'>
                 </a>
                 <div class='product-badge'>
+                <?php
+                    if($pro_label=="new")
+                    { 
+                    ?>
+                        <div class='product-label new'>
+                            <span>New</span>
+                        </div>
+                    <?php 
+                    }
+                    if($pro_label=="sale")
+                    {
+                    ?>
                     <div class='product-label new'>
-                        <span>new</span>
+                            <span>Sale</span>
+                        </div>
+                    <div class='product-label discount'>
+                        <span><?php echo $pro_discount; ?>%</span>
                     </div>
-                  <!--  <div class='product-label discount'>
-                        <span>10%</span>
-                    </div>-->
+                    <?php
+                    }
+                    ?>
                 </div>
-                <div class='button-group'>
-                    <a href='wishlist.html' data-toggle='tooltip' data-placement='left' title='Add to wishlist'><i class='pe-7s-like'></i></a>
-                    <a href='compare.html' data-toggle='tooltip' data-placement='left' title='Add to Compare'><i class='pe-7s-refresh-2'></i></a>
-                    
-                </div>
+                <!--<div class='button-group'>
+                    <a href='wishlist.html' data-toggle='tooltip' data-placement='left' title='Add to wishlist'><i class='pe-7s-like'></i></a> 
+                </div>-->
           </figure>
                 <div class='product-caption text-center'>
+                <div class="manufacturer-name">
+                <?php
+                            $query3="select * from accessories_brand where accessories_brand_id='$accessories_brand'";
+                            $run_carts=mysqli_query($db, $query3);
+                            while ($row_carts=mysqli_fetch_array($run_carts)) { 
+                    ?>
+                            <a href="accessories-details.php?accessories_id=<?php echo $pro_id;?>"><?php echo $row_carts['accessories_brand']; ?></a>
+                                    <?php 
+                        }
+                                                ?>
+                </div>
                     <h6 class='product-name'>
-                        <a href='accessories-details.php?accessories_id=$pro_id'>$pro_title</a>
+                        <a href='accessories-details.php?accessories_id=<?php echo $pro_id;?>'><?php echo$pro_title;?></a>
                     </h6>
                     <div class='price-box'>
-                        <span class='price-regular'>Rs.$pro_price</span>
-                        <span class='price-old'><del></del></span>
+                    <?php
+                        if($pro_label=="new") 
+                        {
+                        ?>
+                        <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
+                       
+                        <?php 
+                        }
+                        if($pro_label=="sale")
+                        {
+                        ?>
+                        <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
+                        <span class='price-old'><del>Rs.<?php echo $pro_d_price; ?></del></span>
+                        <?php 
+                        }
+                        ?>
                     </div>
                 </div>
     </div>
-        ";
+        <?php
     }
 }
 

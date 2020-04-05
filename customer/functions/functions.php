@@ -1,27 +1,21 @@
 
 <?php
 $db=mysqli_connect("localhost","root","","ecom_store");
-function getRealIpUser(){
-    switch(true){
-            
-            case(!empty($_SERVER['HTTP_X_REAL_IP'])) : return $_SERVER['HTTP_X_REAL_IP'];
-            case(!empty($_SERVER['HTTP_CLIENT_IP'])) : return $_SERVER['HTTP_CLIENT_IP'];
-            case(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) : return $_SERVER['HTTP_X_FORWARDED_FOR'];
-            
-            default : return $_SERVER['REMOTE_ADDR'];
-            
-    }
-    
+
+function add_cart($p_id,$product_img,$product_qty,$product_name,$product_price,$product_size,$papage){
+   if ($papage==0) {
+        $product= array($product_img,$product_name,$product_price,$product_qty,$p_id,$product_size,$papage);
+        $_SESSION[$product_name]=$product;
+       echo "<script>window.open('product-details.php?pro_id=$p_id ','_self')</script>";
+   }
+   if($papage==1)
+   {
+        $product= array($product_img,$product_name,$product_price,$product_qty,$p_id,$product_size,$papage);
+        $_SESSION[$product_name]=$product;
+        echo "<script>window.open('accessories-details.php?accessories_id=$p_id ','_self')</script>";
+   }
+
 }
-
-function add_cart($p_id,$product_img,$product_qty,$product_name,$product_price){
-
-    
-    $product= array($product_img,$product_name,$product_price,$product_qty,$p_id);
-    $_SESSION[$product_name]=$product;
-    echo "<script>window.open('product-details.php?pro_id=$p_id ','_self')</script>";
- 
- }
 
 function getPro(){
     global $db;
@@ -113,37 +107,7 @@ function getCats(){
 
 
 
-function items()
-{
-    global $db;
-    $ip_add=getRealIpUser();
-    $get_items="select * from cart where ip_add='$ip_add'";
-    $run_items=mysqli_query($db,$get_items);
-    $count_items=mysqli_num_rows($run_items);
-    echo $count_items;
 
-}
-function update_cart(){
-                                            
-    global $con;
-    
-    if(isset($_GET['p_id'])){
-        
-       $p_ids=$_GET['p_id'];
-            
-            $delete_product = "delete from cart where p_id='$p_ids'";
-            
-            $run_delete = mysqli_query($con,$delete_product);
-            
-            if($run_delete){
-                
-                echo "<script>window.open('cart.php','_self')</script>";
-                
-            }
-            
-        }
-        
-    
-}
+
 
 ?>

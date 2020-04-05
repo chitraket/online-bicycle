@@ -21,6 +21,9 @@ if(isset($_GET['accessories_id']))
     $accessories_qty=$row_accessories['accessories_qty'];
     $available_qty=$row_accessories['available_qty'];
     $accessories_material=$row_accessories['accessories_material'];
+    $pro_label=$row_accessories['accessories_label'];
+    $pro_discount_price=$row_accessories['accessories_discount_price'];
+    $pro_discount=$row_accessories['accessories_discount'];
     if($accessories_material=="null")
     {
         $accessories_material="N/A";
@@ -206,6 +209,29 @@ if(isset($_GET['accessories_id']))
                                         <?php 
                                         }?>
                                     </div>
+                                    <div class="product-badge">
+                                        <?php
+                                        if($pro_label=="new")
+                                        { 
+                                        ?>
+                                            <div class="product-label new">
+                                                <span>New</span>
+                                            </div>
+                                            <?php
+                                        } 
+                                        if($pro_label=="sale")
+                                        {
+                                            ?>
+                                            <div class="product-label new">
+                                                <span>Sale</span>
+                                            </div>
+                                            <div class='product-label discount'>
+                                                <span><?php echo $pro_discount; ?>%</span>
+                                            </div>
+                                            <?php
+                                        } 
+                                            ?>
+                                         </div>
                                 </div>
                                 <div class="col-lg-7">
                               
@@ -215,7 +241,7 @@ if(isset($_GET['accessories_id']))
                                            <?php echo $accessories_brand;?>
                                         </div>
                                         <h3 class="product-name"><?php  echo $accessories_name;?></h3>
-                                        <div class="ratings d-flex">
+                                       <!-- <div class="ratings d-flex">
                                             <span><i class="fa fa-star-o"></i></span>
                                             <span><i class="fa fa-star-o"></i></span>
                                             <span><i class="fa fa-star-o"></i></span>
@@ -224,10 +250,24 @@ if(isset($_GET['accessories_id']))
                                             <div class="pro-review">
                                                 <span>1 Reviews</span>
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <div class="price-box">
+                                        <?php
+                                        if($pro_label=="new")
+                                        {
+                                        ?>
                                             <span class="price-regular">Rs.<?php echo $accessories_prices; ?></span>
-                                            <span class="price-old"><del>Rs.50000</del></span>
+                                            <span class="price-old"><del></del></span>
+                                        <?php
+                                        } 
+                                        if($pro_label=="sale")
+                                        {
+                                            ?>
+                                            <span class="price-regular">Rs.<?php echo $accessories_prices; ?></span>
+                                            <span class="price-old"><del>Rs.<?php echo $pro_discount_price; ?></del></span>
+                                            <?php 
+                                        }
+                                        ?>
                                         </div>
                                         <!--<h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
                                         <div class="product-countdown" data-countdown="2019/12/20"></div>-->

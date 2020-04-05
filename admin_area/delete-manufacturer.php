@@ -14,11 +14,12 @@
         $delete_pro = "delete from manufacturers where manufacturer_id='$delete_id'";
         
         $run_delete = mysqli_query($con, $delete_pro);
+
+        $delete_product = "delete from products where manufacturer_id='$delete_id'";
+        mysqli_query($con, $delete_product);
         
         if ($run_delete) {
-            echo "<script>alert('One of your categories has been Deleted')</script>";
-            
-            echo "<script>window.open('view-manufacturer.php','_self')</script>";
+            echo "<script>window.open('view-manufacturer.php?m=1','_self')</script>";
         }
     } ?>
 <?php

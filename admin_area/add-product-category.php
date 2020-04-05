@@ -88,11 +88,25 @@
               $run_p_cat = mysqli_query($con,$insert_p_cat);
               
               if($run_p_cat){
-                  
-                  echo "<script>alert('Your New Product Category Has Been Inserted')</script>";
-                  
-                  echo "<script>window.open('view-product-category.php','_self')</script>";
-                  
+                ?>
+                   <script>
+                    swal({
+                        title:"Your New Product Category Has Been Inserted.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-product-category.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+                <?php  
               }
               
           }

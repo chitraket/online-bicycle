@@ -18,10 +18,20 @@
         $p_id= $_POST["code"];
         $p_size=$_POST["p_size"]; 
         $papage=$_POST["papage"];
+        if($papage==0)
+        {
         $get_product="select * from products where product_id=$p_id";
         $run_product=mysqli_query($con,$get_product);
         $row_product=mysqli_fetch_array($run_product);
         $pro_qty=$row_product['available_qty'];
+        }
+        if($papage==1)
+        {
+            $get_product="select * from accessories where accessories_id=$p_id";
+            $run_product=mysqli_query($con,$get_product);
+            $row_product=mysqli_fetch_array($run_product);
+            $pro_qty=$row_product['available_qty'];
+        }
         if ($product_qty>$pro_qty) 
         {
             echo "<script type='text/javascript'>swal('Please enter lower quantity', '', 'warning')</script>";

@@ -32,13 +32,6 @@
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
                                     <h4 class="mb-0 font-size-18">View Slider</h4>
-
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                                            <li class="breadcrumb-item active">Data Tables</li>
-                                        </ol>
-                                    </div>
                                     
                                 </div>
                             </div>
@@ -48,7 +41,6 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">View Slider </h4>
                                         
                                        
                                         <table id="employee_data" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -72,15 +64,16 @@
                                               $select_cat="SELECT * FROM slider ORDER BY slide_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
-                                               
-                                                echo'<tr>
+                                               ?>
+                                                <tr>
                                                 <td>
-                                                <img src="slides_images/'.$row_cart["slide_image"].'" width="150" height="80"></td>
-                                                <td>'.$row_cart["slide_name"].'</td>
-                                                <td>'.$row_cart["slide_row"].'</td>
-                                                <td>'.$row_cart["slide_row_2"].'</td>
-                                                <td><a href="delete-slider.php?slide_id='.$row_cart["slide_id"].'"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-slider.php?slide_id='.$row_cart["slide_id"].'" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
-                                                </tr>';
+                                                <img src="slides_images/<?php echo $row_cart["slide_image"]; ?>" width="150" height="80"></td>
+                                                <td><?php echo $row_cart["slide_name"]; ?></td>
+                                                <td><?php echo   $row_cart["slide_row"];?></td>
+                                                <td><?php echo $row_cart["slide_row_2"];?></td>
+                                                <td><a href="delete-slider.php?slide_id=<?php echo $row_cart["slide_id"] ?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-slider.php?slide_id=<?php echo $row_cart["slide_id"];?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
+                                                </tr>
+                                                <?php 
                                                  }?>
                                             </tbody>
                                         </table>
@@ -95,7 +88,14 @@
                 <!-- End Page-content -->
                
                 <!-- Modal -->
-                
+                <?php
+                if(isset($_GET['m']))
+                { 
+                ?>
+                <div class="flash-data" data-flashdata="<?php echo $_GET['m'] ?>"></div>
+                <?php
+                } 
+                ?>
                
                 <!-- end modal -->
                 
@@ -110,55 +110,6 @@
         </div>
         <!-- END layout-wrapper -->
           
-        <!-- Right Sidebar -->
-        <div class="right-bar">
-            <div data-simplebar class="h-100">
-                <div class="rightbar-title px-3 py-4">
-                    <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                        <i class="mdi mdi-close noti-icon"></i>
-                    </a>
-                    <h5 class="m-0">Settings</h5>
-                </div>
-
-                <!-- Settings -->
-                <hr class="mt-0" />
-                <h6 class="text-center mb-0">Choose Layouts</h6>
-
-                <div class="p-4">
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-1.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
-                        <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
-                    </div>
-    
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-2.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="assets/css/bootstrap-dark.min.css" data-appStyle="assets/css/app-dark.min.css" />
-                        <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
-                    </div>
-    
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-3.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-5">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appStyle="assets/css/app-rtl.min.css" />
-                        <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
-                    </div>
-
-            
-                </div>
-
-            </div> <!-- end slimscroll-menu-->
-        </div>
-        <!-- /Right-bar -->
-
-        <!-- Right bar overlay-->
-        <div class="rightbar-overlay"></div>
-
         <!-- JAVASCRIPT -->
        
         <script src="assets/libs/jquery/jquery.min.js"></script>
@@ -196,7 +147,49 @@
         $(document).ready(function(){  
             $('#employee_data').DataTable();  
         });  
+        </script>
+
+         <script>
+           $('.btn-delete').on('click',function(e){
+               e.preventDefault();
+               const href =$(this).attr('href')
+               swal({
+                        title: "Are you sure?",
+                        text: "Delete  slider.",
+                        icon: "warning",
+                        buttons: true,
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                           document.location.href=href;
+                        } else {
+                        
+                        }
+                });
+              
+           })
+
+           const flashdata=$('.flash-data').data('flashdata')
+           if(flashdata){
+            swal({
+                        title: "successful delete slider.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"Ok"],
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-slider.php','_self'); 
+                        } else {
+                        
+                        }
+                });
+                
+           }    
         </script> 
+
 <?php
  } 
 ?>

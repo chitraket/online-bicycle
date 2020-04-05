@@ -60,67 +60,99 @@ if(isset($_POST["action"]))
 //$result=$con->query($query);
 //$total_count=$result->num_rows;
 $outputs='';
-$output = '';
+
  if (mysqli_num_rows($result)>0) {
-     $output.='<div class="shop-product-wrap grid-view row mbn-30">';
+     echo '<div class="shop-product-wrap grid-view row mbn-30">';
      while ($row=mysqli_fetch_assoc($result)) {
-         $output .= '
+         $manufacturer_id=$row['manufacturer_id'];
+         ?>
                         <div class="col-md-4 col-sm-6">
                                     <!-- product grid start -->
                                     <div class="product-item">
                                         <figure class="product-thumb">
-                                            <a href="product-details.php?pro_id='.$row['product_id'].'">
-                                                <img class="pri-img" src="admin_area/product_images/'.$row['product_img1'].'" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="admin_area/product_images/'.$row['product_img2'].'" alt="product" style="height:180px;">
-                                            </a>
+                                            <a href="product-details.php?pro_id=<?php echo $row['product_id'];?>">
+                                                <img class="pri-img" src="admin_area/product_images/<?php echo $row['product_img1'];?>" alt="product" style="height:180px;">
+                                                <img class="sec-img" src="admin_area/product_images/<?php echo $row['product_img2'];?>" alt="product" style="height:180px;">
+                                            </a>                                   
                                             <div class="product-badge">
+                                            <?php
+                                                if($row['product_label']=="new")
+                                                { 
+                                            ?>                                           
                                                 <div class="product-label new">
-                                                    <span>new</span>
+                                                    <span>New</span>
+                                                </div>
+                                                <?php
+                                                }
+                                                if($row['product_label']=="sale")
+                                                { 
+                                                ?>
+                                                 <div class="product-label new">
+                                                    <span>Sale</span>
                                                 </div>
                                                 <div class="product-label discount">
-                                                    <span>10%</span>
+                                                    <span><?php echo $row['product_discount'] ?>%</span>
                                                 </div>
+                                                <?php 
+                                                }
+                                                ?>
                                             </div>
-                                            <div class="button-group">
-                                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            </div>
-                                            
                                         </figure>
                                         <div class="product-caption text-center">
-                                           
+                                        <div class="manufacturer-name">
+                                            <?php
+                                            $query3="select * from manufacturers where manufacturer_id='$manufacturer_id'";
+                                            $run_carts=mysqli_query($con, $query3);
+                                            while ($row_carts=mysqli_fetch_array($run_carts)) { 
+                                            ?>
+                                                <a href="product-details.php?pro_id=<?php echo  $row['product_id'] ?>"><?php echo $row_carts['manufacturer_title']; ?></a>
+                                                <?php 
+                                            }
+                                                ?>
+                                            </div>
                                             <h6 class="product-name">
-                                                <a href="product-details.php?pro_id='.$row['product_id'].'">'.$row['product_title'].'</a>
+                                                <a href="product-details.php?pro_id=<?php echo  $row['product_id'] ?>"><?php echo $row['product_title'] ?></a>
                                             </h6>
                                             <div class="price-box">
-                                                <span class="price-regular">Rs.'.$row['product_price'].'</span>
-                                                <span class="price-old"><del>Rs.50000</del></span>
+                                            <?php
+                                            if($row['product_label']=="new")
+                                            { 
+                                            ?>  
+                                                <span class="price-regular">Rs.<?php echo $row['product_price'] ?></span>
+                                            <?php 
+                                            }
+                                            if($row['product_label']=="sale")
+                                            {
+                                            ?>
+                                             <span class="price-regular">Rs.<?php echo $row['product_price']; ?></span>
+                                                <span class="price-old"><del>Rs.<?php echo $row['product_discount_price']; ?></del></span>
+                                                <?php 
+                                            }
+                                            ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 
 
-                                ';
-     }
-     $output.='</div>';
+        <?php 
+     } 
+     echo '</div>';
     
  }
  
 else
  {
-  $output = '
+?>
   <div class="col-12">
         <!-- section title start -->
         <div class="section-title text-center">
             <h2 class="title">No products Found</h2>
         </div>
         <!-- section title start -->
-        </div><style>.paginatoin-area{display:none;}</style>';
+        </div><style>.paginatoin-area{display:none;}</style>
+        <?php 
  }
-
- 
- echo $output;
 
 }
 

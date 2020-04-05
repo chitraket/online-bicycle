@@ -39,8 +39,16 @@ if(isset($_GET['product_id'])){
     $p_image2 = $row_edit['product_img2'];
     
     $p_image3 = $row_edit['product_img3'];
+
+    $p_image4 =$row_edit['product_img4'];
     
     $p_price = $row_edit['product_price'];
+
+    $p_discount_price=$row_edit['product_discount_price'];
+
+    $p_discount=$row_edit['product_discount'];
+
+    $p_label=$row_edit['product_label'];
     
     $p_size=$row_edit['product_size'];
 
@@ -183,7 +191,7 @@ if(isset($_GET['product_id'])){
                                 <label for="example-search-input" class="col-md-3 col-form-label">Product Category</label>
                                 <div class="col-md-9">
                                 <select class="form-control" name="product_cat">
-                                <option value="<?php echo $p_cat; ?>"> <?php echo $p_cat_title ?> </option>
+                                <option value="<?php echo $p_cat; ?>" > <?php echo $p_cat_title ?> </option>
                               
                               <?php 
                               
@@ -322,15 +330,64 @@ if(isset($_GET['product_id'])){
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="example-tel-input" class="col-md-3 col-form-label">Product Image 4</label>
+                                <div class="col-md-9">
+                                <div class="custom-file">
+                                            <input type="file" name="product_img4" class="custom-file-input" id="customFilewas">
+                                            <label class="custom-file-label" id="customFileswas">Choose file</label>
+                                            <br>
+                                            <br/>
+                                            <img   width="70" height="70" src="product_images/<?php echo $p_image4; ?>" alt="<?php echo $p_image1; ?>">  
+                                              <br>
+                                              <br/>
+                                            <script type="text/javascript">
+                                            const realfileBtnwas=document.getElementById("customFilewas");
+                                            const customTxtwas=document.getElementById("customFileswas");
+                                            realfileBtnwas.addEventListener("change",function(){
+                                                if(realfileBtnwas.value)
+                                                {
+                                                    customTxtwas.innerHTML=realfileBtnwas.value;
+                                                }
+                                                else{
+                                                    customTxtwas.innerHTML="Choose file";
+                                                }
+                                            });
+                                            </script>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-email-input" class="col-md-3 col-form-label">Product label</label>
+                                <div class="col-md-9">
+                                <select class="form-control" name="product_label">
+                                        <option><?php echo $p_label; ?></option>
+                                        <option value="new">new</option>
+                                        <option value="sale">sale</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="example-password-input" class="col-md-3 col-form-label">Product Price</label>
                                 <div class="col-md-9">
                                     <input class="form-control" type="text" placeholder="Prodcut Price" id="example-password-input" value="<?php echo $p_price; ?>" name="product_price">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="example-number-input" class="col-md-3 col-form-label">Product qty</label>
+                                <label for="example-password-input" class="col-md-3 col-form-label">Product Discount</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" id="example-number-input" placeholder="Product Qty" value="<?php echo $p_qty;?> " name="product_qty" >
+                                    <input class="form-control" type="text" placeholder="Prodcut Discount" id="example-password-input" value="<?php echo $p_discount; ?>" name="product_discount">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-password-input" class="col-md-3 col-form-label">Product Discount Price</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" placeholder="Prodcut Discount Price" id="example-password-input" value="<?php echo $p_discount_price; ?>" name="product_discount_price">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="example-number-input" class="col-md-3 col-form-label">Available Quantity<span class="badge badge-pill badge-soft-success font-size-12" ><?php echo $p_qty; ?></span></label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" id="example-number-input" placeholder="Product Qty" value="0" name="product_qty" >
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -542,9 +599,11 @@ if(isset($_POST['update'])){
     $product_title = $_POST['product_title'];
     $product_cat = $_POST['product_cat'];
     $cat = $_POST['cat'];
-    $product_price = $_POST['product_price'];
     $manufacturer_cat=$_POST['manufacturer_cat'];
-   // $product_keywords = $_POST['product_keywords'];
+    $product_price = $_POST['product_price'];
+    $product_label=$_POST['product_label'];
+    $product_discount=$_POST['product_discount'];
+    $product_discount_price=$_POST['product_discount_price'];
     $product_desc = $_POST['product_desc'];
     $product_size=$_POST['product_size'];
     $product_frame=$_POST['product_frame'];
@@ -574,25 +633,58 @@ if(isset($_POST['update'])){
     $product_img1 = $_FILES['product_img1']['name'];
     $product_img2 = $_FILES['product_img2']['name'];
     $product_img3 = $_FILES['product_img3']['name'];
+    $product_img4 = $_FILES['product_img4']['name'];
     
-    $temp_name1 = $_FILES['product_img1']['tmp_name'];
-    $temp_name2 = $_FILES['product_img2']['tmp_name'];
-    $temp_name3 = $_FILES['product_img3']['tmp_name'];
-    
-    move_uploaded_file($temp_name1,"product_images/$product_img1");
-    move_uploaded_file($temp_name2,"product_images/$product_img2");
-    move_uploaded_file($temp_name3,"product_images/$product_img3");
+    if(!($product_img1=="" || $product_img2=="" || $product_img3=="" || $product_img4==""))
+    {
+        $temp_name1 = $_FILES['product_img1']['tmp_name'];
+        $temp_name2 = $_FILES['product_img2']['tmp_name'];
+        $temp_name3 = $_FILES['product_img3']['tmp_name'];
+        $temp_name4 = $_FILES['product_img4']['tmp_name'];
+        move_uploaded_file($temp_name1,"product_images/$product_img1");
+        move_uploaded_file($temp_name2,"product_images/$product_img2");
+        move_uploaded_file($temp_name3,"product_images/$product_img3");
+        move_uploaded_file($temp_name4,"product_images/$product_img4");
 
-    $update_product = "update products set manufacturer_id='$manufacturer_cat', p_cat_id='$product_cat',cat_id='$cat',date=NOW(),product_title='$product_title',product_img1='$product_img1',product_img2='$product_img2',product_img3='$product_img3',product_price='$product_price',product_desc='$product_desc',product_qty=product_qty+'$product_qty',available_qty=available_qty+'$product_qty',product_size='$product_size',product_frame='$product_frame',product_weight='$product_weight',product_front_suspension='$product_front_suspension',product_rear_suspension='$product_rear_suspension',product_front_derailleur='$product_front_derailleur',product_rear_derailleur='$product_rear_derailleur',product_wheels='$product_wheels',product_tires='$product_tires',product_shifter='$product_shifter',product_crankset='$product_crankset',product_freewheels='$product_freewheels',product_bb_set='$product_bb_set',product_cassette='$product_cassette',product_colour='$product_colour',product_pedals='$product_pedals',product_seat_post='$product_seat_post',product_handleber='$product_handleber',product_stem='$product_stem',product_headset='$product_headset',product_brakeset='$product_brakeset',product_status='$product_status' where product_id='$p_id'";
-    
-    $run_product = mysqli_query($con,$update_product);
-    
-    if($run_product){
-       echo "<script>alert('Your product has been updated Successfully')</script>"; 
+        $update_product = "update products set manufacturer_id='$manufacturer_cat', p_cat_id='$product_cat',cat_id='$cat',date=NOW(),product_title='$product_title',product_img1='$product_img1',product_img2='$product_img2',product_img3='$product_img3',product_img4='$product_img4',product_price='$product_price',product_discount_price='$product_discount_price',product_discount='$product_discount',product_label='$product_label',product_desc='$product_desc',product_qty=product_qty+'$product_qty',available_qty=available_qty+'$product_qty',product_size='$product_size',product_frame='$product_frame',product_weight='$product_weight',product_front_suspension='$product_front_suspension',product_rear_suspension='$product_rear_suspension',product_front_derailleur='$product_front_derailleur',product_rear_derailleur='$product_rear_derailleur',product_wheels='$product_wheels',product_tires='$product_tires',product_shifter='$product_shifter',product_crankset='$product_crankset',product_freewheels='$product_freewheels',product_bb_set='$product_bb_set',product_cassette='$product_cassette',product_colour='$product_colour',product_pedals='$product_pedals',product_seat_post='$product_seat_post',product_handleber='$product_handleber',product_stem='$product_stem',product_headset='$product_headset',product_brakeset='$product_brakeset',product_status='$product_status' where product_id='$p_id'";
         
-       echo "<script>window.open('view-product.php','_self')</script>"; 
+        $run_product = mysqli_query($con,$update_product);
+        
+        if($run_product){
+        echo "<script>alert('Your product has been updated Successfully')</script>"; 
+            
+        echo "<script>window.open('view-product.php','_self')</script>"; 
+        }
     }
-    
+    else
+    {
+        $update_product = "update products set manufacturer_id='$manufacturer_cat', p_cat_id='$product_cat',cat_id='$cat',date=NOW(),product_title='$product_title',product_price='$product_price',product_discount_price='$product_discount_price',product_discount='$product_discount',product_label='$product_label',product_desc='$product_desc',product_qty=product_qty+'$product_qty',available_qty=available_qty+'$product_qty',product_size='$product_size',product_frame='$product_frame',product_weight='$product_weight',product_front_suspension='$product_front_suspension',product_rear_suspension='$product_rear_suspension',product_front_derailleur='$product_front_derailleur',product_rear_derailleur='$product_rear_derailleur',product_wheels='$product_wheels',product_tires='$product_tires',product_shifter='$product_shifter',product_crankset='$product_crankset',product_freewheels='$product_freewheels',product_bb_set='$product_bb_set',product_cassette='$product_cassette',product_colour='$product_colour',product_pedals='$product_pedals',product_seat_post='$product_seat_post',product_handleber='$product_handleber',product_stem='$product_stem',product_headset='$product_headset',product_brakeset='$product_brakeset',product_status='$product_status' where product_id='$p_id'";
+        
+        $run_product = mysqli_query($con,$update_product);
+        
+        if($run_product){
+            ?>
+
+            <script>
+                    swal({
+                        title: "successful update product.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-product.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+        <?php 
+        }
+    }
 }
 
 ?>

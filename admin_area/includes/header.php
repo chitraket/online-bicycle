@@ -17,6 +17,8 @@
         <link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+        <!-- Sweet Alert-->
+        <script src="../assets/js/sweetalert.min.js"></script>
         <!-- Pe-icon-7-stroke CSS -->
         <link rel="stylesheet" href="assets/css/vendor/pe-icon-7-stroke.css">
         <!-- Responsive datatable examples -->

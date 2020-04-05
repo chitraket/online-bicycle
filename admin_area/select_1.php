@@ -119,66 +119,76 @@
                                         </tbody>
                                     </table>
                                     <?php
-                                     $get_status="select DISTINCT order_status,invoice_no,txnid from customer_orders where order_id=$order_id";
+                                     $get_status="select DISTINCT order_status,invoice_no,txnid,payment_status from customer_orders where order_id=$order_id";
                                      $run_status=mysqli_query($con,$get_status);
                                      while ($row_status=mysqli_fetch_array($run_status)) {
                                          $product_status=$row_status['order_status']; 
                                          $product_invoice=$row_status['invoice_no'];
-                                         $txnid=$row_status['txnid'];?>
+                                         $txnid=$row_status['txnid'];
+                                         $payment_status=$row_status['payment_status'];
+                                         ?>
                                     <div class="text-left m-2">
                                     <?php
+                                    if($product_status=="c" || $product_status=="cancel")
+                                    {?>
+
+                                        <span class="ml-2 badge badge-pill badge-soft-danger font-size-10" ><img src="icon/close.png" style="height:25px;"/> Cancel Order</span> 
+                                        <?php  
+                                    }
+                                    else if($product_status=="r" || $payment_status=="returned")
+                                    {
+                                        ?>
+                                        <span class="ml-2 badge badge-pill badge-soft-warning font-size-10" ><img src="icon/return.png" style="height:25px;"/> Returned Order</span> 
+                                        <?php 
+                                    }
+                                    else{
+                                        
                                     if ($product_status=="o") {
                                         ?>
+                                            <a href="cancel_order.php?del_id=<?php echo $order_id; ?>&status=c" id="btn-delete"><input type="button" class="btn btn-danger"  value="Cancel Order" ></a>
                                             <a href="delete.php?del_id=<?php echo $order_id; ?>&status=p"><input type="button" class="btn btn-primary"  value="Packed" ></a> 
-                                            <span class="ml-2 badge badge-pill badge-soft-success font-size-10" >Ordered And Approved</span>  
+                                            <span class="ml-2 badge badge-pill badge-soft-success font-size-10" ><img src="icon/tick.png" style="height:25px;"/> Ordered And Approved</span>
                                     <?php
                                         }
                                     if($product_status=="p")
                                     {
                                     ?>
+                                        <a href="cancel_order.php?del_id=<?php echo $order_id; ?>&status=c" id="btn-delete"><input type="button" class="btn btn-danger"  value="Cancel Order" ></a>
                                         <a href="delete.php?del_id=<?php echo $order_id; ?>&status=s"><input type="button" class="btn btn-primary" value="Shipped" > </a>
-                                            <span class="ml-2 badge badge-pill badge-soft-success font-size-10" >Packed</span>  
+                                        <span class="ml-2 badge badge-pill badge-soft-success font-size-10" ><img src="icon/packing.png" style="height:25px;"/> Packed</span>    
+
                                     <?php 
                                     }
                                     if ($product_status=="s") {
                                         ?>
+                                        <a href="cancel_order.php?del_id=<?php echo $order_id; ?>&status=c" id="btn-delete"><input type="button" class="btn btn-danger"  value="Cancel Order"  id=""></a>
                                         <a href="delete.php?del_id=<?php echo $order_id; ?>&status=d"><input type="button" class="btn btn-primary"  value="Delivered" ></a>
-                                            <span class="ml-2 badge badge-pill badge-soft-success font-size-10" >Shipped</span> 
+                                            <span class="ml-2 badge badge-pill badge-soft-success font-size-10" ><img src="icon/truck.png" style="height:25px;"/> Shipped</span> 
                                     <?php
                                     } 
                                     if ($product_status=="d") {
-                                        if ($txnid==" ") {
+                                        if ($txnid=="") {
+                                           // echo "<script>alert('hii');</script>";
                                             $payment_mode="Cash on Delivery";
                                             $insert_payment="insert into payments(invoice_no,txnid,amount,payment_mode,code_name,code,payment_date) values('$product_invoice','','$total','$payment_mode','','',NOW())";
-                                            $run_payment=mysqli_query($con, $insert_payment);
-                                          
+                                            mysqli_query($con, $insert_payment);
+                                            $update_status="update customer_orders set payment_status='successful' where order_id='$order_id'";
+                                            mysqli_query($con,$update_status);
                                         }
-                                                                         
+                                      
+                                
                                         ?>
 
-                                        <span class="ml-2 badge badge-pill badge-soft-success font-size-10" >Delivered</span> 
+                                        <span class="ml-2 badge badge-pill badge-soft-success font-size-10" ><img src="icon/delivery-man.png" style="height:25px;"/> Delivered</span> 
                                     <?php
-                                    } 
+                                    }
+                                    }
+                                    
                                     ?>
-                                <script language="javascript">
-                                            function deleteme(delid,status)
-                                            {
-                                            //     alert(delid);
-                                            // if(confirm("Do you want Delete!")){
-                                             window.location.href='delete.php?del_id='+delid+'&status='+status+'';
-                                            // //return true;
-                                            // }
-
-                                           
-                                            } 
-                                            </script>
+                           
                             </div>
-                            <?php
-                                     } 
-
-                            ?>
                                 </div>
-                               
 <?php 
+                                     }
 }
 ?>    

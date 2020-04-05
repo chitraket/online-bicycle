@@ -16,9 +16,7 @@
         $run_delete = mysqli_query($con, $delete_pro);
         
         if ($run_delete) {
-            echo "<script>alert('One of your customer has been Deleted')</script>";
-            
-            echo "<script>window.open('view-customer.php','_self')</script>";
+            echo "<script>window.open('view-customer.php?m=1','_self')</script>";
         }
     } ?>
 <?php

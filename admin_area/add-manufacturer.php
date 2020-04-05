@@ -84,10 +84,25 @@
                 
                 if($run_cat){
                     
-                    echo "<script>alert('Your New Category Has Been Inserted')</script>";
-                    
-                    echo "<script>window.open('view-manufacturer.php','_self')</script>";
-                    
+                    ?>
+                    <script>
+                    swal({
+                        title:"Your New Manufacturer Has Been Inserted.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-manufacturer.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+                    <?php 
                 }
                 
             }

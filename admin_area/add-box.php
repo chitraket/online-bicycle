@@ -37,7 +37,7 @@
                                 <label for="example-text-input" class="col-md-3 col-form-label">Box Title</label>
                                 <div class="col-md-9">
                                 <select class="form-control select2" name="p_box">
-                                    <option>Select</option>
+                                    <option disabled selected value>Select</option>
                                     <option value="album">album</option>
                                     <option value="back-2">back-2</option>
                                     <option value="arc">arc</option>
@@ -136,12 +136,26 @@
                 $run_cat = mysqli_query($con,$insert_cat);
                 
                 if($run_cat){
+                    ?>
+                <script>
+                    swal({
+                        title: "Your New Box Has Been Inserted..",
+                        text: "",
+                        icon: "success",
+                        buttons:[,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-box.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
                     
-                    echo "<script>alert('Your New Category Has Been Inserted')</script>";
-                    
-                    echo "<script>window.open('view-box.php','_self')</script>";
-                    
-                }
+               <?php  }
                 
             }
     ?>
@@ -166,9 +180,6 @@
 
         <script src="assets/js/app.js"></script>
     </body>
-
-
-<!-- Mirrored from themesbrand.com/skote/layouts/vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:43:03 GMT -->
 </html>
 
 

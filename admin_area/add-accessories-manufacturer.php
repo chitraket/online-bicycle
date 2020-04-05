@@ -84,11 +84,25 @@
                 $run_cat = mysqli_query($con,$insert_cat);
                 
                 if($run_cat){
-                    
-                    echo "<script>alert('Your New Category Has Been Inserted')</script>";
-                    
-                    echo "<script>window.open('view-accessories-manufacturer.php','_self')</script>";
-                    
+                    ?>
+            <script>
+                    swal({
+                        title: "Your New Accessories Manufacturer Has Been Inserted.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-accessories-manufacturer.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+                   <?php  
                 }
                 
             }

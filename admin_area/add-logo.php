@@ -64,6 +64,12 @@
                                 </div>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-md-3 col-form-label">Logo URL</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" placeholder="Logo URL" name="logo_link"  id="example-text-input">
+                                </div>
+                            </div>
                                 <div class="form-group mt-4">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="submit">
@@ -89,16 +95,32 @@
             
 
             $logo_name=$_POST['logo_title'];
+            $logo_link=$_POST['logo_link'];
             $logo_img=$_FILES['logo_img']['name'];
             $temp_name1 = $_FILES['logo_img']['tmp_name'];
             move_uploaded_file($temp_name1,"logo/$logo_img");
-            $insert_accessories = "insert into logo(logo_name,logo_img) values ('$logo_name','$logo_img')";
+            $insert_accessories = "insert into logo(logo_name,logo_img,logo_link) values ('$logo_name','$logo_img','$logo_link')";
             $run_accessories = mysqli_query($con,$insert_accessories);
             if($run_accessories){
-                
-                echo "<script>alert('Product has been inserted sucessfully')</script>";
-                echo "<script>window.open('view-logo.php','_self')</script>";
-                
+                ?>
+                <script>
+                    swal({
+                        title:"Your New Logo Has Been Inserted.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-logo.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+               <?php  
             }
             
         }
