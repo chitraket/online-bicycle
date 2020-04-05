@@ -251,22 +251,17 @@
         <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
         <!-- Datatable init js -->
-        <script src="assets/js/pages/datatables.init.js"></script>    
+            
 
         <script src="assets/js/app.js"></script>
 
-    </body>
-
-<!-- Mirrored from themesbrand.com/skote/layouts/vertical/tables-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:43:50 GMT -->
-</html>
-<script>  
+        <script>  
         $(document).ready(function(){  
             $('#employee_data').DataTable();  
         });  
         </script> 
         <script>  
-                    $(document).ready(function(){  
-                        $('.view_data').click(function(){  
+                    $(document).on('click','.view_data', function(){  
                             var order_id = $(this).attr("id");  
                             $.ajax({  
                                     url:"select_1.php",  
@@ -278,8 +273,13 @@
                                     }  
                             });  
                         });  
-                    });  
                 </script> 
+
+    </body>
+
+<!-- Mirrored from themesbrand.com/skote/layouts/vertical/tables-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:43:50 GMT -->
+</html>
+
 <?php
  } 
 ?>

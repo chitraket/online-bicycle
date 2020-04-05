@@ -112,10 +112,6 @@
                                                 </td>
                                             </tr>
                                             
-                                                
-                                                    
-                                            
-                                            
                                         </tbody>
                                     </table>
                                     <?php

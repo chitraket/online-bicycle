@@ -178,8 +178,7 @@
         });  
         </script>
           <script>  
-                    $(document).ready(function(){  
-                        $('.view_data').click(function(){  
+                    $(document).on('click','.view_data', function(){  
                             var product_id = $(this).attr("id");  
                             $.ajax({  
                                     url:"select.php",  
@@ -190,8 +189,7 @@
                                         $('#dataModal').modal("show");  
                                     }  
                             });  
-                        });  
-                    });  
+                        });    
                 </script> 
         <script>
            $('.btn-delete').on('click',function(e){
