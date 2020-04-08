@@ -22,7 +22,7 @@ if(isset($_POST["action"]))
    //echo $start_from;
     
  $query = "
-  SELECT * FROM products  WHERE manufacturer_id!=''";
+  SELECT * FROM products  WHERE manufacturer_id!='' AND product_status='yes'";
  if(isset($_POST["minimum_price"], $_POST["maximum_price"]) && !empty($_POST["minimum_price"]) && !empty($_POST["maximum_price"]))
  {
   $query .= "
@@ -51,6 +51,7 @@ if(isset($_POST["action"]))
    AND p_cat_id IN('".$storage_filter."')
   ";
  }
+ 
  $query2 = $query;
  $query.="ORDER BY product_id DESC LIMIT "  . $start_from."," .$record_per_page;
 

@@ -9,7 +9,7 @@ if(isset($_GET['accessories_id']))
 {
    // echo $_GET['accessories_id'];
     $accessories_id=$_GET['accessories_id'];
-    $get_accessories="select * from accessories where accessories_id=$accessories_id";
+    $get_accessories="select * from accessories where accessories_status='yes' and accessories_id=$accessories_id";
     $run_accessories=mysqli_query($con,$get_accessories);
     $row_accessories=mysqli_fetch_array($run_accessories);
     $accessories_brand=$row_accessories['accessories_brand'];

@@ -1,18 +1,38 @@
 <?php if (isset($_POST["order_id"])) {
     include("includes/db.php");
     ?>
-<p class="mb-2">Order id: <span class="text-primary"><?php echo $_POST["order_id"] ?></span></p>
+<p class="mb-2">Order id : <span class="text-primary"><?php echo $_POST["order_id"] ?></span></p>
 <?php
  $order_id=$_POST["order_id"];
  $get_product="select * from orders where id=$order_id";
  $run_product=mysqli_query($con,$get_product);
  while ($row_product=mysqli_fetch_array($run_product)) {
      ?>
-                                <p class="mb-2">Billing Name: <span class="text-primary"><?php echo $row_product["customer_name"]; ?></span></p>
-                                <p class="mb-2">Order Address: <span class="text-primary"><?php echo $row_product["customer_address"]; ?></span></p>
-                                <p class="mb-3">Contact Number: <span class="text-primary"><?php echo $row_product["customer_contact"]; ?></span></p>
+                                <p class="mb-2">Billing Name : <span class="text-primary"><?php echo $row_product["customer_name"]; ?></span></p>
+                                <p class="mb-2">Order Address : <span class="text-primary"><?php echo $row_product["customer_address"]; ?></span></p>
+                                <p class="mb-3">Contact Number : <span class="text-primary"><?php echo $row_product["customer_contact"]; ?></span></p>
 <?php
  }
+$get_customer_orders="select DISTINCT txnid,invoice_no from customer_orders where order_id=$order_id";
+$run_customer_orders=mysqli_query($con,$get_customer_orders);
+while($row_customer_orders=mysqli_fetch_array($run_customer_orders))
+{
+    ?>
+     <p class="mb-2">Invoice number : <span class="text-primary"><?php echo $row_customer_orders["invoice_no"]; ?></span></p>
+    <?php 
+    if($row_customer_orders['txnid']=="")
+    {
+        ?>
+         <p class="mb-2">Payment Method : <span class="badge badge-pill badge-soft-success font-size-10" ><img src="icon/cash-on-delivery.png" style="height:25px;"/>Cash On Delivery</span></p>
+        <?php
+
+    }else
+    {?>
+        <p class="mb-2">Transaction ID : <span class="text-primary"><?php echo $row_customer_orders["txnid"]; ?></span></p>
+        <p class="mb-2">Payment Method : <span class="badge badge-pill badge-soft-success font-size-10" ><img src="icon/icons8-paytm-32.png" style="height:25px;"/> Online Payment</span></p>
+    <?php 
+    }
+}
  ?>
                                 <div class="table-responsive">
                                     <table class="table table-centered table-nowrap">
@@ -91,12 +111,14 @@
                                                  }?>
                                             <tr>
                                                
+                                            
                                                 <td colspan="2">
                                                    
                                                     <h6 class="m-0 text-right">Sub Total:</h6>
                                                 </td>
                                                 <td>Rs.<?php echo $total; ?>
                                                 </td>
+
                                             </tr>
                                             
                                             <tr>

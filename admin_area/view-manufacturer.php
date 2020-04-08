@@ -41,7 +41,8 @@
                                             <thead>
                                             <tr>
                                                 <th>Manufacturer Title</th>
-                                                <!--<th>Manufacturer Top</th>-->
+                                                <th>Manufacturer Top</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -50,36 +51,57 @@
                                             
                                             <?php
                                             
-                                              $select_cat="SELECT * FROM manufacturers ORDER BY manufacturer_id DESC";
+                                              $select_cat="SELECT * FROM manufacturers where manufacturer_status IN ('yes','no')  ORDER BY manufacturer_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
                                                ?>
                                                 <tr>
                                                 <td><?php echo $row_cart["manufacturer_title"] ?></td>
-                                               
-                                               <!-- <td>
-                                                <input type="hidden" name="action" id="action" value="change"/>
-                                                <input type="hidden" name="code" id="code" value="<?php echo $row_cart["manufacturer_id"] ?>">
-                                                <?php
-                                                if ($row_cart["manufacturer_top"]=="yes") {
-                                                    ?>
-                                                    
-                                                <input type="checkbox" id="select1"  switch="none" name="manufacturer_top" value="yes" class="get_value"  onchange="check()" checked/>
-                                                <label for="select1" data-on-label="On"
-                                                    data-off-label="Off"></label>
-                                                <?php
-                                                }
-                                                else
+                                                <td>
+                                                <?php 
+                                                if($row_cart['manufacturer_top']=="yes")
                                                 {
-                                                    ?> 
-                                                    <input type="checkbox" id="select1"  switch="none"   name="manufacturer_top"  value="no"  class="get_value"  onchange="check()"/>
-                                                <label for="select1" data-on-label="On"
-                                                    data-off-label="Off"></label>
-
-                                                    <?php
-                                                }
                                                 ?>
-                                                    </td>-->
+                                               
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['manufacturer_id']; ?>" class="switch2" name="no" switch="none" checked/>
+                                                <label for="ch<?php echo $row_cart['manufacturer_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['manufacturer_id']; ?>" class="switch2" name="yes" switch="none" />
+                                                <label for="ch<?php echo $row_cart['manufacturer_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
+                                                <td>
+                                               <?php 
+                                                if($row_cart['manufacturer_status']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="<?php echo $row_cart['manufacturer_id']; ?>" class="switch1" name="no" switch="none" checked/>
+                                                <label for="<?php echo $row_cart['manufacturer_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="<?php echo $row_cart['manufacturer_id']; ?>" class="switch1" name="yes" switch="none" />
+                                                <label for="<?php echo $row_cart['manufacturer_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
+                                               
                                                     <td><a href="delete-manufacturer.php?manufacturer_id=<?php echo $row_cart["manufacturer_id"]?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-manufacturer.php?manufacturer_id=<?php echo $row_cart["manufacturer_id"]?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>
                                                 <?php 
@@ -96,7 +118,14 @@
                 <!-- End Page-content -->
                
                 <!-- Modal -->
-
+                <?php
+                if(isset($_GET['m']))
+                { 
+                ?>
+                <div class="flash-data" data-flashdata="<?php echo $_GET['m'] ?>"></div>
+                <?php
+                } 
+                ?>
                
                 <!-- end modal -->
                <?php 
@@ -117,24 +146,6 @@
         <div class="rightbar-overlay"></div>
 
         <!-- JAVASCRIPT -->
-        <!--<script>
-
-                function check()
-                {
-                    var code = $('#code').val();
-                    var action = $('#action').val();
-                    var checkbox=document.getElementById('select1');
-                    if(checkbox.checked == true)
-                    {
-                        var checkboxs="yes";
-                    }
-                    else{
-                        var checkboxs="no";
-                    }
-                    alert(checkboxs);
-                }
-
-           </script>-->
         <script src="assets/libs/jquery/jquery.min.js"></script>
         <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>
@@ -171,6 +182,40 @@
             $('#employee_data').DataTable();  
         });  
         </script> 
+        <script>
+                    $('.switch1').on('click',function(){
+                        var manufacturer_ids=$(this).attr("id");
+                        var manufacturer_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"manufacturer-status.php",
+                            method:"POST",
+                            data:{manufacturer_ids:manufacturer_ids,manufacturer_idss:manufacturer_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                    });
+        </script> 
+        <script>
+                    $('.switch2').on('click',function(){
+                        var manufacturer_id=$(this).attr("id");
+                        var manufacturer_ids=manufacturer_id.substring(2,manufacturer_id.length);
+                        var manufacturer_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"manufacturer-status-top.php",
+                            method:"POST",
+                            data:{manufacturer_ids:manufacturer_ids,manufacturer_idss:manufacturer_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                        
+                        
+                    });
+        </script>
+
         <script>
            $('.btn-delete').on('click',function(e){
                e.preventDefault();

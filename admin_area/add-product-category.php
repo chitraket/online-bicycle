@@ -83,7 +83,7 @@
               
               $p_cat_top=$_POST['customRadio'];
               
-              $insert_p_cat = "insert into product_categories (p_cat_title,p_cat_top) values('$p_cat_title','$p_cat_top')";
+              $insert_p_cat = "insert into product_categories (p_cat_title,p_cat_top,p_cat_status) values('$p_cat_title','$p_cat_top','yes')";
               
               $run_p_cat = mysqli_query($con,$insert_p_cat);
               

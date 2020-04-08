@@ -8,7 +8,7 @@ include("includes/header.php");
 if(isset($_GET['pro_id']))
 {
     $product_id=$_GET['pro_id'];
-    $get_product="select * from products where product_id=$product_id";
+    $get_product="select * from products where product_id=$product_id and product_status='yes'";
     $run_product=mysqli_query($con,$get_product);
     $row_product=mysqli_fetch_array($run_product);
     $p_cat_id=$row_product['p_cat_id'];

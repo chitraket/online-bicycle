@@ -52,7 +52,8 @@
                                                 <th>qty</th>
                                                 <th>Available qty</th>
                                                 <th>Sold Out</th>
-                                                <th>View Details</th>
+                                                <th>Accessories Top</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -61,7 +62,7 @@
                                             
                                             <?php
                                             
-                                              $select_cat="SELECT * FROM accessories ORDER BY accessories_id DESC";
+                                              $select_cat="SELECT * FROM accessories where accessories_status IN ('yes','no') ORDER BY accessories_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
                                                
@@ -73,8 +74,51 @@
                                                 <td><?php echo $row_cart["accessories_qty"]; ?></td>
                                                 <td><?php echo $row_cart["available_qty"] ?></td>
                                                 <td><?php echo $sold_out=$row_cart["accessories_qty"]-$row_cart["available_qty"]; ?></td>
-                                                <td><input type="button" name="view" value="View Details" id="<?php echo $row_cart["accessories_id"];?>" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light view_data"  /></td>
-                                                <td><a href="delete-accessories.php?accessories_id=<?php echo $row_cart["accessories_id"] ?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-accessories.php?accessories_id=<?php echo $row_cart["accessories_id"]; ?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
+                                                <td>
+                                                <?php 
+                                                if($row_cart['accessories_status_top']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['accessories_id']; ?>" class="switch2" name="no" switch="none" checked/>
+                                                <label for="ch<?php echo $row_cart['accessories_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['accessories_id']; ?>" class="switch2" name="yes" switch="none" />
+                                                <label for="ch<?php echo $row_cart['accessories_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
+                                                <td>
+                                               <?php 
+                                                if($row_cart['accessories_status']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="<?php echo $row_cart['accessories_id']; ?>" class="switch1" name="no" switch="none" checked/>
+                                                <label for="<?php echo $row_cart['accessories_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="<?php echo $row_cart['accessories_id']; ?>" class="switch1" name="yes" switch="none" />
+                                                <label for="<?php echo $row_cart['accessories_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
+                                                <td><a href="delete-accessories.php?accessories_id=<?php echo $row_cart["accessories_id"] ?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-accessories.php?accessories_id=<?php echo $row_cart["accessories_id"]; ?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> <input type="button" name="view" value="View Details" id="<?php echo $row_cart["accessories_id"];?>" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light view_data"  /></td>
                                                 </tr>
                                                 <?php 
                                                  }?>
@@ -192,6 +236,39 @@
                                     }  
                             });  
                         });    
+            </script>
+            <script>
+                    $('.switch1').on('click',function(){
+                        var accessories_ids=$(this).attr("id");
+                        var accessories_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"accessories-status.php",
+                            method:"POST",
+                            data:{accessories_ids:accessories_ids,accessories_idss:accessories_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                    });
+                </script>
+                 <script>
+                    $('.switch2').on('click',function(){
+                        var accessories_id=$(this).attr("id");
+                        var accessories_ids=accessories_id.substring(2,accessories_id.length);
+                        var accessories_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"accessories-status-top.php",
+                            method:"POST",
+                            data:{accessories_ids:accessories_ids,accessories_idss:accessories_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                        
+                        
+                    });
                 </script> 
             <script>
            $('.btn-delete').on('click',function(e){

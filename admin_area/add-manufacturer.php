@@ -78,7 +78,7 @@
                 
                 $manufacturer_title = $_POST['manufacturer_title'];
               
-                $insert_cat = "insert into manufacturers (manufacturer_title,manufacturer_top) values ('$manufacturer_title','$manufacturer_top')";
+                $insert_cat = "insert into manufacturers (manufacturer_title,manufacturer_top,manufacturer_status) values ('$manufacturer_title','$manufacturer_top','yes')";
                 
                 $run_cat = mysqli_query($con,$insert_cat);
                 

@@ -208,7 +208,7 @@ end:
                         <div class="col-lg-9">
 
                             <div class="login-reg-form-wrap sign-up-form">
-                                <h5>Singup Form</h5>
+                                <h5>Register Form</h5>
                                 <form action="#" method="post" id="registration_form" enctype="multipart/form-data">                                    
                                 
                                 <div class="row">
@@ -308,111 +308,6 @@ end:
     include("includes/footer.php");
     ?>
     <!-- footer area end -->
-    <!-- Quick view modal start -->
-    <div class="modal" id="quick_view">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <!-- product details inner end -->
-                    <div class="product-details-inner">
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="product-large-slider">
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                    </div>
-                                </div>
-                                <div class="pro-nav slick-row-10 slick-arrow-style">
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="product-details-des">
-                                    <div class="manufacturer-name">
-                                        <a href="product-details.html">HasTech</a>
-                                    </div>
-                                    <h3 class="product-name">Handmade Golden Necklace</h3>
-                                    <div class="ratings d-flex">
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <div class="pro-review">
-                                            <span>1 Reviews</span>
-                                        </div>
-                                    </div>
-                                    <div class="price-box">
-                                        <span class="price-regular">$70.00</span>
-                                        <span class="price-old"><del>$90.00</del></span>
-                                    </div>
-                                    <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
-                                    <div class="product-countdown" data-countdown="2022/02/20"></div>
-                                    <div class="availability">
-                                        <i class="fa fa-check-circle"></i>
-                                        <span>200 in stock</span>
-                                    </div>
-                                    <p class="pro-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                        eirmod tempor invidunt ut labore et dolore magna.</p>
-                                    <div class="quantity-cart-box d-flex align-items-center">
-                                        <h6 class="option-title">qty:</h6>
-                                        <div class="quantity">
-                                            <div class="pro-qty"><input type="text" value="1"></div>
-                                        </div>
-                                        <div class="action_link">
-                                            <a class="btn btn-cart2" href="#">Add to cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="useful-links">
-                                        <a href="#" data-toggle="tooltip" title="Compare"><i
-                                            class="pe-7s-refresh-2"></i>compare</a>
-                                        <a href="#" data-toggle="tooltip" title="Wishlist"><i
-                                            class="pe-7s-like"></i>wishlist</a>
-                                    </div>
-                                    <div class="like-icon">
-                                        <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
-                                        <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
-                                        <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
-                                        <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- product details inner end -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Quick view modal end -->
     <!-- offcanvas mini cart start -->
     <?php
      include("includes/cart1.php");
@@ -491,6 +386,30 @@ end:
         $('#email').focusout(function(){
             email_check();
         });
+        $('#email').focusout(function(){
+            var email=$("#email").val();
+            $.ajax({
+            url:"registers.php",
+            method:"POST",
+            data:{email:email},
+            success:function(data){
+               if(data!='0')
+               {
+                    $("#email").css("border","1px solid red");
+                    $("#emailMsg").html("<p class='text-danger'>Invalid email idss.</p>");
+                    $('#emailMsg').focus();
+                    $("#btnsubmit").attr("disabled",true);
+                    email_err=false;
+                    return false;
+               }
+               else{
+                    $("#email").css("border","1px solid green");
+                    $("#emailMsg").html("<p class='text-danger'></p>");
+                    $("#btnsubmit").attr("disabled",false);
+               }
+            }
+        });
+        });
 
         $('#pass').keyup(function(){
             pass_check();
@@ -526,7 +445,7 @@ end:
         $('#contact').focusout(function(){
             contact_check();  
         });
-        $('#contact').keyup(function(){
+        $('#contact').focusout(function(){
             var phone=$("#contact").val();
             $.ajax({
             url:"registers.php",

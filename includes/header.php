@@ -45,9 +45,6 @@ include("includes/validation.php");
     <link rel="stylesheet" href="assets/css/style.css">
     <!--sweet alert-->
     <script src="assets/js/sweetalert.min.js"></script>
-    
-    
-    
 </head>
 <body>
 <header class="header-area header-wide">

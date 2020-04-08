@@ -79,7 +79,7 @@
 
                 $cat_top=$_POST['customRadio'];
 
-                $insert_cat = "insert into accessories_category(accessories_category,accessories_category_top) values('$manufacturer_title','$cat_top')";
+                $insert_cat = "insert into accessories_category(accessories_category,accessories_category_top,accessories_category_status) values('$manufacturer_title','$cat_top','yes')";
                 
                 $run_cat = mysqli_query($con,$insert_cat);
                 

@@ -44,6 +44,8 @@
                                             <thead>
                                             <tr>
                                                 <th>Accessories Manufacturer Title</th>
+                                                <th>Accessories Manufacturer Top</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                                
                                                 
@@ -54,12 +56,55 @@
                                             
                                             <?php
                                             
-                                              $select_cat="SELECT * FROM accessories_brand ORDER BY accessories_brand_id DESC";
+                                              $select_cat="SELECT * FROM accessories_brand where accessories_brand_status IN ('yes','no') ORDER BY accessories_brand_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
                                                ?>
                                                 <tr>
                                                 <td><?php echo $row_cart["accessories_brand"]?></td>
+                                                <td>
+                                                <?php 
+                                                if($row_cart['accessories_brand_top']=="yes")
+                                                {
+                                                ?>
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['accessories_brand_id']; ?>" class="switch2" name="no" switch="none" checked/>
+                                                <label for="ch<?php echo $row_cart['accessories_brand_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['accessories_brand_id']; ?>" class="switch2" name="yes" switch="none" />
+                                                <label for="ch<?php echo $row_cart['accessories_brand_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
+                                                <td>
+                                               <?php 
+                                                if($row_cart['accessories_brand_status']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                <input type="checkbox" id="<?php echo $row_cart['accessories_brand_id']; ?>" class="switch1" name="no" switch="none" checked/>
+                                                <label for="<?php echo $row_cart['accessories_brand_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="<?php echo $row_cart['accessories_brand_id']; ?>" class="switch1" name="yes" switch="none" />
+                                                <label for="<?php echo $row_cart['accessories_brand_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
                                                 <td><a href="delete-accessories-manufacturer.php?accessories_id=<?php echo $row_cart["accessories_brand_id"] ?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-accessories-manufacturer.php?accessories_id=<?php echo $row_cart["accessories_brand_id"];?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>
                                                 <?php 
@@ -97,54 +142,6 @@
         </div>
         <!-- END layout-wrapper -->
           
-        <!-- Right Sidebar -->
-        <div class="right-bar">
-            <div data-simplebar class="h-100">
-                <div class="rightbar-title px-3 py-4">
-                    <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                        <i class="mdi mdi-close noti-icon"></i>
-                    </a>
-                    <h5 class="m-0">Settings</h5>
-                </div>
-
-                <!-- Settings -->
-                <hr class="mt-0" />
-                <h6 class="text-center mb-0">Choose Layouts</h6>
-
-                <div class="p-4">
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-1.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked />
-                        <label class="custom-control-label" for="light-mode-switch">Light Mode</label>
-                    </div>
-    
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-2.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-3">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsStyle="assets/css/bootstrap-dark.min.css" data-appStyle="assets/css/app-dark.min.css" />
-                        <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
-                    </div>
-    
-                    <div class="mb-2">
-                        <img src="assets/images/layouts/layout-3.jpg" class="img-fluid img-thumbnail" alt="">
-                    </div>
-                    <div class="custom-control custom-switch mb-5">
-                        <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appStyle="assets/css/app-rtl.min.css" />
-                        <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
-                    </div>
-
-            
-                </div>
-
-            </div> <!-- end slimscroll-menu-->
-        </div>
-        <!-- /Right-bar -->
-
-        <!-- Right bar overlay-->
-        <div class="rightbar-overlay"></div>
 
         <!-- JAVASCRIPT -->
        
@@ -184,6 +181,39 @@
             $('#employee_data').DataTable();  
         });  
         </script>
+        <script>
+                    $('.switch1').on('click',function(){
+                        var accessories_ids=$(this).attr("id");
+                        var accessories_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"accessories-manufacturer-status.php",
+                            method:"POST",
+                            data:{accessories_ids:accessories_ids,accessories_idss:accessories_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                    });
+        </script>
+                 <script>
+                    $('.switch2').on('click',function(){
+                        var accessories_id=$(this).attr("id");
+                        var accessories_ids=accessories_id.substring(2,accessories_id.length);
+                        var accessories_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"accessories-manufacturer-status-top.php",
+                            method:"POST",
+                            data:{accessories_ids:accessories_ids,accessories_idss:accessories_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                        
+                        
+                    });
+                </script>
         <script>
            $('.btn-delete').on('click',function(e){
                e.preventDefault();

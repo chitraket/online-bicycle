@@ -85,7 +85,14 @@
                 <!-- End Page-content -->
                
                 <!-- Modal -->
-                
+                <?php
+                if(isset($_GET['m']))
+                { 
+                ?>
+                <div class="flash-data" data-flashdata="<?php echo $_GET['m'] ?>"></div>
+                <?php
+                } 
+                ?>
                
                 <!-- end modal -->
                 

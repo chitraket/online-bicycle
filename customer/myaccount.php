@@ -48,6 +48,83 @@ if(!isset($_SESSION['customer_email']))
                                             <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
                                                 <div class="myaccount-content">
                                                     <h5>Dashboard</h5>
+                                                    <div class="col-xl-12">
+                                <div class="row">
+                                    <div class="col-md-3 mb-2">
+                                        <div class="card mini-stats-wid">
+                                            <div class="card-body">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                        <p class="text-muted font-weight-medium">Orders</p>
+                                                        <?php
+                                                        $row=0;
+                                                        $select_order='select DISTINCT order_id from customer_orders order by order_id';
+                                                        $query_num=mysqli_query($con,$select_order);
+                                                        $row=mysqli_num_rows($query_num);
+
+                                                        ?>
+                                                        <h4 class="mb-0"><?php echo $row; ?></h4>
+                                                    </div>
+
+                                                    <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                                        <span class="avatar-title">
+                                                            <i class="bx bx-copy-alt font-size-24"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-2">
+                                        <div class="card mini-stats-wid">
+                                            <div class="card-body">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                        <p class="text-muted font-weight-medium">Cancel Order</p>
+                                                        <?php
+                                                        $rows=0;
+                                                        $select_order_cancel='select DISTINCT order_id from customer_orders where payment_status="cancel"  order by order_id';
+                                                        $query_num_cancel=mysqli_query($con,$select_order_cancel);
+                                                        $rows=mysqli_num_rows($query_num_cancel);
+
+                                                        ?>
+                                                        <h4 class="mb-0"><?php echo $rows; ?></h4>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-2">
+                                        <div class="card mini-stats-wid">
+                                            <div class="card-body">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                        <p class="text-muted font-weight-medium">Order Returned</p>
+                                                        <?php
+                                                        $rowss=0;
+                                                        $select_order_returned='select DISTINCT order_id from customer_orders where payment_status="returned"  order by order_id';
+                                                        $query_num_returned=mysqli_query($con,$select_order_returned);
+                                                        $rowss=mysqli_num_rows($query_num_returned);
+                                                        ?>
+                                                        <h4 class="mb-0"><?php echo $rowss; ?></h4>
+                                                    </div>
+
+                                                    <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
+                                                        <span class="avatar-title rounded-circle bg-primary">
+                                                            <i class="bx bx-purchase-tag-alt font-size-24"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
+                                </div>
+                                <!-- end row -->
+
+                                
+                            </div>
                                                     <div class="welcome">
                                                         <p>Hello, <strong>Erik Jhonson</strong> (If Not <strong>Jhonson
                                                             !</strong><a href="login-register.html" class="logout"> Logout</a>)</p>
@@ -56,6 +133,9 @@ if(!isset($_SESSION['customer_email']))
                                                         view your recent orders, manage your shipping and billing addresses
                                                         and edit your password and account details.</p>
                                                 </div>
+                                                <div class="col-md-4">
+                                        
+                                    </div>
                                             </div>
                                             <!-- Single Tab Content End -->
 
@@ -127,111 +207,6 @@ if(!isset($_SESSION['customer_email']))
     ?>
     <!-- footer area end -->
 
-    <!-- Quick view modal start -->
-    <div class="modal" id="quick_view">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <!-- product details inner end -->
-                    <div class="product-details-inner">
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="product-large-slider">
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                    </div>
-                                </div>
-                                <div class="pro-nav slick-row-10 slick-arrow-style">
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="product-details-des">
-                                    <div class="manufacturer-name">
-                                        <a href="product-details.html">HasTech</a>
-                                    </div>
-                                    <h3 class="product-name">Handmade Golden Necklace</h3>
-                                    <div class="ratings d-flex">
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <div class="pro-review">
-                                            <span>1 Reviews</span>
-                                        </div>
-                                    </div>
-                                    <div class="price-box">
-                                        <span class="price-regular">$70.00</span>
-                                        <span class="price-old"><del>$90.00</del></span>
-                                    </div>
-                                    <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
-                                    <div class="product-countdown" data-countdown="2022/02/20"></div>
-                                    <div class="availability">
-                                        <i class="fa fa-check-circle"></i>
-                                        <span>200 in stock</span>
-                                    </div>
-                                    <p class="pro-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                        eirmod tempor invidunt ut labore et dolore magna.</p>
-                                    <div class="quantity-cart-box d-flex align-items-center">
-                                        <h6 class="option-title">qty:</h6>
-                                        <div class="quantity">
-                                            <div class="pro-qty"><input type="text" value="1"></div>
-                                        </div>
-                                        <div class="action_link">
-                                            <a class="btn btn-cart2" href="#">Add to cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="useful-links">
-                                        <a href="#" data-toggle="tooltip" title="Compare"><i
-                                            class="pe-7s-refresh-2"></i>compare</a>
-                                        <a href="#" data-toggle="tooltip" title="Wishlist"><i
-                                            class="pe-7s-like"></i>wishlist</a>
-                                    </div>
-                                    <div class="like-icon">
-                                        <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
-                                        <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
-                                        <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
-                                        <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- product details inner end -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Quick view modal end -->
 
     <!-- offcanvas mini cart start -->
     <?php
@@ -280,8 +255,23 @@ if(!isset($_SESSION['customer_email']))
 
 <!-- Mirrored from demo.hasthemes.com/corano-preview/corano/my-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:08 GMT -->
 </html>
-<script>
-    $(document).ready(function() {
-    $('#example').DataTable();
-} );
-</script>
+<script>  
+        $(document).ready(function(){  
+            load_data();  
+            function load_data(page)  
+            {  
+                $.ajax({  
+                        url:"pagination.php",  
+                        method:"POST",  
+                        data:{page:page},  
+                        success:function(data){  
+                            $('#pagination_data').html(data);  
+                        }  
+                })  
+            }  
+            $(document).on('click', '.pagination_link', function(){  
+                var page = $(this).attr("id");  
+                load_data(page);  
+            });  
+        });  
+ </script>

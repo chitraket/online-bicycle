@@ -22,7 +22,7 @@ if(isset($_POST["action"]))
    //echo $start_from;
     
  $query = "
-  SELECT * FROM accessories  WHERE accessories_brand!=''";
+  SELECT * FROM accessories  WHERE accessories_brand!='' AND accessories_status='yes'";
  if(isset($_POST["minimum_price"], $_POST["maximum_price"]) && !empty($_POST["minimum_price"]) && !empty($_POST["maximum_price"]))
  {
   $query .= "

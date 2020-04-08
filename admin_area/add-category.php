@@ -83,8 +83,7 @@
                 
                 $cat_top=$_POST['customRadio'];
                 
-                $insert_cat = "insert into categories (cat_title,cat_top) values ('$cat_title','$cat_top')";
-                
+                $insert_cat = "insert into categories (cat_title,cat_top,cat_status) values ('$cat_title','$cat_top','yes')";
                 $run_cat = mysqli_query($con,$insert_cat);
                 
                 if($run_cat){

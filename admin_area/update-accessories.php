@@ -36,7 +36,8 @@ if(isset($_GET['accessories_id'])){
     $accessories_color=$row_accessories['accessories_color'];
     $accessories_prices=$row_accessories['accessories_prices'];
     $accessories_desc=$row_accessories['accessories_desc'];
-    $p_cat_top=$row_accessories['accessories_status'];
+    $p_cat_top=$row_accessories['accessories_status_top'];
+    $p_cat_status=$row_accessories['accessories_status'];
     $accessories_discount_price=$row_accessories['accessories_discount_price'];
     $accessories_discount=$row_accessories['accessories_discount'];
     $accessories_label=$row_accessories['accessories_label'];
@@ -317,11 +318,11 @@ while ($row_accessories_categorys=mysqli_fetch_array($run_accessories_categorys)
                                 ?>
                                                     <div class="custom-control custom-radio mt-2 ml-2">
                                                         <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" >
-                                                        <label class="custom-control-label" for="customRadio1">yes</label>
+                                                        <label class="custom-control-label" for="customRadio1">Yes</label>
                                                     </div>
                                                     <div class="custom-control custom-radio mt-2 ml-3">
                                                         <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" checked>
-                                                        <label class="custom-control-label" for="customRadio2">no</label>
+                                                        <label class="custom-control-label" for="customRadio2">No</label>
                                                     </div>
                             
                                 <?php 
@@ -331,11 +332,43 @@ while ($row_accessories_categorys=mysqli_fetch_array($run_accessories_categorys)
                                         ?>
                                                 <div class="custom-control custom-radio mt-2 ml-2">
                                                         <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked>
-                                                        <label class="custom-control-label" for="customRadio1">yes</label>
+                                                        <label class="custom-control-label" for="customRadio1">Yes</label>
                                                     </div>
                                                     <div class="custom-control custom-radio mt-2 ml-3">
                                                         <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" >
-                                                        <label class="custom-control-label" for="customRadio2">no</label>
+                                                        <label class="custom-control-label" for="customRadio2">No</label>
+                                                    </div>
+                                                    
+                                                    <?php
+                                    }?>
+                            </div> 
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Manufacturer Status</label>
+                                <?php
+                                    if($p_cat_status=="no")
+                                    { 
+                                ?>
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio3">Activate</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio4">Deactivate</label>
+                                                    </div>
+                            
+                                <?php 
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                                <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio3">Activate</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio4">Deactivate</label>
                                                     </div>
                                                     
                                                     <?php
@@ -395,7 +428,8 @@ if(isset($_POST['update'])){
     $accessoriess_label=$_POST['accessories_label'];
     $accessoriess_discount_price=$_POST['accessories_discount_price'];
     $accessoriess_discount=$_POST['accessories_discount'];
-    $accessories_status=$_POST['customRadio'];
+    $accessories_status_top=$_POST['customRadio'];
+    $accessories_status=$_POST['customRadios'];
     $accessoriess_img1 = $_FILES['accessories_img1']['name'];
     $accessoriess_img2 = $_FILES['accessories_img2']['name'];
     $accessoriess_img3 = $_FILES['accessories_img3']['name'];
@@ -410,7 +444,7 @@ if(isset($_POST['update'])){
         move_uploaded_file($temp_name2, "accessories_images/$accessoriess_img2");
         move_uploaded_file($temp_name3, "accessories_images/$accessoriess_img3");
         move_uploaded_file($temp_name4, "accessories_images/$accessoriess_img4");
-        $update_accessories= "update accessories set accessories_brand='$accessoriess_manufacturer',accessories_category='$accessoriess_cat',accessories_name='$accessoriess_name',accessories_image_1='$accessoriess_img1',accessories_image_2='$accessoriess_img2',accessories_image_3='$accessoriess_img3',accessories_image_4='$accessoriess_img4',accessories_qty=accessories_qty+'$accessoriess_qty',available_qty=available_qty+'$accessoriess_qty',accessories_material='$accessories_material',accessories_color='$accessoriess_color',accessories_prices='$accessoriess_price',accessories_discount_price='$accessoriess_discount_price',accessories_discount='$accessoriess_discount',accessories_label='$accessoriess_label',accessories_date=NOW(),accessories_desc='$accessoriess_desc',accessories_status='$accessories_status' where accessories_id='$accessoriess_id'";
+        $update_accessories= "update accessories set accessories_brand='$accessoriess_manufacturer',accessories_category='$accessoriess_cat',accessories_name='$accessoriess_name',accessories_image_1='$accessoriess_img1',accessories_image_2='$accessoriess_img2',accessories_image_3='$accessoriess_img3',accessories_image_4='$accessoriess_img4',accessories_qty=accessories_qty+'$accessoriess_qty',available_qty=available_qty+'$accessoriess_qty',accessories_material='$accessories_material',accessories_color='$accessoriess_color',accessories_prices='$accessoriess_price',accessories_discount_price='$accessoriess_discount_price',accessories_discount='$accessoriess_discount',accessories_label='$accessoriess_label',accessories_date=NOW(),accessories_desc='$accessoriess_desc',accessories_status_top='$accessories_status_top',accessories_status='$accessories_status' where accessories_id='$accessoriess_id'";
     
         $run_accessoriess = mysqli_query($con, $update_accessories);
     
@@ -437,7 +471,7 @@ if(isset($_POST['update'])){
         }
     }
     else{
-        $update_accessories= "update accessories set accessories_brand='$accessoriess_manufacturer',accessories_category='$accessoriess_cat',accessories_name='$accessoriess_name',accessories_qty=accessories_qty+'$accessoriess_qty',available_qty=available_qty+'$accessoriess_qty',accessories_material='$accessories_material',accessories_color='$accessoriess_color',accessories_prices='$accessoriess_price',accessories_discount_price='$accessoriess_discount_price',accessories_discount='$accessoriess_discount',accessories_label='$accessoriess_label',accessories_date=NOW(),accessories_desc='$accessoriess_desc' where accessories_id='$accessoriess_id'";
+        $update_accessories= "update accessories set accessories_brand='$accessoriess_manufacturer',accessories_category='$accessoriess_cat',accessories_name='$accessoriess_name',accessories_qty=accessories_qty+'$accessoriess_qty',available_qty=available_qty+'$accessoriess_qty',accessories_material='$accessories_material',accessories_color='$accessoriess_color',accessories_prices='$accessoriess_price',accessories_discount_price='$accessoriess_discount_price',accessories_discount='$accessoriess_discount',accessories_label='$accessoriess_label',accessories_date=NOW(),accessories_desc='$accessoriess_desc',accessories_status_top='$accessories_status_top',accessories_status='$accessories_status' where accessories_id='$accessoriess_id'";
     
         $run_accessoriess = mysqli_query($con, $update_accessories);
     

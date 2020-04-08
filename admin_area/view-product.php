@@ -6,18 +6,12 @@
      echo "<script>window.open('auth-login.php','_self')</script>";
  } 
  else{
-    
-
-
      ?>
-            <!-- ========== Left Sidebar Start ========== -->
     <?php
     include("includes/header.php");
-     include("includes/sidebar.php"); ?>
-
+    include("includes/sidebar.php"); 
+    ?>
             <!-- Left Sidebar End -->
-
-             
             <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
@@ -51,7 +45,8 @@
                                                 <th>Quantity</th>
                                                 <th>Available Quantity</th>
                                                 <th>Sold Out</th>
-                                                <th>View Details</th>
+                                                <th>Product Top</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -60,7 +55,7 @@
                                             
                                             <?php
                                             
-                                              $select_cat="SELECT * FROM products ORDER BY product_id DESC";
+                                              $select_cat="SELECT * FROM products  where product_status IN ('yes','no') ORDER BY product_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
                                                ?>
@@ -72,8 +67,51 @@
                                                 <td><?php echo $row_cart["product_qty"]; ?></td>
                                                 <td><?php echo $row_cart["available_qty"]; ?></td>
                                                 <td><?php echo $sold_out=$row_cart['product_qty']-$row_cart['available_qty'];?></td>
-                                                <td><input type="button" name="view" value="View Details" id="<?php echo $row_cart["product_id"];?>" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light view_data"  /></td>
-                                                <td><a href="delete-product.php?product_id=<?php echo $row_cart["product_id"]; ?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-product.php?product_id=<?php echo $row_cart["product_id"]; ?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
+                                                <td>
+                                                <?php 
+                                                if($row_cart['product_status_top']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['product_id']; ?>" class="switch2" name="no" switch="none" checked/>
+                                                <label for="ch<?php echo $row_cart['product_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['product_id']; ?>" class="switch2" name="yes" switch="none" />
+                                                <label for="ch<?php echo $row_cart['product_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
+                                                <td>
+                                               <?php 
+                                                if($row_cart['product_status']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="<?php echo $row_cart['product_id']; ?>" class="switch1" name="no" switch="none" checked/>
+                                                <label for="<?php echo $row_cart['product_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="<?php echo $row_cart['product_id']; ?>" class="switch1" name="yes" switch="none" />
+                                                <label for="<?php echo $row_cart['product_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
+                                                <td><a href="delete-product.php?product_id=<?php echo $row_cart["product_id"]; ?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-product.php?product_id=<?php echo $row_cart["product_id"]; ?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> <input type="button" name="view" value="View Details" id="<?php echo $row_cart["product_id"];?>" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light view_data" /></td>
                                                 </tr>
                                                 <?php 
                                                  }?>
@@ -190,7 +228,40 @@
                                     }  
                             });  
                         });    
-                </script> 
+                </script>
+                <script>
+                    $('.switch1').on('click',function(){
+                        var product_ids=$(this).attr("id");
+                        var product_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"product-status.php",
+                            method:"POST",
+                            data:{product_ids:product_ids,product_idss:product_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                    });
+                </script>
+                 <script>
+                    $('.switch2').on('click',function(){
+                        var product_id=$(this).attr("id");
+                        var product_ids=product_id.substring(2,product_id.length);
+                        var product_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"product-status-top.php",
+                            method:"POST",
+                            data:{product_ids:product_ids,product_idss:product_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                        
+                        
+                    });
+                </script>
         <script>
            $('.btn-delete').on('click',function(e){
                e.preventDefault();

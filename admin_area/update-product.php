@@ -95,8 +95,8 @@ if(isset($_GET['product_id'])){
     $p_brakeset=$row_edit['product_brakeset'];
 
     $p_desc = $row_edit['product_desc'];
-    $p_top=$row_edit['product_status'];
-
+    $p_top=$row_edit['product_status_top'];
+    $p_status=$row_edit['product_status'];
     //$p_keywords = $row_edit['product_keywords'];
     
    // $p_desc = $row_edit['product_desc'];
@@ -523,7 +523,7 @@ if(isset($_GET['product_id'])){
                                 </div>
                             </div>
                             <div class="form-group row">
-                            <label for="example-text-input" class="col-md-3 col-form-label">Manufacturer Top</label>
+                            <label for="example-text-input" class="col-md-3 col-form-label">Product Top</label>
                                 <?php
                                     if($p_top=="no")
                                     { 
@@ -549,6 +549,38 @@ if(isset($_GET['product_id'])){
                                                     <div class="custom-control custom-radio mt-2 ml-3">
                                                         <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" >
                                                         <label class="custom-control-label" for="customRadio2">no</label>
+                                                    </div>
+                                                    
+                                                    <?php
+                                    }?>
+                            </div>
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Product status</label>
+                                <?php
+                                    if($p_status=="no")
+                                    { 
+                                ?>
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio3">Activate</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio4">Deactivate</label>
+                                                    </div>
+                            
+                                <?php 
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                                <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio3">Activate</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio4">Deactivate</label>
                                                     </div>
                                                     
                                                     <?php
@@ -628,8 +660,8 @@ if(isset($_POST['update'])){
     $product_headset=$_POST['product_headset'];
     $product_brakeset=$_POST['product_brakeset'];
     $product_desc = $_POST['product_desc'];
-    $product_status=$_POST['customRadio'];
-    
+    $product_top=$_POST['customRadio'];
+    $product_status=$_POST['customRadios'];
     $product_img1 = $_FILES['product_img1']['name'];
     $product_img2 = $_FILES['product_img2']['name'];
     $product_img3 = $_FILES['product_img3']['name'];
@@ -646,7 +678,7 @@ if(isset($_POST['update'])){
         move_uploaded_file($temp_name3,"product_images/$product_img3");
         move_uploaded_file($temp_name4,"product_images/$product_img4");
 
-        $update_product = "update products set manufacturer_id='$manufacturer_cat', p_cat_id='$product_cat',cat_id='$cat',date=NOW(),product_title='$product_title',product_img1='$product_img1',product_img2='$product_img2',product_img3='$product_img3',product_img4='$product_img4',product_price='$product_price',product_discount_price='$product_discount_price',product_discount='$product_discount',product_label='$product_label',product_desc='$product_desc',product_qty=product_qty+'$product_qty',available_qty=available_qty+'$product_qty',product_size='$product_size',product_frame='$product_frame',product_weight='$product_weight',product_front_suspension='$product_front_suspension',product_rear_suspension='$product_rear_suspension',product_front_derailleur='$product_front_derailleur',product_rear_derailleur='$product_rear_derailleur',product_wheels='$product_wheels',product_tires='$product_tires',product_shifter='$product_shifter',product_crankset='$product_crankset',product_freewheels='$product_freewheels',product_bb_set='$product_bb_set',product_cassette='$product_cassette',product_colour='$product_colour',product_pedals='$product_pedals',product_seat_post='$product_seat_post',product_handleber='$product_handleber',product_stem='$product_stem',product_headset='$product_headset',product_brakeset='$product_brakeset',product_status='$product_status' where product_id='$p_id'";
+        $update_product = "update products set manufacturer_id='$manufacturer_cat', p_cat_id='$product_cat',cat_id='$cat',date=NOW(),product_title='$product_title',product_img1='$product_img1',product_img2='$product_img2',product_img3='$product_img3',product_img4='$product_img4',product_price='$product_price',product_discount_price='$product_discount_price',product_discount='$product_discount',product_label='$product_label',product_desc='$product_desc',product_qty=product_qty+'$product_qty',available_qty=available_qty+'$product_qty',product_size='$product_size',product_frame='$product_frame',product_weight='$product_weight',product_front_suspension='$product_front_suspension',product_rear_suspension='$product_rear_suspension',product_front_derailleur='$product_front_derailleur',product_rear_derailleur='$product_rear_derailleur',product_wheels='$product_wheels',product_tires='$product_tires',product_shifter='$product_shifter',product_crankset='$product_crankset',product_freewheels='$product_freewheels',product_bb_set='$product_bb_set',product_cassette='$product_cassette',product_colour='$product_colour',product_pedals='$product_pedals',product_seat_post='$product_seat_post',product_handleber='$product_handleber',product_stem='$product_stem',product_headset='$product_headset',product_brakeset='$product_brakeset',product_status_top='$product_top',product_status='$product_status' where product_id='$p_id'";
         
         $run_product = mysqli_query($con,$update_product);
         
@@ -658,7 +690,7 @@ if(isset($_POST['update'])){
     }
     else
     {
-        $update_product = "update products set manufacturer_id='$manufacturer_cat', p_cat_id='$product_cat',cat_id='$cat',date=NOW(),product_title='$product_title',product_price='$product_price',product_discount_price='$product_discount_price',product_discount='$product_discount',product_label='$product_label',product_desc='$product_desc',product_qty=product_qty+'$product_qty',available_qty=available_qty+'$product_qty',product_size='$product_size',product_frame='$product_frame',product_weight='$product_weight',product_front_suspension='$product_front_suspension',product_rear_suspension='$product_rear_suspension',product_front_derailleur='$product_front_derailleur',product_rear_derailleur='$product_rear_derailleur',product_wheels='$product_wheels',product_tires='$product_tires',product_shifter='$product_shifter',product_crankset='$product_crankset',product_freewheels='$product_freewheels',product_bb_set='$product_bb_set',product_cassette='$product_cassette',product_colour='$product_colour',product_pedals='$product_pedals',product_seat_post='$product_seat_post',product_handleber='$product_handleber',product_stem='$product_stem',product_headset='$product_headset',product_brakeset='$product_brakeset',product_status='$product_status' where product_id='$p_id'";
+        $update_product = "update products set manufacturer_id='$manufacturer_cat', p_cat_id='$product_cat',cat_id='$cat',date=NOW(),product_title='$product_title',product_price='$product_price',product_discount_price='$product_discount_price',product_discount='$product_discount',product_label='$product_label',product_desc='$product_desc',product_qty=product_qty+'$product_qty',available_qty=available_qty+'$product_qty',product_size='$product_size',product_frame='$product_frame',product_weight='$product_weight',product_front_suspension='$product_front_suspension',product_rear_suspension='$product_rear_suspension',product_front_derailleur='$product_front_derailleur',product_rear_derailleur='$product_rear_derailleur',product_wheels='$product_wheels',product_tires='$product_tires',product_shifter='$product_shifter',product_crankset='$product_crankset',product_freewheels='$product_freewheels',product_bb_set='$product_bb_set',product_cassette='$product_cassette',product_colour='$product_colour',product_pedals='$product_pedals',product_seat_post='$product_seat_post',product_handleber='$product_handleber',product_stem='$product_stem',product_headset='$product_headset',product_brakeset='$product_brakeset',product_status_top='$product_top',product_status='$product_status' where product_id='$p_id'";
         
         $run_product = mysqli_query($con,$update_product);
         

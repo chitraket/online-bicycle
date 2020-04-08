@@ -11,7 +11,7 @@
     if (isset($_GET['product_id'])) {
         $delete_id = $_GET['product_id'];
         
-        $delete_pro = "delete from products where product_id='$delete_id'";
+        $delete_pro = "update products set product_status='delete' where product_id='$delete_id'";
         
         $run_delete = mysqli_query($con, $delete_pro);
         

@@ -11,11 +11,11 @@
     if (isset($_GET['accessories_id'])) {
         $delete_id = $_GET['accessories_id'];
         
-        $delete_pro = "delete from accessories_brand where accessories_brand_id='$delete_id'";
+        $delete_pro = "update  accessories_brand set accessories_brand_status='delete' where accessories_brand_id='$delete_id'";
         
         $run_delete = mysqli_query($con, $delete_pro);
         
-        $delete_product = "delete from accessories where accessories_brand='$delete_id'";
+        $delete_product = "update  accessories set accessories_status='delete'  where accessories_brand='$delete_id'";
         
         mysqli_query($con, $delete_product);
         

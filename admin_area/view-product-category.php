@@ -45,9 +45,9 @@
                                             <thead>
                                             <tr>
                                                 <th>Product Categories Title</th>
+                                                <th>Product Categories Top</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
-                                               
-                                                
                                             </tr>
                                             </thead>
                                             
@@ -55,12 +55,57 @@
                                             
                                             <?php
                                             
-                                              $select_cat="SELECT * FROM product_categories ORDER BY p_cat_id DESC";
+                                              $select_cat="SELECT * FROM product_categories where  p_cat_status IN ('yes','no') ORDER BY p_cat_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
                                                ?>
                                                 <tr>
                                                 <td><?php echo $row_cart["p_cat_title"];?></td>
+                                                <td>
+                                                <?php 
+                                                if($row_cart['p_cat_top']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['p_cat_id']; ?>" class="switch2" name="no" switch="none" checked/>
+                                                <label for="ch<?php echo $row_cart['p_cat_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['p_cat_id']; ?>" class="switch2" name="yes" switch="none" />
+                                                <label for="ch<?php echo $row_cart['p_cat_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
+                                                <td>
+                                               <?php 
+                                                if($row_cart['p_cat_status']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="<?php echo $row_cart['p_cat_id']; ?>" class="switch1" name="no" switch="none" checked/>
+                                                <label for="<?php echo $row_cart['p_cat_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="<?php echo $row_cart['p_cat_id']; ?>" class="switch1" name="yes" switch="none" />
+                                                <label for="<?php echo $row_cart['p_cat_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+
+                                                </td>
                                                 <td><a href="delete-product-category.php?p_cat_id=<?php echo $row_cart["p_cat_id"]; ?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-product-category.php?p_cat_id=<?php echo $row_cart["p_cat_id"];?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>
                                                 <?php
@@ -138,6 +183,39 @@
             $('#employee_data').DataTable();  
         });  
         </script>
+         <script>
+                    $('.switch1').on('click',function(){
+                        var p_cat_ids=$(this).attr("id");
+                        var p_cat_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"product-category-status.php",
+                            method:"POST",
+                            data:{p_cat_ids:p_cat_ids,p_cat_idss:p_cat_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                    });
+                </script> 
+                <script>
+                    $('.switch2').on('click',function(){
+                        var p_cat_id=$(this).attr("id");
+                        var p_cat_ids=p_cat_id.substring(2,p_cat_id.length);
+                        var p_cat_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"product-category-status-top.php",
+                            method:"POST",
+                            data:{p_cat_ids:p_cat_ids,p_cat_idss:p_cat_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                        
+                        
+                    });
+                </script>
         <script>
            $('.btn-delete').on('click',function(e){
                e.preventDefault();

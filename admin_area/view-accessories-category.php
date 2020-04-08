@@ -45,6 +45,8 @@
                                             <thead>
                                             <tr>
                                                 <th>Accessories Category Title</th>
+                                                <th>Accessories Category Top</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                                
                                                 
@@ -55,12 +57,55 @@
                                             
                                             <?php
                                             
-                                              $select_cat="SELECT * FROM accessories_category ORDER BY accessories_category_id DESC";
+                                              $select_cat="SELECT * FROM accessories_category where accessories_category_status IN ('yes','no') ORDER BY accessories_category_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
                                                ?>
                                                 <tr>
                                                 <td><?php echo $row_cart["accessories_category"];?></td>
+                                                <td>
+                                                <?php 
+                                                if($row_cart['accessories_category_top']=="yes")
+                                                {
+                                                ?>
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['accessories_category_id']; ?>" class="switch2" name="no" switch="none" checked/>
+                                                <label for="ch<?php echo $row_cart['accessories_category_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['accessories_category_id']; ?>" class="switch2" name="yes" switch="none" />
+                                                <label for="ch<?php echo $row_cart['accessories_category_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
+                                                <td>
+                                               <?php 
+                                                if($row_cart['accessories_category_status']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                <input type="checkbox" id="<?php echo $row_cart['accessories_category_id']; ?>" class="switch1" name="no" switch="none" checked/>
+                                                <label for="<?php echo $row_cart['accessories_category_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="<?php echo $row_cart['accessories_category_id']; ?>" class="switch1" name="yes" switch="none" />
+                                                <label for="<?php echo $row_cart['accessories_category_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
                                                 <td><a href="delete-accessories-category.php?accessories_id=<?php echo $row_cart["accessories_category_id"];?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-accessories-category.php?accessories_id=<?php echo $row_cart["accessories_category_id"];?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>
                                                 <?php
@@ -185,6 +230,39 @@
             $('#employee_data').DataTable();  
         });  
         </script>
+        <script>
+                    $('.switch1').on('click',function(){
+                        var accessories_ids=$(this).attr("id");
+                        var accessories_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"accessories-category-status.php",
+                            method:"POST",
+                            data:{accessories_ids:accessories_ids,accessories_idss:accessories_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                    });
+        </script>
+                 <script>
+                    $('.switch2').on('click',function(){
+                        var accessories_id=$(this).attr("id");
+                        var accessories_ids=accessories_id.substring(2,accessories_id.length);
+                        var accessories_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"accessories-category-status-top.php",
+                            method:"POST",
+                            data:{accessories_ids:accessories_ids,accessories_idss:accessories_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                        
+                        
+                    });
+                </script>
         <script>
            $('.btn-delete').on('click',function(e){
                e.preventDefault();

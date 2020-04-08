@@ -8,7 +8,12 @@ if(!isset($_SESSION['customer_email']))
 }
 ?>
     <!-- end Header Area -->
-
+<?php 
+ if(isset($_GET['o_id']))
+ {
+     $o_id=$_GET['o_id'];
+ }
+?>
 
     <main>
         <!-- breadcrumb area start -->
@@ -30,10 +35,35 @@ if(!isset($_SESSION['customer_email']))
             </div>
         </div>
         <!-- breadcrumb area end -->
-
+        
         <!-- cart main wrapper start -->
         <div class="cart-main-wrapper section-padding">
-           
+        <div class="text-center mb-4">
+        <?php 
+          $select_cats="select DISTINCT txnid,invoice_no from customer_orders where order_id='$o_id'";
+          $run_carts =mysqli_query($con,$select_cats);
+              while($row_carts=mysqli_fetch_array($run_carts)){
+                  ?>
+                   <p>Invoice Number : <?php echo $row_carts['invoice_no']; ?></p>
+                  <?php 
+                  if($row_carts['txnid']=="")
+                  {
+                      ?>
+                    <p>Payment Method : <img src="assets/img/icon/cash-on-delivery.png" style="height:25px;"/> Cash On Delivery</p>
+                    <?php 
+                  }else
+                  {
+                    ?>
+                    <p>Transaction ID : <?php echo $row_carts['txnid']; ?></p>
+                    <p>Payment Method :  <img src="assets/img/icon/icons8-paytm-32.png" style="height:25px;"/> Online Payment</p>
+                    <?php 
+                  }
+                  ?>
+                   
+                  <?php 
+              }
+        ?>
+                </div>
             <div class="container">
                 <div class="section-bg-color">
                     <div class="row">
@@ -55,13 +85,9 @@ if(!isset($_SESSION['customer_email']))
  
                                   
                             <?php
-                                    if(isset($_GET['o_id']))
-                                    {
-                                        $o_id=$_GET['o_id'];
-                                    }
+                                   
                                     $total=0;
                                     $select_cat="select * from customer_orders where order_id='$o_id'";
-                                    //$run_cart=mysqli_query($con,$select_cat);
                                     $run_cart =mysqli_query($con,$select_cat);
                                         while($row_cart=mysqli_fetch_array($run_cart)){
                                         $pro_id=$row_cart['product_id'];

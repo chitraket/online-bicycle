@@ -1,7 +1,7 @@
 <?php
-function firstname($txtName)
+function firstname($firstname)
 { 
-    if(empty($txtName) || !preg_match("/^[A-Za-z]*$/",$txtName))
+    if(empty($firstname))
     {
         return true;
     }
@@ -12,7 +12,7 @@ function firstname($txtName)
 }
 function lastname($lastname)
 {
-    if(empty($lastname) || !preg_match("/^[A-Za-z]*$/",$lastname))
+    if(empty($lastname))
     {
         return true;
     }
@@ -23,7 +23,7 @@ function lastname($lastname)
 }
 function email($email)
 {
-    if(empty($email) || !filter_var($email,FILTER_VALIDATE_EMAIL))
+    if(empty($email))
     {
         return true;
     }
@@ -34,7 +34,7 @@ function email($email)
 }
 function pass($pass)
 {
-    if(empty($pass) || !preg_match("/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/",$pass))
+    if(empty($pass))
     {
         return true;
     }
@@ -56,7 +56,7 @@ function c_pass($c_pass)
 }
 function state($state)
 {
-    if(empty($state) || !preg_match("/^[A-Za-z]*$/",$state))
+    if(empty($state))
     {
         return true;
     }
@@ -67,7 +67,7 @@ function state($state)
 }
 function city($city)
 {
-    if(empty($city) || !preg_match("/^[A-Za-z]*$/",$city))
+    if(empty($city))
     {
         return true;
     }
@@ -78,7 +78,7 @@ function city($city)
 }
 function contact($contact)
 {
-    if(empty($contact) || !preg_match("/^[9876][0-9]{9}$/",$contact))
+    if(empty($contact))
     {
         return true;
     }
@@ -100,7 +100,7 @@ function address($address)
 }
 function pincode($pincode)
 {
-    if(empty($pincode) || !preg_match("/^[1-9][0-9]{5}$/",$pincode))
+    if(empty($pincode))
     {
         return true;
     }

@@ -39,8 +39,9 @@
                                         <table id="employee_data" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
-                                                <th>Categories Title</th>
-                                                
+                                                <th>Filter Title</th>
+                                                <th>Filter Top</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -49,13 +50,57 @@
                                             
                                             <?php
                                             
-                                              $select_cat="SELECT * FROM categories ORDER BY cat_id DESC";
+                                              $select_cat="SELECT * FROM categories where cat_status IN ('yes','no')  ORDER BY cat_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
                                                
                                                 ?>
                                                 <tr>
                                                 <td><?php echo $row_cart["cat_title"];?></td> 
+                                                <td>
+                                                <?php 
+                                                if($row_cart['cat_top']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['cat_id']; ?>" class="switch2" name="no" switch="none" checked/>
+                                                <label for="ch<?php echo $row_cart['cat_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['cat_id']; ?>" class="switch2" name="yes" switch="none" />
+                                                <label for="ch<?php echo $row_cart['cat_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
+                                                <td>
+                                               <?php 
+                                                if($row_cart['cat_status']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="<?php echo $row_cart['cat_id']; ?>" class="switch1" name="no" switch="none" checked/>
+                                                <label for="<?php echo $row_cart['cat_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="<?php echo $row_cart['cat_id']; ?>" class="switch1" name="yes" switch="none" />
+                                                <label for="<?php echo $row_cart['cat_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
                                                 <td><a href="delete-category.php?cat_id=<?php echo $row_cart["cat_id"]; ?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-category.php?cat_id=<?php echo $row_cart["cat_id"];?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>
                                                 <?php 
@@ -138,7 +183,41 @@
             $('#employee_data').DataTable();  
         });  
 </script> 
-<script>
+        <script>
+                    $('.switch1').on('click',function(){
+                        var category_ids=$(this).attr("id");
+                        var category_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"category-status.php",
+                            method:"POST",
+                            data:{category_ids:category_ids,category_idss:category_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                    });
+        </script> 
+        <script>
+                    $('.switch2').on('click',function(){
+                        var category_id=$(this).attr("id");
+                        var category_ids=category_id.substring(2,category_id.length);
+                        var category_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"category-status-top.php",
+                            method:"POST",
+                            data:{category_ids:category_ids,category_idss:category_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                        
+                        
+                    });
+                </script>
+
+        <script>
            $('.btn-delete').on('click',function(e){
                e.preventDefault();
                const href =$(this).attr('href')

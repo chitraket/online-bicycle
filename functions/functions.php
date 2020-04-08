@@ -2,6 +2,19 @@
 
 $db=mysqli_connect("localhost","root","","ecom_store");
 
+function load_state()
+{
+    global $db;
+    $output='';
+    $sqls="select * from country";
+    $results=mysqli_query($db,$sqls);
+    while($rows=mysqli_fetch_array($results))
+    {
+        $output .='<option value="'.$rows["country_id"].'">'.$rows["country_name"].'</option>';
+    }
+    return $output;
+
+}
 
 function add_cart($p_id,$product_img,$product_qty,$product_name,$product_price,$product_size,$papage){
    if ($papage==0) {
@@ -20,7 +33,7 @@ function add_cart($p_id,$product_img,$product_qty,$product_name,$product_price,$
 
 function getPro(){
     global $db;
-    $get_products="select * from products where product_status='yes' and product_label='new'";
+    $get_products="select * from products where product_status_top='yes' and product_label='new' and product_status='yes'";
     $run_products=mysqli_query($db,$get_products);
     while($row_products=mysqli_fetch_array($run_products))
     {
@@ -110,7 +123,7 @@ function getPro(){
 function getAcc()
 {
     global $db;
-    $get_accessories="select * from accessories where accessories_status='yes'";
+    $get_accessories="select * from accessories where accessories_status_top='yes' and  accessories_status='yes' and accessories_label='new'";
     $run_accessories=mysqli_query($db,$get_accessories);
     while($row_accessories=mysqli_fetch_array($run_accessories))
     {
@@ -202,7 +215,7 @@ function getAcc()
 
 function getPCats(){
     global $db;
-    $sql="SELECT * FROM product_categories where p_cat_top='yes'";
+    $sql="SELECT * FROM product_categories where p_cat_top='yes' and p_cat_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
 
@@ -216,7 +229,7 @@ function getPCats(){
         ';
             
     }
-    $sql="SELECT * FROM product_categories where p_cat_top='no'";
+    $sql="SELECT * FROM product_categories where p_cat_top='no' and p_cat_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
 
@@ -233,7 +246,7 @@ function getPCats(){
 }
 function getCats(){
     global $db;
-    $sql="SELECT * FROM categories where cat_top='yes'";
+    $sql="SELECT * FROM categories where cat_top='yes' and cat_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
 
@@ -247,7 +260,7 @@ function getCats(){
         ';
             
     }
-    $sql="SELECT * FROM categories where cat_top='no'";
+    $sql="SELECT * FROM categories where cat_top='no' and cat_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
 
@@ -265,7 +278,7 @@ function getCats(){
 
 function  getAbrand(){
     global $db;
-    $sql="SELECT DISTINCT * FROM accessories_brand WHERE accessories_brand_top='yes'";
+    $sql="SELECT DISTINCT * FROM accessories_brand WHERE accessories_brand_top='yes' and accessories_brand_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
         echo '
@@ -277,7 +290,7 @@ function  getAbrand(){
     </li>
     ';
     }
-    $sql="SELECT DISTINCT * FROM accessories_brand WHERE accessories_brand_top='no'";
+    $sql="SELECT DISTINCT * FROM accessories_brand WHERE accessories_brand_top='no' and accessories_brand_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
         echo '
@@ -292,7 +305,7 @@ function  getAbrand(){
 }
 function getAcategory(){
     global $db;
-    $sql="SELECT *  FROM accessories_category WHERE accessories_category_top='yes'";
+    $sql="SELECT *  FROM accessories_category WHERE accessories_category_top='yes' and accessories_category_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
         echo '
@@ -303,7 +316,7 @@ function getAcategory(){
     </div>
     </li>';
     }
-    $sql="SELECT *  FROM accessories_category WHERE accessories_category_top='no'";
+    $sql="SELECT *  FROM accessories_category WHERE accessories_category_top='no' and accessories_category_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
         echo '
@@ -317,7 +330,7 @@ function getAcategory(){
 }
 function getMCats(){
     global $db;
-    $sql="SELECT * FROM manufacturers WHERE manufacturer_top='yes'";
+    $sql="SELECT * FROM manufacturers WHERE manufacturer_top='yes' and manufacturer_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
         echo '
@@ -329,7 +342,7 @@ function getMCats(){
         </li>
         ';
     }
-    $sql="SELECT * FROM manufacturers WHERE manufacturer_top='no'";
+    $sql="SELECT * FROM manufacturers WHERE manufacturer_top='no' and manufacturer_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
         echo '

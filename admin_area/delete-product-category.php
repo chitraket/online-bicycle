@@ -11,11 +11,11 @@
     if (isset($_GET['p_cat_id'])) {
         $delete_id = $_GET['p_cat_id'];
         
-        $delete_pro = "delete from product_categories where p_cat_id='$delete_id'";
+        $delete_pro = "update product_categories set p_cat_status='delete' where p_cat_id='$delete_id'";
         
         $run_delete = mysqli_query($con, $delete_pro);
 
-        $delete_product = "delete from products where p_cat_id='$delete_id'";
+        $delete_product = "update  products set product_status='delete' where p_cat_id='$delete_id'";
         
         mysqli_query($con, $delete_product);
 

@@ -28,6 +28,7 @@ if(isset($_GET['p_cat_id'])){
     
     $p_cat_title = $row_edit['p_cat_title'];
     $p_cat_top=$row_edit['p_cat_top'];   
+    $p_cat_status=$row_edit['p_cat_status'];
 }
 
 ?>
@@ -58,18 +59,18 @@ if(isset($_GET['p_cat_id'])){
                                 </div>
                             </div>
                             <div class="form-group row">
-                            <label for="example-text-input" class="col-md-3 col-form-label">Manufacturer Top</label>
+                            <label for="example-text-input" class="col-md-3 col-form-label">Product Category Top</label>
                                 <?php
                                     if($p_cat_top=="no")
                                     { 
                                 ?>
                                                     <div class="custom-control custom-radio mt-2 ml-2">
                                                         <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" >
-                                                        <label class="custom-control-label" for="customRadio1">yes</label>
+                                                        <label class="custom-control-label" for="customRadio1">Yes</label>
                                                     </div>
                                                     <div class="custom-control custom-radio mt-2 ml-3">
                                                         <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" checked>
-                                                        <label class="custom-control-label" for="customRadio2">no</label>
+                                                        <label class="custom-control-label" for="customRadio2">No</label>
                                                     </div>
                             
                                 <?php 
@@ -79,17 +80,48 @@ if(isset($_GET['p_cat_id'])){
                                         ?>
                                                 <div class="custom-control custom-radio mt-2 ml-2">
                                                         <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked>
-                                                        <label class="custom-control-label" for="customRadio1">yes</label>
+                                                        <label class="custom-control-label" for="customRadio1">Yes</label>
                                                     </div>
                                                     <div class="custom-control custom-radio mt-2 ml-3">
                                                         <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" >
-                                                        <label class="custom-control-label" for="customRadio2">no</label>
+                                                        <label class="custom-control-label" for="customRadio2">No</label>
                                                     </div>
                                                     
                                                     <?php
                                     }?>
                             </div>  
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Product Category Status</label>
+                                <?php
+                                    if($p_cat_status=="no")
+                                    { 
+                                ?>
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio3">Activate</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio4">Deactivate</label>
+                                                    </div>
                             
+                                <?php 
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                                <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio3">Activate</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio4">Deactivate</label>
+                                                    </div>
+                                                    
+                                                    <?php
+                                    }?>
+                            </div> 
                             
                             <div class="form-group mt-4">
                                 <div class="text-right">
@@ -134,13 +166,19 @@ if(isset($_GET['p_cat_id'])){
               
               $p_cat_title = $_POST['p_cat_title'];
               $p_cat_tops=$_POST['customRadio'];
-
+            $p_cat_status=$_POST['customRadios'];
               
-              $update_p_cat = "update product_categories set p_cat_title='$p_cat_title',p_cat_top='$p_cat_tops' where p_cat_id='$p_cat_id'";
+              $update_p_cat = "update product_categories set p_cat_title='$p_cat_title',p_cat_top='$p_cat_tops',p_cat_status='$p_cat_status' where p_cat_id='$p_cat_id'";
               
               $run_p_cat = mysqli_query($con,$update_p_cat);
+
+              
               
               if($run_p_cat){
+
+                $update_product="update products set product_status='$p_cat_status' where p_cat_id='$p_cat_id'";
+                mysqli_query($con,$update_product);
+                
                   ?>
                   <script>
                     swal({

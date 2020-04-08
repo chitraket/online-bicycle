@@ -26,13 +26,6 @@
                                                        Dashboard</a>
                                                    <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
                                                        Orders</a>
-                                                  <!-- <a href="#download" data-toggle="tab"><i class="fa fa-cloud-download"></i>
-                                                       Download</a>
-                                                   <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i>
-                                                       Payment
-                                                       Method</a>
-                                                   <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i>
-                                                       address</a>-->
                                                    <a href="#account-info" data-toggle="tab"><i class="fa fa-edit"></i> Account
                                                        Details</a>
                                                        <a href="#change-pass" data-toggle="tab"><i class="fa fa-user"></i>
