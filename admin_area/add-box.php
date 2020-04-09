@@ -101,7 +101,7 @@
                             <div class="form-group row">
                                 <label for="example-number-input" class="col-md-3 col-form-label">Box Description</label>
                                 <div class="col-md-9">
-                                <textarea required class="form-control" placeholder="Box Description" name="box_desc" cols="19" rows="6"></textarea>
+                                <textarea required class="form-control" placeholder="Box Description" name="box_desc" cols="19" rows="6"> </textarea>
                                 </div>
                             </div>
                             <div class="form-group mt-4">
@@ -124,14 +124,39 @@
         <?php 
         include("includes/footer.php");
         ?>
-        <?php  
+        
+    </div>
+</div>
+</div>
+        <!-- JAVASCRIPT -->
+        <script src="assets/libs/jquery/jquery.min.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="assets/libs/node-waves/waves.min.js"></script>
+
+        <!-- select 2 plugin -->
+        <script src="assets/libs/select2/js/select2.min.js"></script>
+        <script src="assets/js/pages/ecommerce-select2.init.js"></script>
+
+        <!-- apexcharts -->
+        <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+
+        <script src="assets/js/pages/dashboard.init.js"></script>
+
+        <script src="assets/js/tinymce/tinymce.min.js"></script>
+        <script>tinymce.init({ selector:'textarea'});</script>
+        <script src="assets/js/app.js"></script>
+    </body>
+</html>
+<?php  
 
             if(isset($_POST['submit'])){
                 
                 $box_title = $_POST['box_title'];
                 $box_desc = $_POST['box_desc'];
                 $p_box = $_POST['p_box'];
-                $insert_cat = "insert into boxes_section (box_icon,box_title,box_desc) values ('$p_box','$box_title','$box_desc')";
+                $insert_cat = "insert into boxes_section (box_icon,box_title,box_desc,box_status) values ('$p_box','$box_title','$box_desc','yes')";
                 
                 $run_cat = mysqli_query($con,$insert_cat);
                 
@@ -159,29 +184,6 @@
                 
             }
     ?>
-    </div>
-</div>
-</div>
-        <!-- JAVASCRIPT -->
-        <script src="assets/libs/jquery/jquery.min.js"></script>
-        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
-        <script src="assets/libs/simplebar/simplebar.min.js"></script>
-        <script src="assets/libs/node-waves/waves.min.js"></script>
-
-        <!-- select 2 plugin -->
-        <script src="assets/libs/select2/js/select2.min.js"></script>
-        <script src="assets/js/pages/ecommerce-select2.init.js"></script>
-
-        <!-- apexcharts -->
-        <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
-
-        <script src="assets/js/pages/dashboard.init.js"></script>
-
-        <script src="assets/js/app.js"></script>
-    </body>
-</html>
-
 
 
     <?php

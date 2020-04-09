@@ -28,6 +28,7 @@ if(isset($_GET['logo_id'])){
     $l_name = $row_edit['logo_name'];
     $l_img=$row_edit['logo_img'];
     $l_url=$row_edit['logo_link'];
+    $l_status=$row_edit['logo_status'];
 }
 
 ?>
@@ -65,7 +66,7 @@ if(isset($_GET['logo_id'])){
                                             <label class="custom-file-label" id="customFiles">Choose file</label>
                                            <br>
                                             <br/>
-                                            <img   width="70" height="70" src="logo/<?php echo $l_img; ?>" alt="<?php echo $l_img; ?>">  
+                                            <img   width="100" height="50" src="logo/<?php echo $l_img; ?>" alt="<?php echo $l_img; ?>">  
                                             <br>
                                             <br/>
                                             <script type="text/javascript">
@@ -90,6 +91,38 @@ if(isset($_GET['logo_id'])){
                                 <input class="form-control" type="text" placeholder="Logo URL" name="s_url" value="<?php echo $l_url; ?>" id="example-text-input">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Box Status</label>
+                                <?php
+                                    if($l_status=="no")
+                                    { 
+                                ?>
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio3">Activate</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio4">Deactivate</label>
+                                                    </div>
+                            
+                                <?php 
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                                <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio3">Activate</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio4">Deactivate</label>
+                                                    </div>
+                                                    
+                                                    <?php
+                                    }?>
+                            </div> 
                             <div class="form-group mt-4">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="update">
@@ -134,7 +167,7 @@ $s_rows="";
               
               $s_name = $_POST['s_name'];
               
-
+            $s_status=$_POST['customRadios'];
               
               $s_urls=$_POST['s_url'];
 
@@ -145,7 +178,7 @@ $s_rows="";
               $temp_name1 = $_FILES['slider_img']['tmp_name'];
               move_uploaded_file($temp_name1,"logo/$slider_img");
         
-              $update_p_cat = "update logo set logo_name='$s_name',logo_img='$slider_img',logo_link='$s_urls' where logo_id='$l_id'";
+              $update_p_cat = "update logo set logo_name='$s_name',logo_img='$slider_img',logo_link='$s_urls',logo_status='$s_status' where logo_id='$l_id'";
               
               $run_p_cat = mysqli_query($con,$update_p_cat);
               if($run_p_cat){
@@ -172,7 +205,7 @@ $s_rows="";
               }
             }
               else{
-                $update_p_cat = "update logo set logo_name='$s_name',logo_link='$s_urls' where logo_id='$l_id'";
+                $update_p_cat = "update logo set logo_name='$s_name',logo_link='$s_urls',logo_status='$s_status' where logo_id='$l_id'";
               
                 $run_p_cat = mysqli_query($con,$update_p_cat);
                 if($run_p_cat){

@@ -94,7 +94,7 @@ while ($row_accessories_categorys=mysqli_fetch_array($run_accessories_categorys)
                             <div class="form-group row">
                                 <label for="example-search-input" class="col-md-3 col-form-label">Accessories Manufacturer</label>
                                 <div class="col-md-9">
-                                <select class="form-control" name="accessories_manufacturer">
+                                <select class="form-control select2" name="accessories_manufacturer">
                                 <option value="<?php echo $manufacturer_accessories_ids; ?>"> <?php echo $manufacturer_accessories_titles; ?> </option>
                               
                               <?php 
@@ -123,7 +123,7 @@ while ($row_accessories_categorys=mysqli_fetch_array($run_accessories_categorys)
                             <div class="form-group row">
                                 <label for="example-search-input" class="col-md-3 col-form-label">Accessories Category</label>
                                 <div class="col-md-9">
-                                <select class="form-control" name="accessories_cat">
+                                <select class="form-control select2" name="accessories_cat">
                                 <option value="<?php echo $accessories_category_ids; ?>"> <?php echo $accessories_categorys ?> </option>
                               
                               <?php 
@@ -400,12 +400,18 @@ while ($row_accessories_categorys=mysqli_fetch_array($run_accessories_categorys)
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
 
+        <!-- select 2 plugin -->
+        <script src="assets/libs/select2/js/select2.min.js"></script>
+        <script src="assets/js/pages/ecommerce-select2.init.js"></script>
+
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 
         <script src="assets/js/pages/dashboard.init.js"></script>
 
         <script src="assets/js/app.js"></script>
+        <script src="assets/js/tinymce/tinymce.min.js"></script>
+        <script>tinymce.init({ selector:'textarea'});</script>
       
     </body>
 

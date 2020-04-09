@@ -46,11 +46,12 @@
                                         <table id="employee_data" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
-                                                <th>Slider img</th>
-                                                <th>Slider Name</th>
-                                                <th>Slider Row</th>
-                                                <th>Slider Row</th>
-                                                
+                                                <th>Image</th>
+                                                <th>Name</th>
+                                                <th>Row</th>
+                                                <th>Row</th>
+                                                <th>Row Status</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                                
                                                 
@@ -68,11 +69,82 @@
                                                 <tr>
                                                 <td>
                                                 <img src="slides_images/<?php echo $row_cart["slide_image"]; ?>" width="150" height="80"></td>
+
                                                 <td><?php echo $row_cart["slide_name"]; ?></td>
+                                                <?php
+                                                if($row_cart["slide_row"]=="")
+                                                {
+                                                    ?>
+                                                    <td>N/A</td>
+                                                    <?php 
+                                                } 
+                                                else{
+                                                ?>
                                                 <td><?php echo   $row_cart["slide_row"];?></td>
+                                                <?php 
+                                                }
+                                                ?>
+                                                <?php
+                                                if($row_cart["slide_row_2"]=="")
+                                                {
+                                                    ?>
+                                                    <td>N/A</td>
+                                                    <?php 
+                                                } 
+                                                else{
+                                                ?>
                                                 <td><?php echo $row_cart["slide_row_2"];?></td>
+                                                <?php
+                                                } 
+                                                ?>
+
+                                                <td>
+                                                <?php 
+                                                if($row_cart['status']=="float-md-right float-none")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['slide_id']; ?>" class="switch2 font-size-2" name="" switch="none" checked/>
+                                                <label for="ch<?php echo $row_cart['slide_id']; ?>" data-on-label="right"
+                                                    data-off-label="left"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['slide_id']; ?>" class="switch2 font-size-2" name="float-md-right float-none" switch="none"  />
+                                                <label for="ch<?php echo $row_cart['slide_id']; ?>" data-on-label="right"
+                                                    data-off-label="left"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
+                                                <td>
+                                               <?php 
+                                                if($row_cart['slide_status']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="<?php echo $row_cart['slide_id']; ?>" class="switch1" name="no" switch="none" checked/>
+                                                <label for="<?php echo $row_cart['slide_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="<?php echo $row_cart['slide_id']; ?>" class="switch1" name="yes" switch="none" />
+                                                <label for="<?php echo $row_cart['slide_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
                                                 <td><a href="delete-slider.php?slide_id=<?php echo $row_cart["slide_id"] ?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-slider.php?slide_id=<?php echo $row_cart["slide_id"];?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
-                                                </tr>
+  
+                                            </tr>
                                                 <?php 
                                                  }?>
                                             </tbody>
@@ -148,6 +220,39 @@
             $('#employee_data').DataTable();  
         });  
         </script>
+         <script>
+                    $('.switch1').on('click',function(){
+                        var slider_ids=$(this).attr("id");
+                        var slider_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"slider-status.php",
+                            method:"POST",
+                            data:{slider_ids:slider_ids,slider_idss:slider_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                    });
+                </script>
+                 <script>
+                    $('.switch2').on('click',function(){
+                        var slider_id=$(this).attr("id");
+                        var slider_ids=slider_id.substring(2,slider_id.length);
+                        var slider_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"slider-status-top.php",
+                            method:"POST",
+                            data:{slider_ids:slider_ids,slider_idss:slider_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                        
+                        
+                    });
+                </script>
 
          <script>
            $('.btn-delete').on('click',function(e){

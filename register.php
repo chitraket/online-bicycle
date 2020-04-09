@@ -150,58 +150,226 @@ if(isset($_POST['register'])){
     $c_contact = $_POST['c_contact'];
     $c_address = $_POST['c_address'];
     $c_pincode=$_POST['c_pincode'];
-    $c_image = uniqid().$_FILES['c_image']['name'];
+    $c_image = $_FILES['c_image']['name'];
     $c_image_tmp = $_FILES['c_image']['tmp_name'];
     move_uploaded_file($c_image_tmp,"customer/customer_images/".$c_image);
-    $insert_customer = "insert into customers (customer_name,customer_lname,customer_email,customer_pass,customer_state,customer_city,customer_contact,customer_address,customer_pincode,customer_image) values ('$c_name','$c_lname','$c_email','$c_pass','$c_state','$c_city','$c_contact','$c_address','$c_pincode','$c_image')";
+    $insert_customer = "insert into customers (customer_name,customer_lname,customer_email,customer_pass,customer_state,customer_city,customer_contact,customer_address,customer_pincode,customer_image,customer_status) values ('$c_name','$c_lname','$c_email','$c_pass','$c_state','$c_city','$c_contact','$c_address','$c_pincode','$c_image','no')";
     $run_customer = mysqli_query($con,$insert_customer);
+    if($run_customer)
+    {
+        require 'PHPMailer/PHPMailerAutoload.php';
+      $mail=new PHPMailer;
+    try {
+        $mail->isSMTP();                                            // Send using SMTP
+        $mail->Host       = 'ssl://smtp.gmail.com';                    // Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+        $mail->Username   = 'chitraketsavani@gmail.com';                     // SMTP username
+        $mail->Password   = 'CHIT9125';                               // SMTP password
+        $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+        $mail->Port       = 465;                                    // TCP port to connect to
+
+        //Recipients
+        $mail->setFrom('chitraketsavani@gmail.com', 'chitraketsavani');
+        $mail->addAddress($c_email, $c_email);     // Add a recipient
     
-        /// If register have items in cart ///
-        $_SESSION['customer_email']=$c_email;
-        foreach ($_SESSION as $product) {
-            if (!is_array($product)) {
-                ?>
-                    <script type="text/javascript">
+        $html='<!DOCTYPE html>
+        <html lang="en">
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="icon" href="../assets/images/favicon/1.png" type="image/x-icon">
+                <link rel="shortcut icon" href="../assets/images/favicon/1.png" type="image/x-icon">
+                <title>Multikart | Email template </title>
+                <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+                <style type="text/css">
+                    body{
+                        text-align: center;
+                        margin: 0 auto;
+                        width: 650px;
+                        font-family: "Open Sans", sans-serif;
+                        background-color: #e2e2e2;		      	
+                        display: block;
+                    }
+                    ul{
+                        margin:0;
+                        padding: 0;
+                    }
+                    li{
+                        display: inline-block;
+                        text-decoration: unset;
+                    }
+                    a{
+                        text-decoration: none;
+                    }
+                    p{
+                        margin: 15px 0;
+                    }
+        
+                    h5{
+                        color:#444;
+                        text-align:left;
+                        font-weight:400;
+                    }
+                    .text-center{
+                        text-align: center
+                    }
+                    .main-bg-light{
+                        background-color: #fafafa;
+                    }
+                    .title{
+                        color: #444444;
+                        font-size: 22px;
+                        font-weight: bold;
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                        padding-bottom: 0;
+                        text-transform: uppercase;
+                        display: inline-block;
+                        line-height: 1;
+                    }
+                    table{
+                        margin-top:30px
+                    }
+                    table.top-0{
+                        margin-top:0;
+                    }
+                    table.order-detail , .order-detail th , .order-detail td {
+                        border: 1px solid #ddd;
+                        border-collapse: collapse;
+                    }
+                    .order-detail th{
+                        font-size:16px;
+                        padding:15px;
+                        text-align:center;
+                    }
+                    .footer-social-icon tr td img{
+                        margin-left:5px;
+                        margin-right:5px;
+                    }
+                </style>
+            </head>
+            <body style="margin: 20px auto;">
+                
+                <table align="center" border="0" cellpadding="0" cellspacing="0" style="padding: 0 30px;background-color: #fff; -webkit-box-shadow: 0px 0px 14px -4px rgba(0, 0, 0, 0.2705882353);box-shadow: 0px 0px 14px -4px rgba(0, 0, 0, 0.2705882353);width: 100%;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr class="header">
+                                        <td align="left" valign="top" >
+                                            <img src="cid:1001" class="main-logo" style="width: 150px;">
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table align="center" border="0" cellpadding="0" cellspacing="0" >
+                                    <tr>
+                                        <td>
+                                            <h2 class="title">Registration successful.</h2>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        <a href="http://localhost/m-dev-store/registress.php?email='.$c_email.'" class="btn btn-sqr">View</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="border-top:1px solid #777;height:1px;margin-top: 30px;">
+                                        </td>
+                                    </tr>
+                                </table>                        
+        <table class="main-bg-light text-center top-0"  align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td style="padding: 30px;">
+                                    <div>
+                                        <h4 class="title" style="margin:0;text-align: center;">Follow us</h4>
+                                    </div>
+                                    <table border="0" cellpadding="0" cellspacing="0" class="footer-social-icon" align="center" class="text-center" style="margin-top:20px;">
+                                        <tr>
+                                            <td>
+                                                <a href="#"><img src="cid:1004" alt="">
+                                                
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="#"><img src="cid:1005" alt=""></a>
+                                            </td>
+                                            <td>
+                                                <a href="#"><img src="cid:1006" alt=""></a>
+                                            </td>
+                                            <td>
+                                                <a href="#"><img src="cid:1007" alt=""></a>
+                                            </td>
+                                        </tr>                                    
+                                    </table>
+                                    <div style="border-top: 1px solid #ddd; margin: 20px auto 0;"></div>
+                                    <table  border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 20px auto 0;" >
+                                        <tr>
+                                            <td>
+                                                <a href="#" style="font-size:13px">Want to change how you receive these emails?</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p style="font-size:13px; margin:0;">2018 - 19 Copy Right by Themeforest powerd by Pixel Strap</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="#" style="font-size:13px; margin:0;text-decoration: underline;">Unsubscribe</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+    </body>
+</html>';
+                                       
+        // Content
+           $mail->AddEmbeddedImage("assets/img/email-temp/logo.png",1001,'logo.png');
+        
+        $mail->AddEmbeddedImage("assets/img/email-temp/facebook.png",1004, 'facebook.png');
+        $mail->AddEmbeddedImage("assets/img/email-temp/youtube.png", 1005, 'youtube.png');
+        $mail->AddEmbeddedImage("assets/img/email-temp/twitter.png",1006,  'twitter.png');
+        $mail->AddEmbeddedImage("assets/img/email-temp/pinterest.png",1007,  'pinterest.png');          
+
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = "Forget Password";
+        $mail->Body    = "$html";
+        $mail->AltBody = "";
+
+        if($mail->send())
+        {
+        
+        ?>
+         <script type="text/javascript">
                     swal({
                         title: "Registration successful.",
-                        text: "",
+                        text: "Please Check Your Email For Confirmation.",
                         icon: "success",
-                        buttons: true,
+                        buttons:[,"OK"],
                         successMode: true,
                 })
                 .then((willDelete) => {
                         if (willDelete) {
-                            window.open('index.php','_self');
+                            window.open('customer/customer_login.php','_self');
                         } else {
                         
                         }
                 });
                     </script>
+          <?php 
+        }
+    } 
+    catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+    }
 
-                 <?php
-                 continue;
-            } 
-            else {
-                ?>
-                <script type="text/javascript">
-                    swal({
-                        title: "Registration successful.",
-                        text: "",
-                        icon: "success",
-                        buttons: true,
-                        successMode: true,
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('checkout.php','_self');
-                        } else {
-                        }
-                });
-        </script> 
-        <?php
-            }
-        } ?>
-      <?php
+        /// If register have items in cart ///
+
 }
 end:
 ?>
@@ -214,6 +382,7 @@ end:
                                 <div class="row">
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
+                                            <label for="f_name">First Name</label>
                                                     <input type="text" name="c_name" id="f_name" placeholder="Enter your First name" autocomplete="off" >
                                                     <span style="color: red;"><?php echo $error_c_name;?></span>
                                                     <span id="f_nameMsg"></span>
@@ -222,6 +391,7 @@ end:
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
+                                            <label for="c_lname">Last Name</label>
                                                 <input type="text" placeholder="Enter your Last name" name="c_lname" id="l_name"  autocomplete="off" />
                                                 <span id="l_nameMsg"></span>
                                                 <span style="color: red;"><?php echo $error_l_name; ?></span>
@@ -231,6 +401,7 @@ end:
 
                 
                                     <div class="single-input-item">
+                                    <label for="email">Email</label>
                                         <input type="email" placeholder="Enter your Email" name="c_email"  id="email" autocomplete="off"/>
                                         <span id="emailMsg"></span>
                                         <span style="color: red;"><?php echo $error_email; ?></span>
@@ -239,6 +410,7 @@ end:
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
+                                            <label for="pass">Password</label>
                                                 <input type="password" placeholder="Enter your Password" id="pass" name="c_pass"/>
                                                 <span id="passMsg"></span>
                                                 <span style="color: red;"><?php echo $error_pass; ?></span>
@@ -246,6 +418,7 @@ end:
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
+                                            <label for="c_pass">Repeat Password</label>
                                                 <input type="password" placeholder="Repeat your Password" id="c_pass" name="c_c_pass" />
                                                 <span id="c_passMsg"></span>
                                                 <span style="color: red;"><?php echo $error_c_pass; ?></span>
@@ -253,36 +426,42 @@ end:
                                         </div>
                                     </div>
                                     <div class="single-input-item">
+                                    <label for="state">State</label>
                                         <input type="text" placeholder="Enter your state" name="c_state" id="state"/>
                                         <span id="stateMsg"></span>
                                         <span style="color: red;"><?php echo $error_state; ?></span>
                                     </div>
                            
                                     <div class="single-input-item">
+                                    <label for="city">City</label>
                                         <input type="text" placeholder="Enter your City" name="c_city" id="city" />
                                         <span id="cityMsg"></span>
                                         <span style="color: red;"><?php echo $error_city; ?></span>
                                     </div>
                                     <div class="single-input-item">
+                                    <label for="contact">Contact</label>
                                         <input type="text" placeholder="Enter your contact " name="c_contact" id="contact"/>
                                         <span id="contactMsg"></span>
                                         <span style="color: red;"><?php echo $error_c_contact; ?></span>
                                     </div>
 
                                     <div class="single-input-item">
+                                    <label for="address">Address</label>
                                         <input type="text" placeholder="Enter your Address" name="c_address"  id="address"/>
                                         <span id="addressMsg"></span>
                                         <span style="color: red;"><?php echo $error_address; ?></span>
                                     </div>
 
                                     <div class="single-input-item">
+                                    <label for="pincode">Pincode</label>
                                         <input type="text" placeholder="Enter your Pincode" name="c_pincode" id="pincode" />
                                         <span id="pincodeMsg"></span>
                                         <span style="color: red;"><?php echo $error_pincode; ?></span>
                                     </div>
 
                                     <div class="single-input-item">
-                                    <input type="file"  name="c_image" />
+                                    <label for="image">Image</label>
+                                    <input type="file"  name="c_image"  id="image" accept=".jpg,.jpeg,.png,.gif"/>
                                     </div>
                                    
                                     <div class="single-input-item">

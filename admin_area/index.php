@@ -5,7 +5,8 @@
  {
      echo "<script>window.open('auth-login.php','_self')</script>";
  } 
- else{
+ 
+
 
 ?>
             <!-- ========== Left Sidebar Start ========== -->
@@ -45,6 +46,3 @@
 
 <!-- Mirrored from themesbrand.com/skote/layouts/vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:43:03 GMT -->
 </html>
-<?php 
-}
-?>

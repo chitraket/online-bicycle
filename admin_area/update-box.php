@@ -31,6 +31,8 @@ if(isset($_GET['box_id'])){
     $box_desc = $row_edit['box_desc'];
     
     $box_icon=$row_edit['box_icon'];
+
+    $box_status=$row_edit['box_status'];
 }
 
 ?>
@@ -124,7 +126,39 @@ if(isset($_GET['box_id'])){
                                 <textarea required class="form-control" placeholder="Box Desc" name="box_desc" cols="19" rows="6" ><?php echo $box_desc; ?></textarea>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Box Status</label>
+                                <?php
+                                    if($box_status=="no")
+                                    { 
+                                ?>
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio3">Activate</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio4">Deactivate</label>
+                                                    </div>
                             
+                                <?php 
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                                <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio3">Activate</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio4">Deactivate</label>
+                                                    </div>
+                                                    
+                                                    <?php
+                                    }?>
+                            </div> 
+
                             <div class="form-group mt-4">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="update">
@@ -159,6 +193,8 @@ if(isset($_GET['box_id'])){
 
         <script src="assets/js/pages/dashboard.init.js"></script>
 
+        <script src="assets/js/tinymce/tinymce.min.js"></script>
+        <script>tinymce.init({ selector:'textarea'});</script>
         <script src="assets/js/app.js"></script>
     </body>
 
@@ -176,9 +212,9 @@ if(isset($_GET['box_id'])){
               
               $box_desc = $_POST['box_desc'];
               
+              $box_statuss=$_POST['customRadios'];
 
-
-              $update_p_cat = "update boxes_section set box_icon='$p_box',box_title='$box_title',box_desc='$box_desc' where box_id='$box_id'";
+              $update_p_cat = "update boxes_section set box_icon='$p_box',box_title='$box_title',box_desc='$box_desc',box_status='$box_statuss' where box_id='$box_id'";
               
               $run_p_cat = mysqli_query($con,$update_p_cat);
               

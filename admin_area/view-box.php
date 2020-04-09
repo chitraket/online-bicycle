@@ -42,6 +42,7 @@
                                                 <th>Box Icon</th>
                                                 <th>Box Title</th>
                                                 <th>Box Description</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -58,6 +59,28 @@
                                                 <td><?php echo $row_cart["box_icon"];?></td>
                                                 <td><?php echo $row_cart["box_title"]; ?></td>
                                                 <td><?php echo $row_cart["box_desc"];?></td>
+                                                <td>
+                                               <?php 
+                                                if($row_cart['box_status']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="<?php echo $row_cart['box_id']; ?>" class="switch1" name="no" switch="none" checked/>
+                                                <label for="<?php echo $row_cart['box_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="<?php echo $row_cart['box_id']; ?>" class="switch1" name="yes" switch="none" />
+                                                <label for="<?php echo $row_cart['box_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
                                                 <td><a href="delete-box.php?box_id=<?php echo $row_cart["box_id"];?>" class="btn-delete" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a>
                                                 <a href="update-box.php?box_id=<?php echo $row_cart["box_id"];?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>
@@ -134,6 +157,21 @@
             $('#employee_data').DataTable();  
         });  
         </script>
+        <script>
+                    $('.switch1').on('click',function(){
+                        var box_ids=$(this).attr("id");
+                        var box_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"box-status.php",
+                            method:"POST",
+                            data:{box_ids:box_ids,box_idss:box_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                    });
+                </script>
     <script>
            $('.btn-delete').on('click',function(e){
                e.preventDefault();

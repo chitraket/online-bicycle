@@ -49,6 +49,7 @@
                                                 <th>City</th>
                                                 <th>Address</th>
                                                 <th>Contact</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                                
                                                 
@@ -68,6 +69,28 @@
                                                 <td><?php echo $row_cart["customer_city"];?></td>
                                                 <td><?php echo $row_cart["customer_address"];?></td>
                                                 <td><?php echo $row_cart["customer_contact"];?></td>
+                                                <td>
+                                               <?php 
+                                                if($row_cart['customer_status']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="<?php echo $row_cart['customer_id']; ?>" class="switch1" name="no" switch="none" checked/>
+                                                <label for="<?php echo $row_cart['customer_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="<?php echo $row_cart['customer_id']; ?>" class="switch1" name="yes" switch="none" />
+                                                <label for="<?php echo $row_cart['customer_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
                                                 <td><a href="delete-customer.php?customer_id=<?php echo $row_cart["customer_id"]?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>
                                                 <?php 
@@ -151,8 +174,23 @@
         $(document).ready(function(){  
             $('#employee_data').DataTable();  
         });  
-        </script>
-        
+</script>
+
+<script>
+                    $('.switch1').on('click',function(){
+                        var customer_ids=$(this).attr("id");
+                        var customer_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"customer-status.php",
+                            method:"POST",
+                            data:{customer_ids:customer_ids,customer_idss:customer_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                    });
+        </script> 
  <script>
            $('.btn-delete').on('click',function(e){
                e.preventDefault();

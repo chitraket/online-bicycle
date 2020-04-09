@@ -99,7 +99,7 @@
             $logo_img=$_FILES['logo_img']['name'];
             $temp_name1 = $_FILES['logo_img']['tmp_name'];
             move_uploaded_file($temp_name1,"logo/$logo_img");
-            $insert_accessories = "insert into logo(logo_name,logo_img,logo_link) values ('$logo_name','$logo_img','$logo_link')";
+            $insert_accessories = "insert into logo(logo_name,logo_img,logo_link,logo_status) values ('$logo_name','$logo_img','$logo_link','yes')";
             $run_accessories = mysqli_query($con,$insert_accessories);
             if($run_accessories){
                 ?>

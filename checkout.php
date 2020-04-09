@@ -68,7 +68,6 @@ $_SESSION['c_id']=$customer_id;
                  $error_c_name = ""; 
                  $error_l_name="";
                  $error_pass="";
-                 $error_email="";
                  $error_c_pass="";
                  $error_c_contact="";
                  $error_city="";
@@ -96,15 +95,6 @@ $_SESSION['c_id']=$customer_id;
     else
     {
         $error_l_name = "";
-    }
-    if(email($_POST['c_email']))
-    {
-        $error_email = "Required..";
-        $errorresult=false;
-    }
-    else
-    {
-        $error_email = "";
     }
     
 
@@ -135,7 +125,7 @@ $_SESSION['c_id']=$customer_id;
     {
         $error_c_contact = "";
     }
-    if(address($_POST['c_address']))
+    if(address($_POST['c_addresss']))
     {
         $error_address = "Required..";
         $errorresult=false;
@@ -191,11 +181,21 @@ $_SESSION['c_id']=$customer_id;
             }
             $customer_emails=$_SESSION['customer_email'];
             $f_names=$_POST['c_name'];
-            $email=$_POST['c_email'];
+            if(isset($_SESSION['customer_email']))
+            {
+            $email=$_SESSION['customer_email'];
+            }
             $country=$_POST['c_state'];
             $city=$_POST['c_city'];
             $phone=$_POST['c_contact'];
-            $address=$_POST['c_address'];
+            if($_POST['payment']=="deliert")
+            {
+                $address=$_POST['c_address'];
+            }
+            else
+            {
+                $address=$_POST['c_addresss'];
+            }
             $update_order="update customers set customer_name='$f_names',customer_email='$email',customer_state='$country',customer_city='$city',customer_contact='$phone',customer_address='$address' where customer_email='$customer_emails'";
             $run_querys=mysqli_query($db,$update_order);
 
@@ -245,20 +245,38 @@ $_SESSION['c_id']=$customer_id;
                                         </div>
                                     </div>
                                     <div class="single-input-item">
-                                        <label for="email"  class="required ">Email Address</label>
-                                        <input type="email" placeholder="Enter your Email" name="c_email"  id="email" value="<?php echo $customer_email; ?>" required />
-                                        <span id="emailMsg"></span>
-                                        <span style="color: red;"><?php echo $error_email; ?></span>
+                                        <label for="town" class="required">Email</label>
+                                        <input type="text" placeholder="Enter your Email"  value="<?php echo $_SESSION['customer_email'] ?>"  disabled/>
+                                     
                                     </div>
+                                   <div class="single-input-item">
+                                    <div class="custom-control custom-radio">
+                                                <input type="radio" id="cashon" name="payment" value="deliert" class="custom-control-input" checked />
+                                                <label class="custom-control-label" for="cashon" class="required">Delivery address</label>
+                                        
+                                    </div>
+                                   </div>
+                                       
                                     
+                                    <div class="single-input-item">
+                                     <textarea  placeholder="Enter your Address"  cols="30" rows="3" disabled><?php echo $customer_address; ?></textarea>
+                                     <input type="hidden" name="c_address"  value="<?php echo $customer_address; ?>"/>
+                                    </div>
 
                                     <div class="single-input-item">
-                                        <label for="street-address" class="required ">Street address</label>
-                                        <input type="text" placeholder="Enter your Address" name="c_address"  id="address" value="<?php echo $customer_address; ?>" required />
+                                    <div class="custom-control custom-radio">
+                                                <input type="radio" id="cashons" name="payment" value="new" class="custom-control-input"  />
+                                                <label class="custom-control-label" for="cashons" class="required">New address</label>
+                                        
+                                    </div>
+                                   </div>
+                                       
+                                    
+                                    <div class="single-input-item">
+                                     <textarea  placeholder="Enter New Address" name="c_addresss"  id="address"  cols="30" rows="3" ><?php echo " " ?></textarea>
                                         <span id="addressMsg"></span>
                                         <span style="color: red;"><?php echo $error_address; ?></span>
                                     </div>
-
                                   <!--  <div class="checkout-box-wrap">
                                         <div class="single-input-item">
                                             <div class="custom-control custom-radio">
@@ -286,7 +304,7 @@ $_SESSION['c_id']=$customer_id;
                                     </div>
 
                                     <div class="single-input-item">
-                                        <label for="state">State / Divition</label>
+                                        <label for="state" class="required">State / Divition</label>
                                         <input type="text" placeholder="Enter your state" name="c_state" id="state" value="<?php echo $customer_country; ?>" />
                                         <span id="stateMsg"></span>
                                         <span style="color: red;"><?php echo $error_state; ?></span>
@@ -300,7 +318,7 @@ $_SESSION['c_id']=$customer_id;
                                     </div>
 
                                     <div class="single-input-item">
-                                        <label for="phone">Phone</label>
+                                        <label for="phone" class="required">Phone</label>
                                         <input type="text" placeholder="Enter your contact " name="c_contact" id="contact" value="<?php echo $customer_contact; ?>" required/>
                                         <span id="contactMsg"></span>
                                         <span style="color: red;"><?php echo $error_c_contact; ?></span>
@@ -527,7 +545,6 @@ $_SESSION['c_id']=$customer_id;
 		// set initially button state hidden
         var f_name_err=true;
         var l_name_err=true;
-        var email_err=true;
         var pass_err=true;
         var c_pass_err=true;
         var state_err=true;
@@ -552,12 +569,6 @@ $_SESSION['c_id']=$customer_id;
             l_name_check();
         });
 
-        $('#email').keyup(function(){
-            email_check();
-        });
-        $('#email').focusout(function(){
-            email_check();
-        });
 
         $('#state').keyup(function(){
             state_check();
@@ -658,40 +669,6 @@ $_SESSION['c_id']=$customer_id;
             else{
                 $("#l_name").css("border","1px solid green");
                 $("#l_nameMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
-
-        }
-        function email_check(){
-            var email=$('#email').val();
-            var reg=/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
-            if(email.length=='')
-            {
-                $("#email").css("border","1px solid red");
-                $("#emailMsg").html("<p class='text-danger'>Please fill out this field.</p>");
-                $('#emailMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                email_err=false;
-                return false;
-            }
-            else{
-                $("#email").css("border","1px solid green");
-                $("#emailMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
-
-            if(!(reg.test(email)))
-            {
-                $("#email").css("border","1px solid red");
-                $("#emailMsg").html("<p class='text-danger'>Invalid email id.</p>");
-                $('#emailMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                email_err=false;
-                return false;
-            }
-            else{
-                $("#email").css("border","1px solid green");
-                $("#emailMsg").html("<p class='text-danger'></p>");
                 $("#btnsubmit").attr("disabled",false);
             }
 

@@ -134,31 +134,7 @@
                     <li><a href="view-slider.php">View slider</a></li>
                 </ul>
             </li>
-
-            <li>
-                <a href="view-customer.php" >
-                    <i class="bx bx-task"></i>
-                    <span>View customer</span>
-                </a>
-               
-            </li>
-
-            <li>
-                <a href="view-order.php" >
-                    <i class="bx bx-task"></i>
-                    <span>View Orders</span>
-                </a>
-               
-            </li>
-
-            <li>
-                <a href="view-payment.php" >
-                    <i class="bx bx-task"></i>
-                    <span>View Payment</span>
-                </a>
-               
-            </li>
-
+            <li class="menu-title"> Box</li>
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bxs-user-detail"></i>
@@ -171,7 +147,7 @@
                 </ul>
             </li>
 
-            <!--<li class="menu-title">Pages</li>-->
+            <li class="menu-title">Terms & Conditions</li>
 
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -185,6 +161,7 @@
                 </ul>
             </li>
 
+            <li class="menu-title">Logo</li>
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-file"></i>
@@ -195,6 +172,31 @@
                     <li><a href="view-logo.php">View Logo</a></li>
                 </ul>
             </li>
+            <li class="menu-title">Customer</li>
+            <li>
+                <a href="view-customer.php" >
+                    <i class="bx bx-task"></i>
+                    <span>Customer</span>
+                </a>
+               
+            </li>
+            <li class="menu-title">Order</li>
+            <li>
+                <a href="view-order.php" >
+                    <i class="bx bx-task"></i>
+                    <span>Order</span>
+                </a>
+               
+            </li>
+
+            <li>
+                <a href="view-payment.php" >
+                    <i class="bx bx-task"></i>
+                    <span>Payment</span>
+                </a>
+               
+            </li>
+
 
           <!--  <li class="menu-title">Components</li>-->
 

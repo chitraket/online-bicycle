@@ -31,6 +31,7 @@ if(isset($_GET['slide_id'])){
     $s_img=$row_edit['slide_image'];
     $s_status=$row_edit['status'];
     $s_url=$row_edit['slide_url'];
+    $s_statuss=$row_edit['slide_status'];
 }
 
 ?>
@@ -120,6 +121,7 @@ if(isset($_GET['slide_id'])){
                                                     <?php
                                     }?>
                             </div>
+                           
 
                             <div class="form-group row">
                                 <label for="example-number-input" class="col-md-3 col-form-label">Slider Row</label>
@@ -138,6 +140,38 @@ if(isset($_GET['slide_id'])){
                                 <div class="col-md-9">
                                 <input class="form-control" type="text" placeholder="Slider URL" name="s_url" value="<?php echo $s_url; ?>" id="example-text-input">
                                 </div>
+                            </div>
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Slider status</label>
+                                <?php
+                                    if($s_statuss=="no")
+                                    { 
+                                ?>
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio3">Activate</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio4">Deactivate</label>
+                                                    </div>
+                            
+                                <?php 
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                                <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="customRadio3">Activate</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio4">Deactivate</label>
+                                                    </div>
+                                                    
+                                                    <?php
+                                    }?>
                             </div>
                             <div class="form-group mt-4">
                                 <div class="text-right">
@@ -193,7 +227,7 @@ $s_rows="";
                   $s_rows="";
               }
               $s_row_2=$_POST['s_row_2'];
-              
+              $s_statussss=$_POST['customRadios'];
               $s_urls=$_POST['s_url'];
 
               $slider_img = $_FILES['slider_img']['name'];
@@ -203,7 +237,7 @@ $s_rows="";
               $temp_name1 = $_FILES['slider_img']['tmp_name'];
               move_uploaded_file($temp_name1,"slides_images/$slider_img");
         
-              $update_p_cat = "update slider set slide_name='$s_name',slide_image='$slider_img',slide_row='$s_row',slide_row_2='$s_row_2',status='$s_rows',slide_url='$s_urls' where slide_id='$s_id'";
+              $update_p_cat = "update slider set slide_name='$s_name',slide_image='$slider_img',slide_row='$s_row',slide_row_2='$s_row_2',status='$s_rows',slide_url='$s_urls',slide_status='$s_statussss' where slide_id='$s_id'";
               
               $run_p_cat = mysqli_query($con,$update_p_cat);
               if($run_p_cat){
@@ -230,7 +264,7 @@ $s_rows="";
               }
             }
               else{
-                $update_p_cat = "update slider set slide_name='$s_name',slide_row='$s_row',slide_row_2='$s_row_2',status='$s_rows',slide_url='$s_urls' where slide_id='$s_id'";
+                $update_p_cat = "update slider set slide_name='$s_name',slide_row='$s_row',slide_row_2='$s_row_2',status='$s_rows',slide_url='$s_urls',slide_status='$s_statussss' where slide_id='$s_id'";
               
                 $run_p_cat = mysqli_query($con,$update_p_cat);
                 if($run_p_cat){

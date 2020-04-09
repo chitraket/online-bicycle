@@ -358,7 +358,7 @@ function getMCats(){
 function logo()
     {
         global $db;
-        $get_logo="select * from logo";
+        $get_logo="select * from logo where logo_status='yes'";
         $run_logo=mysqli_query($db,$get_logo);
         while ($row_logo=mysqli_fetch_array($run_logo)) {
             echo '

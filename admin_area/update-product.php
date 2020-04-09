@@ -161,7 +161,7 @@ if(isset($_GET['product_id'])){
                             <div class="form-group row">
                                 <label for="example-search-input" class="col-md-3 col-form-label">Manufacturer</label>
                                 <div class="col-md-9">
-                                <select class="form-control" name="manufacturer_cat">
+                                <select class="form-control select2" name="manufacturer_cat">
                                 <option value="<?php echo $manufacturer_id; ?>"> <?php echo $manufacturer_title; ?> </option>
                               
                               <?php 
@@ -190,7 +190,7 @@ if(isset($_GET['product_id'])){
                             <div class="form-group row">
                                 <label for="example-search-input" class="col-md-3 col-form-label">Product Category</label>
                                 <div class="col-md-9">
-                                <select class="form-control" name="product_cat">
+                                <select class="form-control select2" name="product_cat">
                                 <option value="<?php echo $p_cat; ?>" > <?php echo $p_cat_title ?> </option>
                               
                               <?php 
@@ -220,7 +220,7 @@ if(isset($_GET['product_id'])){
                                 <label for="example-email-input" class="col-md-3 col-form-label">Category</label>
                                 <div class="col-md-9">
                                 
-                                <select name="cat" class="form-control"><!-- form-control Begin -->
+                                <select name="cat" class="form-control select2"><!-- form-control Begin -->
                               
                               <option value="<?php echo $cat; ?>"> <?php echo $cat_title; ?> </option>
                               
@@ -612,12 +612,17 @@ if(isset($_GET['product_id'])){
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
 
+        <!-- select 2 plugin -->
+        <script src="assets/libs/select2/js/select2.min.js"></script>
+        <script src="assets/js/pages/ecommerce-select2.init.js"></script>
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 
         <script src="assets/js/pages/dashboard.init.js"></script>
 
         <script src="assets/js/app.js"></script>
+        <script src="assets/js/tinymce/tinymce.min.js"></script>
+        <script>tinymce.init({ selector:'textarea'});</script>
     </body>
 
 

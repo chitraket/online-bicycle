@@ -136,13 +136,13 @@
            else{
                $s_row="";
            }
-                $view_slides="select * from slider";
+                $view_slides="select * from slider where slide_status='yes'";
                 $view_run_slide=mysqli_query($con,$view_slides);
                 $count=mysqli_num_rows($view_run_slide);
                 if($count<4)
                 {
                     move_uploaded_file($temp_name1,"slides_images/$product_img1");
-                    $insert_cat = "insert into slider(slide_name,slide_image,slide_row,slide_row_2,status,slide_url)  values('$s_name','$product_img1','$s_row_1','$s_row_2','$s_row','$s_url')";
+                    $insert_cat = "insert into slider(slide_name,slide_image,slide_row,slide_row_2,status,slide_url,slide_status)  values('$s_name','$product_img1','$s_row_1','$s_row_2','$s_row','$s_url','yes')";
                     $run_cat = mysqli_query($con,$insert_cat);
                     ?>
                     <script>

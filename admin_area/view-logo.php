@@ -45,6 +45,7 @@
                                             <tr>
                                                 <th>Images</th>
                                                 <th>Name</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -61,6 +62,28 @@
                                                 <td>
                                                 <img src="logo/<?php echo $row_cart["logo_img"];?>" width="100" height="30"></td>
                                                 <td><?php echo $row_cart["logo_name"] ?></td>
+                                                <td>
+                                               <?php 
+                                                if($row_cart['logo_status']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="<?php echo $row_cart['logo_id']; ?>" class="switch1" name="no" switch="none" checked/>
+                                                <label for="<?php echo $row_cart['logo_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="<?php echo $row_cart['logo_id']; ?>" class="switch1" name="yes" switch="none" />
+                                                <label for="<?php echo $row_cart['logo_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
                                                 <td><a href="delete-logo.php?logo_id=<?php echo $row_cart["logo_id"];?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-logo.php?logo_id=<?php echo $row_cart["logo_id"];?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>
                                                 <?php 
@@ -145,6 +168,21 @@
             $('#employee_data').DataTable();  
         });  
         </script>
+        <script>
+                    $('.switch1').on('click',function(){
+                        var logo_ids=$(this).attr("id");
+                        var logo_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"logo-status.php",
+                            method:"POST",
+                            data:{logo_ids:logo_ids,logo_idss:logo_idss},
+                            success:function()
+                            {
+
+                            }
+                        });
+                    });
+        </script> 
           <script>  
                     $(document).ready(function(){  
                         $('.view_data').click(function(){  

@@ -51,7 +51,7 @@
                             <div class="form-group row">
                                 <label for="example-number-input" class="col-md-3 col-form-label">Terms Description</label>
                                 <div class="col-md-9">
-                                <textarea required class="form-control" placeholder="Terms Description" name="terms_desc" cols="19" rows="6"></textarea>
+                                <textarea required class="form-control" placeholder="Terms Description" name="terms_desc" cols="19" rows="6"> </textarea>
                                 </div>
                             </div>
                             <div class="form-group mt-4">
@@ -74,45 +74,7 @@
         <?php 
         include("includes/footer.php");
         ?>
-        <?php  
-
-            if(isset($_POST['submit'])){
-                
-                $terms_title = $_POST['terms_title'];
-               
-                $terms_desc = $_POST['terms_desc'];
-
-                $terms_link=$_POST['terms_link'];
-                
-                
-                $insert_terms = "insert into terms (term_title,term_link,term_desc) values ('$terms_title','$terms_link','$terms_desc')";
-                
-                $run_terms = mysqli_query($con,$insert_terms);
-                
-                if($run_terms){
-                    ?>
-                     <script>
-                    swal({
-                        title:"Your New Terms Has Been Inserted.",
-                        text: "",
-                        icon: "success",
-                        buttons: [,"OK"],
-                        successMode: true,
-                       
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('view-terms.php','_self');
-                        } 
-                        else {
-                        }
-                });
-            </script>
-                  <?php  
-                }
-                
-            }
-    ?>
+      
     </div>
 </div>
 </div>
@@ -127,7 +89,8 @@
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 
         <script src="assets/js/pages/dashboard.init.js"></script>
-
+        <script src="assets/js/tinymce/tinymce.min.js"></script>
+        <script>tinymce.init({ selector:'textarea'});</script>
         <script src="assets/js/app.js"></script>
     </body>
 
@@ -135,7 +98,45 @@
 <!-- Mirrored from themesbrand.com/skote/layouts/vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:43:03 GMT -->
 </html>
 
+<?php  
 
+if(isset($_POST['submit'])){
+    
+    $terms_title = $_POST['terms_title'];
+   
+    $terms_desc = $_POST['terms_desc'];
+
+    $terms_link=$_POST['terms_link'];
+    
+    
+    $insert_terms = "insert into terms (term_title,term_link,term_desc,term_status) values ('$terms_title','$terms_link','$terms_desc','yes')";
+    
+    $run_terms = mysqli_query($con,$insert_terms);
+    
+    if($run_terms){
+        ?>
+         <script>
+        swal({
+            title:"Your New Terms Has Been Inserted.",
+            text: "",
+            icon: "success",
+            buttons: [,"OK"],
+            successMode: true,
+           
+    })
+    .then((willDelete) => {
+            if (willDelete) {
+                window.open('view-terms.php','_self');
+            } 
+            else {
+            }
+    });
+</script>
+      <?php  
+    }
+    
+}
+?>
 
     <?php
  }

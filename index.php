@@ -18,7 +18,7 @@ $active='Home';
                
                 <!-- single slider item start -->
                 <?php
-                $get_slides="select * from slider";
+                $get_slides="select * from slider where slide_status='yes'";
                 $run_slider=mysqli_query($con,$get_slides);
                 while($row_slides=mysqli_fetch_array($run_slider)){
                     $slide_name=$row_slides['slide_name'];
@@ -62,7 +62,7 @@ $active='Home';
             <div class="container">
                 <div class="row mtn-30">
                 <?php
-                $get_boxs="select * from boxes_section";
+                $get_boxs="select * from boxes_section where box_status='yes'";
                 $run_box=mysqli_query($con,$get_boxs);
                 while($row_boxs=mysqli_fetch_array($run_box))
                 {

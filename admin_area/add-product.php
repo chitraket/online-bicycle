@@ -374,8 +374,8 @@
                             </div>
                             <div class="form-group row">
                                 <label for="example-number-input" class="col-md-3 col-form-label">Product Desc</label>
-                                <div class="col-md-9">
-                                <textarea required class="form-control" placeholder="Product Desc" name="product_desc" cols="19" rows="6"></textarea>
+                                <div class="col-md-9" >
+                                <textarea required class="form-control" class="summernote" placeholder="Product Desc" name="product_desc" cols="19" rows="6"> </textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -410,85 +410,7 @@
         <?php 
         include("includes/footer.php");
         ?>
-        <?php 
-
-        if(isset($_POST['submit'])){
-            
-            $product_title = $_POST['product_title'];
-            $manufacturer_cat=$_POST['manufacturer_cat'];
-            $product_cat = $_POST['product_cat'];
-            $cat = $_POST['cat'];
-            $product_label=$_POST['product_label'];
-            $product_discount=$_POST['product_discount'];
-            $product_discount_price=$_POST['product_discount_price'];
-            $product_price = $_POST['product_price'];
-            $product_size=$_POST['product_size'];
-            $product_frame=$_POST['product_frame'];
-            $product_qty=$_POST['product_qty'];
-            $product_weight=$_POST['product_weight'];
-            $product_front_suspension=$_POST['product_front_suspension'];
-            $product_rear_suspension=$_POST['product_rear_suspension'];
-            $product_front_derailleur=$_POST['product_front_derailleur'];
-            $product_rear_derailleur=$_POST['product_rear_derailleur'];
-            $product_wheels=$_POST['product_wheels'];
-            $product_tires=$_POST['product_tires'];
-            $product_shifter=$_POST['product_shifter'];
-            $product_crankset=$_POST['product_crankset'];
-            $product_freewheels=$_POST['product_freewheels'];
-            $product_bb_set=$_POST['product_bb_set'];
-            $product_cassette=$_POST['product_cassette'];
-            $product_colour=$_POST['product_colour'];
-            $product_pedals=$_POST['product_pedals'];
-            $product_seat_post=$_POST['product_seat_post'];
-            $product_handleber=$_POST['product_handleber'];
-            $product_stem=$_POST['product_stem'];
-            $product_headset=$_POST['product_headset'];
-            $product_brakeset=$_POST['product_brakeset'];
-            $product_desc = $_POST['product_desc'];
-            $product_top=$_POST['customRadio'];
-            $product_img1 = $_FILES['product_img1']['name'];
-            $product_img2 = $_FILES['product_img2']['name'];
-            $product_img3 = $_FILES['product_img3']['name'];
-            $product_img4 = $_FILES['product_img4']['name'];
-            
-            $temp_name1 = $_FILES['product_img1']['tmp_name'];
-            $temp_name2 = $_FILES['product_img2']['tmp_name'];
-            $temp_name3 = $_FILES['product_img3']['tmp_name'];
-            $temp_name4 = $_FILES['product_img4']['tmp_name'];
-            
-            move_uploaded_file($temp_name1,"product_images/$product_img1");
-            move_uploaded_file($temp_name2,"product_images/$product_img2");
-            move_uploaded_file($temp_name3,"product_images/$product_img3");
-            move_uploaded_file($temp_name4,"product_images/$product_img4");
-            
-            $insert_product = "insert into products (manufacturer_id,p_cat_id,cat_id,date,product_title,product_img1,product_img2,product_img3,product_img4,product_price,product_discount_price,product_discount,product_label,product_desc,product_qty,available_qty,product_size,product_frame,product_weight,product_front_suspension,product_rear_suspension,product_front_derailleur,product_rear_derailleur,product_wheels,product_tires,product_shifter,product_crankset,product_freewheels,product_bb_set,product_cassette,product_colour,product_pedals,product_seat_post,product_handleber,product_stem,product_headset,product_brakeset,product_status_top,product_status) values ('$manufacturer_cat','$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_img4','$product_price','$product_discount_price','$product_discount','$product_label','$product_desc','$product_qty','$product_qty','$product_size','$product_frame','$product_weight','$product_front_suspension','$product_rear_suspension','$product_front_derailleur','$product_rear_derailleur','$product_wheels','$product_tires','$product_shifter','$product_crankset','$product_freewheels','$product_bb_set','$product_cassette','$product_colour','$product_pedals','$product_seat_post','$product_handleber','$product_stem','$product_headset','$product_brakeset','$product_top','yes')";
-            $run_product = mysqli_query($con,$insert_product);
-            
-            if($run_product){
-                ?>
-                <script>
-                    swal({
-                        title:"Your New Product Has Been Inserted.",
-                        text: "",
-                        icon: "success",
-                        buttons: [,"OK"],
-                        successMode: true,
-                       
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('view-product.php','_self');
-                        } 
-                        else {
-                        }
-                });
-            </script>
-            <?php     
-            }
-            
-        }
-
-        ?>
+       
 
 
     </div>
@@ -508,15 +430,99 @@
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 
         <script src="assets/js/pages/dashboard.init.js"></script>
+        
+        <script src="assets/js/tinymce/tinymce.min.js"></script>
+        <script>tinymce.init({ selector:'textarea'});</script>
 
         <script src="assets/js/app.js"></script>
+
+        
     </body>
 
 
 <!-- Mirrored from themesbrand.com/skote/layouts/vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:43:03 GMT -->
 </html>
 
+<?php 
 
+if(isset($_POST['submit'])){
+    
+    $product_title = $_POST['product_title'];
+    $manufacturer_cat=$_POST['manufacturer_cat'];
+    $product_cat = $_POST['product_cat'];
+    $cat = $_POST['cat'];
+    $product_label=$_POST['product_label'];
+    $product_discount=$_POST['product_discount'];
+    $product_discount_price=$_POST['product_discount_price'];
+    $product_price = $_POST['product_price'];
+    $product_size=$_POST['product_size'];
+    $product_frame=$_POST['product_frame'];
+    $product_qty=$_POST['product_qty'];
+    $product_weight=$_POST['product_weight'];
+    $product_front_suspension=$_POST['product_front_suspension'];
+    $product_rear_suspension=$_POST['product_rear_suspension'];
+    $product_front_derailleur=$_POST['product_front_derailleur'];
+    $product_rear_derailleur=$_POST['product_rear_derailleur'];
+    $product_wheels=$_POST['product_wheels'];
+    $product_tires=$_POST['product_tires'];
+    $product_shifter=$_POST['product_shifter'];
+    $product_crankset=$_POST['product_crankset'];
+    $product_freewheels=$_POST['product_freewheels'];
+    $product_bb_set=$_POST['product_bb_set'];
+    $product_cassette=$_POST['product_cassette'];
+    $product_colour=$_POST['product_colour'];
+    $product_pedals=$_POST['product_pedals'];
+    $product_seat_post=$_POST['product_seat_post'];
+    $product_handleber=$_POST['product_handleber'];
+    $product_stem=$_POST['product_stem'];
+    $product_headset=$_POST['product_headset'];
+    $product_brakeset=$_POST['product_brakeset'];
+    $product_desc = $_POST['product_desc'];
+    $product_top=$_POST['customRadio'];
+    $product_status='yes';
+    $product_img1 = $_FILES['product_img1']['name'];
+    $product_img2 = $_FILES['product_img2']['name'];
+    $product_img3 = $_FILES['product_img3']['name'];
+    $product_img4 = $_FILES['product_img4']['name'];
+    
+    $temp_name1 = $_FILES['product_img1']['tmp_name'];
+    $temp_name2 = $_FILES['product_img2']['tmp_name'];
+    $temp_name3 = $_FILES['product_img3']['tmp_name'];
+    $temp_name4 = $_FILES['product_img4']['tmp_name'];
+    
+    move_uploaded_file($temp_name1,"product_images/$product_img1");
+    move_uploaded_file($temp_name2,"product_images/$product_img2");
+    move_uploaded_file($temp_name3,"product_images/$product_img3");
+    move_uploaded_file($temp_name4,"product_images/$product_img4");
+    
+    $insert_product = "insert into products (manufacturer_id,p_cat_id,cat_id,date,product_title,product_img1,product_img2,product_img3,product_img4,product_price,product_discount_price,product_discount,product_label,product_desc,product_qty,available_qty,product_size,product_frame,product_weight,product_front_suspension,product_rear_suspension,product_front_derailleur,product_rear_derailleur,product_wheels,product_tires,product_shifter,product_crankset,product_freewheels,product_bb_set,product_cassette,product_colour,product_pedals,product_seat_post,product_handleber,product_stem,product_headset,product_brakeset,product_status_top,product_status) values ('$manufacturer_cat','$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_img4','$product_price','$product_discount_price','$product_discount','$product_label','$product_desc','$product_qty','$product_qty','$product_size','$product_frame','$product_weight','$product_front_suspension','$product_rear_suspension','$product_front_derailleur','$product_rear_derailleur','$product_wheels','$product_tires','$product_shifter','$product_crankset','$product_freewheels','$product_bb_set','$product_cassette','$product_colour','$product_pedals','$product_seat_post','$product_handleber','$product_stem','$product_headset','$product_brakeset','$product_top','$product_status')";
+    $run_product = mysqli_query($con,$insert_product);
+    
+    if($run_product){
+        ?>
+        <script>
+            swal({
+                title:"Your New Product Has Been Inserted.",
+                text: "",
+                icon: "success",
+                buttons: [,"OK"],
+                successMode: true,
+               
+        })
+        .then((willDelete) => {
+                if (willDelete) {
+                    window.open('view-product.php','_self');
+                } 
+                else {
+                }
+        });
+    </script>
+    <?php     
+    }
+    
+}
+
+?>
 
     <?php
  }

@@ -45,7 +45,9 @@
                                         <table id="employee_data" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
-                                                <th>Terms Title</th>
+                                                <th>Title</th>
+                                                <th>Description</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                                
                                                 
@@ -63,7 +65,29 @@
                                                 <tr>
                                             
                                                 <td><?php echo $row_cart["term_title"]; ?></td>
-
+                                                <td><?php echo $row_cart["term_desc"]; ?></td>
+                                                <td>
+                                               <?php 
+                                                if($row_cart['term_status']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="<?php echo $row_cart['term_id']; ?>" class="switch1" name="no" switch="none" checked/>
+                                                <label for="<?php echo $row_cart['term_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="<?php echo $row_cart['term_id']; ?>" class="switch1" name="yes" switch="none" />
+                                                <label for="<?php echo $row_cart['term_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
                                                 <td><a href="delete-term.php?term_id=<?php echo $row_cart["term_id"]; ?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a><a href="update-term.php?term_id=<?php echo $row_cart["term_id"]; ?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a> </td>
                                                 </tr>
                                                 <?php 
@@ -141,7 +165,21 @@
             $('#employee_data').DataTable();  
         });  
         </script>
+ <script>
+                    $('.switch1').on('click',function(){
+                        var terms_ids=$(this).attr("id");
+                        var terms_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"terms-status.php",
+                            method:"POST",
+                            data:{terms_ids:terms_ids,terms_idss:terms_idss},
+                            success:function()
+                            {
 
+                            }
+                        });
+                    });
+</script>
          <script>
            $('.btn-delete').on('click',function(e){
                e.preventDefault();

@@ -52,6 +52,7 @@ if(isset($_POST["action"]))
   ";
  }
  
+ 
  $query2 = $query;
  $query.="ORDER BY product_id DESC LIMIT "  . $start_from."," .$record_per_page;
 

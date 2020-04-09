@@ -62,7 +62,7 @@ if (isset($_POST['login'])) {
     
     $customer_pass = $_POST['c_pass'];
     
-    $select_customer = "select * from customers where customer_email='$customer_email' AND customer_pass='$customer_pass'";
+    $select_customer = "select * from customers where customer_email='$customer_email' AND customer_pass='$customer_pass' AND customer_status='yes'";
     
     $run_customer = mysqli_query($con, $select_customer);
     
@@ -79,14 +79,13 @@ if (isset($_POST['login'])) {
                    title: "Your Email Or Password Is Wrong.",
                    text: "",
                    icon: "error",
-                   buttons: true,
+                   buttons:[,"Ok"],
                    successMode: true,
            })
            .then((willDelete) => {
                    if (willDelete) {
                        window.open('customer_login.php','_self');
-                   } 
-                   window.open('customer_login.php','_self');     
+                   }   
            });
            </script>
         <?php

@@ -116,7 +116,7 @@ if(isset($_POST['register'])){
     $c_contact = $_POST['c_contact'];
     $c_image = $_FILES['c_image']['name'];
     
-    if(!($c_name==""))
+    if(!($c_image==""))
     {
     $c_image_tmp = $_FILES['c_image']['tmp_name'];
     
@@ -126,23 +126,55 @@ if(isset($_POST['register'])){
     $run_customer = mysqli_query($con,$update_customer);
     if($run_customer){
         
-        echo "<script>alert('Your account has been edited, to complete the process, please Relogin')</script>";
-        
-        echo "<script>window.open('logout.php','_self')</script>";
-        
+       ?> 
+       <script>
+                    swal({
+                        title: "Your account has been edited, to complete the process.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('myaccount.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+        <?php 
     }
+    
 }
 else
 {
     $update_customer = "update customers set customer_name='$c_name',customer_lname='$c_lname',customer_email='$c_email',customer_state='$c_state',customer_city='$c_city',customer_address='$c_address',customer_contact='$c_contact' where customer_id='$update_id' ";
     $run_customer = mysqli_query($con,$update_customer);
     if($run_customer){
-        
-        echo "<script>alert('Your account has been edited, to complete the process, please Relogin')</script>";
-        
-        echo "<script>window.open('logout.php','_self')</script>";
-        
+      ?>
+      <script>
+                    swal({
+                        title: "Your account has been edited, to complete the process.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"OK"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('myaccount.php','_self');
+                        } 
+                        else {
+                        }
+                });
+            </script>
+      <?php  
+      
     }
+
 }
     
     
@@ -159,6 +191,7 @@ end:
                                 <div class="row">
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
+                                            <label for="f_name">First Name</label>
                                                     <input type="text" name="c_name" id="f_name" placeholder="Enter your First name" value="<?php echo $customer_name;?>" autocomplete="off" />
                                                     <span id="f_nameMsg"></span>
                                                     <span style="color: red;"><?php echo $error_c_name;?></span>
@@ -168,6 +201,7 @@ end:
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="single-input-item">
+                                            <label for="c_lname">Last Name</label>
                                                 <input type="text" placeholder="Enter your Last name" name="c_lname" id="l_name" value="<?php echo $customer_lname; ?>" autocomplete="off" />
                                                 <span id="l_nameMsg"></span>
                                                 <span style="color: red;"><?php echo $error_l_name; ?></span>
@@ -177,36 +211,43 @@ end:
 
                 
                                     <div class="single-input-item">
-                                        <input type="email" placeholder="Enter your Email" name="c_email"  id="email" value="<?php  echo $customer_email;?>" autocomplete="off"/>
+                                        <label for="email" >Email</label>
+                                        <input type="email" placeholder="Enter your Email"  value="<?php  echo $customer_email;?>" autocomplete="off" disabled/>
+                                        <input type="hidden" name="c_email" id="email" value="<?php echo  $customer_email; ?> ">
                                         <span id="emailMsg"></span>
                                         <span style="color: red;"><?php echo $error_email; ?></span>
                                     </div>
 
                                     
                                     <div class="single-input-item">
+                                    <label for="state">State</label>
                                         <input type="text" placeholder="Enter your state" name="c_state" id="state" value="<?php echo $customer_state; ?>" />
                                         <span id="stateMsg"></span>
                                         <span style="color: red;"><?php echo $error_state; ?></span>
                                     </div>
                            
                                     <div class="single-input-item">
+                                    <label for="city">City</label>
                                         <input type="text" placeholder="Enter your City" name="c_city" id="city" value="<?php echo $customer_city; ?>" />
                                         <span id="cityMsg"></span>
                                         <span style="color: red;"><?php echo $error_city; ?></span>
                                     </div>
                                     <div class="single-input-item">
+                                    <label for="contact">Contact</label>
                                         <input type="text" placeholder="Enter your contact " name="c_contact" id="contact" value="<?php echo $customer_contact; ?>" />
                                         <span id="contactMsg"></span>
                                         <span style="color: red;"><?php echo $error_c_contact; ?></span>
                                     </div>
 
                                     <div class="single-input-item">
-                                        <input type="text" placeholder="Enter your Address" name="c_address"  id="address" value="<?php echo $customer_address; ?>"/>
+                                    <label for="f_name">Address</label>
+                                        <textarea  placeholder="Enter your Address" name="c_address"  id="address"  cols="30" rows="3" ><?php echo $customer_address; ?></textarea>
                                         <span id="addressMsg"></span>
                                         <span style="color: red;"><?php echo $error_address; ?></span>
                                     </div>
 
                                     <div class="single-input-item">
+                                    <label for="image">Image</label>
                                     <input type="file" name="c_image" id="image" accept=".jpg,.jpeg,.png,.gif"/>
                                     <span id="imageMsg"></span>
                                     <img class="img-responsive my-4 " src="customer_images/<?php echo $customer_image; ?>" style="width:100px;height:100px;" alt="Customer Image">

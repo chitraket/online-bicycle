@@ -237,7 +237,7 @@
                             <div class="form-group row">
                                 <label for="example-number-input" class="col-md-3 col-form-label">Accessories Desc</label>
                                 <div class="col-md-9">
-                                <textarea required class="form-control" placeholder="Accessories Desc" name="accessories_desc" cols="19" rows="6"></textarea>
+                                <textarea required class="form-control" class="summernote" placeholder="Accessories Desc" name="accessories_desc" cols="19" rows="6"> </textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -354,6 +354,8 @@
 
         <script src="assets/js/pages/dashboard.init.js"></script>
 
+        <script src="assets/js/tinymce/tinymce.min.js"></script>
+        <script>tinymce.init({ selector:'textarea'});</script>
         <script src="assets/js/app.js"></script>
     </body>
 

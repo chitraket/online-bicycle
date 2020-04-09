@@ -25,6 +25,7 @@ include("includes/header.php");
             <div class="container">
                 <div class="row">
                     <!-- sidebar area start -->
+                    
                    <?php
                    include("includes/sidebar.php"); 
                    ?>
@@ -127,6 +128,8 @@ $(document).ready(function(){
             }
         });
     }
+    
+
     $(document).on('click', '.pagination_link', function(){  
            var page = $(this).attr("id");  
            filter_data($('#firsttime'+page).val(),page);  
