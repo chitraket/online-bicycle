@@ -312,10 +312,10 @@ include("includes/validation.php");
                         <div class="off-canvas-contact-widget">
                             <ul>
                                 <li><i class="fa fa-mobile"></i>
-                                    <a href="#"></a>
+                                    <a href="#">+91 7984498992</a>
                                 </li>
                                 <li><i class="fa fa-envelope-o"></i>
-                                    <a href="#"></a>
+                                    <a href="#">chitraketsavani@gmail.com</a>
                                 </li>
                             </ul>
                         </div>

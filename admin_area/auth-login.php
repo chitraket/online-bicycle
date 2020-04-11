@@ -96,7 +96,7 @@ include("includes/db.php");
                              if($count==1)
                              {
                                     $_SESSION['admin_email']=$admin_email;
-                                    
+                                    $_SESSION['last_login_timestamp'] = time();  
                                     echo "<script>window.open('index.php','_self')</script>";
                              }
                              else{

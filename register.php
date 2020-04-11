@@ -265,12 +265,12 @@ if(isset($_POST['register'])){
                                 <table align="center" border="0" cellpadding="0" cellspacing="0" >
                                     <tr>
                                         <td>
-                                            <h2 class="title">Registration successful.</h2>
+                                            <h2 class="title">Email Verification.</h2>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                        <a href="http://localhost/m-dev-store/registress.php?email='.$c_email.'" class="btn btn-sqr">View</a>
+                                       <p>Click<a href="http://localhost/m-dev-store/registress.php?email='.$c_email.'" class="btn btn-sqr">here</a> to activate your account.</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -336,7 +336,7 @@ if(isset($_POST['register'])){
         $mail->AddEmbeddedImage("assets/img/email-temp/pinterest.png",1007,  'pinterest.png');          
 
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = "Forget Password";
+        $mail->Subject = "{Last Step}-Email Verification Required";
         $mail->Body    = "$html";
         $mail->AltBody = "";
 

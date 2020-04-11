@@ -52,11 +52,23 @@ while($row = mysqli_fetch_array($result))
                                                     
                         $qty=$row_total['qty'];
                         $product_id=$row_total['product_id'];
+                        if($row_total['papage_number']==0)
+                        {
                         $select_totals="SELECT * FROM products WHERE product_id='$product_id'";
                         $run_totals=mysqli_query($con,$select_totals);
                         while ($row_totals=mysqli_fetch_array($run_totals)) {
                             $bill=$row_totals['product_price']*$qty;
                         }
+                     }
+                     if($row_total['papage_number']==1)
+                     {
+                        $select_totals="SELECT * FROM accessories WHERE accessories_id='$product_id'";
+                        $run_totals=mysqli_query($con,$select_totals);
+                        while ($row_totals=mysqli_fetch_array($run_totals)) {
+                            $bill=$row_totals['accessories_prices']*$qty;
+                        }
+                     }
+
                         $total+=$bill;
                     }
                                                 

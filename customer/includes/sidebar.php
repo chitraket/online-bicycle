@@ -29,9 +29,8 @@
                                                    <a href="#account-info" data-toggle="tab"><i class="fa fa-edit"></i> Account
                                                        Details</a>
                                                        <a href="#change-pass" data-toggle="tab"><i class="fa fa-user"></i>
-                                                       Change Password</a> 
-                                                       <a href="#delete-account" data-toggle="tab"><i class="fa fa-close"></i>
-                                                       Delete Account</a>
+                                                       Change Password</a>
+                                                       
                                                    <a href="logout.php"><i class="fa fa-sign-out"></i> Logout</a>
                                            </div>
                                </div>

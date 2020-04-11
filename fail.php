@@ -15,17 +15,7 @@
     <!-- Start Header Area -->
 
     <!-- end Header Area -->
-<?php
-$papage="";
-$pro_size="";          
-$pro_qty=0;
-$pro_id=0;
-$pro_price=0;
-$pro_name="";
-$pro_img="";
-$sub_total=0;
-$total=0; 
-?>
+
     <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
@@ -35,11 +25,20 @@ $total=0;
                         <div class="breadcrumb-wrap">
                         <div class="success-text">
                         <div class="section-title text-center" style="margin-top: 25px;">
-                        <img src="assets/img/icon/close.png" style="height: 50px;"> 
-                    <h2 class="title" style="margin-top: 10px;">Thank you</h2>
+                        <img src="assets/img/icon/error.png" style="height: 50px;"> 
+                    <h2 class="title" style="margin-top: 10px;">Payment Failed</h2>
 
-                    <p style="margin-top: 10px;">Payment is successfully processsed and your order is on the way</p>
-               
+                    <p style="margin-top: 10px;">Your Payment could not be Processed</p>
+                   <?php  
+                   if(isset($_GET['txnid']))
+                        {
+                            $txnid=$_GET['txnid'];
+                            //$_SESSION['txn_id']=$txnid;
+                            echo "<p>Transaction ID:$txnid</p>";
+                        }
+                        
+                        ?>
+
                     
                     </div>
                 </div>
@@ -50,7 +49,14 @@ $total=0;
         </div>
         <div class="container">
                 <div class="section-bg-color">
-              
+                <?php 
+                                    if(isset($_GET['c_id']))
+                                    {
+                                        $customer_address='';
+                                        $customer_email='';
+                                        $customer_phone='';
+                                        $productinfo=$_GET['c_id'];
+                                    ?>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-lg-12">
                             <!-- Cart Table Area -->
@@ -66,54 +72,35 @@ $total=0;
                                             <th class="pro-subtotal">Total</th>
                                         </tr>
                                     </thead>
-                                    <?php 
-                                     
-                                     // $total=$_SESSION['total'];
-                foreach ($_SESSION as $product) {
-                    if (!is_array($product)) {
-                        continue;
-                    }
-                foreach ($product as $key => $value) {
-                    if($key==6)
-                    {
-                        $papage=$value;
-                    }
-                    elseif($key==5)
-                    {
-                        $pro_size=$value;
-                    }
-                    elseif ($key==4) {
-                        $pro_id= $value;
-                    } elseif ($key ==3) {
-                        $pro_qty= $value;
-                    }
-                    elseif ($key ==2) {
-                        $pro_price= $value;
-                    }
-                    elseif($key==1)
-                    {
-                        $pro_name=$value;
-                    }
-                    elseif($key==0)
-                    {
-                        $pro_img=$value;
-                    }
-
-                }
-                $sub_total=$pro_price*$pro_qty;
-                $total+=$sub_total;
-                if($papage==0)
-                {
-                ?>
+ 
                                   
-                            
+                            <?php
+                                    
+                                    $total=0;
+                                        $select_carts="select * from customer_orders where order_id='$productinfo'";
+                                        $run_carts=mysqli_query($con,$select_carts);
+                                        while($row_carts=mysqli_fetch_array($run_carts))
+                                        {
+                                        $papage_number=$row_carts['papage_number'];
+                                        $pro_id=$row_carts['product_id'];
+                                        $pro_qty=$row_carts['qty'];
+                                        $product_size=$row_carts['size'];
+                                        if ($papage_number==0) {
+                                        $get_products="select * from products where product_id='$pro_id'";
+                                        $run_products=mysqli_query($con,$get_products);
+                                        while ($row_products=mysqli_fetch_array($run_products)) {
+                                            $product_title=$row_products['product_title'];
+                                            $product_img1=$row_products['product_img1'];
+                                            $product_price=$row_products['product_price'];
+                                            $sub_total=$row_products['product_price']*$pro_qty;
+                                            $total+=$sub_total; ?>
                            
                                     <tbody>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="admin_area/product_images/<?php echo $pro_img ?>" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="product-details.php?pro_id=<?php echo $pro_id ?>"><?php  echo $pro_name ?></a></td>
-                                            <td class="pro-price"><span><?php echo  $pro_size ?></span></td>
-                                            <td class="pro-price"><span>Rs.<?php echo  $pro_price?></span></td>
+                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
+                                            <td class="pro-title"><a href="product-details.php?pro_id=<?php echo $pro_id ?>"><?php  echo $product_title ?></a></td>
+                                            <td class="pro-price"><span><?php echo  $product_size ?></span></td>
+                                            <td class="pro-price"><span>Rs.<?php echo $product_price ?></span></td>
                                             <td class="pro-quantity">
                                             <span><?php echo $pro_qty ?></span>
                                             </td>
@@ -121,34 +108,45 @@ $total=0;
                                         </tr>
                                         </tbody>
                                         <?php
-                } 
-                if($papage==1)
-                {
-                                        ?>
-                                       <tbody>
+                                        }
+
+                                        }
+                                        if($papage_number==1)
+                                        {
+                                        $get_accessories="select * from accessories where accessories_id='$pro_id'";
+                                        $run_accessories=mysqli_query($con, $get_accessories);
+                                        while ($row_acessories=mysqli_fetch_array($run_accessories)) {
+                                            $accessoires_name=$row_acessories['accessories_name'];
+                                            $accessories_img1=$row_acessories['accessories_image_1'];
+                                            $accessories_prices=$row_acessories['accessories_prices'];
+                                            $sub_total=$row_acessories['accessories_prices']*$pro_qty;
+                                            $total+=$sub_total; ?>
+                                              <tbody>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="admin_area/accessories_images/<?php echo $pro_img ?>" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="accessories-details.php?accessories_id=<?php echo $pro_id ?>"><?php  echo $pro_name ?></a></td>
-                                            <td class="pro-price"><span><?php echo  $pro_size ?></span></td>
-                                            <td class="pro-price"><span>Rs.<?php echo  $pro_price?></span></td>
+                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="admin_area/accessories_images/<?php echo $accessories_img1?>" alt="Product" /></a></td>
+                                            <td class="pro-title"><a href="accessories-details.php?accessories_id=<?php echo $pro_id ?>"><?php  echo $accessoires_name ?></a></td>
+                                            <td class="pro-price"><span><?php echo  $product_size ?></span></td>
+                                            <td class="pro-price"><span>Rs.<?php echo $accessories_prices ?></span></td>
                                             <td class="pro-quantity">
-                                            <span><?php echo $pro_qty ?></span>
+                                               <span><?php echo $pro_qty ?></span>
                                             </td>
                                             <td class="pro-subtotal"><span>Rs. <?php echo $sub_total ?></span></td>
                                         </tr>
-                                        </tbody> 
-                                    <?php
-                }
-                                    } 
-                                    ?>  
+                                        </tbody>
+                                            <?php
+                                        }
+                                        }
+                                    }
+                                }
+                                       ?>
+                                      
                                 </table>
                             </div>
                             
                         </div>
                     </div>
                     <div class="row">
-
-                    <!--<div class="col-lg-6 mr-auto">
+                    <div class="col-lg-6 mr-auto">
                         <div class="contact-info">
                             <h4 class="contact-title"></h4>
                             <?php 
@@ -177,7 +175,7 @@ $total=0;
                                 <li><i class="fa fa-phone"></i>Phone: +91 <?php echo $customer_phone;?></li>
                             </ul>
                         </div>
-                    </div>-->
+                    </div>
                         <div class="col-lg-5 ml-auto">
                             <!-- Cart Calculation Area -->
                             <div class="cart-calculator-wrapper">
@@ -200,25 +198,17 @@ $total=0;
                                         </table>
                                     </div>
                                 </div>
-                                <form  method="POST" action="">
-                                    <input type="submit" class="btn btn-sqr d-block" style="margin-bottom: 50px;width: auto;" name="submit" value="Continue Shopping">
-                                </form>
+                                <a href="index.php" class="btn btn-sqr d-block" style="margin-bottom: 50px;">Continue Shopping</a>
                             </div>
                         </div>
-               
+                      
                     </div>
                    
                 </div>
             </div>
+        
+  
     </main>
-    <?php
-                      if(isset($_POST['submit']))
-                      {
-                               unset($_SESSION[$pro_name]); 
-                               echo "<script>window.open('index.php','_self')</script>";
-
-                      } 
-    ?>
     
     <div class="scroll-top not-visible">
         <i class="fa fa-angle-up"></i>

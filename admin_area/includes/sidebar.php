@@ -180,6 +180,14 @@
                 </a>
                
             </li>
+            <li class="menu-title">Review</li>
+            <li>
+                <a href="view-review.php" >
+                    <i class="bx bx-task"></i>
+                    <span>Review</span>
+                </a>
+               
+            </li>
             <li class="menu-title">Order</li>
             <li>
                 <a href="view-order.php" >

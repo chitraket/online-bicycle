@@ -1,4 +1,15 @@
 <?php
+function opass($opass)
+{
+    if(empty($opass))
+    {
+        return true;
+    }
+    else
+    {
+      return false;
+    }
+}
 function firstname($firstname)
 { 
     if(empty($firstname))

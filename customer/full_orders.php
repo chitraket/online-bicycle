@@ -233,6 +233,14 @@ if(!isset($_SESSION['customer_email']))
                                                </div>  
                                                 <?php 
                                             }
+                                            else if($order_status=="f" || $payment_status=="failed")
+                                            {
+                                                ?>
+                                                <div class="section-title text-center mt-2">
+                                                <h2 class="title">Payment Failed</h2>
+                                               </div>  
+                                                <?php 
+                                            }
                                             else
                                             {
                                             ?>

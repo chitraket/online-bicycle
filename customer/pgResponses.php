@@ -26,7 +26,7 @@ if($isValidChecksum == "TRUE") {
 			echo "<script>window.open('form_process3.php','_self')</script>";
 	}
 	else {
-		echo "<script>window.open('fail.php','_self')</script>";
+		echo "<script>window.open('form_process4.php','_self')</script>";
 	}
 
 }

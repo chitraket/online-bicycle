@@ -15,7 +15,46 @@
                         <!-- end page title -->
 
                         <div class="row">
-                           
+                        <div class="col-xl-4">
+                                <div class="card overflow-hidden">
+                                    <div class="bg-soft-primary">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <div class="text-primary p-3">
+                                                    <h5 class="text-primary">Welcome Back !</h5>
+                                                    <p>Skote Dashboard</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-5 align-self-end">
+                                                <img src="assets/images/profile-img.png" alt="" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                            <?php
+                                            $admin_email=$_SESSION['admin_email'];
+                                          
+                                            $select_admin="select * from admins where admin_email='$admin_email'";
+                                            $run_admin=mysqli_query($con,$select_admin);
+                                            while($row_admin=mysqli_fetch_array($run_admin))
+                                            {
+                                                ?>
+                                                <div class="avatar-md profile-user-wid mb-4">
+                                                    <img src="admin_images/<?php echo $row_admin['admin_image']; ?>" alt="" class="img-thumbnail rounded-circle">
+                                                </div>
+                                                <h5 class="font-size-15 text-truncate"><?php echo $row_admin['admin_name']; ?></h5>
+                                                <?php
+                                            } 
+                                            ?>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-xl-8">
                                 <div class="row">
                                     <div class="col-md-4">
@@ -51,7 +90,7 @@
                                                         <p class="text-muted font-weight-medium">Cancel Order</p>
                                                         <?php
                                                         $rows=0;
-                                                        $select_order_cancel='select DISTINCT order_id from customer_orders where payment_status="cancel"  order by order_id';
+                                                        $select_order_cancel='select DISTINCT order_id from customer_orders where payment_status="cancel" and order_status="c"  order by order_id';
                                                         $query_num_cancel=mysqli_query($con,$select_order_cancel);
                                                         $rows=mysqli_num_rows($query_num_cancel);
 
@@ -73,10 +112,34 @@
                                             <div class="card-body">
                                                 <div class="media">
                                                     <div class="media-body">
-                                                        <p class="text-muted font-weight-medium">Order Returned</p>
+                                                        <p class="text-muted font-weight-medium">Returned Order</p>
                                                         <?php
                                                         $rowss=0;
-                                                        $select_order_returned='select DISTINCT order_id from customer_orders where payment_status="returned"  order by order_id';
+                                                        $select_order_returned='select DISTINCT order_id from customer_orders where payment_status="returned" and order_status="r" order by order_id';
+                                                        $query_num_returned=mysqli_query($con,$select_order_returned);
+                                                        $rowss=mysqli_num_rows($query_num_returned);
+                                                        ?>
+                                                        <h4 class="mb-0"><?php echo $rowss; ?></h4>
+                                                    </div>
+
+                                                    <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
+                                                        <span class="avatar-title rounded-circle bg-primary">
+                                                            <i class="bx bx-purchase-tag-alt font-size-24"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card mini-stats-wid">
+                                            <div class="card-body">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                        <p class="text-muted font-weight-medium">Payment Failed</p>
+                                                        <?php
+                                                        $rowss=0;
+                                                        $select_order_returned='select DISTINCT order_id from customer_orders where payment_status="failed" and order_status="f"  order by order_id';
                                                         $query_num_returned=mysqli_query($con,$select_order_returned);
                                                         $rowss=mysqli_num_rows($query_num_returned);
                                                         ?>
@@ -140,30 +203,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="card mini-stats-wid">
-                                            <div class="card-body">
-                                                <div class="media">
-                                                    <div class="media-body">
-                                                        <p class="text-muted font-weight-medium">Order Returned</p>
-                                                        <?php
-                                                        $rowss=0;
-                                                        $select_order_returned='select DISTINCT order_id from customer_orders where payment_status="returned"  order by order_id';
-                                                        $query_num_returned=mysqli_query($con,$select_order_returned);
-                                                        $rowss=mysqli_num_rows($query_num_returned);
-                                                        ?>
-                                                        <h4 class="mb-0"><?php echo $rowss; ?></h4>
-                                                    </div>
-
-                                                    <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
-                                                        <span class="avatar-title rounded-circle bg-primary">
-                                                            <i class="bx bx-purchase-tag-alt font-size-24"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                   
                                 </div>
                                 <!-- end row -->
 

@@ -15,8 +15,6 @@ include("functions/functions.php");
  if (isset($_SESSION['c_id'])) {
      $c_id=$_SESSION['c_id'];
  }
- 
-
                 $status="successful";
                 $o_status="o";
                 $invoice_no=mt_rand();
@@ -87,7 +85,7 @@ include("functions/functions.php");
                 
 
 
-                 $insert_customer_orders="insert into customer_orders(order_id,product_id,txnid,invoice_no,qty,size,order_date,order_status,payment_status,papage_number) values('$order_id','$pro_id','$txnid','$invoice_no','$pro_qty','$pro_size',NOW(),'$o_status','$status','$papage')";
+                 $insert_customer_orders="insert into customer_orders(order_id,product_id,txnid,invoice_no,qty,size,customer_email,order_date,order_status,payment_status,papage_number) values('$order_id','$pro_id','$txnid','$invoice_no','$pro_qty','$pro_size','$customer_email',NOW(),'$o_status','$status','$papage')";
                 $run_customer_orders=mysqli_query($con,$insert_customer_orders);
 
                 $paytm="Paytm";
@@ -363,7 +361,8 @@ include("functions/functions.php");
                                                             <p style="text-align: left;font-weight: normal; font-size: 14px; color: #000000;line-height: 21px;    margin-top: 0;">'.$customer_address.'</p>
                                                         </td>
                                                     </tr>
-                                                </tbody></table>                               
+                                                </tbody>
+                                        </table>                               
                                     </td>
                                 </tr>
                             </tbody>            

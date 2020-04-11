@@ -27,7 +27,8 @@ if($isValidChecksum == "TRUE") {
 			echo "<script>window.open('form_process1.php','_self')</script>";
 	}
 	else {
-		echo "<script>window.open('fail.php','_self')</script>";
+		$_SESSION['order_id']=$_POST['ORDERID']	;
+		echo "<script>window.open('form_process3.php','_self')</script>";
 	}
 
 }

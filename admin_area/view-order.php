@@ -175,6 +175,12 @@
                                                       <td><span class="badge badge-pill badge-soft-warning font-size-10" ><img src="icon/return.png" style="height:25px;"/> Returned  Order</span></td>
                                                     <?php
                                                     }
+                                                    else if($order_status=="f")
+                                                    {
+                                                        ?>
+                                                        <td><span class="badge badge-pill badge-soft-danger font-size-10" ><img src="icon/error.png" style="height:25px;"/>Payment Failed</span></td>
+                                                        <?php
+                                                    }
                                                     } 
                                                     ?>
                                                 <td><input type="button" name="view" value="View Details" id="<?php echo $row_cart["id"]?>" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light view_data"  /></td>
@@ -269,6 +275,48 @@
         <script>  
         $(document).ready(function(){  
             $('#employee_data').DataTable();  
+            var counter=60*60;
+ myVar= setInterval(function()
+ { 
+     if(counter<=30)
+     {
+
+                    swal({
+                        title:"Your Session is About to Expire!",
+                        text: "Redirecting in "+counter+"s seconds.",
+                        icon: "warning",
+                        buttons: ["Logout","Stay Connected"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-order.php','_self');
+                        } 
+                        else
+                        {
+                            window.open('logout.php','_self');
+                        }
+
+                });
+     }
+  if(counter==0)
+  {
+   $.ajax
+   ({
+    type:'post',
+     url:'auth-logout.php',
+     data:{
+      logout:"logout"
+     },
+     success:function(response) 
+     {
+        window.location="auth-login.php";
+     }
+   });
+   }
+   counter--;
+ }, 1000)
         });  
         </script> 
         <script>  

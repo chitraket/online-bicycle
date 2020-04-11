@@ -87,7 +87,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="copyright-text text-center">
-                            <p>Powered By <a href="#">Corano</a>. Store 1 © 2019</p>
+                            <p>Powered By <a href="../index.php">SKOTE</a> © 2020</p>
                         </div>
                     </div>
                 </div>

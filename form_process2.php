@@ -74,7 +74,7 @@ else{
                     }
 
                 }
-                 $insert_customer_orders="insert into customer_orders(order_id,product_id,txnid,invoice_no,qty,size,order_date,order_status,payment_status,papage_number) values('$order_id','$pro_id','','$invoice_no','$pro_qty','$pro_size',NOW(),'$o_status','$status','$papage')";
+                 $insert_customer_orders="insert into customer_orders(order_id,product_id,txnid,invoice_no,qty,size,customer_email,order_date,order_status,payment_status,papage_number) values('$order_id','$pro_id','','$invoice_no','$pro_qty','$pro_size','$customer_email',NOW(),'$o_status','$status','$papage')";
                  $run_customer_orders=mysqli_query($con,$insert_customer_orders);
 
                

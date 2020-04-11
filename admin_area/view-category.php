@@ -180,8 +180,51 @@
 </html>
 <script>  
         $(document).ready(function(){  
-            $('#employee_data').DataTable();  
+            $('#employee_data').DataTable(); 
+            var counter=60*60;
+ myVar= setInterval(function()
+ { 
+     if(counter<=30)
+     {
+
+                    swal({
+                        title:"Your Session is About to Expire!",
+                        text: "Redirecting in "+counter+"s seconds.",
+                        icon: "warning",
+                        buttons: ["Logout","Stay Connected"],
+                        successMode: true,
+                       
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('view-category.php','_self');
+                        } 
+                        else
+                        {
+                            window.open('logout.php','_self');
+                        }
+
+                });
+     }
+  if(counter==0)
+  {
+   $.ajax
+   ({
+    type:'post',
+     url:'auth-logout.php',
+     data:{
+      logout:"logout"
+     },
+     success:function(response) 
+     {
+        window.location="auth-login.php";
+     }
+   });
+   }
+   counter--;
+ }, 1000) 
         });  
+
 </script> 
         <script>
                     $('.switch1').on('click',function(){

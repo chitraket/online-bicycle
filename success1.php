@@ -27,7 +27,7 @@
                                     <div class="section-title text-center" >
                                         <img src="assets/img/icon/check.png" style="height: 50px;"> 
                                         <h2 class="title" style="margin-top: 10px;">Thank you</h2>
-                                        <p style="margin-top: 10px;">Payment is successfully processsed and your order is on the way</p>
+                                        <p style="margin-top: 10px;">Order is successfully processsed and your order is on the way</p>
                                     </div>
                             </div>
                         </div>

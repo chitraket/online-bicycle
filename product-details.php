@@ -377,16 +377,99 @@ if(isset($_GET['pro_id']))
                                            <?php echo $manufacturer_title;?>
                                         </div>
                                         <h3 class="product-name"><?php  echo $pro_title; ?></h3>
-                                       <!-- <div class="ratings d-flex">
+                                       <div class="ratings d-flex">
+                                       <?php
+                                       $pro_idss=$_GET['pro_id'];
+                                       //$output=0;
+                                        $query="select AVG(rating) as rating from review where product_id='$pro_idss' and status='yes' and papage='0'";
+                                        $statement=mysqli_query($con,$query);
+                                        while($ruo=mysqli_fetch_array($statement))
+                                        {
+                                        $output=round($ruo['rating']);
+                                        } 
+                                        $select_reviewss="select * from review where product_id='$pro_idss' and status='yes' and papage='0'";
+                                        $run_reviewss=mysqli_query($con,$select_reviewss);
+                                        $total_reviewss=mysqli_num_rows($run_reviewss);
+                                        if($output==0)
+                                        {
+                                        ?>
                                             <span><i class="fa fa-star-o"></i></span>
                                             <span><i class="fa fa-star-o"></i></span>
                                             <span><i class="fa fa-star-o"></i></span>
                                             <span><i class="fa fa-star-o"></i></span>
                                             <span><i class="fa fa-star-o"></i></span>
                                             <div class="pro-review">
-                                                <span>1 Reviews</span>
+                                                <span><?php echo $total_reviewss; ?> Reviews</span>
                                             </div>
-                                        </div>-->
+                                            <?php
+                                        }
+                                       else if($output==1)
+                                        {
+                                            ?>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <div class="pro-review">
+                                                <span><?php echo $total_reviewss; ?> Reviews</span>
+                                            </div>
+                                            <?php
+                                        }
+                                       else if($output==2)
+                                        {
+                                            ?>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <div class="pro-review">
+                                                <span><?php echo $total_reviewss; ?> Reviews</span>
+                                            </div>
+                                            <?php
+                                        }
+                                        else if($output==3)
+                                        {
+                                            ?>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <div class="pro-review">
+                                                <span><?php echo $total_reviewss; ?> Reviews</span>
+                                            </div>
+                                            <?php
+                                        }
+                                        else if($output==4)
+                                        {
+                                            ?>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star-o"></i></span>
+                                            <div class="pro-review">
+                                                <span><?php echo $total_reviewss; ?> Reviews</span>
+                                            </div>
+                                            <?php
+                                        }
+                                        else if($output==5)
+                                        {
+                                            ?>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <span><i class="fa fa-star"></i></span>
+                                            <div class="pro-review">
+                                                <span><?php echo $total_reviewss; ?> Reviews</span>
+                                            </div>
+                                            <?php
+                                        }
+                                        ?>
+                                        </div>
                                         <div class="price-box">
                                         <?php
                                         if($pro_label=="new")
@@ -551,6 +634,9 @@ if(isset($_GET['pro_id']))
                                             <li>
                                                 <a data-toggle="tab" href="#tab_two">Information</a>
                                             </li>
+                                            <li>
+                                                <a data-toggle="tab" href="#tab_three">reviews</a>
+                                            </li>
                                         </ul>
                                         <div class="tab-content reviews-tab">
                                             <div class="tab-pane fade show active" id="tab_one">
@@ -642,8 +728,211 @@ if(isset($_GET['pro_id']))
                                                     </tbody>
                                                 </table>
                                             </div>
-                                           
-                                        </div>
+                                            <div class="tab-pane fade" id="tab_three">
+                                                <form action="#" method="POST" class="review-form">
+                                                    <?php
+                                                    $product_ids=$_GET['pro_id'];
+                                                    $select_reviews="select * from review where product_id='$product_ids' and status='yes' and papage='0'";
+                                                    $run_reviews=mysqli_query($con,$select_reviews);
+                                                    $total_reviews=mysqli_num_rows($run_reviews);
+                                                    ?>
+                                                <h5><?php echo $total_reviews; ?> review for <span><?php echo $pro_title; ?></span></h5>
+                                                    <?php
+                                                   
+                                                    $select_review="select * from review where product_id='$product_ids'and status='yes' and papage='0'";
+                                                     $run_review=mysqli_query($con,$select_review);
+                                                     while($row_review=mysqli_fetch_array($run_review))
+                                                     {
+                                                         $customer_emailss=$row_review['customer_email'];
+                                                        $rating=$row_review['rating'];
+                                                        $time=$row_review['time']; 
+                                                        $orgDate = $time;  
+                                                        $newDate = date("d-M-Y", strtotime($orgDate));  
+                                                        $message=$row_review['message'];
+                                                     
+                                                    ?>
+                                                 
+                                                    <div class="total-reviews">
+                                                        <?php
+                                                        $customer_review="select * from customers where customer_email='$customer_emailss' and customer_status='yes'";
+                                                        $run_customer_review=mysqli_query($con,$customer_review);
+                                                        while($row_customer_review=mysqli_fetch_array($run_customer_review))
+                                                        {
+                                                            ?>
+                                                            <div class="rev-avatar">
+                                                            <img src="customer/customer_images/<?php echo $row_customer_review['customer_image']; ?>" alt="">
+                                                        </div>
+                                                           
+                                                        
+                                                        <div class="review-box">
+                                                            <div class="ratings">
+                                                                <?php
+                                                                if($rating==1)
+                                                                {
+                                                                ?>
+                                                                <span class="good"><i class="fa fa-star"></i></span>
+                                                                <span class="good"><i class="fa fa-star-o"></i></span>
+                                                                <span class="good"><i class="fa fa-star-o"></i></span>
+                                                                <span class="good"><i class="fa fa-star-o"></i></span>
+                                                                <span class="good"><i class="fa fa-star-o"></i></span>
+                                                                <?php 
+                                                                }
+                                                                else if($rating==2){
+                                                                    ?>
+                                                                <span class="good"><i class="fa fa-star"></i></span>
+                                                                <span class="good"><i class="fa fa-star"></i></span>
+                                                                <span class="good"><i class="fa fa-star-o"></i></span>
+                                                                <span class="good"><i class="fa fa-star-o"></i></span>
+                                                                <span class="good"><i class="fa fa-star-o"></i></span>
+                                                                    <?php
+                                                                }
+                                                                else if($rating==3)
+                                                                {
+                                                                    ?>
+                                                                    <span class="good"><i class="fa fa-star"></i></span>
+                                                                    <span class="good"><i class="fa fa-star"></i></span>
+                                                                    <span class="good"><i class="fa fa-star"></i></span>
+                                                                    <span class="good"><i class="fa fa-star-o"></i></span>
+                                                                    <span class="good"><i class="fa fa-star-o"></i></span>
+                                                                    <?php
+                                                                }
+                                                                else if($rating==4)
+                                                                {
+                                                                    ?>
+                                                                    <span class="good"><i class="fa fa-star"></i></span>
+                                                                    <span class="good"><i class="fa fa-star"></i></span>
+                                                                    <span class="good"><i class="fa fa-star"></i></span>
+                                                                    <span class="good"><i class="fa fa-star"></i></span>
+                                                                    <span class="good"><i class="fa fa-star-o"></i></span>
+                                                                    <?php 
+                                                                }
+                                                                else if($rating==5)
+                                                                {
+                                                                    ?>
+                                                                    <span class="good"><i class="fa fa-star"></i></span>
+                                                                <span class="good"><i class="fa fa-star"></i></span>
+                                                                <span class="good"><i class="fa fa-star"></i></span>
+                                                                <span class="good"><i class="fa fa-star"></i></span>
+                                                                <span class="good"><i class="fa fa-star"></i></span>
+                                                                    <?php
+                                                                }
+                                                                ?>
+                                                                
+
+                                                            </div>
+                                                            <div class="post-author">
+                                                                <p><span><?php echo $row_customer_review['customer_name']; ?>-</span> <?php echo $newDate; ?></p>
+                                                            </div>
+                                                            <p><?php echo $message; ?></p>
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                        }
+                                                    }
+                                                   
+                                                    ?>
+                                                    <?php
+                                                    if(isset($_SESSION['customer_email']))
+                                                    { 
+                                                    ?>
+                                                    
+                                                    <div class="form-group row">
+                                                        <div class="col">
+                                                            <label class="col-form-label"><span class="text-danger">*</span>
+                                                                Your Review</label>
+                                                            <textarea class="form-control" name="message" required></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col">
+                                                            <label class="col-form-label"><span class="text-danger">*</span>
+                                                                Rating</label>
+                                                            &nbsp;&nbsp;&nbsp; Bad&nbsp;
+                                                            <input type="radio" value="1" name="rating" checked>
+                                                            &nbsp;
+                                                            <input type="radio" value="2" name="rating">
+                                                            &nbsp;
+                                                            <input type="radio" value="3" name="rating">
+                                                            &nbsp;
+                                                            <input type="radio" value="4" name="rating">
+                                                            &nbsp;
+                                                            <input type="radio" value="5" name="rating">
+                                                            &nbsp;Good
+                                                        </div>
+                                                    </div>
+                                                    <div class="buttons">
+                                                        <input type="submit" class="btn btn-sqr" value="Continue" name="submits" />
+                                                    </div>
+                                                    <?php
+                                                    }
+                                                    else
+                                                    {
+
+                                                    }
+                                                    ?>
+
+                                                </form> <!-- end of review-form -->
+                                            </div>
+                                        </div> 
+                                        <?php 
+                                        if(isset($_POST['submits']))
+                                        {
+                                            $message=$_POST['message'];
+                                            $rating=$_POST['rating'];
+                                            $pro_ids=$_GET['pro_id'];
+                                            $customer_email=$_SESSION['customer_email'];
+                                            $select_revieww="select * from review where customer_email='$customer_email'  and  product_id='$pro_ids' and papage='0'";
+                                            $run_revieww=mysqli_query($con,$select_revieww);
+                                           if(mysqli_num_rows($run_revieww)>0)
+                                           {
+                                                ?>
+                                                 <script type="text/javascript">
+                                                swal({
+                                                    title: "You have already give review",
+                                                    text: "",
+                                                    icon: "warning",
+                                                    buttons:[,"OK"],
+                                                    successMode: true,
+                                            })
+                                            .then((willDelete) => {
+                                                    if (willDelete) {
+                                                        window.open('product-details.php?pro_id=<?php echo $pro_ids; ?>','_self');
+                                                    } else {
+                                                    
+                                                    }
+                                            });
+                                                </script>
+                                                <?php
+                                           }
+                                            else{
+
+                                            
+                                            $insert_review="insert into review(product_id,papage,customer_email,message,time,rating,status) values('$pro_ids','0','$customer_email','$message',NOW(),'$rating','yes')";
+                                            $run_review=mysqli_query($con,$insert_review);
+                                            if($run_review)
+                                            {
+                                               ?>
+                                               <script type="text/javascript">
+                                                swal({
+                                                    title: "Thank You For Review.",
+                                                    text: "",
+                                                    icon: "success",
+                                                    buttons:[,"OK"],
+                                                    successMode: true,
+                                            })
+                                            .then((willDelete) => {
+                                                    if (willDelete) {
+                                                        window.open('product-details.php?pro_id=<?php echo $pro_ids; ?>','_self');
+                                                    } else {
+                                                    
+                                                    }
+                                            });
+                                                </script>
+                                               <?php
+                                            }
+                                        }
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>

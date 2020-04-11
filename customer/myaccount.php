@@ -5,7 +5,9 @@ if(!isset($_SESSION['customer_email']))
 {
     echo "<script>window.open('customer_login.php','_self')</script>";
 }
+$custmoer_email=$_SESSION['customer_email'];
    ?>
+   
     <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
@@ -58,7 +60,7 @@ if(!isset($_SESSION['customer_email']))
                                                         <p class="text-muted font-weight-medium">Orders</p>
                                                         <?php
                                                         $row=0;
-                                                        $select_order='select DISTINCT order_id from customer_orders order by order_id';
+                                                        $select_order="select DISTINCT order_id from customer_orders where customer_email='$custmoer_email' order by order_id";
                                                         $query_num=mysqli_query($con,$select_order);
                                                         $row=mysqli_num_rows($query_num);
 
@@ -83,7 +85,7 @@ if(!isset($_SESSION['customer_email']))
                                                         <p class="text-muted font-weight-medium">Cancel Order</p>
                                                         <?php
                                                         $rows=0;
-                                                        $select_order_cancel='select DISTINCT order_id from customer_orders where payment_status="cancel"  order by order_id';
+                                                        $select_order_cancel="select DISTINCT order_id from customer_orders where customer_email='$custmoer_email' and payment_status='cancel' and order_status='c' order by order_id";
                                                         $query_num_cancel=mysqli_query($con,$select_order_cancel);
                                                         $rows=mysqli_num_rows($query_num_cancel);
 
@@ -95,15 +97,16 @@ if(!isset($_SESSION['customer_email']))
                                             </div>
                                         </div>
                                     </div>
+                                    
                                     <div class="col-md-3 mb-2">
                                         <div class="card mini-stats-wid">
                                             <div class="card-body">
                                                 <div class="media">
                                                     <div class="media-body">
-                                                        <p class="text-muted font-weight-medium">Order Returned</p>
+                                                        <p class="text-muted font-weight-medium">Returned Order</p>
                                                         <?php
                                                         $rowss=0;
-                                                        $select_order_returned='select DISTINCT order_id from customer_orders where payment_status="returned"  order by order_id';
+                                                        $select_order_returned="select DISTINCT order_id from customer_orders where customer_email='$custmoer_email' and payment_status='returned' and order_status='r' order by order_id";
                                                         $query_num_returned=mysqli_query($con,$select_order_returned);
                                                         $rowss=mysqli_num_rows($query_num_returned);
                                                         ?>
@@ -115,6 +118,26 @@ if(!isset($_SESSION['customer_email']))
                                                             <i class="bx bx-purchase-tag-alt font-size-24"></i>
                                                         </span>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-2">
+                                        <div class="card mini-stats-wid">
+                                            <div class="card-body">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                        <p class="text-muted font-weight-medium">Payment Failed</p>
+                                                        <?php
+                                                        $rowws=0;
+                                                        $select_order_failed="select DISTINCT order_id from customer_orders where customer_email='$custmoer_email' and payment_status='failed' and order_status='f' order by order_id";
+                                                        $query_num_failed=mysqli_query($con,$select_order_failed);
+                                                        $rowws=mysqli_num_rows($query_num_failed);
+
+                                                        ?>
+                                                        <h4 class="mb-0"><?php echo $rowws; ?></h4>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -150,9 +173,6 @@ if(!isset($_SESSION['customer_email']))
                                             include("change_pass.php"); 
                                             ?>
                                             <!-- Single Tab Content End -->
-                                                <?php
-                                                include("delete_account.php"); 
-                                                ?>
                                             <!-- Single Tab Content Start -->
                                             <div class="tab-pane fade" id="payment-method" role="tabpanel">
                                                 <div class="myaccount-content">
