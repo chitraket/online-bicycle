@@ -1,7 +1,24 @@
 <?php
 
 $db=mysqli_connect("localhost","root","","ecom_store");
+function listCheckbox($query)
+{
+    global $db;
+    $list="select * from admins $query";
+    $result=$this->query($list);
+    $count=$result->num_rows;
+    if($count<1)
+    {
 
+    }
+    else{
+        while($row=$result->fetch_array(MYSQLI_BOTH))
+        {
+            $arr[]=$row;
+        }
+        return $arr;
+    }
+}
 function load_state()
 {
     global $db;

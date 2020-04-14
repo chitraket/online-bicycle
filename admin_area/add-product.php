@@ -6,12 +6,25 @@
      echo "<script>window.open('auth-login.php','_self')</script>";
  } 
  else{
-     ?>
+   
+    include("includes/header.php");
+    include("includes/sidebar.php"); 
+    $admin_email=$_SESSION['admin_email'];
+    $paga=1;
+    $query_per="select * from admins where admin_email='$admin_email'";
+    $run_query_per=mysqli_query($con,$query_per);
+    while($row_query_per=mysqli_fetch_array($run_query_per))
+    {
+         $admin_permission=$row_query_per['admin_permission'];
+                                
+    } 
+    $subject=explode(",",$admin_permission);
+    if(in_array($paga,$subject))
+    {
+            ?>
+      
             <!-- ========== Left Sidebar Start ========== -->
-    <?php
-        include("includes/header.php");
-        include("includes/sidebar.php"); 
-     ?>
+    
 
 <div class="main-content">
 <div class="page-content">
@@ -573,4 +586,30 @@ if(isset($_POST['submit'])){
 
     <?php
  }
+
+else{
+    
     ?>
+    <!-- Sweet Alert-->
+
+    <script>
+    swal({
+        title:"You cannot access this page!",
+        text: "Please contact administrator",
+        icon: "warning",
+        buttons: [,"OK"],
+        successMode: true,
+       
+})
+.then((willDelete) => {
+        if (willDelete) {
+            window.open('index.php','_self');
+        } 
+        else {
+        }
+});
+    </script>
+    <?php
+        }
+    }
+?>

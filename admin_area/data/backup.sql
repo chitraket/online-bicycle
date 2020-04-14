@@ -68,12 +68,14 @@ CREATE TABLE `admins` (
   `admin_email` varchar(255) NOT NULL,
   `admin_pass` varchar(255) NOT NULL,
   `admin_image` text NOT NULL,
-  `admin_country` varchar(255) NOT NULL,
   `admin_contact` varchar(255) NOT NULL,
+  `admin_roles` text NOT NULL,
+  `admin_permission` text NOT NULL,
+  `admin_status` text NOT NULL,
   PRIMARY KEY (`admin_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO admins VALUES("2","chitraket","chitraketsavani@gmail.com","chit9125","tatiana-saphira.jpg","Indonesia","2222-2222-2222");
+INSERT INTO admins VALUES("2","chitraket","chitraketsavani@gmail.com","chit9125","tatiana-saphira.jpg","2222-2222-2222","admin","1,2","yes");
 
 
 
@@ -108,68 +110,6 @@ CREATE TABLE `categories` (
 
 INSERT INTO categories VALUES("1","5-8","yes","yes");
 INSERT INTO categories VALUES("3","2-5","yes","yes");
-
-
-
-DROP TABLE city;
-
-CREATE TABLE `city` (
-  `city_id` int(11) NOT NULL AUTO_INCREMENT,
-  `city_name` varchar(50) NOT NULL,
-  `country_id` varchar(50) NOT NULL,
-  PRIMARY KEY (`city_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-
-INSERT INTO city VALUES("1","Karachi","1");
-INSERT INTO city VALUES("2","Lahore","1");
-INSERT INTO city VALUES("3","Jeddah","2");
-INSERT INTO city VALUES("4","Riyadh","2");
-INSERT INTO city VALUES("5","London","3");
-INSERT INTO city VALUES("6","Liverpool","3");
-
-
-
-DROP TABLE country;
-
-CREATE TABLE `country` (
-  `country_id` int(11) NOT NULL AUTO_INCREMENT,
-  `country_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`country_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
-INSERT INTO country VALUES("1","Pakistan");
-INSERT INTO country VALUES("2","Saudi Arabia");
-INSERT INTO country VALUES("3","United Kingdom");
-
-
-
-DROP TABLE country_state_city;
-
-CREATE TABLE `country_state_city` (
-  `id` int(11) NOT NULL,
-  `country` varchar(250) NOT NULL,
-  `state` varchar(250) NOT NULL,
-  `city` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO country_state_city VALUES("1","USA","New York","New York city");
-INSERT INTO country_state_city VALUES("2","USA","New York","Buffalo");
-INSERT INTO country_state_city VALUES("3","USA","New York","Albany");
-INSERT INTO country_state_city VALUES("4","USA","Alabama","Birmingham");
-INSERT INTO country_state_city VALUES("5","USA","Alabama","Montgomery");
-INSERT INTO country_state_city VALUES("6","USA","Alabama","Huntsville");
-INSERT INTO country_state_city VALUES("7","USA","California","Los Angeles");
-INSERT INTO country_state_city VALUES("8","USA","California","San Francisco");
-INSERT INTO country_state_city VALUES("9","USA","California","San Diego");
-INSERT INTO country_state_city VALUES("10","Canada","Ontario","Toronto");
-INSERT INTO country_state_city VALUES("11","Canada","Ontario","Ottawa");
-INSERT INTO country_state_city VALUES("12","Canada","British Columbia","Vancouver");
-INSERT INTO country_state_city VALUES("13","Canada","British Columbia","Victoria");
-INSERT INTO country_state_city VALUES("14","Australia","New South Wales","Sydney");
-INSERT INTO country_state_city VALUES("15","Australia","New South Wales","Newcastle");
-INSERT INTO country_state_city VALUES("16","Australia","Queensland","City of Brisbane");
-INSERT INTO country_state_city VALUES("17","Australia","Queensland","Gold Coast
-");
 
 
 
@@ -351,22 +291,6 @@ INSERT INTO payments VALUES("17","1267937988","","20000","Cash on Delivery","","
 INSERT INTO payments VALUES("18","1267937988","","20000","Cash on Delivery","","","2020-04-10");
 INSERT INTO payments VALUES("19","2020633601","ORDS87042246","20000","Paytm","","","2020-04-10");
 INSERT INTO payments VALUES("20","919141111","","0","Cash on Delivery","","","2020-04-10");
-
-
-
-DROP TABLE pending_orders;
-
-CREATE TABLE `pending_orders` (
-  `order_id` int(10) NOT NULL AUTO_INCREMENT,
-  `customer_id` int(10) NOT NULL,
-  `invoice_no` int(10) NOT NULL,
-  `product_id` text NOT NULL,
-  `qty` int(10) NOT NULL,
-  `size` text NOT NULL,
-  `order_status` text NOT NULL,
-  PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 
 

@@ -178,8 +178,8 @@
                     <i class="bx bx-task"></i>
                     <span>Customer</span>
                 </a>
-               
             </li>
+            
             <li class="menu-title">Review</li>
             <li>
                 <a href="view-review.php" >
@@ -188,7 +188,8 @@
                 </a>
                
             </li>
-            <li class="menu-title">Order</li>
+
+            <li class="menu-title">Order & Payment</li>
             <li>
                 <a href="view-order.php" >
                     <i class="bx bx-task"></i>
@@ -203,6 +204,18 @@
                     <span>Payment</span>
                 </a>
                
+            </li>
+
+            <li class="menu-title">Sub User</li>
+            <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="bx bx-file"></i>
+                    <span>Sub User</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                    <li><a href="add-sub-user.php">Add Sub User</a></li>
+                    <li><a href="view-sub-user.php">View Sub User</a></li>
+                </ul>
             </li>
 
 

@@ -874,6 +874,8 @@ if(isset($_GET['accessories_id']))
     <script src="assets/js/plugins/google-map.js"></script>
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/tinymce/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea'});</script>
     <!--sweet alert-->
     <!--<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>-->
 </body>

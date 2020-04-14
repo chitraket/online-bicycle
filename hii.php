@@ -1,7 +1,7 @@
 <?php
 session_start();
-foreach ($_SESSION as $product) {
-    print_r($product);
-    
+foreach($_SESSION as $value)
+{
+  print_r($value);
 }
 ?>
