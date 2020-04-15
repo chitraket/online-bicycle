@@ -290,7 +290,7 @@ if(isset($_GET['product_id'])){
                                             <label class="custom-file-label" id="customFilesw">Choose file</label>
                                             <br>
                                             <br/>
-                                            <img   width="70" height="70" src="product_images/<?php echo $p_image2; ?>" alt="<?php echo $p_image1; ?>">  
+                                            <img   width="70" height="70" src="product_images/<?php echo $p_image2; ?>" alt="<?php echo $p_image2; ?>">  
                                               <br>
                                               <br/>
                                             <script type="text/javascript">
@@ -318,7 +318,7 @@ if(isset($_GET['product_id'])){
                                             <label class="custom-file-label" id="customFileswa">Choose file</label>
                                             <br>
                                             <br/>
-                                            <img   width="70" height="70" src="product_images/<?php echo $p_image3; ?>" alt="<?php echo $p_image1; ?>">  
+                                            <img   width="70" height="70" src="product_images/<?php echo $p_image3; ?>" alt="<?php echo $p_image3; ?>">  
                                               <br>
                                               <br/>
                                             <script type="text/javascript">

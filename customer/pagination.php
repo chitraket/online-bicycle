@@ -70,11 +70,13 @@ while($row = mysqli_fetch_array($result))
                      }
 
                         $total+=$bill;
+                        $gst=$total*12/100;
+                        $totals=$total+$gst;
                     }
                                                 
             ?>
 
-            <td>Rs.<?php echo $total; ?></td>
+            <td>Rs.<?php echo $totals; ?></td>
             <?php 
                                                 $select_pays="SELECT DISTINCT txnid,payment_status FROM customer_orders WHERE order_id='$order_id'";
                                                 $run_pays=mysqli_query($con, $select_pays);

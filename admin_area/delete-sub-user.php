@@ -13,19 +13,19 @@
         {
              $admin_permission=$row_query_per['admin_permission'];                                
         } 
-    $paga=16;
+    $paga=44;
     $subject=explode(",",$admin_permission);
     if(in_array($paga,$subject))
     {
-    if (isset($_GET['slide_id'])) {
-        $delete_id = $_GET['slide_id'];
+    if (isset($_GET['admin_id'])) {
+        $delete_id = $_GET['admin_id'];
         
-        $delete_pro = "delete from slider where slide_id='$delete_id'";
+        $delete_pro = "delete from admins where admin_id='$delete_id'";
         
         $run_delete = mysqli_query($con, $delete_pro);
         
         if ($run_delete) {   
-            echo "<script>window.open('view-slider.php?m=1','_self')</script>";
+            echo "<script>window.open('view-sub-user.php?m=1','_self')</script>";
         }
     } ?>
 <?php

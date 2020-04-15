@@ -6,33 +6,24 @@
      echo "<script>window.open('auth-login.php','_self')</script>";
  } 
  else{
-
     include("includes/header.php");
-     include("includes/sidebar.php"); 
-  
-     $paga=16;
-     $admin_email=$_SESSION['admin_email'];
+    include("includes/sidebar.php"); 
+    $paga=16;
+    $admin_email=$_SESSION['admin_email'];
     $query_per="select * from admins where admin_email='$admin_email'";
     $run_query_per=mysqli_query($con,$query_per);
     while($row_query_per=mysqli_fetch_array($run_query_per))
     {
-         $admin_permission=$row_query_per['admin_permission'];
-                                
+         $admin_permission=$row_query_per['admin_permission'];                          
     } 
     $subject=explode(",",$admin_permission);
      if(in_array($paga,$subject))
      {
-
 if(isset($_GET['slide_id'])){
-    
     $edit_p_cat_id = $_GET['slide_id'];
-    
     $edit_p_cat_query = "select * from slider where slide_id='$edit_p_cat_id'";
-    
     $run_edit = mysqli_query($con,$edit_p_cat_query);
-    
     $row_edit = mysqli_fetch_array($run_edit);
-    
     $s_id = $row_edit['slide_id'];
     $s_name = $row_edit['slide_name'];
     $s_row = $row_edit['slide_row'];

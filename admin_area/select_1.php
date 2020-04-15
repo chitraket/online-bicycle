@@ -48,6 +48,7 @@ while($row_customer_orders=mysqli_fetch_array($run_customer_orders))
                                                 <?php
                                                 $bill=0;
                                                 $total=0;
+                                                $totals=0;
                                                  $get_products="select * from customer_orders where order_id=$order_id";
                                                  $run_products=mysqli_query($con,$get_products);
                                                  while ($row_products=mysqli_fetch_array($run_products)) {
@@ -125,12 +126,24 @@ while($row_customer_orders=mysqli_fetch_array($run_customer_orders))
                                             
                                                 <td colspan="2">
                                                     
+                                                    <h6 class="m-0 text-right">GST (12%):</h6>
+                                                </td>
+                                                <td>
+                                                
+                                                
+                                                Rs.<?php echo $gst=$total*12/100; ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                            
+                                                <td colspan="2">
+                                                    
                                                     <h6 class="m-0 text-right">Total:</h6>
                                                 </td>
                                                 <td>
                                                 
                                                 
-                                                Rs.<?php echo $total; ?>
+                                                Rs.<?php echo $totals=$total+$gst; ?>
                                                 </td>
                                             </tr>
                                             
@@ -170,7 +183,7 @@ while($row_customer_orders=mysqli_fetch_array($run_customer_orders))
                                     if ($product_status=="o") {
                                         ?>
                                             <a href="cancel_order.php?del_id=<?php echo $order_id; ?>&status=c" id="btn-delete"><input type="button" class="btn btn-danger"  value="Cancel Order" ></a>
-                                            <a href="delete.php?del_id=<?php echo $order_id; ?>&status=p&txnid=<?php echo $txnids ?>&invoiceno=<?php echo $product_invoice ?>&total=<?php echo $total ?>"><input type="button" class="btn btn-primary"  value="Packed" ></a> 
+                                            <a href="delete.php?del_id=<?php echo $order_id; ?>&status=p&txnid=<?php echo $txnids ?>&invoiceno=<?php echo $product_invoice ?>&total=<?php echo $totals ?>"><input type="button" class="btn btn-primary"  value="Packed" ></a> 
                                             <span class="ml-2 badge badge-pill badge-soft-success font-size-10" ><img src="icon/tick.png" style="height:25px;"/> Ordered And Approved</span>
                                     <?php
                                         }
@@ -178,7 +191,7 @@ while($row_customer_orders=mysqli_fetch_array($run_customer_orders))
                                     {
                                     ?>
                                         <a href="cancel_order.php?del_id=<?php echo $order_id; ?>&status=c" id="btn-delete"><input type="button" class="btn btn-danger"  value="Cancel Order" ></a>
-                                        <a href="delete.php?del_id=<?php echo $order_id; ?>&status=s&txnid=<?php echo $txnids ?>&invoiceno=<?php echo $product_invoice ?>&total=<?php echo $total ?>"><input type="button" class="btn btn-primary" value="Shipped" > </a>
+                                        <a href="delete.php?del_id=<?php echo $order_id; ?>&status=s&txnid=<?php echo $txnids ?>&invoiceno=<?php echo $product_invoice ?>&total=<?php echo $totals ?>"><input type="button" class="btn btn-primary" value="Shipped" > </a>
                                         <span class="ml-2 badge badge-pill badge-soft-success font-size-10" ><img src="icon/packing.png" style="height:25px;"/> Packed</span>    
 
                                     <?php 
@@ -186,18 +199,11 @@ while($row_customer_orders=mysqli_fetch_array($run_customer_orders))
                                     if ($product_status=="s") {
                                         ?>
                                         <a href="cancel_order.php?del_id=<?php echo $order_id; ?>&status=c" id="btn-delete"><input type="button" class="btn btn-danger"  value="Cancel Order"  id=""></a>
-                                        <a href="delete.php?del_id=<?php echo $order_id; ?>&status=d&txnid=<?php echo $txnids ?>&invoiceno=<?php echo $product_invoice ?>&total=<?php echo $total ?>"><input type="button" class="btn btn-primary"  value="Delivered" ></a>
+                                        <a href="delete.php?del_id=<?php echo $order_id; ?>&status=d&txnid=<?php echo $txnids ?>&invoiceno=<?php echo $product_invoice ?>&total=<?php echo $totals ?>"><input type="button" class="btn btn-primary"  value="Delivered" ></a>
                                             <span class="ml-2 badge badge-pill badge-soft-success font-size-10" ><img src="icon/truck.png" style="height:25px;"/> Shipped</span> 
                                     <?php
                                     } 
                                     if ($product_status=="d") {
-                                        if ($txnids=="") {    
-                                            $payment_mode="Cash on Delivery";
-                                            $insert_payment="insert into payments(invoice_no,txnid,amount,payment_mode,code_name,code,payment_date) values('$product_invoice','','$total','$payment_mode','','',NOW())";
-                                            mysqli_query($con, $insert_payment);
-                                            $update_status="update customer_orders set payment_status='successful' where order_id='$order_id'";
-                                            mysqli_query($con,$update_status);
-                                        }
                                       
                                 
                                         ?>

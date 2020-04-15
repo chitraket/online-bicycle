@@ -3,7 +3,7 @@
     <?php
        $active='';
        include("includes/header.php");
-       if(isset($_POST['action']) && $_POST['action']=="remove")
+       if(isset($_POST['action']) && $_POST['action']=="Remove")
        {
             unset($_SESSION[$_POST["p_name"]]);
             
@@ -87,13 +87,13 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th class="pro-thumbnail">Thumbnail</th>
+                                            <th class="pro-thumbnail">Image</th>
                                             <th class="pro-title">Product</th>
                                             <th class="pro-price">Size</th>
                                             <th class="pro-price">Price</th>
                                             <th class="pro-quantity">Quantity</th>
                                             <th class="pro-subtotal">Total</th>
-                                            <th class="pro-remove">Delete</th>
+                                            <th class="pro-remove">Remove</th>
 
                                         </tr>
                                     </thead>
@@ -196,7 +196,7 @@
                                       <td class="pro-remove">
                                           <input type="hidden" name="code" value="<?php echo $p_id?>">
                                           <input type="hidden" name="p_name" value="<?php echo $p_name ?>">
-                                          <input type="submit" value="remove" name="action" class="btn btn-cart2">
+                                          <input type="submit" value="Remove" name="action" class="btn btn-cart2">
                                         </td>
                                      </form>
                                      <?php
@@ -233,7 +233,7 @@
                                         <td class="pro-remove">
                                             <input type="hidden" name="code" value="<?php echo $p_id?>">
                                             <input type="hidden" name="p_name" value="<?php echo $p_name ?>">
-                                            <input type="submit" value="remove" name="action" class="btn btn-cart2">
+                                            <input type="submit" value="Remove" name="action" class="btn btn-cart2">
                                         </td>
                                         </form>
                                         <?php
@@ -252,12 +252,6 @@
                                 <div class="cart-update">
                                     <a href="shop.php"><input type="submit" name="update" class="btn btn-sqr" value="Continue Shopping"></a>
                                 </div>
-                                <div class="apply-coupon-wrapper">
-                                    <form action="#" method="post" class=" d-block d-md-flex">
-                                        <input type="text" placeholder="Enter Your Coupon Code" required />
-                                        <button class="btn btn-sqr">Apply Coupon</button>
-                                    </form>
-                                </div>
                                
                             </div>
                         </div>
@@ -267,20 +261,20 @@
                             <!-- Cart Calculation Area -->
                             <div class="cart-calculator-wrapper">
                                 <div class="cart-calculate-items">
-                                    <h6>Cart Totals</h6>
+                                    <h6>Cart Total</h6>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tr>
                                                 <td>Sub Total</td>
                                                 <td>Rs.<?php echo $total ?></td>
                                             </tr>
-                                            <!--<tr>
-                                                <td>Shipping</td>
-                                                <td>$70</td>
-                                            </tr>-->
+                                            <tr>
+                                                <td>GST (12%)</td>
+                                                <td>Rs.<?php echo $gst=$total*12/100; ?></td>
+                                            </tr>
                                             <tr class="total">
                                                 <td>Total</td>
-                                                <td class="total-amount">Rs.<?php echo $total ?></td>
+                                                <td class="total-amount">Rs.<?php echo $totals=$total+$gst; ?></td>
                                             </tr>
                                         </table>
                                         

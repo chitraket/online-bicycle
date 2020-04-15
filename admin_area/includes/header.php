@@ -4,7 +4,7 @@
 <!-- Mirrored from themesbrand.com/skote/layouts/vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:42:31 GMT -->
 <head>
         <meta charset="utf-8" />
-        <title>Dashboard | Skote - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Dashboard | SKOTE</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />

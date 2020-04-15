@@ -9,7 +9,6 @@
            
            if(!isset($_SESSION['customer_email'])){
             echo "<script>window.open('customer/customer_login.php','_self')</script>";
-              // include("customer/customer_login.php");
            }     
 ?>
 
@@ -277,25 +276,6 @@ $_SESSION['c_id']=$customer_id;
                                         <span id="addressMsg"></span>
                                         <span style="color: red;"><?php echo $error_address; ?></span>
                                     </div>
-                                  <!--  <div class="checkout-box-wrap">
-                                        <div class="single-input-item">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" id="create_pwd">
-                                                <label class="custom-control-label" for="create_pwd">New </label>
-                                            </div>
-                                        </div>
-                                        <div class="account-create single-form-row">
-                                            <div class="single-input-item">
-                                                <label for="pwd" class="required">New Address</label>
-                                                <input type="text" id="pwd" placeholder="New Address" required />
-                                            </div>
-                                        </div>
-                                    </div>-->
-                                    
-                                    <!--<div class="single-input-item">
-                                    <label for="street-address" class="required mt-20">Street address</label>
-                                        <input type="text"  placeholder="Street address Line 2 (Optional)" />
-                                    </div>-->
                                     <div class="single-input-item">
                                         <label for="town" class="required">Town / City</label>
                                         <input type="text" placeholder="Enter your City" name="c_city" id="city" value="<?php echo $customer_city; ?>" required />
@@ -423,15 +403,15 @@ $_SESSION['c_id']=$customer_id;
                                             <tr>
                                                 <td>Sub Total</td>
                                                 <td><strong><?php echo $total; ?></strong></td>
-                                                <?php 
-                                               // $_SESSION['total']=$total;
-                                                ?>
+                                            </tr>
+                                            <tr>
+                                                <td>GST (12%)</td>
+                                                <td><strong><?php echo $gst=$total*12/100; ?></strong></td>
                                             </tr>
                                             <tr>
                                                 <td>Total Amount</td>
-                                                <td><strong><?php echo $total; ?></strong>
-                                                <input type="hidden" title="TXN_AMOUNT" tabindex="10" type="text" name="TXN_AMOUNT"value="<?php echo $total; ?>">
-                                                <!--<input type="hidden" name="amount" value="<?php echo $total; ?>" />-->
+                                                <td><strong><?php echo $totals=$total+$gst; ?></strong>
+                                                <input type="hidden" title="TXN_AMOUNT" tabindex="10" type="text" name="TXN_AMOUNT"value="<?php echo $totals; ?>">
                                             </td>
                                             </tr>
                                         </tfoot>

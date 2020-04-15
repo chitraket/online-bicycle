@@ -25,7 +25,7 @@ CREATE TABLE `accessories` (
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 INSERT INTO accessories VALUES("1","5","8","x","boys-Puffer-Coat-With-Detachable-Hood-1.jpg","boys-Puffer-Coat-With-Detachable-Hood-2.jpg","boys-Puffer-Coat-With-Detachable-Hood-3.jpg","boys-Puffer-Coat-With-Detachable-Hood-3.jpg","2","0","2","2","20000","343456","23","new","2020-04-08","2","yes","yes");
-INSERT INTO accessories VALUES("4","5","1","amansss","boys-Puffer-Coat-With-Detachable-Hood-1.jpg","boys-Puffer-Coat-With-Detachable-Hood-2.jpg","boys-Puffer-Coat-With-Detachable-Hood-3.jpg","boys-Puffer-Coat-With-Detachable-Hood-3.jpg","12","11","2","2","20000","40","100000","new","2020-04-09","<p>2</p>","yes","yes");
+INSERT INTO accessories VALUES("4","5","1","amansss","boys-Puffer-Coat-With-Detachable-Hood-1.jpg","boys-Puffer-Coat-With-Detachable-Hood-2.jpg","boys-Puffer-Coat-With-Detachable-Hood-3.jpg","boys-Puffer-Coat-With-Detachable-Hood-3.jpg","12","10","2","2","20000","40","100000","new","2020-04-09","<p>2</p>","yes","yes");
 
 
 
@@ -73,9 +73,11 @@ CREATE TABLE `admins` (
   `admin_permission` text NOT NULL,
   `admin_status` text NOT NULL,
   PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO admins VALUES("2","chitraket","chitraketsavani@gmail.com","chit9125","tatiana-saphira.jpg","2222-2222-2222","admin","1,2","yes");
+INSERT INTO admins VALUES("2","chitraket","chitraketsavani@gmail.com","chit9125","tatiana-saphira.jpg","2222-2222-2222","admin","1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,44","yes");
+INSERT INTO admins VALUES("3","chit","17bmiit116@gmail.com","chit@9125","Arief.jpeg","7984498992","sub","1,3","yes");
+INSERT INTO admins VALUES("4","amans","aman@gmail.com","aman@9125","iko.png","7984498993","sub","1,2,3,4,5,6,7,8","yes");
 
 
 
@@ -147,7 +149,7 @@ CREATE TABLE `customer_orders` (
   `payment_status` text NOT NULL,
   `papage_number` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 INSERT INTO customer_orders VALUES("8","41","1","ORDS88870342","402651783","1","N/A","17bmiit116@gmail.com","2020-04-01","o","successful","1");
 INSERT INTO customer_orders VALUES("9","41","1","ORDS88870342","402651783","1","S","17bmiit116@gmail.com","2020-04-01","o","successful","0");
@@ -159,9 +161,9 @@ INSERT INTO customer_orders VALUES("21","51","1","","1592854802","1","N/A","17bm
 INSERT INTO customer_orders VALUES("22","52","2","","735431476","1","S","17bmiit116@gmail.com","2020-04-05","c","cancel","0");
 INSERT INTO customer_orders VALUES("23","53","2","ORDS6049935","996900946","1","S","17bmiit116@gmail.com","2020-04-05","c","cancel","0");
 INSERT INTO customer_orders VALUES("24","54","2","ORDS71030701","1748788475","1","S","17bmiit116@gmail.com","2020-04-05","o","pending","0");
-INSERT INTO customer_orders VALUES("25","55","5","","919141111","1","N/A","17bmiit116@gmail.com","2020-04-05","d","pending","1");
+INSERT INTO customer_orders VALUES("25","55","5","","919141111","1","N/A","17bmiit116@gmail.com","2020-04-05","d","successful","1");
 INSERT INTO customer_orders VALUES("26","56","1","","1795758946","1","S","17bmiit116@gmail.com","2020-04-05","d","pending","0");
-INSERT INTO customer_orders VALUES("27","57","2","","1267937988","1","S","17bmiit116@gmail.com","2020-04-05","d","pending","0");
+INSERT INTO customer_orders VALUES("27","57","2","","1267937988","1","S","17bmiit116@gmail.com","2020-04-05","d","successful","0");
 INSERT INTO customer_orders VALUES("28","58","1","","389925188","1","S","17bmiit116@gmail.com","2020-04-05","o","pending","0");
 INSERT INTO customer_orders VALUES("29","59","2","","515687472","1","S","17bmiit116@gmail.com","2020-04-09","o","pending","0");
 INSERT INTO customer_orders VALUES("30","60","2","ORDS79413530","432080359","1","S","17bmiit116@gmail.com","2020-04-09","f","failed","0");
@@ -173,6 +175,11 @@ INSERT INTO customer_orders VALUES("35","64","5","ORDS47302900","1374556290","1"
 INSERT INTO customer_orders VALUES("36","65","2","ORDS87231945","926379929","1","S","17bmiit116@gmail.com","2020-04-10","f","failed","0");
 INSERT INTO customer_orders VALUES("37","65","4","ORDS87231945","926379929","1","N/A","17bmiit116@gmail.com","2020-04-10","f","failed","1");
 INSERT INTO customer_orders VALUES("38","66","4","ORDS87042246","2020633601","1","N/A","17bmiit116@gmail.com","2020-04-10","o","successful","1");
+INSERT INTO customer_orders VALUES("39","67","2","ORDS12099586","256657129","1","S","17bmiit116@gmail.com","2020-04-15","o","successful","0");
+INSERT INTO customer_orders VALUES("40","68","1","","170037176","1","S","17bmiit116@gmail.com","2020-04-15","d","successful","0");
+INSERT INTO customer_orders VALUES("41","68","4","","170037176","1","N/A","17bmiit116@gmail.com","2020-04-15","d","successful","1");
+INSERT INTO customer_orders VALUES("42","69","2","ORDS27343316","1446192773","1","S","17bmiit116@gmail.com","2020-04-15","f","failed","0");
+INSERT INTO customer_orders VALUES("43","69","4","ORDS27343316","1446192773","1","N/A","17bmiit116@gmail.com","2020-04-15","f","failed","1");
 
 
 
@@ -192,10 +199,10 @@ CREATE TABLE `customers` (
   `customer_image` text NOT NULL,
   `customer_status` text NOT NULL,
   PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
-INSERT INTO customers VALUES("7","test","test","17bmiit116@gmail.com","chit@9125","gujarat","surat","7984498992"," 34,lax,surat","396005","h-man.jpg","yes");
-INSERT INTO customers VALUES("11","chit","chit","17bmiit117@gmail.com ","chit@9125","guj","surat","7984498994","34,dfgh","567897","erika.jpg","yes");
+INSERT INTO customers VALUES("14","chit","savani","17bmiit116@gmail.com","chit@9125","guj","surat","7984498992","34,lax,surat","345673","5e36fb208c952Arief.jpeg","yes");
+INSERT INTO customers VALUES("17","chitraket","savani","chitraketsavani@gmail.com","chit@9125","guj","surat","7984498994","23,lax,surat","234567","tatiana-saphira.jpg","no");
 
 
 
@@ -240,7 +247,7 @@ CREATE TABLE `orders` (
   `customer_contact` varchar(100) NOT NULL,
   `customer_address` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO orders VALUES("41","test","17bmiit116@gmail.com","gujarat","surat","7984498992","34,lax,surat");
 INSERT INTO orders VALUES("42","test","17bmiit116@gmail.com","gujarat","surat","7984498992","34,lax,surat");
@@ -261,6 +268,9 @@ INSERT INTO orders VALUES("63","test","17bmiit116@gmail.com","gujarat","surat","
 INSERT INTO orders VALUES("64","test","17bmiit116@gmail.com","gujarat","surat","7984498992"," 34,lax,surat");
 INSERT INTO orders VALUES("65","test","17bmiit116@gmail.com","gujarat","surat","7984498992"," 34,lax,surat");
 INSERT INTO orders VALUES("66","test","17bmiit116@gmail.com","gujarat","surat","7984498992"," 34,lax,surat");
+INSERT INTO orders VALUES("67","chit","17bmiit116@gmail.com","guj","surat","7984498992","34,lax,surat");
+INSERT INTO orders VALUES("68","chit","17bmiit116@gmail.com","guj","surat","7984498992","34,lax,surat");
+INSERT INTO orders VALUES("69","chit","17bmiit116@gmail.com","guj","surat","7984498992","34,lax,surat");
 
 
 
@@ -276,7 +286,7 @@ CREATE TABLE `payments` (
   `code` text NOT NULL,
   `payment_date` date NOT NULL,
   PRIMARY KEY (`payment_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 INSERT INTO payments VALUES("2","350058432","","20000","CashonDelivery","","","2020-03-23");
 INSERT INTO payments VALUES("3","2069819726","ORDS98838426","20000","Paytm","","","2020-03-23");
@@ -291,6 +301,11 @@ INSERT INTO payments VALUES("17","1267937988","","20000","Cash on Delivery","","
 INSERT INTO payments VALUES("18","1267937988","","20000","Cash on Delivery","","","2020-04-10");
 INSERT INTO payments VALUES("19","2020633601","ORDS87042246","20000","Paytm","","","2020-04-10");
 INSERT INTO payments VALUES("20","919141111","","0","Cash on Delivery","","","2020-04-10");
+INSERT INTO payments VALUES("21","256657129","ORDS12099586","20000","Paytm","","","2020-04-15");
+INSERT INTO payments VALUES("22","919141111","","0","Cash on Delivery","","","2020-04-15");
+INSERT INTO payments VALUES("23","1267937988","","20000","Cash on Delivery","","","2020-04-15");
+INSERT INTO payments VALUES("24","919141111","","0","Cash on Delivery","","","2020-04-15");
+INSERT INTO payments VALUES("25","170037176","","44800","Cash on Delivery","","","2020-04-15");
 
 
 
@@ -355,13 +370,13 @@ CREATE TABLE `products` (
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
-INSERT INTO products VALUES("1","8","3","8","2020-04-11 10:36:03","amans","bik1.jpg","bik2.jpg","bik3.jpg","bik3.jpg","20000","30","30000","new","sdfghj","99","97","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","","","","yes","yes");
-INSERT INTO products VALUES("2","7","1","7","2020-04-10 14:52:15","savani","bik2.jpg","bik2.jpg","bik3.jpg","bik3.jpg","20000","40","100000","new","<p><strong>chitraket</strong></p>
+INSERT INTO products VALUES("1","8","3","8","2020-04-15 13:36:03","amans","bik1.jpg","bik2.jpg","bik3.jpg","bik3.jpg","20000","30","30000","new","sdfghj","99","96","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","","","","yes","yes");
+INSERT INTO products VALUES("2","7","1","7","2020-04-15 13:34:54","savani","bik2.jpg","bik2.jpg","bik3.jpg","bik3.jpg","20000","40000","10","new","<p><strong>chitraket</strong></p>
 <p>dfjslsfjl fkgsjgv dfgkjdfjk dfgdkjjxffj&nbsp;</p>
 <p>djfsgdkjgkhfkjgkj fgdhjhjfgfkjgkjtkufduhdfrgiuidfugtnjdfjkngjfdgkjvjfgkhvmfngjhgjgjvfj</p>
 <p>frkgdjkvjsfgjkckjgfgjfkgdfjkgcvgjtkh</p>
 <p>dfghjcvj f tjkcxnjgrtj</p>
-<p>&nbsp;jfgtiuufduy</p>","164","159","2","2","2","2","2","2","22","2","2","2","2","2","222","2","2","2","2","2","2","22","","yes","yes");
+<p>&nbsp;jfgtiuufduy</p>","164","158","2","2","2","2","2","2","22","2","2","2","2","2","222","2","2","2","2","2","2","22","","yes","yes");
 
 
 
@@ -377,13 +392,9 @@ CREATE TABLE `review` (
   `rating` int(10) NOT NULL,
   `status` text NOT NULL,
   PRIMARY KEY (`review_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
-INSERT INTO review VALUES("1","2","0","17bmiit116@gmail.com","cdfvbgfn","2020-04-10","1","yes");
-INSERT INTO review VALUES("7","2","0","17bmiit117@gmail.com","dfghjkl.;/.","2020-04-11","1","yes");
-INSERT INTO review VALUES("8","1","0","17bmiit117@gmail.com","sdcfvgbhnjmk,l./","2020-04-11","1","yes");
-INSERT INTO review VALUES("9","1","0","17bmiit116@gmail.com","dfghjmfgbyjufgvcbc","2020-04-11","1","yes");
-INSERT INTO review VALUES("10","4","1","17bmiit116@gmail.com","adfrgthyjlkhg","2020-04-11","1","yes");
+INSERT INTO review VALUES("12","2","0","17bmiit116@gmail.com","cit","2020-04-14","1","yes");
 
 
 

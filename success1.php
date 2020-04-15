@@ -174,7 +174,7 @@
                             <!-- Cart Calculation Area -->
                             <div class="cart-calculator-wrapper">
                                 <div class="cart-calculate-items">
-                                    <h6> Totals</h6>
+                                    <h6>Total</h6>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tr>
@@ -182,12 +182,12 @@
                                                 <td>Rs.<?php echo $total ?></td>
                                             </tr>
                                             <tr>
-                                                <td>Shipping</td>
-                                                <td>$70</td>
+                                                <td>GST (12%)</td>
+                                                <td>Rs.<?php echo $gst=$total*12/100; ?></td>
                                             </tr>
                                             <tr class="total">
                                                 <td>Total</td>
-                                                <td class="total-amount">Rs.<?php echo $total ?></td>
+                                                <td class="total-amount">Rs.<?php echo $totals=$total+$gst; ?></td>
                                             </tr>
                                         </table>
                                         

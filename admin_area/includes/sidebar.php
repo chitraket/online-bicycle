@@ -18,22 +18,10 @@
 
             <li>
                 <a href="index.php" class="waves-effect">
-                   
+                <i class="bx bx-home-circle"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-
-           <!-- <li>
-                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                    <i class="bx bx-layout"></i>
-                    <span> Product</span>
-                </a>
-                <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="layouts-horizontal.html">Add Product</a></li>
-                    <li><a href="layouts-light-sidebar.html">View Product</a></li>
-                    
-                </ul>
-            </li>-->
 
             <li class="menu-title">Product</li>
 

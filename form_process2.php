@@ -270,6 +270,8 @@ else{
                                                                                    // echo $product_title;
                                                                                     
                                                                                     $totals+=$sub_total; 
+                                                                                    $gst=$totals*12/100;
+                                                                                    $totalss=$totals+$gst;
                                                                                     $html .='
                                                                                      <tr>                                
                                                                                        <td>
@@ -301,6 +303,8 @@ else{
                                                                               // echo  $accessoires_name;
                                                                                
                                                                                 $totals+=$sub_total; 
+                                                                                $gst=$totals*12/100;
+                                                                                $totalss=$totals+$gst;
                                                                                 $html .='
                                                                                 <tr>                                
                                                                                   <td>
@@ -322,23 +326,16 @@ else{
                                                                         }
                                                                     }
                                                                     $html .=' <tr>
-                                                                    <td colspan="2" style="line-height: 49px;font-size: 13px;color: #000000;padding-left: 20px;text-align:left;border-right: unset;">Products:</td>
+                                                                    <td colspan="2" style="line-height: 49px;font-size: 13px;color: #000000;padding-left: 20px;text-align:left;border-right: unset;">Sub-Total :</td>
                                                                         <td colspan="3" class="price" style="line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;"><b>Rs.'.$totals.'</b></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td colspan="2" style="line-height: 49px;font-size: 13px;color: #000000;padding-left: 20px;text-align:left;border-right: unset;">Discount :</td>
-                                                                        <td colspan="3" class="price" style="line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;"><b>$10</b></td>
+                                                                    <td colspan="2" style="line-height: 49px;font-size: 13px;color: #000000;padding-left: 20px;text-align:left;border-right: unset;">GST (12%) :</td>
+                                                                        <td colspan="3" class="price" style="line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;"><b>Rs.'.$gst.'</b></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td colspan="2" style="line-height: 49px;font-size: 13px;color: #000000;
-                                                                        padding-left: 20px;text-align:left;border-right: unset;">Shipping :</td>
-                                                                        <td colspan="3" class="price" style="
-                                                                            line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;"><b>$30</b></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="2" style="line-height: 49px;font-size: 13px;color: #000000;
-                                                                        padding-left: 20px;text-align:left;border-right: unset;">TOTAL PAID :</td>
-                                                                        <td colspan="3" class="price" style="line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;"><b>Rs.'.$totals.'</b></td>
+                                                                    <td colspan="2" style="line-height: 49px;font-size: 13px;color: #000000;padding-left: 20px;text-align:left;border-right: unset;">Total Paid :</td>
+                                                                        <td colspan="3" class="price" style="line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;"><b>Rs.'.$totalss.'</b></td>
                                                                 </tr>
                                                             </table>
                                                             <table cellpadding="0" cellspacing="0" border="0" align="left" style="width: 100%;margin-top: 30px;    margin-bottom: 30px;">
@@ -386,7 +383,7 @@ else{
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
-                                                                                    <p style="font-size:13px; margin:0;">2018 - 19 Copy Right by Themeforest powerd by Pixel Strap</p>
+                                                                                    <p style="font-size:13px; margin:0;">© 2020 Skote.</p>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>

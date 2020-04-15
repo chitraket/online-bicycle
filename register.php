@@ -312,7 +312,7 @@ if(isset($_POST['register'])){
                                         </tr>
                                         <tr>
                                             <td>
-                                                <p style="font-size:13px; margin:0;">2018 - 19 Copy Right by Themeforest powerd by Pixel Strap</p>
+                                                <p style="font-size:13px; margin:0;">© 2020 Skote.</p>
                                             </td>
                                         </tr>
                                         <tr>
@@ -344,7 +344,7 @@ if(isset($_POST['register'])){
         {
         
         ?>
-         <script type="text/javascript">
+        <script type="text/javascript">
                     swal({
                         title: "Registration successful.",
                         text: "Please Check Your Email For Confirmation.",

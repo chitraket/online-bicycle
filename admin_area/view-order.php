@@ -107,6 +107,8 @@
                                                             //$total=$total+$bill;
                                                         }
                                                         $total+=$bill;
+                                                        $gst=$total*12/100;
+                                                        $totals=$gst+$total;
                                                     }
                                                     if($row_total['papage_number']==1)
                                                     {
@@ -116,12 +118,14 @@
                                                             $bill=$row_totalss['accessories_prices']*$qty;
                                                         }
                                                         $total+=$bill;
+                                                        $gst=$total*12/100;
+                                                        $totals=$gst+$total;
                                                     }
 
                                                 }
                                                 
                                                 ?>
-                                                <td>Rs.<?php echo  $total; ?></td> 
+                                                <td>Rs.<?php echo  $totals; ?></td> 
                                                 <?php 
                                                 $select_pays="SELECT DISTINCT txnid,payment_status FROM customer_orders WHERE order_id='$id'";
                                                 $run_pays=mysqli_query($con, $select_pays);

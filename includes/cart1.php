@@ -137,21 +137,17 @@
                    
                     <div class="minicart-pricing-box">
                         <ul>
-                            <!--<li>
+                            <li>
                                 <span>sub-total</span>
-                                <span><strong>$300.00</strong></span>
+                                <span><strong>Rs.<?php echo $total; ?></strong></span>
                             </li>
                             <li>
-                                <span>Eco Tax (-2.00)</span>
-                                <span><strong>$10.00</strong></span>
+                                <span>GST (12%) </span>
+                                <span><strong>Rs.<?php echo $gst=$total*12/100; ?></strong></span>
                             </li>
-                            <li>
-                                <span>VAT (20%)</span>
-                                <span><strong>$60.00</strong></span>
-                            </li>-->
                             <li class="total">
                                 <span>total</span>
-                                <span><strong>Rs.<?php echo $total ?></strong></span>
+                                <span><strong>Rs.<?php echo $totals=$total+$gst; ?></strong></span>
                             </li>
                         </ul>
                     </div>

@@ -13,7 +13,7 @@ include("includes/db.php");
 <!-- Mirrored from themesbrand.com/skote/layouts/vertical/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:43:30 GMT -->
 <head>
         <meta charset="utf-8" />
-        <title>Login | Skote - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Login | SKOTE</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -90,7 +90,7 @@ include("includes/db.php");
                          {
                              $admin_email=mysqli_real_escape_string($con,$_POST['admin_email']);
                              $admin_pass=mysqli_real_escape_string($con,$_POST['admin_pass']);
-                             $get_admin="select * from admins where admin_email='$admin_email' AND admin_pass='$admin_pass'";
+                             $get_admin="select * from admins where admin_email='$admin_email' AND admin_pass='$admin_pass' AND admin_status='yes'";
                              $run_admin=mysqli_query($con,$get_admin);
                              $count=mysqli_num_rows($run_admin);
                              if($count==1)
@@ -123,7 +123,7 @@ include("includes/db.php");
                         ?>
                         <div class="mt-5 text-center">
                             <!--<p>Don't have an account ? <a href="auth-register.html" class="font-weight-medium text-primary"> Signup now </a> </p>-->
-                            <p>© 2020 Skote. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                            <p>© 2020 Skote.</p>
                         </div>
 
                     </div>
