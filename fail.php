@@ -6,9 +6,7 @@
 <?php 
            
            if(!isset($_SESSION['customer_email'])){
-               
             echo "<script>window.open('customer/customer_login.php','_self')</script>";
-              // include("customer/customer_login.php");
            }
            
 ?> 
@@ -32,14 +30,17 @@
                    <?php  
                    if(isset($_GET['txnid']))
                         {
-                            $txnid=$_GET['txnid'];
-                            //$_SESSION['txn_id']=$txnid;
+                            $txnid=base64_decode($_GET['txnid']);
                             echo "<p>Transaction ID:$txnid</p>";
                         }
-                        
+                        else{
+                            ?>
+                            <script type="text/javascript">
+                                window.open('home','_self');
+                            </script>
+                            <?php
+                        }
                         ?>
-
-                    
                     </div>
                 </div>
                         </div>
@@ -55,7 +56,7 @@
                                         $customer_address='';
                                         $customer_email='';
                                         $customer_phone='';
-                                        $productinfo=$_GET['c_id'];
+                                        $productinfo=base64_decode($_GET['c_id']);
                                     ?>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-lg-12">
@@ -64,7 +65,7 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th class="pro-thumbnail">Thumbnail</th>
+                                            <th class="pro-thumbnail">Images</th>
                                             <th class="pro-title">Product</th>
                                             <th class="pro-price">Size</th>
                                             <th class="pro-price">Price</th>
@@ -155,7 +156,7 @@
                                         $customer_address='';
                                         $customer_email='';
                                         $customer_phone='';
-                                        $productinfo=$_GET['c_id'];
+                                        $productinfo=base64_decode($_GET['c_id']);
                                         $select_cart = "select * from orders where id='$productinfo'";
                                                     $run_cart = mysqli_query($con,$select_cart);
                                                     while($row_cart = mysqli_fetch_array($run_cart))
@@ -198,7 +199,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <a href="index.php" class="btn btn-sqr d-block" style="margin-bottom: 50px;">Continue Shopping</a>
+                                <a href="home" class="btn btn-sqr d-block" style="margin-bottom: 50px;">Continue Shopping</a>
                             </div>
                         </div>
                       

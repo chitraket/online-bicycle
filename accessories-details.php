@@ -5,12 +5,28 @@ include("includes/header.php");
 
 ?>
 <?php
-if(isset($_GET['accessories_id']))
+if(!isset($_GET['accessories_id']))
 {
-   // echo $_GET['accessories_id'];
-    $accessories_id=$_GET['accessories_id'];
+    ?>
+    <script>
+        window.open('home','_self');
+    </script>
+    <?php 
+}
+else{
+    $accessories_id=base64_decode($_GET['accessories_id']);
     $get_accessories="select * from accessories where accessories_status='yes' and accessories_id=$accessories_id";
     $run_accessories=mysqli_query($con,$get_accessories);
+    if(!$run_accessories)
+    {
+        ?>
+        <script>
+        window.open('home','_self');
+    </script>
+    <?php 
+    }
+    else
+    {
     $row_accessories=mysqli_fetch_array($run_accessories);
     $accessories_brand=$row_accessories['accessories_brand'];
     $accessories_category=$row_accessories['accessories_category'];
@@ -42,30 +58,11 @@ if(isset($_GET['accessories_id']))
     }
     $accessories_prices=$row_accessories['accessories_prices'];
     $accessories_desc=$row_accessories['accessories_desc'];
-    // $p_cat_id=$row_product['p_cat_id'];
-    // $manufacturer_id=$row_product['manufacturer_id'];
-    // $pro_title=$row_product['product_title'];
-    // $pro_qty=$row_product['available_qty'];
-    // $pro_price=$row_product['product_price'];
-    // $pro_desc=$row_product['product_desc'];
-    // $pro_img1=$row_product['product_img1'];
-    // $pro_img2=$row_product['product_img2'];
-    // $pro_img3=$row_product['product_img3'];
-    
-  
-    // $pro_brakeset=$row_product['product_brakeset'];
-    // if($pro_brakeset==null)
-    // {
-    //     $pro_brakeset="N/A";
-    // }
-    // else{
-    //     $pro_brakeset=$row_product['product_brakeset'];
-    // }
     $get_manufacturer="select * from accessories_brand where accessories_brand_id=$accessories_brand";
     $run_manufacturer=mysqli_query($con,$get_manufacturer);
     $row_manufacturer=mysqli_fetch_array($run_manufacturer);
     $accessories_brand=$row_manufacturer['accessories_brand'];
-
+    }
 }
 ?>
 
@@ -81,8 +78,8 @@ if(isset($_GET['accessories_id']))
                         <div class="breadcrumb-wrap">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.php"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="accessories.php">Accessories</a></li>
+                                    <li class="breadcrumb-item"><a href="index"><i class="fa fa-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="accessories">Accessories</a></li>
                                     <li class="breadcrumb-item active" >
                                        <?php echo $accessories_name ?> 
                                     </li>                                
@@ -244,7 +241,7 @@ if(isset($_GET['accessories_id']))
                                         <h3 class="product-name"><?php  echo $accessories_name;?></h3>
                                        <div class="ratings d-flex">
                                        <?php
-                                       $pro_idss=$_GET['accessories_id'];
+                                       $pro_idss=base64_decode($_GET['accessories_id']);
                                        //$output=0;
                                         $query="select AVG(rating) as rating from review where product_id='$pro_idss' and status='yes' and papage='1'";
                                         $statement=mysqli_query($con,$query);
@@ -382,15 +379,49 @@ if(isset($_GET['accessories_id']))
                                             $product_price=$_POST['accessories_price'];
                                             $product_name=$_POST['accessories_name'];
                                             $product_size="N/A";
-                                                if(isset($_SESSION[$product_name]))
+                                                if(isset($_SESSION[$product_name.$p_id]))
                                                 {
-                                                    echo "<script type='text/javascript'>swal('Your product is alrady added in cart', '', 'warning')</script>";
+                                                    ?>
+                                                    <script type="text/javascript">
+                                                        swal({
+                                                            title: "Your product is alrady added in cart",
+                                                            text: "",
+                                                            icon: "warning",
+                                                            buttons:[,"OK"],
+                                                            successMode: true,
+                                                    })
+                                                    .then((willDelete) => {
+                                                            if (willDelete) {
+                                                                window.open('accessories-details?accessories_id=<?php echo base64_encode($p_id); ?>','_self');
+                                                            } else {
+                                                            
+                                                            }
+                                                    });
+                                                </script>
+                                                    <?php 
                                                     goto end;
                                                 }
 
                                                 if ($product_qty>$available_qty) 
                                                 {
-                                                    echo "<script type='text/javascript'>swal('Please enter lower quantity', '', 'warning')</script>";
+                                                    ?>
+                                                    <script type="text/javascript">
+                                                        swal({
+                                                            title: "Please enter lower quantity",
+                                                            text: "",
+                                                            icon: "warning",
+                                                            buttons:[,"OK"],
+                                                            successMode: true,
+                                                    })
+                                                    .then((willDelete) => {
+                                                            if (willDelete) {
+                                                                window.open('accessories-details?accessories_id=<?php echo base64_encode($p_id); ?>','_self');
+                                                            } else {
+                                                            
+                                                            }
+                                                    });
+                                                </script>
+                                                    <?php 
                                                 }
                                                 else
                                                 {
@@ -444,37 +475,65 @@ if(isset($_GET['accessories_id']))
                                        ?>
                                         </div>
                                     </form>
-                                      <!--  -->
-                                      <!--  <div class="color-option">
-                                            <h6 class="option-title">color :</h6>
-                                            <ul class="color-categories">
-                                                <li>
-                                                    <a class="c-lightblue" href="#" title="LightSteelblue"></a>
-                                                </li>
-                                                <li>
-                                                    <a class="c-darktan" href="#" title="Darktan"></a>
-                                                </li>
-                                                <li>
-                                                    <a class="c-grey" href="#" title="Grey"></a>
-                                                </li>
-                                                <li>
-                                                    <a class="c-brown" href="#" title="Brown"></a>
-                                                </li>
-                                            </ul>
+                                    <div class="color-option">
+                                            
+                                            </div>
+                                            <?php
+                                             if(isset($_SESSION['customer_email']))
+                                             { 
+                                            ?>
+                                            <form method="POST" action="">
+                                            <div class="useful-links">
+                                            <button  type="submit" name="submit"  title="Wishlist" ><i class="pe-7s-like"></i> Wishlist</button>
+                                            </div>
+                                            </form>
+                                            <?php
+                                            if(isset($_POST['submit']))
+                                            {
+                                                $customer_emailss=$_SESSION['customer_email'];
+                                                $product_idss=base64_decode($_GET['accessories_id']);
+                                                $select_wishlist="select * from wishlist where customer_email='$customer_emailss' and product_id='$product_idss'";
+                                                $run_wishlist=mysqli_query($con,$select_wishlist);
+                                                if(mysqli_num_rows($run_wishlist)>0)
+                                                {
+                                                    ?>
+                                                    <script type="text/javascript">
+                                                    swal({
+                                                        title: "You have already add product to wishlist",
+                                                        text: "",
+                                                        icon: "warning",
+                                                        buttons:[,"OK"],
+                                                        successMode: true,
+                                                })
+                                                .then((willDelete) => {
+                                                        if (willDelete) {
+                                                            window.open('accessories-details?accessories_id=<?php echo base64_encode($product_idss); ?>','_self');
+                                                        } else {
+                                                        
+                                                        }
+                                                });
+                                                    </script>
+                                                    <?php
+                                                }
+                                                else
+                                                {
+                                                    $papage=1;
+                                                    wishlist($product_idss,$customer_emailss,$papage);
+                                                }
+                                            }
+                                             }
+                                            else
+                                            {
+    
+                                            } 
+                                            ?>
+                                            <div class="like-icon">
+                                                <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
+                                                <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
+                                                <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
+                                                <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
+                                            </div>
                                         </div>
-                                        <div class="useful-links">
-                                            <a href="#" data-toggle="tooltip" title="Compare"><i
-                                                    class="pe-7s-refresh-2"></i>compare</a>
-                                            <a href="#" data-toggle="tooltip" title="Wishlist"><i
-                                                    class="pe-7s-like"></i>wishlist</a>
-                                        </div>
-                                        <div class="like-icon">
-                                            <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
-                                            <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
-                                            <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
-                                            <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
-                                        </div>
-                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -522,7 +581,7 @@ if(isset($_GET['accessories_id']))
                                             <div class="tab-pane fade" id="tab_three">
                                                 <form action="#" method="POST" class="review-form">
                                                     <?php
-                                                    $product_ids=$_GET['accessories_id'];
+                                                    $product_ids=base64_decode($_GET['accessories_id']);
                                                     $select_reviews="select * from review where product_id='$product_ids' and status='yes' and papage='1'";
                                                     $run_reviews=mysqli_query($con,$select_reviews);
                                                     $total_reviews=mysqli_num_rows($run_reviews);
@@ -637,7 +696,7 @@ if(isset($_GET['accessories_id']))
                                                         <div class="col">
                                                             <label class="col-form-label"><span class="text-danger">*</span>
                                                                 Your Review</label>
-                                                            <textarea class="form-control" name="message" required></textarea>
+                                                            <textarea class="form-control" name="message" required> </textarea>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -676,7 +735,7 @@ if(isset($_GET['accessories_id']))
                                         {
                                             $message=$_POST['message'];
                                             $rating=$_POST['rating'];
-                                            $pro_ids=$_GET['accessories_id'];
+                                            $pro_ids=base64_decode($_GET['accessories_id']);
                                             $customer_email=$_SESSION['customer_email'];
                                             $select_revieww="select * from review where customer_email='$customer_email'  and  product_id='$pro_ids' and papage='1'";
                                             $run_revieww=mysqli_query($con,$select_revieww);
@@ -693,7 +752,7 @@ if(isset($_GET['accessories_id']))
                                             })
                                             .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.open('accessories-details.php?accessories_id=<?php echo $pro_ids; ?>','_self');
+                                                        window.open('accessories-details?accessories_id=<?php echo base64_encode($pro_ids); ?>','_self');
                                                     } else {
                                                     
                                                     }
@@ -719,7 +778,7 @@ if(isset($_GET['accessories_id']))
                                             })
                                             .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.open('accessories-details.php?accessories_id=<?php echo $pro_ids; ?>','_self');
+                                                        window.open('accessories-details?accessories_id=<?php echo base64_encode($pro_ids); ?>','_self');
                                                     } else {
                                                     
                                                     }
@@ -773,7 +832,7 @@ if(isset($_GET['accessories_id']))
                                     
                                     <div class="product-item">
                                     <figure class="product-thumb">
-                                        <a href="accessories-details.php?accessories_id=<?php echo $pro_id;?>">
+                                        <a href="accessories-details?accessories_id=<?php echo base64_encode($pro_id);?>">
                                             <img class="pri-img" src="admin_area/accessories_images/<?php echo $pro_img1;?>" alt="product">
                                             <img class="sec-img" src="admin_area/accessories_images/<?php echo $pro_img2;?>" alt="product">
                                         </a>
@@ -785,18 +844,18 @@ if(isset($_GET['accessories_id']))
                                                 <span>10%</span>
                                             </div>-->
                                         </div>
-                                        <div class="button-group">
+                                       <!-- <div class="button-group">
                                             <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
                                             <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
                                             
-                                        </div>
+                                        </div>-->
                                         <!--<div class='cart-hover'>
                                             <button class='btn btn-cart'>add to cart</button>
                                         </div>-->
                                   </figure>
                                         <div class="product-caption text-center">
                                             <h6 class="product-name">
-                                                <a href="accessories-details.php?accessories_id=<?php echo $pro_id;?>"><?php echo $pro_title;?></a>
+                                                <a href="accessories-details?accessories_id=<?php echo base64_encode($pro_id);?>"><?php echo $pro_title;?></a>
                                             </h6>
                                             <div class="price-box">
                                                 <span class="price-regular">Rs.<?php echo  $pro_price;?></span>

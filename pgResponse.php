@@ -1,6 +1,13 @@
 <?php
 session_start(); 
 ?>
+<?php 
+           
+           if(!isset($_SESSION['customer_email'])){
+            echo "<script>window.open('customer/customer_login.php','_self')</script>";
+           }
+           
+?> 
 <?php
 header("Pragma: no-cache");
 header("Cache-Control: no-cache");

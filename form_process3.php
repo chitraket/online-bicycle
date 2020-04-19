@@ -5,16 +5,29 @@ session_start();
 include("includes/db.php");
 include("functions/functions.php");
 ?>
+<?php 
+           
+           if(!isset($_SESSION['customer_email'])){
+            echo "<script>window.open('customer/customer_login.php','_self')</script>";
+           }
+           else{
+           
+?> 
 <?php
 
  if(isset($_SESSION['order_id']))
  {
      $txnid=$_SESSION['order_id'];
  }
-
+ else{
+    echo "<script>window.open('home','_self')</script>";   
+}
  if (isset($_SESSION['c_id'])) {
      $c_id=$_SESSION['c_id'];
  }
+ else{
+    echo "<script>window.open('home','_self')</script>";   
+}
  
 
                 $status="failed";
@@ -90,7 +103,7 @@ include("functions/functions.php");
                 $insert_customer_orders="insert into customer_orders(order_id,product_id,txnid,invoice_no,qty,size,customer_email,order_date,order_status,payment_status,papage_number) values('$order_id','$pro_id','$txnid','$invoice_no','$pro_qty','$pro_size','$customer_email',NOW(),'$o_status','$status','$papage')";
                 $run_customer_orders=mysqli_query($con,$insert_customer_orders);
 
-                    unset($_SESSION[$pro_name]);  
+                    unset($_SESSION[$pro_name.$pro_id]);  
 
                 
                     }
@@ -269,6 +282,8 @@ include("functions/functions.php");
                                                                // echo $product_title;
                                                                 
                                                                 $totals+=$sub_total; 
+                                                                $gst=$totals*12/100;
+                                                                $totalss=$totals+$gst; 
                                                                 $html .='
                                                                  <tr>                                
                                                                    <td>
@@ -410,6 +425,8 @@ include("functions/functions.php");
                         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                     }
                 unset($_SESSION['order_id'],$_SESSION['ORDER_ID'],$_SESSION['CUST_ID'],$_SESSION['INDUSTRY_TYPE_ID'],$_SESSION['CHANNEL_ID'],$_SESSION['TXN_AMOUNT'],$_SESSION['c_id']);
-                echo "<script>window.open('fail.php?c_id=$order_id&txnid=$txnid','_self')</script>";
-              
+              ?>  
+                <script>window.open('fail?c_id=<?php echo base64_encode($order_id); ?>&txnid=<?php echo base64_encode($txnid) ?>','_self')</script>
+<?php
+           } 
 ?>

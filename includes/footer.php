@@ -38,7 +38,7 @@
                                     <li><a href="#">about us</a></li>
                                     <li><a href="#">Delivery Information</a></li>
                                     <li><a href="#">privet policy</a></li>
-                                    <li><a href="terms.php">Terms & Conditions</a></li>
+                                    <li><a href="terms-and-conditions">Terms & Conditions</a></li>
                                     <li><a href="#">contact us</a></li>
                                     <li><a href="#">site map</a></li>
                                 </ul>
@@ -87,7 +87,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="copyright-text text-center">
-                            <p>Powered By <a href="index.php">SKOTE</a> © 2020</p>
+                            <p>Powered By <a href="home">SKOTE</a> © 2020</p>
                         </div>
                     </div>
                 </div>

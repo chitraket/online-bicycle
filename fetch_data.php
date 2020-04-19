@@ -72,7 +72,7 @@ $outputs='';
                                     <!-- product grid start -->
                                     <div class="product-item">
                                         <figure class="product-thumb">
-                                            <a href="product-details.php?pro_id=<?php echo $row['product_id'];?>">
+                                            <a href="bikes-details?pro_id=<?php echo base64_encode($row['product_id']);?>">
                                                 <img class="pri-img" src="admin_area/product_images/<?php echo $row['product_img1'];?>" alt="product" style="height:180px;">
                                                 <img class="sec-img" src="admin_area/product_images/<?php echo $row['product_img2'];?>" alt="product" style="height:180px;">
                                             </a>                                   
@@ -107,13 +107,13 @@ $outputs='';
                                             $run_carts=mysqli_query($con, $query3);
                                             while ($row_carts=mysqli_fetch_array($run_carts)) { 
                                             ?>
-                                                <a href="product-details.php?pro_id=<?php echo  $row['product_id'] ?>"><?php echo $row_carts['manufacturer_title']; ?></a>
+                                                <a href="bikes-details?pro_id=<?php echo base64_encode($row['product_id']);?>"><?php echo $row_carts['manufacturer_title']; ?></a>
                                                 <?php 
                                             }
                                                 ?>
                                             </div>
                                             <h6 class="product-name">
-                                                <a href="product-details.php?pro_id=<?php echo  $row['product_id'] ?>"><?php echo $row['product_title'] ?></a>
+                                                <a href="bikes-details?pro_id=<?php echo base64_encode($row['product_id']); ?>"><?php echo $row['product_title'] ?></a>
                                             </h6>
                                             <div class="price-box">
                                             <?php

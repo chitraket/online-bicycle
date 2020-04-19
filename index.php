@@ -1,6 +1,5 @@
 <?php
 $active='Home';
-
 ?>
 
 
@@ -88,63 +87,6 @@ $active='Home';
         </div>
         <!-- service policy area end -->
 
-        <!-- banner statistics area start -->
-        <!--<div class="banner-statistics-area">
-            <div class="container">
-                <div class="row row-20 mtn-20">
-                    <div class="col-sm-6">
-                        <figure class="banner-statistics mt-20">
-                            <a href="#">
-                                <img src="assets/img/banner/2.jpg" alt="product banner" style="height:250px;">
-                            </a>
-                            <div class="banner-content text-right">
-                                <h5 class="banner-text1">Bikes</h5>
-                                <h2 class="banner-text2" >Mountain Bikes<span>New products</span></h2>
-                                <a href="shop.php" class="btn btn-text">Shop Now</a>
-                            </div>
-                        </figure>
-                    </div>
-                    <div class="col-sm-6">
-                        <figure class="banner-statistics mt-20">
-                            <a href="#">
-                                <img src="assets/img/banner/4.jpg" alt="product banner" style="height:250px;">
-                            </a>
-                            <div class="banner-content text-center">
-                                <h5 class="banner-text1">New Accessories</h5>
-                                <h2 class="banner-text2">New Accessories<span>Accessories</span></h2>
-                                <a href="shop.php" class="btn btn-text">Shop Now</a>
-                            </div>
-                        </figure>
-                    </div>
-                   <div class="col-sm-6">
-                        <figure class="banner-statistics mt-20">
-                                <a href="#">
-                                <img src="assets/img/banner/img3-top.jpg" alt="product banner">
-                            </a>
-                            <div class="banner-content text-center">
-                                <h5 class="banner-text1">NEW ARRIVALLS</h5>
-                                <h2 class="banner-text2">Pearl<span>Necklaces</span></h2>
-                                <a href="shop.html" class="btn btn-text">Shop Now</a>
-                            </div>
-                        </figure>
-                    </div>
-                    <div class="col-sm-6">
-                        <figure class="banner-statistics mt-20">
-                            <a href="#">
-                                <img src="assets/img/banner/img4-top.jpg" alt="product banner">
-                            </a>
-                            <div class="banner-content text-right">
-                                <h5 class="banner-text1">NEW DESIGN</h5>
-                                <h2 class="banner-text2">Diamond<span>Jewelry</span></h2>
-                                <a href="shop.html" class="btn btn-text">Shop Now</a>
-                            </div>
-                        </figure>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-        <!-- banner statistics area end -->
-
         <!-- product area start -->
         <section class="product-area section-padding">
             <div class="container">
@@ -152,7 +94,7 @@ $active='Home';
                     <div class="col-12">
                         <!-- section title start -->
                         <div class="section-title text-center">
-                            <h2 class="title">New products</h2>
+                            <h2 class="title">Bicycles</h2>
                           <!--  <p class="sub-title">Add our products to weekly lineup</p>-->
                         </div>
                         <!-- section title start -->
@@ -161,11 +103,6 @@ $active='Home';
                 <div class="row">
                     <div class="col-12">
                         <div class="product-container">
-                            <!-- product tab menu start -->
-                            
-                            <!-- product tab menu end -->
-
-                            <!-- product tab content start -->
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" >
                                     <div class="product-carousel-4 slick-row-10 slick-arrow-style">
@@ -181,6 +118,189 @@ $active='Home';
                 </div>
             </div>
         </section>
+        <!-- group product start -->
+        <section class="group-product-area section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="categories-group-wrapper">
+                            <!-- section title start -->
+                            <div class="section-title-append">
+                                <h4>New Arrivals</h4>
+                                <div class="slick-append"></div>
+                            </div>
+                            <!-- section title start -->
+
+                            <!-- group list carousel start -->
+                            <div class="group-list-item-wrapper">
+                                <div class="group-list-carousel">
+                                    <!-- group list item start -->
+                                    <?php
+                                    $select_new_product="select * from products where product_status='yes' and product_label='new'";
+                                    $run_new_product=mysqli_query($con,$select_new_product);
+                                    while($row_new_product=mysqli_fetch_array($run_new_product))
+                                    {
+                                        $product_img=$row_new_product['product_img1'];
+                                        $product_title=$row_new_product['product_title'];
+                                        $product_price=$row_new_product['product_price'];
+                                        $product_id=$row_new_product['product_id'];
+                                        ?>
+
+                                    <div class="group-slide-item">
+                                        <div class="group-item">
+                                            <div class="group-item-thumb">
+                                            <a href='bikes-details?pro_id=<?php echo base64_encode($product_id);?>'>
+                                                <img class='pri-img' src='admin_area/product_images/<?php echo $product_img;?>' alt='product'>
+                                            </a>
+                                            </div>
+                                            <div class="group-item-desc">
+                                                <h5 class="group-product-name"><a href="bikes-details?pro_id=<?php echo base64_encode($product_id);?>">
+                                                 <?php echo $product_title; ?></a></h5>
+                                                <div class="price-box">
+                                                    <span class="price-regular">Rs.<?php echo $product_price; ?></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php 
+                                    } 
+                                     ?>
+                                    <!-- group list item end -->
+
+                                   
+                                </div>
+                            </div>
+                            <!-- group list carousel start -->
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="categories-group-wrapper">
+                            <!-- section title start -->
+                            <div class="section-title-append">
+                                <h4>best seller Bicycles</h4>
+                                <div class="slick-append"></div>
+                            </div>
+                            <!-- section title start -->
+
+                            <!-- group list carousel start -->
+                            <div class="group-list-item-wrapper">
+                                <div class="group-list-carousel">
+                                    <!-- group list item start -->
+                                    
+                                        <?php
+                                    $select_selle_product="select * from products where product_status='yes'";
+                                    $run_selle_product=mysqli_query($con,$select_selle_product);
+                                    while($row_selle_product=mysqli_fetch_array($run_selle_product))
+                                    {
+                                        $product_qty=$row_selle_product['product_qty'];
+                                        $available_qty=$row_selle_product['available_qty'];
+                                        $shold_out=$product_qty-$available_qty;
+                                        if($shold_out>5)
+                                        {
+                                        $product_imgs=$row_selle_product['product_img1'];
+                                        $product_titles=$row_selle_product['product_title'];
+                                        $product_prices=$row_selle_product['product_price'];
+                                        $product_ids=$row_selle_product['product_id'];
+                                        $product_labels=$row_selle_product['product_label'];
+                                        $product_discount_price=$row_selle_product['product_discount_price'];
+
+                                        ?>
+                                        <div class="group-slide-item">
+                                        <div class="group-item">
+                                           <div class="group-item-thumb">
+                                            <a href='bikes-details?pro_id=<?php echo base64_encode($product_ids);?>'>
+                                                <img class='pri-img' src='admin_area/product_images/<?php echo $product_imgs;?>' alt='product'>
+                                            </a>
+                                            </div>
+                                            <div class="group-item-desc">
+                                                <h5 class="group-product-name"><a href="bikes-details?pro_id=<?php echo base64_encode($product_ids);?>">
+                                                 <?php echo $product_titles; ?></a></h5>
+                                                <div class="price-box">
+                                                    <?php
+                                                    if($product_labels=="new")
+                                                    { 
+                                                    ?>
+                                                    <span class="price-regular">Rs.<?php echo $product_prices; ?></span>
+                                                    <?php
+                                                    }
+                                                    else{
+                                                        ?>
+                                                        <span class="price-regular">Rs.<?php echo $product_prices; ?></span>
+                                                        <span class="price-old"><del>Rs.<?php echo $product_discount_price; ?></del></span>
+                                                        <?php 
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- group list item end -->
+                                        <?php
+                                        }
+                                    } 
+                                        ?>
+                                    
+                                </div>
+                            </div>
+                            <!-- group list carousel start -->
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="categories-group-wrapper">
+                            <!-- section title start -->
+                            <div class="section-title-append">
+                                <h4>on-sale Bicycles</h4>
+                                <div class="slick-append"></div>
+                            </div>
+                            <!-- section title start -->
+
+                            <!-- group list carousel start -->
+                            <div class="group-list-item-wrapper">
+                                <div class="group-list-carousel">
+                                    <!-- group list item start -->
+                                    <div class="group-slide-item">
+                                        <div class="group-item">
+                                        <?php
+                                    $select_sale_product="select * from products where product_status='yes' and product_label='sale'";
+                                    $run_sale_product=mysqli_query($con,$select_sale_product);
+                                    while($row_sale_product=mysqli_fetch_array($run_sale_product))
+                                    {
+                                        $product_imgl=$row_sale_product['product_img1'];
+                                        $product_titlel=$row_sale_product['product_title'];
+                                        $product_pricel=$row_sale_product['product_price'];
+                                        $product_idl=$row_sale_product['product_id'];
+                                        $product_discount_pricel=$row_sale_product['product_discount_price'];
+                                        ?>
+                                            <div class="group-item-thumb">
+                                            <a href='bikes-details?pro_id=<?php echo base64_encode($product_idl);?>'>
+                                                <img class='pri-img' src='admin_area/product_images/<?php echo $product_imgl;?>' alt='product'>
+                                            </a>
+                                            </div>
+                                            <div class="group-item-desc">
+                                                <h5 class="group-product-name"><a href="bikes-details?pro_id=<?php echo base64_encode($product_idl);?>">
+                                                 <?php echo $product_titlel; ?></a></h5>
+                                                <div class="price-box">
+                                                    <span class="price-regular">Rs.<?php echo $product_pricel; ?></span>
+                                                    <span class="price-old"><del>Rs.<?php echo $product_discount_pricel; ?></del></span>
+                                                </div>
+                                            </div>
+                                            <?php
+                                    } 
+                                            ?>
+                                        </div>
+                                    </div>
+                                    <!-- group list item end -->
+
+                                    
+                                </div>
+                            </div>
+                            <!-- group list carousel start -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- group product end -->
         <!-- product area end -->
         <section class="product-area section-padding">
             <div class="container">
@@ -188,7 +308,7 @@ $active='Home';
                     <div class="col-12">
                         <!-- section title start -->
                         <div class="section-title text-center">
-                            <h2 class="title">New Accessories</h2>
+                            <h2 class="title">Accessories</h2>
                           <!--  <p class="sub-title">Add our products to weekly lineup</p>-->
                         </div>
                         <!-- section title start -->
@@ -197,11 +317,6 @@ $active='Home';
                 <div class="row">
                     <div class="col-12">
                         <div class="product-container">
-                            <!-- product tab menu start -->
-                            
-                            <!-- product tab menu end -->
-
-                            <!-- product tab content start -->
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" >
                                     <div class="product-carousel-4 slick-row-10 slick-arrow-style">
@@ -217,23 +332,6 @@ $active='Home';
                 </div>
             </div>
         </section>
-
-
-
-        <!-- product banner statistics area start -->
-        <!-- product banner statistics area end -->
-
-        <!-- featured product area start -->
-        <!-- featured product area end -->
-
-        <!-- testimonial area start -->
-        <!-- testimonial area end -->
-
-        <!-- group product start -->
-        <!-- group product end -->
-
-        <!-- latest blog area start -->
-        <!-- latest blog area end -->
 
         <!-- brand logo area start -->
         <div class="brand-logo section-padding pt-0">

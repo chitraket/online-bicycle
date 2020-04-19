@@ -1,6 +1,13 @@
 <?php 
 session_start(); 
 ?>
+<?php 
+           
+           if(!isset($_SESSION['customer_email'])){
+            echo "<script>window.open('customer/customer_login.php','_self')</script>";
+           }
+           
+?> 
 <?php
 header("Pragma: no-cache");
 header("Cache-Control: no-cache");
@@ -16,14 +23,14 @@ if(isset($_SESSION['ORDER_ID']))
     $order_ids=$_SESSION['ORDER_ID'];
 }
 else{
-    echo "<script>window.open('checkout.php','_self')</script>";   
+    echo "<script>window.open('home.php','_self')</script>";   
 }
 if(isset($_SESSION['CUST_ID']))
 {
     $cust_ids=$_SESSION['CUST_ID'];
 }
 else{
-    echo "<script>window.open('checkout.php','_self')</script>";   
+    echo "<script>window.open('home.php','_self')</script>";   
 }
 if(isset($_SESSION['INDUSTRY_TYPE_ID']))
 {
@@ -31,21 +38,21 @@ if(isset($_SESSION['INDUSTRY_TYPE_ID']))
 }
 else
 {
-	echo "<script>window.open('checkout.php','_self')</script>"; 
+	echo "<script>window.open('home','_self')</script>"; 
 }
 if(isset($_SESSION['CHANNEL_ID']))
 {
 	$channel_ids=$_SESSION['CHANNEL_ID'];
 }
 else{
-	echo "<script>window.open('checkout.php','_self')</script>"; 
+	echo "<script>window.open('home','_self')</script>"; 
 }
 if(isset($_SESSION['TXN_AMOUNT']))
 {
 	$txn_amounts=$_SESSION['TXN_AMOUNT'];
 }
 else{
-	echo "<script>window.open('checkout.php','_self')</script>"; 
+	echo "<script>window.open('home','_self')</script>"; 
 }
 $ORDER_ID = $order_ids;
 $CUST_ID = $cust_ids;

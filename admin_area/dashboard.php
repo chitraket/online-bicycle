@@ -1,5 +1,4 @@
 <div class="main-content">
-
                 <div class="page-content">
                     <div class="container-fluid">
 
@@ -45,7 +44,7 @@
                                                 <div class="avatar-md profile-user-wid mb-4">
                                                     <img src="admin_images/<?php echo $row_admin['admin_image']; ?>" alt="" class="img-thumbnail rounded-circle">
                                                 </div>
-                                                <h5 class="font-size-15 text-truncate"><?php echo $row_admin['admin_name']; ?></h5>
+                                                <h5 class="font-size-10 text-truncate"><?php echo $row_admin['admin_name']; ?></h5>
 
                                                 <?php
                                             } 
@@ -57,7 +56,7 @@
                                                     <div class="row">
                                                         <div class="col-12">
                                                         <p class="text-muted mb-2">Email</p>
-                                                            <h5><?php echo $admin_email; ?></h5>
+                                                            <h6><?php echo $admin_email; ?></h6>
                                                         </div>
                                                     </div>
                                                     
@@ -206,7 +205,6 @@
                                                         ?>
                                                         <h4 class="mb-0"><?php echo $accessories; ?></h4>
                                                     </div>
-
                                                     <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
                                                         <span class="avatar-title rounded-circle bg-primary">
                                                             <i class="bx bx-purchase-tag-alt font-size-24"></i>

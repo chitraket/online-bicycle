@@ -2,7 +2,7 @@
 <?php
     $active='';
     include("includes/header.php");
-   
+   $_SESSION['papage']=1;
 ?>
 
 <?php 
@@ -11,11 +11,6 @@
             echo "<script>window.open('customer/customer_login.php','_self')</script>";
            }     
 ?>
-
-    <!-- Start Header Area -->
-
-    <!-- end Header Area -->
-
     <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
@@ -25,8 +20,7 @@
                         <div class="breadcrumb-wrap">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.php"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="shop.php">shop</a></li>
+                                    <li class="breadcrumb-item"><a href="home"><i class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item active" aria-current="page">checkout</li>
                                 </ul>
                             </nav>
@@ -56,12 +50,6 @@ $_SESSION['c_id']=$customer_id;
                         <input type="hidden" id="CUST_ID" tabindex="2" maxlength="12" size="12" name="CUST_ID" autocomplete="off" value="<?php echo $customer_id; ?>">
                         <input type="hidden" id="INDUSTRY_TYPE_ID" tabindex="4" maxlength="12" size="12" name="INDUSTRY_TYPE_ID" autocomplete="off" value="Retail">
                         <input type="hidden" id="CHANNEL_ID" tabindex="4" maxlength="12"size="12" name="CHANNEL_ID" autocomplete="off" value="WEB">
-
-           <!-- <input type="hidden" name="txnid" value="<?php echo $txnid=time().rand(1000,99999); ?>" />
-            <input type="hidden" name="productinfo" value="<?php echo $customer_id; ?>" />
-            <input type="hidden" name="service_provider" value="1"  />
-            <input type="hidden" name="surl" value="http://localhost:9126/m-dev-store/form_process1.php?c_id=<?php echo $customer_id; ?>&txnid=<?php echo $txnid; ?>" size="64" />
-            <input type="hidden" name="furl" value="http://localhost:9126/m-dev-store/checkout.php" size="64" />-->
                 <div class="row">
                 <?php 
                  $error_c_name = ""; 
@@ -162,7 +150,7 @@ $_SESSION['c_id']=$customer_id;
                         if (willDelete) {
                             window.open('form_process2.php','_self');
                         } else {
-                        
+                            window.open('checkout','_self');
                         }
                 });
                 </script>
@@ -198,7 +186,6 @@ $_SESSION['c_id']=$customer_id;
             $update_order="update customers set customer_name='$f_names',customer_email='$email',customer_state='$country',customer_city='$city',customer_contact='$phone',customer_address='$address' where customer_email='$customer_emails'";
             $run_querys=mysqli_query($db,$update_order);
 
-          
         }
         end:
         ?>
@@ -209,7 +196,6 @@ $_SESSION['c_id']=$customer_id;
                     $select_customer = "select * from customers where customer_email='$customer_email'";
                     $run_customer=mysqli_query($con,$select_customer);
                     while($row_products=mysqli_fetch_array($run_customer)){
-
                         $customer_name=$row_products['customer_name'];
                         $customer_lname=$row_products['customer_lname'];
                         $customer_email=$row_products['customer_email'];
@@ -252,11 +238,9 @@ $_SESSION['c_id']=$customer_id;
                                     <div class="custom-control custom-radio">
                                                 <input type="radio" id="cashon" name="payment" value="deliert" class="custom-control-input" checked />
                                                 <label class="custom-control-label" for="cashon" class="required">Delivery address</label>
-                                        
                                     </div>
                                    </div>
                                        
-                                    
                                     <div class="single-input-item">
                                      <textarea  placeholder="Enter your Address"  cols="30" rows="3" disabled><?php echo $customer_address; ?></textarea>
                                      <input type="hidden" name="c_address"  value="<?php echo $customer_address; ?>"/>
@@ -380,14 +364,14 @@ $_SESSION['c_id']=$customer_id;
                                             <tr>
                                                 <?php if($papage==0)
                                                 {?>
-                                                <td><a href="product-details.php?pro_id=<?php echo $p_id ?>"><?php echo $p_name; ?> <strong> × <?php echo $p_qty; ?></strong></a>
+                                                <td><a href="bikes-details?pro_id=<?php echo base64_encode($p_id); ?>"><?php echo $p_name; ?> <strong> × <?php echo $p_qty; ?></strong></a>
                                                 </td>
                                                 <td><?php echo $bill; ?></td>
                                                 <?php
                                                 }
                                                 if ($papage==1) {
                                                     ?>
-                                                <td><a href="accessories-details.php?accessories_id=<?php echo $p_id ?>"><?php echo $p_name; ?> <strong> × <?php echo $p_qty; ?></strong></a>
+                                                <td><a href="accessories-details?accessories_id=<?php echo base64_encode($p_id); ?>"><?php echo $p_name; ?> <strong> × <?php echo $p_qty; ?></strong></a>
                                                 </td>
                                                 <td><?php echo $bill; ?></td>
                                                     <?php

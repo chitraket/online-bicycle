@@ -1,6 +1,11 @@
 <?php
 session_start();
 include("includes/db.php");
+if(!isset($_SESSION['customer_email'])){
+            echo "<script>window.open('customer_login.php','_self')</script>";
+        }    
+else
+{       
 if(isset($_SESSION['CUST_IDS']))
 {
     $order_id=$_SESSION['CUST_IDS'];
@@ -351,6 +356,8 @@ $totals=0;
                             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                         }
                         unset($_SESSION['CUST_IDS'],$_SESSION['ORDER_IDS'],$_SESSION['invoice_no'],$_SESSION['TXN_AMOUNTS'],$_SESSION['INDUSTRY_TYPE_IDS'],$_SESSION['CHANNEL_IDS']);
-                        echo "<script>window.open('success3.php?c_id=$order_id&txnid=$txn_amount','_self')</script>";
-                        
+                        ?>
+                        <script>window.open('success3.php?c_id=<?php echo base64_encode($order_id); ?>&txnid=<?php echo base64_encode($txn_amount);?>','_self')</script>
+<?php
+           } 
 ?>

@@ -32,7 +32,7 @@
                    <?php  
                    if(isset($_GET['txnid']))
                         {
-                            $txnid=$_GET['txnid'];
+                            $txnid=base64_decode($_GET['txnid']);
                             //$_SESSION['txn_id']=$txnid;
                             echo "<p>Transaction ID:$txnid</p>";
                         }
@@ -55,7 +55,7 @@
                                         $customer_address='';
                                         $customer_email='';
                                         $customer_phone='';
-                                        $productinfo=$_GET['c_id'];
+                                        $productinfo=base64_decode($_GET['c_id']);
                                     ?>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-lg-12">
@@ -64,7 +64,7 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th class="pro-thumbnail">Thumbnail</th>
+                                            <th class="pro-thumbnail">Images</th>
                                             <th class="pro-title">Product</th>
                                             <th class="pro-price">Size</th>
                                             <th class="pro-price">Price</th>
@@ -97,8 +97,8 @@
                            
                                     <tbody>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="../admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="../product-details.php?pro_id=<?php echo $pro_id ?>"><?php  echo $product_title ?></a></td>
+                                            <td class="pro-thumbnail"><a href="../bikes-details?pro_id=<?php echo base64_encode($pro_id); ?>"><img class="img-fluid" src="../admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
+                                            <td class="pro-title"><a href="../bikes-details?pro_id=<?php echo base64_encode($pro_id); ?>"><?php  echo $product_title ?></a></td>
                                             <td class="pro-price"><span><?php echo  $product_size ?></span></td>
                                             <td class="pro-price"><span>Rs.<?php echo $product_price ?></span></td>
                                             <td class="pro-quantity">
@@ -123,8 +123,8 @@
                                             $total+=$sub_total; ?>
                                               <tbody>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="../admin_area/accessories_images/<?php echo $accessories_img1?>" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="../accessories-details.php?accessories_id=<?php echo $pro_id ?>"><?php  echo $accessoires_name ?></a></td>
+                                            <td class="pro-thumbnail"><a href="../accessories-details?accessories_id=<?php echo base64_encode($pro_id); ?>"><img class="img-fluid" src="../admin_area/accessories_images/<?php echo $accessories_img1?>" alt="Product" /></a></td>
+                                            <td class="pro-title"><a href="../accessories-details?accessories_id=<?php echo base64_encode($pro_id); ?>"><?php  echo $accessoires_name ?></a></td>
                                             <td class="pro-price"><span><?php echo  $product_size ?></span></td>
                                             <td class="pro-price"><span>Rs.<?php echo $accessories_prices ?></span></td>
                                             <td class="pro-quantity">
@@ -155,7 +155,7 @@
                                         $customer_address='';
                                         $customer_email='';
                                         $customer_phone='';
-                                        $productinfo=$_GET['c_id'];
+                                        $productinfo=base64_decode($_GET['c_id']);
                                         $select_cart = "select * from orders where id='$productinfo'";
                                                     $run_cart = mysqli_query($con,$select_cart);
                                                     while($row_cart = mysqli_fetch_array($run_cart))
@@ -180,25 +180,25 @@
                             <!-- Cart Calculation Area -->
                             <div class="cart-calculator-wrapper">
                                 <div class="cart-calculate-items">
-                                    <h6>Cart Totals</h6>
+                                    <h6>Totals</h6>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tr>
                                                 <td>Sub Total</td>
                                                 <td>Rs.<?php echo $total ?></td>
                                             </tr>
-                                           <!-- <tr>
-                                                <td>Shipping</td>
-                                                <td>$70</td>
-                                            </tr>-->
+                                           <tr>
+                                                <td>GST (12%)</td>
+                                                <td>Rs<?php echo $gsst=$total*12/100;?></td>
+                                            </tr>
                                             <tr class="total">
                                                 <td>Total</td>
-                                                <td class="total-amount">Rs.<?php echo $total ?></td>
+                                                <td class="total-amount">Rs.<?php echo $totalls=$total+$gsst; ?></td>
                                             </tr>
                                         </table>
                                     </div>
                                 </div>
-                                <a href="../index.php" class="btn btn-sqr d-block" style="margin-bottom: 50px;">Continue Shopping</a>
+                                <a href="../home" class="btn btn-sqr d-block" style="margin-bottom: 50px;">Continue Shopping</a>
                             </div>
                         </div>
                     </div>

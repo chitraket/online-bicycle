@@ -5,13 +5,21 @@ session_start();
 include("includes/db.php");
 include("functions/functions.php");
 ?>
+<?php 
+           
+           if(!isset($_SESSION['customer_email'])){
+            echo "<script>window.open('customer/customer_login.php','_self')</script>";
+           }
+           else
+           {
+?> 
 <?php
 if(isset($_SESSION['c_id']))
 {
     $c_id=$_SESSION['c_id'];
 }
 else{
-    echo "<script>window.open('checkout.php','_self')</script>";   
+    echo "<script>window.open('home','_self')</script>";   
 }
 
     $status="pending";
@@ -77,23 +85,17 @@ else{
                  $insert_customer_orders="insert into customer_orders(order_id,product_id,txnid,invoice_no,qty,size,customer_email,order_date,order_status,payment_status,papage_number) values('$order_id','$pro_id','','$invoice_no','$pro_qty','$pro_size','$customer_email',NOW(),'$o_status','$status','$papage')";
                  $run_customer_orders=mysqli_query($con,$insert_customer_orders);
 
-               
-
-
-
                 if ($papage==0) {
-                  $querys="update products set available_qty=available_qty-$pro_qty where product_id='$pro_id' ";
-                    $run_querys=mysqli_query($db, $querys);
-                 unset($_SESSION[$pro_name]); 
+                    $querys="update products set available_qty=available_qty-$pro_qty where product_id='$pro_id' ";
+                        $run_querys=mysqli_query($db, $querys);
+                    unset($_SESSION[$pro_name.$pro_id]); 
                  }
-
-
                  if($papage==1)
                 {
                      $querys="update accessories set available_qty=available_qty-$pro_qty where accessories_id='$pro_id' ";
                       $run_querys=mysqli_query($db, $querys);
-                    unset($_SESSION[$pro_name]); 
-              }
+                    unset($_SESSION[$pro_name.$pro_id]); 
+                }
                     
                  
         }
@@ -418,6 +420,10 @@ else{
                                             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                                         }
                                     unset($_SESSION['c_id']); 
-                                    echo "<script>window.open('success1.php?c_id=$order_id','_self')</script>";
+                                    ?>
+                                    <script>window.open('cash-on-delivery-successful?c_id=<?php echo base64_encode($order_id); ?>','_self')</script>
 
+
+<?php
+           } 
 ?>

@@ -24,7 +24,7 @@ if(!isset($_SESSION['customer_email']))
                         <div class="breadcrumb-wrap">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="../index.php"><i class="fa fa-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="../home"><i class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item"><a href="myaccount.php">my-account</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">view order</li>
                                 </ul>
@@ -73,7 +73,7 @@ if(!isset($_SESSION['customer_email']))
                                 <table  class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th class="pro-thumbnail">Thumbnail</th>
+                                            <th class="pro-thumbnail">Images</th>
                                             <th class="pro-title">Product</th>
                                             <th class="pro-price">Size</th>
                                             <th class="pro-price">Price</th>
@@ -324,24 +324,24 @@ if(!isset($_SESSION['customer_email']))
                                         if($order_status=="o" && $payment_status=="pending")
                                         {
                                             ?>
-                                                <td class="pro-subtotal"><a href="payment.php?o_id=<?php echo $productinfo; ?>&amount=<?php echo $total; ?>" class="btn  btn-sqr">Payment</a></td>
+                                                <td class="pro-subtotal"><a href="payment.php?o_id=<?php echo $productinfo; ?>&amount=<?php echo $totals; ?>" class="btn  btn-sqr">Payment</a></td>
                                             <?php 
                                         }
                                         if($order_status=="p" && $payment_status=="pending")
                                         {
                                             ?>
-                                                <td class="pro-subtotal"><a href="payment.php?o_id=<?php echo $productinfo; ?>&amount=<?php echo $total; ?>" class="btn btn-sqr">Payment</a></td>
+                                                <td class="pro-subtotal"><a href="payment.php?o_id=<?php echo $productinfo; ?>&amount=<?php echo $totals; ?>" class="btn btn-sqr">Payment</a></td>
                                             <?php 
                                         }
                                         if($order_status=="s" && $payment_status=="pending")
                                         {
                                             ?>
-                                                <td class="pro-subtotal"><a href="payment.php?o_id=<?php echo $productinfo; ?>&amount=<?php echo $total; ?>" class="btn btn-sqr">Payment</a></td>
+                                                <td class="pro-subtotal"><a href="payment.php?o_id=<?php echo $productinfo; ?>&amount=<?php echo $totals; ?>" class="btn btn-sqr">Payment</a></td>
                                             <?php 
                                         }
                                         ?>
                                         
-                                                <td class="pro-subtotal"><a href="Generate_bill.php?o_id=<?php echo $o_id; ?>" class="btn btn-sqr">Generate bill</a></td>
+                                                <td class="pro-subtotal"><a href="Generate_bill.php?or_id=<?php echo $o_id; ?>" class="btn btn-sqr">Generate bill</a></td>
                                             </div>
                                  
                                 <?php 
@@ -486,9 +486,16 @@ if(isset($_GET['n']))
                         title: "successful order cancel.",
                         text: "",
                         icon: "success",
-                        buttons: true,
+                        buttons:[,"OK"],
                         successMode: true,
                 })
+                .then((willDelete) => {
+                        if (willDelete) {
+                           window.open("full_orders.php?o_id=<?php echo $o_id; ?>","_self");
+                        } else {
+                        
+                        }
+                });
            }
            const flashdatas=$('.flash-datas').data('flashdata')
            if(flashdatas){
@@ -496,9 +503,17 @@ if(isset($_GET['n']))
                         title: "successful order returned.",
                         text: "",
                         icon: "success",
-                        buttons: true,
+                        buttons: [,"OK"],
                         successMode: true,
                 })
+                .then((willDelete) => {
+                        if (willDelete) {
+                           window.open("full_orders.php?o_id=<?php echo $o_id; ?>","_self");
+                        } else {
+                        
+                        }
+                }); 
+
            }
    </script> 
 

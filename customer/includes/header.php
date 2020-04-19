@@ -6,7 +6,6 @@ include("includes/validation.php");
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:19:45 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -150,6 +149,28 @@ include("includes/validation.php");
                                                 ?>
                                             </ul>
                                         </li>
+                                        <?php
+                                        if(isset($_SESSION['customer_email']))
+                                        { 
+                                            $customer_emailss=$_SESSION['customer_email'];
+                                            $select_wishlist="select * from  wishlist where customer_email='$customer_emailss'";
+                                            $run_wishlist=mysqli_query($con,$select_wishlist);
+                                            $num_wishlist=mysqli_num_rows($run_wishlist);
+                                        ?>
+                                        <li>
+                                            <a href="../wishlist.php">
+                                                <i class="pe-7s-like"></i>
+                                                
+                                                <div class="notification"><?php echo $num_wishlist; ?></div>
+                                            </a>
+                                        </li>
+                                        <?php
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                        ?>
                                         <li>
                                             <a href="#" class="minicart-btn">
                                                 <i class="pe-7s-shopbag"></i>
@@ -204,9 +225,32 @@ include("includes/validation.php");
                                     <img src="assets/img/logo/logo.png" alt="Brand Logo">
                                 </a>
                             </div>
+                            
                             <div class="mobile-menu-toggler">
                                 <div class="mini-cart-wrap">
-                                    <a href="cart.php">
+                                <?php
+                                        if(isset($_SESSION['customer_email']))
+                                        { 
+                                            $customer_emailsss=$_SESSION['customer_email'];
+                                            $select_wishlists="select * from  wishlist where customer_email='$customer_emailsss'";
+                                            $run_wishlists=mysqli_query($con,$select_wishlists);
+                                            $num_wishlists=mysqli_num_rows($run_wishlists);
+                                        
+                                        ?>
+                                <a href="../wishlist.php">
+
+                                        <i class="pe-7s-like"></i>
+                                        <div class="notification" ><?php echo $num_wishlists; ?></div>
+                                    </a>
+                                    <?php
+                                        }
+                                        else
+                                        {
+
+                                        } 
+                                    ?>
+                                    
+                                    <a href="../cart.php"  class="pl-2">
                                         <i class="pe-7s-shopbag"></i>
                                         <?php 
 
@@ -232,7 +276,8 @@ include("includes/validation.php");
                                                 }
                                                 ?>
                                     </a>
-                                </div>
+                                 
+
                                 <button class="mobile-menu-btn">
                                     <span></span>
                                     <span></span>
@@ -326,13 +371,13 @@ include("includes/validation.php");
                                 </li>
                             </ul>
                         </div>
-                      <!--<div class="off-canvas-social-widget">
+                      <div class="off-canvas-social-widget">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
                             <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             <a href="#"><i class="fa fa-linkedin"></i></a>
                             <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        </div>-->
+                        </div>
                     </div>
                     <!-- offcanvas widget area end -->
                 </div>

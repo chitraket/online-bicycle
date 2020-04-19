@@ -96,13 +96,13 @@ include("includes/validation.php");
                                     <!-- main menu navbar start -->
                                      <nav class="desktop-menu">
                                         <ul>
-                                            <li class="<?php if($active=='Home') echo"active"?>"><a href="index.php">Home <i class="fa fa-angle"></i></a>   
+                                            <li class="<?php if($active=='Home') echo"active"?>"><a href="home">Home <i class="fa fa-angle"></i></a>   
                                             </li>
-                                            <li class="<?php if($active=='Shop') echo"active"?>"><a href="shop.php">Bikes<i class="fa fa-angle"></i></a>
+                                            <li class="<?php if($active=='Shop') echo"active"?>"><a href="bike">Bikes<i class="fa fa-angle"></i></a>
                                             </li>
-                                            <li class="<?php if($active=='Accessories') echo"active"?>"><a href="accessories.php">Accessories<i class="fa fa-angle"></i></a>
+                                            <li class="<?php if($active=='Accessories') echo"active"?>"><a href="accessories">Accessories<i class="fa fa-angle"></i></a>
                                             </li>
-                                            <li class="<?php if($active=='contact') echo"active"?>"><a href="contact.php">Contact us</a></li>
+                                            <li class="<?php if($active=='contact') echo"active"?>"><a href="contact">Contact us</a></li>
                                         </ul>
                                     </nav>
                                     <!-- main menu navbar end -->
@@ -143,6 +143,28 @@ include("includes/validation.php");
                                                 ?>
                                             </ul>
                                         </li>
+                                        <?php
+                                        if(isset($_SESSION['customer_email']))
+                                        { 
+                                            $customer_emailss=$_SESSION['customer_email'];
+                                            $select_wishlist="select * from  wishlist where customer_email='$customer_emailss'";
+                                            $run_wishlist=mysqli_query($con,$select_wishlist);
+                                            $num_wishlist=mysqli_num_rows($run_wishlist);
+                                        ?>
+                                        <li>
+                                            <a href="wishlist.php">
+                                                <i class="pe-7s-like"></i>
+                                                
+                                                <div class="notification"><?php echo $num_wishlist; ?></div>
+                                            </a>
+                                        </li>
+                                        <?php
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                        ?>
                                         <li>
                                             <a href="#" class="minicart-btn">
                                                 <i class="pe-7s-shopbag"></i>
@@ -199,7 +221,28 @@ include("includes/validation.php");
                             </div>
                             <div class="mobile-menu-toggler">
                                 <div class="mini-cart-wrap">
-                                    <a href="cart.php">
+                                <?php
+                                        if(isset($_SESSION['customer_email']))
+                                        { 
+                                            $customer_emailsss=$_SESSION['customer_email'];
+                                            $select_wishlists="select * from  wishlist where customer_email='$customer_emailsss'";
+                                            $run_wishlists=mysqli_query($con,$select_wishlists);
+                                            $num_wishlists=mysqli_num_rows($run_wishlists);
+                                        
+                                        ?>
+                                <a href="wishlist.php">
+
+                                        <i class="pe-7s-like"></i>
+                                        <div class="notification" ><?php echo $num_wishlists; ?></div>
+                                    </a>
+                                    <?php
+                                        }
+                                        else
+                                        {
+
+                                        } 
+                                    ?>
+                                    <a href="cart.php" class="pl-2">
                                         <i class="pe-7s-shopbag"></i>
                                         <?php 
 
@@ -319,13 +362,13 @@ include("includes/validation.php");
                                 </li>
                             </ul>
                         </div>
-                      <!--<div class="off-canvas-social-widget">
+                      <div class="off-canvas-social-widget">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
                             <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             <a href="#"><i class="fa fa-linkedin"></i></a>
                             <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        </div>-->
+                        </div>
                     </div>
                     <!-- offcanvas widget area end -->
                 </div>

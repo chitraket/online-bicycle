@@ -1,24 +1,7 @@
 <?php
 
 $db=mysqli_connect("localhost","root","","ecom_store");
-function listCheckbox($query)
-{
-    global $db;
-    $list="select * from admins $query";
-    $result=$this->query($list);
-    $count=$result->num_rows;
-    if($count<1)
-    {
 
-    }
-    else{
-        while($row=$result->fetch_array(MYSQLI_BOTH))
-        {
-            $arr[]=$row;
-        }
-        return $arr;
-    }
-}
 function load_state()
 {
     global $db;
@@ -33,24 +16,49 @@ function load_state()
 
 }
 
+function wishlist($product_idss,$customer_emailss,$papage)
+{
+    global $db;
+    $insert_wishlist="insert into wishlist(product_id,customer_email,papage) values('$product_idss','$customer_emailss','$papage')";
+    $run_wishlist=mysqli_query($db,$insert_wishlist);
+    if($run_wishlist)
+    {
+        if($papage==0)
+        {
+            ?>
+        <script>window.open('bikes-details?pro_id=<?php echo base64_encode($product_idss); ?>','_self')</script> 
+        <?php 
+        }
+        if($papage==1)
+        {
+            ?>
+            <script>window.open('accessories-details?accessories_id=<?php echo base64_encode($product_idss);?> ','_self')</script>
+            <?php   
+        }
+    }
+}
 function add_cart($p_id,$product_img,$product_qty,$product_name,$product_price,$product_size,$papage){
    if ($papage==0) {
         $product= array($product_img,$product_name,$product_price,$product_qty,$p_id,$product_size,$papage);
-        $_SESSION[$product_name]=$product;
-       echo "<script>window.open('product-details.php?pro_id=$p_id ','_self')</script>";
+        $_SESSION[$product_name.$p_id]=$product;
+        ?>
+    <script>window.open('bikes-details?pro_id=<?php echo base64_encode($p_id); ?> ','_self')</script>
+    <?php 
    }
    if($papage==1)
    {
         $product= array($product_img,$product_name,$product_price,$product_qty,$p_id,$product_size,$papage);
-        $_SESSION[$product_name]=$product;
-        echo "<script>window.open('accessories-details.php?accessories_id=$p_id ','_self')</script>";
+        $_SESSION[$product_name.$p_id]=$product;
+        ?>
+       <script>window.open('accessories-details?accessories_id=<?php echo base64_encode($p_id); ?> ','_self')</script>
+    <?php 
    }
 
 }
 
 function getPro(){
     global $db;
-    $get_products="select * from products where product_status_top='yes' and product_label='new' and product_status='yes'";
+    $get_products="select * from products where product_status_top='yes' and product_status='yes'";
     $run_products=mysqli_query($db,$get_products);
     while($row_products=mysqli_fetch_array($run_products))
     {
@@ -66,7 +74,7 @@ function getPro(){
       ?>
         <div class='product-item'>
             <figure class='product-thumb'>
-                <a href='product-details.php?pro_id=<?php echo $pro_id;?>'>
+                <a href='bikes-details?pro_id=<?php echo base64_encode($pro_id);?>'>
                     <img class='pri-img' src='admin_area/product_images/<?php echo $pro_img1;?>' alt='product' style='height:180px;'>
                     <img class='sec-img' src='admin_area/product_images/<?php echo $pro_img2;?>' alt='product' style='height:180px;'>
                 </a>
@@ -105,13 +113,13 @@ function getPro(){
                             $run_carts=mysqli_query($db, $query3);
                             while ($row_carts=mysqli_fetch_array($run_carts)) { 
                     ?>
-                            <a href="product-details.php?pro_id=<?php echo  $pro_id; ?>"><?php echo $row_carts['manufacturer_title']; ?></a>
+                            <a href="bikes-details?pro_id=<?php echo base64_encode($pro_id); ?>"><?php echo $row_carts['manufacturer_title']; ?></a>
                                     <?php 
                         }
                                                 ?>
                                             </div>
                     <h6 class='product-name'>
-                        <a href='product-details.php?pro_id=<?php echo $pro_id;?>'><?php echo $pro_title;?></a>
+                        <a href='bikes-details?pro_id=<?php echo base64_encode($pro_id);?>'><?php echo $pro_title;?></a>
                     </h6>
                     <div class='price-box'>
                         <?php
@@ -140,7 +148,7 @@ function getPro(){
 function getAcc()
 {
     global $db;
-    $get_accessories="select * from accessories where accessories_status_top='yes' and  accessories_status='yes' and accessories_label='new'";
+    $get_accessories="select * from accessories where accessories_status_top='yes' and  accessories_status='yes'";
     $run_accessories=mysqli_query($db,$get_accessories);
     while($row_accessories=mysqli_fetch_array($run_accessories))
     {

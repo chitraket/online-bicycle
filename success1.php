@@ -6,16 +6,10 @@
 <?php 
            
            if(!isset($_SESSION['customer_email'])){
-               
             echo "<script>window.open('customer/customer_login.php','_self')</script>";
-              // include("customer/customer_login.php");
            }
            
 ?> 
-    <!-- Start Header Area -->
-
-    <!-- end Header Area -->
-
     <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
@@ -25,9 +19,10 @@
                         <div class="breadcrumb-wrap">
                             <div class="success-text">
                                     <div class="section-title text-center" >
-                                        <img src="assets/img/icon/check.png" style="height: 50px;"> 
+                                        <img src="assets/img/icon/check.png" style="height: 50px;margin-top: 10px;"> 
                                         <h2 class="title" style="margin-top: 10px;">Thank you</h2>
                                         <p style="margin-top: 10px;">Order is successfully processsed and your order is on the way</p>
+                                        <p style="margin-top: 10px;">Payment Method : <img src="assets/img/icon/cash-on-delivery.png" style="height:25px;"/> Cash On Delivery</p>
                                     </div>
                             </div>
                         </div>
@@ -44,10 +39,11 @@
 
                                     if(isset($_GET['c_id']))
                                     {
+
                                         $customer_address='';
                                         $customer_email='';
                                         $customer_phone='';
-                                        $productinfo=$_GET['c_id'];
+                                        $productinfo=base64_decode($_GET['c_id']);
                                         
                                         ?>
                                         
@@ -58,7 +54,7 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th class="pro-thumbnail">Thumbnail</th>
+                                            <th class="pro-thumbnail">Images</th>
                                             <th class="pro-title">Product</th>
                                             <th class="pro-price">Size</th>
                                             <th class="pro-price">Price</th>
@@ -74,6 +70,15 @@
                                     
                                         $select_carts="select * from customer_orders where order_id='$productinfo'";
                                         $run_carts=mysqli_query($con,$select_carts);
+                                        if(!$run_carts)
+                                        {
+                                            ?>
+                                            <script>
+                                                window.open('home','_self');
+                                            </script>
+                                            <?php
+                                        }
+                                        else{
                                         while($row_carts=mysqli_fetch_array($run_carts))
                                         {
                                         $papage_number=$row_carts['papage_number'];
@@ -92,8 +97,8 @@
                            
                                     <tbody>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="product-details.php?pro_id=<?php echo $pro_id ?>"><?php  echo $product_title ?></a></td>
+                                            <td class="pro-thumbnail"><a href="bikes-details?pro_id=<?php echo base64_encode($pro_id); ?>"><img class="img-fluid" src="admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
+                                            <td class="pro-title"><a href="bikes-details?pro_id=<?php echo base64_encode($pro_id); ?>"><?php  echo $product_title ?></a></td>
                                             <td class="pro-price"><span><?php echo  $product_size ?></span></td>
                                             <td class="pro-price"><span>Rs.<?php echo $product_price ?></span></td>
                                             <td class="pro-quantity">
@@ -117,8 +122,8 @@
                                             $total+=$sub_total; ?>
                                              <tbody>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="admin_area/accessories_images/<?php echo $accessories_img1?>" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="accessories-details.php?accessories_id=<?php echo $pro_id ?>"><?php  echo $accessoires_name ?></a></td>
+                                            <td class="pro-thumbnail"><a href="accessories-details?accessories_id=<?php echo base64_encode($pro_id); ?>"><img class="img-fluid" src="admin_area/accessories_images/<?php echo $accessories_img1?>" alt="Product" /></a></td>
+                                            <td class="pro-title"><a href="accessories-details?accessories_id=<?php echo base64_encode($pro_id); ?>"><?php  echo $accessoires_name ?></a></td>
                                             <td class="pro-price"><span><?php echo  $product_size ?></span></td>
                                             <td class="pro-price"><span>Rs.<?php echo $accessories_prices ?></span></td>
                                             <td class="pro-quantity">
@@ -130,9 +135,17 @@
 
 
                                         <?php
+                                                }
+                                            }
                                         }
-                                    }
-                                    }
+                                    }   
+                                }
+                                else{
+                                    ?>
+                                            <script>
+                                                window.open('home','_self');
+                                            </script>
+                                    <?php 
                                 }
                                        ?>
                                       
@@ -149,7 +162,7 @@
                                         $customer_address='';
                                         $customer_email='';
                                         $customer_phone='';
-                                        $productinfo=$_GET['c_id'];
+                                        $productinfo=base64_decode($_GET['c_id']);
                                         $select_cart = "select * from orders where id='$productinfo'";
                                                     $run_cart = mysqli_query($con,$select_cart);
                                                     while($row_cart = mysqli_fetch_array($run_cart))
@@ -193,7 +206,7 @@
                                         
                                     </div>
                                 </div>
-                                <a href="index.php" class="btn btn-sqr d-block " style="margin-bottom: 50px;">Continue Shopping</a>
+                                <a href="home" class="btn btn-sqr d-block " style="margin-bottom: 50px;">Continue Shopping</a>
                             </div>
                         </div>
                       
@@ -217,111 +230,6 @@
     ?>
     <!-- footer area end -->
 
-    <!-- Quick view modal start -->
-    <div class="modal" id="quick_view">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <!-- product details inner end -->
-                    <div class="product-details-inner">
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="product-large-slider">
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                    </div>
-                                </div>
-                                <div class="pro-nav slick-row-10 slick-arrow-style">
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="product-details-des">
-                                    <div class="manufacturer-name">
-                                        <a href="product-details.html">HasTech</a>
-                                    </div>
-                                    <h3 class="product-name">Handmade Golden Necklace</h3>
-                                    <div class="ratings d-flex">
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <div class="pro-review">
-                                            <span>1 Reviews</span>
-                                        </div>
-                                    </div>
-                                    <div class="price-box">
-                                        <span class="price-regular">$70.00</span>
-                                        <span class="price-old"><del>$90.00</del></span>
-                                    </div>
-                                    <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
-                                    <div class="product-countdown" data-countdown="2022/02/20"></div>
-                                    <div class="availability">
-                                        <i class="fa fa-check-circle"></i>
-                                        <span>200 in stock</span>
-                                    </div>
-                                    <p class="pro-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                        eirmod tempor invidunt ut labore et dolore magna.</p>
-                                    <div class="quantity-cart-box d-flex align-items-center">
-                                        <h6 class="option-title">qty:</h6>
-                                        <div class="quantity">
-                                            <div class="pro-qty"><input type="text" value="1"></div>
-                                        </div>
-                                        <div class="action_link">
-                                            <a class="btn btn-cart2" href="#">Add to cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="useful-links">
-                                        <a href="#" data-toggle="tooltip" title="Compare"><i
-                                            class="pe-7s-refresh-2"></i>compare</a>
-                                        <a href="#" data-toggle="tooltip" title="Wishlist"><i
-                                            class="pe-7s-like"></i>wishlist</a>
-                                    </div>
-                                    <div class="like-icon">
-                                        <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
-                                        <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
-                                        <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
-                                        <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- product details inner end -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Quick view modal end -->
 
     <!-- offcanvas mini cart start -->
     <?php
@@ -366,6 +274,4 @@
     <script src="assets/js/main.js"></script>
 </body>
 
-
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:07 GMT -->
 </html>

@@ -1,0 +1,19 @@
+RewriteEngine On
+
+RewriteRule ^home?$ index.php
+RewriteRule ^bikes?$ shop.php
+RewriteRule ^accessories?$ accessories.php
+RewriteRule ^contact?$ contact.php
+RewriteRule ^bikes-details?$ product-details.php
+RewriteRule ^accessories-details?$ accessories-details.php
+RewriteRule ^cart?$ cart.php
+RewriteRule ^delete-cart?$ delete-cart.php
+RewriteRule ^wishlist?$ wishlist.php
+RewriteRule ^delete-wishlist?$ delete-wishlist.php
+RewriteRule ^checkout?$ checkout.php
+RewriteRule ^fail?$ fail.php
+
+RewriteRule ^online-payment-successful?$ success.php
+RewriteRule ^cash-on-delivery-successful?$ success1.php
+RewriteRule ^terms-and-conditions?$ terms.php
+

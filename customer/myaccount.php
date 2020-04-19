@@ -1,10 +1,12 @@
 <?php
 $active="";
 include("includes/header.php");
+$_SESSION['papage']=0;
 if(!isset($_SESSION['customer_email']))
 {
     echo "<script>window.open('customer_login.php','_self')</script>";
 }
+
 $custmoer_email=$_SESSION['customer_email'];
    ?>
    

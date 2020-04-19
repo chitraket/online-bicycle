@@ -3,14 +3,8 @@
     <?php
        $active='';
        include("includes/header.php");
-       if(isset($_POST['action']) && $_POST['action']=="Remove")
-       {
-            unset($_SESSION[$_POST["p_name"]]);
-            
-       }
        if(isset($_POST['action']) && $_POST['action']=="change")
        {   
-        
         $product_qty=$_POST["product-qty"];
         $product_img= $_POST["p_img"];
         $product_name= $_POST["p_name"];
@@ -38,7 +32,7 @@
         }
         else{
             $product= array($product_img,$product_name,$product_price,$product_qty,$p_id,$p_size,$papage);
-            $_SESSION[$product_name]=$product;
+            $_SESSION[$product_name.$p_id]=$product;
         }
         }
     ?>
@@ -54,8 +48,7 @@
                         <div class="breadcrumb-wrap">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.php"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="shop.php">shop</a></li>
+                                    <li class="breadcrumb-item"><a href="home"><i class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item active" aria-current="page">cart</li>
                                 </ul>
                             </nav>
@@ -74,7 +67,7 @@
                 <h2 class="title">Your cart is empty</h2>
             </div>
            <center> <div class="action_link">
-            <a href="index.php"><input type="submit" class="btn btn-cart2" name="add_cart" value="Start shopping"></a>
+            <a href="home"><input type="submit" class="btn btn-cart2" name="add_cart" value="Start shopping"></a>
         </div></center>  
         </div>
            
@@ -169,11 +162,11 @@
                                       if ($papage==0) {
                                           ?>
 
-                                    <td class="pro-thumbnail"><a href="product-details.php?pro_id=<?php echo $p_id ?>"><img class="img-fluid" src="admin_area/product_images/<?php echo $p_img ?>" alt="Product" /></a></td>
+                                    <td class="pro-thumbnail"><a href="bikes-details?pro_id=<?php echo base64_encode($p_id); ?>"><img class="img-fluid" src="admin_area/product_images/<?php echo $p_img ?>" alt="Product" /></a></td>
                                    
                                     <td class="pro-title">
                                         
-                                        <a href="product-details.php?pro_id=<?php echo $p_id ?>"><?php  echo $p_name ?></a>
+                                        <a href="bikes-details?pro_id=<?php echo base64_encode($p_id); ?>"><?php  echo $p_name ?></a>
                                     </td>
                                     <td class="pro-price"><span><?php echo $size ?></span></td>  
 
@@ -192,24 +185,18 @@
                                                     <input type="hidden" name="papage" value="<?php echo $papage?>">
                                     </form>
                                     <td class="pro-subtotal"><span>Rs. <?php echo $bill ?></span></td>
-                                     <form method="POST" action="">
-                                      <td class="pro-remove">
-                                          <input type="hidden" name="code" value="<?php echo $p_id?>">
-                                          <input type="hidden" name="p_name" value="<?php echo $p_name ?>">
-                                          <input type="submit" value="Remove" name="action" class="btn btn-cart2">
-                                        </td>
-                                     </form>
+                                    <td class="pro-remove"><a href="delete-cart?p_name=<?php echo base64_encode($p_name);?>&p_id=<?php echo base64_encode($p_id); ?>" class="btn-delete"><i class="fa fa-trash-o"></i></a></td>
                                      <?php
                                       }
                                       if ($papage==1) {
                                           ?>
                                     
                                   
-                                    <td class="pro-thumbnail"><a href="accessories-details.php?accessories_id=<?php echo $p_id ?>"><img class="img-fluid" src="admin_area/accessories_images/<?php echo $p_img ?>" alt="Product" /></a></td>
+                                    <td class="pro-thumbnail"><a href="accessories-details?accessories_id=<?php echo  base64_encode($p_id); ?>"><img class="img-fluid" src="admin_area/accessories_images/<?php echo $p_img ?>" alt="Product" /></a></td>
                                     
                                     <td class="pro-title">
                                         
-                                        <a href="accessories-details.php?accessories_id=<?php echo $p_id ?>"><?php  echo $p_name ?></a>
+                                        <a href="accessories-details?accessories_id=<?php echo base64_encode($p_id); ?>" ><?php  echo $p_name ?></a>
                                     </td>
                                     
                                     <td class="pro-price"><span><?php echo $size ?></span></td>
@@ -229,12 +216,8 @@
                                                     <input type="hidden" name="papage" value="<?php echo $papage?>">
                                     </form>
                                     <td class="pro-subtotal"><span>Rs. <?php echo $bill ?></span></td>
-                                        <form method="POST" action="">
-                                        <td class="pro-remove">
-                                            <input type="hidden" name="code" value="<?php echo $p_id?>">
-                                            <input type="hidden" name="p_name" value="<?php echo $p_name ?>">
-                                            <input type="submit" value="Remove" name="action" class="btn btn-cart2">
-                                        </td>
+                                        <form method="POST" action=""> 
+                                        <td class="pro-remove"><a href="delete-cart?p_name=<?php echo base64_encode($p_name);?>&p_id=<?php echo base64_encode($p_id); ?>" class="btn-delete"><i class="fa fa-trash-o"></i></a></td>
                                         </form>
                                         <?php
                                       }
@@ -250,7 +233,7 @@
                             <!-- Cart Update Option -->
                             <div class="cart-update-option d-block d-md-flex justify-content-between">
                                 <div class="cart-update">
-                                    <a href="shop.php"><input type="submit" name="update" class="btn btn-sqr" value="Continue Shopping"></a>
+                                    <a href="home"><input type="submit" name="update" class="btn btn-sqr" value="Continue Shopping"></a>
                                 </div>
                                
                             </div>
@@ -280,7 +263,7 @@
                                         
                                     </div>
                                 </div>
-                                <a href="checkout.php" class="btn btn-sqr d-block">Proceed Checkout</a>
+                                <a href="checkout" class="btn btn-sqr d-block">Proceed Checkout</a>
                             </div>
                         </div>
                       
@@ -298,119 +281,19 @@
         <i class="fa fa-angle-up"></i>
     </div>
     <!-- Scroll to Top End -->
-
+    <?php
+                if(isset($_GET['m']))
+                { 
+                ?>
+                <div class="flash-data" data-flashdata="<?php echo $_GET['m'] ?>"></div>
+                <?php
+                } 
+                ?>
     <!-- footer area start -->
     <?php
     include("includes/footer.php");
     ?>
     <!-- footer area end -->
-
-    <!-- Quick view modal start -->
-    <div class="modal" id="quick_view">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <!-- product details inner end -->
-                    <div class="product-details-inner">
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="product-large-slider">
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                    </div>
-                                </div>
-                                <div class="pro-nav slick-row-10 slick-arrow-style">
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="product-details-des">
-                                    <div class="manufacturer-name">
-                                        <a href="product-details.html">HasTech</a>
-                                    </div>
-                                    <h3 class="product-name">Handmade Golden Necklace</h3>
-                                    <div class="ratings d-flex">
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <span><i class="fa fa-star-o"></i></span>
-                                        <div class="pro-review">
-                                            <span>1 Reviews</span>
-                                        </div>
-                                    </div>
-                                    <div class="price-box">
-                                        <span class="price-regular">$70.00</span>
-                                        <span class="price-old"><del>$90.00</del></span>
-                                    </div>
-                                    <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
-                                    <div class="product-countdown" data-countdown="2022/02/20"></div>
-                                    <div class="availability">
-                                        <i class="fa fa-check-circle"></i>
-                                        <span>200 in stock</span>
-                                    </div>
-                                    <p class="pro-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                        eirmod tempor invidunt ut labore et dolore magna.</p>
-                                    <div class="quantity-cart-box d-flex align-items-center">
-                                        <h6 class="option-title">qty:</h6>
-                                        <div class="quantity">
-                                            <div class="pro-qty"><input type="text" value="1"></div>
-                                        </div>
-                                        <div class="action_link">
-                                            <a class="btn btn-cart2" href="#">Add to cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="useful-links">
-                                        <a href="#" data-toggle="tooltip" title="Compare"><i
-                                            class="pe-7s-refresh-2"></i>compare</a>
-                                        <a href="#" data-toggle="tooltip" title="Wishlist"><i
-                                            class="pe-7s-like"></i>wishlist</a>
-                                    </div>
-                                    <div class="like-icon">
-                                        <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
-                                        <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
-                                        <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
-                                        <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- product details inner end -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Quick view modal end -->
-
     <!-- offcanvas mini cart start -->
     <?php
      include("includes/cart1.php");
@@ -453,10 +336,46 @@
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
 
-    
+    <script>
+           $('.btn-delete').on('click',function(e){
+               e.preventDefault();
+               const href =$(this).attr('href')
+               swal({
+                        title: "Are you sure?",
+                        text: "You want to remove this item.",
+                        icon: "warning",
+                        buttons: true,
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                           document.location.href=href;
+                        } else {
+                        
+                        }
+                });
+              
+           })
+           const flashdata=$('.flash-data').data('flashdata')
+           if(flashdata){
+            swal({
+                        title: "successful remove item.",
+                        text: "",
+                        icon: "success",
+                        buttons: [,"Ok"],
+                        successMode: true,
+                })
+                .then((willDelete) => {
+                        if (willDelete) {
+                            window.open('cart','_self'); 
+                        } else {
+                        
+                        }
+                });
+                
+           }    
+        </script> 
     
 </body>
 
-
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:06 GMT -->
 </html>

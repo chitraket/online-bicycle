@@ -4,14 +4,19 @@
 
 if(isset($_SESSION['customer_email']))
 {
-    //header('location:customer/myaccount.php');
-    echo "<script>window.open('myaccount.php','_self');</script>";
+    if(isset($_SESSION['papage']))
+    {
+        if($_SESSION['papage']==1)
+        {
+            echo "<script>window.open('../checkout','_self');</script>";
+        }
+        if($_SESSION['papage']==0)
+        {
+            echo "<script>window.open('myaccount.php','_self');</script>";
+        }
+    }
 }
-
 ?>
-    <!-- Start Header Area -->
-    
-    <!-- end Header Area -->
 
 
     <main>

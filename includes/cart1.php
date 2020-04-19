@@ -16,7 +16,7 @@
                                 </div>
                                 <center>
                                     <div class="action_link" style="margin-top: -10px;">
-                                        <a href="index.php"><input type="submit" class="btn btn-cart2" name="add_cart" value="Start shopping" ></a>
+                                        <a href="home"><input type="submit" class="btn btn-cart2" name="add_cart" value="Start shopping" ></a>
                                     </div>   
                                 </center>       
                             </div>
@@ -86,13 +86,13 @@
                                              ?>
                                         <li class="minicart-item">
                                             <div class="minicart-thumb">
-                                                <a href="product-details.php?pro_id=<?php echo $p_id ?>">
+                                                <a href="bikes-details?pro_id=<?php echo base64_encode($p_id) ?>">
                                                     <img src="admin_area/product_images/<?php echo $p_img ?>" alt="product">
                                                 </a>
                                             </div>
                                             <div class="minicart-content">
                                                 <h3 class="product-name">
-                                                    <a href="product-details.php?pro_id=<?php echo $p_id ?>"><?php echo $p_name ?></a>
+                                                    <a href="bikes-details?pro_id=<?php echo base64_encode($p_id); ?>"><?php echo $p_name ?></a>
                                                 </h3>
                                                 <p>
                                                     <span class="cart-quantity"><?php echo $p_qty ?> <strong> | </strong></span>
@@ -109,13 +109,13 @@
                                              ?>
                                              <li class="minicart-item">
                                             <div class="minicart-thumb">
-                                                <a href="accessories-details.php?accessories_id=<?php echo $p_id ?>">
+                                                <a href="accessories-details?accessories_id=<?php echo base64_encode($p_id); ?>">
                                                     <img src="admin_area/accessories_images/<?php echo $p_img ?>" alt="product">
                                                 </a>
                                             </div>
                                             <div class="minicart-content">
                                                 <h3 class="product-name">
-                                                    <a href="accessories-details.php?accessories_id=<?php echo $p_id ?>"><?php echo $p_name ?></a>
+                                                    <a href="accessories-details?accessories_id=<?php echo base64_encode($p_id); ?>"><?php echo $p_name ?></a>
                                                 </h3>
                                                 <p>
                                                     <span class="cart-quantity"><?php echo $p_qty ?> <strong> | </strong></span>
@@ -153,8 +153,8 @@
                     </div>
 
                     <div class="minicart-button">
-                        <a href="cart.php"><i class="fa fa-shopping-cart"></i> View Cart</a>
-                        <a href="checkout.php"><i class="fa fa-share"></i> Checkout</a>
+                        <a href="cart"><i class="fa fa-shopping-cart"></i> View Cart</a>
+                        <a href="checkout"><i class="fa fa-share"></i> Checkout</a>
                     </div>
                 </div>
          

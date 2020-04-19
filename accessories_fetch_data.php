@@ -64,7 +64,7 @@ $outputs='';
                                     <!-- product grid start -->
                                     <div class="product-item">
                                         <figure class="product-thumb">
-                                            <a href="accessories-details.php?accessories_id=<?php echo $row['accessories_id'];?>">
+                                            <a href="accessories-details?accessories_id=<?php echo base64_encode($row['accessories_id']);?>">
                                                 <img class="pri-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_1'];?>" alt="product" style="height:180px;">
                                                 <img class="sec-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_2'];?>" alt="product" style="height:180px;">
                                             </a>
@@ -104,13 +104,13 @@ $outputs='';
                                             $run_carts=mysqli_query($con, $query3);
                                             while ($row_carts=mysqli_fetch_array($run_carts)) { 
                                             ?>
-                                                <a href="accessories-details.php?accessories_id=<?php echo $row['accessories_id']?>"><?php echo $row_carts['accessories_brand']; ?></a>
+                                                <a href="accessories-details?accessories_id=<?php echo base64_encode($row['accessories_id']);?>"><?php echo $row_carts['accessories_brand']; ?></a>
                                                 <?php 
                                             }
                                                 ?>
                                             </div>
                                             <h6 class="product-name">
-                                                <a href="accessories-details.php?accessories_id=<?php echo $row['accessories_id']?>"><?php echo $row['accessories_name'];?></a>
+                                                <a href="accessories-details.php?accessories_id=<?php echo  base64_encode($row['accessories_id']);?>"><?php echo $row['accessories_name'];?></a>
                                             </h6>
                                             <div class="price-box">
                                             <?php
