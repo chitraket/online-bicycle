@@ -76,7 +76,20 @@ function getPro(){
             <figure class='product-thumb'>
                 <a href='bikes-details?pro_id=<?php echo base64_encode($pro_id);?>'>
                     <img class='pri-img' src='admin_area/product_images/<?php echo $pro_img1;?>' alt='product' style='height:180px;'>
+                    <?php
+                    if($pro_img2=="")
+                    {
+                        ?>
+                        <img class='sec-img' src='admin_area/product_images/<?php echo $pro_img1;?>' alt='product' style='height:180px;'>
+                        <?php 
+                    } 
+                    else
+                    {
+                    ?>
                     <img class='sec-img' src='admin_area/product_images/<?php echo $pro_img2;?>' alt='product' style='height:180px;'>
+                    <?php 
+                    }
+                    ?>
                 </a>
                 <div class='product-badge'>
                     <?php
@@ -101,10 +114,6 @@ function getPro(){
                     }
                     ?>
                 </div>
-               <!-- <div class='button-group'>
-                    <a href='wishlist.html' data-toggle='tooltip' data-placement='left' title='Add to wishlist'><i class='pe-7s-like'></i></a>
-                    
-                </div>-->
           </figure>
                 <div class='product-caption text-center'>
                 <div class="manufacturer-name">
@@ -113,7 +122,7 @@ function getPro(){
                             $run_carts=mysqli_query($db, $query3);
                             while ($row_carts=mysqli_fetch_array($run_carts)) { 
                     ?>
-                            <a href="bikes-details?pro_id=<?php echo base64_encode($pro_id); ?>"><?php echo $row_carts['manufacturer_title']; ?></a>
+                            <a href="bikes?manufacturer_id=<?php echo base64_encode($manufacturer_id);?>"><?php echo $row_carts['manufacturer_title']; ?></a>
                                     <?php 
                         }
                                                 ?>
@@ -166,9 +175,21 @@ function getAcc()
         ?>
         <div class='product-item'>
             <figure class='product-thumb'>
-                <a href='accessories-details.php?accessories_id=<?php echo $pro_id;?>'>
+                <a href='accessories-details?accessories_id=<?php echo base64_encode($pro_id);?>'>
                     <img class='pri-img' src='admin_area/accessories_images/<?php echo $pro_img1;?>' alt='product' style='height:180px;'>
+                    <?php
+                    if($pro_img2=="")
+                    {
+                        ?>
+                        <img class='sec-img' src='admin_area/accessories_images/<?php echo $pro_img1;?>' alt='product' style='height:180px;'>
+                        <?php
+                    } 
+                    else{
+                    ?>
                     <img class='sec-img' src='admin_area/accessories_images/<?php echo $pro_img2;?>' alt='product' style='height:180px;'>
+                    <?php
+                    } 
+                    ?>
                 </a>
                 <div class='product-badge'>
                 <?php
@@ -204,13 +225,13 @@ function getAcc()
                             $run_carts=mysqli_query($db, $query3);
                             while ($row_carts=mysqli_fetch_array($run_carts)) { 
                     ?>
-                            <a href="accessories-details.php?accessories_id=<?php echo $pro_id;?>"><?php echo $row_carts['accessories_brand']; ?></a>
+                            <a href="accessories?manufacturer_id=<?php echo base64_encode($accessories_brand);?>"><?php echo $row_carts['accessories_brand']; ?></a>
                                     <?php 
                         }
                                                 ?>
                 </div>
                     <h6 class='product-name'>
-                        <a href='accessories-details.php?accessories_id=<?php echo $pro_id;?>'><?php echo$pro_title;?></a>
+                        <a href='accessories-details?accessories_id=<?php echo base64_encode($pro_id);?>'><?php echo$pro_title;?></a>
                     </h6>
                     <div class='price-box'>
                     <?php
@@ -243,30 +264,45 @@ function getPCats(){
     $sql="SELECT * FROM product_categories where p_cat_top='yes' and p_cat_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
-
-        echo '
+        ?>
         <li>
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" class=" common_selector p_cat_id custom-control-input" id="'.$row['p_cat_title'].'" value="'. $row['p_cat_id'].'">
-            <label class="common_selector p_cat_id custom-control-label" for="'. $row['p_cat_title'].'">'. $row['p_cat_title'].'</label>
+            <input type="checkbox" class=" common_selector p_cat_id custom-control-input" id="<?php echo $row['p_cat_title']; ?>" value="<?php echo  $row['p_cat_id']; ?>"
+            <?php
+            if(isset($_GET['category_id']))
+            {
+                if(base64_decode($_GET['category_id'])==$row['p_cat_id'])
+                {
+                    echo "checked";
+                }
+            }
+             ?>>
+            <label class="common_selector p_cat_id custom-control-label" for="<?php echo  $row['p_cat_title']; ?>"><?php echo  $row['p_cat_title'] ?></label>
         </div>
         </li>
-        ';
+    <?php 
             
     }
     $sql="SELECT * FROM product_categories where p_cat_top='no' and p_cat_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
-
-        echo '
+        ?>
         <li>
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" class=" common_selector p_cat_id custom-control-input" id="'.$row['p_cat_title'].'" value="'. $row['p_cat_id'].'">
-            <label class="common_selector p_cat_id custom-control-label" for="'. $row['p_cat_title'].'">'. $row['p_cat_title'].'</label>
+            <input type="checkbox" class=" common_selector p_cat_id custom-control-input" id="<?php echo $row['p_cat_title']; ?>" value="<?php echo $row['p_cat_id']; ?>"
+            <?php
+            if(isset($_GET['category_id']))
+            {
+                if(base64_decode($_GET['category_id'])==$row['p_cat_id'])
+                {
+                    echo "checked";
+                }
+            }
+             ?>>
+            <label class="common_selector p_cat_id custom-control-label" for="<?php echo  $row['p_cat_title']; ?>"><?php echo $row['p_cat_title']; ?></label>
         </div>
         </li>
-        ';
-            
+        <?php 
     }
 }
 function getCats(){
@@ -274,58 +310,70 @@ function getCats(){
     $sql="SELECT * FROM categories where cat_top='yes' and cat_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
-
-        echo '
+?>
         <li>
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="common_selector cat_id custom-control-input" id="'.$row['cat_title'].'" value="'. $row['cat_id'].'">
-            <label class="common_selector cat_id custom-control-label" for="'. $row['cat_title'].'">'. $row['cat_title'].'</label>
+            <input type="checkbox" class="common_selector cat_id custom-control-input" id="<?php echo $row['cat_title'];?>" value="<?php  echo  $row['cat_id']; ?>" >
+            <label class="common_selector cat_id custom-control-label" for="<?php echo  $row['cat_title']; ?>"><?php echo $row['cat_title']; ?></label>
         </div>
         </li>
-        ';
+    <?php
             
     }
     $sql="SELECT * FROM categories where cat_top='no' and cat_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
-
-        echo '
+?>
         <li>
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="common_selector cat_id custom-control-input" id="'.$row['cat_title'].'" value="'. $row['cat_id'].'">
-            <label class="common_selector cat_id custom-control-label" for="'. $row['cat_title'].'">'. $row['cat_title'].'</label>
+            <input type="checkbox" class="common_selector cat_id custom-control-input" id="<?php echo $row['cat_title']; ?>" value="<?php echo  $row['cat_id']; ?>">
+            <label class="common_selector cat_id custom-control-label" for="<?php echo $row['cat_title']; ?>"><?php echo  $row['cat_title']; ?></label>
         </div>
         </li>
-        ';
+        <?php 
             
     }
 }
 
 function  getAbrand(){
     global $db;
-    $sql="SELECT DISTINCT * FROM accessories_brand WHERE accessories_brand_top='yes' and accessories_brand_status='yes'";
+    $sql="SELECT  * FROM accessories_brand WHERE accessories_brand_top='yes' and accessories_brand_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
-        echo '
+        ?>
     <li>
     <div class="custom-control custom-checkbox">
-        <input type="checkbox" class=" common_selector accessories_brand_id custom-control-input" id="'.$row['accessories_brand'].'" value="'. $row['accessories_brand_id'].'">
-        <label class="common_selector accessories_brand_id custom-control-label" for="'. $row['accessories_brand'].'">'. $row['accessories_brand'].'</label>
+        <input type="checkbox" class=" common_selector accessories_brand_id custom-control-input" id="<?php echo $row['accessories_brand'];?>" value="<?php echo $row['accessories_brand_id']?>"
+        <?php if(isset($_GET['manufacturer_id']))
+            {
+                if(base64_decode($_GET['manufacturer_id'])==$row['accessories_brand_id'])
+                {
+                      echo "checked";  
+                }
+            }?> >
+        <label class="common_selector accessories_brand_id custom-control-label" for="<?php echo  $row['accessories_brand']; ?>"><?php echo  $row['accessories_brand']; ?></label>
     </div>
     </li>
-    ';
+    <?php
     }
     $sql="SELECT DISTINCT * FROM accessories_brand WHERE accessories_brand_top='no' and accessories_brand_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
-        echo '
+        ?>
     <li>
     <div class="custom-control custom-checkbox">
-        <input type="checkbox" class=" common_selector accessories_brand_id custom-control-input" id="'.$row['accessories_brand'].'" value="'. $row['accessories_brand_id'].'">
-        <label class="common_selector accessories_brand_id custom-control-label" for="'. $row['accessories_brand'].'">'. $row['accessories_brand'].'</label>
+        <input type="checkbox" class=" common_selector accessories_brand_id custom-control-input" id="<?php echo $row['accessories_brand']; ?>" value="<?php echo $row['accessories_brand_id'];?>"
+        <?php if(isset($_GET['manufacturer_id']))
+            {
+                if(base64_decode($_GET['manufacturer_id'])==$row['accessories_brand_id'])
+                {
+                      echo "checked";  
+                }
+            }?>>
+        <label class="common_selector accessories_brand_id custom-control-label" for="<?php echo  $row['accessories_brand']; ?>"><?php echo  $row['accessories_brand']; ?></label>
     </div>
     </li>
-    ';
+    <?php 
     }
 }
 function getAcategory(){
@@ -333,24 +381,40 @@ function getAcategory(){
     $sql="SELECT *  FROM accessories_category WHERE accessories_category_top='yes' and accessories_category_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
-        echo '
+        ?>
     <li>
     <div class="custom-control custom-checkbox">
-        <input type="checkbox" class=" common_selector accessories_category custom-control-input" id="'.$row['accessories_category'].'" value="'. $row['accessories_category_id'].'">
-        <label class="common_selector accessories_category custom-control-label" for="'. $row['accessories_category'].'">'. $row['accessories_category'].'</label>
+        <input type="checkbox" class=" common_selector accessories_category custom-control-input" id="<?php echo $row['accessories_category']; ?>" value="<?php echo  $row['accessories_category_id']; ?>"
+        <?php if(isset($_GET['category_id']))
+            {
+                if(base64_decode($_GET['category_id'])==$row['accessories_category_id'])
+                {
+                      echo "checked";  
+                }
+            }?>>
+        <label class="common_selector accessories_category custom-control-label" for="<?php echo $row['accessories_category']; ?>"><?php echo $row['accessories_category']; ?></label>
     </div>
-    </li>';
+    </li>
+    <?php 
     }
     $sql="SELECT *  FROM accessories_category WHERE accessories_category_top='no' and accessories_category_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
-        echo '
+        ?>
     <li>
     <div class="custom-control custom-checkbox">
-        <input type="checkbox" class=" common_selector accessories_category custom-control-input" id="'.$row['accessories_category'].'" value="'. $row['accessories_category_id'].'">
-        <label class="common_selector accessories_category custom-control-label" for="'. $row['accessories_category'].'">'. $row['accessories_category'].'</label>
+        <input type="checkbox" class=" common_selector accessories_category custom-control-input" id="<?php echo $row['accessories_category']; ?>" value="<?php echo $row['accessories_category_id']; ?>"
+        <?php if(isset($_GET['category_id']))
+            {
+                if(base64_decode($_GET['category_id'])==$row['accessories_category_id'])
+                {
+                      echo "checked";  
+                }
+            }?>>
+        <label class="common_selector accessories_category custom-control-label" for="<?php echo $row['accessories_category']; ?>">'. $row['accessories_category'].'</label>
     </div>
-    </li>';
+    </li>
+    <?php
     }
 }
 function getMCats(){
@@ -358,26 +422,40 @@ function getMCats(){
     $sql="SELECT * FROM manufacturers WHERE manufacturer_top='yes' and manufacturer_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
-        echo '
+        ?>
         <li>
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" class=" common_selector manufacturer_id custom-control-input" id="'.$row['manufacturer_title'].'" value="'. $row['manufacturer_id'].'">
-            <label class="common_selector manufacturer_id custom-control-label" for="'. $row['manufacturer_title'].'">'. $row['manufacturer_title'].'</label>
+            <input type="checkbox" class=" common_selector manufacturer_id custom-control-input" id="<?php echo $row['manufacturer_title'];?>" value="<?php echo  $row['manufacturer_id']; ?>" 
+            <?php if(isset($_GET['manufacturer_id']))
+            {
+                if(base64_decode($_GET['manufacturer_id'])==$row['manufacturer_id'])
+                {
+                      echo "checked";  
+                }
+            }?>>
+            <label class="common_selector manufacturer_id custom-control-label" for="<?php echo  $row['manufacturer_title']; ?>"><?php echo $row['manufacturer_title']; ?></label>
         </div>
         </li>
-        ';
+        <?php 
     }
     $sql="SELECT * FROM manufacturers WHERE manufacturer_top='no' and manufacturer_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
-        echo '
+        ?>
         <li>
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" class=" common_selector manufacturer_id custom-control-input" id="'.$row['manufacturer_title'].'" value="'. $row['manufacturer_id'].'">
-            <label class="common_selector manufacturer_id custom-control-label" for="'. $row['manufacturer_title'].'">'. $row['manufacturer_title'].'</label>
+            <input type="checkbox" class=" common_selector manufacturer_id custom-control-input" id="<?php echo  $row['manufacturer_title']; ?>" value="<?php echo  $row['manufacturer_id'];?>"
+            <?php if(isset($_GET['manufacturer_id']))
+            {
+                if(base64_decode($_GET['manufacturer_id'])==$row['manufacturer_id'])
+                {
+                      echo "checked";  
+                }
+            }?>>
+            <label class="common_selector manufacturer_id custom-control-label" for="<?php echo  $row['manufacturer_title']; ?>"><?php echo  $row['manufacturer_title']; ?></label>
         </div>
         </li>
-        ';
+        <?php 
     }
 }
 function logo()

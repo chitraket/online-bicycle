@@ -12,8 +12,11 @@ RewriteRule ^wishlist?$ wishlist.php
 RewriteRule ^delete-wishlist?$ delete-wishlist.php
 RewriteRule ^checkout?$ checkout.php
 RewriteRule ^fail?$ fail.php
-
 RewriteRule ^online-payment-successful?$ success.php
 RewriteRule ^cash-on-delivery-successful?$ success1.php
 RewriteRule ^terms-and-conditions?$ terms.php
-
+RewriteRule ^privet-policy?$ policy.php
+RewriteRule ^register?$ register.php
+RewriteRule ^register-verification?$ registress.php
+RewriteRule ^wishlist?$ wishlist.php
+RewriteRule ^sitemap?$ sitemap.php

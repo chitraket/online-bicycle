@@ -94,7 +94,7 @@ $active='Home';
                     <div class="col-12">
                         <!-- section title start -->
                         <div class="section-title text-center">
-                            <h2 class="title">Bicycles</h2>
+                           <!-- <h2 class="title">Bicycles</h2>-->
                           <!--  <p class="sub-title">Add our products to weekly lineup</p>-->
                         </div>
                         <!-- section title start -->
@@ -258,8 +258,7 @@ $active='Home';
                             <div class="group-list-item-wrapper">
                                 <div class="group-list-carousel">
                                     <!-- group list item start -->
-                                    <div class="group-slide-item">
-                                        <div class="group-item">
+                                   
                                         <?php
                                     $select_sale_product="select * from products where product_status='yes' and product_label='sale'";
                                     $run_sale_product=mysqli_query($con,$select_sale_product);
@@ -271,6 +270,8 @@ $active='Home';
                                         $product_idl=$row_sale_product['product_id'];
                                         $product_discount_pricel=$row_sale_product['product_discount_price'];
                                         ?>
+                                         <div class="group-slide-item">
+                                        <div class="group-item">
                                             <div class="group-item-thumb">
                                             <a href='bikes-details?pro_id=<?php echo base64_encode($product_idl);?>'>
                                                 <img class='pri-img' src='admin_area/product_images/<?php echo $product_imgl;?>' alt='product'>
@@ -284,6 +285,8 @@ $active='Home';
                                                     <span class="price-old"><del>Rs.<?php echo $product_discount_pricel; ?></del></span>
                                                 </div>
                                             </div>
+                                        </div>
+                                         </div>
                                             <?php
                                     } 
                                             ?>
@@ -308,7 +311,7 @@ $active='Home';
                     <div class="col-12">
                         <!-- section title start -->
                         <div class="section-title text-center">
-                            <h2 class="title">Accessories</h2>
+                            <!--<h2 class="title">Accessories</h2>-->
                           <!--  <p class="sub-title">Add our products to weekly lineup</p>-->
                         </div>
                         <!-- section title start -->

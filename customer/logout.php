@@ -4,6 +4,6 @@ session_start();
 
 session_destroy();
 
-echo "<script>window.open('../index.php','_self')</script>";
+echo "<script>window.open('../home','_self')</script>";
 
 ?>

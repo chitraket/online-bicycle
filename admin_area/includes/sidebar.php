@@ -149,6 +149,34 @@
                 </ul>
             </li>
 
+            <li class="menu-title">Privet Policy</li>
+
+            <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="bx bx-user-circle"></i>
+                    <span>Privet Policy</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                    <li><a href="add-policy.php">Add Privet Policy</a></li>
+                    <li><a href="view-policy.php">View Privet Policy</a></li>
+                   
+                </ul>
+            </li>
+
+            <li class="menu-title">Order Policy</li>
+
+            <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="bx bx-user-circle"></i>
+                    <span>Order Policy</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                    <li><a href="add-o-policy.php">Add Order Policy</a></li>
+                    <li><a href="view-o-policy.php">View Order Policy</a></li>
+                   
+                </ul>
+            </li>
+
             <li class="menu-title">Logo</li>
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">

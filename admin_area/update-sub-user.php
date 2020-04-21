@@ -376,6 +376,46 @@ include("includes/sidebar.php");
                                         ?>>
                                             <label class="custom-control-label" for="customCheck26">Payment</label>
                                         </div>
+                                        <div class="custom-control custom-checkbox mb-2">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck27" name="subject[]" value="27" 
+                                            <?php 
+                                        if(in_array(27,$subjects))
+                                        {
+                                            echo "checked";
+                                        }
+                                        ?>>
+                                            <label class="custom-control-label" for="customCheck27">Add Privet Policy</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox mb-2">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck28" name="subject[]" value="28" 
+                                            <?php 
+                                        if(in_array(28,$subjects))
+                                        {
+                                            echo "checked";
+                                        }
+                                        ?>>
+                                            <label class="custom-control-label" for="customCheck28">View Privet Policy</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox mb-2">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck29" name="subject[]" value="29" 
+                                            <?php 
+                                        if(in_array(29,$subjects))
+                                        {
+                                            echo "checked";
+                                        }
+                                        ?>>
+                                            <label class="custom-control-label" for="customCheck29">Add Order Policy</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox mb-2">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck30" name="subject[]" value="30" 
+                                            <?php 
+                                        if(in_array(30,$subjects))
+                                        {
+                                            echo "checked";
+                                        }
+                                        ?>>
+                                            <label class="custom-control-label" for="customCheck30">View Order Policy</label>
+                                        </div>
                                 </div>
                             </div>
                             

@@ -44,7 +44,7 @@
 <?php
 include("includes/db.php");
 
-$email=$_GET['email'];
+$email=base64_decode($_GET['email']);
 $update_registree="update customers set customer_status='yes' where customer_email='$email'";
 $run_update=mysqli_query($con,$update_registree);
 if($run_update)

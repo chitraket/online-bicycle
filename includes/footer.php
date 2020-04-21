@@ -6,7 +6,7 @@
                         <div class="widget-item">
                             <div class="widget-title">
                                 <div class="widget-logo">
-                                    <a href="index.php">
+                                    <a href="home">
                                         <img src="assets/img/logo/logo.png" alt="brand logo" style="height: 40px">
                                     </a>
                                 </div>
@@ -35,12 +35,12 @@
                             <h6 class="widget-title">Information</h6>
                             <div class="widget-body">
                                 <ul class="info-list">
-                                    <li><a href="#">about us</a></li>
-                                    <li><a href="#">Delivery Information</a></li>
-                                    <li><a href="#">privet policy</a></li>
+                                <li><a href="#">about us</a></li>
+                                    <li><a href="privet-policy">Privet Policy</a></li>
+                                    <li><a href="order-policy">Order Policy</a></li>
                                     <li><a href="terms-and-conditions">Terms & Conditions</a></li>
-                                    <li><a href="#">contact us</a></li>
-                                    <li><a href="#">site map</a></li>
+                                    <li><a href="contact">Contact Us</a></li>
+                                    <li><a href="sitemap">Site Map</a></li>
                                 </ul>
                             </div>
                         </div>

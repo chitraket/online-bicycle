@@ -2,7 +2,7 @@
  include("includes/db.php");
 if(isset($_GET['o_id']))
 {
-    $o_id=$_GET['o_id'];
+    $o_id=base64_decode($_GET['o_id']);
     //$invoice_no=$_SESSION['invoice_no'];
     $customer_email='';
     $customer_address='';
@@ -364,9 +364,9 @@ if(isset($_GET['o_id']))
                         catch (Exception $e) {
                             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                         }
-    
-    echo "<script>window.open('full_orders.php?o_id=$o_id&m=1','_self')</script>";
-   
-  //  header('localhost:/m-dev-store/customer/orders_delete.php?m=1');
+    ?>
+    <script>window.open('view-order?o_id=<?php echo base64_encode($o_id);?>&m=1','_self')</script>
+
+  <?php 
 }
 ?>

@@ -16,14 +16,14 @@ if(isset($_SESSION['ORDER_IDS']))
     $order_ids=$_SESSION['ORDER_IDS'];
 }
 else{
-    echo "<script>window.open('myaccount.php','_self')</script>";   
+    echo "<script>window.open('my-account','_self')</script>";   
 }
 if(isset($_SESSION['CUST_IDS']))
 {
     $cust_ids=$_SESSION['CUST_IDS'];
 }
 else{
-    echo "<script>window.open('myaccount.php','_self')</script>";   
+    echo "<script>window.open('my-account','_self')</script>";   
 }
 if(isset($_SESSION['INDUSTRY_TYPE_IDS']))
 {
@@ -31,21 +31,21 @@ if(isset($_SESSION['INDUSTRY_TYPE_IDS']))
 }
 else
 {
-	echo "<script>window.open('myaccount.php','_self')</script>"; 
+	echo "<script>window.open('my-account','_self')</script>"; 
 }
 if(isset($_SESSION['CHANNEL_IDS']))
 {
 	$channel_ids=$_SESSION['CHANNEL_IDS'];
 }
 else{
-	echo "<script>window.open('myaccount.php','_self')</script>"; 
+	echo "<script>window.open('my-account','_self')</script>"; 
 }
 if(isset($_SESSION['TXN_AMOUNTS']))
 {
 	$txn_amounts=$_SESSION['TXN_AMOUNTS'];
 }
 else{
-	echo "<script>window.open('myaccount.php','_self')</script>"; 
+	echo "<script>window.open('my-account','_self')</script>"; 
 }
 $ORDER_ID = $order_ids;
 $CUST_ID = $cust_ids;

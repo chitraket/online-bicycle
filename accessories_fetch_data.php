@@ -66,7 +66,18 @@ $outputs='';
                                         <figure class="product-thumb">
                                             <a href="accessories-details?accessories_id=<?php echo base64_encode($row['accessories_id']);?>">
                                                 <img class="pri-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_1'];?>" alt="product" style="height:180px;">
+                                                <?php
+                                                if($row['accessories_image_2']=="")
+                                                {
+                                                    ?>
+                                                    <img class="sec-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_1'];?>" alt="product" style="height:180px;">
+                                                    <?php 
+                                                } 
+                                                else{
+                                                ?>
                                                 <img class="sec-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_2'];?>" alt="product" style="height:180px;">
+                                                <?php 
+                                                }?>
                                             </a>
                                             <div class="product-badge">
                                             <?php
@@ -104,7 +115,7 @@ $outputs='';
                                             $run_carts=mysqli_query($con, $query3);
                                             while ($row_carts=mysqli_fetch_array($run_carts)) { 
                                             ?>
-                                                <a href="accessories-details?accessories_id=<?php echo base64_encode($row['accessories_id']);?>"><?php echo $row_carts['accessories_brand']; ?></a>
+                                                <a href="accessories?manufacturer_id=<?php echo base64_encode($accessories_brand_id);?>"><?php echo $row_carts['accessories_brand']; ?></a>
                                                 <?php 
                                             }
                                                 ?>

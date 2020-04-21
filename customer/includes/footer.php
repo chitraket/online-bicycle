@@ -6,8 +6,8 @@
                         <div class="widget-item">
                             <div class="widget-title">
                                 <div class="widget-logo">
-                                    <a href="index.html">
-                                        <img src="assets/img/logo/logo.png" alt="brand logo">
+                                    <a href="../home">
+                                        <img src="assets/img/logo/logo.png" alt="brand logo" style="height: 40px">
                                     </a>
                                 </div>
                             </div>
@@ -22,9 +22,9 @@
                             <div class="widget-body">
                                 <address class="contact-block">
                                     <ul>
-                                        <li><i class="pe-7s-home"></i> 4710-4890 Breckinridge USA</li>
-                                        <li><i class="pe-7s-mail"></i> <a href="mailto:demo@plazathemes.com">demo@yourdomain.com </a></li>
-                                        <li><i class="pe-7s-call"></i> <a href="tel:(012)800456789987">(012) 800 456 789-987</a></li>
+                                        <li><i class="pe-7s-home"></i> 34,vip,surat</li>
+                                        <li><i class="pe-7s-mail"></i> <a href="mailto:chitraketsavani@gmail.com">chitraketsavani@gmail.com </a></li>
+                                        <li><i class="pe-7s-call"></i> <a href="tel:+91 7984498992">+91 7984498992</a></li>
                                     </ul>
                                 </address>
                             </div>
@@ -36,11 +36,11 @@
                             <div class="widget-body">
                                 <ul class="info-list">
                                     <li><a href="#">about us</a></li>
-                                    <li><a href="#">Delivery Information</a></li>
-                                    <li><a href="#">privet policy</a></li>
+                                    <li><a href="../privet-policy">Privet Policy</a></li>
+                                    <li><a href="../order-policy">Order Policy</a></li>
                                     <li><a href="../terms-and-conditions">Terms & Conditions</a></li>
-                                    <li><a href="#">contact us</a></li>
-                                    <li><a href="#">site map</a></li>
+                                    <li><a href="../contact">Contact Us</a></li>
+                                    <li><a href="../sitemap">Site Map</a></li>
                                 </ul>
                             </div>
                         </div>

@@ -538,11 +538,11 @@ if(isset($_GET['product_id'])){
                                 ?>
                                                     <div class="custom-control custom-radio mt-2 ml-2">
                                                         <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" >
-                                                        <label class="custom-control-label" for="customRadio1">yes</label>
+                                                        <label class="custom-control-label" for="customRadio1">Yes</label>
                                                     </div>
                                                     <div class="custom-control custom-radio mt-2 ml-3">
                                                         <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" checked>
-                                                        <label class="custom-control-label" for="customRadio2">no</label>
+                                                        <label class="custom-control-label" for="customRadio2">No</label>
                                                     </div>
                             
                                 <?php 
@@ -552,11 +552,11 @@ if(isset($_GET['product_id'])){
                                         ?>
                                                 <div class="custom-control custom-radio mt-2 ml-2">
                                                         <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked>
-                                                        <label class="custom-control-label" for="customRadio1">yes</label>
+                                                        <label class="custom-control-label" for="customRadio1">Yes</label>
                                                     </div>
                                                     <div class="custom-control custom-radio mt-2 ml-3">
                                                         <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" >
-                                                        <label class="custom-control-label" for="customRadio2">no</label>
+                                                        <label class="custom-control-label" for="customRadio2">No</label>
                                                     </div>
                                                     
                                                     <?php

@@ -107,7 +107,7 @@ $outputs='';
                                             $run_carts=mysqli_query($con, $query3);
                                             while ($row_carts=mysqli_fetch_array($run_carts)) { 
                                             ?>
-                                                <a href="bikes-details?pro_id=<?php echo base64_encode($row['product_id']);?>"><?php echo $row_carts['manufacturer_title']; ?></a>
+                                                <a href="bikes?manufacturer_id=<?php echo base64_encode($manufacturer_id);?>"><?php echo $row_carts['manufacturer_title']; ?></a>
                                                 <?php 
                                             }
                                                 ?>

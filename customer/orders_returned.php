@@ -2,7 +2,7 @@
  include("includes/db.php");
 if(isset($_GET['o_id']))
 {
-    $o_id=$_GET['o_id'];
+    $o_id=base64_decode($_GET['o_id']);
     $customer_email='';
     $customer_address='';
     $select_delete="select * from customer_orders where order_id='$o_id'";
@@ -359,6 +359,8 @@ if(isset($_GET['o_id']))
                         catch (Exception $e) {
                             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                         }
-    echo "<script>window.open('full_orders.php?o_id=$o_id&n=1','_self')</script>";
-}
+                        ?>
+                    <script>window.open('view-order?o_id=<?php echo base64_encode($o_id);?>&n=1','_self')</script>";
+<?php 
+                }
 ?>

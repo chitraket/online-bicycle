@@ -12,13 +12,11 @@ if(isset($_SESSION['customer_email']))
         }
         if($_SESSION['papage']==0)
         {
-            echo "<script>window.open('myaccount.php','_self');</script>";
+            echo "<script>window.open('my-account','_self');</script>";
         }
     }
 }
 ?>
-
-
     <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
@@ -28,7 +26,7 @@ if(isset($_SESSION['customer_email']))
                         <div class="breadcrumb-wrap">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="../index.php"><i class="fa fa-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="../home"><i class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item active" aria-current="page">login</li>
                                 </ul>
                             </nav>
@@ -70,9 +68,6 @@ if (isset($_POST['login'])) {
     $select_customer = "select * from customers where customer_email='$customer_email' AND customer_pass='$customer_pass' AND customer_status='yes'";
     
     $run_customer = mysqli_query($con, $select_customer);
-    
-   // $get_ip = getRealIpUser();
-    
     $check_customer = mysqli_num_rows($run_customer);
     
   
@@ -89,7 +84,7 @@ if (isset($_POST['login'])) {
            })
            .then((willDelete) => {
                    if (willDelete) {
-                       window.open('customer_login.php','_self');
+                       window.open('../customer/login','_self');
                    }   
            });
            </script>
@@ -104,14 +99,13 @@ if (isset($_POST['login'])) {
             if (!(is_array($product))) {
                 ?>
                     <script type="text/javascript">
-                    
-                                window.open('myaccount.php','_self');
+                                window.open('my-account','_self');
                     </script>
                  <?php
             } else{
                 ?>
                 <script type="text/javascript">
-                    window.open('../checkout.php','_self');
+                    window.open('../checkout','_self');
         </script> 
         <?php
             }
@@ -126,7 +120,7 @@ if (isset($_POST['login'])) {
         ?>
         <script type="text/javascript">
        
-             window.open('../checkout.php','_self');
+             window.open('../checkout','_self');
                
         </script>
         <?php

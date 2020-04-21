@@ -87,7 +87,7 @@ include("includes/validation.php");
                         <!-- start logo area -->
                         <div class="col-lg-2">
                             <div class="logo">
-                                <a href="index.php">
+                                <a href="../home">
                                     <img src="assets/img/logo/logo.png" alt="Brand Logo">
                                 </a>
                             </div>
@@ -101,13 +101,78 @@ include("includes/validation.php");
                                     <!-- main menu navbar start -->
                                      <nav class="desktop-menu">
                                         <ul>
-                                            <li class="<?php if($active=='Home') echo"active"?>"><a href="../index.php">Home <i class="fa fa-angle"></i></a>   
+                                            <li class="<?php if($active=='Home') echo"active"?>"><a href="../home">Home <i class="fa fa-angle"></i></a>   
                                             </li>
-                                            <li class="<?php if($active=='Shop') echo"active"?>"><a href="../shop.php">Bikes<i class="fa fa-angle"></i></a>
+                                            <li class="position-static <?php if($active=='Shop') echo"active"?>"><a href="bike">Bikes<i class="fa fa-angle-down"></i></a>
+                                                <ul class="megamenu dropdown">
+                                                    <li class="mega-title"><span>Bikes Category</span>
+                                                        <ul>
+                                                            <?php
+                                                            $select_category="select * from product_categories where p_cat_status='yes'";
+                                                            $run_category=mysqli_query($con,$select_category);
+                                                            while($row_category=mysqli_fetch_array($run_category))
+                                                            {
+                                                             ?>
+                                                            <li><a href="../bike?category_id=<?php echo base64_encode($row_category['p_cat_id']); ?>"><?php echo $row_category['p_cat_title']; ?></a></li>
+                                                            <?php }?>
+                                                            
+                                                        </ul>
+                                                    </li>
+                                                    <li class="mega-title"><span>Manufacturers</span>
+                                                        <ul>
+                                                        <?php
+                                                            $select_manufacturer="select * from manufacturers where manufacturer_status='yes'";
+                                                            $run_manufacturer=mysqli_query($con,$select_manufacturer);
+                                                            while($row_manufacturer=mysqli_fetch_array($run_manufacturer))
+                                                            {
+                                                             ?>
+                                                            <li><a href="../bike?manufacturer_id=<?php echo base64_encode($row_manufacturer['manufacturer_id']); ?>"><?php echo $row_manufacturer['manufacturer_title']; ?></a></li>
+                                                            <?php }?>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="megamenu-banners d-none d-lg-block">
+                                                        <a href="../bikes">
+                                                            <img src="assets/img/banner/img1-static-menu.jpg" alt="">
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </li>
-                                            <li class="<?php if($active=='Accessories') echo"active"?>"><a href="../accessories.php">Accessories<i class="fa fa-angle"></i></a>
+                                            <li class="position-static <?php if($active=='Accessories') echo"active"?>"><a href="accessories">Accessories<i class="fa fa-angle-down"></i></a>
+                                                <ul class="megamenu dropdown">
+                                                    <li class="mega-title"><span>Accessories Category</span>
+                                                        <ul>
+                                                            <?php
+                                                            $select_accessories="select * from accessories_category where accessories_category_status='yes'";
+                                                            $run_accessories=mysqli_query($con,$select_accessories);
+                                                            while($row_accessories=mysqli_fetch_array($run_accessories))
+                                                            {
+                                                             ?>
+                                                            <li><a href="../accessories?category_id=<?php echo base64_encode($row_accessories['accessories_category_id']); ?>"><?php echo $row_accessories['accessories_category']; ?></a></li>
+                                                            <?php }?>
+                                                            
+                                                        </ul>
+                                                    </li>
+                                                    <li class="mega-title"><span>Manufacturers</span>
+                                                        <ul>
+                                                        <?php
+                                                            $select_manufacturers="select * from accessories_brand where accessories_brand_status='yes'";
+                                                            $run_manufacturers=mysqli_query($con,$select_manufacturers);
+                                                            while($row_manufacturers=mysqli_fetch_array($run_manufacturers))
+                                                            {
+                                                             ?>
+                                                            <li><a href="../accessories?manufacturer_id=<?php echo base64_encode($row_manufacturers['accessories_brand_id']); ?>"><?php echo $row_manufacturers['accessories_brand']; ?></a></li>
+                                                            <?php }?>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="megamenu-banners d-none d-lg-block">
+                                                        <a href="../accessories">
+                                                            <img src="assets/img/banner/img1-static-menu.jpg" alt="">
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </li>
-                                            <li class="<?php if($active=='contact') echo"active"?>"><a href="../contact.php">Contact us</a></li>
+                                            <li class="<?php if($active=='contact') echo"active"?>"><a href="../contact">contact us<i class="fa fa-angle"></i></a>   
+                                            </li>
                                         </ul>
                                     </nav>
                                     <!-- main menu navbar end -->
@@ -135,7 +200,7 @@ include("includes/validation.php");
                                                 {
                                                     echo"
                                                 <li><a href='../customer/customer_login.php'>Login</a></li>
-                                                <li><a href='../register.php'>Register</a></li>
+                                                <li><a href='../register'>Register</a></li>
                                                 ";
                                                 }
                                                 else{
@@ -158,7 +223,7 @@ include("includes/validation.php");
                                             $num_wishlist=mysqli_num_rows($run_wishlist);
                                         ?>
                                         <li>
-                                            <a href="../wishlist.php">
+                                            <a href="../wishlist">
                                                 <i class="pe-7s-like"></i>
                                                 
                                                 <div class="notification"><?php echo $num_wishlist; ?></div>
@@ -221,7 +286,7 @@ include("includes/validation.php");
                     <div class="col-12">
                         <div class="mobile-main-header">
                             <div class="mobile-logo">
-                                <a href="index.php">
+                                <a href="../home">
                                     <img src="assets/img/logo/logo.png" alt="Brand Logo">
                                 </a>
                             </div>
@@ -237,7 +302,7 @@ include("includes/validation.php");
                                             $num_wishlists=mysqli_num_rows($run_wishlists);
                                         
                                         ?>
-                                <a href="../wishlist.php">
+                                <a href="../wishlist">
 
                                         <i class="pe-7s-like"></i>
                                         <div class="notification" ><?php echo $num_wishlists; ?></div>
@@ -250,7 +315,7 @@ include("includes/validation.php");
                                         } 
                                     ?>
                                     
-                                    <a href="../cart.php"  class="pl-2">
+                                    <a href="../cart"  class="pl-2">
                                         <i class="pe-7s-shopbag"></i>
                                         <?php 
 
@@ -312,16 +377,16 @@ include("includes/validation.php");
                         <!-- mobile menu navigation start -->
                         <nav>
                             <ul class="mobile-menu">
-                                <li class="menu-item-has-children"><a href="../index.php">Home</a>
+                                <li class="menu-item-has-children"><a href="../home">Home</a>
                                 </li>
                                
-                                <li class="menu-item-has-children "><a href="../shop.php">Bikes</a>
+                                <li class="menu-item-has-children "><a href="../bikes">Bikes</a>
                                 </li>
 
-                                <li class="menu-item-has-children "><a href="../accessories.php">Accessories</a>
+                                <li class="menu-item-has-children "><a href="../accessories">Accessories</a>
                                 </li>
-                                
-                                <li><a href="../contact.php">Contact us</a></li>
+                                <li class="menu-item-has-children "><a href="../contact">Contact Us</a>
+                                </li>
                             </ul>
                         </nav>
                         <!-- mobile menu navigation end -->
@@ -342,7 +407,7 @@ include("includes/validation.php");
                                                 {
                                                     echo"
                                                 <a class='dropdown-item' href='../customer/customer_login.php'>Login</a>
-                                                <a class='dropdown-item' href='../register.php'>Register</a>
+                                                <a class='dropdown-item' href='../register'>Register</a>
                                                 ";
                                                 }
                                                 else{

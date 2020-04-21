@@ -1051,6 +1051,7 @@ else{
                                     $pro_img2=$row_products['product_img2'];
                                     $pro_label=$row_products['product_label'];
                                     $pro_discount=$row_products['product_discount'];
+                                    $manufacturer_id=$row_products['manufacturer_id'];
                                     $pro_discount_price=$row_products['product_discount_price'];
                                     ?>
                                     
@@ -1058,7 +1059,19 @@ else{
                                     <figure class="product-thumb">
                                         <a href="bikes-details?pro_id=<?php echo base64_encode($pro_id);?>">
                                             <img class="pri-img" src="admin_area/product_images/<?php echo $pro_img1;?>" alt="product" style="height:180px;">
+                                            <?php
+                                            if($pro_img2=="")
+                                            {
+                                                ?>
+                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img1;?>" alt="product" style="height:180px;">
+                                                <?php
+                                            }
+                                            else{ 
+                                            ?>
                                             <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
+                                            <?php
+                                            } 
+                                            ?>
                                         </a>
                                        
                                         <div class="product-badge">
@@ -1084,19 +1097,19 @@ else{
                                         } 
                                         ?>
                                         </div>
-                                        <!--<div class="button-group">
-                                            <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                            <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            
-                                        </div>-->
-                                        <!--<div class='cart-hover'>
-                                            <button class='btn btn-cart'>add to cart</button>
-                                        </div>-->
                                   </figure>
                                         <div class="product-caption text-center">
-                                        <!--<div class="product-identity">
-                                                <p class="manufacturer-name"><a href="product-details.html">Gold</a></p>
-                                            </div>-->
+                                            <div class="manufacturer-name">
+                                            <?php
+                                                    $query3="select * from manufacturers where manufacturer_id='$manufacturer_id'";
+                                                    $run_carts=mysqli_query($db, $query3);
+                                                    while ($row_carts=mysqli_fetch_array($run_carts)) { 
+                                            ?>
+                                                    <a href="bikes?manufacturer_id=<?php echo base64_encode($manufacturer_id);?>"><?php echo $row_carts['manufacturer_title']; ?></a>
+                                            <?php 
+                                                }
+                                                ?>
+                                            </div>
                                             <h6 class="product-name">
                                                 <a href="bikes-details?pro_id=<?php echo base64_encode($pro_id);?>"><?php echo $pro_title;?></a>
                                             </h6>

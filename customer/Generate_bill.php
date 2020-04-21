@@ -27,7 +27,7 @@
     
     if(isset($_GET['or_id']))
     {
-        $o_id=$_GET['or_id'];
+        $o_id=base64_decode($_GET['or_id']);
     }
     $total=0;
     $get_c_orders = "select * from customer_orders where order_id='$o_id'";

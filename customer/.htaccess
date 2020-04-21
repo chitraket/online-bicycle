@@ -1,0 +1,5 @@
+RewriteEngine On
+
+RewriteRule ^login?$ customer_login.php
+RewriteRule ^my-account?$ myaccount.php
+RewriteRule ^view-order?$ full_orders.php

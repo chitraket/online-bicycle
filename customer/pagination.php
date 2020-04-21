@@ -100,7 +100,7 @@ while($row = mysqli_fetch_array($result))
 
                                             }
                                                 ?>
-            <td><a href="full_orders.php?o_id=<?php echo $row['id']; ?>" class="btn btn-sqr">View</a>
+            <td><a href="view-order?o_id=<?php echo base64_encode($row['id']); ?>" class="btn btn-sqr">View</a>
             </td>  
         </tr>
     </tbody>  

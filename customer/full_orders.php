@@ -4,14 +4,17 @@ include("includes/db.php");
 include("includes/header.php");
 if(!isset($_SESSION['customer_email']))
 {
-    echo "<script>window.open('customer_login.php','_self')</script>";
+    echo "<script>window.open('login','_self')</script>";
 }
 ?>
     <!-- end Header Area -->
 <?php 
  if(isset($_GET['o_id']))
  {
-     $o_id=$_GET['o_id'];
+     $o_id= base64_decode($_GET['o_id']);
+ }
+ else{
+    echo "<script>window.open('my-account','_self')</script>";
  }
 ?>
 
@@ -25,7 +28,7 @@ if(!isset($_SESSION['customer_email']))
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="../home"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="myaccount.php">my-account</a></li>
+                                    <li class="breadcrumb-item"><a href="my-account">my-account</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">view order</li>
                                 </ul>
                             </nav>
@@ -169,7 +172,7 @@ if(!isset($_SESSION['customer_email']))
                                         $customer_address='';
                                         $customer_email='';
                                         $customer_phone='';
-                                        $productinfo=$_GET['o_id'];
+                                        $productinfo=base64_decode($_GET['o_id']);
                                         $select_cart = "select * from orders where id='$productinfo'";
                                                     $run_cart = mysqli_query($con,$select_cart);
                                                     while($row_cart = mysqli_fetch_array($run_cart))
@@ -296,13 +299,13 @@ if(!isset($_SESSION['customer_email']))
                                         if($order_status=="o")
                                         {
                                             ?>
-                                                <td class="pro-subtotal"><a href="orders_delete.php?o_id=<?php echo $o_id; ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
+                                                <td class="pro-subtotal"><a href="orders_delete.php?o_id=<?php echo base64_encode($o_id); ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
                                             <?php 
                                         }
                                         if($order_status=="p")
                                         {
                                             ?>
-                                                <td class="pro-subtotal"><a href="orders_delete.php?o_id=<?php echo $o_id; ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
+                                                <td class="pro-subtotal"><a href="orders_delete.php?o_id=<?php echo base64_encode($o_id); ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
                                            
                                             <?php 
                                         }
@@ -310,14 +313,14 @@ if(!isset($_SESSION['customer_email']))
                                         {
                                             ?>
                                              
-                                                <td class="pro-subtotal"><a href="orders_delete.php?o_id=<?php echo $o_id; ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
+                                                <td class="pro-subtotal"><a href="orders_delete.php?o_id=<?php echo base64_encode($o_id); ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
                                            
                                             <?php 
                                         }
                                         if($order_status=="d")
                                         {
                                                ?>
-                                               <td class="pro-subtotal"><a href="orders_returned.php?o_id=<?php echo $o_id; ?>" class="btn btn-sqr" id="btn-returned">Returned Order</a></td>
+                                               <td class="pro-subtotal"><a href="orders_returned.php?o_id=<?php echo base64_encode($o_id); ?>" class="btn btn-sqr" id="btn-returned">Returned Order</a></td>
                                                <?php     
                                         }
                                         
@@ -341,7 +344,7 @@ if(!isset($_SESSION['customer_email']))
                                         }
                                         ?>
                                         
-                                                <td class="pro-subtotal"><a href="Generate_bill.php?or_id=<?php echo $o_id; ?>" class="btn btn-sqr">Generate bill</a></td>
+                                                <td class="pro-subtotal"><a href="Generate_bill.php?or_id=<?php echo base64_encode($o_id); ?>" class="btn btn-sqr">Generate bill</a></td>
                                             </div>
                                  
                                 <?php 
@@ -491,7 +494,7 @@ if(isset($_GET['n']))
                 })
                 .then((willDelete) => {
                         if (willDelete) {
-                           window.open("full_orders.php?o_id=<?php echo $o_id; ?>","_self");
+                           window.open("view-order?o_id=<?php echo base64_encode($o_id); ?>","_self");
                         } else {
                         
                         }
@@ -508,7 +511,7 @@ if(isset($_GET['n']))
                 })
                 .then((willDelete) => {
                         if (willDelete) {
-                           window.open("full_orders.php?o_id=<?php echo $o_id; ?>","_self");
+                           window.open("view-order?o_id=<?php echo base64_encode($o_id); ?>","_self");
                         } else {
                         
                         }

@@ -15,7 +15,7 @@
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="home"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Terms & Conditions</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Order Policy</li>
                                 </ul>
                             </nav>
                         </div>
@@ -39,14 +39,14 @@
                                         <div class="myaccount-tab-menu nav" role="tablist">
                                         <?php 
                     
-                                            $get_terms = "select * from terms where term_status='yes' LIMIT 0,1";
+                                            $get_terms = "select * from order_policy where o_policy_status='yes' LIMIT 0,1";
                                             $run_terms = mysqli_query($con,$get_terms);
 
                                             while($row_terms=mysqli_fetch_array($run_terms)){
 
-                                                $term_title = $row_terms['term_title'];
-                                                $term_desc = $row_terms['term_desc'];
-                                                $term_link = $row_terms['term_link'];
+                                                $term_title = $row_terms['o_policy_title'];
+                                                $term_desc = $row_terms['o_policy_desc'];
+                                                $term_link = $row_terms['o_policy_link'];
                                         
                                         ?> 
                                             <a href="#<?php echo $term_link; ?>" class="active" data-toggle="tab">
@@ -56,16 +56,16 @@
                                             ?>
                                         <?php 
 
-                                            $count_terms = "select * from terms  where term_status='yes'";
+                                            $count_terms = "select * from order_policy  where o_policy_status='yes'";
                                             $run_count_terms = mysqli_query($con,$count_terms);
                                             $count = mysqli_num_rows($run_count_terms);
-                                            $get_terms = "select * from terms where term_status='yes' LIMIT 1,$count";
+                                            $get_terms = "select * from order_policy where o_policy_status='yes' LIMIT 1,$count";
                                             $run_terms = mysqli_query($con,$get_terms);
 
                                             while ($row_terms=mysqli_fetch_array($run_terms)) {
-                                                $term_title = $row_terms['term_title'];
-                                                $term_desc = $row_terms['term_desc'];
-                                                $term_link = $row_terms['term_link']; ?>
+                                                $term_title = $row_terms['o_policy_title'];
+                                                $term_desc = $row_terms['o_policy_desc'];
+                                                $term_link = $row_terms['o_policy_link']; ?>
                                             <a href="#<?php echo $term_link; ?>" data-toggle="tab">
                                                 <?php echo $term_title;?></a>
                                            <?php
@@ -81,13 +81,13 @@
                                             <!-- Single Tab Content Start -->
                                             <?php 
                     
-                                                $get_terms = "select * from terms where term_status='yes' LIMIT 0,1";
+                                                $get_terms = "select * from order_policy where o_policy_status='yes' LIMIT 0,1";
                                                 $run_terms = mysqli_query($con,$get_terms);
 
                                                 while ($row_terms=mysqli_fetch_array($run_terms)) {
-                                                    $term_title = $row_terms['term_title'];
-                                                    $term_desc = $row_terms['term_desc'];
-                                                    $term_link = $row_terms['term_link']; 
+                                                    $term_title = $row_terms['o_policy_title'];
+                                                    $term_desc = $row_terms['o_policy_desc'];
+                                                    $term_link = $row_terms['o_policy_link']; 
                                                     ?> 
                                             <div class="tab-pane fade show active" id="<?php echo $term_link; ?>" role="tabpanel">
                                                 <div class="myaccount-content">
@@ -100,15 +100,15 @@
                                         ?>
                                             <!-- Single Tab Content End -->
                                             <?php 
-                                                            $count_terms = "select * from terms where term_status='yes'";
+                                                            $count_terms = "select * from order_policy where o_policy_status='yes'";
                                                             $run_count_terms = mysqli_query($con,$count_terms);
                                                             $count = mysqli_num_rows($run_count_terms);
-                                                            $get_terms = "select * from terms where term_status='yes'  LIMIT 1,$count";
+                                                            $get_terms = "select * from order_policy where o_policy_status='yes'  LIMIT 1,$count";
                                                             $run_terms = mysqli_query($con,$get_terms);
                                                             while ($row_terms=mysqli_fetch_array($run_terms)) {
-                                                                $term_title = $row_terms['term_title'];
-                                                                $term_desc = $row_terms['term_desc'];
-                                                                $term_link = $row_terms['term_link']; ?> 
+                                                                $term_title = $row_terms['o_policy_title'];
+                                                                $term_desc = $row_terms['o_policy_desc'];
+                                                                $term_link = $row_terms['o_policy_link']; ?> 
                                                 <div class="tab-pane fade " id="<?php echo $term_link; ?>" role="tabpanel">
                                                 <div class="myaccount-content">
                                                     <h5><?php echo $term_title;?></h5>

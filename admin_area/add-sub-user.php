@@ -196,6 +196,22 @@
                                             <input type="checkbox" class="custom-control-input" id="customCheck26" name="subject[]" value="26" >
                                             <label class="custom-control-label" for="customCheck26">Payment</label>
                                         </div>
+                                        <div class="custom-control custom-checkbox mb-2">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck27" name="subject[]" value="27" >
+                                            <label class="custom-control-label" for="customCheck27">Add Privet Policy</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox mb-2">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck28" name="subject[]" value="28" >
+                                            <label class="custom-control-label" for="customCheck28">View Privet Policy</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox mb-2">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck29" name="subject[]" value="29" >
+                                            <label class="custom-control-label" for="customCheck29">Add Order Policy</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox mb-2">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck30" name="subject[]" value="30" >
+                                            <label class="custom-control-label" for="customCheck30">View Order Policy</label>
+                                        </div>
                                 </div>
                             </div>
                             

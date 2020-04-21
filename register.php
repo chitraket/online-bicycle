@@ -270,7 +270,7 @@ if(isset($_POST['register'])){
                                     </tr>
                                     <tr>
                                         <td>
-                                       <p>Click<a href="http://localhost/m-dev-store/registress.php?email='.$c_email.'" class="btn btn-sqr">here</a> to activate your account.</p>
+                                       <p>Click<a href="http://localhost/m-dev-store/register-verification?email='.base64_encode($c_email).'" class="btn btn-sqr">here</a> to activate your account.</p>
                                         </td>
                                     </tr>
                                     <tr>
