@@ -8,7 +8,7 @@
 <?php 
            
            if(!isset($_SESSION['customer_email'])){
-            echo "<script>window.open('customer/customer_login.php','_self')</script>";
+            echo "<script>window.open('customer/login','_self')</script>";
            }     
 ?>
     <main>

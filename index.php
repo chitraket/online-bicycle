@@ -92,16 +92,6 @@ $active='Home';
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <!-- section title start -->
-                        <div class="section-title text-center">
-                           <!-- <h2 class="title">Bicycles</h2>-->
-                          <!--  <p class="sub-title">Add our products to weekly lineup</p>-->
-                        </div>
-                        <!-- section title start -->
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
                         <div class="product-container">
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" >
@@ -307,16 +297,6 @@ $active='Home';
         <!-- product area end -->
         <section class="product-area section-padding">
             <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <!-- section title start -->
-                        <div class="section-title text-center">
-                            <!--<h2 class="title">Accessories</h2>-->
-                          <!--  <p class="sub-title">Add our products to weekly lineup</p>-->
-                        </div>
-                        <!-- section title start -->
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="product-container">

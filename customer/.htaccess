@@ -3,3 +3,6 @@ RewriteEngine On
 RewriteRule ^login?$ customer_login.php
 RewriteRule ^my-account?$ myaccount.php
 RewriteRule ^view-order?$ full_orders.php
+RewriteRule ^forget-password?$ forget_password.php
+RewriteRule ^forget-password-otp?$ forget_password_1.php
+RewriteRule ^forget-password-change?$ forget_password_2.php

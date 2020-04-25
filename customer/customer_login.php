@@ -158,7 +158,7 @@ end:
                                                     <label class="custom-control-label" for="rememberMe">Remember Me</label>
                                                 </div>
                                             </div>-->
-                                            <a href="forget_password.php" class="forget-pwd">Forget Password?</a>
+                                            <a href="forget_password" class="forget-pwd">Forget Password?</a>
                                         </div>
                                     </div>
                                     <div class="single-input-item">

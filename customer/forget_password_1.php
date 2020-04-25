@@ -85,11 +85,11 @@
 
 if(!isset($_SESSION['email']))
 {
-    echo "<script>window.open('forget_password.php','_self')</script>";
+    echo "<script>window.open('forget-password','_self')</script>";
 }
 if(!isset($_SESSION['otp']))
 {
-    echo "<script>window.open('forget_password.php','_self')</script>";
+    echo "<script>window.open('forget-password','_self')</script>";
 }
 else{
     if (isset($_POST['login'])) {
@@ -107,7 +107,7 @@ else{
           })
           .then((willDelete) => {
                   if (willDelete) {
-                      window.open('forget_password_2.php','_self');
+                      window.open('forget-password-change.php','_self');
                   } else {
                   
                   }
@@ -129,7 +129,7 @@ else{
           })
           .then((willDelete) => {
                   if (willDelete) {
-                      window.open('forget_password_1.php','_self');
+                      window.open('forget-password-otp.php','_self');
                   } else {
                   
                   }

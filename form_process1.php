@@ -49,12 +49,14 @@ include("functions/functions.php");
                 {
 
                     $customer_name=$row_customer['customer_name'];
+                    $customer_lname=$row_customer['customer_lname'];
                     $customer_email=$row_customer['customer_email'];
                     $customer_country=$row_customer['customer_state'];
                     $customer_city=$row_customer['customer_city'];
                     $customer_contact=$row_customer['customer_contact'];
                     $customer_address=$row_customer['customer_address'];
-                    $insert_customer="insert into orders(customer_name,customer_email,customer_country,customer_city,customer_contact,customer_address) values('$customer_name','$customer_email','$customer_country','$customer_city','$customer_contact','$customer_address')";
+                    $customer_pincode=$row_customer['customer_pincode'];
+                    $insert_customer="insert into orders(customer_name,customer_email,customer_country,customer_city,customer_pincode,customer_contact,customer_address) values('$customer_name $customer_lname','$customer_email','$customer_country','$customer_city','$customer_pincode','$customer_contact','$customer_address')";
                     $run_insert_customer=mysqli_query($con,$insert_customer);
                     $get_orders="select * from orders where customer_email='$customer_email'";
                     $run_orders=mysqli_query($con,$get_orders);

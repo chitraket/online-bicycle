@@ -1,7 +1,7 @@
 <?php
 session_start();          
 if(!isset($_SESSION['customer_email'])){
-            echo "<script>window.open('customer_login.php','_self')</script>";
+            echo "<script>window.open('login','_self')</script>";
 }
 else{
            

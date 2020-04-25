@@ -2,8 +2,6 @@
     $active='';
     include("includes/header.php");
 ?>
-    <!-- Start Header Area -->
-    <!-- end Header Area -->
     <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
@@ -239,8 +237,7 @@ if(isset($_POST['otp']))
 
         if($mail->send())
         {
-        
-        ?>
+            ?>
         <script type="text/javascript">
         swal({
                   title: "OTP send successful",
@@ -251,13 +248,14 @@ if(isset($_POST['otp']))
           })
           .then((willDelete) => {
                   if (willDelete) {
-                      window.open('forget_password_1.php','_self');
+                      window.open('forget-password-otp','_self');
                   } else {
                   
                   }
           });
           </script>
           <?php 
+        
         }
     } 
     catch (Exception $e) {

@@ -2,7 +2,7 @@
 session_start();
 include("includes/db.php");
 if(!isset($_SESSION['customer_email'])){
-            echo "<script>window.open('customer_login.php','_self')</script>";
+            echo "<script>window.open('login','_self')</script>";
         }    
 else
 {       
