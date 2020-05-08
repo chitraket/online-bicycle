@@ -6,7 +6,6 @@ include("includes/validation.php");
  ?>
 <!doctype html>
 <html class="no-js" lang="en">
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:19:45 GMT -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -45,8 +44,36 @@ include("includes/validation.php");
     <link rel="stylesheet" href="assets/css/style.css">
     <!--sweet alert-->
     <script src="assets/js/sweetalert.min.js"></script>
+    <style>
+div#load_screen{
+	background: #00bbfe;
+	opacity: 1;
+	position: fixed;
+    z-index:10;
+	top: 0px;
+	width: 100%;
+	height: 1600px;
+}
+div#load_screen > div#loading{
+	color:#00bbfe;
+	width:400px;
+	height:400px;
+	margin: 200px auto;
+}
+</style>
+<script>
+window.addEventListener("load", 
+setTimeout(function(){
+	var load_screen = document.getElementById("load_screen");
+
+	document.body.removeChild(load_screen);
+},1000)
+)
+;
+</script>
 </head>
 <body>
+
 <header class="header-area header-wide">
         <!-- main header start -->
         <div class="main-header d-none d-lg-block">
@@ -98,7 +125,7 @@ include("includes/validation.php");
                                         <ul>
                                             <li class="<?php if($active=='Home') echo"active"?>"><a href="home">Home <i class="fa fa-angle"></i></a>   
                                             </li>
-                                            <li class="position-static <?php if($active=='Shop') echo"active"?>"><a href="bike">Bikes<i class="fa fa-angle-down"></i></a>
+                                            <li class="position-static <?php if($active=='Shop') echo"active"?>"><a href="bikes">Bikes<i class="fa fa-angle-down"></i></a>
                                                 <ul class="megamenu dropdown">
                                                     <li class="mega-title"><span>Bikes Category</span>
                                                         <ul>
@@ -108,7 +135,7 @@ include("includes/validation.php");
                                                             while($row_category=mysqli_fetch_array($run_category))
                                                             {
                                                              ?>
-                                                            <li><a href="bike?category_id=<?php echo base64_encode($row_category['p_cat_id']); ?>"><?php echo $row_category['p_cat_title']; ?></a></li>
+                                                            <li><a href="bikes_category-<?php echo base64_encode($row_category['p_cat_id']); ?>"><?php echo $row_category['p_cat_title']; ?></a></li>
                                                             <?php }?>
                                                             
                                                         </ul>
@@ -121,13 +148,13 @@ include("includes/validation.php");
                                                             while($row_manufacturer=mysqli_fetch_array($run_manufacturer))
                                                             {
                                                              ?>
-                                                            <li><a href="bike?manufacturer_id=<?php echo base64_encode($row_manufacturer['manufacturer_id']); ?>"><?php echo $row_manufacturer['manufacturer_title']; ?></a></li>
+                                                            <li><a href="bikes_manufacturer-<?php echo base64_encode($row_manufacturer['manufacturer_id']); ?>"><?php echo $row_manufacturer['manufacturer_title']; ?></a></li>
                                                             <?php }?>
                                                         </ul>
                                                     </li>
                                                     <li class="megamenu-banners d-none d-lg-block">
                                                         <a href="bikes">
-                                                            <img src="assets/img/banner/img1-static-menu.jpg" alt="">
+                                                            <img src="assets/img/banner/img1.jpg" alt="">
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -142,7 +169,7 @@ include("includes/validation.php");
                                                             while($row_accessories=mysqli_fetch_array($run_accessories))
                                                             {
                                                              ?>
-                                                            <li><a href="accessories?category_id=<?php echo base64_encode($row_accessories['accessories_category_id']); ?>"><?php echo $row_accessories['accessories_category']; ?></a></li>
+                                                            <li><a href="accessories_category-<?php echo base64_encode($row_accessories['accessories_category_id']); ?>"><?php echo $row_accessories['accessories_category']; ?></a></li>
                                                             <?php }?>
                                                             
                                                         </ul>
@@ -155,13 +182,13 @@ include("includes/validation.php");
                                                             while($row_manufacturers=mysqli_fetch_array($run_manufacturers))
                                                             {
                                                              ?>
-                                                            <li><a href="accessories?manufacturer_id=<?php echo base64_encode($row_manufacturers['accessories_brand_id']); ?>"><?php echo $row_manufacturers['accessories_brand']; ?></a></li>
+                                                            <li><a href="accessories_manufacturer-<?php echo base64_encode($row_manufacturers['accessories_brand_id']); ?>"><?php echo $row_manufacturers['accessories_brand']; ?></a></li>
                                                             <?php }?>
                                                         </ul>
                                                     </li>
                                                     <li class="megamenu-banners d-none d-lg-block">
                                                         <a href="accessories">
-                                                            <img src="assets/img/banner/img1-static-menu.jpg" alt="">
+                                                            <img src="assets/img/banner/Accessories-Banner.jpg" alt="">
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -307,7 +334,7 @@ include("includes/validation.php");
 
                                         } 
                                     ?>
-                                    <a href="../cart" class="pl-2">
+                                    <a href="cart" class="pl-2">
                                         <i class="pe-7s-shopbag"></i>
                                         <?php 
 

@@ -4,7 +4,7 @@
    include("includes/header.php"); 
    ?>
 
-
+<!--<div id="load_screen"><div id="loading"><img src="loder.gif" ></div></div>-->
     <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
@@ -42,7 +42,7 @@
                                                             while($row_category=mysqli_fetch_array($run_category))
                                                             {
                                                              ?>
-                                                            <li><a href="bike?category_id=<?php echo base64_encode($row_category['p_cat_id']); ?>"><?php echo $row_category['p_cat_title']; ?></a></li>
+                                                            <li><a href="bikes_category-<?php echo base64_encode($row_category['p_cat_id']); ?>"><?php echo $row_category['p_cat_title']; ?></a></li>
                                                             <?php }?>
                                     </ul>
                                 </div>
@@ -62,7 +62,7 @@
                                                             while($row_manufacturer=mysqli_fetch_array($run_manufacturer))
                                                             {
                                                              ?>
-                                                            <li><a href="bike?manufacturer_id=<?php echo base64_encode($row_manufacturer['manufacturer_id']); ?>"><?php echo $row_manufacturer['manufacturer_title']; ?></a></li>
+                                                            <li><a href="bikes_manufacturer-<?php echo base64_encode($row_manufacturer['manufacturer_id']); ?>"><?php echo $row_manufacturer['manufacturer_title']; ?></a></li>
                                                             <?php }?>
                                     </ul>
                                 </div>
@@ -82,7 +82,7 @@
                                                             while($row_accessories=mysqli_fetch_array($run_accessories))
                                                             {
                                                              ?>
-                                                            <li><a href="accessories?category_id=<?php echo base64_encode($row_accessories['accessories_category_id']); ?>"><?php echo $row_accessories['accessories_category']; ?></a></li>
+                                                            <li><a href="accessories_category-<?php echo base64_encode($row_accessories['accessories_category_id']); ?>"><?php echo $row_accessories['accessories_category']; ?></a></li>
                                                             <?php }?>
                                                             
                                     </ul>
@@ -103,7 +103,7 @@
                                                             while($row_manufacturers=mysqli_fetch_array($run_manufacturers))
                                                             {
                                                              ?>
-                                                            <li><a href="accessories?manufacturer_id=<?php echo base64_encode($row_manufacturers['accessories_brand_id']); ?>"><?php echo $row_manufacturers['accessories_brand']; ?></a></li>
+                                                            <li><a href="accessories_manufacturer-<?php echo base64_encode($row_manufacturers['accessories_brand_id']); ?>"><?php echo $row_manufacturers['accessories_brand']; ?></a></li>
                                                             <?php }?>
                                     </ul>
                                 </div>

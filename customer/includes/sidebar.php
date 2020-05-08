@@ -13,12 +13,25 @@
                                                 
                                            }else{
                                               
-                                                    echo "
+                                                    ?>
                                                     <a href='#dashboad'  data-toggle='tab'>
-                                                    <center> <img src='customer_images/$customer_image' alt='Mdev Profile' class='rounded-circle mt-4' style='height:100px;width:100px;'></center>
-                                                    <center class='mt-2'>$customer_name  </center>    
+                                                    <?php
+                                                    if($customer_image=="")
+                                                    {
+                                                        ?>
+                                                        <center> <img src='customer_images/user.png' alt='Mdev Profile' class='rounded-circle mt-4' style='height:100px;width:100px;'></center>
+                                                        <?php 
+                                                    } 
+                                                    else
+                                                    {
+                                                    ?>
+                                                    <center> <img src='customer_images/<?php echo $customer_image; ?>' alt='Mdev Profile' class='rounded-circle mt-4' style='height:100px;width:100px;'></center>
+                                                    <?php 
+                                                    }
+                                                    ?>
+                                                    <center class='mt-2'><?php echo  $customer_name; ?> </center>    
                                                 </a>
-                                                    ";
+                                                    <?php 
                                            }
                                            ?>
 

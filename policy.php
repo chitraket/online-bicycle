@@ -4,7 +4,7 @@
    include("includes/header.php"); 
    ?>
 
-
+<!--<div id="load_screen"><div id="loading"><img src="loder.gif" ></div></div>-->
     <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">

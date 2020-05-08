@@ -1,0 +1,2 @@
+RewriteEngine On
+ErrorDocument 404 /SKOTE/admin_area/404.php

@@ -276,7 +276,7 @@ if(isset($_POST['otp']))
            })
            .then((willDelete) => {
                    if (willDelete) {
-                       window.open('forget_password.php','_self');
+                       window.open('forget-password','_self');
                    } 
            });
            </script>
@@ -296,7 +296,7 @@ end:
                         <div class="col-lg-6">
                             <div class="login-reg-form-wrap">
                                 <h5>Forget Password</h5>
-                                <form action="forget_password.php" method="post" >
+                                <form action="forget-password" method="post" >
                                     <div class="single-input-item">
                                         <input type="text" placeholder="Enter Email" name="email" id="email" />
                                         <span id="emailMsg"></span>

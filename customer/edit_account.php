@@ -25,6 +25,13 @@ $customer_contact = $row_customer['customer_contact'];
 $customer_address = $row_customer['customer_address'];
 
 $customer_image = $row_customer['customer_image'];
+if($customer_image=="")
+{
+    $customer_image="user.png";
+}
+else{
+    $customer_image = $row_customer['customer_image'];
+}
 
 ?>
 
@@ -36,6 +43,7 @@ $customer_image = $row_customer['customer_image'];
  $error_city="";
  $error_state="";
  $error_address="";
+ $error_image2="";
  $errorresult=true;
 if(isset($_POST['register'])){
     if(firstname($_POST['c_name']))
@@ -102,6 +110,16 @@ if(isset($_POST['register'])){
     {
         $error_address = "";
     }
+    $test_img2=$_FILES['c_image']['name'];
+                
+    if(images($test_img2))
+    {   
+        $error_image2="JPEG or PNG file.";
+        $errorresult=false;
+    }
+    else{
+        $error_image2="";
+    }
     if($errorresult==false)
     {
         goto end;
@@ -116,7 +134,7 @@ if(isset($_POST['register'])){
     $c_contact = $_POST['c_contact'];
     $c_image = $_FILES['c_image']['name'];
     
-    if(!($c_image==""))
+    if($c_image!="")
     {
     $c_image_tmp = $_FILES['c_image']['tmp_name'];
     
@@ -138,7 +156,7 @@ if(isset($_POST['register'])){
                 })
                 .then((willDelete) => {
                         if (willDelete) {
-                            window.open('myaccount.php','_self');
+                            window.open('myaccount','_self');
                         } 
                         else {
                         }
@@ -165,7 +183,7 @@ else
                 })
                 .then((willDelete) => {
                         if (willDelete) {
-                            window.open('myaccount.php','_self');
+                            window.open('myaccount','_self');
                         } 
                         else {
                         }
@@ -212,8 +230,8 @@ end:
                 
                                     <div class="single-input-item">
                                         <label for="email" >Email</label>
-                                        <input type="email" placeholder="Enter your Email"  value="<?php  echo $customer_email;?>" autocomplete="off" disabled/>
-                                        <input type="hidden" name="c_email" id="email" value="<?php echo  $customer_email; ?> ">
+                                        <input type="email" placeholder="Enter your Email" value="<?php  echo $customer_email;?>"  disabled/>
+                                        <input type="hidden" name="c_email" id="email"  value="<?php  echo $customer_email;?>"/>
                                         <span id="emailMsg"></span>
                                         <span style="color: red;"><?php echo $error_email; ?></span>
                                     </div>
@@ -234,7 +252,8 @@ end:
                                     </div>
                                     <div class="single-input-item">
                                     <label for="contact">Contact</label>
-                                        <input type="text" placeholder="Enter your contact " name="c_contact" id="contact" value="<?php echo $customer_contact; ?>" />
+                                        <input type="text" placeholder="Enter your contact "  value="<?php echo $customer_contact; ?>" disabled/>
+                                        <input type="hidden" name="c_contact" id="contact" value="<?php echo $customer_contact; ?>"  required/>
                                         <span id="contactMsg"></span>
                                         <span style="color: red;"><?php echo $error_c_contact; ?></span>
                                     </div>
@@ -249,6 +268,7 @@ end:
                                     <div class="single-input-item">
                                     <label for="image">Image</label>
                                     <input type="file" name="c_image" id="image" accept=".jpg,.jpeg,.png,.gif"/>
+                                    <span style="color: red;"><?php echo $error_image2; ?></span>
                                     <span id="imageMsg"></span>
                                     <img class="img-responsive my-4 " src="customer_images/<?php echo $customer_image; ?>" style="width:100px;height:100px;" alt="Customer Image">
                                     </div>

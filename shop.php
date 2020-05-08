@@ -2,6 +2,7 @@
 $active='Shop';
 include("includes/header.php");
 ?>
+<div id="load_screen"><div id="loading"><img src="loder.gif" ></div></div>
 <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
@@ -119,10 +120,12 @@ $(document).ready(function(){
         var brand = get_filter('manufacturer_id');
         var ram = get_filter('cat_id');
         var storage = get_filter('p_cat_id');
+        var colour=get_filter('colour');
+        var size=get_filter('size');
         $.ajax({
             url:"fetch_data.php",
             method:"POST",
-            data:{action:action, minimum_price:minimum_price, maximum_price:maximum_price, brand:brand, ram:ram, storage:storage,page:page,firsttime:firsttime},
+            data:{action:action,minimum_price:minimum_price, maximum_price:maximum_price, brand:brand, ram:ram, storage:storage,colour:colour,size:size, page:page,firsttime:firsttime},
             success:function(data){
                 $('.filter_data').html(data);
             }
@@ -133,7 +136,7 @@ $(document).ready(function(){
     $(document).on('click', '.pagination_link', function(){  
            var page = $(this).attr("id");  
            filter_data($('#firsttime'+page).val(),page);  
-      });  
+      });
 
     function get_filter(class_name)
     {
@@ -141,9 +144,10 @@ $(document).ready(function(){
         $('.'+class_name+':checked').each(function(){
             filter.push($(this).val());
         });
+        
         return filter;
     }
-
+    filter_data(0);
     $('.common_selector').click(function(){
         filter_data(0);
     });
@@ -151,8 +155,8 @@ $(document).ready(function(){
     $('#price_range').slider({
         range:true,
         min:1000,
-        max:65000,
-        values:[1000, 65000],
+        max:250000,
+        values:[1000, 250000],
         step:500,
         stop:function(event, ui)
         {
@@ -170,6 +174,4 @@ $(document).ready(function(){
 
 </body>
 
-
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/shop.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:04 GMT -->
 </html>

@@ -11,7 +11,7 @@
     include("includes/sidebar.php"); 
     $paga=3;
     $admin_email=$_SESSION['admin_email'];
-    $query_per="select * from admins where admin_email='$admin_email'";
+    $query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
     $run_query_per=mysqli_query($con,$query_per);
     while($row_query_per=mysqli_fetch_array($run_query_per))
     {
@@ -21,6 +21,64 @@
     $subject=explode(",",$admin_permission);
     if(in_array($paga,$subject))
     {
+        $error_product="";
+        $error_top="";
+        $errorresult=true;
+        if(isset($_POST['submit']))
+        {
+                if(empty($_POST['manufacturer_title']))
+                {
+                    $error_product="Required..";
+                    $errorresult=false;
+                }
+                else{
+                    $error_product="";
+                }
+                        if(empty($_POST['customRadio']))
+                        {
+                            $error_top="Required..";
+                            $errorresult=false;
+                        }
+                        else{
+                            $error_top="";   
+                        }
+                if($errorresult==false)
+                {
+                    goto end;
+                }
+            $manufacturer_top=$_POST['customRadio'];
+            
+            $manufacturer_title = $_POST['manufacturer_title'];
+          
+            $insert_cat = "insert into manufacturers (manufacturer_title,manufacturer_top,manufacturer_status) values ('$manufacturer_title','$manufacturer_top','yes')";
+            
+            $run_cat = mysqli_query($con,$insert_cat);
+            
+            if($run_cat){
+                
+                ?>
+                <script>
+                swal({
+                    title:"Your New Manufacturer Has Been Inserted.",
+                    text: "",
+                    icon: "success",
+                    buttons: [,"OK"],
+                    successMode: true,
+                   
+            })
+            .then((willDelete) => {
+                    if (willDelete) {
+                        window.open('view-manufacturer.php','_self');
+                    } 
+                    else {
+                    }
+            });
+        </script>
+                <?php 
+            }
+            
+        }
+        end :
      ?>
 
 <div class="main-content">
@@ -42,24 +100,26 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                       <form method="POST" enctype="multipart/form-data"> 
+                       <form class="custom-validation" method="POST" enctype="multipart/form-data"> 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Manufacturer Title</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder="Manufacturer Title" name="manufacturer_title"  id="example-text-input">
+                                    <input class="form-control" type="text" placeholder="Manufacturer Title" name="manufacturer_title"  id="example-text-input" required>
+                                    <span style="color: red;"><?php echo $error_product; ?></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                             <label for="example-text-input" class="col-md-3 col-form-label">Manufacturer Top</label>
                                                     
                                                     <div class="custom-control custom-radio mt-2 ml-2">
-                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked />
+                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input"  checked required/>
                                                         <label class="custom-control-label" for="customRadio1">Yes</label>
                                                     </div>
                                                     <div class="custom-control custom-radio mt-2 ml-3">
                                                         <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" />
                                                         <label class="custom-control-label" for="customRadio2">No</label>
                                                     </div>
+                                                    <span style="color: red;"><?php echo $error_top; ?></span>
                             </div>
                             <div class="form-group mt-4">
                                 <div class="text-right">
@@ -81,42 +141,6 @@
         <?php 
         include("includes/footer.php");
         ?>
-        <?php  
-
-            if(isset($_POST['submit'])){
-                $manufacturer_top=$_POST['customRadio'];
-                
-                $manufacturer_title = $_POST['manufacturer_title'];
-              
-                $insert_cat = "insert into manufacturers (manufacturer_title,manufacturer_top,manufacturer_status) values ('$manufacturer_title','$manufacturer_top','yes')";
-                
-                $run_cat = mysqli_query($con,$insert_cat);
-                
-                if($run_cat){
-                    
-                    ?>
-                    <script>
-                    swal({
-                        title:"Your New Manufacturer Has Been Inserted.",
-                        text: "",
-                        icon: "success",
-                        buttons: [,"OK"],
-                        successMode: true,
-                       
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('view-manufacturer.php','_self');
-                        } 
-                        else {
-                        }
-                });
-            </script>
-                    <?php 
-                }
-                
-            }
-    ?>
     </div>
 </div>
 </div>
@@ -127,6 +151,9 @@
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
 
+        <script src="assets/libs/parsleyjs/parsley.min.js"></script>
+
+        <script src="assets/js/pages/form-validation.init.js"></script>
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 

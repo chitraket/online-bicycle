@@ -10,7 +10,7 @@
      include("includes/sidebar.php"); 
         $paga=23;
         $admin_email=$_SESSION['admin_email'];
-        $query_per="select * from admins where admin_email='$admin_email'";
+        $query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
             $run_query_per=mysqli_query($con,$query_per);
             while($row_query_per=mysqli_fetch_array($run_query_per))
             {
@@ -71,7 +71,19 @@
                                                ?>
                                                 <tr>
                                                 <td><?php echo $row_cart["customer_name"];?> <?php echo $row_cart["customer_lname"];?></td>
+                                                <?php
+                                                if($row_cart["customer_image"]=="")
+                                                {
+                                                    ?>
+                                                    <td><img src="../customer/customer_images/user.png" width="60" height="60"></td>
+                                                    <?php 
+                                                } 
+                                                else{
+                                                ?>
                                                 <td><img src="../customer/customer_images/<?php echo $row_cart["customer_image"];?>" width="60" height="60"></td>
+                                                <?php 
+                                                }
+                                                ?>
                                                 <td><?php echo $row_cart["customer_email"];?></td>
                                                 <td><?php echo $row_cart["customer_city"];?></td>
                                                 <td><?php echo $row_cart["customer_address"];?></td>
@@ -235,7 +247,7 @@
                             data:{customer_ids:customer_ids,customer_idss:customer_idss},
                             success:function()
                             {
-
+                                window.open('view-customer.php','_self');
                             }
                         });
                     });

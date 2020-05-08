@@ -7,15 +7,35 @@
            
            if(!isset($_SESSION['customer_email'])){
                
-            echo "<script>window.open('customer/customer_login.php','_self')</script>";
-              // include("customer/customer_login.php");
+            echo "<script>window.open('login','_self')</script>";
            }
-           
+           if(isset($_GET['txnid']))
+           {
+               $txnid=base64_decode($_GET['txnid']);
+           }
+           else{
+                ?>
+                <script>window.open('my-account','_self')</script>
+                <?php
+           }
+           if(isset($_GET['c_id']))
+            {
+                                        
+                $productinfo=base64_decode($_GET['c_id']);
+            }
+            else{
+                ?>
+                <script>window.open('my-account','_self')</script>
+                <?php
+            }
+            $customer_address='';
+            $customer_email='';
+            $customer_phone='';
+          
 ?> 
     <!-- Start Header Area -->
 
     <!-- end Header Area -->
-
     <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
@@ -29,17 +49,7 @@
                     <h2 class="title" style="margin-top: 10px;">Payment Failed</h2>
 
                     <p style="margin-top: 10px;">Your Payment could not be Processed</p>
-                   <?php  
-                   if(isset($_GET['txnid']))
-                        {
-                            $txnid=base64_decode($_GET['txnid']);
-                            //$_SESSION['txn_id']=$txnid;
-                            echo "<p>Transaction ID:$txnid</p>";
-                        }
-                        
-                        ?>
-
-                    
+                            <p>Transaction ID:<?php echo $txnid; ?></p>                    
                     </div>
                 </div>
                         </div>
@@ -49,14 +59,6 @@
         </div>
         <div class="container">
                 <div class="section-bg-color">
-                <?php 
-                                    if(isset($_GET['c_id']))
-                                    {
-                                        $customer_address='';
-                                        $customer_email='';
-                                        $customer_phone='';
-                                        $productinfo=base64_decode($_GET['c_id']);
-                                    ?>
                     <div class="row" style="margin-top: 20px;">
                         <div class="col-lg-12">
                             <!-- Cart Table Area -->
@@ -79,6 +81,14 @@
                                     $total=0;
                                         $select_carts="select * from customer_orders where order_id='$productinfo'";
                                         $run_carts=mysqli_query($con,$select_carts);
+                                        $num_carts=mysqli_num_rows($run_carts);
+                                        if($num_carts==0)
+                                        {
+                                            ?>
+                                            <script>window.open('my-account','_self')</script>
+                                            <?php
+                                        }
+                                        else{
                                         while($row_carts=mysqli_fetch_array($run_carts))
                                         {
                                         $papage_number=$row_carts['papage_number'];
@@ -97,8 +107,8 @@
                            
                                     <tbody>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="../bikes-details?pro_id=<?php echo base64_encode($pro_id); ?>"><img class="img-fluid" src="../admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="../bikes-details?pro_id=<?php echo base64_encode($pro_id); ?>"><?php  echo $product_title ?></a></td>
+                                            <td class="pro-thumbnail"><a href="../bikes-<?php echo base64_encode($pro_id); ?>"><img class="img-fluid" src="../admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
+                                            <td class="pro-title"><a href="../bikes-<?php echo base64_encode($pro_id); ?>"><?php  echo $product_title ?></a></td>
                                             <td class="pro-price"><span><?php echo  $product_size ?></span></td>
                                             <td class="pro-price"><span>Rs.<?php echo $product_price ?></span></td>
                                             <td class="pro-quantity">
@@ -123,8 +133,8 @@
                                             $total+=$sub_total; ?>
                                               <tbody>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="../accessories-details?accessories_id=<?php echo base64_encode($pro_id); ?>"><img class="img-fluid" src="../admin_area/accessories_images/<?php echo $accessories_img1?>" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="../accessories-details?accessories_id=<?php echo base64_encode($pro_id); ?>"><?php  echo $accessoires_name ?></a></td>
+                                            <td class="pro-thumbnail"><a href="../accessories-<?php echo base64_encode($pro_id); ?>"><img class="img-fluid" src="../admin_area/accessories_images/<?php echo $accessories_img1?>" alt="Product" /></a></td>
+                                            <td class="pro-title"><a href="../accessories-<?php echo base64_encode($pro_id); ?>"><?php  echo $accessoires_name ?></a></td>
                                             <td class="pro-price"><span><?php echo  $product_size ?></span></td>
                                             <td class="pro-price"><span>Rs.<?php echo $accessories_prices ?></span></td>
                                             <td class="pro-quantity">
@@ -150,14 +160,17 @@
                         <div class="contact-info">
                             <h4 class="contact-title"></h4>
                             <?php 
-                                    if(isset($_GET['c_id']))
-                                    {
-                                        $customer_address='';
-                                        $customer_email='';
-                                        $customer_phone='';
-                                        $productinfo=base64_decode($_GET['c_id']);
                                         $select_cart = "select * from orders where id='$productinfo'";
                                                     $run_cart = mysqli_query($con,$select_cart);
+                                                    $num_cart=mysqli_num_rows($run_cart);
+                                                    if($num_cart==0)
+                                                    {
+                                                        ?>
+                                                        <script>window.open('my-account','_self')</script>
+                                                        <?php
+                                                    }
+                                                    else
+                                                    {
                                                     while($row_cart = mysqli_fetch_array($run_cart))
                                                     {   
                                                                     $customer_name=$row_cart['customer_name'];
@@ -166,8 +179,7 @@
                                                                     $customer_phone=$row_cart['customer_contact'];
                                                            
                                                     }
-                                    }
-                                       
+                                                }
                                 ?>                            
                             <ul style="margin-top: 20px;">
                             <li><i class="fa fa-map"></i> Address : <?php echo $customer_address; ?></li>

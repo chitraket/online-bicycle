@@ -4,11 +4,14 @@ $active='Shop';
 include("includes/header.php");
 if(!isset($_GET['pro_id']))
 {
+    if($_GET['pro_id']=="")
+    {
     ?>
     <script type="text/javascript">
            window.open('home','_self');
     </script>
     <?php 
+    }
 }
 else{
     $product_id=base64_decode($_GET['pro_id']);
@@ -26,6 +29,15 @@ else{
     }
     else
     {
+    $row_num=mysqli_num_rows($run_product);
+    if($row_num==0)
+    {
+        ?>
+        <script>
+                window.open('home','_self');
+            </script>
+        <?php 
+    }
     $row_product=mysqli_fetch_array($run_product);
     $p_cat_id=$row_product['p_cat_id'];
     $manufacturer_id=$row_product['manufacturer_id'];
@@ -33,9 +45,17 @@ else{
     $pro_qty=$row_product['available_qty'];
     $pro_price=$row_product['product_price'];
     $pro_desc=$row_product['product_desc'];
+    if($pro_desc==null)
+    {
+        $pro_desc=" No Description Available";
+    }
+    else{
+        $pro_desc=$row_product['product_desc'];
+    }
     $pro_img1=$row_product['product_img1'];
     $pro_img2=$row_product['product_img2'];
     $pro_img3=$row_product['product_img3'];
+    $pro_img4=$row_product['product_img4'];
     $pro_label=$row_product['product_label'];
     $pro_discount_price=$row_product['product_discount_price'];
     $pro_discount=$row_product['product_discount'];
@@ -216,8 +236,13 @@ else{
     $run_manufacturer=mysqli_query($con,$get_manufacturer);
     $row_manufacturer=mysqli_fetch_array($run_manufacturer);
     $manufacturer_title=$row_manufacturer['manufacturer_title'];
+    $get_product_cat="select * from product_categories where p_cat_id=$p_cat_id";
+    $run_product_cat=mysqli_query($con,$get_product_cat);
+    $row_product_cat=mysqli_fetch_array($run_product_cat);
+    $p_cat_title=$row_product_cat['p_cat_title'];
 }
 }
+
 ?>
 
     <main>
@@ -229,8 +254,10 @@ else{
                         <div class="breadcrumb-wrap">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="shop">Bikes</a></li>
+                                    <li class="breadcrumb-item"><a href="home"><i class="fa fa-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="bikes">Bikes</a></li>
+                                    <li class="breadcrumb-item"><a href="bikes_manufacturer-<?php echo base64_encode($manufacturer_id) ?>"><?php echo $manufacturer_title; ?></a></li>
+                                    <li class="breadcrumb-item"><a href="bikes_category-<?php echo base64_encode($p_cat_id) ?>"><?php echo $p_cat_title; ?></a></li>
                                     <li class="breadcrumb-item active" >
                                        <?php echo $pro_title; ?> 
                                     </li>                                
@@ -262,7 +289,7 @@ else{
                                         {
                                         ?>
                                             <div class="pro-large-img img-zoom">
-                                                <img src="assets/img/product/<?php echo $pro_img1 ?>" alt="product-details" />
+                                                <img src="admin_area/product_images/<?php echo $pro_img1 ?>" alt="product-details" />
                                             </div>
                                         <?php 
                                         }
@@ -276,7 +303,7 @@ else{
                                         {
                                         ?>
                                             <div class="pro-large-img img-zoom">
-                                                <img src="assets/img/product/<?php echo $pro_img2 ?>" alt="product-details" />
+                                                <img src="admin_area/product_images/<?php echo $pro_img2 ?>" alt="product-details" />
                                             </div>
                                         <?php 
                                         }
@@ -288,20 +315,20 @@ else{
                                         else
                                         {?>
                                             <div class="pro-large-img img-zoom">
-                                                <img src="assets/img/product/<?php echo $pro_img3 ?>" alt="product-details" />
+                                                <img src="admin_area/product_images/<?php echo $pro_img3 ?>" alt="product-details" />
                                             </div>
                                         <?php
                                         } 
                                         ?>
                                         <?php
-                                     if($pro_img2=="")
+                                     if($pro_img4=="")
                                         {
                                         }
                                         else
                                         {?>
                                         
                                         <div class="pro-nav-thumb">
-                                            <img src="assets/img/product/<?php echo $pro_img2 ?>" alt="product-details" />
+                                            <img src="admin_area/product_images/<?php echo $pro_img4 ?>" alt="product-details" />
                                         </div>
                                         <?php 
                                         }?>
@@ -316,7 +343,7 @@ else{
                                         {
                                         ?>
                                             <div class="pro-nav-thumb">
-                                                <img src="assets/img/product/<?php echo $pro_img1 ?>" alt="product-details" />
+                                                <img src="admin_area/product_images/<?php echo $pro_img1 ?>" alt="product-details" />
                                             </div>
                                         <?php 
                                         }?>
@@ -329,7 +356,7 @@ else{
                                         {
                                         ?>
                                             <div class="pro-nav-thumb">
-                                                <img src="assets/img/product/<?php echo $pro_img2 ?>" alt="product-details" />
+                                                <img src="admin_area/product_images/<?php echo $pro_img2 ?>" alt="product-details" />
                                             </div>
                                         <?php 
                                         }?>
@@ -340,19 +367,19 @@ else{
                                         else
                                         {?>
                                             <div class="pro-nav-thumb">
-                                                <img src="assets/img/product/<?php echo $pro_img3 ?>" alt="product-details" />
+                                                <img src="admin_area/product_images/<?php echo $pro_img3 ?>" alt="product-details" />
                                             </div>
                                         <?php
                                         } 
                                         ?>
                                         <?php 
-                                         if($pro_img2=="")
+                                         if($pro_img4=="")
                                         {
                                         }
                                         else
                                         {?>
                                             <div class="pro-nav-thumb">
-                                                <img src="assets/img/product/<?php echo $pro_img2 ?>" alt="product-details" />
+                                                <img src="admin_area/product_images/<?php echo $pro_img4 ?>" alt="product-details" />
                                             </div>
                                         <?php 
                                         }?>
@@ -367,6 +394,10 @@ else{
                                                 <span>New</span>
                                             </div>
                                             <?php
+                                        }
+                                        if($pro_label=="old")
+                                        { 
+                                            
                                         } 
                                         if($pro_label=="sale")
                                         {
@@ -392,15 +423,15 @@ else{
                                         <h3 class="product-name"><?php  echo $pro_title; ?></h3>
                                        <div class="ratings d-flex">
                                        <?php
-                                       $pro_idss=base64_decode($_GET['pro_id']);
+                                      // $pro_idss=base64_decode($_GET['pro_id']);
                                        //$output=0;
-                                        $query="select AVG(rating) as rating from review where product_id='$pro_idss' and status='yes' and papage='0'";
+                                        $query="select AVG(rating) as rating from review where product_id='$product_id' and status='yes' and papage='0'";
                                         $statement=mysqli_query($con,$query);
                                         while($ruo=mysqli_fetch_array($statement))
                                         {
                                         $output=round($ruo['rating']);
                                         } 
-                                        $select_reviewss="select * from review where product_id='$pro_idss' and status='yes' and papage='0'";
+                                        $select_reviewss="select * from review where product_id='$product_id' and status='yes' and papage='0'";
                                         $run_reviewss=mysqli_query($con,$select_reviewss);
                                         $total_reviewss=mysqli_num_rows($run_reviewss);
                                         if($output==0)
@@ -489,9 +520,15 @@ else{
                                         {
                                         ?>
                                             <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
-                                            <span class="price-old"><del></del></span>
+                                            
                                         <?php
                                         } 
+                                        if($pro_label=="old")
+                                        {
+                                        ?>
+                                            <span class="price-regular">Rs.<?php echo $pro_price; ?></span>
+                                        <?php
+                                        }
                                         if($pro_label=="sale")
                                         {
                                             ?>
@@ -542,7 +579,7 @@ else{
                                                     })
                                                     .then((willDelete) => {
                                                             if (willDelete) {
-                                                                window.open('bikes-details?pro_id=<?php echo base64_encode($p_id); ?>','_self');
+                                                                window.open('bikes-<?php echo base64_encode($p_id); ?>','_self');
                                                             } else {
                                                             
                                                             }
@@ -565,7 +602,7 @@ else{
                                                     })
                                                     .then((willDelete) => {
                                                             if (willDelete) {
-                                                                window.open('bikes-details?pro_id=<?php echo base64_encode($p_id); ?>','_self');
+                                                                window.open('bikes-<?php echo base64_encode($p_id); ?>','_self');
                                                             } else {
                                                             
                                                             }
@@ -589,11 +626,62 @@ else{
                                             <div class="quantity" style="padding-top: 17px;">
                                                 
                                             <div class="pro-size">
-                                                <select class="nice-select" name="pro_sizes">
-                                                <option>S</option>
-                                                <option>M</option>
-                                                <option>L</option>
-                                                <option>XL</option>
+                                                <select class="nice-select" name="pro_sizes" required>
+                                                    <?php 
+                                                    $select_qty="select * from products where product_id='$product_id'";
+                                                    $run_qty=mysqli_query($con,$select_qty);
+                                                    while($row_qty=mysqli_fetch_array($run_qty))
+                                                    {
+                                                        $p_qty=$row_qty['product_size'];
+                                                        $subject=explode(",",$p_qty);
+                                                    }
+                                                    
+                                                    if(in_array("33cms",$subject))
+                                                    {
+                                                        ?>
+                                                        <option value="33cms">33cms</option>
+                                                        <?php
+                                                    }
+                                                    if(in_array("38cms",$subject))
+                                                    {
+                                                        ?>
+                                                        <option value="38cms">38cms</option>
+                                                        <?php
+                                                    }
+                                                    if(in_array("40cms",$subject))
+                                                    {
+                                                        ?>
+                                                        <option value="40cms">40cms</option>
+                                                        <?php
+                                                    }
+                                                    if(in_array("45cms",$subject))
+                                                    {
+                                                        ?>
+                                                        <option value="45cms">45cms</option>
+                                                        <?php
+                                                    }
+                                                    if(in_array("48cms",$subject))
+                                                    {
+                                                        ?>
+                                                        <option value="48cms">48cms</option>
+                                                        <?php
+                                                    }
+                                                    if(in_array("53cms",$subject))
+                                                    {
+                                                        ?>
+                                                        <option value="53cms">53cms</option>
+                                                        <?php
+                                                    }
+                                                    if(in_array("55cms",$subject))
+                                                    {
+                                                        ?>
+                                                        <option value="55cms">55cms</option>
+                                                        <?php
+                                                    }
+                                                    
+                                                    ?>
+                                                     
+                                                
                                             </select>
                                                 </div>
                                             </div>
@@ -602,11 +690,11 @@ else{
                                             <div class="quantity">
                                                 
                                                 <div class="pro-qty"style="width: 110px;" >
-                                                    <input type="number" min="1" value="1"  name="product_qty" style="width: 40px;">
+                                                    <input type="number" min="1" value="1"  name="product_qty" style="width: 40px;" required>
                                                 </div>
                                             </div>
                     
-                                            
+                                             
                                         </div>
                                        <?php  if($pro_qty<=0)
                                        {
@@ -650,8 +738,8 @@ else{
                                         if(isset($_POST['submit']))
                                         {
                                             $customer_emailss=$_SESSION['customer_email'];
-                                            $product_idss=base64_decode($_GET['pro_id']);
-                                            $select_wishlist="select * from wishlist where customer_email='$customer_emailss' and product_id='$product_idss'";
+                                            //$product_idss=base64_decode($_GET['pro_id']);
+                                            $select_wishlist="select * from wishlist where customer_email='$customer_emailss' and product_id='$product_id' and papage='0'";
                                             $run_wishlist=mysqli_query($con,$select_wishlist);
                                             if(mysqli_num_rows($run_wishlist)>0)
                                             {
@@ -666,7 +754,7 @@ else{
                                             })
                                             .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.open('bikes-details?pro_id=<?php echo base64_encode($product_idss); ?>','_self');
+                                                        window.open('bikes-<?php echo base64_encode($product_id); ?>','_self');
                                                     } else {
                                                     
                                                     }
@@ -677,7 +765,7 @@ else{
                                             else
                                             {
                                                 $papage=0;
-                                                wishlist($product_idss,$customer_emailss,$papage);
+                                                wishlist($product_id,$customer_emailss,$papage);
                                             }
                                         }
                                          }
@@ -807,15 +895,15 @@ else{
                                             <div class="tab-pane fade" id="tab_three">
                                                 <form action="#" method="POST" class="review-form">
                                                     <?php
-                                                    $product_ids=base64_decode($_GET['pro_id']);
-                                                    $select_reviews="select * from review where product_id='$product_ids' and status='yes' and papage='0'";
+                                                    //$product_ids=base64_decode($_GET['pro_id']);
+                                                    $select_reviews="select * from review where product_id='$product_id' and status='yes' and papage='0'";
                                                     $run_reviews=mysqli_query($con,$select_reviews);
                                                     $total_reviews=mysqli_num_rows($run_reviews);
                                                     ?>
                                                 <h5><?php echo $total_reviews; ?> review for <span><?php echo $pro_title; ?></span></h5>
                                                     <?php
                                                    
-                                                    $select_review="select * from review where product_id='$product_ids'and status='yes' and papage='0'";
+                                                    $select_review="select * from review where product_id='$product_id'and status='yes' and papage='0'";
                                                      $run_review=mysqli_query($con,$select_review);
                                                      while($row_review=mysqli_fetch_array($run_review))
                                                      {
@@ -836,7 +924,19 @@ else{
                                                         {
                                                             ?>
                                                             <div class="rev-avatar">
+                                                            <?php
+                                                            if($row_customer_review['customer_image']=="")
+                                                            {
+                                                                ?>
+                                                                <img src="customer/customer_images/user.png" alt="">
+                                                                <?php 
+                                                            } 
+                                                            else{
+                                                            ?>
                                                             <img src="customer/customer_images/<?php echo $row_customer_review['customer_image']; ?>" alt="">
+                                                            <?php 
+                                                            }
+                                                            ?>
                                                         </div>
                                                            
                                                         
@@ -955,9 +1055,9 @@ else{
                                         {
                                             $message=$_POST['message'];
                                             $rating=$_POST['rating'];
-                                            $pro_ids=base64_decode($_GET['pro_id']);
+                                            //$pro_ids=base64_decode($_GET['pro_id']);
                                             $customer_email=$_SESSION['customer_email'];
-                                            $select_revieww="select * from review where customer_email='$customer_email'  and  product_id='$pro_ids' and papage='0'";
+                                            $select_revieww="select * from review where customer_email='$customer_email'  and  product_id='$product_id' and papage='0'";
                                             $run_revieww=mysqli_query($con,$select_revieww);
                                            if(mysqli_num_rows($run_revieww)>0)
                                            {
@@ -972,7 +1072,7 @@ else{
                                             })
                                             .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.open('bikes-details?pro_id=<?php echo base64_encode($pro_ids); ?>','_self');
+                                                        window.open('bikes-<?php echo base64_encode($product_id); ?>','_self');
                                                     } else {
                                                     
                                                     }
@@ -983,7 +1083,7 @@ else{
                                             else{
 
                                             
-                                            $insert_review="insert into review(product_id,papage,customer_email,message,time,rating,status) values('$pro_ids','0','$customer_email','$message',NOW(),'$rating','yes')";
+                                            $insert_review="insert into review(product_id,papage,customer_email,message,time,rating,status) values('$product_id','0','$customer_email','$message',NOW(),'$rating','yes')";
                                             $run_review=mysqli_query($con,$insert_review);
                                             if($run_review)
                                             {
@@ -998,7 +1098,7 @@ else{
                                             })
                                             .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.open('bikes-details?pro_id=<?php echo base64_encode($pro_ids); ?>','_self');
+                                                        window.open('bikes-<?php echo base64_encode($product_id); ?>','_self');
                                                     } else {
                                                     
                                                     }
@@ -1040,7 +1140,7 @@ else{
 
                             <?php
                             
-                                $get_products="select * from products where product_status='yes' order by rand() DESC LIMIT 0,8"; 
+                                $get_products="select * from products where product_status='yes' and product_status_top='yes' and p_cat_id='$p_cat_id'  order by rand() DESC LIMIT 0,8"; 
                                 $run_products=mysqli_query($con,$get_products);
                                 while($row_products=mysqli_fetch_array($run_products))
                                 {
@@ -1057,18 +1157,18 @@ else{
                                     
                                     <div class="product-item">
                                     <figure class="product-thumb">
-                                        <a href="bikes-details?pro_id=<?php echo base64_encode($pro_id);?>">
-                                            <img class="pri-img" src="admin_area/product_images/<?php echo $pro_img1;?>" alt="product" style="height:180px;">
+                                        <a href="bikes-<?php echo base64_encode($pro_id);?>">
+                                            <img class="pri-img" src="admin_area/product_images/<?php echo $pro_img1;?>" alt="product" >
                                             <?php
                                             if($pro_img2=="")
                                             {
                                                 ?>
-                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img1;?>" alt="product" style="height:180px;">
+                                                <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img1;?>" alt="product" >
                                                 <?php
                                             }
                                             else{ 
                                             ?>
-                                            <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2;?>" alt="product" style="height:180px;">
+                                            <img class="sec-img" src="admin_area/product_images/<?php echo $pro_img2;?>" alt="product" >
                                             <?php
                                             } 
                                             ?>
@@ -1083,6 +1183,10 @@ else{
                                                     <span>New</span>
                                                 </div>
                                                 <?php 
+                                        }
+                                        if($pro_label=="old")
+                                        {
+
                                         }
                                         if($pro_label=="sale")
                                         {
@@ -1105,17 +1209,23 @@ else{
                                                     $run_carts=mysqli_query($db, $query3);
                                                     while ($row_carts=mysqli_fetch_array($run_carts)) { 
                                             ?>
-                                                    <a href="bikes?manufacturer_id=<?php echo base64_encode($manufacturer_id);?>"><?php echo $row_carts['manufacturer_title']; ?></a>
+                                                    <a href="bikes_manufacturer-<?php echo base64_encode($manufacturer_id);?>"><?php echo $row_carts['manufacturer_title']; ?></a>
                                             <?php 
                                                 }
                                                 ?>
                                             </div>
                                             <h6 class="product-name">
-                                                <a href="bikes-details?pro_id=<?php echo base64_encode($pro_id);?>"><?php echo $pro_title;?></a>
+                                                <a href="bikes-<?php echo base64_encode($pro_id);?>"><?php echo $pro_title;?></a>
                                             </h6>
                                             <div class="price-box">
                                                 <?php
                                                 if($pro_label=="new")
+                                                { 
+                                                ?>
+                                                <span class="price-regular">Rs.<?php echo  $pro_price;?></span>
+                                                <?php
+                                                }
+                                                if($pro_label=="old")
                                                 { 
                                                 ?>
                                                 <span class="price-regular">Rs.<?php echo  $pro_price;?></span>

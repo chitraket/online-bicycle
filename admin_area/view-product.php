@@ -11,7 +11,7 @@
     include("includes/sidebar.php"); 
     $page=2;
     $admin_email=$_SESSION['admin_email'];
-$query_per="select * from admins where admin_email='$admin_email'";
+$query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
     $run_query_per=mysqli_query($con,$query_per);
     while($row_query_per=mysqli_fetch_array($run_query_per))
     {
@@ -56,7 +56,7 @@ $query_per="select * from admins where admin_email='$admin_email'";
                                                 <th>Quantity</th>
                                                 <th>Available Quantity</th>
                                                 <th>Sold Out</th>
-                                                <th>Product Top</th>
+                                                <th>Top</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -292,7 +292,7 @@ $query_per="select * from admins where admin_email='$admin_email'";
                             data:{product_ids:product_ids,product_idss:product_idss},
                             success:function()
                             {
-
+                                window.open('view-product.php','_self');
                             }
                         });
                     });
@@ -308,7 +308,7 @@ $query_per="select * from admins where admin_email='$admin_email'";
                             data:{product_ids:product_ids,product_idss:product_idss},
                             success:function()
                             {
-
+                                window.open('view-product.php','_self');
                             }
                         });
                         

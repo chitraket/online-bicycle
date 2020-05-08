@@ -10,7 +10,7 @@
         include("includes/sidebar.php"); 
         $paga=14;
         $admin_email=$_SESSION['admin_email'];
-$query_per="select * from admins where admin_email='$admin_email'";
+$query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
     $run_query_per=mysqli_query($con,$query_per);
     while($row_query_per=mysqli_fetch_array($run_query_per))
     {
@@ -294,7 +294,7 @@ $query_per="select * from admins where admin_email='$admin_email'";
                             data:{accessories_ids:accessories_ids,accessories_idss:accessories_idss},
                             success:function()
                             {
-
+                                window.open('view-accessories-category.php','_self');
                             }
                         });
                     });
@@ -310,7 +310,7 @@ $query_per="select * from admins where admin_email='$admin_email'";
                             data:{accessories_ids:accessories_ids,accessories_idss:accessories_idss},
                             success:function()
                             {
-
+                                window.open('view-accessories-category.php','_self');
                             }
                         });
                         

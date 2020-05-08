@@ -7,11 +7,14 @@ include("includes/header.php");
 <?php
 if(!isset($_GET['accessories_id']))
 {
+    if($_GET['accessories_id']=="")
+    {
     ?>
     <script>
         window.open('home','_self');
     </script>
     <?php 
+    }
 }
 else{
     $accessories_id=base64_decode($_GET['accessories_id']);
@@ -27,6 +30,15 @@ else{
     }
     else
     {
+        $row_num=mysqli_num_rows($run_accessories);
+    if($row_num==0)
+    {
+        ?>
+        <script>
+                window.open('home','_self');
+            </script>
+        <?php 
+    }
     $row_accessories=mysqli_fetch_array($run_accessories);
     $accessories_brand=$row_accessories['accessories_brand'];
     $accessories_category=$row_accessories['accessories_category'];
@@ -34,6 +46,7 @@ else{
     $accessories_image_1=$row_accessories['accessories_image_1'];
     $accessories_image_2=$row_accessories['accessories_image_2'];
     $accessories_image_3=$row_accessories['accessories_image_3'];
+    $accessories_image_4=$row_accessories['accessories_image_4'];
     $accessories_qty=$row_accessories['accessories_qty'];
     $available_qty=$row_accessories['available_qty'];
     $accessories_material=$row_accessories['accessories_material'];
@@ -58,16 +71,28 @@ else{
     }
     $accessories_prices=$row_accessories['accessories_prices'];
     $accessories_desc=$row_accessories['accessories_desc'];
+    if($accessories_desc==null)
+    {
+        $accessories_desc=" No Description Available";
+    }
+    else{
+        $accessories_desc=$row_accessories['accessories_desc'];
+    }
     $get_manufacturer="select * from accessories_brand where accessories_brand_id=$accessories_brand";
     $run_manufacturer=mysqli_query($con,$get_manufacturer);
     $row_manufacturer=mysqli_fetch_array($run_manufacturer);
-    $accessories_brand=$row_manufacturer['accessories_brand'];
+    $accessories_brands=$row_manufacturer['accessories_brand'];
+    $get_product_cat="select * from accessories_category where accessories_category_id=$accessories_category";
+    $run_product_cat=mysqli_query($con,$get_product_cat);
+    $row_product_cat=mysqli_fetch_array($run_product_cat);
+    $p_cat_title=$row_product_cat['accessories_category'];
     }
+
 }
 ?>
 
     <!-- Start Header Area -->
-   
+    
     <!-- end Header Area -->
     <main>
         <!-- breadcrumb area start -->
@@ -80,6 +105,8 @@ else{
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index"><i class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item"><a href="accessories">Accessories</a></li>
+                                    <li class="breadcrumb-item"><a href="accessories_manufacturer-<?php echo base64_encode($accessories_brand) ?>"><?php echo $accessories_brands; ?></a></li>
+                                    <li class="breadcrumb-item"><a href="accessories_category-<?php echo base64_encode($accessories_category) ?>"><?php echo $p_cat_title; ?></a></li>
                                     <li class="breadcrumb-item active" >
                                        <?php echo $accessories_name ?> 
                                     </li>                                
@@ -141,15 +168,16 @@ else{
                                             </div>
                                         <?php
                                         } 
+
                                         ?>
                                         <?php 
-                                        if($accessories_image_3=="")
+                                        if($accessories_image_4=="")
                                         {
                                         }
                                         else
                                         {?>
                                             <div class="pro-large-img img-zoom">
-                                                <img src="admin_area/accessories_images/<?php echo $accessories_image_3 ?>" alt="product-details" />
+                                                <img src="admin_area/accessories_images/<?php echo $accessories_image_4 ?>" alt="product-details" />
                                             </div>
                                         <?php
                                         } 
@@ -195,13 +223,13 @@ else{
                                         } 
                                         ?>
                                         <?php 
-                                         if($accessories_image_3=="")
+                                         if($accessories_image_4=="")
                                         {
                                         }
                                         else
                                         {?>
                                             <div class="pro-nav-thumb">
-                                                <img src="admin_area/accessories_images/<?php echo $accessories_image_3 ?>" alt="product-details" />
+                                                <img src="admin_area/accessories_images/<?php echo $accessories_image_4 ?>" alt="product-details" />
                                             </div>
                                         <?php 
                                         }?>
@@ -216,7 +244,12 @@ else{
                                                 <span>New</span>
                                             </div>
                                             <?php
-                                        } 
+                                        }
+                                        if($pro_label=="new")
+                                        { 
+                                        ?>
+                                            <?php
+                                        }
                                         if($pro_label=="sale")
                                         {
                                             ?>
@@ -241,15 +274,13 @@ else{
                                         <h3 class="product-name"><?php  echo $accessories_name;?></h3>
                                        <div class="ratings d-flex">
                                        <?php
-                                       $pro_idss=base64_decode($_GET['accessories_id']);
-                                       //$output=0;
-                                        $query="select AVG(rating) as rating from review where product_id='$pro_idss' and status='yes' and papage='1'";
+                                        $query="select AVG(rating) as rating from review where product_id='$accessories_id' and status='yes' and papage='1'";
                                         $statement=mysqli_query($con,$query);
                                         while($ruo=mysqli_fetch_array($statement))
                                         {
                                         $output=round($ruo['rating']);
                                         } 
-                                        $select_reviewss="select * from review where product_id='$pro_idss' and status='yes' and papage='1'";
+                                        $select_reviewss="select * from review where product_id='$accessories_id' and status='yes' and papage='1'";
                                         $run_reviewss=mysqli_query($con,$select_reviewss);
                                         $total_reviewss=mysqli_num_rows($run_reviewss);
                                         if($output==0)
@@ -338,7 +369,13 @@ else{
                                         {
                                         ?>
                                             <span class="price-regular">Rs.<?php echo $accessories_prices; ?></span>
-                                            <span class="price-old"><del></del></span>
+                                            
+                                        <?php
+                                        } 
+                                        if($pro_label=="old")
+                                        {
+                                        ?>
+                                            <span class="price-regular">Rs.<?php echo $accessories_prices; ?></span>
                                         <?php
                                         } 
                                         if($pro_label=="sale")
@@ -392,7 +429,7 @@ else{
                                                     })
                                                     .then((willDelete) => {
                                                             if (willDelete) {
-                                                                window.open('accessories-details?accessories_id=<?php echo base64_encode($p_id); ?>','_self');
+                                                                window.open('accessories-<?php echo base64_encode($p_id); ?>','_self');
                                                             } else {
                                                             
                                                             }
@@ -415,7 +452,7 @@ else{
                                                     })
                                                     .then((willDelete) => {
                                                             if (willDelete) {
-                                                                window.open('accessories-details?accessories_id=<?php echo base64_encode($p_id); ?>','_self');
+                                                                window.open('accessories-<?php echo base64_encode($p_id); ?>','_self');
                                                             } else {
                                                             
                                                             }
@@ -491,8 +528,8 @@ else{
                                             if(isset($_POST['submit']))
                                             {
                                                 $customer_emailss=$_SESSION['customer_email'];
-                                                $product_idss=base64_decode($_GET['accessories_id']);
-                                                $select_wishlist="select * from wishlist where customer_email='$customer_emailss' and product_id='$product_idss'";
+                                                //$product_idss=base64_decode($_GET['accessories_id']);
+                                                $select_wishlist="select * from wishlist where customer_email='$customer_emailss' and product_id='$accessories_id' and papage='1'";
                                                 $run_wishlist=mysqli_query($con,$select_wishlist);
                                                 if(mysqli_num_rows($run_wishlist)>0)
                                                 {
@@ -507,7 +544,7 @@ else{
                                                 })
                                                 .then((willDelete) => {
                                                         if (willDelete) {
-                                                            window.open('accessories-details?accessories_id=<?php echo base64_encode($product_idss); ?>','_self');
+                                                            window.open('accessories-<?php echo base64_encode($accessories_id); ?>','_self');
                                                         } else {
                                                         
                                                         }
@@ -518,7 +555,7 @@ else{
                                                 else
                                                 {
                                                     $papage=1;
-                                                    wishlist($product_idss,$customer_emailss,$papage);
+                                                    wishlist($accessories_id,$customer_emailss,$papage);
                                                 }
                                             }
                                              }
@@ -581,11 +618,11 @@ else{
                                             <div class="tab-pane fade" id="tab_three">
                                                 <form action="#" method="POST" class="review-form">
                                                     <?php
-                                                    $product_ids=base64_decode($_GET['accessories_id']);
-                                                    $select_reviews="select * from review where product_id='$product_ids' and status='yes' and papage='1'";
+                                                    
+                                                    $select_reviews="select * from review where product_id='$accessories_id' and status='yes' and papage='1'";
                                                     $run_reviews=mysqli_query($con,$select_reviews);
                                                     $total_reviews=mysqli_num_rows($run_reviews);
-                                                    $select_a="select * from accessories where accessories_id='$product_ids' and accessories_status='yes'";
+                                                    $select_a="select * from accessories where accessories_id='$accessories_id' and accessories_status='yes'";
                                                     $run_a=mysqli_query($con,$select_a);
                                                     while($row_a=mysqli_fetch_array($run_a))
                                                     {
@@ -595,7 +632,7 @@ else{
                                                 <h5><?php echo $total_reviews; ?> review for <span><?php echo $product_namess; ?></span></h5>
                                                     <?php
                                                    
-                                                    $select_review="select * from review where product_id='$product_ids'and status='yes' and papage='1'";
+                                                    $select_review="select * from review where product_id='$accessories_id'and status='yes' and papage='1'";
                                                      $run_review=mysqli_query($con,$select_review);
                                                      while($row_review=mysqli_fetch_array($run_review))
                                                      {
@@ -616,7 +653,20 @@ else{
                                                         {
                                                             ?>
                                                             <div class="rev-avatar">
+                                                            <?php
+                                                            if($row_customer_review['customer_image']=="")
+                                                            {
+                                                                ?>
+                                                                <img src="customer/customer_images/user.png" alt="">
+                                                                <?php 
+                                                            } 
+                                                            else
+                                                            {
+                                                            ?>
                                                             <img src="customer/customer_images/<?php echo $row_customer_review['customer_image']; ?>" alt="">
+                                                            <?php
+                                                            } 
+                                                            ?>
                                                         </div>
                                                            
                                                         
@@ -735,9 +785,9 @@ else{
                                         {
                                             $message=$_POST['message'];
                                             $rating=$_POST['rating'];
-                                            $pro_ids=base64_decode($_GET['accessories_id']);
+                                            //$pro_ids=base64_decode($_GET['accessories_id']);
                                             $customer_email=$_SESSION['customer_email'];
-                                            $select_revieww="select * from review where customer_email='$customer_email'  and  product_id='$pro_ids' and papage='1'";
+                                            $select_revieww="select * from review where customer_email='$customer_email'  and  product_id='$accessories_id' and papage='1'";
                                             $run_revieww=mysqli_query($con,$select_revieww);
                                            if(mysqli_num_rows($run_revieww)>0)
                                            {
@@ -752,7 +802,7 @@ else{
                                             })
                                             .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.open('accessories-details?accessories_id=<?php echo base64_encode($pro_ids); ?>','_self');
+                                                        window.open('accessories-<?php echo base64_encode($accessories_id); ?>','_self');
                                                     } else {
                                                     
                                                     }
@@ -763,7 +813,7 @@ else{
                                             else{
 
                                             
-                                            $insert_review="insert into review(product_id,papage,customer_email,message,time,rating,status) values('$pro_ids','1','$customer_email','$message',NOW(),'$rating','yes')";
+                                            $insert_review="insert into review(product_id,papage,customer_email,message,time,rating,status) values('$accessories_id','1','$customer_email','$message',NOW(),'$rating','yes')";
                                             $run_review=mysqli_query($con,$insert_review);
                                             if($run_review)
                                             {
@@ -778,7 +828,7 @@ else{
                                             })
                                             .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.open('accessories-details?accessories_id=<?php echo base64_encode($pro_ids); ?>','_self');
+                                                        window.open('accessories-<?php echo base64_encode($accessories_id); ?>','_self');
                                                     } else {
                                                     
                                                     }
@@ -837,18 +887,18 @@ else{
                                 ?>
                                 <div class='product-item'>
                                     <figure class='product-thumb'>
-                                        <a href='accessories-details?accessories_id=<?php echo base64_encode($pro_id);?>'>
-                                            <img class='pri-img' src='admin_area/accessories_images/<?php echo $pro_img1;?>' alt='product' style='height:180px;'>
+                                        <a href='accessories-<?php echo base64_encode($pro_id);?>'>
+                                            <img class='pri-img' src='admin_area/accessories_images/<?php echo $pro_img1;?>' alt='product' >
                                             <?php
                                             if($pro_img2=="")
                                             {
                                                 ?>
-                                                <img class='sec-img' src='admin_area/accessories_images/<?php echo $pro_img1;?>' alt='product' style='height:180px;'>
+                                                <img class='sec-img' src='admin_area/accessories_images/<?php echo $pro_img1;?>' alt='product'>
                                                 <?php
                                             } 
                                             else{
                                             ?>
-                                            <img class='sec-img' src='admin_area/accessories_images/<?php echo $pro_img2;?>' alt='product' style='height:180px;'>
+                                            <img class='sec-img' src='admin_area/accessories_images/<?php echo $pro_img2;?>' alt='product'>
                                             <?php
                                             } 
                                             ?>
@@ -861,6 +911,11 @@ else{
                                                 <div class='product-label new'>
                                                     <span>New</span>
                                                 </div>
+                                            <?php 
+                                            }
+                                            if($pro_label=="old")
+                                            { 
+                                            ?>
                                             <?php 
                                             }
                                             if($pro_label=="sale")
@@ -887,17 +942,24 @@ else{
                                                     $run_carts=mysqli_query($db, $query3);
                                                     while ($row_carts=mysqli_fetch_array($run_carts)) { 
                                             ?>
-                                                    <a href="accessories?manufacturer_id=<?php echo base64_encode($accessories_brand);?>"><?php echo $row_carts['accessories_brand']; ?></a>
+                                                    <a href="accessories_manufacturer-<?php echo base64_encode($accessories_brand);?>"><?php echo $row_carts['accessories_brand']; ?></a>
                                                             <?php 
                                                 }
                                                                         ?>
                                         </div>
                                             <h6 class='product-name'>
-                                                <a href='accessories-details?accessories_id=<?php echo base64_encode($pro_id);?>'><?php echo$pro_title;?></a>
+                                                <a href='accessories-<?php echo base64_encode($pro_id);?>'><?php echo$pro_title;?></a>
                                             </h6>
                                             <div class='price-box'>
                                             <?php
                                                 if($pro_label=="new") 
+                                                {
+                                                ?>
+                                                <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
+                                            
+                                                <?php 
+                                                }
+                                                if($pro_label=="old") 
                                                 {
                                                 ?>
                                                 <span class='price-regular'>Rs.<?php echo $pro_price;?></span>

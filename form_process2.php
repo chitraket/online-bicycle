@@ -1,3 +1,4 @@
+
 <?php
 session_start(); 
 ?>
@@ -12,6 +13,7 @@ include("functions/functions.php");
            }
            else
            {
+
 ?> 
 <?php
 if(isset($_SESSION['c_id']))
@@ -422,7 +424,7 @@ else{
                                         }
                                     unset($_SESSION['c_id']); 
                                     ?>
-                                    <script>window.open('cash-on-delivery-successful?c_id=<?php echo base64_encode($order_id); ?>','_self')</script>
+                                    <script>window.open('cash_on_delivery_successful-<?php echo base64_encode($order_id); ?>','_self')</script>
 
 
 <?php

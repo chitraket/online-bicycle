@@ -6,5 +6,5 @@ $update_manufacturer="update manufacturers set manufacturer_status='$manufacture
 mysqli_query($con,$update_manufacturer);
 $delete_product = "update products set product_status='$manufacturer_idss' where manufacturer_id='$manufacturer_id'";
 mysqli_query($con, $delete_product);
-echo "<script>window.open('view-manufacturer.php','_self')</script>";
+echo "success";
 ?>

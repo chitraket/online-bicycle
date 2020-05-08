@@ -4,11 +4,22 @@ $order_id=$_GET['del_id'];
 $order_status=$_GET['status'];
 $customer_email='';
 $customer_address='';
+$totalss=0;
+$gst=0;
+$total=0;
 $update_p_cat = "update customer_orders set order_status='$order_status',payment_status='cancel' where order_id=$order_id"; 
 $run_p_cat = mysqli_query($con,$update_p_cat);
 
 $select_delete="select * from customer_orders where order_id='$order_id'";
 $run_delete = mysqli_query($con,$select_delete);
+$num_delete=mysqli_num_rows($run_delete);
+if($num_delete==0)
+{
+    ?>
+    <script>window.open("index.php");</script>
+    <?php 
+}
+else{
 while ($row_delete = mysqli_fetch_array($run_delete)) {
     $papage=$row_delete['papage_number'];
     $qty=$row_delete['qty'];
@@ -33,12 +44,22 @@ while ($row_delete = mysqli_fetch_array($run_delete)) {
     }
     
 }
+}
 $select_customer="select * from orders where id='$order_id'";
 $run_customer=mysqli_query($con,$select_customer);
+$num_customer=mysqli_num_rows($run_customer);
+if($num_customer==0)
+{
+    ?>
+    <script>window.open("index.php");</script>
+    <?php 
+}
+else{
 while($row_customer=mysqli_fetch_array($run_customer))
 {
     $customer_email=$row_customer['customer_email'];
     $customer_address=$row_customer['customer_address'];
+}
 }
 $totals=0;
 
@@ -214,7 +235,9 @@ $totals=0;
                                                                 $sub_total=$row_products['product_price']*$pro_qty;
                                                                // echo $product_title;
                                                                 
-                                                                $totals+=$sub_total; 
+                                                                $totals+=$sub_total;
+                                                                $gst=$totals*12/100;
+                                                                $totalss=$totals+$gst;
                                                                 $html .='
                                                                  <tr>                                
                                                                    <td>
@@ -246,6 +269,8 @@ $totals=0;
                                                           // echo  $accessoires_name;
                                                            
                                                             $totals+=$sub_total; 
+                                                            $gst=$totals*12/100;
+                                                            $totalss=$totals+$gst;
                                                             $html .='
                                                             <tr>                                
                                                               <td>
@@ -267,23 +292,17 @@ $totals=0;
                                                     }
                                                 }
                                                 $html .=' <tr>
-                                                <td colspan="2" style="line-height: 49px;font-size: 13px;color: #000000;padding-left: 20px;text-align:left;border-right: unset;">Products:</td>
+                                                <td colspan="2" style="line-height: 49px;font-size: 13px;color: #000000;padding-left: 20px;text-align:left;border-right: unset;">Sub-Total :</td>
                                                     <td colspan="3" class="price" style="line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;"><b>Rs.'.$totals.'</b></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" style="line-height: 49px;font-size: 13px;color: #000000;padding-left: 20px;text-align:left;border-right: unset;">Discount :</td>
-                                                    <td colspan="3" class="price" style="line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;"><b>$10</b></td>
+                                                <td colspan="2" style="line-height: 49px;font-size: 13px;color: #000000;padding-left: 20px;text-align:left;border-right: unset;">GST (12%) :</td>
+                                                    <td colspan="3" class="price" style="line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;"><b>Rs.'.$gst.'</b></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="line-height: 49px;font-size: 13px;color: #000000;
-                                                    padding-left: 20px;text-align:left;border-right: unset;">Shipping :</td>
-                                                    <td colspan="3" class="price" style="
-                                                        line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;"><b>$30</b></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="line-height: 49px;font-size: 13px;color: #000000;
-                                                    padding-left: 20px;text-align:left;border-right: unset;">TOTAL PAID :</td>
-                                                    <td colspan="3" class="price" style="line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;"><b>Rs.'.$totals.'</b></td>
+                                                    padding-left: 20px;text-align:left;border-right: unset;">Total Paid :</td>
+                                                    <td colspan="3" class="price" style="line-height: 49px;text-align: right;padding-right: 28px;font-size: 13px;color: #000000;text-align:right;border-left: unset;"><b>Rs.'.$totalss.'</b></td>
                                             </tr>
                                         </table>
                                         <table cellpadding="0" cellspacing="0" border="0" align="left" style="width: 100%;margin-top: 30px;    margin-bottom: 30px;">

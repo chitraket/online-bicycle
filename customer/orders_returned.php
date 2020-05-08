@@ -7,6 +7,15 @@ if(isset($_GET['o_id']))
     $customer_address='';
     $select_delete="select * from customer_orders where order_id='$o_id'";
     $run_delete = mysqli_query($con,$select_delete);
+    $num_delete=mysqli_num_rows($run_delete);
+    if($num_delete==0)
+    {
+        ?>
+        <script>window.open('my-account','_self')</script>
+        <?php
+    }
+    else
+    {
     while ($row_delete = mysqli_fetch_array($run_delete)) {
         $papage=$row_delete['papage_number'];
         $qty=$row_delete['qty'];
@@ -29,14 +38,27 @@ if(isset($_GET['o_id']))
         }
         
     }
+}
     $select_customer="select * from orders where id='$o_id'";
     $run_customer=mysqli_query($con,$select_customer);
+    $num_customer=mysqli_num_rows($run_customer);
+    if($num_customer==0)
+    {
+        ?>
+        <script>window.open('my-account','_self')</script>
+        <?php
+    }
+    else
+    {
     while($row_customer=mysqli_fetch_array($run_customer))
     {
         $customer_email=$row_customer['customer_email'];
         $customer_address=$row_customer['customer_address'];
     }
-    $totals=0;
+}
+$totals=0;
+$totalss=0;
+$gst=0;
 
                         require '../PHPMailer/PHPMailerAutoload.php';
                         $mail=new PHPMailer;
@@ -360,7 +382,7 @@ if(isset($_GET['o_id']))
                             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                         }
                         ?>
-                    <script>window.open('view-order?o_id=<?php echo base64_encode($o_id);?>&n=1','_self')</script>";
+                    <script>window.open('view_orderss-<?php echo base64_encode($o_id);?>-1','_self')</script>";
 <?php 
                 }
 ?>

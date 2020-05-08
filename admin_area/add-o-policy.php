@@ -10,7 +10,7 @@
      include("includes/sidebar.php");
      $paga=29;
      $admin_email=$_SESSION['admin_email'];
-     $query_per="select * from admins where admin_email='$admin_email'";
+     $query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
          $run_query_per=mysqli_query($con,$query_per);
          while($row_query_per=mysqli_fetch_array($run_query_per))
          {
@@ -20,6 +20,76 @@
          $subject=explode(",",$admin_permission);
         if(in_array($paga,$subject))
         {
+            $error_tiitle="";
+            $error_desc="";
+            $error_link=""; 
+            $errorresult=true;  
+if(isset($_POST['submit'])){
+    
+    if(empty($_POST['terms_title']))
+    {
+        $error_tiitle="Required..";
+        $errorresult=false;
+    }
+    else{
+        $error_tiitle="";
+    }
+    if(empty($_POST['terms_desc']))
+    {
+        $error_desc="Required..";
+        $errorresult=false;
+    }
+    else{
+        $error_desc="";
+    }
+    if(empty($_POST['terms_link']))
+    {
+        $error_link="Required..";
+        $errorresult=false;
+    }
+    else{
+        $error_link="";
+    }
+    if($errorresult==false)
+    {
+        goto end;
+    }
+
+    $terms_title = $_POST['terms_title'];
+   
+    $terms_desc = $_POST['terms_desc'];
+
+    $terms_link=$_POST['terms_link'];
+    
+    
+    $insert_terms = "insert into order_policy(o_policy_title,o_policy_link,o_policy_desc,o_policy_status) values ('$terms_title','$terms_link','$terms_desc','yes')";
+    
+    $run_terms = mysqli_query($con,$insert_terms);
+    
+    if($run_terms){
+        ?>
+         <script>
+        swal({
+            title:"Your New Order Policy Has Been Inserted.",
+            text: "",
+            icon: "success",
+            buttons: [,"OK"],
+            successMode: true,
+           
+    })
+    .then((willDelete) => {
+            if (willDelete) {
+                window.open('view-o-policy.php','_self');
+            } 
+            else {
+            }
+    });
+</script>
+      <?php  
+    }
+    
+}
+end:
      ?>
 
 <div class="main-content">
@@ -31,10 +101,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0 font-size-18">Add Order Policy</h4>
-
-                   
-                    
+                    <h4 class="mb-0 font-size-18">Add Order Policy</h4>  
                 </div>
             </div>
         </div>     
@@ -44,24 +111,27 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                       <form method="POST" enctype="multipart/form-data"> 
+                       <form class="custom-validation" method="POST" enctype="multipart/form-data"> 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Order Policy Title</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder=" Order Policy Title" name="terms_title"  id="example-text-input">
+                                    <input class="form-control" type="text" placeholder=" Order Policy Title" name="terms_title"  id="example-text-input" required>
+                                    <span style="color: red;"><?php echo $error_tiitle;; ?></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Order Policy link</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder="Order Policy Link" name="terms_link"  id="example-text-input">
+                                    <input class="form-control" type="text" placeholder="Order Policy Link" name="terms_link"  id="example-text-input" required>
+                                    <span style="color: red;"><?php echo $error_link; ?></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-number-input" class="col-md-3 col-form-label">Order Policy Description</label>
                                 <div class="col-md-9">
-                                <textarea required class="form-control" placeholder="Order Policy Description" name="terms_desc" cols="19" rows="6"> </textarea>
-                                </div>
+                                <textarea  class="form-control" placeholder="Order Policy Description" name="terms_desc" cols="19" rows="6" required> </textarea>
+                                <span style="color: red;"><?php echo $error_desc; ?></span>    
+                            </div>
                             </div>
                             <div class="form-group mt-4">
                                 <div class="text-right">
@@ -96,7 +166,8 @@
 
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
-
+        <script src="assets/libs/parsleyjs/parsley.min.js"></script>
+        <script src="assets/js/pages/form-validation.init.js"></script>
         <script src="assets/js/pages/dashboard.init.js"></script>
         <script src="assets/js/tinymce/tinymce.min.js"></script>
         <script>tinymce.init({ selector:'textarea'});</script>
@@ -154,42 +225,6 @@ $(document).ready(function(){
 </script>
 <?php  
 
-if(isset($_POST['submit'])){
-    
-    $terms_title = $_POST['terms_title'];
-   
-    $terms_desc = $_POST['terms_desc'];
-
-    $terms_link=$_POST['terms_link'];
-    
-    
-    $insert_terms = "insert into order_policy(o_policy_title,o_policy_link,o_policy_desc,o_policy_status) values ('$terms_title','$terms_link','$terms_desc','yes')";
-    
-    $run_terms = mysqli_query($con,$insert_terms);
-    
-    if($run_terms){
-        ?>
-         <script>
-        swal({
-            title:"Your New Order Policy Has Been Inserted.",
-            text: "",
-            icon: "success",
-            buttons: [,"OK"],
-            successMode: true,
-           
-    })
-    .then((willDelete) => {
-            if (willDelete) {
-                window.open('view-o-policy.php','_self');
-            } 
-            else {
-            }
-    });
-</script>
-      <?php  
-    }
-    
-}
  }
 
 else{

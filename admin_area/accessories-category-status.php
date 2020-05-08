@@ -6,6 +6,5 @@ $update_product="update accessories_category set accessories_category_status='$a
 mysqli_query($con,$update_product);
 $update_product="update accessories set accessories_status='$accessories_idss' where accessories_category='$accessories_id'";
 mysqli_query($con,$update_product);
-
-echo "<script>window.open('view-accessories-category.php','_self')</script>";
+echo "success";
 ?>

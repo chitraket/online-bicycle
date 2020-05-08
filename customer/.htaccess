@@ -1,8 +1,19 @@
 RewriteEngine On
-
+ErrorDocument 404 /SKOTE/customer/404.php
 RewriteRule ^login?$ customer_login.php
 RewriteRule ^my-account?$ myaccount.php
-RewriteRule ^view-order?$ full_orders.php
+
+RewriteRule ^view_order-([0-9A-ZA-Z!@=-]+)$ full_orders.php?o_id=$1 [QSA,NC,L]
+RewriteRule ^view_orders-([0-9A-ZA-Z!@=-]+)-([0-9A-ZA-Z!@=-]+)$ full_orders.php?o_id=$1&m=$2 [QSA,NC,L]
+RewriteRule ^view_orderss-([0-9A-ZA-Z!@=-]+)-([0-9A-ZA-Z!@=-]+)$ full_orders.php?o_id=$1&n=$2 [QSA,NC,L]
+
+RewriteRule ^orders_delete([0-9A-ZA-Z!@=-]+)$ orders_delete.php?o_id=$1 [QSA,NC,L]
+RewriteRule ^orders_returned-([0-9A-ZA-Z!@=-]+)$ orders_returned.php?o_id=$1 [QSA,NC,L]
+RewriteRule ^payment-([0-9A-ZA-Z!@=-]+)-([0-9A-ZA-Z!@=-]+)$ payment.php?o_id=$1&amount=$2 [QSA,NC,L]
+
+RewriteRule ^online_payment_successfuls-([0-9A-ZA-Z!@=-]+)-([0-9A-ZA-Z!@=-]+)$ success3.php?c_id=$1&txnid=$2 [QSA,NC,L]
+RewriteRule ^fail_payment-([0-9A-ZA-Z!@=-]+)-([0-9A-ZA-Z!@=-]+)$ fail.php?c_id=$1&txnid=$2 [QSA,NC,L]
+
 RewriteRule ^forget-password?$ forget_password.php
 RewriteRule ^forget-password-otp?$ forget_password_1.php
 RewriteRule ^forget-password-change?$ forget_password_2.php

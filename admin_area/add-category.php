@@ -10,7 +10,7 @@
      include("includes/sidebar.php"); 
      $paga=7;
      $admin_email=$_SESSION['admin_email'];
-     $query_per="select * from admins where admin_email='$admin_email'";
+     $query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
          $run_query_per=mysqli_query($con,$query_per);
          while($row_query_per=mysqli_fetch_array($run_query_per))
          {
@@ -20,6 +20,63 @@
          $subject=explode(",",$admin_permission);
      if(in_array($paga,$subject))
      { 
+        $error_product="";
+        $error_top="";
+        $errorresult=true;
+        if(isset($_POST['submit'])){
+                
+            if(empty($_POST['cat_title']))
+                {
+                    $error_product="Required..";
+                    $errorresult=false;
+                }
+                else{
+                    $error_product="";
+                }
+                        if(empty($_POST['customRadio']))
+                        {
+                            $error_top="Required..";
+                            $errorresult=false;
+                        }
+                        else{
+                            $error_top="";   
+                        }
+                if($errorresult==false)
+                {
+                    goto end;
+                }
+            $cat_title = $_POST['cat_title'];
+            
+            $cat_top=$_POST['customRadio'];
+            
+            $insert_cat = "insert into categories (cat_title,cat_top,cat_status) values ('$cat_title','$cat_top','yes')";
+            $run_cat = mysqli_query($con,$insert_cat);
+            
+            if($run_cat){
+                
+                ?>
+            <script>
+                swal({
+                    title:"Your New Age Has Been Inserted.",
+                    text: "",
+                    icon: "success",
+                    buttons: [,"OK"],
+                    successMode: true,
+                   
+            })
+            .then((willDelete) => {
+                    if (willDelete) {
+                        window.open('view-category.php','_self');
+                    } 
+                    else {
+                    }
+            });
+        </script>
+               <?php  
+            }
+            
+        }
+        end:
      ?>
 
 <div class="main-content">
@@ -31,10 +88,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0 font-size-18">Add Filter</h4>
-
-                   
-                    
+                    <h4 class="mb-0 font-size-18">Add Age</h4>   
                 </div>
             </div>
         </div>     
@@ -44,25 +98,27 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                       <form method="POST" enctype="multipart/form-data"> 
+                       <form class="custom-validation" method="POST" enctype="multipart/form-data"> 
                             <div class="form-group row">
-                                <label for="example-text-input" class="col-md-3 col-form-label">Category Title</label>
+                                <label for="example-text-input" class="col-md-3 col-form-label">Age Title</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder="Category Title" name="cat_title"  id="example-text-input">
+                                    <input class="form-control" type="text" placeholder="Age Title" name="cat_title"  id="example-text-input" required>
+                                    <span style="color: red;"><?php echo $error_product; ?></span>
                                 </div>
                             </div>
                            
                             <div class="form-group row">
-                            <label for="example-text-input" class="col-md-3 col-form-label">Manufacturer Top</label>
+                            <label for="example-text-input" class="col-md-3 col-form-label">Age Top</label>
                                                     
                                                     <div class="custom-control custom-radio mt-2 ml-2">
-                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked />
+                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked  required/>
                                                         <label class="custom-control-label" for="customRadio1">Yes</label>
                                                     </div>
                                                     <div class="custom-control custom-radio mt-2 ml-3">
                                                         <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" />
                                                         <label class="custom-control-label" for="customRadio2">No</label>
                                                     </div>
+                                                    <span style="color: red;"><?php echo $error_top; ?></span>
                             </div>
                             <div class="form-group mt-4">
                                 <div class="text-right">
@@ -86,39 +142,7 @@
         ?>
         <?php  
 
-            if(isset($_POST['submit'])){
-                
-                $cat_title = $_POST['cat_title'];
-                
-                $cat_top=$_POST['customRadio'];
-                
-                $insert_cat = "insert into categories (cat_title,cat_top,cat_status) values ('$cat_title','$cat_top','yes')";
-                $run_cat = mysqli_query($con,$insert_cat);
-                
-                if($run_cat){
-                    
-                    ?>
-                <script>
-                    swal({
-                        title:"Your New Filter Has Been Inserted.",
-                        text: "",
-                        icon: "success",
-                        buttons: [,"OK"],
-                        successMode: true,
-                       
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('view-category.php','_self');
-                        } 
-                        else {
-                        }
-                });
-            </script>
-                   <?php  
-                }
-                
-            }
+            
     ?>
     </div>
 </div>
@@ -129,7 +153,9 @@
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
+        <script src="assets/libs/parsleyjs/parsley.min.js"></script>
 
+        <script src="assets/js/pages/form-validation.init.js"></script>
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 

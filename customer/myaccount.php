@@ -4,7 +4,7 @@ include("includes/header.php");
 $_SESSION['papage']=0;
 if(!isset($_SESSION['customer_email']))
 {
-    echo "<script>window.open('customer_login.php','_self')</script>";
+    echo "<script>window.open('login','_self')</script>";
 }
 
 $custmoer_email=$_SESSION['customer_email'];
@@ -150,13 +150,8 @@ $custmoer_email=$_SESSION['customer_email'];
 
                                 
                             </div>
-                                                    <div class="welcome">
-                                                        <p>Hello, <strong>Erik Jhonson</strong> (If Not <strong>Jhonson
-                                                            !</strong><a href="login-register.html" class="logout"> Logout</a>)</p>
-                                                    </div>
-                                                    <p class="mb-0">From your account dashboard. you can easily check &
-                                                        view your recent orders, manage your shipping and billing addresses
-                                                        and edit your password and account details.</p>
+                                                    
+                                                    
                                                 </div>
                                                 <div class="col-md-4">
                                         
@@ -175,31 +170,6 @@ $custmoer_email=$_SESSION['customer_email'];
                                             include("change_pass.php"); 
                                             ?>
                                             <!-- Single Tab Content End -->
-                                            <!-- Single Tab Content Start -->
-                                            <div class="tab-pane fade" id="payment-method" role="tabpanel">
-                                                <div class="myaccount-content">
-                                                    <h5>Payment Method</h5>
-                                                    <p class="saved-message">You Can't Saved Your Payment Method yet.</p>
-                                                </div>
-                                            </div>
-                                            <!-- Single Tab Content End -->
-
-                                            <!-- Single Tab Content Start -->
-                                            <div class="tab-pane fade" id="address-edit" role="tabpanel">
-                                                <div class="myaccount-content">
-                                                    <h5>Billing Address</h5>
-                                                    <address>
-                                                        <p><strong>Erik Jhonson</strong></p>
-                                                        <p>1355 Market St, Suite 900 <br>
-                                                            San Francisco, CA 94103</p>
-                                                            <p>Mobile: (123) 456-7890</p>
-                                                    </address>
-                                                    <a href="#" class="btn btn-sqr"><i class="fa fa-edit"></i>
-                                                        Edit Address</a>
-                                                </div>
-                                            </div>
-                                            <!-- Single Tab Content End -->
-
                                             <!-- Single Tab Content Start -->
                                             <?php 
                                             include("edit_account.php");

@@ -3,7 +3,7 @@
        include("includes/header.php");
     ?>
     <!-- Start Header Area -->
-   
+    <!--<div id="load_screen"><div id="loading"><img src="loder.gif" ></div></div>-->
     <!-- end Header Area -->
     <main>
         <!-- breadcrumb area start -->
@@ -44,6 +44,7 @@
  $error_state="";
  $error_address="";
  $error_pincode="";
+ $error_image2="";
  $errorresult=true;
 if(isset($_POST['register'])){
     if(firstname($_POST['c_name']))
@@ -66,7 +67,7 @@ if(isset($_POST['register'])){
     }
     if(email($_POST['c_email']))
     {
-        $error_email = "Required..";
+        $error_email = "Required & Email is already registered.";
         $errorresult=false;
     }
     else
@@ -112,7 +113,7 @@ if(isset($_POST['register'])){
     }
     if(contact($_POST['c_contact']))
     {
-        $error_c_contact = "Required..";
+        $error_c_contact = "Required & Contact is already registered.";
         $errorresult=false;
     }
     else
@@ -136,6 +137,16 @@ if(isset($_POST['register'])){
     else
     {
         $error_pincode = "";
+    }
+    $test_img2=$_FILES['c_image']['name'];
+                
+    if(images($test_img2))
+    {   
+        $error_image2="JPEG or PNG file.";
+        $errorresult=false;
+    }
+    else{
+        $error_image2="";
     }
     if($errorresult==false)
     {
@@ -270,7 +281,7 @@ if(isset($_POST['register'])){
                                     </tr>
                                     <tr>
                                         <td>
-                                       <p>Click<a href="http://localhost/m-dev-store/register-verification?email='.base64_encode($c_email).'" class="btn btn-sqr">here</a> to activate your account.</p>
+                                       <p>Click<a href="http://localhost/SKOTE/register-verification-'.base64_encode($c_email).'" class="btn btn-sqr">here</a> to activate your account.</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -354,7 +365,7 @@ if(isset($_POST['register'])){
                 })
                 .then((willDelete) => {
                         if (willDelete) {
-                            window.open('customer/customer_login.php','_self');
+                            window.open('customer/login','_self');
                         } else {
                         
                         }
@@ -462,6 +473,7 @@ end:
                                     <div class="single-input-item">
                                     <label for="image">Image</label>
                                     <input type="file"  name="c_image"  id="image" accept=".jpg,.jpeg,.png,.gif"/>
+                                    <span style="color: red;"><?php echo $error_image2; ?></span>
                                     </div>
                                    
                                     <div class="single-input-item">
@@ -575,7 +587,7 @@ end:
                if(data!='0')
                {
                     $("#email").css("border","1px solid red");
-                    $("#emailMsg").html("<p class='text-danger'>Invalid email idss.</p>");
+                    $("#emailMsg").html("<p class='text-danger'>Email is already registered.</p>");
                     $('#emailMsg').focus();
                     $("#btnsubmit").attr("disabled",true);
                     email_err=false;
@@ -634,7 +646,7 @@ end:
                if(data!='0')
                {
                     $("#contact").css("border","1px solid red");
-                    $("#contactMsg").html("<p class='text-danger'>Invalid contact numberss.</p>");
+                    $("#contactMsg").html("<p class='text-danger'>Contact is already registered.</p>");
                     $('#contactMsg').focus();
                     $("#btnsubmit").attr("disabled",true);
                     contact_err=false;
@@ -982,17 +994,13 @@ end:
                 $("#addressMsg").html("<p class='text-danger'></p>");
                 $("#btnsubmit").attr("disabled",false);
             }
-           
-
         }
-
 	
 	});
 </script>
 
 
 </body>
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:08 GMT -->
 </html>
 
 

@@ -11,7 +11,7 @@
         include("includes/sidebar.php"); 
         $paga=24;
         $admin_email=$_SESSION['admin_email'];
-$query_per="select * from admins where admin_email='$admin_email'";
+$query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
     $run_query_per=mysqli_query($con,$query_per);
     while($row_query_per=mysqli_fetch_array($run_query_per))
     {
@@ -252,29 +252,11 @@ $query_per="select * from admins where admin_email='$admin_email'";
                             data:{review_ids:review_ids,review_idss:review_idss},
                             success:function()
                             {
-
+                                window.open('view-review.php','_self');
                             }
                         });
                     });
         </script> 
-        <script>
-                    $('.switch2').on('click',function(){
-                        var category_id=$(this).attr("id");
-                        var category_ids=category_id.substring(2,category_id.length);
-                        var category_idss=$(this).attr("name");
-                        $.ajax({
-                            url:"category-status-top.php",
-                            method:"POST",
-                            data:{category_ids:category_ids,category_idss:category_idss},
-                            success:function()
-                            {
-
-                            }
-                        });
-                        
-                        
-                    });
-                </script>
 
         <script>
            $('.btn-delete').on('click',function(e){

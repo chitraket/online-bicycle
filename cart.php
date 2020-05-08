@@ -162,11 +162,11 @@
                                       if ($papage==0) {
                                           ?>
 
-                                    <td class="pro-thumbnail"><a href="bikes-details?pro_id=<?php echo base64_encode($p_id); ?>"><img class="img-fluid" src="admin_area/product_images/<?php echo $p_img ?>" alt="Product" /></a></td>
+                                    <td class="pro-thumbnail"><a href="bikes-<?php echo base64_encode($p_id); ?>"><img class="img-fluid" src="admin_area/product_images/<?php echo $p_img ?>" alt="Product" /></a></td>
                                    
                                     <td class="pro-title">
                                         
-                                        <a href="bikes-details?pro_id=<?php echo base64_encode($p_id); ?>"><?php  echo $p_name ?></a>
+                                        <a href="bikes-<?php echo base64_encode($p_id); ?>"><?php  echo $p_name ?></a>
                                     </td>
                                     <td class="pro-price"><span><?php echo $size ?></span></td>  
 
@@ -185,18 +185,18 @@
                                                     <input type="hidden" name="papage" value="<?php echo $papage?>">
                                     </form>
                                     <td class="pro-subtotal"><span>Rs. <?php echo $bill ?></span></td>
-                                    <td class="pro-remove"><a href="delete-cart?p_name=<?php echo base64_encode($p_name);?>&p_id=<?php echo base64_encode($p_id); ?>" class="btn-delete"><i class="fa fa-trash-o"></i></a></td>
+                                    <td class="pro-remove"><a href="delete_cart-<?php echo base64_encode($p_name);?>-<?php echo base64_encode($p_id); ?>" class="btn-delete"><i class="fa fa-trash-o"></i></a></td>
                                      <?php
                                       }
                                       if ($papage==1) {
                                           ?>
                                     
                                   
-                                    <td class="pro-thumbnail"><a href="accessories-details?accessories_id=<?php echo  base64_encode($p_id); ?>"><img class="img-fluid" src="admin_area/accessories_images/<?php echo $p_img ?>" alt="Product" /></a></td>
+                                    <td class="pro-thumbnail"><a href="accessories-<?php echo  base64_encode($p_id); ?>"><img class="img-fluid" src="admin_area/accessories_images/<?php echo $p_img ?>" alt="Product" /></a></td>
                                     
                                     <td class="pro-title">
                                         
-                                        <a href="accessories-details?accessories_id=<?php echo base64_encode($p_id); ?>" ><?php  echo $p_name ?></a>
+                                        <a href="accessories-<?php echo base64_encode($p_id); ?>" ><?php  echo $p_name ?></a>
                                     </td>
                                     
                                     <td class="pro-price"><span><?php echo $size ?></span></td>

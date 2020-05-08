@@ -23,23 +23,15 @@
                 </a>
             </li>
 
-            <li class="menu-title">Product</li>
-
-<!--<li>
-                <a href="calendar.html" class=" waves-effect">
-                    <i class="bx bx-calendar"></i>
-                    <span>Calendar</span>
-                </a>
-            </li>-->
-
+            <li class="menu-title">Bikes</li>
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-store"></i>
-                    <span>Product</span>
+                    <span>Bikes</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="add-product.php">Add Products</a></li>
-                    <li><a href="view-product.php">View Products</a></li>
+                    <li><a href="add-product.php">Add Bikes</a></li>
+                    <li><a href="view-product.php">View Bikes</a></li>
                 </ul>
             </li>
 
@@ -57,22 +49,22 @@
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-envelope"></i>
-                    <span>Product Category</span>
+                    <span>Bikes Category</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="add-product-category.php">Add Product Category</a></li>
-                    <li><a href="view-product-category.php">View Product Category</a></li>
+                    <li><a href="add-product-category.php">Add Bikes Category</a></li>
+                    <li><a href="view-product-category.php">View Bikes Category</a></li>
                 </ul>
             </li>
 
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-receipt"></i>
-                    <span>Filter</span>
+                    <span>Age</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="add-category.php">Add Filter</a></li>
-                    <li><a href="view-category.php">View Filter</a></li>
+                    <li><a href="add-category.php">Add Age</a></li>
+                    <li><a href="view-category.php">View Age</a></li>
                 </ul>
             </li>
 

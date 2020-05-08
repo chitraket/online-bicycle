@@ -10,7 +10,7 @@
      include("includes/sidebar.php"); 
      $paga=13;
      $admin_email=$_SESSION['admin_email'];
-     $query_per="select * from admins where admin_email='$admin_email'";
+     $query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
          $run_query_per=mysqli_query($con,$query_per);
          while($row_query_per=mysqli_fetch_array($run_query_per))
          {
@@ -18,71 +18,34 @@
                                      
          } 
          $subject=explode(",",$admin_permission);
+         
         if(in_array($paga,$subject))
         {
-     ?>
-
-<div class="main-content">
-
-<div class="page-content">
-    <div class="container-fluid">
-
-        <!-- start page title -->
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box d-flex align-items-center justify-content-between">
-                    <h4 class="mb-0 font-size-18">Add Accessoires Category</h4>   
-                </div>
-            </div>
-        </div>     
-        <!-- end page title -->
-
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                       <form method="POST" enctype="multipart/form-data"> 
-                            <div class="form-group row">
-                                <label for="example-text-input" class="col-md-3 col-form-label">Category Title</label>
-                                <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder="Category Title" name="manufacturer_title"  id="example-text-input">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                            <label for="example-text-input" class="col-md-3 col-form-label">Category Top</label>
-                                                    
-                                                    <div class="custom-control custom-radio mt-2 ml-2">
-                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked />
-                                                        <label class="custom-control-label" for="customRadio1">Yes</label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio mt-2 ml-3">
-                                                        <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" />
-                                                        <label class="custom-control-label" for="customRadio2">No</label>
-                                                    </div>
-                            </div>
-                            <div class="form-group mt-4">
-                                <div class="text-right">
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="submit">
-                                        Submit
-                                    </button>
-                                    <button type="reset" class="btn btn-secondary waves-effect">
-                                        Cancel
-                                    </button>
-                                </div>
-                            </div>                                        
-                       </form>
-
-                    </div>
-                </div>
-            </div> <!-- end col -->
-        </div>
-        <!-- end row -->
-        <?php 
-        include("includes/footer.php");
-        ?>
-        <?php  
-
+            $error_product="";
+            $error_top="";
+            $errorresult=true;
             if(isset($_POST['submit'])){
+            if(empty($_POST['manufacturer_title']))
+                {
+                    $error_product="Required..";
+                    $errorresult=false;
+                }
+                else{
+                    $error_product="";
+                }
+                        if(empty($_POST['customRadio']))
+                        {
+                            $error_top="Required..";
+                            $errorresult=false;
+                        }
+                        else{
+                            $error_top="";   
+                        }
+                if($errorresult==false)
+                {
+                    goto end;
+                }
+            
                 
                 $manufacturer_title = $_POST['manufacturer_title'];
 
@@ -116,7 +79,67 @@
                 }
                 
             }
-    ?>
+            end:
+     ?>
+<div class="main-content">
+<div class="page-content">
+    <div class="container-fluid">
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0 font-size-18">Add Accessoires Category</h4>   
+                </div>
+            </div>
+        </div>     
+        <!-- end page title -->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                       <form class="custom-validation" method="POST" enctype="multipart/form-data"> 
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-md-3 col-form-label">Accessoires Category Title</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" placeholder="Accessoires Category Title" name="manufacturer_title"  id="example-text-input" required>
+                                    <span style="color: red;"><?php echo $error_product; ?></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Accessoires Category Top</label>
+                                                    
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio1" name="customRadio"  value="yes" class="custom-control-input" checked required />
+                                                        <label class="custom-control-label" for="customRadio1">Yes</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio2" name="customRadio" value="no" class="custom-control-input" />
+                                                        <label class="custom-control-label" for="customRadio2">No</label>
+                                                    </div>
+                                                    <span style="color: red;"><?php echo $error_top; ?></span>
+                            </div>
+                            <div class="form-group mt-4">
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="submit">
+                                        Submit
+                                    </button>
+                                    <button type="reset" class="btn btn-secondary waves-effect">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>                                        
+                       </form>
+
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+        <!-- end row -->
+        <?php 
+        include("includes/footer.php");
+        ?>
+
     </div>
 </div>
 </div>
@@ -127,6 +150,9 @@
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
 
+        <script src="assets/libs/parsleyjs/parsley.min.js"></script>
+
+        <script src="assets/js/pages/form-validation.init.js"></script>
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 

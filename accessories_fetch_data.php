@@ -1,9 +1,4 @@
 <?php
-
-//fetch_data.php
-
-// use function PHPSTORM_META\elementType;
-
 include('includes/db.php');
 if(isset($_POST["action"]))
 {
@@ -64,18 +59,18 @@ $outputs='';
                                     <!-- product grid start -->
                                     <div class="product-item">
                                         <figure class="product-thumb">
-                                            <a href="accessories-details?accessories_id=<?php echo base64_encode($row['accessories_id']);?>">
-                                                <img class="pri-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_1'];?>" alt="product" style="height:180px;">
+                                            <a href="accessories-<?php echo base64_encode($row['accessories_id']);?>">
+                                                <img class="pri-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_1'];?>" alt="product" >
                                                 <?php
                                                 if($row['accessories_image_2']=="")
                                                 {
                                                     ?>
-                                                    <img class="sec-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_1'];?>" alt="product" style="height:180px;">
+                                                    <img class="sec-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_1'];?>" alt="product">
                                                     <?php 
                                                 } 
                                                 else{
                                                 ?>
-                                                <img class="sec-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_2'];?>" alt="product" style="height:180px;">
+                                                <img class="sec-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_2'];?>" alt="product" >
                                                 <?php 
                                                 }?>
                                             </a>
@@ -87,6 +82,11 @@ $outputs='';
                                                 <div class="product-label new">
                                                     <span>New</span>
                                                 </div>
+                                                <?php
+                                                }
+                                                if($row['accessories_label']=="old")
+                                                { 
+                                            ?>                                           
                                                 <?php
                                                 }
                                                 if($row['accessories_label']=="sale")
@@ -102,10 +102,6 @@ $outputs='';
                                                 }
                                                 ?>
                                             </div>
-                                           <!-- <div class="button-group">
-                                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="Add to wishlist"><i class="pe-7s-like"></i></a>
-                                                <a href="compare.html" data-toggle="tooltip" data-placement="left" title="Add to Compare"><i class="pe-7s-refresh-2"></i></a>
-                                            </div>-->
                                             
                                         </figure>
                                         <div class="product-caption text-center">
@@ -115,17 +111,23 @@ $outputs='';
                                             $run_carts=mysqli_query($con, $query3);
                                             while ($row_carts=mysqli_fetch_array($run_carts)) { 
                                             ?>
-                                                <a href="accessories?manufacturer_id=<?php echo base64_encode($accessories_brand_id);?>"><?php echo $row_carts['accessories_brand']; ?></a>
+                                                <a href="accessories_manufacturer-<?php echo base64_encode($accessories_brand_id);?>"><?php echo $row_carts['accessories_brand']; ?></a>
                                                 <?php 
                                             }
                                                 ?>
                                             </div>
                                             <h6 class="product-name">
-                                                <a href="accessories-details.php?accessories_id=<?php echo  base64_encode($row['accessories_id']);?>"><?php echo $row['accessories_name'];?></a>
+                                                <a href="accessories-<?php echo  base64_encode($row['accessories_id']);?>"><?php echo $row['accessories_name'];?></a>
                                             </h6>
                                             <div class="price-box">
                                             <?php
                                             if($row['accessories_label']=="new")
+                                            { 
+                                            ?>  
+                                                <span class="price-regular">Rs.<?php echo $row['accessories_prices'] ?></span>
+                                            <?php 
+                                            }
+                                            if($row['accessories_label']=="old")
                                             { 
                                             ?>  
                                                 <span class="price-regular">Rs.<?php echo $row['accessories_prices'] ?></span>

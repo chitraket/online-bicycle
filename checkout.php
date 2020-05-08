@@ -30,6 +30,7 @@
             </div>
         </div>
         <!-- breadcrumb area end -->
+        
 <?php
 $session_email=$_SESSION['customer_email'];
 $select_customer="select * from customers where customer_email='$session_email'";
@@ -39,18 +40,6 @@ $customer_id=$row_customer['customer_id'];
 $_SESSION['c_id']=$customer_id;
 
 ?>
-
-        <!-- checkout main wrapper start -->
-        <div class="checkout-page-wrapper section-padding">
-            <div class="container">
-
-            <form name="postForm" action="#" method="POST">
- 
-            <input type="hidden" id="ORDER_ID" tabindex="1" maxlength="20" size="20"name="ORDER_ID" autocomplete="off"value="<?php echo  "ORDS" . rand(10000,99999999)?>">
-                        <input type="hidden" id="CUST_ID" tabindex="2" maxlength="12" size="12" name="CUST_ID" autocomplete="off" value="<?php echo $customer_id; ?>">
-                        <input type="hidden" id="INDUSTRY_TYPE_ID" tabindex="4" maxlength="12" size="12" name="INDUSTRY_TYPE_ID" autocomplete="off" value="Retail">
-                        <input type="hidden" id="CHANNEL_ID" tabindex="4" maxlength="12"size="12" name="CHANNEL_ID" autocomplete="off" value="WEB">
-                <div class="row">
                 <?php 
                  $error_c_name = ""; 
                  $error_l_name="";
@@ -61,6 +50,9 @@ $_SESSION['c_id']=$customer_id;
                  $error_state="";
                  $error_address="";
                  $error_pincode="";
+                 $error_box="";
+                 //$address="";
+                 $error_new_address="";
                  $errorresult=true;
         if(isset($_POST['place_order']))
         {
@@ -83,8 +75,6 @@ $_SESSION['c_id']=$customer_id;
     {
         $error_l_name = "";
     }
-    
-
     if(city($_POST['c_city']))
     {
         $error_city = "Required..";
@@ -103,7 +93,7 @@ $_SESSION['c_id']=$customer_id;
     {
         $error_state = "";
     }
-    if(contact($_POST['c_contact']))
+    if(contacts($_POST['c_contact']))
     {
         $error_c_contact = "Required..";
         $errorresult=false;
@@ -130,15 +120,33 @@ $_SESSION['c_id']=$customer_id;
     {
         $error_pincode = "";
     }
+    if(empty($_POST['payment']))
+    {
+        $error_new_address="Required..";
+        $errorresult=false;
+    }
+    else
+    {
+        $error_new_address="";
+    }
+    if(empty($_POST['paymentmethod']))
+    {
+        $error_box="Required..";
+        $errorresult=false;
+    }
+    else{
+        $error_box="";
+    }
     if($errorresult==false)
     {
         goto end;
     }
+    
             if($_POST['paymentmethod']=="cash")
             {
                 $_SESSION['CUST_ID']=$_POST['CUST_ID'];
               ?>
-                <script type="text/javascript">
+            <script type="text/javascript">
               swal({
                         title: "Order Successfully Placed",
                         text: "Thank you for ordering. We received your order and will begin processing it soon. Your order information appears below.",
@@ -155,7 +163,6 @@ $_SESSION['c_id']=$customer_id;
                 });
                 </script>
                 <?php
-                
             }
             else{  
                 $_SESSION['ORDER_ID']=$_POST['ORDER_ID'];
@@ -175,20 +182,32 @@ $_SESSION['c_id']=$customer_id;
             $country=$_POST['c_state'];
             $city=$_POST['c_city'];
             $phone=$_POST['c_contact'];
-            if($_POST['payment']=="deliert")
-            {
-                $address=$_POST['c_address'];
-            }
-            else
-            {
-                $address=$_POST['c_addresss'];
-            }
+                if($_POST['payment']=='deliert')
+                {
+                    $address=$_POST['c_address'];
+                }
+                else
+                {
+                    $address=$_POST['c_addresss'];
+                }
             $update_order="update customers set customer_name='$f_names',customer_email='$email',customer_state='$country',customer_city='$city',customer_contact='$phone',customer_address='$address' where customer_email='$customer_emails'";
             $run_querys=mysqli_query($db,$update_order);
 
         }
         end:
         ?>
+        <!-- checkout main wrapper start -->
+        <div class="checkout-page-wrapper section-padding">
+            <div class="container">
+
+            <form name="postForm" action="#" method="POST">
+ 
+            <input type="hidden" id="ORDER_ID" tabindex="1" maxlength="20" size="20"name="ORDER_ID" autocomplete="off"value="<?php echo  "ORDS" . rand(10000,99999999)?>">
+                        <input type="hidden" id="CUST_ID" tabindex="2" maxlength="12" size="12" name="CUST_ID" autocomplete="off" value="<?php echo $customer_id; ?>">
+                        <input type="hidden" id="INDUSTRY_TYPE_ID" tabindex="4" maxlength="12" size="12" name="INDUSTRY_TYPE_ID" autocomplete="off" value="Retail">
+                        <input type="hidden" id="CHANNEL_ID" tabindex="4" maxlength="12"size="12" name="CHANNEL_ID" autocomplete="off" value="WEB">
+                <div class="row">
+
                 <?php
                 
                 if(isset($_SESSION['customer_email'])){
@@ -236,8 +255,8 @@ $_SESSION['c_id']=$customer_id;
                                     </div>
                                    <div class="single-input-item">
                                     <div class="custom-control custom-radio">
-                                                <input type="radio" id="cashon" name="payment" value="deliert" class="custom-control-input" checked />
-                                                <label class="custom-control-label" for="cashon" class="required">Delivery address</label>
+                                                <input type="radio" id="cashon" name="payment" value="deliert" class="custom-control-input" checked/>
+                                                <label class="custom-control-label" for="cashon" class="required">Delivery address <span style="color: red;"><?php echo $error_new_address; ?></span></label>
                                     </div>
                                    </div>
                                        
@@ -249,14 +268,15 @@ $_SESSION['c_id']=$customer_id;
                                     <div class="single-input-item">
                                     <div class="custom-control custom-radio">
                                                 <input type="radio" id="cashons" name="payment" value="new" class="custom-control-input"  />
-                                                <label class="custom-control-label" for="cashons" class="required">New address</label>
+                                                <label class="custom-control-label" for="cashons" class="required">New address <span style="color: red;"><?php echo $error_new_address; ?></span></label>
+                                                
                                         
                                     </div>
                                    </div>
                                        
                                     
                                     <div class="single-input-item">
-                                     <textarea  placeholder="Enter New Address" name="c_addresss"  id="address"  cols="30" rows="3" ><?php echo " " ?></textarea>
+                                     <textarea  placeholder="Enter New Address" name="c_addresss"  id="txtaddress"  cols="30" rows="3" ><?php echo "  " ?></textarea>
                                         <span id="addressMsg"></span>
                                         <span style="color: red;"><?php echo $error_address; ?></span>
                                     </div>
@@ -283,7 +303,9 @@ $_SESSION['c_id']=$customer_id;
 
                                     <div class="single-input-item">
                                         <label for="phone" class="required">Phone</label>
-                                        <input type="text" placeholder="Enter your contact " name="c_contact" id="contact" value="<?php echo $customer_contact; ?>" required/>
+
+                                        <input type="text" placeholder="Enter your contact" value="<?php echo $customer_contact; ?>"  disabled/>
+                                        <input type="hidden" name="c_contact" id="contact" value="<?php echo $customer_contact; ?>" required>
                                         <span id="contactMsg"></span>
                                         <span style="color: red;"><?php echo $error_c_contact; ?></span>
                                     </div>
@@ -364,14 +386,14 @@ $_SESSION['c_id']=$customer_id;
                                             <tr>
                                                 <?php if($papage==0)
                                                 {?>
-                                                <td><a href="bikes-details?pro_id=<?php echo base64_encode($p_id); ?>"><?php echo $p_name; ?> <strong> × <?php echo $p_qty; ?></strong></a>
+                                                <td><a href="bikes-<?php echo base64_encode($p_id); ?>"><?php echo $p_name; ?> <strong> × <?php echo $p_qty; ?></strong></a>
                                                 </td>
                                                 <td><?php echo $bill; ?></td>
                                                 <?php
                                                 }
                                                 if ($papage==1) {
                                                     ?>
-                                                <td><a href="accessories-details?accessories_id=<?php echo base64_encode($p_id); ?>"><?php echo $p_name; ?> <strong> × <?php echo $p_qty; ?></strong></a>
+                                                <td><a href="accessories-<?php echo base64_encode($p_id); ?>"><?php echo $p_name; ?> <strong> × <?php echo $p_qty; ?></strong></a>
                                                 </td>
                                                 <td><?php echo $bill; ?></td>
                                                     <?php
@@ -408,8 +430,9 @@ $_SESSION['c_id']=$customer_id;
                                     <div class="single-payment-method show">
                                         <div class="payment-method-name">
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="cashon" name="paymentmethod" value="cash" class="custom-control-input" checked />
-                                                <label class="custom-control-label" for="cashon">Cash On Delivery</label>
+                                                <input type="radio" id="cashon" name="paymentmethod" value="cash" class="custom-control-input" checked required/>
+                                                <label class="custom-control-label" for="cashon">Cash On Delivery <span style="color: red;"><?php echo $error_box; ?></span></label>
+                                                
                                             </div>
                                         </div>
                                         <div class="payment-method-details" data-method="cash">
@@ -421,7 +444,8 @@ $_SESSION['c_id']=$customer_id;
                                         <div class="payment-method-name">
                                             <div class="custom-control custom-radio">
                                                 <input type="radio" id="paypalpayment" name="paymentmethod" value="paypal" class="custom-control-input" />
-                                                <label class="custom-control-label" for="paypalpayment">Paytm <img src="assets/img/paypal-card.jpg" class="img-fluid paypal-card" alt="Paypal" /></label>
+                                                <label class="custom-control-label" for="paypalpayment">Paytm <img src="assets/img/paypal-card.jpg" class="img-fluid paypal-card" alt="Paypal" /> <span style="color: red;"><?php echo $error_box; ?></span></label>
+                                                
                                             </div>
                                         </div>
                                         <div class="payment-method-details" data-method="paypal">
@@ -532,8 +556,6 @@ $_SESSION['c_id']=$customer_id;
         $('#l_name').focusout(function(){
             l_name_check();
         });
-
-
         $('#state').keyup(function(){
             state_check();
         });
@@ -554,7 +576,6 @@ $_SESSION['c_id']=$customer_id;
         $('#contact').focusout(function(){
             contact_check();
         });
-
         $('#pincode').keyup(function(){
             pincode_check();
         });
@@ -797,7 +818,4 @@ $_SESSION['c_id']=$customer_id;
 	});
 </script>
 </body>
-
-
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:07 GMT -->
 </html>

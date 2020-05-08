@@ -8,18 +8,116 @@
  else{
     include("includes/header.php");
     include("includes/sidebar.php"); 
+    include("includes/validation.php");
     $paga=44;
     $admin_email=$_SESSION['admin_email'];
-    $query_per="select * from admins where admin_email='$admin_email'";
+    $query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
         $run_query_per=mysqli_query($con,$query_per);
         while($row_query_per=mysqli_fetch_array($run_query_per))
         {
-             $admin_permission=$row_query_per['admin_permission'];
-                                    
+             $admin_permission=$row_query_per['admin_permission'];       
         } 
         $subject=explode(",",$admin_permission);
         if(in_array($paga,$subject))
         { 
+            $error_name="";
+            $error_email="";
+            $error_pass="";
+            $error_contact="";
+            $error_check="";
+            $error_image2="";
+            $errorresult=true;
+            if(isset($_POST['submit'])){
+                if(firstname($_POST['a_name']))
+                    {
+                        $error_name="Required..";
+                        $errorresult=false;
+                    }
+                    else{
+                        $error_name="";
+                    }
+                    if(email($_POST['a_email']))
+                    {
+                        $error_email="Required..";
+                        $errorresult=false;
+                    }
+                    else{
+                        $error_email="";
+                    }
+                    if(pass($_POST['a_pass']))
+                    {
+                        $error_pass="Required..";
+                        $errorresult=false;
+                    }
+                    else{
+                        $error_pass="";
+                    }
+                    if(contact($_POST['a_contact']))
+                    {
+                        $error_contact="Required..";
+                        $errorresult=false;
+                    }
+                    else{
+                        $error_contact="";
+                    }
+                    if(empty($_POST['subject']))
+                    {
+                        $error_check="Required..";
+                        $errorresult=false;
+                    }
+                    else{
+                        $error_check="";
+                    }
+                    $test_img1 = $_FILES['admin_img1']['name'];
+                if(images($test_img1))
+                {   
+                    $error_image2="JPEG or PNG file.";
+                    $errorresult=false;
+                }
+                else{
+                    $error_image2="";
+                }
+                if($errorresult==false)
+                    {
+                        goto end;
+                    }
+                $a_name=$_POST['a_name'];
+                $a_email=$_POST['a_email'];
+                $a_pass=$_POST['a_pass'];
+                $a_contact=$_POST['a_contact'];
+                $a=$_POST['subject'];
+                $per=implode(",",$a);
+                //$admin_img1=$_POST['admin_img1'];
+                $admin_img1 = $_FILES['admin_img1']['name'];
+                $temp_name1 = $_FILES['admin_img1']['tmp_name'];
+               
+                move_uploaded_file($temp_name1,"admin_images/$admin_img1");
+                $insert_cat = "insert into admins(admin_name,admin_email,admin_pass,admin_image,admin_contact,admin_roles,admin_permission,admin_status)  values('$a_name','$a_email','$a_pass','$admin_img1','$a_contact','sub','$per','yes')";
+                $run_cat = mysqli_query($con,$insert_cat);
+                if($run_cat)
+                {
+                        ?>
+                        <script>
+                        swal({
+                            title:"Your New Admin Has Been Inserted.",
+                            text: "",
+                            icon: "success",
+                            buttons: [,"OK"],
+                            successMode: true,
+                           
+                    })
+                    .then((willDelete) => {
+                            if (willDelete) {
+                                window.open('view-sub-user.php','_self');
+                            } 
+                            else {
+                            }
+                    });
+                </script>
+                        <?php
+                }
+                    }
+                    end:
      ?>
 
 <div class="main-content">
@@ -41,38 +139,42 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                       <form method="POST" enctype="multipart/form-data"> 
+                       <form class="custom-validation" method="POST" enctype="multipart/form-data"> 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Admin Name</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder="Admin Name" name="a_name"  id="example-text-input">
+                                    <input class="form-control" type="text" placeholder="Admin Name" name="a_name"  id="example-text-input" required data-parsley-pattern="[a-zA-Z]*">                                   
+                                    <span style="color: red;"><?php echo $error_name; ?></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Admin Email</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder="Admin Email" name="a_email"  id="example-text-input">
+                                    <input class="form-control" type="email" placeholder="Admin Email" name="a_email"  id="example-text-input" required>
+                                    <span style="color: red;"><?php echo $error_email; ?></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Admin Password</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="password" placeholder="Admin Password" name="a_pass"  id="example-text-input">
+                                    <input class="form-control" type="password" placeholder="Admin Password" name="a_pass"  id="example-text-input" required data-parsley-pattern="(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}">
+                                    <span style="color: red;"><?php echo $error_pass; ?></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Admin Contact</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder="Admin Contact" name="a_contact"  id="example-text-input">
+                                    <input class="form-control" type="number" placeholder="Admin Contact" name="a_contact"  id="example-text-input" required data-parsley-pattern="/^[9876][0-9]{9}$/">
+                                    <span style="color: red;"><?php echo $error_contact; ?></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-url-input" class="col-md-3 col-form-label">Admin Image</label>
                                 <div class="col-md-9">
                                 <div class="custom-file">
-                                            <input type="file" name="admin_img1" class="custom-file-input" id="customFile">
+                                            <input type="file" name="admin_img1" class="custom-file-input" id="customFile"  accept=".jpg,.jpeg,.png">
+                                            <span style="color: red;"><?php echo $error_image2; ?></span>
                                             <label class="custom-file-label" id="customFiles">Choose file</label>
-                                            
                                             <script type="text/javascript">
                                             const realfileBtn=document.getElementById("customFile");
                                             const customTxt=document.getElementById("customFiles");
@@ -93,7 +195,7 @@
                             <label for="example-url-input" class="col-md-3 col-form-label">Admin Permission</label>
                                 <div class="col-md-9">
                                         <div class="custom-control custom-checkbox mb-2">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1" name="subject[]" value="1" >
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1" name="subject[]" value="1" checked required>
                                         <label class="custom-control-label" for="customCheck1">Add Product</label>
                                         </div>
                                         <div class="custom-control custom-checkbox mb-2">
@@ -212,6 +314,7 @@
                                             <input type="checkbox" class="custom-control-input" id="customCheck30" name="subject[]" value="30" >
                                             <label class="custom-control-label" for="customCheck30">View Order Policy</label>
                                         </div>
+                                        <span style="color: red;"><?php echo $error_check; ?></span>
                                 </div>
                             </div>
                             
@@ -235,42 +338,8 @@
         <?php 
         include("includes/footer.php");
         ?>
-        <?php  
-            $s_row="";
-          if(isset($_POST['submit'])){
-            $a_name=$_POST['a_name'];
-            $a_email=$_POST['a_email'];
-            $a_pass=$_POST['a_pass'];
-            $a_contact=$_POST['a_contact'];
-            $a=$_POST['subject'];
-            $per=implode(",",$a);
-            //$admin_img1=$_POST['admin_img1'];
-            $admin_img1 = $_FILES['admin_img1']['name'];
-            $temp_name1 = $_FILES['admin_img1']['tmp_name'];
-           
-            move_uploaded_file($temp_name1,"admin_images/$admin_img1");
-            $insert_cat = "insert into admins(admin_name,admin_email,admin_pass,admin_image,admin_contact,admin_roles,admin_permission,admin_status)  values('$a_name','$a_email','$a_pass','$admin_img1','$a_contact','sub','$per','yes')";
-            $run_cat = mysqli_query($con,$insert_cat);
-                    ?>
-                    <script>
-                    swal({
-                        title:"Your New Admin Has Been Inserted.",
-                        text: "",
-                        icon: "success",
-                        buttons: [,"OK"],
-                        successMode: true,
-                       
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('view-sub-user.php','_self');
-                        } 
-                        else {
-                        }
-                });
-            </script>
-                    <?php
-                }
+        <?php 
+         
                
 ?>
     </div>
@@ -282,7 +351,8 @@
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
-
+        <script src="assets/libs/parsleyjs/parsley.min.js"></script>
+        <script src="assets/js/pages/form-validation.init.js"></script>
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 

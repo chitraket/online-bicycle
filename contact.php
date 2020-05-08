@@ -3,10 +3,8 @@
        include("includes/header.php");
     ?>
     <!-- Start Header Area -->
-  
+    <!--div id="load_screen"><div id="loading"><img src="loder.gif" ></div></div>-->
     <!-- end Header Area -->
-
-
     <main>
         <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
@@ -26,11 +24,6 @@
             </div>
         </div>
         <!-- breadcrumb area end -->
-
-        <!-- google map start -->
-        
-        <!-- google map end -->
-
         <!-- contact area start -->
         <div class="contact-area section-padding pt-5">
             <div class="container">

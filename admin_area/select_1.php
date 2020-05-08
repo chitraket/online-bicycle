@@ -182,14 +182,17 @@ while($row_customer_orders=mysqli_fetch_array($run_customer_orders))
                                         
                                     if ($product_status=="o") {
                                         ?>
+                                        <a href="Generate_bill.php?or_id=<?php echo $order_id; ?>"><input type="button" class="btn btn-primary"  value="Bill" ></a>
                                             <a href="cancel_order.php?del_id=<?php echo $order_id; ?>&status=c" id="btn-delete"><input type="button" class="btn btn-danger"  value="Cancel Order" ></a>
                                             <a href="delete.php?del_id=<?php echo $order_id; ?>&status=p&txnid=<?php echo $txnids ?>&invoiceno=<?php echo $product_invoice ?>&total=<?php echo $totals ?>"><input type="button" class="btn btn-primary"  value="Packed" ></a> 
                                             <span class="ml-2 badge badge-pill badge-soft-success font-size-10" ><img src="icon/tick.png" style="height:25px;"/> Ordered And Approved</span>
+
                                     <?php
                                         }
                                     if($product_status=="p")
                                     {
                                     ?>
+                                    <a href="Generate_bill.php?or_id=<?php echo $order_id; ?>"><input type="button" class="btn btn-primary"  value="Bill"></a>
                                         <a href="cancel_order.php?del_id=<?php echo $order_id; ?>&status=c" id="btn-delete"><input type="button" class="btn btn-danger"  value="Cancel Order" ></a>
                                         <a href="delete.php?del_id=<?php echo $order_id; ?>&status=s&txnid=<?php echo $txnids ?>&invoiceno=<?php echo $product_invoice ?>&total=<?php echo $totals ?>"><input type="button" class="btn btn-primary" value="Shipped" > </a>
                                         <span class="ml-2 badge badge-pill badge-soft-success font-size-10" ><img src="icon/packing.png" style="height:25px;"/> Packed</span>    
@@ -198,6 +201,7 @@ while($row_customer_orders=mysqli_fetch_array($run_customer_orders))
                                     }
                                     if ($product_status=="s") {
                                         ?>
+                                        <a href="Generate_bill.php?or_id=<?php echo $order_id; ?>"><input type="button" class="btn btn-primary"  value="Bill" ></a>
                                         <a href="cancel_order.php?del_id=<?php echo $order_id; ?>&status=c" id="btn-delete"><input type="button" class="btn btn-danger"  value="Cancel Order"  id=""></a>
                                         <a href="delete.php?del_id=<?php echo $order_id; ?>&status=d&txnid=<?php echo $txnids ?>&invoiceno=<?php echo $product_invoice ?>&total=<?php echo $totals ?>"><input type="button" class="btn btn-primary"  value="Delivered" ></a>
                                             <span class="ml-2 badge badge-pill badge-soft-success font-size-10" ><img src="icon/truck.png" style="height:25px;"/> Shipped</span> 
@@ -207,14 +211,13 @@ while($row_customer_orders=mysqli_fetch_array($run_customer_orders))
                                       
                                 
                                         ?>
-
+                                        <a href="Generate_bill.php?or_id=<?php echo $order_id; ?>"><input type="button" class="btn btn-primary"  value="Generate bill" ></a>
                                         <span class="ml-2 badge badge-pill badge-soft-success font-size-10" ><img src="icon/delivery-man.png" style="height:25px;"/> Delivered</span> 
                                     <?php
                                     }
                                     }
-                                    
                                     ?>
-                           
+                            
                             </div>
                                 </div>
 <?php 

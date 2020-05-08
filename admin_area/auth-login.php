@@ -59,16 +59,16 @@ include("includes/db.php");
                                     </a>
                                 </div>
                                 <div class="p-2">
-                                    <form class="form-horizontal" action="#" method="POST">
+                                    <form class="form-horizontal custom-validation" action="#" method="POST" >
         
                                         <div class="form-group">
                                             <label for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" placeholder="Enter username" name="admin_email">
+                                            <input type="email" class="form-control" id="username" placeholder="Enter username" name="admin_email" required />
                                         </div>
                 
                                         <div class="form-group">
                                             <label for="userpassword">Password</label>
-                                            <input type="password" class="form-control" id="userpassword" placeholder="Enter password" name="admin_pass">
+                                            <input type="password" class="form-control" id="userpassword" placeholder="Enter password" name="admin_pass" required data-parsley-pattern="(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}" >
                                         </div>
                 
                                        
@@ -130,8 +130,19 @@ include("includes/db.php");
                 </div>
             </div>
         </div>
+        <!-- JAVASCRIPT -->
+        <script src="assets/libs/jquery/jquery.min.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+        <script src="assets/libs/simplebar/simplebar.min.js"></script>
+        <script src="assets/libs/node-waves/waves.min.js"></script>
 
+        <script src="assets/libs/parsleyjs/parsley.min.js"></script>
+
+        <script src="assets/js/pages/form-validation.init.js"></script>
+
+        <script src="assets/js/app.js"></script>
+        <script src="assets/js/pages/form-validation.init.js"></script>
     </body>
-
-<!-- Mirrored from themesbrand.com/skote/layouts/vertical/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:43:30 GMT -->
 </html>
+

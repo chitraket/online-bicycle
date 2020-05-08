@@ -65,7 +65,7 @@ if(isset($_POST['submit'])){
                                             })
                                             .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.open('myaccount.php','_self');
+                                                        window.open('myaccount','_self');
                                                     } else {
                                                     
                                                     }
@@ -89,7 +89,7 @@ if(isset($_POST['submit'])){
                                             })
                                             .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.open('myaccount.php','_self');
+                                                        window.open('myaccount','_self');
                                                     } else {
                                                     
                                                     }
@@ -116,7 +116,7 @@ if(isset($_POST['submit'])){
                                             })
                                             .then((willDelete) => {
                                                     if (willDelete) {
-                                                        window.open('myaccount.php','_self');
+                                                        window.open('myaccount','_self');
                                                     } else {
                                                     
                                                     }

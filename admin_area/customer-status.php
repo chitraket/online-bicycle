@@ -16,5 +16,5 @@ $customer_email='';
        
         $delete_customer="update review set status='$customer_idss' where customer_email='$customer_email'";
         mysqli_query($con,$delete_customer);
-echo "<script>window.open('view-customer.php','_self')</script>";
+        echo "success";
 ?>

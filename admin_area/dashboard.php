@@ -42,7 +42,19 @@
                                             {
                                                 ?>
                                                 <div class="avatar-md profile-user-wid mb-4">
+                                                    <?php
+                                                    if($row_admin['admin_image']=="")
+                                                    {
+                                                        ?>
+                                                        <img src="admin_images/user.png" alt="" class="img-thumbnail rounded-circle">
+                                                        <?php 
+                                                    } 
+                                                    else{
+                                                    ?>
                                                     <img src="admin_images/<?php echo $row_admin['admin_image']; ?>" alt="" class="img-thumbnail rounded-circle">
+                                                    <?php 
+                                                    }
+                                                    ?>
                                                 </div>
                                                 <h5 class="font-size-10 text-truncate"><?php echo $row_admin['admin_name']; ?></h5>
 

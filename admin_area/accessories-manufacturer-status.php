@@ -6,5 +6,5 @@ $update_manufacturer="update accessories_brand set accessories_brand_status='$ma
 mysqli_query($con,$update_manufacturer);
 $delete_product = "update accessories set accessories_status='$manufacturer_idss' where accessories_brand='$manufacturer_id'";
 mysqli_query($con, $delete_product);
-echo "<script>window.open('view-accessories-manufacturer.php','_self')</script>";
+echo "success";
 ?>

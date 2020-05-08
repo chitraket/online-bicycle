@@ -7,8 +7,11 @@
     
     
         $date=date("d-M-Y");
-        $customer_session = $_SESSION['customer_email'];
-        $get_orders = "select * from orders where customer_email='$customer_session'";
+        if(isset($_GET['or_id']))
+            {
+                $o_id=base64_decode($_GET['or_id']);
+            }
+        $get_orders = "select * from orders where id='$o_id'";
         $run_orders = mysqli_query($con,$get_orders);
         $i = 0;
        while( $row_orders = mysqli_fetch_array($run_orders)){
@@ -25,10 +28,7 @@
             //$qty=$row_orders['qty'];
             $i++; 
     
-    if(isset($_GET['or_id']))
-    {
-        $o_id=base64_decode($_GET['or_id']);
-    }
+    
     $total=0;
     $get_c_orders = "select * from customer_orders where order_id='$o_id'";
     $run_c_orders = mysqli_query($con,$get_c_orders);
@@ -75,7 +75,7 @@ $pdf->Cell(34	,5,"{$invoice_no}",0,1);//end of line
 
 $pdf->Cell(130	,5,'',0,0);
 $pdf->Cell(25	,5,'Order ID :',0,0);
-$pdf->Cell(34	,5,"{$order_id}",0,1);//end of line
+$pdf->Cell(34	,5,"{$o_id}",0,1);//end of line
 
 //make a dummy empty cell as a vertical spacer
 $pdf->Cell(189	,10,'',0,1);//end of line
@@ -112,6 +112,9 @@ $pdf->SetFont('Arial','',12);
 
 //Numbers are right-aligned so we give 'R' after new line parameter
 $total=0;
+$sub_total=0;
+$gst=0;
+$totals=0;
 $get_c_orders = "select * from customer_orders where order_id='$o_id'";
 $run_c_orders = mysqli_query($con,$get_c_orders);
 while ($row_c_orders = mysqli_fetch_array($run_c_orders)) {
@@ -153,27 +156,21 @@ while ($row_c_orders = mysqli_fetch_array($run_c_orders)) {
         }
     }
     $total+=$sub_total;
+    $gst=$total*12/100;
+    $totals=$total+$gst;
 }
 //summary
 $pdf->Cell(130	,5,'',0,0);
-$pdf->Cell(25	,5,'Subtotal',0,0);
-$pdf->Cell(4	,5,'Rs.',1,0);
-$pdf->Cell(30	,5,"{$total}",1,1,'R');//end of line
+$pdf->Cell(25	,5,'Sub Total',0,0);
+$pdf->Cell(30	,5,"Rs.{$total}",1,1,'R');//end of line
 
 $pdf->Cell(130	,5,'',0,0);
-$pdf->Cell(25	,5,'Taxable',0,0);
-$pdf->Cell(4	,5,'$',1,0);
-$pdf->Cell(30	,5,'0',1,1,'R');//end of line
+$pdf->Cell(25	,5,'GST(12%)',0,0);
+$pdf->Cell(30	,5,"Rs.{$gst}",1,1,'R');//end of line
 
 $pdf->Cell(130	,5,'',0,0);
-$pdf->Cell(25	,5,'Tax Rate',0,0);
-$pdf->Cell(4	,5,'',1,0);
-$pdf->Cell(30	,5,'10%',1,1,'R');//end of line
-
-$pdf->Cell(130	,5,'',0,0);
-$pdf->Cell(25	,5,'Total Due',0,0);
-$pdf->Cell(4	,5,'Rs.',1,0);
-$pdf->Cell(30	,5,"{$total}",1,1,'R');//end of line
+$pdf->Cell(25	,5,'Total Paid',0,0);
+$pdf->Cell(30	,5,"Rs.{$totals}",1,1,'R');//end of line
 
     $pdf->output();
     }

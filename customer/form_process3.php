@@ -10,30 +10,61 @@ if(isset($_SESSION['CUST_IDS']))
 {
     $order_id=$_SESSION['CUST_IDS'];
 }
+else{
+    ?>
+    <script>window.open('my-account','_self')</script>
+    <?php
+}
 if(isset($_SESSION['ORDER_IDS']))
 {
     $txn_amount=$_SESSION['ORDER_IDS'];
+}
+else{
+    ?>
+    <script>window.open('my-account','_self')</script>
+    <?php
 }
 if(isset($_SESSION['invoice_no']))
 {
     $invoice_no=$_SESSION['invoice_no'];
 }
+else{
+    ?>
+    <script>window.open('my-account','_self')</script>
+    <?php
+}
 if(isset($_SESSION['TXN_AMOUNTS']))
 {
     $amount=$_SESSION['TXN_AMOUNTS'];
 }
+else{
+    ?>
+    <script>window.open('my-account','_self')</script>
+    <?php
+}
 $customer_email='';
 $customer_address='';
 $update_payment="update customer_orders set txnid='$txn_amount',payment_status='successful' where 	order_id='$order_id'";
-mysqli_query($con,$update_payment);
+$run_payment=mysqli_query($con,$update_payment);
+
 $paytm="Paytm";
 $insert_payment="insert into payments(invoice_no,txnid,amount,payment_mode,code_name,code,payment_date) values('$invoice_no','$txn_amount','$amount','$paytm','','',NOW())";
 $run_payments=mysqli_query($con,$insert_payment);
+
 $select_order="select * from orders where id='$order_id'";
 $run_orders = mysqli_query($con,$select_order);
-while($row_orders = mysqli_fetch_array($run_orders)){
-    $customer_email=$row_orders['customer_email'];
-    $customer_address=$row_orders['customer_address'];
+$num_orders=mysqli_num_rows($run_orders);
+if($num_orders==0)
+{
+    ?>
+    <script>window.open('my-account','_self')</script>
+    <?php
+}
+else{
+    while($row_orders = mysqli_fetch_array($run_orders)){
+        $customer_email=$row_orders['customer_email'];
+        $customer_address=$row_orders['customer_address'];
+    }
 }
 $totals=0;
 
@@ -357,7 +388,7 @@ $totals=0;
                         }
                         unset($_SESSION['CUST_IDS'],$_SESSION['ORDER_IDS'],$_SESSION['invoice_no'],$_SESSION['TXN_AMOUNTS'],$_SESSION['INDUSTRY_TYPE_IDS'],$_SESSION['CHANNEL_IDS']);
                         ?>
-                        <script>window.open('success3.php?c_id=<?php echo base64_encode($order_id); ?>&txnid=<?php echo base64_encode($txn_amount);?>','_self')</script>
+                        <script>window.open('online_payment_successfuls-<?php echo base64_encode($order_id);?>-<?php echo base64_encode($txn_amount);?>','_self')</script>
 <?php
            } 
 ?>

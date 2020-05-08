@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   
@@ -92,8 +93,21 @@
                             $admin_image=$row_cart['admin_image']; ?>
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                <?php
+                                if($admin_image=="")
+                                {
+                                    ?>
+                                    <img class="rounded-circle header-profile-user" src="admin_images/user.png" alt="Header Avatar">
+                                    <?php 
+                                }
+                                else{
+                                ?>
                                 <img class="rounded-circle header-profile-user" src="admin_images/<?php echo $admin_image; ?>"
                                     alt="Header Avatar">
+                                    <?php 
+                                }
+                                ?>
                                 <span class="d-none d-xl-inline-block ml-1"><?php echo $admin_name; ?></span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>

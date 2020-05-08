@@ -10,7 +10,7 @@
         include("includes/sidebar.php"); 
         $paga=8;
         $admin_email=$_SESSION['admin_email'];
-        $query_per="select * from admins where admin_email='$admin_email'";
+        $query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
             $run_query_per=mysqli_query($con,$query_per);
             while($row_query_per=mysqli_fetch_array($run_query_per))
             {
@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0 font-size-18">View Filter</h4>
+                                    <h4 class="mb-0 font-size-18">View Age</h4>
                                 </div>
                             </div>
                         </div>     
@@ -48,8 +48,8 @@
                                         <table id="employee_data" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
-                                                <th>Filter Title</th>
-                                                <th>Filter Top</th>
+                                                <th>Age Title</th>
+                                                <th>Age Top</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -245,7 +245,7 @@
                             data:{category_ids:category_ids,category_idss:category_idss},
                             success:function()
                             {
-
+                                window.open('view-category.php','_self');
                             }
                         });
                     });
@@ -261,7 +261,7 @@
                             data:{category_ids:category_ids,category_idss:category_idss},
                             success:function()
                             {
-
+                                window.open('view-category.php','_self')
                             }
                         });
                         
@@ -275,7 +275,7 @@
                const href =$(this).attr('href')
                swal({
                         title: "Are you sure?",
-                        text: "Delete filter.",
+                        text: "Delete Age.",
                         icon: "warning",
                         buttons: true,
                         successMode: true,
@@ -292,7 +292,7 @@
            const flashdata=$('.flash-data').data('flashdata')
            if(flashdata){
             swal({
-                        title: "successful delete filter.",
+                        title: "successful delete Age.",
                         text: "",
                         icon: "success",
                         buttons: [,"Ok"],

@@ -10,7 +10,7 @@
      include("includes/sidebar.php"); 
      $paga=28;
      $admin_email=$_SESSION['admin_email'];
-     $query_per="select * from admins where admin_email='$admin_email'";
+     $query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
          $run_query_per=mysqli_query($con,$query_per);
          while($row_query_per=mysqli_fetch_array($run_query_per))
          {
@@ -53,26 +53,20 @@
                                             <thead>
                                             <tr>
                                                 <th>Title</th>
-                                                <th>Description</th>
                                                 <th>Status</th>
-                                                <th>Action</th>
-                                               
-                                                
+                                                <th>Action</th>    
                                             </tr>
                                             </thead>
                                             
                                             <tbody>
                                             
                                             <?php
-                                            
                                               $select_cat="SELECT * FROM  policy  ORDER BY policy_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
                                                ?>
                                                 <tr>
-                                            
                                                 <td><?php echo $row_cart["policy_title"]; ?></td>
-                                                <td><?php echo $row_cart["policy_desc"]; ?></td>
                                                 <td>
                                                <?php 
                                                 if($row_cart['policy_status']=="yes")
@@ -224,7 +218,7 @@
                             data:{policy_ids:policy_ids,policy_idss:policy_idss},
                             success:function()
                             {
-
+                                window.open('view-policy.php','_self');
                             }
                         });
                     });

@@ -4,17 +4,20 @@ include("includes/db.php");
 include("includes/header.php");
 if(!isset($_SESSION['customer_email']))
 {
-    echo "<script>window.open('login','_self')</script>";
+    ?>
+    <script>window.open('login','_self')</script>
+    <?php
 }
 ?>
-    <!-- end Header Area -->
 <?php 
  if(isset($_GET['o_id']))
  {
      $o_id= base64_decode($_GET['o_id']);
  }
  else{
-    echo "<script>window.open('my-account','_self')</script>";
+     ?>
+    <script>window.open('my-account','_self')</script>
+    <?php 
  }
 ?>
 
@@ -45,6 +48,14 @@ if(!isset($_SESSION['customer_email']))
         <?php 
           $select_cats="select DISTINCT txnid,invoice_no from customer_orders where order_id='$o_id'";
           $run_carts =mysqli_query($con,$select_cats);
+          $num_carts=mysqli_num_rows($run_carts);
+          if($num_carts==0)
+          {
+            ?>
+            <script>window.open('my-account','_self')</script>
+            <?php 
+          }
+          else{
               while($row_carts=mysqli_fetch_array($run_carts)){
                   ?>
                    <p>Invoice Number : <?php echo $row_carts['invoice_no']; ?></p>
@@ -65,6 +76,7 @@ if(!isset($_SESSION['customer_email']))
                    
                   <?php 
               }
+            }
         ?>
                 </div>
             <div class="container">
@@ -92,6 +104,14 @@ if(!isset($_SESSION['customer_email']))
                                     $total=0;
                                     $select_cat="select * from customer_orders where order_id='$o_id'";
                                     $run_cart =mysqli_query($con,$select_cat);
+                                    $num_cart=mysqli_num_rows($run_cart);
+                                    if($num_cart==0)
+                                    {
+                                        ?>
+                                        <script>window.open('my-account','_self')</script>
+                                        <?php 
+                                    }
+                                    else{
                                         while($row_cart=mysqli_fetch_array($run_cart)){
                                         $pro_id=$row_cart['product_id'];
                                         $pro_qty=$row_cart['qty'];
@@ -109,8 +129,8 @@ if(!isset($_SESSION['customer_email']))
                            
                                     <tbody>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="../admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="../product-details.php?pro_id=<?php echo $pro_id ?>"><?php  echo $product_title ?></a></td>
+                                            <td class="pro-thumbnail"><a href="../bikes-<?php echo base64_encode($pro_id) ?>"><img class="img-fluid" src="../admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
+                                            <td class="pro-title"><a href="../bikes-<?php echo base64_encode($pro_id) ?>"><?php  echo $product_title ?></a></td>
                                             <td class="pro-price"><span><?php echo $pro_size ?></span></td>
                                             <td class="pro-price"><span>Rs.<?php echo $product_price ?></span></td>
                                             <td class="pro-quantity">
@@ -135,8 +155,8 @@ if(!isset($_SESSION['customer_email']))
                                                 $total+=$sub_total; ?>
                                         <tbody>
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="../admin_area/accessories_images/<?php echo $accessories_img1; ?>" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="../accessories-details.php?accessories_id=<?php echo $pro_id ?>"><?php  echo $accessories_name; ?></a></td>
+                                            <td class="pro-thumbnail"><a href="../accessories-<?php echo base64_encode($pro_id) ?>"><img class="img-fluid" src="../admin_area/accessories_images/<?php echo $accessories_img1; ?>" alt="Product" /></a></td>
+                                            <td class="pro-title"><a href="../accessories-<?php echo base64_encode($pro_id) ?>"><?php  echo $accessories_name; ?></a></td>
                                             <td class="pro-price"><span><?php echo $pro_size ?></span></td>
                                             <td class="pro-price"><span>Rs.<?php echo $accessories_price; ?></span></td>
                                             <td class="pro-quantity">
@@ -152,6 +172,7 @@ if(!isset($_SESSION['customer_email']))
                                         }
 
                                     }
+                                }
                                        ?> 
      
                                 </table>
@@ -175,6 +196,15 @@ if(!isset($_SESSION['customer_email']))
                                         $productinfo=base64_decode($_GET['o_id']);
                                         $select_cart = "select * from orders where id='$productinfo'";
                                                     $run_cart = mysqli_query($con,$select_cart);
+                                                    $num_cart=mysqli_num_rows($run_cart);
+                                                    if($num_cart==0)
+                                                    {
+                                                        ?>
+                                                        <script>window.open('my-account','_self')</script>
+                                                        <?php
+                                                    }
+                                                    else
+                                                    {
                                                     while($row_cart = mysqli_fetch_array($run_cart))
                                                     {   
                                                                     $customer_name=$row_cart['customer_name'];
@@ -183,6 +213,7 @@ if(!isset($_SESSION['customer_email']))
                                                                     $customer_phone=$row_cart['customer_contact'];
                                                            
                                                     }
+                                                }
                                     } 
                                 ?>                            
                             <ul style="margin-top: 20px;">
@@ -216,6 +247,14 @@ if(!isset($_SESSION['customer_email']))
                                         <?php 
                                         $select_status="select DISTINCT order_status,payment_status,invoice_no from customer_orders where order_id='$o_id' ";
                                             $run_status = mysqli_query($con,$select_status);
+                                            $row_status=mysqli_num_rows($run_status);
+                                            if($row_status==0)
+                                            {
+                                                ?>
+                                                <script>window.open('my-account','_self')</script>
+                                                <?php
+                                            }
+                                            else{
                                             while ($row_status = mysqli_fetch_array($run_status)) {
                                             $order_status=$row_status['order_status']; 
                                             $payment_status=$row_status['payment_status'];
@@ -299,13 +338,13 @@ if(!isset($_SESSION['customer_email']))
                                         if($order_status=="o")
                                         {
                                             ?>
-                                                <td class="pro-subtotal"><a href="orders_delete.php?o_id=<?php echo base64_encode($o_id); ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
+                                                <td class="pro-subtotal"><a href="orders_delete-<?php echo base64_encode($o_id); ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
                                             <?php 
                                         }
                                         if($order_status=="p")
                                         {
                                             ?>
-                                                <td class="pro-subtotal"><a href="orders_delete.php?o_id=<?php echo base64_encode($o_id); ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
+                                                <td class="pro-subtotal"><a href="orders_delete-<?php echo base64_encode($o_id); ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
                                            
                                             <?php 
                                         }
@@ -313,33 +352,33 @@ if(!isset($_SESSION['customer_email']))
                                         {
                                             ?>
                                              
-                                                <td class="pro-subtotal"><a href="orders_delete.php?o_id=<?php echo base64_encode($o_id); ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
+                                                <td class="pro-subtotal"><a href="orders_delete-<?php echo base64_encode($o_id); ?>" class="btn btn-sqr" id="btn-delete">Cancel Order</a></td>
                                            
                                             <?php 
                                         }
                                         if($order_status=="d")
                                         {
                                                ?>
-                                               <td class="pro-subtotal"><a href="orders_returned.php?o_id=<?php echo base64_encode($o_id); ?>" class="btn btn-sqr" id="btn-returned">Returned Order</a></td>
+                                               <td class="pro-subtotal"><a href="orders_returned-<?php echo base64_encode($o_id); ?>" class="btn btn-sqr" id="btn-returned">Returned Order</a></td>
                                                <?php     
                                         }
                                         
                                         if($order_status=="o" && $payment_status=="pending")
                                         {
                                             ?>
-                                                <td class="pro-subtotal"><a href="payment.php?o_id=<?php echo $productinfo; ?>&amount=<?php echo $totals; ?>" class="btn  btn-sqr">Payment</a></td>
+                                                <td class="pro-subtotal"><a href="payment-<?php echo $productinfo; ?>-<?php echo $totals; ?>" class="btn  btn-sqr">Payment</a></td>
                                             <?php 
                                         }
                                         if($order_status=="p" && $payment_status=="pending")
                                         {
                                             ?>
-                                                <td class="pro-subtotal"><a href="payment.php?o_id=<?php echo $productinfo; ?>&amount=<?php echo $totals; ?>" class="btn btn-sqr">Payment</a></td>
+                                                <td class="pro-subtotal"><a href="payment-<?php echo $productinfo; ?>-<?php echo $totals; ?>" class="btn btn-sqr">Payment</a></td>
                                             <?php 
                                         }
                                         if($order_status=="s" && $payment_status=="pending")
                                         {
                                             ?>
-                                                <td class="pro-subtotal"><a href="payment.php?o_id=<?php echo $productinfo; ?>&amount=<?php echo $totals; ?>" class="btn btn-sqr">Payment</a></td>
+                                                <td class="pro-subtotal"><a href="payment-<?php echo $productinfo; ?>-<?php echo $totals; ?>" class="btn btn-sqr">Payment</a></td>
                                             <?php 
                                         }
                                         ?>
@@ -350,6 +389,7 @@ if(!isset($_SESSION['customer_email']))
                                 <?php 
                                             }
                                         }
+                                    }
                                         
                                             ?>
 
@@ -494,7 +534,7 @@ if(isset($_GET['n']))
                 })
                 .then((willDelete) => {
                         if (willDelete) {
-                           window.open("view-order?o_id=<?php echo base64_encode($o_id); ?>","_self");
+                           window.open("view_order-<?php echo base64_encode($o_id); ?>","_self");
                         } else {
                         
                         }
@@ -511,7 +551,7 @@ if(isset($_GET['n']))
                 })
                 .then((willDelete) => {
                         if (willDelete) {
-                           window.open("view-order?o_id=<?php echo base64_encode($o_id); ?>","_self");
+                           window.open("view_order-<?php echo base64_encode($o_id); ?>","_self");
                         } else {
                         
                         }

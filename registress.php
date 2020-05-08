@@ -43,30 +43,51 @@
 </html>
 <?php
 include("includes/db.php");
-
-$email=base64_decode($_GET['email']);
-$update_registree="update customers set customer_status='yes' where customer_email='$email'";
-$run_update=mysqli_query($con,$update_registree);
-if($run_update)
+if(isset($_GET['email']))
 {
+    if($_GET['email']=="")
+    {
     ?>
-     <script type="text/javascript">
-                    swal({
-                        title: "Registration successful.",
-                        text: "",
-                        icon: "success",
-                        buttons:[,"OK"],
-                        successMode: true,
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('customer/customer_login.php','_self');
-                        } else {
-                        
-                        }
-                });
-                    </script>
+    <script type="text/javascript">
+           window.open('home','_self');
+    </script>
     <?php 
+    }
+    else{
+        $email=base64_decode($_GET['email']);
+    }
+   
+}
+else{
+    ?>
+    <script type="text/javascript">
+           window.open('home','_self');
+    </script>
+    <?php    
 }
 
+
+    $update_registree="update customers set customer_status='yes' where customer_email='$email'";
+    $run_update=mysqli_query($con,$update_registree);
+    if($run_update)
+    {
+        ?>
+        <script type="text/javascript">
+                        swal({
+                            title: "Registration successful.",
+                            text: "",
+                            icon: "success",
+                            buttons:[,"OK"],
+                            successMode: true,
+                    })
+                    .then((willDelete) => {
+                            if (willDelete) {
+                                window.open('customer/login','_self');
+                            } else {
+                            
+                            }
+                    });
+                        </script>
+    <?php 
+    }
 ?>

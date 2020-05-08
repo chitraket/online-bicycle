@@ -8,9 +8,10 @@
  else{
 include("includes/header.php");
 include("includes/sidebar.php"); 
+include("includes/validation.php");
     $paga=44;
     $admin_email=$_SESSION['admin_email'];
-    $query_per="select * from admins where admin_email='$admin_email'";
+    $query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
         $run_query_per=mysqli_query($con,$query_per);
         while($row_query_per=mysqli_fetch_array($run_query_per))
         {
@@ -33,10 +34,147 @@ include("includes/sidebar.php");
                     $admin_contact=$row_select_admin['admin_contact'];
                     $admin_image=$row_select_admin['admin_image'];
                     $admin_permissions=$row_select_admin['admin_permission'];
+                    $admin_status=$row_select_admin['admin_status'];
                     $subjects=explode(",",$admin_permissions);
                     
                 }
             }
+            $error_name="";
+            $error_email="";
+            $error_pass="";
+            $error_contact="";
+            $error_check="";
+            $error_image2="";
+            $error_status="";
+            $errorresult=true;
+            if(isset($_POST['submit'])){
+                if(firstname($_POST['a_name']))
+                    {
+                        $error_name="Required..";
+                        $errorresult=false;
+                    }
+                    else{
+                        $error_name="";
+                    }
+                    if(email($_POST['a_email']))
+                    {
+                        $error_email="Required..";
+                        $errorresult=false;
+                    }
+                    else{
+                        $error_email="";
+                    }
+                    if(pass($_POST['a_pass']))
+                    {
+                        $error_pass="Required..";
+                        $errorresult=false;
+                    }
+                    else{
+                        $error_pass="";
+                    }
+                    if(contact($_POST['a_contact']))
+                    {
+                        $error_contact="Required..";
+                        $errorresult=false;
+                    }
+                    else{
+                        $error_contact="";
+                    }
+                    if(empty($_POST['subject']))
+                    {
+                        $error_check="Required..";
+                        $errorresult=false;
+                    }
+                    else{
+                        $error_check="";
+                    }
+                    if(empty($_POST['customRadios']))
+                    {
+                        $error_status="Required..";
+                        $errorresult=false;
+                    }
+                    else{
+                        $error_status="";
+                    }
+                    $test_img1 = $_FILES['admin_img1']['name'];
+                if(images($test_img1))
+                {   
+                    $error_image2="JPEG or PNG file.";
+                    $errorresult=false;
+                }
+                else{
+                    $error_image2="";
+                }
+                if($errorresult==false)
+                    {
+                        goto end;
+                    }
+                $a_id=$_GET['admin_id'];
+              $a_name=$_POST['a_name'];
+              $a_email=$_POST['a_email'];
+              $a_pass=$_POST['a_pass'];
+              $a_contact=$_POST['a_contact'];
+              $a_status=$_POST['customRadios'];
+              $a=$_POST['subject'];
+              $per=implode(",",$a);
+              //$admin_img1=$_POST['admin_img1'];
+              $admin_img1 = $_FILES['admin_img1']['name'];
+              if(!($admin_img1==''))
+              {
+              $temp_name1 = $_FILES['admin_img1']['tmp_name'];
+             
+              move_uploaded_file($temp_name1,"admin_images/$admin_img1");
+              $update_cat = "update admins set admin_name='$a_name',admin_email='$a_email',admin_pass='$a_pass',admin_image='$admin_img1',admin_contact='$a_contact',admin_roles='sub',admin_permission='$per',admin_status='$a_status' where admin_id='$a_id'";
+              $run_cat = mysqli_query($con,$update_cat);
+              if($run_cat){
+                      ?>
+                      <script>
+                      swal({
+                          title:"Your Sub user Has Been Updated",
+                          text: "",
+                          icon: "success",
+                          buttons: [,"OK"],
+                          successMode: true,
+                         
+                  })
+                  .then((willDelete) => {
+                          if (willDelete) {
+                              window.open('view-sub-user.php','_self');
+                          } 
+                          else {
+                          }
+                  });
+              </script>
+                      <?php
+              }
+          }
+              else{
+                  $update_cat = "update admins set admin_name='$a_name',admin_email='$a_email',admin_pass='$a_pass',admin_contact='$a_contact',admin_roles='sub',admin_permission='$per',admin_status='$a_status' where admin_id='$a_id'";
+              $run_cat = mysqli_query($con,$update_cat);
+              if($run_cat){
+                      ?>
+                      <script>
+                      swal({
+                          title:"Your Sub user Has Been Updated",
+                          text: "",
+                          icon: "success",
+                          buttons: [,"OK"],
+                          successMode: true,
+                         
+                  })
+                  .then((willDelete) => {
+                          if (willDelete) {
+                              window.open('view-sub-user.php','_self');
+                          } 
+                          else {
+                          }
+                  });
+              </script>
+                      <?php
+              }
+                  }
+              }
+              end:
      ?>
 
 <div class="main-content">
@@ -58,36 +196,41 @@ include("includes/sidebar.php");
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                       <form method="POST" enctype="multipart/form-data"> 
+                       <form class="custom-validation" method="POST" enctype="multipart/form-data"> 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Admin Name</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder="Admin Name" name="a_name"  value="<?php echo $admin_name; ?>" id="example-text-input">
+                                    <input class="form-control" type="text" placeholder="Admin Name" name="a_name"  value="<?php echo $admin_name; ?>" id="example-text-input" required data-parsley-pattern="[a-zA-Z]*">
+                                    <span style="color: red;"><?php echo $error_name; ?></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Admin Email</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder="Admin Email" name="a_email" value="<?php echo $admin_email; ?>" id="example-text-input">
+                                    <input class="form-control" type="email" placeholder="Admin Email" name="a_email" value="<?php echo $admin_email; ?>" id="example-text-input" required>
+                                    <span style="color: red;"><?php echo $error_email; ?></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Admin Password</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="password" placeholder="Admin Password" name="a_pass" value="<?php echo $admin_password; ?>" id="example-text-input">
+                                    <input class="form-control" type="password" placeholder="Admin Password" name="a_pass" value="<?php echo $admin_password; ?>" id="example-text-input" required data-parsley-pattern="(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}">
+                                    <span style="color: red;"><?php echo $error_pass; ?></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Admin Contact</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder="Admin Contact" name="a_contact" value="<?php echo $admin_contact; ?>" id="example-text-input">
+                                    <input class="form-control" type="number" placeholder="Admin Contact" name="a_contact" value="<?php echo $admin_contact; ?>" id="example-text-input" required data-parsley-pattern="/^[9876][0-9]{9}$/">
+                                    <span style="color: red;"><?php echo $error_contact; ?></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-url-input" class="col-md-3 col-form-label">Admin Image</label>
                                 <div class="col-md-9">
                                 <div class="custom-file">
-                                            <input type="file" name="admin_img1" class="custom-file-input" id="customFile">
+                                            <input type="file" name="admin_img1" class="custom-file-input" id="customFile"  accept=".jpg,.jpeg,.png">
+                                            <span style="color: red;"><?php echo $error_image2; ?></span>
                                             <label class="custom-file-label" id="customFiles">Choose file</label>
                                             <br>
                                             <br/>
@@ -123,7 +266,7 @@ include("includes/sidebar.php");
                                             echo "checked";
                                         }
                                         ?>
-                                        >
+                                        required>
                                         <label class="custom-control-label" for="customCheck1">Add Product</label>
                                         </div>
                                         <div class="custom-control custom-checkbox mb-2">
@@ -416,9 +559,41 @@ include("includes/sidebar.php");
                                         ?>>
                                             <label class="custom-control-label" for="customCheck30">View Order Policy</label>
                                         </div>
+                                        <span style="color: red;"><?php echo $error_check; ?></span>
                                 </div>
                             </div>
-                            
+                            <div class="form-group row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Bikes status</label>
+                                <?php
+                                    if($admin_status=="no")
+                                    { 
+                                ?>
+                                                    <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio3">Activate</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" checked required>
+                                                        <label class="custom-control-label" for="customRadio4">Deactivate</label>
+                                                    </div>
+                                                    <span style="color: red;"><?php echo $error_status; ?></span>
+                                <?php 
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                                <div class="custom-control custom-radio mt-2 ml-2">
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" checked required>
+                                                        <label class="custom-control-label" for="customRadio3">Activate</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio mt-2 ml-3">
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" >
+                                                        <label class="custom-control-label" for="customRadio4">Deactivate</label>
+                                                    </div>
+                                                    <span style="color: red;"><?php echo $error_status; ?></span>
+                                                    <?php
+                                    }?>
+                            </div>
                             <div class="form-group mt-4">
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="submit">
@@ -441,71 +616,7 @@ include("includes/sidebar.php");
         ?>
         <?php  
             //$s_row="";
-          if(isset($_POST['submit'])){
-              $a_id=$_GET['admin_id'];
-            $a_name=$_POST['a_name'];
-            $a_email=$_POST['a_email'];
-            $a_pass=$_POST['a_pass'];
-            $a_contact=$_POST['a_contact'];
-            $a=$_POST['subject'];
-            $per=implode(",",$a);
-            //$admin_img1=$_POST['admin_img1'];
-            $admin_img1 = $_FILES['admin_img1']['name'];
-            if(!($admin_img1==''))
-            {
-            $temp_name1 = $_FILES['admin_img1']['tmp_name'];
-           
-            move_uploaded_file($temp_name1,"admin_images/$admin_img1");
-            $update_cat = "update admins set admin_name='$a_name',admin_email='$a_email',admin_pass='$a_pass',admin_image='$admin_img1',admin_contact='$a_contact',admin_roles='sub',admin_permission='$per',admin_status='yes' where admin_id='$a_id'";
-            $run_cat = mysqli_query($con,$update_cat);
-            if($run_cat){
-                    ?>
-                    <script>
-                    swal({
-                        title:"Your Sub user Has Been Updated",
-                        text: "",
-                        icon: "success",
-                        buttons: [,"OK"],
-                        successMode: true,
-                       
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('view-sub-user.php','_self');
-                        } 
-                        else {
-                        }
-                });
-            </script>
-                    <?php
-            }
-        }
-            else{
-                $update_cat = "update admins set admin_name='$a_name',admin_email='$a_email',admin_pass='$a_pass',admin_contact='$a_contact',admin_roles='sub',admin_permission='$per',admin_status='yes' where admin_id='$a_id'";
-            $run_cat = mysqli_query($con,$update_cat);
-            if($run_cat){
-                    ?>
-                    <script>
-                    swal({
-                        title:"Your Sub user Has Been Updated",
-                        text: "",
-                        icon: "success",
-                        buttons: [,"OK"],
-                        successMode: true,
-                       
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('view-sub-user.php','_self');
-                        } 
-                        else {
-                        }
-                });
-            </script>
-                    <?php
-            }
-                }
-            }
+          
                
 ?>
     </div>
@@ -517,7 +628,8 @@ include("includes/sidebar.php");
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
-
+        <script src="assets/libs/parsleyjs/parsley.min.js"></script>
+        <script src="assets/js/pages/form-validation.init.js"></script>
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 

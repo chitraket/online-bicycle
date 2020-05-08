@@ -446,7 +446,7 @@ include("functions/functions.php");
                     }
                 unset($_SESSION['order_id'],$_SESSION['ORDER_ID'],$_SESSION['CUST_ID'],$_SESSION['INDUSTRY_TYPE_ID'],$_SESSION['CHANNEL_ID'],$_SESSION['TXN_AMOUNT'],$_SESSION['c_id']);
                 ?>
-                <script>window.open('online-payment-successful?c_id= <?php echo base64_encode($order_id);?>&txnid=<?php echo base64_encode($txnid);?>','_self')</script>";
+                <script>window.open('online_payment_successful-<?php echo base64_encode($order_id);?>-<?php echo base64_encode($txnid);?>','_self')</script>";
               
 <?php
            } 

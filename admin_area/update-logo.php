@@ -9,9 +9,10 @@
 
     include("includes/header.php");
      include("includes/sidebar.php"); 
+     include("includes/validation.php");
      $paga=22;
      $admin_email=$_SESSION['admin_email'];
-    $query_per="select * from admins where admin_email='$admin_email'";
+    $query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
     $run_query_per=mysqli_query($con,$query_per);
     while($row_query_per=mysqli_fetch_array($run_query_per))
     {
@@ -37,7 +38,120 @@ if(isset($_GET['logo_id'])){
     $l_url=$row_edit['logo_link'];
     $l_status=$row_edit['logo_status'];
 }
+        $error_product="";
+        $error_top="";
+        $error_image2="";
+        $error_status="";
+        $errorresult=true;
+if(isset($_POST['update'])){
+      
+    if(empty($_POST['s_name']))
+                {
+                    $error_product="Required..";
+                    $errorresult=false;
+                }
+                else{
+                    $error_product="";
+                }
+                $test_img2=$_FILES['slider_img']['name'];
+                if(images($test_img2))
+                {   
+                    $error_image2="JPEG or PNG file.";
+                    $errorresult=false;
+                }
+                else{
+                    $error_image2="";
+                } 
+                        if(empty($_POST['s_url']))
+                        {
+                            $error_top="Required..";
+                            $errorresult=false;
+                        }
+                        else{
+                            $error_top="";   
+                        }
+                        if(empty($_POST['customRadios']))
+                        {
+                            $error_status="Required..";
+                            $errorresult=false;
+                        }
+                        else{
+                            $error_status="";   
+                        }
+                if($errorresult==false)
+                {
+                    goto end;
+                }
+    $s_name = $_POST['s_name'];
+    
+  $s_status=$_POST['customRadios'];
+    
+    $s_urls=$_POST['s_url'];
 
+    $slider_img = $_FILES['slider_img']['name'];
+
+    if(!($slider_img==""))
+    {
+    $temp_name1 = $_FILES['slider_img']['tmp_name'];
+    move_uploaded_file($temp_name1,"logo/$slider_img");
+
+    $update_p_cat = "update logo set logo_name='$s_name',logo_img='$slider_img',logo_link='$s_urls',logo_status='$s_status' where logo_id='$l_id'";
+    
+    $run_p_cat = mysqli_query($con,$update_p_cat);
+    if($run_p_cat){
+      ?>
+      <script>
+          swal({
+              title:"Your Logo Has Been Updated",
+              text: "",
+              icon: "success",
+              buttons: [,"OK"],
+              successMode: true,
+             
+      })
+      .then((willDelete) => {
+              if (willDelete) {
+                  window.open('view-logo.php','_self');
+              } 
+              else {
+              }
+      });
+  </script>
+        <?php 
+
+    }
+  }
+    else{
+      $update_p_cat = "update logo set logo_name='$s_name',logo_link='$s_urls',logo_status='$s_status' where logo_id='$l_id'";
+    
+      $run_p_cat = mysqli_query($con,$update_p_cat);
+      if($run_p_cat){
+        ?>
+        <script>
+            swal({
+                title:"Your Logo Has Been Updated",
+                text: "",
+                icon: "success",
+                buttons: [,"OK"],
+                successMode: true,
+               
+        })
+        .then((willDelete) => {
+                if (willDelete) {
+                    window.open('view-logo.php','_self');
+                } 
+                else {
+                }
+        });
+    </script>
+          <?php 
+    }
+    
+    
+    }
+    
+}
+end:
 ?>
 <div class="main-content">
 
@@ -57,11 +171,12 @@ if(isset($_GET['logo_id'])){
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                       <form method="POST" enctype="multipart/form-data"> 
+                       <form class="custom-validation" method="POST" enctype="multipart/form-data"> 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Logo Name</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder="logo Name" name="s_name" value="<?php echo $l_name; ?>" id="example-text-input">
+                                    <input class="form-control" type="text" placeholder="logo Name" name="s_name" value="<?php echo $l_name; ?>" id="example-text-input" required>
+                                    <span style="color: red;"><?php echo $error_product; ?></span> 
                                 </div>
                             </div>
 
@@ -69,7 +184,8 @@ if(isset($_GET['logo_id'])){
                                 <label for="example-url-input" class="col-md-3 col-form-label">Logo Image</label>
                                 <div class="col-md-9">
                                 <div class="custom-file">
-                                            <input type="file" name="slider_img" class="custom-file-input" id="customFile">
+                                            <input type="file" name="slider_img" class="custom-file-input" id="customFile" accept=".jpg,.jpeg,.png">
+                                            <span style="color: red;"><?php echo $error_image2; ?></span>
                                             <label class="custom-file-label" id="customFiles">Choose file</label>
                                            <br>
                                             <br/>
@@ -95,8 +211,9 @@ if(isset($_GET['logo_id'])){
                             <div class="form-group row">
                                 <label for="example-number-input" class="col-md-3 col-form-label">Logo URL</label>
                                 <div class="col-md-9">
-                                <input class="form-control" type="text" placeholder="Logo URL" name="s_url" value="<?php echo $l_url; ?>" id="example-text-input">
-                                </div>
+                                <input class="form-control" type="text" placeholder="Logo URL" name="s_url" value="<?php echo $l_url; ?>" id="example-text-input" required>
+                                <span style="color: red;"><?php echo $error_top; ?></span>
+                            </div>
                             </div>
                             <div class="form-group row">
                             <label for="example-text-input" class="col-md-3 col-form-label">Box Status</label>
@@ -109,7 +226,8 @@ if(isset($_GET['logo_id'])){
                                                         <label class="custom-control-label" for="customRadio3">Activate</label>
                                                     </div>
                                                     <div class="custom-control custom-radio mt-2 ml-3">
-                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" checked>
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" checked required>
+                                                        <span style="color: red;"><?php echo $error_status; ?></span>
                                                         <label class="custom-control-label" for="customRadio4">Deactivate</label>
                                                     </div>
                             
@@ -119,7 +237,8 @@ if(isset($_GET['logo_id'])){
                                     {
                                         ?>
                                                 <div class="custom-control custom-radio mt-2 ml-2">
-                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" checked>
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" checked required>
+                                                        <span style="color: red;"><?php echo $error_status; ?></span>
                                                         <label class="custom-control-label" for="customRadio3">Activate</label>
                                                     </div>
                                                     <div class="custom-control custom-radio mt-2 ml-3">
@@ -154,7 +273,9 @@ if(isset($_GET['logo_id'])){
         <script src="assets/libs/metismenu/metisMenu.min.js"></script>
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
+        <script src="assets/libs/parsleyjs/parsley.min.js"></script>
 
+<script src="assets/js/pages/form-validation.init.js"></script>
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 
@@ -214,78 +335,7 @@ $(document).ready(function(){
 </script>
 <?php  
 
-$s_rows="";
-          if(isset($_POST['update'])){
-              
-              $s_name = $_POST['s_name'];
-              
-            $s_status=$_POST['customRadios'];
-              
-              $s_urls=$_POST['s_url'];
-
-              $slider_img = $_FILES['slider_img']['name'];
-
-              if(!($slider_img==""))
-              {
-              $temp_name1 = $_FILES['slider_img']['tmp_name'];
-              move_uploaded_file($temp_name1,"logo/$slider_img");
-        
-              $update_p_cat = "update logo set logo_name='$s_name',logo_img='$slider_img',logo_link='$s_urls',logo_status='$s_status' where logo_id='$l_id'";
-              
-              $run_p_cat = mysqli_query($con,$update_p_cat);
-              if($run_p_cat){
-                ?>
-                <script>
-                    swal({
-                        title:"Your Logo Has Been Updated",
-                        text: "",
-                        icon: "success",
-                        buttons: [,"OK"],
-                        successMode: true,
-                       
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('view-logo.php','_self');
-                        } 
-                        else {
-                        }
-                });
-            </script>
-                  <?php 
-
-              }
-            }
-              else{
-                $update_p_cat = "update logo set logo_name='$s_name',logo_link='$s_urls',logo_status='$s_status' where logo_id='$l_id'";
-              
-                $run_p_cat = mysqli_query($con,$update_p_cat);
-                if($run_p_cat){
-                  ?>
-                  <script>
-                      swal({
-                          title:"Your Logo Has Been Updated",
-                          text: "",
-                          icon: "success",
-                          buttons: [,"OK"],
-                          successMode: true,
-                         
-                  })
-                  .then((willDelete) => {
-                          if (willDelete) {
-                              window.open('view-logo.php','_self');
-                          } 
-                          else {
-                          }
-                  });
-              </script>
-                    <?php 
-              }
-              
-              
-              }
-              
-          }
+          
  }
 
 else{

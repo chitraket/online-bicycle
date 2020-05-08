@@ -1,15 +1,12 @@
 <?php
 $active='Home';
 ?>
-
-
     <!-- Start Header Area -->
     <?php
        include("includes/header.php");
     ?>
     <!-- end Header Area -->
-
-
+    <div id="load_screen"><div id="loading"><img src="loder.gif" ></div></div>
     <main>
         <!-- hero slider area start -->
         <section class="slider-area">
@@ -29,14 +26,31 @@ $active='Home';
                 ?>
                     
                     <div class="hero-single-slide hero-overlay">
-                    <div class="hero-slider-item bg-img" data-bg="admin_area/slides_images/<?php echo $slide_image; ?>">
+                    <div class="hero-slider-item bg-img"  data-bg="admin_area/slides_images/<?php echo $slide_image; ?>" style="width: 100%;">
                    <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="hero-slider-content slide-1 <?php echo $status;?>">
+                                        <?php  
+                                        if($slide_row=="")
+                                        {
+                                        }else{?>
                                         <h2 class="slide-title"><?php echo  $slide_row; ?></h2>
-                                        <h4 class="slide-desc"><?php echo  $slide_row_2;?></h4>
+                                        <h4 class="slide-desc pb-5"><?php echo  $slide_row_2;?></h4>
+                                        <?php
+                                        }?>
+                                        <?php
+                                        if($slide_url=="")
+                                        {
+
+                                        } 
+                                        else{
+                                        ?>
+                                        <div class="pt-4"></div>
                                         <a href="<?php echo $slide_url; ?>" class="btn btn-hero">Shop Now</a>
+                                        <?php 
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -45,17 +59,11 @@ $active='Home';
                 </div>
                 <?php 
                 }
-               
-                
                 ?>
                 <!-- single slider item end -->
             </div>
         </section>
         <!-- hero slider area end -->
-
-        <!-- twitter feed area start -->
-        <!-- twitter feed area end -->
-
         <!-- service policy area start -->
         <div class="service-policy section-padding">
             <div class="container">
@@ -81,7 +89,6 @@ $active='Home';
                    <?php 
                 }
                 ?>
-                    
                 </div>
             </div>
         </div>
@@ -126,7 +133,7 @@ $active='Home';
                                 <div class="group-list-carousel">
                                     <!-- group list item start -->
                                     <?php
-                                    $select_new_product="select * from products where product_status='yes' and product_label='new'";
+                                    $select_new_product="select * from products where product_status='yes' and product_label='new' and product_status_top='yes'";
                                     $run_new_product=mysqli_query($con,$select_new_product);
                                     while($row_new_product=mysqli_fetch_array($run_new_product))
                                     {
@@ -139,12 +146,12 @@ $active='Home';
                                     <div class="group-slide-item">
                                         <div class="group-item">
                                             <div class="group-item-thumb">
-                                            <a href='bikes-details?pro_id=<?php echo base64_encode($product_id);?>'>
+                                            <a href='bikes-<?php echo base64_encode($product_id);?>'>
                                                 <img class='pri-img' src='admin_area/product_images/<?php echo $product_img;?>' alt='product'>
                                             </a>
                                             </div>
                                             <div class="group-item-desc">
-                                                <h5 class="group-product-name"><a href="bikes-details?pro_id=<?php echo base64_encode($product_id);?>">
+                                                <h5 class="group-product-name"><a href="bikes-<?php echo base64_encode($product_id);?>">
                                                  <?php echo $product_title; ?></a></h5>
                                                 <div class="price-box">
                                                     <span class="price-regular">Rs.<?php echo $product_price; ?></span>
@@ -178,7 +185,7 @@ $active='Home';
                                     <!-- group list item start -->
                                     
                                         <?php
-                                    $select_selle_product="select * from products where product_status='yes'";
+                                    $select_selle_product="select * from products where product_status='yes' and product_status_top='yes'";
                                     $run_selle_product=mysqli_query($con,$select_selle_product);
                                     while($row_selle_product=mysqli_fetch_array($run_selle_product))
                                     {
@@ -198,12 +205,12 @@ $active='Home';
                                         <div class="group-slide-item">
                                         <div class="group-item">
                                            <div class="group-item-thumb">
-                                            <a href='bikes-details?pro_id=<?php echo base64_encode($product_ids);?>'>
+                                            <a href='bikes-<?php echo base64_encode($product_ids);?>'>
                                                 <img class='pri-img' src='admin_area/product_images/<?php echo $product_imgs;?>' alt='product'>
                                             </a>
                                             </div>
                                             <div class="group-item-desc">
-                                                <h5 class="group-product-name"><a href="bikes-details?pro_id=<?php echo base64_encode($product_ids);?>">
+                                                <h5 class="group-product-name"><a href="bikes-<?php echo base64_encode($product_ids);?>">
                                                  <?php echo $product_titles; ?></a></h5>
                                                 <div class="price-box">
                                                     <?php
@@ -250,7 +257,7 @@ $active='Home';
                                     <!-- group list item start -->
                                    
                                         <?php
-                                    $select_sale_product="select * from products where product_status='yes' and product_label='sale'";
+                                    $select_sale_product="select * from products where product_status='yes' and product_label='sale' and product_status_top='yes'";
                                     $run_sale_product=mysqli_query($con,$select_sale_product);
                                     while($row_sale_product=mysqli_fetch_array($run_sale_product))
                                     {
@@ -263,12 +270,12 @@ $active='Home';
                                          <div class="group-slide-item">
                                         <div class="group-item">
                                             <div class="group-item-thumb">
-                                            <a href='bikes-details?pro_id=<?php echo base64_encode($product_idl);?>'>
+                                            <a href='bikes-<?php echo base64_encode($product_idl);?>'>
                                                 <img class='pri-img' src='admin_area/product_images/<?php echo $product_imgl;?>' alt='product'>
                                             </a>
                                             </div>
                                             <div class="group-item-desc">
-                                                <h5 class="group-product-name"><a href="bikes-details?pro_id=<?php echo base64_encode($product_idl);?>">
+                                                <h5 class="group-product-name"><a href="bikes-<?php echo base64_encode($product_idl);?>">
                                                  <?php echo $product_titlel; ?></a></h5>
                                                 <div class="price-box">
                                                     <span class="price-regular">Rs.<?php echo $product_pricel; ?></span>
@@ -396,3 +403,21 @@ $active='Home';
 
 <!-- Mirrored from demo.hasthemes.com/corano-preview/corano/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:21:37 GMT -->
 </html>
+<script>
+  $(document).ready(function(){
+    $('#search_data').autocomplete({
+      source: "fetch_search.php",
+      minLength: 1,
+      select: function(event, ui)
+      {
+        $('#search_data').val(ui.item.value);
+      }
+    }).data('ui-autocomplete')._renderItem = function(ul, item){
+      return $("<li class='ui-autocomplete-row'></li>")
+        .data("item.autocomplete", item)
+        .append(item.label)
+        .appendTo(ul);
+    };
+
+  });
+</script>

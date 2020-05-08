@@ -11,7 +11,7 @@
     include("includes/sidebar.php"); 
     $paga=18;
     $admin_email=$_SESSION['admin_email'];
-    $query_per="select * from admins where admin_email='$admin_email'";
+    $query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
     $run_query_per=mysqli_query($con,$query_per);
     while($row_query_per=mysqli_fetch_array($run_query_per))
     {
@@ -42,7 +42,89 @@ if(isset($_GET['box_id'])){
 
     $box_status=$row_edit['box_status'];
 }
+$error_name = ""; 
+$error_status="";
+$error_title="";
+$error_desc="";
+$errorresult=true;
+if(isset($_POST['update'])){
 
+    if(empty($_POST['p_box']))
+                {
+                    $error_name="Required..";
+                    $errorresult=false;
+                }
+                else{
+                    $error_name="";
+                }
+                if(empty($_POST['box_desc']))
+                {
+                    $error_desc="Required..";
+                    $errorresult=false;
+                }
+                else{
+                    $error_desc="";
+                }    
+                
+                        if(empty($_POST['box_title']))
+                        {
+                            $error_title="Required..";
+                            $errorresult=false;
+                        }
+                        else{
+                            $error_title="";   
+                        }
+                        if(empty($_POST['customRadios']))
+                        {
+                            $error_status="Required..";
+                            $errorresult=false;
+                        }
+                        else{
+                            $error_status="";   
+                        }
+                if($errorresult==false)
+                {
+                    goto end;
+                }
+    $p_box=$_POST['p_box'];
+    
+    $box_title = $_POST['box_title'];
+    
+    $box_desc = $_POST['box_desc'];
+    
+    $box_statuss=$_POST['customRadios'];
+
+    $update_p_cat = "update boxes_section set box_icon='$p_box',box_title='$box_title',box_desc='$box_desc',box_status='$box_statuss' where box_id='$box_id'";
+    
+    $run_p_cat = mysqli_query($con,$update_p_cat);
+    
+    if($run_p_cat){
+
+      ?>
+
+      <script>
+          swal({
+              title: "successful update box.",
+              text: "",
+              icon: "success",
+              buttons:[,"OK"],
+              successMode: true,
+             
+      })
+      .then((willDelete) => {
+              if (willDelete) {
+                  window.open('view-box.php','_self');
+              } 
+              else {  
+              }
+      });
+  </script>
+        <?php 
+        
+    }
+    
+}
+end:
 ?>
 <div class="main-content">
 
@@ -63,11 +145,12 @@ if(isset($_GET['box_id'])){
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                       <form method="POST" enctype="multipart/form-data"> 
+                       <form class="custom-validation" method="POST" enctype="multipart/form-data"> 
                        <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Box Icon</label>
                                 <div class="col-md-9">
-                                <select class="form-control select2" name="p_box">
+                                <select class="form-control select2" name="p_box" required>
+                                <span style="color: red;"><?php echo $error_name; ?></span>
                                 <option value="<?php echo $box_icon; ?>"> <?php echo $box_icon; ?> </option>
                                     <option value="album">album</option>
                                     <option value="back-2">back-2</option>
@@ -119,19 +202,90 @@ if(isset($_GET['box_id'])){
                                     <option value="angle-left">angle-left</option>
                                     <option value="user-female">user-female</option>
                                     <option value="angle-left-circle">angle-left-circle</option>
+                                    <option value="up-arrow">up-arrow</option>
+                                    <option value="angle-left">angle-left</option>
+                                    <option value="angle-down">angle-down</option>
+                                    <option value="switch">switch</option>
+                                    <option value="angle-down-circle">angle-down-circle</option>
+                                    <option value="scissors">scissors</option>
+                                    <option value="wallet">wallet</option>
+                                    <option value="safe">safe</option>
+                                    <option value="volume2">volume2</option>
+                                    <option value="volume1">volume1</option>
+                                    <option value="voicemail">voicemail</option>
+                                    <option value="video">video</option>
+                                    <option value="user">user</option>
+                                    <option value="upload">upload</option>
+                                    <option value="unlock">unlock</option>
+                                    <option value="umbrella">umbrella</option>
+                                    <option value="trash">trash</option>
+                                    <option value="tools">tools</option>
+                                    <option value="timer">timer</option>
+                                    <option value="ticket">ticket</option>
+                                    <option value="target">target</option>
+                                    <option value="sun">sun</option>
+                                    <option value="study">study</option>
+                                    <option value="stopwatch">stopwatch</option>
+                                    <option value="speaker">speaker</option>
+                                    <option value="star">star</option>
+                                    <option value="signal">signal</option>
+                                    <option value="shuffle">shuffle</option>
+                                    <option value="shopbag">shopbag</option>
+                                    <option value="share">share</option>
+                                    <option value="server">server</option>
+                                    <option value="search">search</option>
+                                    <option value="film">film</option>
+                                    <option value="science">science</option>
+                                    <option value="disk">disk</option>
+                                    <option value="ribbon">ribbon</option>
+                                    <option value="repeat">repeat</option>
+                                    <option value="refresh">refresh</option>
+                                    <option value="add-user">add-user</option>
+                                    <option value="refresh-cloud">refresh-cloud</option>
+                                    <option value="paperclip">paperclip</option>
+                                    <option value="radio">radio</option>
+                                    <option value="note2">note2</option>
+                                    <option value="print">print</option>
+                                    <option value="network">network</option>
+                                    <option value="prev">prev</option>
+                                    <option value="mute">mute</option>
+                                    <option value="power">power</option>
+                                    <option value="medal">medal</option>
+                                    <option value="portfolio">portfolio</option>
+                                    <option value="plus">plus</option>
+                                    <option value="left-arrow">left-arrow</option>
+                                    <option value="play">play</option>
+                                    <option value="key">key</option>
+                                    <option value="plane">plane</option>
+                                    <option value="joy">joy</option>
+                                    <option value="photo-gallery">photo-gallery</option>
+                                    <option value="pin">pin</option>
+                                    <option value="phone">phone</option>
+                                    <option value="plug">plug</option>
+                                    <option value="pen">pen</option>
+                                    <option value="bicycle">bicycle</option>
+                                    <option value="bell">bell</option>
+                                    <option value="alarm">alarm</option>
+                                    <option value="airplay">airplay</option>
+                                    <option value="albums">albums</option>
+                                    <option value="attention">attention</option>
+                                    <option value="box2">box2</option>
+                                    <option value="box1">box1</option>                            
                                 </select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Box Title </label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder="Box Title " name="box_title" value="<?php echo $box_title; ?>" id="example-text-input">
+                                    <input class="form-control" type="text" placeholder="Box Title " name="box_title" value="<?php echo $box_title; ?>" id="example-text-input" required>
+                                    <span style="color: red;"><?php echo $error_title; ?></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-number-input" class="col-md-3 col-form-label">Box Desc</label>
                                 <div class="col-md-9">
                                 <textarea required class="form-control" placeholder="Box Desc" name="box_desc" cols="19" rows="6" ><?php echo $box_desc; ?></textarea>
+                                <span style="color: red;"><?php echo $error_desc; ?></span>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -145,9 +299,10 @@ if(isset($_GET['box_id'])){
                                                         <label class="custom-control-label" for="customRadio3">Activate</label>
                                                     </div>
                                                     <div class="custom-control custom-radio mt-2 ml-3">
-                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" checked>
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" checked required>
                                                         <label class="custom-control-label" for="customRadio4">Deactivate</label>
                                                     </div>
+                                                    <span style="color: red;"><?php echo $error_status; ?></span>
                             
                                 <?php 
                                     }
@@ -155,14 +310,14 @@ if(isset($_GET['box_id'])){
                                     {
                                         ?>
                                                 <div class="custom-control custom-radio mt-2 ml-2">
-                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" checked>
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" checked required>
                                                         <label class="custom-control-label" for="customRadio3">Activate</label>
                                                     </div>
                                                     <div class="custom-control custom-radio mt-2 ml-3">
                                                         <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" >
                                                         <label class="custom-control-label" for="customRadio4">Deactivate</label>
                                                     </div>
-                                                    
+                                                    <span style="color: red;"><?php echo $error_status; ?></span>
                                                     <?php
                                     }?>
                             </div> 
@@ -195,7 +350,9 @@ if(isset($_GET['box_id'])){
         <!-- select 2 plugin -->
         <script src="assets/libs/select2/js/select2.min.js"></script>
         <script src="assets/js/pages/ecommerce-select2.init.js"></script>
+        <script src="assets/libs/parsleyjs/parsley.min.js"></script>
 
+        <script src="assets/js/pages/form-validation.init.js"></script>
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 
@@ -257,46 +414,7 @@ $(document).ready(function(){
 </script>
 <?php  
 
-          if(isset($_POST['update'])){
-
-              $p_box=$_POST['p_box'];
-              
-              $box_title = $_POST['box_title'];
-              
-              $box_desc = $_POST['box_desc'];
-              
-              $box_statuss=$_POST['customRadios'];
-
-              $update_p_cat = "update boxes_section set box_icon='$p_box',box_title='$box_title',box_desc='$box_desc',box_status='$box_statuss' where box_id='$box_id'";
-              
-              $run_p_cat = mysqli_query($con,$update_p_cat);
-              
-              if($run_p_cat){
-
-                ?>
-
-                <script>
-                    swal({
-                        title: "successful update box.",
-                        text: "",
-                        icon: "success",
-                        buttons:[,"OK"],
-                        successMode: true,
-                       
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('view-box.php','_self');
-                        } 
-                        else {  
-                        }
-                });
-            </script>
-                  <?php 
-                  
-              }
-              
-          }
+         
  }
 
 else{

@@ -10,7 +10,7 @@
     include("includes/sidebar.php"); 
     $paga=16;
     $admin_email=$_SESSION['admin_email'];
-    $query_per="select * from admins where admin_email='$admin_email'";
+    $query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
         $run_query_per=mysqli_query($con,$query_per);
         while($row_query_per=mysqli_fetch_array($run_query_per))
         {
@@ -60,8 +60,6 @@
                                                 <th>Row Status</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
-                                               
-                                                
                                             </tr>
                                             </thead>
                                             
@@ -279,7 +277,7 @@
                             data:{slider_ids:slider_ids,slider_idss:slider_idss},
                             success:function()
                             {
-
+                                window.open('view-slider.php','_self');
                             }
                         });
                     });
@@ -295,7 +293,7 @@
                             data:{slider_ids:slider_ids,slider_idss:slider_idss},
                             success:function()
                             {
-
+                                window.open('view-slider.php','_self');
                             }
                         });
                         

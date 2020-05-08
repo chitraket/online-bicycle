@@ -5,13 +5,12 @@ include("includes/header.php");
 
 if(!isset($_SESSION['customer_email']))
 {
-    echo "<script>window.open('customer/customer_login.php','_self')</script>";
+    echo "<script>window.open('customer/login','_self')</script>";
 }
 ?>
 
-
+<!--<div id="load_screen"><div id="loading"><img src="loder.gif" ></div></div>-->
     <main>
-        <!-- breadcrumb area start -->
         <div class="breadcrumb-area">
             <div class="container">
                 <div class="row">
@@ -19,7 +18,7 @@ if(!isset($_SESSION['customer_email']))
                         <div class="breadcrumb-wrap">
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.php"><i class="fa fa-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="home"><i class="fa fa-home"></i></a></li>
                                     <li class="breadcrumb-item active" aria-current="page">wishlist</li>
                                 </ul>
                             </nav>
@@ -91,9 +90,9 @@ if(!isset($_SESSION['customer_email']))
                                                 
                                             ?>
                                              <tr>
-                                             <td class="pro-thumbnail"><a href="bikes-details?pro_id=<?php echo base64_encode($product_id); ?>"><img class="img-fluid" src="admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
+                                             <td class="pro-thumbnail"><a href="bikes-<?php echo base64_encode($product_id); ?>"><img class="img-fluid" src="admin_area/product_images/<?php echo $product_img1 ?>" alt="Product" /></a></td>
                                             <td class="pro-title">
-                                                <a href="bikes-details?pro_id=<?php echo base64_encode($product_id) ?>"><?php  echo  $product_name ?></a>
+                                                <a href="bikes-<?php echo base64_encode($product_id) ?>"><?php  echo  $product_name ?></a>
                                             </td>
                                             <td class="pro-price"><span>Rs.<?php echo $product_price ?></span></td>  
                                             <?php
@@ -111,7 +110,7 @@ if(!isset($_SESSION['customer_email']))
                                             }
                                             ?>
                                             
-                                            <td class="pro-remove"><a href="delete-wishlist?wishlist_id=<?php echo base64_encode($wishilist_id); ?>" class="btn-delete"><i class="fa fa-trash-o"></i></a></td>
+                                            <td class="pro-remove"><a href="delete_wishlist-<?php echo base64_encode($wishilist_id); ?>" class="btn-delete"><i class="fa fa-trash-o"></i></a></td>
                                              </tr>
                                             <?php
                                              }
@@ -128,9 +127,9 @@ if(!isset($_SESSION['customer_email']))
                                                         $available_qtys=$row_accessories['available_qty'];
                                                         ?>
                                                         <tr>
-                                                        <td class="pro-thumbnail"><a href="accessories-details?accessories_id=<?php echo base64_encode($product_id); ?>"><img class="img-fluid" src="admin_area/accessories_images/<?php echo $accessories_image_1 ?>" alt="accessories" /></a></td>
+                                                        <td class="pro-thumbnail"><a href="accessories-<?php echo base64_encode($product_id); ?>"><img class="img-fluid" src="admin_area/accessories_images/<?php echo $accessories_image_1 ?>" alt="accessories" /></a></td>
                                                             <td class="pro-title">
-                                                                <a href="accessories-details?accessories_id=<?php echo base64_encode($product_id); ?>"><?php  echo $accessories_name; ?></a>
+                                                                <a href="accessories-<?php echo base64_encode($product_id); ?>"><?php  echo $accessories_name; ?></a>
                                                             </td>
                                                             <td class="pro-price"><span>Rs.<?php echo $accessories_prices ?></span></td>  
                                                             <?php

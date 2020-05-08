@@ -20,7 +20,22 @@ else
 $start_from = ($page - 1)*$record_per_page; 
 $customer_session = $_SESSION['customer_email']; 
 $query = "SELECT * FROM orders where customer_email='$customer_session' LIMIT $start_from, $record_per_page";  
-$result = mysqli_query($con, $query); 
+$result = mysqli_query($con, $query);
+$num_count=mysqli_num_rows($result);
+if($num_count==0)
+{
+    ?>
+    <div class="col-12" id="cart_empty">
+                                        <div class="section-title text-center">
+                                            <h2 class="title">Your Order is empty</h2>
+                                        </div>
+                                    <center> <div class="action_link">
+                                        <a href="home"><input type="submit" class="btn btn-cart2" name="add_cart" value="Start shopping"></a>
+                                    </div></center>  
+                                    </div>
+    <?php 
+}
+else{
 ?>  
     <table class='table table-bordered' id='example'>
         <thead class='thead-light'>
@@ -100,7 +115,7 @@ while($row = mysqli_fetch_array($result))
 
                                             }
                                                 ?>
-            <td><a href="view-order?o_id=<?php echo base64_encode($row['id']); ?>" class="btn btn-sqr">View</a>
+            <td><a href="view_order-<?php echo base64_encode($row['id']); ?>" class="btn btn-sqr">View</a>
             </td>  
         </tr>
     </tbody>  
@@ -131,4 +146,5 @@ $outputs.="<li><a class='next'><span class='pagination_link' id='".$total_pages.
  $outputs.= '</ul>
  </div>';   
 echo $outputs;
+}
 ?>

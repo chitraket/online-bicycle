@@ -7,7 +7,7 @@
 include('includes/db.php');
 if(isset($_POST["action"]))
 {
-    $record_per_page = 12;  
+    $record_per_page = 18;  
     $page = '';  
     $output = ''; 
     if(isset($_POST["page"]))  
@@ -19,10 +19,8 @@ if(isset($_POST["action"]))
          $page = 1;  
     }  
     $start_from = ($page - 1)*$record_per_page;  
-   //echo $start_from;
-    
  $query = "
-  SELECT * FROM products  WHERE manufacturer_id!='' AND product_status='yes'";
+  SELECT * FROM products  WHERE  manufacturer_id!='' AND product_status='yes'  ";
  if(isset($_POST["minimum_price"], $_POST["maximum_price"]) && !empty($_POST["minimum_price"]) && !empty($_POST["maximum_price"]))
  {
   $query .= "
@@ -51,8 +49,29 @@ if(isset($_POST["action"]))
    AND p_cat_id IN('".$storage_filter."')
   ";
  }
- 
- 
+ if(isset($_POST["colour"]))
+ {
+  $colour_filter = implode("','", $_POST["colour"]);
+  $query .= "
+   AND product_colour IN('".$colour_filter."')
+  ";
+ }
+ if(isset($_POST["size"]))
+ {
+  foreach($_POST["size"] as $key => $word){
+    //$sqls[] = 'AND product_size LIKE "%'.$word.'%"';
+    if($key==0)
+    {
+        $sqls='AND product_size LIKE "%'.$word.'%" AND product_status="yes"';   
+    }
+    else
+    {
+        $sqls .=' OR product_size LIKE "%'.$word.'%" AND product_status="yes"';
+    }
+   
+    }
+    $query .=$sqls;
+ }
  $query2 = $query;
  $query.="ORDER BY product_id DESC LIMIT "  . $start_from."," .$record_per_page;
 
@@ -72,9 +91,21 @@ $outputs='';
                                     <!-- product grid start -->
                                     <div class="product-item">
                                         <figure class="product-thumb">
-                                            <a href="bikes-details?pro_id=<?php echo base64_encode($row['product_id']);?>">
-                                                <img class="pri-img" src="admin_area/product_images/<?php echo $row['product_img1'];?>" alt="product" style="height:180px;">
-                                                <img class="sec-img" src="admin_area/product_images/<?php echo $row['product_img2'];?>" alt="product" style="height:180px;">
+                                            <a href="bikes-<?php echo base64_encode($row['product_id']);?>">
+                                                <img class="pri-img" src="admin_area/product_images/<?php echo $row['product_img1'];?>" alt="product" >
+                                                <?php 
+                                                if($row['product_img2']=="")
+                                                {
+                                                    ?>
+                                                    <img class="sec-img" src="admin_area/product_images/<?php echo $row['product_img1'];?>" alt="product" >
+                                                    <?php 
+                                                }
+                                                else{
+                                                ?>
+                                                <img class="sec-img" src="admin_area/product_images/<?php echo $row['product_img2'];?>" alt="product" >
+                                                <?php
+                                                } 
+                                                ?>
                                             </a>                                   
                                             <div class="product-badge">
                                             <?php
@@ -85,6 +116,9 @@ $outputs='';
                                                     <span>New</span>
                                                 </div>
                                                 <?php
+                                                }
+                                                if($row['product_label']=="old")
+                                                { 
                                                 }
                                                 if($row['product_label']=="sale")
                                                 { 
@@ -107,17 +141,23 @@ $outputs='';
                                             $run_carts=mysqli_query($con, $query3);
                                             while ($row_carts=mysqli_fetch_array($run_carts)) { 
                                             ?>
-                                                <a href="bikes?manufacturer_id=<?php echo base64_encode($manufacturer_id);?>"><?php echo $row_carts['manufacturer_title']; ?></a>
+                                                <a href="bikes_manufacturer-<?php echo base64_encode($manufacturer_id);?>"><?php echo $row_carts['manufacturer_title']; ?></a>
                                                 <?php 
                                             }
                                                 ?>
                                             </div>
                                             <h6 class="product-name">
-                                                <a href="bikes-details?pro_id=<?php echo base64_encode($row['product_id']); ?>"><?php echo $row['product_title'] ?></a>
+                                                <a href="bikes-<?php echo base64_encode($row['product_id']); ?>"><?php echo $row['product_title'] ?></a>
                                             </h6>
                                             <div class="price-box">
                                             <?php
                                             if($row['product_label']=="new")
+                                            { 
+                                            ?>  
+                                                <span class="price-regular">Rs.<?php echo $row['product_price'] ?></span>
+                                            <?php 
+                                            }
+                                            if($row['product_label']=="old")
                                             { 
                                             ?>  
                                                 <span class="price-regular">Rs.<?php echo $row['product_price'] ?></span>

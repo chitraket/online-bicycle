@@ -5,5 +5,5 @@ $product_idss=$_POST['product_idss'];
 
 $update_product="update products set product_status='$product_idss' where product_id='$product_id'";
 mysqli_query($con,$update_product);
-echo "<script>window.open('view-product.php','_self')</script>";
+echo "success";
 ?>

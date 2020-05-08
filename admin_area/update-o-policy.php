@@ -11,7 +11,7 @@
      include("includes/sidebar.php"); 
      $paga=30;
      $admin_email=$_SESSION['admin_email'];
-    $query_per="select * from admins where admin_email='$admin_email'";
+    $query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
     $run_query_per=mysqli_query($con,$query_per);
     while($row_query_per=mysqli_fetch_array($run_query_per))
     {
@@ -41,7 +41,83 @@ if(isset($_GET['o_policy_id'])){
 
     $term_status=$term_edit['o_policy_status'];
 }
+$error_tiitle="";
+$error_desc="";
+$error_link=""; 
+$error_status="";
+$errorresult=true;
+if(isset($_POST['update'])){
 
+    if(empty($_POST['term_title']))
+    {
+        $error_tiitle="Required..";
+        $errorresult=false;
+    }
+    else{
+        $error_tiitle="";
+    }
+    if(empty($_POST['term_desc']))
+    {
+        $error_desc="Required..";
+        $errorresult=false;
+    }
+    else{
+        $error_desc="";
+    }
+    if(empty($_POST['term_link']))
+    {
+        $error_link="Required..";
+        $errorresult=false;
+    }
+    else{
+        $error_link="";
+    }
+    if(empty($_POST['customRadios']))
+    {
+        $error_status="Required..";
+        $errorresult=false;
+    }
+    else{
+        $error_status="";
+    }
+    if($errorresult==false)
+    {
+        goto end;
+    }
+    $term_title = $_POST['term_title'];
+    $term_link=$_POST['term_link'];
+    $term_desc = $_POST['term_desc'];
+    $term_statuss=$_POST['customRadios'];
+    
+    $update_term = "update order_policy set o_policy_title='$term_title',o_policy_link='$term_link',o_policy_desc='$term_desc',o_policy_status='$term_statuss' where o_policy_id='$term_id'";
+    
+    $run_term = mysqli_query($con,$update_term);
+    
+    if($run_term){
+        ?>
+        <script>
+          swal({
+              title:"Your Order Policy Has Been Updated",
+              text: "",
+              icon: "success",
+              buttons: [,"OK"],
+              successMode: true,
+             
+      })
+      .then((willDelete) => {
+              if (willDelete) {
+                  window.open('view-o-policy.php','_self');
+              } 
+              else {
+              }
+      });
+  </script>
+        <?php 
+        
+    }
+    
+}
+end:
 ?>
 <div class="main-content">
 
@@ -57,22 +133,23 @@ if(isset($_GET['o_policy_id'])){
             </div>
         </div>     
         <!-- end page title -->
-
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                       <form method="POST" enctype="multipart/form-data"> 
+                       <form class="custom-validation" method="POST" enctype="multipart/form-data"> 
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Order Policy Title </label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder="Order Policy Title " name="term_title" value="<?php echo $term_title; ?>" id="example-text-input">
+                                    <input class="form-control" type="text" placeholder="Order Policy Title " name="term_title" value="<?php echo $term_title;?>" id="example-text-input" required>
+                                    <span style="color: red;"><?php echo $error_tiitle; ?></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Order Policy Link</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" placeholder="Order Policy Link" name="term_link" value="<?php echo $term_link; ?>" id="example-text-input">
+                                    <input class="form-control" type="text" placeholder="Order Policy Link" name="term_link" value="<?php echo $term_link;?>" id="example-text-input" required>
+                                    <span style="color: red;"><?php echo $error_link; ?></span>
                                 </div>
                             </div>
                             
@@ -80,7 +157,8 @@ if(isset($_GET['o_policy_id'])){
                                 <label for="example-number-input" class="col-md-3 col-form-label">Order Policy Desc</label>
                                 <div class="col-md-9">
                                 <textarea required class="form-control" placeholder="Order Policy Desc" name="term_desc" cols="19" rows="6" ><?php echo $term_desc; ?></textarea>
-                                </div>
+                                <span style="color: red;"><?php echo $error_desc; ?></span>    
+                            </div>
                             </div>
                             <div class="form-group row">
                             <label for="example-text-input" class="col-md-3 col-form-label">Order Policy Status</label>
@@ -93,9 +171,10 @@ if(isset($_GET['o_policy_id'])){
                                                         <label class="custom-control-label" for="customRadio3">Activate</label>
                                                     </div>
                                                     <div class="custom-control custom-radio mt-2 ml-3">
-                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" checked>
+                                                        <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" required checked>
                                                         <label class="custom-control-label" for="customRadio4">Deactivate</label>
                                                     </div>
+                                                    <span style="color: red;"><?php echo $error_status; ?></span>
                             
                                 <?php 
                                     }
@@ -103,14 +182,14 @@ if(isset($_GET['o_policy_id'])){
                                     {
                                         ?>
                                                 <div class="custom-control custom-radio mt-2 ml-2">
-                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" checked>
+                                                        <input type="radio" id="customRadio3" name="customRadios"  value="yes" class="custom-control-input" required checked>
                                                         <label class="custom-control-label" for="customRadio3">Activate</label>
                                                     </div>
                                                     <div class="custom-control custom-radio mt-2 ml-3">
                                                         <input type="radio" id="customRadio4" name="customRadios" value="no" class="custom-control-input" >
                                                         <label class="custom-control-label" for="customRadio4">Deactivate</label>
                                                     </div>
-                                                    
+                                                    <span style="color: red;"><?php echo $error_status; ?></span>
                                                     <?php
                                     }?>
                             </div> 
@@ -139,6 +218,8 @@ if(isset($_GET['o_policy_id'])){
         <script src="assets/libs/simplebar/simplebar.min.js"></script>
         <script src="assets/libs/node-waves/waves.min.js"></script>
 
+        <script src="assets/libs/parsleyjs/parsley.min.js"></script>
+        <script src="assets/js/pages/form-validation.init.js"></script>     
         <!-- apexcharts -->
         <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 
@@ -199,41 +280,6 @@ $(document).ready(function(){
 </script>
 <?php  
 
-          if(isset($_POST['update'])){
-              
-              $term_title = $_POST['term_title'];
-              $term_link=$_POST['term_link'];
-              $term_desc = $_POST['term_desc'];
-              $term_statuss=$_POST['customRadios'];
-              
-              $update_term = "update order_policy set o_policy_title='$term_title',o_policy_link='$term_link',o_policy_desc='$term_desc',o_policy_status='$term_statuss' where o_policy_id='$term_id'";
-              
-              $run_term = mysqli_query($con,$update_term);
-              
-              if($run_term){
-                  ?>
-                  <script>
-                    swal({
-                        title:"Your Order Policy Has Been Updated",
-                        text: "",
-                        icon: "success",
-                        buttons: [,"OK"],
-                        successMode: true,
-                       
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('view-o-policy.php','_self');
-                        } 
-                        else {
-                        }
-                });
-            </script>
-                  <?php 
-                  
-              }
-              
-          }
 
  }
 

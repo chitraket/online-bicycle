@@ -22,15 +22,31 @@ function lastname($lastname)
     }
 }
 function email($email)
-{
-    if(empty($email) || !filter_var($email,FILTER_VALIDATE_EMAIL))
+{ 
+  global $con;
+  $select_email="select * from customers where customer_email='$email'";
+  $row_email=mysqli_query($con,$select_email);
+  $num_email=mysqli_num_rows($row_email);
+    if(empty($email) || !filter_var($email,FILTER_VALIDATE_EMAIL) || $num_email!=0)
     {
         return true;
-    }
-    else
+    }   
+  else
     {
       return false;
     }
+}
+function images($image)
+{
+  $ext = pathinfo($image, PATHINFO_EXTENSION);
+  $extensions= array("jpeg","jpg","png"); 
+  if(!empty($image) && in_array($ext,$extensions)==false)
+  {
+    return true;   
+  }
+  else{
+    return false;
+  }
 }
 function pass($pass)
 {
@@ -77,6 +93,21 @@ function city($city)
     }
 }
 function contact($contact)
+{
+  global $con;
+  $select_contact="select * from customers where customer_contact='$contact'";
+  $row_contact=mysqli_query($con,$select_contact);
+  $num_contact=mysqli_num_rows($row_contact);
+    if(empty($contact) || !preg_match("/^[9876][0-9]{9}$/",$contact) || $num_contact!=0)
+    {
+        return true;
+    }
+    else
+    {
+      return false;
+    }
+}
+function contacts($contact)
 {
     if(empty($contact) || !preg_match("/^[9876][0-9]{9}$/",$contact))
     {

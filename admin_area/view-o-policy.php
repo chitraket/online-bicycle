@@ -10,7 +10,7 @@
      include("includes/sidebar.php"); 
      $paga=30;
      $admin_email=$_SESSION['admin_email'];
-     $query_per="select * from admins where admin_email='$admin_email'";
+     $query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
          $run_query_per=mysqli_query($con,$query_per);
          while($row_query_per=mysqli_fetch_array($run_query_per))
          {
@@ -53,11 +53,8 @@
                                             <thead>
                                             <tr>
                                                 <th>Title</th>
-                                                <th>Description</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
-                                               
-                                                
                                             </tr>
                                             </thead>
                                             
@@ -72,7 +69,6 @@
                                                 <tr>
                                             
                                                 <td><?php echo $row_cart["o_policy_title"]; ?></td>
-                                                <td><?php echo $row_cart["o_policy_desc"]; ?></td>
                                                 <td>
                                                <?php 
                                                 if($row_cart['o_policy_status']=="yes")
@@ -224,7 +220,7 @@
                             data:{o_policy_ids:o_policy_ids,o_policy_idss:o_policy_idss},
                             success:function()
                             {
-
+                                window.open('view-o-policy.php','_self');
                             }
                         });
                     });

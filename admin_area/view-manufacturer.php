@@ -11,7 +11,7 @@
         include("includes/sidebar.php"); 
         $paga=4;
         $admin_email=$_SESSION['admin_email'];
-$query_per="select * from admins where admin_email='$admin_email'";
+$query_per="select * from admins where admin_email='$admin_email' and admin_status='yes'";
     $run_query_per=mysqli_query($con,$query_per);
     while($row_query_per=mysqli_fetch_array($run_query_per))
     {
@@ -21,13 +21,7 @@ $query_per="select * from admins where admin_email='$admin_email'";
     $subject=explode(",",$admin_permission);
         if(in_array($paga,$subject))
         {
-     ?>
-            <!-- Left Sidebar End --> 
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
-            
-            
+     ?>    
             <div class="main-content">
 
                 <div class="page-content">
@@ -244,7 +238,7 @@ $query_per="select * from admins where admin_email='$admin_email'";
                             data:{manufacturer_ids:manufacturer_ids,manufacturer_idss:manufacturer_idss},
                             success:function()
                             {
-
+                                window.open('view-manufacturer.php','_self')
                             }
                         });
                     });
@@ -260,7 +254,7 @@ $query_per="select * from admins where admin_email='$admin_email'";
                             data:{manufacturer_ids:manufacturer_ids,manufacturer_idss:manufacturer_idss},
                             success:function()
                             {
-
+                                window.open('view-manufacturer.php','_self')
                             }
                         });
                         

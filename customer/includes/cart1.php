@@ -89,13 +89,13 @@
                                 ?>
                             <li class="minicart-item">
                                 <div class="minicart-thumb">
-                                    <a href="../bikes-details?pro_id=<?php echo base64_encode($p_id); ?>">
+                                    <a href="../bikes-<?php echo base64_encode($p_id); ?>">
                                         <img src="../admin_area/product_images/<?php echo $p_img ?>" alt="product">
                                     </a>
                                 </div>
                                 <div class="minicart-content">
                                     <h3 class="product-name">
-                                        <a href="../bikes-details?pro_id=<?php echo base64_encode($p_id); ?>"><?php echo $p_name ?></a>
+                                        <a href="../bikes-<?php echo base64_encode($p_id); ?>"><?php echo $p_name ?></a>
                                     </h3>
                                     <p>
                                         <span class="cart-quantity"><?php echo $p_qty ?> <strong> | </strong></span>
@@ -112,13 +112,13 @@
                                 ?>
                                 <li class="minicart-item">
                                 <div class="minicart-thumb">
-                                    <a href="../accessories-details?accessories_id=<?php echo base64_encode($p_id); ?>">
+                                    <a href="../accessories-<?php echo base64_encode($p_id); ?>">
                                         <img src="../admin_area/accessories_images/<?php echo $p_img ?>" alt="product">
                                     </a>
                                 </div>
                                 <div class="minicart-content">
                                     <h3 class="product-name">
-                                        <a href="../accessories-details?accessories_id=<?php echo base64_encode($p_id); ?>"><?php echo $p_name ?></a>
+                                        <a href="../accessories-<?php echo base64_encode($p_id); ?>"><?php echo $p_name ?></a>
                                     </h3>
                                     <p>
                                         <span class="cart-quantity"><?php echo $p_qty ?> <strong> | </strong></span>
