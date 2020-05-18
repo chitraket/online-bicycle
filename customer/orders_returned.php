@@ -11,8 +11,10 @@ if(isset($_GET['o_id']))
     if($num_delete==0)
     {
         ?>
-        <script>window.open('my-account','_self')</script>
-        <?php
+<script>
+window.open('my-account', '_self')
+</script>
+<?php
     }
     else
     {
@@ -45,8 +47,10 @@ if(isset($_GET['o_id']))
     if($num_customer==0)
     {
         ?>
-        <script>window.open('my-account','_self')</script>
-        <?php
+<script>
+window.open('my-account', '_self')
+</script>
+<?php
     }
     else
     {
@@ -382,7 +386,9 @@ $gst=0;
                             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                         }
                         ?>
-                    <script>window.open('view_orderss-<?php echo base64_encode($o_id);?>-1','_self')</script>";
+<script>
+window.open('view_orderss-<?php echo base64_encode($o_id);?>-1', '_self')
+</script>";
 <?php 
                 }
 ?>

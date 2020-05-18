@@ -2,56 +2,169 @@
 
 $db=mysqli_connect("localhost","root","","ecom_store");
 
-function load_state()
-{
-    global $db;
-    $output='';
-    $sqls="select * from country";
-    $results=mysqli_query($db,$sqls);
-    while($rows=mysqli_fetch_array($results))
-    {
-        $output .='<option value="'.$rows["country_id"].'">'.$rows["country_name"].'</option>';
-    }
-    return $output;
-
-}
-
 function wishlist($product_idss,$customer_emailss,$papage)
 {
     global $db;
-    $insert_wishlist="insert into wishlist(product_id,customer_email,papage) values('$product_idss','$customer_emailss','$papage')";
+    $insert_wishlist="insert into wishlist(product_id,customer_email,papage,status) values('$product_idss','$customer_emailss','$papage','yes')";
     $run_wishlist=mysqli_query($db,$insert_wishlist);
     if($run_wishlist)
     {
         if($papage==0)
         {
             ?>
-        <script>window.open('bikes-<?php echo base64_encode($product_idss); ?>','_self')</script> 
-        <?php 
+<script>
+window.open('bikes-<?php echo base64_encode($product_idss); ?>', '_self')
+</script>
+<?php 
         }
         if($papage==1)
         {
             ?>
-            <script>window.open('accessories-<?php echo base64_encode($product_idss);?> ','_self')</script>
-            <?php   
+<script>
+window.open('accessories-<?php echo base64_encode($product_idss);?> ', '_self')
+</script>
+<?php   
         }
     }
 }
-function add_cart($p_id,$product_img,$product_qty,$product_name,$product_price,$product_size,$papage){
-   if ($papage==0) {
-        $product= array($product_img,$product_name,$product_price,$product_qty,$p_id,$product_size,$papage);
-        $_SESSION[$product_name.$p_id]=$product;
-        ?>
-    <script>window.open('bikes-<?php echo base64_encode($p_id); ?> ','_self')</script>
-    <?php 
-   }
-   if($papage==1)
+
+function compare($p_id,$product_name,$papage)
+{
+    if(isset($_SESSION['compare']))
    {
-        $product= array($product_img,$product_name,$product_price,$product_qty,$p_id,$product_size,$papage);
-        $_SESSION[$product_name.$p_id]=$product;
+       $count=count($_SESSION['compare']);
+       if($papage==0)
+       {
+        $product= array(
+            'item_id' => $p_id,
+            'item_name' => $product_name,
+            'papage' => $papage
+        );
+        $_SESSION['compare'][$count]=$product;
         ?>
-       <script>window.open('accessories-<?php echo base64_encode($p_id); ?> ','_self')</script>
-    <?php 
+<script>
+window.open('bikes-<?php echo base64_encode($p_id); ?>', '_self')
+</script>
+<?php
+        }
+        if($papage==1)
+        {
+            $product= array(
+                'item_id' => $p_id,
+                'item_name' => $product_name,
+                'papage' => $papage
+            );
+            $_SESSION['compare'][$count]=$product;
+            ?>
+<script>
+window.open('accessories-<?php echo base64_encode($p_id); ?>', '_self')
+</script>
+<?php
+        }
+        ?>
+<?php 
+   }
+   else{
+    $product= array(
+        'item_id' => $p_id,
+        'item_name' => $product_name,
+        'papage' => $papage
+    );
+    $_SESSION['compare'][0]=$product;
+    if($papage==0)
+    {
+        ?>
+<script>
+window.open('bikes-<?php echo base64_encode($p_id); ?>', '_self')
+</script>
+<?php
+    }
+    if($papage==1)
+    {
+        ?>
+<script>
+window.open('accessories-<?php echo base64_encode($p_id); ?>', '_self')
+</script>
+<?php
+    }
+    ?>
+<script>
+window.open('compare', '_self')
+</script>
+<?php
+    
+   }
+  // print_r($_SESSION['compare']);
+}
+
+function add_cart($p_id,$product_img,$product_qty,$product_name,$product_price,$product_size,$papage){
+   if(isset($_SESSION['shopping_cart']))
+   {
+       $count=count($_SESSION['shopping_cart']);
+       if ($papage==0) {
+        $product= array(
+            'item_id' => $p_id,
+            'item_img' => $product_img,
+            'item_qty' => $product_qty,
+            'item_name' => $product_name,
+            'item_price' => $product_price,
+            'item_size' => $product_size,
+            'papage' => $papage
+        );
+        $_SESSION['shopping_cart'][$count]=$product;
+        ?>
+<script>
+window.open('bikes-<?php echo base64_encode($p_id); ?> ', '_self')
+</script>
+<?php 
+    }
+    if($papage==1)
+    {
+            $product= array(
+                    'item_id' => $p_id,
+                    'item_img' => $product_img,
+                    'item_qty' => $product_qty,
+                    'item_name' => $product_name,
+                    'item_price' => $product_price,
+                    'item_size' => $product_size,
+                    'papage' => $papage
+            );
+            $_SESSION['shopping_cart'][$count]=$product;
+            ?>
+<script>
+window.open('accessories-<?php echo base64_encode($p_id); ?> ', '_self')
+</script>
+<?php 
+    }
+
+   }
+   else{
+    $product= array(
+        'item_id' => $p_id,
+        'item_img' => $product_img,
+        'item_qty' => $product_qty,
+        'item_name' => $product_name,
+        'item_price' => $product_price,
+        'item_size' => $product_size,
+        'papage' => $papage
+    );
+    $_SESSION['shopping_cart'][0]=$product;
+    if($papage==0)
+    {
+     ?>
+<script>
+window.open('bikes-<?php echo base64_encode($p_id); ?> ', '_self')
+</script>
+<?php    
+    }
+    if($papage==1)
+    {
+        ?>
+<script>
+window.open('accessories-<?php echo base64_encode($p_id); ?> ', '_self')
+</script>
+<?php
+    }
    }
 
 }
@@ -72,34 +185,34 @@ function getPro(){
         $pro_d_price=$row_products['product_discount_price'];
         $manufacturer_id=$row_products['manufacturer_id'];
       ?>
-        <div class='product-item'>
-            <figure class='product-thumb'>
-                <a href='bikes-<?php echo base64_encode($pro_id);?>'>
-                    <img class='pri-img' src='admin_area/product_images/<?php echo $pro_img1;?>' alt='product' >
-                    <?php
+<div class='product-item'>
+    <figure class='product-thumb'>
+        <a href='bikes-<?php echo base64_encode($pro_id);?>'>
+            <img class='pri-img' src='admin_area/product_images/<?php echo $pro_img1;?>' alt='product'>
+            <?php
                     if($pro_img2=="")
                     {
                         ?>
-                        <img class='sec-img' src='admin_area/product_images/<?php echo $pro_img1;?>' alt='product' >
-                        <?php 
+            <img class='sec-img' src='admin_area/product_images/<?php echo $pro_img1;?>' alt='product'>
+            <?php 
                     } 
                     else
                     {
                     ?>
-                    <img class='sec-img' src='admin_area/product_images/<?php echo $pro_img2;?>' alt='product'>
-                    <?php 
+            <img class='sec-img' src='admin_area/product_images/<?php echo $pro_img2;?>' alt='product'>
+            <?php 
                     }
                     ?>
-                </a>
-                <div class='product-badge'>
-                    <?php
+        </a>
+        <div class='product-badge'>
+            <?php
                     if($pro_label=="new")
                     { 
                     ?>
-                        <div class='product-label new'>
-                            <span>New</span>
-                        </div>
-                    <?php 
+            <div class='product-label new'>
+                <span>New</span>
+            </div>
+            <?php 
                     }
                     if($pro_label=="old")
                     {
@@ -108,58 +221,59 @@ function getPro(){
                     if($pro_label=="sale")
                     {
                     ?>
-                    <div class='product-label new'>
-                            <span>Sale</span>
-                        </div>
-                    <div class='product-label discount'>
-                        <span><?php echo $pro_discount; ?>%</span>
-                    </div>
-                    <?php
+            <div class='product-label new'>
+                <span>Sale</span>
+            </div>
+            <div class='product-label discount'>
+                <span><?php echo $pro_discount; ?>%</span>
+            </div>
+            <?php
                     }
                     ?>
-                </div>
-          </figure>
-                <div class='product-caption text-center'>
-                <div class="manufacturer-name">
-                    <?php
+        </div>
+    </figure>
+    <div class='product-caption text-center'>
+        <div class="manufacturer-name">
+            <?php
                             $query3="select * from manufacturers where manufacturer_id='$manufacturer_id'";
                             $run_carts=mysqli_query($db, $query3);
                             while ($row_carts=mysqli_fetch_array($run_carts)) { 
                     ?>
-                            <a href="bikes_manufacturer-<?php echo base64_encode($manufacturer_id);?>"><?php echo $row_carts['manufacturer_title']; ?></a>
-                                    <?php 
+            <a
+                href="bikes_manufacturer-<?php echo base64_encode($manufacturer_id);?>"><?php echo $row_carts['manufacturer_title']; ?></a>
+            <?php 
                         }
                                                 ?>
-                                            </div>
-                    <h6 class='product-name'>
-                        <a href='bikes-<?php echo base64_encode($pro_id);?>'><?php echo $pro_title;?></a>
-                    </h6>
-                    <div class='price-box'>
-                        <?php
+        </div>
+        <h6 class='product-name'>
+            <a href='bikes-<?php echo base64_encode($pro_id);?>'><?php echo $pro_title;?></a>
+        </h6>
+        <div class='price-box'>
+            <?php
                         if($pro_label=="new") 
                         {
                         ?>
-                        <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
-                        <?php 
+            <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
+            <?php 
                         }
                         if($pro_label=="old") 
                         {
                         ?>
-                        <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
-                        <?php 
+            <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
+            <?php 
                         }
                         if($pro_label=="sale")
                         {
                         ?>
-                        <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
-                        <span class='price-old'><del>Rs.<?php echo $pro_d_price; ?></del></span>
-                        <?php 
+            <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
+            <span class='price-old'><del>Rs.<?php echo $pro_d_price; ?></del></span>
+            <?php 
                         }
                         ?>
-                    </div>
-                </div>
+        </div>
     </div>
-        <?php
+</div>
+<?php
     }
     
 }
@@ -183,94 +297,95 @@ function getAcc()
         
 
         ?>
-        <div class='product-item'>
-            <figure class='product-thumb'>
-                <a href='accessories-<?php echo base64_encode($pro_id);?>'>
-                    <img class='pri-img' src='admin_area/accessories_images/<?php echo $pro_img1;?>' alt='product' >
-                    <?php
+<div class='product-item'>
+    <figure class='product-thumb'>
+        <a href='accessories-<?php echo base64_encode($pro_id);?>'>
+            <img class='pri-img' src='admin_area/accessories_images/<?php echo $pro_img1;?>' alt='product'>
+            <?php
                     if($pro_img2=="")
                     {
                         ?>
-                        <img class='sec-img' src='admin_area/accessories_images/<?php echo $pro_img1;?>' alt='product' >
-                        <?php
+            <img class='sec-img' src='admin_area/accessories_images/<?php echo $pro_img1;?>' alt='product'>
+            <?php
                     } 
                     else{
                     ?>
-                    <img class='sec-img' src='admin_area/accessories_images/<?php echo $pro_img2;?>' alt='product'>
-                    <?php
+            <img class='sec-img' src='admin_area/accessories_images/<?php echo $pro_img2;?>' alt='product'>
+            <?php
                     } 
                     ?>
-                </a>
-                <div class='product-badge'>
-                <?php
+        </a>
+        <div class='product-badge'>
+            <?php
                     if($pro_label=="new")
                     { 
                     ?>
-                        <div class='product-label new'>
-                            <span>New</span>
-                        </div>
-                    <?php 
+            <div class='product-label new'>
+                <span>New</span>
+            </div>
+            <?php 
                     }
                     if($pro_label=="old")
                     { 
                     ?>
-                    <?php 
+            <?php 
                     }
                     if($pro_label=="sale")
                     {
                     ?>
-                    <div class='product-label new'>
-                            <span>Sale</span>
-                        </div>
-                    <div class='product-label discount'>
-                        <span><?php echo $pro_discount; ?>%</span>
-                    </div>
-                    <?php
+            <div class='product-label new'>
+                <span>Sale</span>
+            </div>
+            <div class='product-label discount'>
+                <span><?php echo $pro_discount; ?>%</span>
+            </div>
+            <?php
                     }
                     ?>
-                </div>
-          </figure>
-                <div class='product-caption text-center'>
-                <div class="manufacturer-name">
-                <?php
+        </div>
+    </figure>
+    <div class='product-caption text-center'>
+        <div class="manufacturer-name">
+            <?php
                             $query3="select * from accessories_brand where accessories_brand_id='$accessories_brand'";
                             $run_carts=mysqli_query($db, $query3);
                             while ($row_carts=mysqli_fetch_array($run_carts)) { 
                     ?>
-                            <a href="accessories_manufacturer-<?php echo base64_encode($accessories_brand);?>"><?php echo $row_carts['accessories_brand']; ?></a>
-                                    <?php 
+            <a
+                href="accessories_manufacturer-<?php echo base64_encode($accessories_brand);?>"><?php echo $row_carts['accessories_brand']; ?></a>
+            <?php 
                         }
                     ?>
-                </div>
-                    <h6 class='product-name'>
-                        <a href='accessories-<?php echo base64_encode($pro_id);?>'><?php echo$pro_title;?></a>
-                    </h6>
-                    <div class='price-box'>
-                    <?php
+        </div>
+        <h6 class='product-name'>
+            <a href='accessories-<?php echo base64_encode($pro_id);?>'><?php echo$pro_title;?></a>
+        </h6>
+        <div class='price-box'>
+            <?php
                         if($pro_label=="new") 
                         {
                         ?>
-                        <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
-                        <?php 
+            <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
+            <?php 
                         }
                         if($pro_label=="old") 
                         {
                         ?>
-                        <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
-                        <?php 
+            <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
+            <?php 
                         }
                         if($pro_label=="sale")
                         {
                         ?>
-                        <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
-                        <span class='price-old'><del>Rs.<?php echo $pro_d_price; ?></del></span>
-                        <?php 
+            <span class='price-regular'>Rs.<?php echo $pro_price;?></span>
+            <span class='price-old'><del>Rs.<?php echo $pro_d_price; ?></del></span>
+            <?php 
                         }
                         ?>
-                    </div>
-                </div>
+        </div>
     </div>
-        <?php
+</div>
+<?php
     }
 }
 
@@ -282,10 +397,10 @@ function getPCats(){
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
         ?>
-        <li>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class=" common_selector p_cat_id custom-control-input" id="<?php echo $row['p_cat_title']; ?>" value="<?php echo  $row['p_cat_id']; ?>"
-            <?php
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class=" common_selector p_cat_id custom-control-input"
+            id="<?php echo $row['p_cat_title']; ?>" value="<?php echo  $row['p_cat_id']; ?>" <?php
             if(isset($_GET['category_id']))
             {
                 if(base64_decode($_GET['category_id'])==$row['p_cat_id'])
@@ -294,20 +409,21 @@ function getPCats(){
                 }
             }
              ?>>
-            <label class="common_selector p_cat_id custom-control-label" for="<?php echo  $row['p_cat_title']; ?>"><?php echo  $row['p_cat_title'] ?></label>
-        </div>
-        </li>
-    <?php 
+        <label class="common_selector p_cat_id custom-control-label"
+            for="<?php echo  $row['p_cat_title']; ?>"><?php echo  $row['p_cat_title'] ?></label>
+    </div>
+</li>
+<?php 
             
     }
     $sql="SELECT * FROM product_categories where p_cat_top='no' and p_cat_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
         ?>
-        <li>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class=" common_selector p_cat_id custom-control-input" id="<?php echo $row['p_cat_title']; ?>" value="<?php echo $row['p_cat_id']; ?>"
-            <?php
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class=" common_selector p_cat_id custom-control-input"
+            id="<?php echo $row['p_cat_title']; ?>" value="<?php echo $row['p_cat_id']; ?>" <?php
             if(isset($_GET['category_id']))
             {
                 if(base64_decode($_GET['category_id'])==$row['p_cat_id'])
@@ -316,10 +432,11 @@ function getPCats(){
                 }
             }
              ?>>
-            <label class="common_selector p_cat_id custom-control-label" for="<?php echo  $row['p_cat_title']; ?>"><?php echo $row['p_cat_title']; ?></label>
-        </div>
-        </li>
-        <?php 
+        <label class="common_selector p_cat_id custom-control-label"
+            for="<?php echo  $row['p_cat_title']; ?>"><?php echo $row['p_cat_title']; ?></label>
+    </div>
+</li>
+<?php 
     }
 }
 function getCats(){
@@ -328,26 +445,30 @@ function getCats(){
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
 ?>
-        <li>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="common_selector cat_id custom-control-input" id="<?php echo $row['cat_title'];?>" value="<?php  echo  $row['cat_id']; ?>" >
-            <label class="common_selector cat_id custom-control-label" for="<?php echo  $row['cat_title']; ?>"><?php echo $row['cat_title']; ?></label>
-        </div>
-        </li>
-    <?php
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="common_selector cat_id custom-control-input" id="<?php echo $row['cat_title'];?>"
+            value="<?php  echo  $row['cat_id']; ?>">
+        <label class="common_selector cat_id custom-control-label"
+            for="<?php echo  $row['cat_title']; ?>"><?php echo $row['cat_title']; ?></label>
+    </div>
+</li>
+<?php
             
     }
     $sql="SELECT * FROM categories where cat_top='no' and cat_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
 ?>
-        <li>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="common_selector cat_id custom-control-input" id="<?php echo $row['cat_title']; ?>" value="<?php echo  $row['cat_id']; ?>">
-            <label class="common_selector cat_id custom-control-label" for="<?php echo $row['cat_title']; ?>"><?php echo  $row['cat_title']; ?></label>
-        </div>
-        </li>
-        <?php 
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="common_selector cat_id custom-control-input" id="<?php echo $row['cat_title']; ?>"
+            value="<?php echo  $row['cat_id']; ?>">
+        <label class="common_selector cat_id custom-control-label"
+            for="<?php echo $row['cat_title']; ?>"><?php echo  $row['cat_title']; ?></label>
+    </div>
+</li>
+<?php 
             
     }
 }
@@ -358,39 +479,41 @@ function  getAbrand(){
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
         ?>
-    <li>
+<li>
     <div class="custom-control custom-checkbox">
-        <input type="checkbox" class=" common_selector accessories_brand_id custom-control-input" id="<?php echo $row['accessories_brand'];?>" value="<?php echo $row['accessories_brand_id']?>"
-        <?php if(isset($_GET['manufacturer_id']))
-            {
-                if(base64_decode($_GET['manufacturer_id'])==$row['accessories_brand_id'])
-                {
-                      echo "checked";  
-                }
-            }?> >
-        <label class="common_selector accessories_brand_id custom-control-label" for="<?php echo  $row['accessories_brand']; ?>"><?php echo  $row['accessories_brand']; ?></label>
-    </div>
-    </li>
-    <?php
-    }
-    $sql="SELECT DISTINCT * FROM accessories_brand WHERE accessories_brand_top='no' and accessories_brand_status='yes'";
-    $result=$db->query($sql);
-    while ($row=$result->fetch_assoc()) {
-        ?>
-    <li>
-    <div class="custom-control custom-checkbox">
-        <input type="checkbox" class=" common_selector accessories_brand_id custom-control-input" id="<?php echo $row['accessories_brand']; ?>" value="<?php echo $row['accessories_brand_id'];?>"
-        <?php if(isset($_GET['manufacturer_id']))
+        <input type="checkbox" class=" common_selector accessories_brand_id custom-control-input"
+            id="<?php echo $row['accessories_brand'];?>" value="<?php echo $row['accessories_brand_id']?>" <?php if(isset($_GET['manufacturer_id']))
             {
                 if(base64_decode($_GET['manufacturer_id'])==$row['accessories_brand_id'])
                 {
                       echo "checked";  
                 }
             }?>>
-        <label class="common_selector accessories_brand_id custom-control-label" for="<?php echo  $row['accessories_brand']; ?>"><?php echo  $row['accessories_brand']; ?></label>
+        <label class="common_selector accessories_brand_id custom-control-label"
+            for="<?php echo  $row['accessories_brand']; ?>"><?php echo  $row['accessories_brand']; ?></label>
     </div>
-    </li>
-    <?php 
+</li>
+<?php
+    }
+    $sql="SELECT DISTINCT * FROM accessories_brand WHERE accessories_brand_top='no' and accessories_brand_status='yes'";
+    $result=$db->query($sql);
+    while ($row=$result->fetch_assoc()) {
+        ?>
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class=" common_selector accessories_brand_id custom-control-input"
+            id="<?php echo $row['accessories_brand']; ?>" value="<?php echo $row['accessories_brand_id'];?>" <?php if(isset($_GET['manufacturer_id']))
+            {
+                if(base64_decode($_GET['manufacturer_id'])==$row['accessories_brand_id'])
+                {
+                      echo "checked";  
+                }
+            }?>>
+        <label class="common_selector accessories_brand_id custom-control-label"
+            for="<?php echo  $row['accessories_brand']; ?>"><?php echo  $row['accessories_brand']; ?></label>
+    </div>
+</li>
+<?php 
     }
 }
 function getAcategory(){
@@ -399,29 +522,30 @@ function getAcategory(){
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
         ?>
-    <li>
+<li>
     <div class="custom-control custom-checkbox">
-        <input type="checkbox" class=" common_selector accessories_category custom-control-input" id="<?php echo $row['accessories_category']; ?>" value="<?php echo  $row['accessories_category_id']; ?>"
-        <?php if(isset($_GET['category_id']))
+        <input type="checkbox" class=" common_selector accessories_category custom-control-input"
+            id="<?php echo $row['accessories_category']; ?>" value="<?php echo  $row['accessories_category_id']; ?>" <?php if(isset($_GET['category_id']))
             {
                 if(base64_decode($_GET['category_id'])==$row['accessories_category_id'])
                 {
                       echo "checked";  
                 }
             }?>>
-        <label class="common_selector accessories_category custom-control-label" for="<?php echo $row['accessories_category']; ?>"><?php echo $row['accessories_category']; ?></label>
+        <label class="common_selector accessories_category custom-control-label"
+            for="<?php echo $row['accessories_category']; ?>"><?php echo $row['accessories_category']; ?></label>
     </div>
-    </li>
-    <?php 
+</li>
+<?php 
     }
     $sql="SELECT *  FROM accessories_category WHERE accessories_category_top='no' and accessories_category_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
         ?>
-    <li>
+<li>
     <div class="custom-control custom-checkbox">
-        <input type="checkbox" class=" common_selector accessories_category custom-control-input" id="<?php echo $row['accessories_category']; ?>" value="<?php echo $row['accessories_category_id']; ?>"
-        <?php if(isset($_GET['category_id']))
+        <input type="checkbox" class=" common_selector accessories_category custom-control-input"
+            id="<?php echo $row['accessories_category']; ?>" value="<?php echo $row['accessories_category_id']; ?>" <?php if(isset($_GET['category_id']))
             {
                 if(base64_decode($_GET['category_id'])==$row['accessories_category_id'])
                 {
@@ -431,10 +555,11 @@ function getAcategory(){
                    echo "<script>window.open('accessories','_self')</script>"; 
                 }
             }?>>
-        <label class="common_selector accessories_category custom-control-label" for="<?php echo $row['accessories_category']; ?>">'. $row['accessories_category'].'</label>
+        <label class="common_selector accessories_category custom-control-label"
+            for="<?php echo $row['accessories_category']; ?>">'. $row['accessories_category'].'</label>
     </div>
-    </li>
-    <?php
+</li>
+<?php
     }
 }
 function getMCats(){
@@ -443,39 +568,41 @@ function getMCats(){
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
         ?>
-        <li>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class=" common_selector manufacturer_id custom-control-input" id="<?php echo $row['manufacturer_title'];?>" value="<?php echo  $row['manufacturer_id']; ?>" 
-            <?php if(isset($_GET['manufacturer_id']))
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class=" common_selector manufacturer_id custom-control-input"
+            id="<?php echo $row['manufacturer_title'];?>" value="<?php echo  $row['manufacturer_id']; ?>" <?php if(isset($_GET['manufacturer_id']))
             {
                 if(base64_decode($_GET['manufacturer_id'])==$row['manufacturer_id'])
                 {
                       echo "checked";  
                 }
             }?>>
-            <label class="common_selector manufacturer_id custom-control-label" for="<?php echo  $row['manufacturer_title']; ?>"><?php echo $row['manufacturer_title']; ?></label>
-        </div>
-        </li>
-        <?php 
+        <label class="common_selector manufacturer_id custom-control-label"
+            for="<?php echo  $row['manufacturer_title']; ?>"><?php echo $row['manufacturer_title']; ?></label>
+    </div>
+</li>
+<?php 
     }
     $sql="SELECT * FROM manufacturers WHERE manufacturer_top='no' and manufacturer_status='yes'";
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
         ?>
-        <li>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class=" common_selector manufacturer_id custom-control-input" id="<?php echo  $row['manufacturer_title']; ?>" value="<?php echo  $row['manufacturer_id'];?>"
-            <?php if(isset($_GET['manufacturer_id']))
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class=" common_selector manufacturer_id custom-control-input"
+            id="<?php echo  $row['manufacturer_title']; ?>" value="<?php echo  $row['manufacturer_id'];?>" <?php if(isset($_GET['manufacturer_id']))
             {
                 if(base64_decode($_GET['manufacturer_id'])==$row['manufacturer_id'])
                 {
                       echo "checked";  
                 }
             }?>>
-            <label class="common_selector manufacturer_id custom-control-label" for="<?php echo  $row['manufacturer_title']; ?>"><?php echo  $row['manufacturer_title']; ?></label>
-        </div>
-        </li>
-        <?php 
+        <label class="common_selector manufacturer_id custom-control-label"
+            for="<?php echo  $row['manufacturer_title']; ?>"><?php echo  $row['manufacturer_title']; ?></label>
+    </div>
+</li>
+<?php 
     }
 }
 function getcolor()
@@ -485,13 +612,15 @@ function getcolor()
     $result=$db->query($sql);
     while ($row=$result->fetch_assoc()) {
 ?>
-        <li>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="common_selector colour custom-control-input" id="<?php echo $row['product_colour'];?>" value="<?php  echo  $row['product_colour']; ?>" >
-            <label class="common_selector colour custom-control-label" for="<?php echo  $row['product_colour']; ?>"><?php echo $row['product_colour']; ?></label>
-        </div>
-        </li>
-    <?php
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="common_selector colour custom-control-input"
+            id="<?php echo $row['product_colour'];?>" value="<?php  echo  $row['product_colour']; ?>">
+        <label class="common_selector colour custom-control-label"
+            for="<?php echo  $row['product_colour']; ?>"><?php echo $row['product_colour']; ?></label>
+    </div>
+</li>
+<?php
             
     }   
 }
@@ -500,51 +629,51 @@ function getsize()
 
        
             ?>
-        <li>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="common_selector size custom-control-input" id="33cms" value="33cms" >
-            <label class="common_selector size custom-control-label" for="33cms">33cms</label>
-        </div>
-        </li>
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="common_selector size custom-control-input" id="33cms" value="33cms">
+        <label class="common_selector size custom-control-label" for="33cms">33cms</label>
+    </div>
+</li>
 
-        <li>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="common_selector size custom-control-input" id="38cms" value="38cms" >
-            <label class="common_selector size custom-control-label" for="38cms">38cms</label>
-        </div>
-        </li>
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="common_selector size custom-control-input" id="38cms" value="38cms">
+        <label class="common_selector size custom-control-label" for="38cms">38cms</label>
+    </div>
+</li>
 
-        <li>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="common_selector size custom-control-input" id="40cms" value="40cms" >
-            <label class="common_selector size custom-control-label" for="40cms">40cms</label>
-        </div>
-        </li>
-        <li>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="common_selector size custom-control-input" id="45cms" value="45cms" >
-            <label class="common_selector size custom-control-label" for="45cms">45cms</label>
-        </div>
-        </li>
-        <li>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="common_selector size custom-control-input" id="48cms" value="48cms" >
-            <label class="common_selector size custom-control-label" for="48cms">48cms</label>
-        </div>
-        </li>
-        <li>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="common_selector size custom-control-input" id="53cms" value="53cms" >
-            <label class="common_selector size custom-control-label" for="53cms">53cms</label>
-        </div>
-        </li>
-        <li>
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="common_selector size custom-control-input" id="55cms" value="55cms" >
-            <label class="common_selector size custom-control-label" for="55cms">55cms</label>
-        </div>
-        </li>        
-    <?php
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="common_selector size custom-control-input" id="40cms" value="40cms">
+        <label class="common_selector size custom-control-label" for="40cms">40cms</label>
+    </div>
+</li>
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="common_selector size custom-control-input" id="45cms" value="45cms">
+        <label class="common_selector size custom-control-label" for="45cms">45cms</label>
+    </div>
+</li>
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="common_selector size custom-control-input" id="48cms" value="48cms">
+        <label class="common_selector size custom-control-label" for="48cms">48cms</label>
+    </div>
+</li>
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="common_selector size custom-control-input" id="53cms" value="53cms">
+        <label class="common_selector size custom-control-label" for="53cms">53cms</label>
+    </div>
+</li>
+<li>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="common_selector size custom-control-input" id="55cms" value="55cms">
+        <label class="common_selector size custom-control-label" for="55cms">55cms</label>
+    </div>
+</li>
+<?php
             
     }   
 
@@ -555,12 +684,13 @@ function logo()
         $run_logo=mysqli_query($db,$get_logo);
         while ($row_logo=mysqli_fetch_array($run_logo)) {
             ?>
-                <div class="brand-item">
-                    <a href="<?php echo $row_logo['logo_link']; ?>">
-                        <center><img src="admin_area/logo/<?php echo $row_logo['logo_img'] ?>" alt="<?php echo $row_logo['logo_name']; ?>"></center>
-                    </a>
-                </div>
-            <?php 
+<div class="brand-item">
+    <a href="<?php echo $row_logo['logo_link']; ?>">
+        <center><img src="admin_area/logo/<?php echo $row_logo['logo_img'] ?>"
+                alt="<?php echo $row_logo['logo_name']; ?>"></center>
+    </a>
+</div>
+<?php 
         }  
     }
 ?>

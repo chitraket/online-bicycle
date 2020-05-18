@@ -1,5 +1,6 @@
 <html>
-    <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Corano - Bikes Shop</title>
@@ -25,7 +26,7 @@
     <link rel="stylesheet" href="assets/css/plugins/animate.css">
     <!-- Nice Select css -->
     <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
-    
+
     <!-- jquery UI css -->
     <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
     <link rel="stylesheet" href="assets/js/plugins/jquery.min.js">
@@ -48,10 +49,10 @@ if(isset($_GET['email']))
     if($_GET['email']=="")
     {
     ?>
-    <script type="text/javascript">
-           window.open('home','_self');
-    </script>
-    <?php 
+<script type="text/javascript">
+window.open('home', '_self');
+</script>
+<?php 
     }
     else{
         $email=base64_decode($_GET['email']);
@@ -60,10 +61,10 @@ if(isset($_GET['email']))
 }
 else{
     ?>
-    <script type="text/javascript">
-           window.open('home','_self');
-    </script>
-    <?php    
+<script type="text/javascript">
+window.open('home', '_self');
+</script>
+<?php    
 }
 
 
@@ -72,22 +73,22 @@ else{
     if($run_update)
     {
         ?>
-        <script type="text/javascript">
-                        swal({
-                            title: "Registration successful.",
-                            text: "",
-                            icon: "success",
-                            buttons:[,"OK"],
-                            successMode: true,
-                    })
-                    .then((willDelete) => {
-                            if (willDelete) {
-                                window.open('customer/login','_self');
-                            } else {
-                            
-                            }
-                    });
-                        </script>
-    <?php 
+<script type="text/javascript">
+swal({
+        title: "Registration successful.",
+        text: "",
+        icon: "success",
+        buttons: [, "OK"],
+        successMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+            window.open('customer/login', '_self');
+        } else {
+
+        }
+    });
+</script>
+<?php 
     }
 ?>

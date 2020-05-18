@@ -7,7 +7,7 @@ session_start();
             echo "<script>window.open('customer/customer_login.php','_self')</script>";
            }
            
-?> 
+?>
 <?php
 header("Pragma: no-cache");
 header("Cache-Control: no-cache");
@@ -83,25 +83,30 @@ $checkSum = getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
 
 ?>
 <html>
+
 <head>
-<title>Merchant Check Out Page</title>
+    <title>Merchant Check Out Page</title>
 </head>
+
 <body>
-	<center><h1>Please do not refresh this page...</h1></center>
-		<form method="post" action="<?php echo PAYTM_TXN_URL ?>" name="f1">
-		<table border="1">
-			<tbody>
-			<?php
+    <center>
+        <h1>Please do not refresh this page...</h1>
+    </center>
+    <form method="post" action="<?php echo PAYTM_TXN_URL ?>" name="f1">
+        <table border="1">
+            <tbody>
+                <?php
 			foreach($paramList as $name => $value) {
 				echo '<input type="hidden" name="' . $name .'" value="' . $value . '">';
 			}
 			?>
-			<input type="hidden" name="CHECKSUMHASH" value="<?php echo $checkSum ?>">
-			</tbody>
-		</table>
-		<script type="text/javascript">
-			document.f1.submit();
-		</script>
-	</form>
+                <input type="hidden" name="CHECKSUMHASH" value="<?php echo $checkSum ?>">
+            </tbody>
+        </table>
+        <script type="text/javascript">
+        document.f1.submit();
+        </script>
+    </form>
 </body>
+
 </html>

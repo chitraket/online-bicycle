@@ -7,7 +7,7 @@ session_start();
             echo "<script>window.open('customer/customer_login.php','_self')</script>";
            }
            
-?> 
+?>
 <?php
 header("Pragma: no-cache");
 header("Cache-Control: no-cache");

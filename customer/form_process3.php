@@ -12,8 +12,10 @@ if(isset($_SESSION['CUST_IDS']))
 }
 else{
     ?>
-    <script>window.open('my-account','_self')</script>
-    <?php
+<script>
+window.open('my-account', '_self')
+</script>
+<?php
 }
 if(isset($_SESSION['ORDER_IDS']))
 {
@@ -21,8 +23,10 @@ if(isset($_SESSION['ORDER_IDS']))
 }
 else{
     ?>
-    <script>window.open('my-account','_self')</script>
-    <?php
+<script>
+window.open('my-account', '_self')
+</script>
+<?php
 }
 if(isset($_SESSION['invoice_no']))
 {
@@ -30,8 +34,10 @@ if(isset($_SESSION['invoice_no']))
 }
 else{
     ?>
-    <script>window.open('my-account','_self')</script>
-    <?php
+<script>
+window.open('my-account', '_self')
+</script>
+<?php
 }
 if(isset($_SESSION['TXN_AMOUNTS']))
 {
@@ -39,8 +45,10 @@ if(isset($_SESSION['TXN_AMOUNTS']))
 }
 else{
     ?>
-    <script>window.open('my-account','_self')</script>
-    <?php
+<script>
+window.open('my-account', '_self')
+</script>
+<?php
 }
 $customer_email='';
 $customer_address='';
@@ -57,8 +65,10 @@ $num_orders=mysqli_num_rows($run_orders);
 if($num_orders==0)
 {
     ?>
-    <script>window.open('my-account','_self')</script>
-    <?php
+<script>
+window.open('my-account', '_self')
+</script>
+<?php
 }
 else{
     while($row_orders = mysqli_fetch_array($run_orders)){
@@ -388,7 +398,11 @@ $totals=0;
                         }
                         unset($_SESSION['CUST_IDS'],$_SESSION['ORDER_IDS'],$_SESSION['invoice_no'],$_SESSION['TXN_AMOUNTS'],$_SESSION['INDUSTRY_TYPE_IDS'],$_SESSION['CHANNEL_IDS']);
                         ?>
-                        <script>window.open('online_payment_successfuls-<?php echo base64_encode($order_id);?>-<?php echo base64_encode($txn_amount);?>','_self')</script>
+<script>
+window.open(
+    'online_payment_successfuls-<?php echo base64_encode($order_id);?>-<?php echo base64_encode($txn_amount);?>',
+    '_self')
+</script>
 <?php
            } 
 ?>

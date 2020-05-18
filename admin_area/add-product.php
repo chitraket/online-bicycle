@@ -216,7 +216,7 @@
             $product_img2 = $_FILES['product_img2']['name'];
             $product_img3 = $_FILES['product_img3']['name'];
             $product_img4 = $_FILES['product_img4']['name'];
-            
+            $product_ids='17116'.rand(10000000,100000000);
             $temp_name1 = $_FILES['product_img1']['tmp_name'];
             $temp_name2 = $_FILES['product_img2']['tmp_name'];
             $temp_name3 = $_FILES['product_img3']['tmp_name'];
@@ -227,7 +227,7 @@
             move_uploaded_file($temp_name3,"product_images/$product_img3");
             move_uploaded_file($temp_name4,"product_images/$product_img4");
             
-            $insert_product = "insert into products (manufacturer_id,p_cat_id,cat_id,date,product_title,product_img1,product_img2,product_img3,product_img4,product_price,product_discount_price,product_discount,product_label,product_desc,product_qty,available_qty,product_size,product_frame,product_weight,product_front_suspension,product_rear_suspension,product_front_derailleur,product_rear_derailleur,product_wheels,product_tires,product_shifter,product_crankset,product_freewheels,product_bb_set,product_cassette,product_colour,product_pedals,product_seat_post,product_handleber,product_stem,product_headset,product_brakeset,product_status_top,product_status) values ('$manufacturer_cat','$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_img4','$product_price','$product_discount_price','$product_discount','$product_label','$product_desc','$product_qty','$product_qty','$per','$product_frame','$product_weight','$product_front_suspension','$product_rear_suspension','$product_front_derailleur','$product_rear_derailleur','$product_wheels','$product_tires','$product_shifter','$product_crankset','$product_freewheels','$product_bb_set','$product_cassette','$product_colour','$product_pedals','$product_seat_post','$product_handleber','$product_stem','$product_headset','$product_brakeset','$product_top','$product_status')";
+            $insert_product = "insert into products (product_id,manufacturer_id,p_cat_id,cat_id,date,product_title,product_img1,product_img2,product_img3,product_img4,product_price,product_discount_price,product_discount,product_label,product_desc,product_qty,available_qty,product_size,product_frame,product_weight,product_front_suspension,product_rear_suspension,product_front_derailleur,product_rear_derailleur,product_wheels,product_tires,product_shifter,product_crankset,product_freewheels,product_bb_set,product_cassette,product_colour,product_pedals,product_seat_post,product_handleber,product_stem,product_headset,product_brakeset,product_status_top,product_status) values ('$product_ids','$manufacturer_cat','$product_cat','$cat',NOW(),'$product_title','$product_img1','$product_img2','$product_img3','$product_img4','$product_price','$product_discount_price','$product_discount','$product_label','$product_desc','$product_qty','$product_qty','$per','$product_frame','$product_weight','$product_front_suspension','$product_rear_suspension','$product_front_derailleur','$product_rear_derailleur','$product_wheels','$product_tires','$product_shifter','$product_crankset','$product_freewheels','$product_bb_set','$product_cassette','$product_colour','$product_pedals','$product_seat_post','$product_handleber','$product_stem','$product_headset','$product_brakeset','$product_top','$product_status')";
             $run_product = mysqli_query($con,$insert_product);
             
             if($run_product){

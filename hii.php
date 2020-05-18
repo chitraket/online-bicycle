@@ -1,7 +1,6 @@
 <?php 
 session_start();
-foreach($_SESSION as $p)
-{
-    print_r($p);
+if (isset($_SESSION["compare"])) {
+    print_r($_SESSION["compare"]);
 }
 ?>

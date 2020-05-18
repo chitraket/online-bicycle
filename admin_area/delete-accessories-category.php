@@ -20,14 +20,23 @@
         if (isset($_GET['accessories_id'])) {
             $delete_id = $_GET['accessories_id'];
             
+            $select_product="select * from accessories where accessories_category='$delete_id'";
+            $run_product=mysqli_query($con,$select_product);
+            while($row_product=mysqli_fetch_array($run_product))
+            {
+                $accessories_ids=$row_product['accessories_id'];
+                $update_review="delete from review where product_id='$accessories_ids'";
+                mysqli_query($con,$update_review);
+                $update_Wishlist="delete from wishlist where product_id='$accessories_ids'";
+                mysqli_query($con,$update_Wishlist);
+            }
+            
             $delete_pro = "update  accessories_category set accessories_category_status='delete' where accessories_category_id='$delete_id'";
-            
             $run_delete = mysqli_query($con, $delete_pro);
-            
             $delete_product = "update  accessories set accessories_status='delete' where accessories_category='$delete_id'";
-            
             mysqli_query($con, $delete_product);
-
+            
+            
             if ($run_delete) {            
                 echo "<script>window.open('view-accessories-category.php?m=1','_self')</script>";
             }

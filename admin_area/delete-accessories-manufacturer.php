@@ -20,7 +20,18 @@ $paga=12;
         {
     if (isset($_GET['accessories_id'])) {
         $delete_id = $_GET['accessories_id'];
-        
+
+            $select_product="select * from accessories where accessories_brand='$delete_id'";
+            $run_product=mysqli_query($con,$select_product);
+            while($row_product=mysqli_fetch_array($run_product))
+            {
+                $accessories_ids=$row_product['accessories_id'];
+                $update_review="delete from review where product_id='$accessories_ids'";
+                mysqli_query($con,$update_review);
+                $update_Wishlist="delete from wishlist where product_id='$accessories_ids'";
+                mysqli_query($con,$update_Wishlist);
+            }
+
         $delete_pro = "update  accessories_brand set accessories_brand_status='delete' where accessories_brand_id='$delete_id'";
         
         $run_delete = mysqli_query($con, $delete_pro);
@@ -28,6 +39,8 @@ $paga=12;
         $delete_product = "update  accessories set accessories_status='delete'  where accessories_brand='$delete_id'";
         
         mysqli_query($con, $delete_product);
+
+            
         
         if ($run_delete) {
             echo "<script>window.open('view-accessories-manufacturer.php?m=1','_self')</script>";

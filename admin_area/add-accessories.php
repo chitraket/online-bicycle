@@ -163,7 +163,7 @@
                 $accessories_name=$_POST['accessories_title'];
                 $accessories_brand=$_POST['accessories_brand'];
                 $accessories_category=$_POST['accessories_category'];
-               
+                
                 $accessories_price=$_POST['accessories_price'];
                 $accessories_qty=$_POST['accessories_qty'];
                 $accessories_material=$_POST['accessories_material'];
@@ -174,7 +174,7 @@
                 $accessories_img2=$_FILES['accessories_img2']['name'];
                 $accessories_img3=$_FILES['accessories_img3']['name'];
                 $accessories_img4=$_FILES['accessories_img4']['name'];
-              
+                $accessorie_ids='1791'.rand(100000,1000000);
                 $accessories_label=$_POST['accessories_label'];
                 $accessories_discount=$_POST['accessories_discount'];
                 $accessories_discount_price=$_POST['accessories_discount_price'];
@@ -189,7 +189,7 @@
                 move_uploaded_file($temp_name3,"accessories_images/$accessories_img3");
                 move_uploaded_file($temp_name4,"accessories_images/$accessories_img4");
             
-                $insert_accessories = "insert into accessories(accessories_brand,accessories_category,accessories_name,accessories_image_1,accessories_image_2,accessories_image_3,accessories_image_4,accessories_qty,available_qty,accessories_material,accessories_color,accessories_prices,accessories_discount_price,accessories_discount,accessories_label,accessories_date,accessories_desc,accessories_status_top,accessories_status) values ('$accessories_brand','$accessories_category','$accessories_name','$accessories_img1','$accessories_img2','$accessories_img3','$accessories_img4','$accessories_qty','$accessories_qty','$accessories_material','$accessories_color','$accessories_price','$accessories_discount_price','$accessories_discount','$accessories_label',NOW(),'$accessories_desc','$accessories_status_top','yes')";
+                $insert_accessories = "insert into accessories(accessories_id,accessories_brand,accessories_category,accessories_name,accessories_image_1,accessories_image_2,accessories_image_3,accessories_image_4,accessories_qty,available_qty,accessories_material,accessories_color,accessories_prices,accessories_discount_price,accessories_discount,accessories_label,accessories_date,accessories_desc,accessories_status_top,accessories_status) values ('$accessorie_ids','$accessories_brand','$accessories_category','$accessories_name','$accessories_img1','$accessories_img2','$accessories_img3','$accessories_img4','$accessories_qty','$accessories_qty','$accessories_material','$accessories_color','$accessories_price','$accessories_discount_price','$accessories_discount','$accessories_label',NOW(),'$accessories_desc','$accessories_status_top','yes')";
                 $run_accessories = mysqli_query($con,$insert_accessories);
                 if($run_accessories){
                     ?>

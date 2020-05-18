@@ -19,10 +19,13 @@
             {
     if (isset($_GET['product_id'])) {
         $delete_id = $_GET['product_id'];
-        
         $delete_pro = "update products set product_status='delete' where product_id='$delete_id'";
-        
         $run_delete = mysqli_query($con, $delete_pro);
+
+        $update_review="delete from review where product_id='$delete_id'";
+        mysqli_query($con,$update_review);
+        $update_Wishlist="delete from wishlist where product_id='$delete_id'";
+        mysqli_query($con,$update_Wishlist);
         
         if ($run_delete) {
             echo "<script>window.open('view-product.php?m=1','_self')</script>";

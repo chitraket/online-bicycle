@@ -20,6 +20,16 @@
     if (isset($_GET['p_cat_id'])) {
         $delete_id = $_GET['p_cat_id'];
         
+            $select_product="select * from products where p_cat_id='$delete_id'";
+            $run_product=mysqli_query($con,$select_product);
+            while($row_product=mysqli_fetch_array($run_product))
+            {
+                $accessories_ids=$row_product['product_id'];
+                $update_review="delete from review where product_id='$accessories_ids'";
+                mysqli_query($con,$update_review);
+                $update_Wishlist="delete from wishlist where product_id='$accessories_ids'";
+                mysqli_query($con,$update_Wishlist);
+            }
         $delete_pro = "update product_categories set p_cat_status='delete' where p_cat_id='$delete_id'";
         
         $run_delete = mysqli_query($con, $delete_pro);
@@ -27,7 +37,7 @@
         $delete_product = "update  products set product_status='delete' where p_cat_id='$delete_id'";
         
         mysqli_query($con, $delete_product);
-
+        
         
         if ($run_delete) {
             echo "<script>window.open('view-product-category.php?m=1','_self')</script>";

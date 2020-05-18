@@ -1,8 +1,6 @@
 <?php
 session_start();
     include("includes/db.php");
-    
-
 ?>
 <?php
 
@@ -25,36 +23,38 @@ $num_count=mysqli_num_rows($result);
 if($num_count==0)
 {
     ?>
-    <div class="col-12" id="cart_empty">
-                                        <div class="section-title text-center">
-                                            <h2 class="title">Your Order is empty</h2>
-                                        </div>
-                                    <center> <div class="action_link">
-                                        <a href="home"><input type="submit" class="btn btn-cart2" name="add_cart" value="Start shopping"></a>
-                                    </div></center>  
-                                    </div>
-    <?php 
+<div class="col-12" id="cart_empty">
+    <div class="section-title text-center">
+        <h2 class="title">Your Order is empty</h2>
+    </div>
+    <center>
+        <div class="action_link">
+            <a href="home"><input type="submit" class="btn btn-cart2" name="add_cart" value="Start shopping"></a>
+        </div>
+    </center>
+</div>
+<?php 
 }
 else{
-?>  
-    <table class='table table-bordered' id='example'>
-        <thead class='thead-light'>
-            <tr>
-                <th>Order</th>
-                <th>Name</th>
-                <th>Total</th>
-                <th>Payment Method</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-<?php 
+?>
+<table class='table table-bordered' id='example'>
+    <thead class='thead-light'>
+        <tr>
+            <th>Order</th>
+            <th>Name</th>
+            <th>Total</th>
+            <th>Payment Method</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <?php 
 $i=0; 
 while($row = mysqli_fetch_array($result))  
 {  
     $order_id=$row['id'];
      $i++;
      ?>
-     <tbody>  
+    <tbody>
         <tr>
             <td> <?php echo $i; ?></td>
             <td><?php echo $row["customer_name"] ?></td>
@@ -102,24 +102,24 @@ while($row = mysqli_fetch_array($result))
                                                         if($pay=="")
                                                         {
                                                         ?>
-                                                        
-                                                        <td><img src="assets/img/icon/cash-on-delivery.png" style="height:25px;"/> Cash On Delivery</td>
-                                                        <?php
+
+            <td><img src="assets/img/icon/cash-on-delivery.png" style="height:25px;" /> Cash On Delivery</td>
+            <?php
                                                         
                                                         }
                                                         else{
                                                             ?>
-                                                            <td><span><img src="assets/img/icon/icons8-paytm-32.png" style="height:25px;"/> Online Payment</span></td>
-                                                              <?php
+            <td><span><img src="assets/img/icon/icons8-paytm-32.png" style="height:25px;" /> Online Payment</span></td>
+            <?php
                                                         }
 
                                             }
                                                 ?>
             <td><a href="view_order-<?php echo base64_encode($row['id']); ?>" class="btn btn-sqr">View</a>
-            </td>  
+            </td>
         </tr>
-    </tbody>  
-     <?php 
+    </tbody>
+    <?php 
 }  
 $outputs .= '</table><br /><div align="center">';  
 $page_query = "SELECT * FROM orders where customer_email='$customer_session'";  

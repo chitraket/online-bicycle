@@ -12,7 +12,7 @@ include("functions/functions.php");
            }
            else{
 
-?> 
+?>
 <?php
 
  if(isset($_SESSION['order_id']))
@@ -68,51 +68,27 @@ include("functions/functions.php");
                     }
                    
                 }
-                foreach ($_SESSION as $product) {
-                    if (!is_array($product)) {
-                        continue;
-                    }
-                foreach ($product as $key => $value) {
-                    if($key==6)
-                    {
-                        $papage=$value;
-                    }
-                    elseif($key==5)
-                    {
-                        $pro_size=$value;
-                    }
-                    elseif ($key==4) {
-                        $pro_id= $value;
-                    } elseif ($key ==3) {
-                        $pro_qty= $value;
-                    } elseif ($key ==2) {
-                        $pro_price= $value;
-                    }
-                    elseif($key==1)
-                    {
-                        $pro_name=$value;
-                    }
-
-                }
-                $sub_total=$pro_price*$pro_qty;
-                $total+=$sub_total;
-
-                
-
-
+                foreach ($_SESSION['shopping_cart'] as $key => $value) {
+                    $pro_qty=$value['item_qty'];
+                    $pro_id=$value['item_id'];
+                    $pro_size=$value['item_size'];
+                    $pro_price=$value['item_price'];
+                    $papage=$value['papage'];
+                    $pro_name=$value['item_name'];
+                    $total=$total+$value['item_price']*$value['item_qty'];
                  $insert_customer_orders="insert into customer_orders(order_id,product_id,txnid,invoice_no,qty,size,customer_email,order_date,order_status,payment_status,papage_number) values('$order_id','$pro_id','$txnid','$invoice_no','$pro_qty','$pro_size','$customer_email',NOW(),'$o_status','$status','$papage')";
                 $run_customer_orders=mysqli_query($con,$insert_customer_orders);
 
                  if ($papage==0) {
                      $querys="update products set available_qty=available_qty-$pro_qty where product_id='$pro_id' ";
                      $run_querys=mysqli_query($db, $querys);
-                     unset($_SESSION[$pro_name.$pro_id]);  
+                     unset($_SESSION['shopping_cart'][$key]);  
                  }
                  if($papage==1)
                  {
                     $querys="update accessories set available_qty=available_qty-$pro_qty where accessories_id='$pro_id' ";
                     $run_querys=mysqli_query($db, $querys);
-                    unset($_SESSION[$pro_name.$pro_id]);  
+                    unset($_SESSION['shopping_cart'][$key]);  
                  }
 
                        // unset($_SESSION[$pro_name]);    
@@ -446,8 +422,11 @@ include("functions/functions.php");
                     }
                 unset($_SESSION['order_id'],$_SESSION['ORDER_ID'],$_SESSION['CUST_ID'],$_SESSION['INDUSTRY_TYPE_ID'],$_SESSION['CHANNEL_ID'],$_SESSION['TXN_AMOUNT'],$_SESSION['c_id']);
                 ?>
-                <script>window.open('online_payment_successful-<?php echo base64_encode($order_id);?>-<?php echo base64_encode($txnid);?>','_self')</script>";
-              
+<script>
+window.open('online_payment_successful-<?php echo base64_encode($order_id);?>-<?php echo base64_encode($txnid);?>',
+    '_self')
+</script>";
+
 <?php
            } 
 ?>

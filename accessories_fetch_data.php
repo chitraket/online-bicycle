@@ -14,7 +14,6 @@ if(isset($_POST["action"]))
          $page = 1;  
     }  
     $start_from = ($page - 1)*$record_per_page;  
-   //echo $start_from;
     
  $query = "
   SELECT * FROM accessories  WHERE accessories_brand!='' AND accessories_status='yes'";
@@ -55,99 +54,104 @@ $outputs='';
      while ($row=mysqli_fetch_assoc($result)) {
         $accessories_brand_id=$row['accessories_brand'];
             ?>
-                        <div class="col-md-4 col-sm-6">
-                                    <!-- product grid start -->
-                                    <div class="product-item">
-                                        <figure class="product-thumb">
-                                            <a href="accessories-<?php echo base64_encode($row['accessories_id']);?>">
-                                                <img class="pri-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_1'];?>" alt="product" >
-                                                <?php
+<div class="col-md-4 col-sm-6">
+    <!-- product grid start -->
+    <div class="product-item">
+        <figure class="product-thumb">
+            <a href="accessories-<?php echo base64_encode($row['accessories_id']);?>">
+                <img class="pri-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_1'];?>"
+                    alt="product">
+                <?php
                                                 if($row['accessories_image_2']=="")
                                                 {
                                                     ?>
-                                                    <img class="sec-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_1'];?>" alt="product">
-                                                    <?php 
+                <img class="sec-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_1'];?>"
+                    alt="product">
+                <?php 
                                                 } 
                                                 else{
                                                 ?>
-                                                <img class="sec-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_2'];?>" alt="product" >
-                                                <?php 
+                <img class="sec-img" src="admin_area/accessories_images/<?php echo $row['accessories_image_2'];?>"
+                    alt="product">
+                <?php 
                                                 }?>
-                                            </a>
-                                            <div class="product-badge">
-                                            <?php
+            </a>
+            <div class="product-badge">
+                <?php
                                                 if($row['accessories_label']=="new")
                                                 { 
-                                            ?>                                           
-                                                <div class="product-label new">
-                                                    <span>New</span>
-                                                </div>
-                                                <?php
+                                            ?>
+                <div class="product-label new">
+                    <span>New</span>
+                </div>
+                <?php
                                                 }
                                                 if($row['accessories_label']=="old")
                                                 { 
-                                            ?>                                           
-                                                <?php
+                                            ?>
+                <?php
                                                 }
                                                 if($row['accessories_label']=="sale")
                                                 { 
                                                 ?>
-                                                 <div class="product-label new">
-                                                    <span>Sale</span>
-                                                </div>
-                                                <div class="product-label discount">
-                                                    <span><?php echo $row['accessories_discount'] ?>%</span>
-                                                </div>
-                                                <?php 
+                <div class="product-label new">
+                    <span>Sale</span>
+                </div>
+                <div class="product-label discount">
+                    <span><?php echo $row['accessories_discount'] ?>%</span>
+                </div>
+                <?php 
                                                 }
                                                 ?>
-                                            </div>
-                                            
-                                        </figure>
-                                        <div class="product-caption text-center">
-                                        <div class="manufacturer-name">
-                                            <?php
+            </div>
+
+        </figure>
+        <div class="product-caption text-center">
+            <div class="manufacturer-name">
+                <?php
                                             $query3="select * from accessories_brand where accessories_brand_id='$accessories_brand_id'";
                                             $run_carts=mysqli_query($con, $query3);
                                             while ($row_carts=mysqli_fetch_array($run_carts)) { 
                                             ?>
-                                                <a href="accessories_manufacturer-<?php echo base64_encode($accessories_brand_id);?>"><?php echo $row_carts['accessories_brand']; ?></a>
-                                                <?php 
+                <a
+                    href="accessories_manufacturer-<?php echo base64_encode($accessories_brand_id);?>"><?php echo $row_carts['accessories_brand']; ?></a>
+                <?php 
                                             }
                                                 ?>
-                                            </div>
-                                            <h6 class="product-name">
-                                                <a href="accessories-<?php echo  base64_encode($row['accessories_id']);?>"><?php echo $row['accessories_name'];?></a>
-                                            </h6>
-                                            <div class="price-box">
-                                            <?php
+            </div>
+            <h6 class="product-name">
+                <a
+                    href="accessories-<?php echo  base64_encode($row['accessories_id']);?>"><?php echo $row['accessories_name'];?></a>
+            </h6>
+            <div class="price-box">
+                <?php
                                             if($row['accessories_label']=="new")
                                             { 
-                                            ?>  
-                                                <span class="price-regular">Rs.<?php echo $row['accessories_prices'] ?></span>
-                                            <?php 
+                                            ?>
+                <span class="price-regular">Rs.<?php echo $row['accessories_prices'] ?></span>
+                <?php 
                                             }
                                             if($row['accessories_label']=="old")
                                             { 
-                                            ?>  
-                                                <span class="price-regular">Rs.<?php echo $row['accessories_prices'] ?></span>
-                                            <?php 
+                                            ?>
+                <span class="price-regular">Rs.<?php echo $row['accessories_prices'] ?></span>
+                <?php 
                                             }
                                             if($row['accessories_label']=="sale")
                                             {
                                             ?>
-                                             <span class="price-regular">Rs.<?php echo $row['accessories_prices']; ?></span>
-                                                <span class="price-old"><del>Rs.<?php echo $row['accessories_discount_price']; ?></del></span>
-                                                <?php 
+                <span class="price-regular">Rs.<?php echo $row['accessories_prices']; ?></span>
+                <span class="price-old"><del>Rs.<?php echo $row['accessories_discount_price']; ?></del></span>
+                <?php 
                                             }
                                             ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
+            </div>
+        </div>
+    </div>
+</div>
 
-                              <?php 
+
+<?php 
          }
          echo'</div>';
      
@@ -156,14 +160,19 @@ $outputs='';
 else
  {
   ?>
-  <div class="col-12">
-        <!-- section title start -->
-        <div class="section-title text-center">
-            <h2 class="title">No Accessories Found</h2>
-        </div>
-        <!-- section title start -->
-        </div><style>.paginatoin-area{display:none;}</style>
-        <?php
+<div class="col-12">
+    <!-- section title start -->
+    <div class="section-title text-center">
+        <h2 class="title">No Accessories Found</h2>
+    </div>
+    <!-- section title start -->
+</div>
+<style>
+.paginatoin-area {
+    display: none;
+}
+</style>
+<?php
  }
 
 }
@@ -204,8 +213,3 @@ $outputs .= '<div class="paginatoin-area text-center">
  </div>'; 
 echo $outputs;
 ?>
-
-<!--<div class="product-identity">
-                                           
-                                           <p class="manufacturer-name">'.$row['accessories_brand'].'</p>
-                                           </div>-->

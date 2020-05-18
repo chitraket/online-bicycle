@@ -1,16 +1,14 @@
-
-
-
 <div class="tab-pane fade" id="delete-account" role="tabpanel">
 
-<form action="" method="post"><!-- form Begin -->
-        
-            <div class="single-input-item">
-                    <button name="Yes" class="btn btn-sqr">Yes, I Want To Delete</button>
-                    <button name="No" class="btn btn-sqr">No, I Dont Want To Delete</button>
-            </div>
-    
-        
+    <form action="" method="post">
+        <!-- form Begin -->
+
+        <div class="single-input-item">
+            <button name="Yes" class="btn btn-sqr">Yes, I Want To Delete</button>
+            <button name="No" class="btn btn-sqr">No, I Dont Want To Delete</button>
+        </div>
+
+
     </form><!-- form Finish -->
 </div>
 

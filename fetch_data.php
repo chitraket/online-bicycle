@@ -1,9 +1,4 @@
 <?php
-
-//fetch_data.php
-
-// use function PHPSTORM_META\elementType;
-
 include('includes/db.php');
 if(isset($_POST["action"]))
 {
@@ -87,35 +82,35 @@ $outputs='';
      while ($row=mysqli_fetch_assoc($result)) {
          $manufacturer_id=$row['manufacturer_id'];
          ?>
-                        <div class="col-md-4 col-sm-6">
-                                    <!-- product grid start -->
-                                    <div class="product-item">
-                                        <figure class="product-thumb">
-                                            <a href="bikes-<?php echo base64_encode($row['product_id']);?>">
-                                                <img class="pri-img" src="admin_area/product_images/<?php echo $row['product_img1'];?>" alt="product" >
-                                                <?php 
+<div class="col-md-4 col-sm-6">
+    <!-- product grid start -->
+    <div class="product-item">
+        <figure class="product-thumb">
+            <a href="bikes-<?php echo base64_encode($row['product_id']);?>">
+                <img class="pri-img" src="admin_area/product_images/<?php echo $row['product_img1'];?>" alt="product">
+                <?php 
                                                 if($row['product_img2']=="")
                                                 {
                                                     ?>
-                                                    <img class="sec-img" src="admin_area/product_images/<?php echo $row['product_img1'];?>" alt="product" >
-                                                    <?php 
+                <img class="sec-img" src="admin_area/product_images/<?php echo $row['product_img1'];?>" alt="product">
+                <?php 
                                                 }
                                                 else{
                                                 ?>
-                                                <img class="sec-img" src="admin_area/product_images/<?php echo $row['product_img2'];?>" alt="product" >
-                                                <?php
+                <img class="sec-img" src="admin_area/product_images/<?php echo $row['product_img2'];?>" alt="product">
+                <?php
                                                 } 
                                                 ?>
-                                            </a>                                   
-                                            <div class="product-badge">
-                                            <?php
+            </a>
+            <div class="product-badge">
+                <?php
                                                 if($row['product_label']=="new")
                                                 { 
-                                            ?>                                           
-                                                <div class="product-label new">
-                                                    <span>New</span>
-                                                </div>
-                                                <?php
+                                            ?>
+                <div class="product-label new">
+                    <span>New</span>
+                </div>
+                <?php
                                                 }
                                                 if($row['product_label']=="old")
                                                 { 
@@ -123,61 +118,62 @@ $outputs='';
                                                 if($row['product_label']=="sale")
                                                 { 
                                                 ?>
-                                                 <div class="product-label new">
-                                                    <span>Sale</span>
-                                                </div>
-                                                <div class="product-label discount">
-                                                    <span><?php echo $row['product_discount'] ?>%</span>
-                                                </div>
-                                                <?php 
+                <div class="product-label new">
+                    <span>Sale</span>
+                </div>
+                <div class="product-label discount">
+                    <span><?php echo $row['product_discount'] ?>%</span>
+                </div>
+                <?php 
                                                 }
                                                 ?>
-                                            </div>
-                                        </figure>
-                                        <div class="product-caption text-center">
-                                        <div class="manufacturer-name">
-                                            <?php
+            </div>
+        </figure>
+        <div class="product-caption text-center">
+            <div class="manufacturer-name">
+                <?php
                                             $query3="select * from manufacturers where manufacturer_id='$manufacturer_id'";
                                             $run_carts=mysqli_query($con, $query3);
                                             while ($row_carts=mysqli_fetch_array($run_carts)) { 
                                             ?>
-                                                <a href="bikes_manufacturer-<?php echo base64_encode($manufacturer_id);?>"><?php echo $row_carts['manufacturer_title']; ?></a>
-                                                <?php 
+                <a
+                    href="bikes_manufacturer-<?php echo base64_encode($manufacturer_id);?>"><?php echo $row_carts['manufacturer_title']; ?></a>
+                <?php 
                                             }
                                                 ?>
-                                            </div>
-                                            <h6 class="product-name">
-                                                <a href="bikes-<?php echo base64_encode($row['product_id']); ?>"><?php echo $row['product_title'] ?></a>
-                                            </h6>
-                                            <div class="price-box">
-                                            <?php
+            </div>
+            <h6 class="product-name">
+                <a href="bikes-<?php echo base64_encode($row['product_id']); ?>"><?php echo $row['product_title'] ?></a>
+            </h6>
+            <div class="price-box">
+                <?php
                                             if($row['product_label']=="new")
                                             { 
-                                            ?>  
-                                                <span class="price-regular">Rs.<?php echo $row['product_price'] ?></span>
-                                            <?php 
+                                            ?>
+                <span class="price-regular">Rs.<?php echo $row['product_price'] ?></span>
+                <?php 
                                             }
                                             if($row['product_label']=="old")
                                             { 
-                                            ?>  
-                                                <span class="price-regular">Rs.<?php echo $row['product_price'] ?></span>
-                                            <?php 
+                                            ?>
+                <span class="price-regular">Rs.<?php echo $row['product_price'] ?></span>
+                <?php 
                                             }
                                             if($row['product_label']=="sale")
                                             {
                                             ?>
-                                             <span class="price-regular">Rs.<?php echo $row['product_price']; ?></span>
-                                                <span class="price-old"><del>Rs.<?php echo $row['product_discount_price']; ?></del></span>
-                                                <?php 
+                <span class="price-regular">Rs.<?php echo $row['product_price']; ?></span>
+                <span class="price-old"><del>Rs.<?php echo $row['product_discount_price']; ?></del></span>
+                <?php 
                                             }
                                             ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
+            </div>
+        </div>
+    </div>
+</div>
 
-        <?php 
+
+<?php 
      } 
      echo '</div>';
     
@@ -186,14 +182,19 @@ $outputs='';
 else
  {
 ?>
-  <div class="col-12">
-        <!-- section title start -->
-        <div class="section-title text-center">
-            <h2 class="title">No products Found</h2>
-        </div>
-        <!-- section title start -->
-        </div><style>.paginatoin-area{display:none;}</style>
-        <?php 
+<div class="col-12">
+    <!-- section title start -->
+    <div class="section-title text-center">
+        <h2 class="title">No products Found</h2>
+    </div>
+    <!-- section title start -->
+</div>
+<style>
+.paginatoin-area {
+    display: none;
+}
+</style>
+<?php 
  }
 
 }

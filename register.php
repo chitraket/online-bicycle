@@ -2,38 +2,38 @@
         $active='';
        include("includes/header.php");
     ?>
-    <!-- Start Header Area -->
-    <!--<div id="load_screen"><div id="loading"><img src="loder.gif" ></div></div>-->
-    <!-- end Header Area -->
-    <main>
-        <!-- breadcrumb area start -->
-        <div class="breadcrumb-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="breadcrumb-wrap">
-                            <nav aria-label="breadcrumb">
-                                <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="home"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Register</li>
-                                </ul>
-                            </nav>
-                        </div>
+<!-- Start Header Area -->
+<!--<div id="load_screen"><div id="loading"><img src="loder.gif" ></div></div>-->
+<!-- end Header Area -->
+<main>
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap">
+                        <nav aria-label="breadcrumb">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="home"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Register</li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- breadcrumb area end -->
-        
-        <!-- login register wrapper start -->
-        <div class="login-register-wrapper section-padding ">
-            <div class="container">
-                <div class="member-area-from-wrap">
-                    <div class="row">
-                        <!-- Login Content Start -->
-                        <!-- Login Content End -->
-                        <!-- Register Content Start -->
-<?php 
+    </div>
+    <!-- breadcrumb area end -->
+
+    <!-- login register wrapper start -->
+    <div class="login-register-wrapper section-padding ">
+        <div class="container">
+            <div class="member-area-from-wrap">
+                <div class="row">
+                    <!-- Login Content Start -->
+                    <!-- Login Content End -->
+                    <!-- Register Content Start -->
+                    <?php 
  $error_c_name = ""; 
  $error_l_name="";
  $error_pass="";
@@ -355,23 +355,23 @@ if(isset($_POST['register'])){
         {
         
         ?>
-        <script type="text/javascript">
+                    <script type="text/javascript">
                     swal({
-                        title: "Registration successful.",
-                        text: "Please Check Your Email For Confirmation.",
-                        icon: "success",
-                        buttons:[,"OK"],
-                        successMode: true,
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('customer/login','_self');
-                        } else {
-                        
-                        }
-                });
+                            title: "Registration successful.",
+                            text: "Please Check Your Email For Confirmation.",
+                            icon: "success",
+                            buttons: [, "OK"],
+                            successMode: true,
+                        })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                window.open('customer/login', '_self');
+                            } else {
+
+                            }
+                        });
                     </script>
-          <?php 
+                    <?php 
         }
     } 
     catch (Exception $e) {
@@ -384,624 +384,598 @@ if(isset($_POST['register'])){
 }
 end:
 ?>
-                        <div class="col-lg-9">
+                    <div class="col-lg-9">
 
-                            <div class="login-reg-form-wrap sign-up-form">
-                                <h5>Register Form</h5>
-                                <form action="#" method="post" id="registration_form" enctype="multipart/form-data">                                    
-                                
+                        <div class="login-reg-form-wrap sign-up-form">
+                            <h5>Register Form</h5>
+                            <form action="#" method="post" id="registration_form" enctype="multipart/form-data">
+
                                 <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="single-input-item">
+                                    <div class="col-lg-6">
+                                        <div class="single-input-item">
                                             <label for="f_name">First Name</label>
-                                                    <input type="text" name="c_name" id="f_name" placeholder="Enter your First name" autocomplete="off" >
-                                                    <span style="color: red;"><?php echo $error_c_name;?></span>
-                                                    <span id="f_nameMsg"></span>
-                                                    
-                                            </div>
+                                            <input type="text" name="c_name" id="f_name"
+                                                placeholder="Enter your First name" autocomplete="off">
+                                            <span style="color: red;"><?php echo $error_c_name;?></span>
+                                            <span id="f_nameMsg"></span>
+
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="single-input-item">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="single-input-item">
                                             <label for="c_lname">Last Name</label>
-                                                <input type="text" placeholder="Enter your Last name" name="c_lname" id="l_name"  autocomplete="off" />
-                                                <span id="l_nameMsg"></span>
-                                                <span style="color: red;"><?php echo $error_l_name; ?></span>
-                                            </div>
+                                            <input type="text" placeholder="Enter your Last name" name="c_lname"
+                                                id="l_name" autocomplete="off" />
+                                            <span id="l_nameMsg"></span>
+                                            <span style="color: red;"><?php echo $error_l_name; ?></span>
                                         </div>
+                                    </div>
                                 </div>
 
-                
-                                    <div class="single-input-item">
+
+                                <div class="single-input-item">
                                     <label for="email">Email</label>
-                                        <input type="email" placeholder="Enter your Email" name="c_email"  id="email" autocomplete="off"/>
-                                        <span id="emailMsg"></span>
-                                        <span style="color: red;"><?php echo $error_email; ?></span>
-                                    </div>
+                                    <input type="email" placeholder="Enter your Email" name="c_email" id="email"
+                                        autocomplete="off" />
+                                    <span id="emailMsg"></span>
+                                    <span style="color: red;"><?php echo $error_email; ?></span>
+                                </div>
 
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="single-input-item">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="single-input-item">
                                             <label for="pass">Password</label>
-                                                <input type="password" placeholder="Enter your Password" id="pass" name="c_pass"/>
-                                                <span id="passMsg"></span>
-                                                <span style="color: red;"><?php echo $error_pass; ?></span>
-                                            </div>
+                                            <input type="password" placeholder="Enter your Password" id="pass"
+                                                name="c_pass" />
+                                            <span id="passMsg"></span>
+                                            <span style="color: red;"><?php echo $error_pass; ?></span>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="single-input-item">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="single-input-item">
                                             <label for="c_pass">Repeat Password</label>
-                                                <input type="password" placeholder="Repeat your Password" id="c_pass" name="c_c_pass" />
-                                                <span id="c_passMsg"></span>
-                                                <span style="color: red;"><?php echo $error_c_pass; ?></span>
-                                            </div>
+                                            <input type="password" placeholder="Repeat your Password" id="c_pass"
+                                                name="c_c_pass" />
+                                            <span id="c_passMsg"></span>
+                                            <span style="color: red;"><?php echo $error_c_pass; ?></span>
                                         </div>
                                     </div>
-                                    <div class="single-input-item">
+                                </div>
+                                <div class="single-input-item">
                                     <label for="state">State</label>
-                                        <input type="text" placeholder="Enter your state" name="c_state" id="state"/>
-                                        <span id="stateMsg"></span>
-                                        <span style="color: red;"><?php echo $error_state; ?></span>
-                                    </div>
-                           
-                                    <div class="single-input-item">
+                                    <input type="text" placeholder="Enter your state" name="c_state" id="state" />
+                                    <span id="stateMsg"></span>
+                                    <span style="color: red;"><?php echo $error_state; ?></span>
+                                </div>
+
+                                <div class="single-input-item">
                                     <label for="city">City</label>
-                                        <input type="text" placeholder="Enter your City" name="c_city" id="city" />
-                                        <span id="cityMsg"></span>
-                                        <span style="color: red;"><?php echo $error_city; ?></span>
-                                    </div>
-                                    <div class="single-input-item">
+                                    <input type="text" placeholder="Enter your City" name="c_city" id="city" />
+                                    <span id="cityMsg"></span>
+                                    <span style="color: red;"><?php echo $error_city; ?></span>
+                                </div>
+                                <div class="single-input-item">
                                     <label for="contact">Contact</label>
-                                        <input type="text" placeholder="Enter your contact " name="c_contact" id="contact"/>
-                                        <span id="contactMsg"></span>
-                                        <span style="color: red;"><?php echo $error_c_contact; ?></span>
-                                    </div>
+                                    <input type="text" placeholder="Enter your contact " name="c_contact"
+                                        id="contact" />
+                                    <span id="contactMsg"></span>
+                                    <span style="color: red;"><?php echo $error_c_contact; ?></span>
+                                </div>
 
-                                    <div class="single-input-item">
+                                <div class="single-input-item">
                                     <label for="address">Address</label>
-                                        <input type="text" placeholder="Enter your Address" name="c_address"  id="address"/>
-                                        <span id="addressMsg"></span>
-                                        <span style="color: red;"><?php echo $error_address; ?></span>
-                                    </div>
+                                    <input type="text" placeholder="Enter your Address" name="c_address" id="address" />
+                                    <span id="addressMsg"></span>
+                                    <span style="color: red;"><?php echo $error_address; ?></span>
+                                </div>
 
-                                    <div class="single-input-item">
+                                <div class="single-input-item">
                                     <label for="pincode">Pincode</label>
-                                        <input type="text" placeholder="Enter your Pincode" name="c_pincode" id="pincode" />
-                                        <span id="pincodeMsg"></span>
-                                        <span style="color: red;"><?php echo $error_pincode; ?></span>
-                                    </div>
+                                    <input type="text" placeholder="Enter your Pincode" name="c_pincode" id="pincode" />
+                                    <span id="pincodeMsg"></span>
+                                    <span style="color: red;"><?php echo $error_pincode; ?></span>
+                                </div>
 
-                                    <div class="single-input-item">
+                                <div class="single-input-item">
                                     <label for="image">Image</label>
-                                    <input type="file"  name="c_image"  id="image" accept=".jpg,.jpeg,.png,.gif"/>
+                                    <input type="file" name="c_image" id="image" accept=".jpg,.jpeg,.png,.gif" />
                                     <span style="color: red;"><?php echo $error_image2; ?></span>
-                                    </div>
-                                   
-                                    <div class="single-input-item">
-                                        <button class="btn btn-sqr" id="btnsubmit" name="register">Register</button>
-                                    </div>
-                                </form>                            
-                            </div>
+                                </div>
+
+                                <div class="single-input-item">
+                                    <button class="btn btn-sqr" id="btnsubmit" name="register">Register</button>
+                                </div>
+                            </form>
                         </div>
-                        <!-- Register Content End -->
                     </div>
+                    <!-- Register Content End -->
                 </div>
             </div>
         </div>
-        <!-- login register wrapper end -->
-    </main>
-    <!-- Scroll to top start -->
-    <div class="scroll-top not-visible">
-        <i class="fa fa-angle-up"></i>
     </div>
-    <!-- Scroll to Top End -->
-    <!-- footer area start -->
-    <?php
+    <!-- login register wrapper end -->
+</main>
+<!-- Scroll to top start -->
+<div class="scroll-top not-visible">
+    <i class="fa fa-angle-up"></i>
+</div>
+<!-- Scroll to Top End -->
+<!-- footer area start -->
+<?php
     include("includes/footer.php");
     ?>
-    <!-- footer area end -->
-    <!-- offcanvas mini cart start -->
-    <?php
+<!-- footer area end -->
+<!-- offcanvas mini cart start -->
+<?php
      include("includes/cart1.php");
     ?>
-    <!-- offcanvas mini cart end -->
+<!-- offcanvas mini cart end -->
 
-    <!-- JS
+<!-- JS
 ============================================ -->
 
-    <!-- Modernizer JS -->
-    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
-    <!-- jQuery JS -->
-    <script src="assets/js/vendor/jquery-3.3.1.min.js"></script>
-    <!-- Popper JS -->
-    <script src="assets/js/vendor/popper.min.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="assets/js/vendor/bootstrap.min.js"></script>
-    <!-- slick Slider JS -->
-    <script src="assets/js/plugins/slick.min.js"></script>
-    <!-- Countdown JS -->
-    <script src="assets/js/plugins/countdown.min.js"></script>
-    <!-- Nice Select JS -->
-    <script src="assets/js/plugins/nice-select.min.js"></script>
-    <!-- jquery UI JS -->
-    <script src="assets/js/plugins/jqueryui.min.js"></script>
-    <!-- Image zoom JS -->
-    <script src="assets/js/plugins/image-zoom.min.js"></script>
-    <!-- Imagesloaded JS -->
-    <script src="assets/js/plugins/imagesloaded.pkgd.min.js"></script>
-    <!-- Instagram feed JS -->
-    <script src="assets/js/plugins/instagramfeed.min.js"></script>
-    <!-- mailchimp active js -->
-    <script src="assets/js/plugins/ajaxchimp.js"></script>
-    <!-- contact form dynamic js -->
-    <script src="assets/js/plugins/ajax-mail.js"></script>
-    <!-- google map api -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8"></script>
-    <!-- google map active js -->
-    <script src="assets/js/plugins/google-map.js"></script>
-    <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+<!-- Modernizer JS -->
+<script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+<!-- jQuery JS -->
+<script src="assets/js/vendor/jquery-3.3.1.min.js"></script>
+<!-- Popper JS -->
+<script src="assets/js/vendor/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="assets/js/vendor/bootstrap.min.js"></script>
+<!-- slick Slider JS -->
+<script src="assets/js/plugins/slick.min.js"></script>
+<!-- Countdown JS -->
+<script src="assets/js/plugins/countdown.min.js"></script>
+<!-- Nice Select JS -->
+<script src="assets/js/plugins/nice-select.min.js"></script>
+<!-- jquery UI JS -->
+<script src="assets/js/plugins/jqueryui.min.js"></script>
+<!-- Image zoom JS -->
+<script src="assets/js/plugins/image-zoom.min.js"></script>
+<!-- Imagesloaded JS -->
+<script src="assets/js/plugins/imagesloaded.pkgd.min.js"></script>
+<!-- Instagram feed JS -->
+<script src="assets/js/plugins/instagramfeed.min.js"></script>
+<!-- mailchimp active js -->
+<script src="assets/js/plugins/ajaxchimp.js"></script>
+<!-- contact form dynamic js -->
+<script src="assets/js/plugins/ajax-mail.js"></script>
+<!-- google map api -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfmCVTjRI007pC1Yk2o2d_EhgkjTsFVN8"></script>
+<!-- google map active js -->
+<script src="assets/js/plugins/google-map.js"></script>
+<!-- Main JS -->
+<script src="assets/js/main.js"></script>
 
-  <script type="text/javascript">
-	$(document).ready(function(){
-		// set initially button state hidden
-        var f_name_err=true;
-        var l_name_err=true;
-        var email_err=true;
-        var pass_err=true;
-        var c_pass_err=true;
-        var state_err=true;
-        var city_err=true;
-        var contact_err=true;
-        var pincode_err=true;
-        var address_err=true;
+<script type="text/javascript">
+$(document).ready(function() {
+    // set initially button state hidden
+    var f_name_err = true;
+    var l_name_err = true;
+    var email_err = true;
+    var pass_err = true;
+    var c_pass_err = true;
+    var state_err = true;
+    var city_err = true;
+    var contact_err = true;
+    var pincode_err = true;
+    var address_err = true;
 
-        $("#btnsubmit").attr("disabled",true);
+    $("#btnsubmit").attr("disabled", true);
 
-        $('#f_name').keyup(function(){
-            f_name_check();
-        });
-        $('#f_name').focusout(function(){
-            f_name_check();
-        });
+    $('#f_name').keyup(function() {
+        f_name_check();
+    });
+    $('#f_name').focusout(function() {
+        f_name_check();
+    });
 
-        $('#l_name').keyup(function(){
-            l_name_check();
-        });
-        $('#l_name').focusout(function(){
-            l_name_check();
-        });
+    $('#l_name').keyup(function() {
+        l_name_check();
+    });
+    $('#l_name').focusout(function() {
+        l_name_check();
+    });
 
-        $('#email').keyup(function(){
-            email_check();
-        });
-        $('#email').focusout(function(){
-            email_check();
-        });
-        $('#email').focusout(function(){
-            var email=$("#email").val();
-            $.ajax({
-            url:"registers.php",
-            method:"POST",
-            data:{email:email},
-            success:function(data){
-               if(data!='0')
-               {
-                    $("#email").css("border","1px solid red");
-                    $("#emailMsg").html("<p class='text-danger'>Email is already registered.</p>");
+    $('#email').keyup(function() {
+        email_check();
+    });
+    $('#email').focusout(function() {
+        email_check();
+    });
+    $('#email').focusout(function() {
+        var email = $("#email").val();
+        $.ajax({
+            url: "registers.php",
+            method: "POST",
+            data: {
+                email: email
+            },
+            success: function(data) {
+                if (data != '0') {
+                    $("#email").css("border", "1px solid red");
+                    $("#emailMsg").html(
+                        "<p class='text-danger'>Email is already registered.</p>");
                     $('#emailMsg').focus();
-                    $("#btnsubmit").attr("disabled",true);
-                    email_err=false;
+                    $("#btnsubmit").attr("disabled", true);
+                    email_err = false;
                     return false;
-               }
-               else{
-                    $("#email").css("border","1px solid green");
+                } else {
+                    $("#email").css("border", "1px solid green");
                     $("#emailMsg").html("<p class='text-danger'></p>");
-                    $("#btnsubmit").attr("disabled",false);
-               }
+                    $("#btnsubmit").attr("disabled", false);
+                }
             }
         });
-        });
+    });
 
-        $('#pass').keyup(function(){
-            pass_check();
-        });
-        $('#pass').focusout(function(){
-            pass_check();
-        });
+    $('#pass').keyup(function() {
+        pass_check();
+    });
+    $('#pass').focusout(function() {
+        pass_check();
+    });
 
-        $('#c_pass').keyup(function(){
-            c_pass_check();
-        });
-        $('#c_pass').focusout(function(){
-            c_pass_check();
-        });
+    $('#c_pass').keyup(function() {
+        c_pass_check();
+    });
+    $('#c_pass').focusout(function() {
+        c_pass_check();
+    });
 
-        $('#state').keyup(function(){
-            state_check();
-        });
-        $('#state').focusout(function(){
-            state_check();
-        });
+    $('#state').keyup(function() {
+        state_check();
+    });
+    $('#state').focusout(function() {
+        state_check();
+    });
 
-        $('#city').keyup(function(){
-            city_check();
-        });
-        $('#city').focusout(function(){
-            city_check();
-        });
+    $('#city').keyup(function() {
+        city_check();
+    });
+    $('#city').focusout(function() {
+        city_check();
+    });
 
-        $('#contact').keyup(function(){
-            contact_check();           
-        });
-        $('#contact').focusout(function(){
-            contact_check();  
-        });
-        $('#contact').focusout(function(){
-            var phone=$("#contact").val();
-            $.ajax({
-            url:"registers.php",
-            method:"POST",
-            data:{phone:phone},
-            success:function(data){
-               if(data!='0')
-               {
-                    $("#contact").css("border","1px solid red");
-                    $("#contactMsg").html("<p class='text-danger'>Contact is already registered.</p>");
+    $('#contact').keyup(function() {
+        contact_check();
+    });
+    $('#contact').focusout(function() {
+        contact_check();
+    });
+    $('#contact').focusout(function() {
+        var phone = $("#contact").val();
+        $.ajax({
+            url: "registers.php",
+            method: "POST",
+            data: {
+                phone: phone
+            },
+            success: function(data) {
+                if (data != '0') {
+                    $("#contact").css("border", "1px solid red");
+                    $("#contactMsg").html(
+                        "<p class='text-danger'>Contact is already registered.</p>");
                     $('#contactMsg').focus();
-                    $("#btnsubmit").attr("disabled",true);
-                    contact_err=false;
+                    $("#btnsubmit").attr("disabled", true);
+                    contact_err = false;
                     return false;
-               }
-               else{
-                $("#contact").css("border","1px solid green");
-                $("#contactMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-               }
+                } else {
+                    $("#contact").css("border", "1px solid green");
+                    $("#contactMsg").html("<p class='text-danger'></p>");
+                    $("#btnsubmit").attr("disabled", false);
+                }
             }
         });
-        });
+    });
 
-        $('#pincode').keyup(function(){
-            pincode_check();
-        });
-        $('#pincode').focusout(function(){
-            pincode_check();
-        });
+    $('#pincode').keyup(function() {
+        pincode_check();
+    });
+    $('#pincode').focusout(function() {
+        pincode_check();
+    });
 
-        $('#address').keyup(function(){
-            address_check();
-        });
-        $('#address').focusout(function(){
-            address_check();
-        });
-		// use keyup event on email field
-        function f_name_check(){
-            var f_name=$('#f_name').val();
-            var reg=/^[A-Za-z]*$/
-            if(f_name.length=='')
-            {
-                $("#f_name").css("border","1px solid red");
-                $("#f_nameMsg").html("<p class='text-danger'>Please fill out this field.</p>");
-                $('#f_nameMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                f_name_err=false;
-                return false;
-            }
-            else{
-                $("#f_name").css("border","1px solid green");
-                $("#f_nameMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-
-            }
-            if(!(reg.test(f_name)))
-            {
-                $("#f_name").css("border","1px solid red");
-                $("#f_nameMsg").html("<p class='text-danger'>Invalid first name.</p>");
-                $('#f_nameMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                f_name_err=false;
-                return false;
-            }
-            else{
-                $("#f_name").css("border","1px solid green");
-                $("#f_nameMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
+    $('#address').keyup(function() {
+        address_check();
+    });
+    $('#address').focusout(function() {
+        address_check();
+    });
+    // use keyup event on email field
+    function f_name_check() {
+        var f_name = $('#f_name').val();
+        var reg = /^[A-Za-z]*$/
+        if (f_name.length == '') {
+            $("#f_name").css("border", "1px solid red");
+            $("#f_nameMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+            $('#f_nameMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            f_name_err = false;
+            return false;
+        } else {
+            $("#f_name").css("border", "1px solid green");
+            $("#f_nameMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
 
         }
-        function l_name_check(){
-            var l_name=$('#l_name').val();
-            var reg=/^[A-Za-z]*$/
-            if(l_name.length=='')
-            {
-                $("#l_name").css("border","1px solid red");
-                $("#l_nameMsg").html("<p class='text-danger'>Please fill out this field.</p>");
-                $('#l_nameMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                l_name_err=false;
-                return false;
-            }
-            else{
-                $("#l_name").css("border","1px solid green");
-                $("#l_nameMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
+        if (!(reg.test(f_name))) {
+            $("#f_name").css("border", "1px solid red");
+            $("#f_nameMsg").html("<p class='text-danger'>Invalid first name.</p>");
+            $('#f_nameMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            f_name_err = false;
+            return false;
+        } else {
+            $("#f_name").css("border", "1px solid green");
+            $("#f_nameMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
+        }
 
-            }
-            if(!(reg.test(l_name)))
-            {
-                $("#l_name").css("border","1px solid red");
-                $("#l_nameMsg").html("<p class='text-danger'>Invalid last name.</p>");
-                $('#l_nameMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                l_name_err=false;
-                return false;
-            }
-            else{
-                $("#l_name").css("border","1px solid green");
-                $("#l_nameMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
+    }
+
+    function l_name_check() {
+        var l_name = $('#l_name').val();
+        var reg = /^[A-Za-z]*$/
+        if (l_name.length == '') {
+            $("#l_name").css("border", "1px solid red");
+            $("#l_nameMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+            $('#l_nameMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            l_name_err = false;
+            return false;
+        } else {
+            $("#l_name").css("border", "1px solid green");
+            $("#l_nameMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
 
         }
-        function email_check(){
-            var email=$('#email').val();
-            var reg=/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
-            if(email.length=='')
-            {
-                $("#email").css("border","1px solid red");
-                $("#emailMsg").html("<p class='text-danger'>Please fill out this field.</p>");
-                $('#emailMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                email_err=false;
-                return false;
-            }
-            else{
-                $("#email").css("border","1px solid green");
-                $("#emailMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
+        if (!(reg.test(l_name))) {
+            $("#l_name").css("border", "1px solid red");
+            $("#l_nameMsg").html("<p class='text-danger'>Invalid last name.</p>");
+            $('#l_nameMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            l_name_err = false;
+            return false;
+        } else {
+            $("#l_name").css("border", "1px solid green");
+            $("#l_nameMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
+        }
 
-            if(!(reg.test(email)))
-            {
-                $("#email").css("border","1px solid red");
-                $("#emailMsg").html("<p class='text-danger'>Invalid email id.</p>");
-                $('#emailMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                email_err=false;
-                return false;
-            }
-            else{
-                $("#email").css("border","1px solid green");
-                $("#emailMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
+    }
 
+    function email_check() {
+        var email = $('#email').val();
+        var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+        if (email.length == '') {
+            $("#email").css("border", "1px solid red");
+            $("#emailMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+            $('#emailMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            email_err = false;
+            return false;
+        } else {
+            $("#email").css("border", "1px solid green");
+            $("#emailMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
         }
-        function pass_check(){
-            var pass=$('#pass').val();
-            var reg=/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/
-            if(pass.length=='')
-            {
-                $("#pass").css("border","1px solid red");
-                $("#passMsg").html("<p class='text-danger'>Please fill out this field.</p>");
-                $('#passMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                pass_err=false;
-                return false;
-            }
-            else{
-                $("#pass").css("border","1px solid green");
-                $("#passMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
-            if(!(reg.test(pass)))
-            {
-                $("#pass").css("border","1px solid red");
-                $("#passMsg").html("<p class='text-danger'>Invalid password.</p>");
-                $('#passMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                pass_err=false;
-                return false;
-            }
-            else{
-                $("#pass").css("border","1px solid green");
-                $("#passMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
 
+        if (!(reg.test(email))) {
+            $("#email").css("border", "1px solid red");
+            $("#emailMsg").html("<p class='text-danger'>Invalid email id.</p>");
+            $('#emailMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            email_err = false;
+            return false;
+        } else {
+            $("#email").css("border", "1px solid green");
+            $("#emailMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
         }
-        function c_pass_check(){
-            var pass=$('#pass').val();
-            var c_pass=$('#c_pass').val();
-            if(c_pass.length=='')
-            {
-                $("#c_pass").css("border","1px solid red");
-                $("#c_passMsg").html("<p class='text-danger'>Please fill out this field.</p>");
-                $('#c_passMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                c_pass_err=false;
-                return false;
-            }
-            else{
-                $("#c_pass").css("border","1px solid green");
-                $("#c_passMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
-            if(c_pass!=pass)
-            {
-                $("#c_pass").css("border","1px solid red");
-                $("#c_passMsg").html("<p class='text-danger'>Password are not matching</p>");
-                $('#c_passMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                c_pass_err=false;
-                return false;
-            }
-            else{
-                $("#c_pass").css("border","1px solid green");
-                $("#c_passMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
-        }
-        function state_check(){
-            var state=$('#state').val();
-            var reg=/^[A-Za-z]*$/
-            if(state.length=='')
-            {
-                $("#state").css("border","1px solid red");
-                $("#stateMsg").html("<p class='text-danger'>Please fill out this field.</p>");
-                $('#stateMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                state_err=false;
-                return false;
-            }
-            else{
-                $("#state").css("border","1px solid green");
-                $("#stateMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
-            if(!(reg.test(state)))
-            {
-                $("#state").css("border","1px solid red");
-                $("#stateMsg").html("<p class='text-danger'>Invalid state.</p>");
-                $('#stateMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                state_err=false;
-                return false;
-            }
-            else{
-                $("#state").css("border","1px solid green");
-                $("#stateMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
 
-        }
-        function city_check(){
-            var city=$('#city').val();
-            var reg=/^[A-Za-z]*$/
-            if(city.length=='')
-            {
-                $("#city").css("border","1px solid red");
-                $("#cityMsg").html("<p class='text-danger'>Please fill out this field.</p>");
-                $('#cityMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                city_err=false;
-                return false;
-            }
-            else{
-                $("#city").css("border","1px solid green");
-                $("#cityMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
-            if(!(reg.test(city)))
-            {
-                $("#city").css("border","1px solid red");
-                $("#cityMsg").html("<p class='text-danger'>Invalid city.</p>");
-                $('#cityMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                city_err=false;
-                return false;
-            }
-            else{
-                $("#city").css("border","1px solid green");
-                $("#cityMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
+    }
 
+    function pass_check() {
+        var pass = $('#pass').val();
+        var reg = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/
+        if (pass.length == '') {
+            $("#pass").css("border", "1px solid red");
+            $("#passMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+            $('#passMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            pass_err = false;
+            return false;
+        } else {
+            $("#pass").css("border", "1px solid green");
+            $("#passMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
         }
-        
-        function contact_check(){
-            var contact=$('#contact').val();
-            var reg=/^[9876][0-9]{9}$/
-            if(contact.length=='')
-            {
-                $("#contact").css("border","1px solid red");
-                $("#contactMsg").html("<p class='text-danger'>Please fill out this field.</p>");
-                $('#contactMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                contact_err=false;
-                
-                return false;
-            }
-            else{
-                $("#contact").css("border","1px solid green");
-                $("#contactMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
-            if(!(reg.test(contact)))
-            {
-                $("#contact").css("border","1px solid red");
-                $("#contactMsg").html("<p class='text-danger'>Invalid contact number.</p>");
-                $('#contactMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                contact_err=false;
-                return false;
-            }
-            else{
-                $("#contact").css("border","1px solid green");
-                $("#contactMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
+        if (!(reg.test(pass))) {
+            $("#pass").css("border", "1px solid red");
+            $("#passMsg").html("<p class='text-danger'>Invalid password.</p>");
+            $('#passMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            pass_err = false;
+            return false;
+        } else {
+            $("#pass").css("border", "1px solid green");
+            $("#passMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
+        }
 
-        }
-        function pincode_check(){
-            var pincode=$('#pincode').val();
-            var reg=/^[1-9][0-9]{5}$/
-            if(pincode.length=='')
-            {
-                $("#pincode").css("border","1px solid red");
-                $("#pincodeMsg").html("<p class='text-danger'>Please fill out this field.</p>");
-                $('#pincodeMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                pincode_err=false;
-                return false;
-            }
-            else
-            {
-                $("#pincode").css("border","1px solid green");
-                $("#pincodeMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
-            if(!(reg.test(pincode)))
-            {
-                $("#pincode").css("border","1px solid red");
-                $("#pincodeMsg").html("<p class='text-danger'>Invalid pincode.</p>");
-                $('#pincodeMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                pincode_err=false;
-                return false;
-            }
-            else
-            {
-                $("#pincode").css("border","1px solid green");
-                $("#pincodeMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
+    }
 
+    function c_pass_check() {
+        var pass = $('#pass').val();
+        var c_pass = $('#c_pass').val();
+        if (c_pass.length == '') {
+            $("#c_pass").css("border", "1px solid red");
+            $("#c_passMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+            $('#c_passMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            c_pass_err = false;
+            return false;
+        } else {
+            $("#c_pass").css("border", "1px solid green");
+            $("#c_passMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
         }
-        function address_check(){
-            var pass=$('#address').val();
-            if(pass.length=='')
-            {
-                $("#address").css("border","1px solid red");
-                $("#addressMsg").html("<p class='text-danger'>Please fill out this field.</p>");
-                $('#addressMsg').focus();
-                $("#btnsubmit").attr("disabled",true);
-                pass_err=false;
-                return false;
-            }
-            else{
-                $("#address").css("border","1px solid green");
-                $("#addressMsg").html("<p class='text-danger'></p>");
-                $("#btnsubmit").attr("disabled",false);
-            }
+        if (c_pass != pass) {
+            $("#c_pass").css("border", "1px solid red");
+            $("#c_passMsg").html("<p class='text-danger'>Password are not matching</p>");
+            $('#c_passMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            c_pass_err = false;
+            return false;
+        } else {
+            $("#c_pass").css("border", "1px solid green");
+            $("#c_passMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
         }
-	
-	});
+    }
+
+    function state_check() {
+        var state = $('#state').val();
+        var reg = /^[A-Za-z]*$/
+        if (state.length == '') {
+            $("#state").css("border", "1px solid red");
+            $("#stateMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+            $('#stateMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            state_err = false;
+            return false;
+        } else {
+            $("#state").css("border", "1px solid green");
+            $("#stateMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
+        }
+        if (!(reg.test(state))) {
+            $("#state").css("border", "1px solid red");
+            $("#stateMsg").html("<p class='text-danger'>Invalid state.</p>");
+            $('#stateMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            state_err = false;
+            return false;
+        } else {
+            $("#state").css("border", "1px solid green");
+            $("#stateMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
+        }
+
+    }
+
+    function city_check() {
+        var city = $('#city').val();
+        var reg = /^[A-Za-z]*$/
+        if (city.length == '') {
+            $("#city").css("border", "1px solid red");
+            $("#cityMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+            $('#cityMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            city_err = false;
+            return false;
+        } else {
+            $("#city").css("border", "1px solid green");
+            $("#cityMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
+        }
+        if (!(reg.test(city))) {
+            $("#city").css("border", "1px solid red");
+            $("#cityMsg").html("<p class='text-danger'>Invalid city.</p>");
+            $('#cityMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            city_err = false;
+            return false;
+        } else {
+            $("#city").css("border", "1px solid green");
+            $("#cityMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
+        }
+
+    }
+
+    function contact_check() {
+        var contact = $('#contact').val();
+        var reg = /^[9876][0-9]{9}$/
+        if (contact.length == '') {
+            $("#contact").css("border", "1px solid red");
+            $("#contactMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+            $('#contactMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            contact_err = false;
+
+            return false;
+        } else {
+            $("#contact").css("border", "1px solid green");
+            $("#contactMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
+        }
+        if (!(reg.test(contact))) {
+            $("#contact").css("border", "1px solid red");
+            $("#contactMsg").html("<p class='text-danger'>Invalid contact number.</p>");
+            $('#contactMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            contact_err = false;
+            return false;
+        } else {
+            $("#contact").css("border", "1px solid green");
+            $("#contactMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
+        }
+
+    }
+
+    function pincode_check() {
+        var pincode = $('#pincode').val();
+        var reg = /^[1-9][0-9]{5}$/
+        if (pincode.length == '') {
+            $("#pincode").css("border", "1px solid red");
+            $("#pincodeMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+            $('#pincodeMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            pincode_err = false;
+            return false;
+        } else {
+            $("#pincode").css("border", "1px solid green");
+            $("#pincodeMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
+        }
+        if (!(reg.test(pincode))) {
+            $("#pincode").css("border", "1px solid red");
+            $("#pincodeMsg").html("<p class='text-danger'>Invalid pincode.</p>");
+            $('#pincodeMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            pincode_err = false;
+            return false;
+        } else {
+            $("#pincode").css("border", "1px solid green");
+            $("#pincodeMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
+        }
+
+    }
+
+    function address_check() {
+        var pass = $('#address').val();
+        if (pass.length == '') {
+            $("#address").css("border", "1px solid red");
+            $("#addressMsg").html("<p class='text-danger'>Please fill out this field.</p>");
+            $('#addressMsg').focus();
+            $("#btnsubmit").attr("disabled", true);
+            pass_err = false;
+            return false;
+        } else {
+            $("#address").css("border", "1px solid green");
+            $("#addressMsg").html("<p class='text-danger'></p>");
+            $("#btnsubmit").attr("disabled", false);
+        }
+    }
+
+});
 </script>
 
 
 </body>
+
 </html>
-
-
-
