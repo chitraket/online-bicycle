@@ -79,11 +79,11 @@ window.open('home', '_self');
     else{
         $accessories_desc=$row_accessories['accessories_desc'];
     }
-    $get_manufacturer="select * from accessories_brand where accessories_brand_id=$accessories_brand";
+    $get_manufacturer="select * from accessories_brand where accessories_brand_status='yes' and accessories_brand_id=$accessories_brand";
     $run_manufacturer=mysqli_query($con,$get_manufacturer);
     $row_manufacturer=mysqli_fetch_array($run_manufacturer);
     $accessories_brands=$row_manufacturer['accessories_brand'];
-    $get_product_cat="select * from accessories_category where accessories_category_id=$accessories_category";
+    $get_product_cat="select * from accessories_category where accessories_category_status='yes' and  accessories_category_id=$accessories_category";
     $run_product_cat=mysqli_query($con,$get_product_cat);
     $row_product_cat=mysqli_fetch_array($run_product_cat);
     $p_cat_title=$row_product_cat['accessories_category'];
@@ -212,7 +212,7 @@ swal({
                                                         ?>
 <script type="text/javascript">
 swal({
-        title: "You have already slected 3 cycles.",
+        title: "You have already slected 3 item.",
         text: "",
         icon: "warning",
         buttons: [, "OK"],
@@ -642,7 +642,7 @@ swal({
                                             }
                                             ?>
                                     </div>
-                                    <p class="pro-desc"><?php echo $accessories_desc; ?></p>
+                                    <!--<p class="pro-desc"><?php echo $accessories_desc; ?></p>-->
 
                                     <form action="#" method="POST">
                                         <div class="quantity-cart-box d-flex align-items-center">

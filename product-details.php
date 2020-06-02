@@ -231,11 +231,11 @@ window.open('home', '_self');
     else{
         $pro_brakeset=$row_product['product_brakeset'];
     }
-    $get_manufacturer="select * from manufacturers where manufacturer_id=$manufacturer_id";
+    $get_manufacturer="select * from manufacturers  where manufacturer_status='yes' and manufacturer_id=$manufacturer_id";
     $run_manufacturer=mysqli_query($con,$get_manufacturer);
     $row_manufacturer=mysqli_fetch_array($run_manufacturer);
     $manufacturer_title=$row_manufacturer['manufacturer_title'];
-    $get_product_cat="select * from product_categories where p_cat_id=$p_cat_id";
+    $get_product_cat="select * from product_categories where p_cat_status='yes' and p_cat_id=$p_cat_id";
     $run_product_cat=mysqli_query($con,$get_product_cat);
     $row_product_cat=mysqli_fetch_array($run_product_cat);
     $p_cat_title=$row_product_cat['p_cat_title'];
@@ -362,7 +362,7 @@ swal({
                                                         ?>
 <script type="text/javascript">
 swal({
-        title: "You have already slected 3 cycles.",
+        title: "You have already slected 3 item.",
         text: "",
         icon: "warning",
         buttons: [, "OK"],
@@ -1224,7 +1224,7 @@ end:
 
                                                 <div class="form-group row">
                                                     <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span>
+                                                        <label class="col-form-label"><span class="text-danger"></span>
                                                             Your Review</label>
                                                         <textarea class="form-control" name="message"
                                                             required> </textarea>
@@ -1233,10 +1233,10 @@ end:
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col">
-                                                        <label class="col-form-label"><span class="text-danger">*</span>
+                                                        <label class="col-form-label"><span class="text-danger"></span>
                                                             Rating</label>
                                                         &nbsp;&nbsp;&nbsp; Bad&nbsp;
-                                                        <input type="radio" value="1" name="rating">
+                                                        <input type="radio" value="1" name="rating" checked required>
                                                         &nbsp;
                                                         <input type="radio" value="2" name="rating">
                                                         &nbsp;
@@ -1481,11 +1481,8 @@ tinymce.init({
     selector: 'textarea'
 });
 </script>
-<!--sweet alert-->
-<!--<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>-->
+
 </body>
 
-
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:06 GMT -->
 
 </html>

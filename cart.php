@@ -17,7 +17,7 @@ $active='';
         $papage=$_POST["papage"];
         if($papage==0)
         {
-        $get_product="select * from products where and product_status='yes' and product_id=$p_id";
+        $get_product="select * from products where  product_status='yes' and product_id=$p_id";
         $run_product=mysqli_query($con,$get_product);
         $row_product=mysqli_fetch_array($run_product);
         $pro_qty=$row_product['available_qty'];
