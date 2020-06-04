@@ -2,7 +2,7 @@
 include('includes/db.php');
 if(isset($_POST["action"]))
 {
-    $record_per_page = 18;  
+    $record_per_page = 21;  
     $page = '';  
     $output = ''; 
     if(isset($_POST["page"]))  
@@ -51,6 +51,13 @@ if(isset($_POST["action"]))
    AND product_colour IN('".$colour_filter."')
   ";
  }
+ if(isset($_POST["sale"]))
+ {
+     $sale_filter= implode("','", $_POST["sale"]);
+     $query .="
+     AND product_label IN('".$sale_filter."')
+     ";
+ }
  if(isset($_POST["size"]))
  {
   foreach($_POST["size"] as $key => $word){
@@ -68,8 +75,7 @@ if(isset($_POST["action"]))
     $query .=$sqls;
  }
  $query2 = $query;
- $query.="ORDER BY product_id DESC LIMIT "  . $start_from."," .$record_per_page;
-
+ $query.="ORDER BY available_qty DESC,product_id DESC LIMIT "  . $start_from."," .$record_per_page;
  $result=mysqli_query($con,$query);
  $total_count=mysqli_num_rows($result);
 

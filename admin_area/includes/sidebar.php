@@ -26,7 +26,7 @@
             <li class="menu-title">Bikes</li>
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                    <i class="bx bx-store"></i>
+                    <i class="mdi mdi-bicycle"></i>
                     <span>Bikes</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
@@ -106,7 +106,7 @@
             <li class="menu-title">Slider</li>
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                    <i class="bx bx-briefcase-alt-2"></i>
+                    <i class="mdi mdi-play-box-outline"></i>
                     <span>Slider</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
@@ -117,7 +117,7 @@
             <li class="menu-title"> Box</li>
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                    <i class="bx bxs-user-detail"></i>
+                    <i class="bx bxs-box"></i>
                     <span>Boxs</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
@@ -145,7 +145,7 @@
 
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                    <i class="bx bx-user-circle"></i>
+                    <i class="bx bx-lock-alt "></i>
                     <span>Privet Policy</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
@@ -172,7 +172,7 @@
             <li class="menu-title">Logo</li>
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                    <i class="bx bx-file"></i>
+                    <i class="bx bx-aperture"></i>
                     <span>Logo</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">
@@ -183,7 +183,14 @@
             <li class="menu-title">Customer</li>
             <li>
                 <a href="view-customer.php" >
-                    <i class="bx bx-task"></i>
+                    <i class="bx bx-user"></i>
+                    <?php
+                    $date=date("Y-m-d");
+                    $select_customer="select * from customers where customer_status='no' AND customer_date LIKE '".$date."%' ";
+                    $run_customer=mysqli_query($con,$select_customer);
+                    $num_customer=mysqli_num_rows($run_customer);
+                    ?>
+                    <span class="badge badge-pill badge-info float-right"><?php echo $num_customer; ?></span>
                     <span>Customer</span>
                 </a>
             </li>
@@ -200,7 +207,14 @@
             <li class="menu-title">Order & Payment</li>
             <li>
                 <a href="view-order.php" >
-                    <i class="bx bx-task"></i>
+                    <i class="bx bx-box"></i>
+                    <?php
+                                
+                                    $select_order="select DISTINCT order_id from customer_orders where payment_status IN ('pending','successful') AND order_status='o' AND order_date LIKE '".$date."%' ";
+                                    $run_order=mysqli_query($con,$select_order);
+                                    $num_order=mysqli_num_rows($run_order);
+                                ?>
+                    <span class="badge badge-pill badge-info float-right"><?php echo $num_order; ?></span>
                     <span>Order</span>
                 </a>
                
@@ -208,7 +222,7 @@
 
             <li>
                 <a href="view-payment.php" >
-                    <i class="bx bx-task"></i>
+                    <i class="bx bx-money"></i>
                     <span>Payment</span>
                 </a>
                
@@ -217,7 +231,7 @@
             <li class="menu-title">Sub User</li>
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                    <i class="bx bx-file"></i>
+                    <i class="mdi mdi-account-multiple-plus-outline"></i>
                     <span>Sub User</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="false">

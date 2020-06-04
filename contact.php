@@ -64,7 +64,7 @@
                                         $sender_email=$_POST['email_address'];
                                         $sender_subject=$_POST['contact_subject'];
                                         $sender_message=$_POST['message'];
-                                        $receiver_email="chitraketsavani@gmail.com";
+                                        $receiver_email="skotebicycle@gmail.com";
 
                                         require 'PHPMailer/PHPMailerAutoload.php';
                                         $mail=new PHPMailer;
@@ -74,12 +74,12 @@
                                             $mail->Host = 'ssl://smtp.gmail.com';  //Sets the SMTP hosts
                                             $mail->Port = '465';        //Sets the default SMTP server port
                                             $mail->SMTPAuth = true;       //Sets SMTP authentication. Utilizes the Username and Password variables
-                                            $mail->Username = 'chitraketsavani@gmail.com';     //Sets SMTP username
-                                            $mail->Password = 'CHIT9125';     //Sets SMTP password
+                                            $mail->Username = 'skotebicycle@gmail.com';     //Sets SMTP username
+                                            $mail->Password = 'Ab7man91';     //Sets SMTP password
                                             $mail->SMTPSecure = '';       //Sets connection prefix. Options are "", "ssl" or "tls"
                                             $mail->From = $_POST["email_address"];     //Sets the From email address for the message
                                             $mail->FromName = $_POST["first_name"];    //Sets the From name of the message
-                                            $mail->AddAddress($receiver_email,'chitraketsavani');//Adds a "To" address
+                                            $mail->AddAddress($receiver_email,'skote');//Adds a "To" address
                                             $mail->AddCC($_POST["email_address"], $_POST["first_name"]); //Adds a "Cc" address
                                             $mail->WordWrap = 50;       //Sets word wrapping on the body of the message to a given number of characters
                                             $mail->IsHTML(true);       //Sets message type to HTML    
@@ -103,8 +103,8 @@
                             formas human.</p>
                         <ul>
                             <li><i class="fa fa-home"></i> Address : 34,vip,surat</li>
-                            <li><i class="fa fa-phone"></i> Phone:+91 7984498992 </li>
-                            <li><i class="fa fa-envelope-o"></i>E-mail:chitraketsavani@gmail.com </li>
+                            <li><i class="fa fa-phone"></i> Phone:+91 9999999999 </li>
+                            <li><i class="fa fa-envelope-o"></i>E-mail:skotebicycle@gmail.com </li>
                         </ul>
                     </div>
                 </div>

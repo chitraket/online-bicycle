@@ -164,7 +164,7 @@ if(isset($_POST['register'])){
     $c_image = $_FILES['c_image']['name'];
     $c_image_tmp = $_FILES['c_image']['tmp_name'];
     move_uploaded_file($c_image_tmp,"customer/customer_images/".$c_image);
-    $insert_customer = "insert into customers (customer_name,customer_lname,customer_email,customer_pass,customer_state,customer_city,customer_contact,customer_address,customer_pincode,customer_image,customer_status) values ('$c_name','$c_lname','$c_email','$c_pass','$c_state','$c_city','$c_contact','$c_address','$c_pincode','$c_image','no')";
+    $insert_customer = "insert into customers (customer_name,customer_lname,customer_email,customer_pass,customer_state,customer_city,customer_contact,customer_address,customer_pincode,customer_image,customer_date,customer_status) values ('$c_name','$c_lname','$c_email','$c_pass','$c_state','$c_city','$c_contact','$c_address','$c_pincode','$c_image',NOW(),'no')";
     $run_customer = mysqli_query($con,$insert_customer);
     if($run_customer)
     {
@@ -174,13 +174,13 @@ if(isset($_POST['register'])){
         $mail->isSMTP();                                            // Send using SMTP
         $mail->Host       = 'ssl://smtp.gmail.com';                    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-        $mail->Username   = 'chitraketsavani@gmail.com';                     // SMTP username
-        $mail->Password   = 'CHIT9125';                               // SMTP password
+        $mail->Username   = 'skotebicycle@gmail.com';                     // SMTP username
+        $mail->Password   = 'Ab7man91';                               // SMTP password
         $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
         $mail->Port       = 465;                                    // TCP port to connect to
 
         //Recipients
-        $mail->setFrom('chitraketsavani@gmail.com', 'chitraketsavani');
+        $mail->setFrom('skotebicycle@gmail.com', 'skote');
         $mail->addAddress($c_email, $c_email);     // Add a recipient
     
         $html='<!DOCTYPE html>
@@ -478,7 +478,7 @@ end:
 
                                 <div class="single-input-item">
                                     <label for="image">Image</label>
-                                    <input type="file" name="c_image" id="image" accept=".jpg,.jpeg,.png,.gif" />
+                                    <input type="file" name="c_image" id="image" accept=".jpg,.jpeg,.png" />
                                     <span style="color: red;"><?php echo $error_image2; ?></span>
                                 </div>
 
@@ -607,6 +607,7 @@ $(document).ready(function() {
                 }
             }
         });
+        
     });
 
     $('#pass').keyup(function() {

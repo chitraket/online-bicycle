@@ -147,7 +147,7 @@ swal({
                                             else{
 
                                             
-                                            $insert_review="insert into review(product_id,papage,customer_email,message,time,rating,status) values('$accessories_id','1','$customer_email','$message',NOW(),'$rating','yes')";
+                                            $insert_review="insert into review(product_id,papage,customer_email,message,time,rating,status_top,status) values('$accessories_id','1','$customer_email','$message',NOW(),'$rating','no','yes')";
                                             $run_review=mysqli_query($con,$insert_review);
                                             if($run_review)
                                             {

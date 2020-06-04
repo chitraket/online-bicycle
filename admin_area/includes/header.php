@@ -115,10 +115,24 @@
                         }?>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <!-- item-->
+                               
+                               
+                                <?php
+                                    $date=date("Y-m-d");
+                                    $select_customer="select * from customers where customer_status='no' AND customer_date LIKE '".$date."%' ";
+                                    $run_customer=mysqli_query($con,$select_customer);
+                                    $num_customer=mysqli_num_rows($run_customer);
+                                ?>
+                                
+                                <a class="dropdown-item d-block" href="view-customer.php"><span class="badge badge-info float-right"><?php echo $num_customer; ?></span><i class="bx bx-user font-size-16 align-middle mr-1"></i>Customer</a>
+                                <?php
+                                
+                                    $select_order="select DISTINCT order_id from customer_orders where payment_status IN ('pending','successful') AND order_status='o' AND order_date LIKE '".$date."%' ";
+                                    $run_order=mysqli_query($con,$select_order);
+                                    $num_order=mysqli_num_rows($run_order);
+                                ?>
+                                <a class="dropdown-item d-block" href="view-order.php"><span class="badge badge-info float-right"><?php echo $num_order; ?></span><i class="bx bx-box font-size-16 align-middle mr-1"></i>Order</a>
                                 <a class="dropdown-item" href="data.php"><i class="bx bx-data font-size-16 align-middle mr-1"></i>Data Backup</a>
-                                <!--<a class="dropdown-item" href="#"><i class="bx bx-wallet font-size-16 align-middle mr-1"></i> My Wallet</a>
-                                <a class="dropdown-item d-block" href="#"><span class="badge badge-success float-right">11</span><i class="bx bx-wrench font-size-16 align-middle mr-1"></i> Settings</a>
-                                <a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle mr-1"></i> Lock screen</a>-->
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item text-danger" href="logout.php"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>
                             </div>

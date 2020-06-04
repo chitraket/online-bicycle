@@ -155,7 +155,11 @@ include("includes/validation.php");
                                                         <a href="bikes">
                                                             <img src="assets/img/banner/img1.jpg" alt="">
                                                         </a>
+                                                        <a href="bikes">
+                                                            <img src="assets/img/banner/img1.jpg" alt="">
+                                                        </a>
                                                     </li>
+                                                    
                                                 </ul>
                                             </li>
                                             <li class="position-static <?php if($active=='Accessories') echo"active"?>">
@@ -191,6 +195,9 @@ include("includes/validation.php");
                                                         </ul>
                                                     </li>
                                                     <li class="megamenu-banners d-none d-lg-block">
+                                                        <a href="accessories">
+                                                            <img src="assets/img/banner/Accessories-Banner.jpg" alt="">
+                                                        </a>
                                                         <a href="accessories">
                                                             <img src="assets/img/banner/Accessories-Banner.jpg" alt="">
                                                         </a>
@@ -478,10 +485,10 @@ include("includes/validation.php");
                         <div class="off-canvas-contact-widget">
                             <ul>
                                 <li><i class="fa fa-mobile"></i>
-                                    <a href="#">+91 7984498992</a>
+                                    <a href="#">+91 9999999999</a>
                                 </li>
                                 <li><i class="fa fa-envelope-o"></i>
-                                    <a href="#">chitraketsavani@gmail.com</a>
+                                    <a href="#">skotebicycle@gmail.com</a>
                                 </li>
                             </ul>
                         </div>

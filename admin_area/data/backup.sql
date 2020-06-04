@@ -25,7 +25,102 @@ CREATE TABLE `accessories` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=192 DEFAULT CHARSET=latin1;
 
-INSERT INTO accessories VALUES("191","1791739269","7","8","chit","Screenshot_php.png","","","","5","5","","red","20000","","","old","2020-05-31","<p>jb</p>","yes","delete");
+INSERT INTO accessories VALUES("7","161101","10","1","XMR Saddle Bag 200 Black","xmr-saddle-bag-200-black.jpg","","xmr-saddle-bag-200-black-2.jpg","xmr-saddle-bag-200-black-3.jpg","23","19","PU Carbon fibre grain/PVC ball Grain","Black","695","","","new","2020-06-04","<p>Waterproof material</p>
+<p>2-way Zipper closure</p>
+<p>Size: 18*9.5*10.5cm approx</p>","yes","yes");
+INSERT INTO accessories VALUES("12","161102","7","1","Ortileb Seatpost Bag 4L - Red","ortileb-seatpost-bag-4l-red.jpg","","","","5","5","polyester fabric","Orange","4700","","","new","2020-06-04","<p><strong>About Ortileb Seatpost Bag 4L</strong></p>
+<p>The Ortileb Seatpost Bag is a versatile and lightweight and one simple tool free manoeuvre is all it takes to fix or remove the waterproof Seatpost-Bag made of PU coated nylon and Cordura. The integrated mounting allows quick change from bicycle to bicycle. The roll closure with elastics ensures safe closing of the bag and allows tight packing.</p>
+<p><strong>Technical Specifications </strong></p>
+<p>4 Litre Capacity</p>
+<p>Adjustable Ratchet Closure</p>
+<p>Integrated Mesh Pockets</p>
+<p>3M Scotchlite reflector</p>
+<p>Rear Light can be attached</p>","yes","yes");
+INSERT INTO accessories VALUES("9","161103","11","1","Firefox Top Tube Bag","firefox-top-tube-bag.jpg","","","","30","30","Polyester material","Orange","1380","","","new","2020-06-04","<p>2 Pocket Design</p>
+<p>600D Ployester</p>
+<p>Handle Strap</p>","yes","yes");
+INSERT INTO accessories VALUES("10","161104","7","1","Deuter Triangle Bag","deuter-triangle-bag.jpg","","","","8","7","Matrix RS150D material","Black","1150","","","new","2020-06-04","<p>&nbsp;</p>
+<p><strong>Technical Specifications :</strong></p>
+<p>Matrix RS150D material</p>
+<p>26cm x 22cm x 5cm</p>
+<p>Volume - 1.7 litres</p>
+<p>130 grams</p>","yes","yes");
+INSERT INTO accessories VALUES("11","161105","7","1","Hercules Saddle Bag","hercules-saddle-bag-blue-1.jpg","hercules-saddle-bag-blue.jpg","hercules-saddle-bag-blue-2.jpg","","30","30","1000D Polyester","Blue","899","","","new","2020-06-04","<p><strong>About Hercules Saddle Bag - Blue :</strong></p>
+<p>The Hercules Saddle Bag has a capacity of 0.8 Litres and is made from 1000D Polyester. This Saddle bag securely fastens below the saddle and weighs 110 grams.</p>
+<p><strong>Technical Specifications: </strong></p>
+<p>Capacity - 800ml</p>
+<p>Dimensions - 10cm x 17cm x 10cm</p>
+<p>Material - 1000D Polyester</p>
+<p>Weight - 110 grams</p>","yes","yes");
+INSERT INTO accessories VALUES("13","161106","7","1","Ortileb Seatpost Bag 4L - Ocean Blue","ortileb-seatpost-bag-4l-ocean-blue.jpg","","","","7","7","polyester fabric","OceanBlue","4700","","","new","2020-06-04","<p><strong>About Ortileb Seatpost Bag 4L - Ocean Blue </strong></p>
+<p>The Ortileb Seatpost Bag is a versatile and lightweight and one simple tool free manoeuvre is all it takes to fix or remove the waterproof Seatpost-Bag made of PU coated nylon and Cordura. The integrated mounting allows quick change from bicycle to bicycle. The roll closure with elastics ensures safe closing of the bag and allows tight packing.</p>
+<p><strong>Technical Specifications </strong></p>
+<p>4 Litre Capacity</p>
+<p>Adjustable Ratchet Closure</p>
+<p>Integrated Mesh Pockets</p>
+<p>3M Scotchlite reflector</p>
+<p>Rear Light can be attached</p>","yes","yes");
+INSERT INTO accessories VALUES("14","161107","7","1","Ortileb Seatpost Bag 4L - Lime","ortileb-seatpost-bag-4l-lime.jpg","","","","15","15","polyester fabric","Lime","4700","","","new","2020-06-04","<p><strong>About Ortileb Seatpost Bag 4L - Lime</strong></p>
+<p>The Ortileb Seatpost Bag is a versatile and lightweight and one simple tool free manoeuvre is all it takes to fix or remove the waterproof Seatpost-Bag made of PU coated nylon and Cordura. The integrated mounting allows quick change from bicycle to bicycle. The roll closure with elastics ensures safe closing of the bag and allows tight packing.</p>
+<p><strong>Technical Specifications </strong></p>
+<p>4 Litre Capacity</p>
+<p>Adjustable Ratchet Closure</p>
+<p>Integrated Mesh Pockets</p>
+<p>3M Scotchlite reflector</p>
+<p>Rear Light can be attached</p>","yes","yes");
+INSERT INTO accessories VALUES("15","161108","7","1","Ortileb Back Roller Pair - Yellow","ortileb-back-roller-pair-yellow.jpg","","","","3","3","polyester fabric","Yellow","10200","","","new","2020-06-04","<p><strong>About Ortileb Back Roller Pair - Yellow </strong></p>
+<p>The Ortileb Back Roller Pair durable polyester fabric pannier bag which is waterproof and can be quiclkly mounted and taken off. This bag comes with a shoulder strap for easy carrying when off the bicycle.</p>
+<p><strong>Technical Specifications </strong></p>
+<p>40 Litre Capacity</p>
+<p>3M Scotchlite reflectors</p>
+<p>Integrated Inner Pocket</p>","yes","yes");
+INSERT INTO accessories VALUES("16","161109","11","7","Firefox Alloy Top Plastic Base - Blue","firefox-alloy-top-plastic-base-blue.jpg","","","","25","25","Plastic Base","Blue","200","","","new","2020-05-14","<p><strong>About Firefox Alloy Top Plastic Base - Blue </strong></p>
+<p>The Firefox Alloy Top Plastic Base - Blue is a tring bell which has an Alloy top and a plastic base and is compatible with standard diameter handlebars.</p>
+<p><strong>Technical Specifications </strong></p>
+<p>40mm Diameter</p>
+<p>Alloy Top</p>
+<p>Plastic Base</p>","yes","yes");
+INSERT INTO accessories VALUES("17","161110","11","7","Firefox Bell Rotating Pink","firefox-bell-rotating-pink.jpg","","","","16","16","Plastic Base","Pink","120","","","new","2020-06-04","<p><strong>About Firefox Bell Rotating Pink </strong></p>
+<p>The Firefox Bell Rotating Pink is a bell which has an Alloy Top nad a Plastic Bell. This operate this bell you will have to rotate the base.</p>
+<p><strong>Technical Specifications</strong></p>
+<p>42mm diameter</p>
+<p>Alloy Top</p>
+<p>Platic Base</p>","yes","yes");
+INSERT INTO accessories VALUES("18","161111","11","7","Firefox Rotating Bell with Compass - Black/Yellow","firefox-rotating-bell-with-compass-black-yellow.jpg","","","","30","30","Plastic Base","Yellow","250","","","new","2020-06-04","<p><strong>About Firefox Rotating Bell with Compass - Black/Yellow </strong></p>
+<p>The Firefox Rotating Bell with Compass - Black/Yellow is a a bell operated by Rotating which has an Alloy Top and a Plastic Base. The diamter of the Bell is 42mm and has a Compass attached to it.</p>
+<p><strong> Technical Specifications </strong></p>
+<p>Compass</p>
+<p>Top - Alloy</p>
+<p>Bottom - Plastic</p>
+<p>Diameter - 42mm</p>","yes","yes");
+INSERT INTO accessories VALUES("20","161112","5","13","Cateye Padrone with Outfront Bracket","cateye-padrone-with-outfront-bracket.jpg","","","","6","6","Plastic","Black","3990","","","new","2020-06-04","<p><strong>About Cateye Padrone with Outfront Bracket </strong></p>
+<p>The Cateye Padrone with Outfront Bracket is for any type of cyclist and is ideal for anyone who wants to enjoy a squint-free ride and a fast,simple setup.</p>
+<p><strong>Technical Specifications </strong></p>
+<p>Functions - Current/Average/Max Speed,Trip distance,Total distance,Elapsed time,Clock,Stopwatch</p>
+<p>Wireless</p>
+<p>Auto Start/Stop</p>
+<p>Battery Life - Computer - 1 year, Sensor - 10,000 km</p>
+<p>Weight - 31.5 grams</p>","yes","yes");
+INSERT INTO accessories VALUES("21","161113","5","13","Cateye Quick Black","cateye-quick-black.jpg","","","","4","4","Weather proof","Black","4200","","","new","2020-06-04","<p><strong>About Cateye Quick Black </strong></p>
+<p>The Cateye Quick Black is wireless, weather-proof and easy to read, the sleekly designed Quick cyclocomputer with integrated out-front bracket measures your speed and distance giving you the edge on your daily commute and beyond.</p>
+<p><strong>Technical Specifications </strong></p>
+<p>Functions - Current/Average/Maximum Speed, Trip Distance, Total Distance, Moving time, Clock Analog</p>
+<p>Wireless</p>
+<p>Battery Life - Computer - 1 year, Sensor - 10,000 km</p>
+<p>Weight - 24 grams</p>","yes","yes");
+INSERT INTO accessories VALUES("22","161114","5","13","Cateye HR Sensor Kit","cateye-hr-sensor-kit.jpg","","","","2","1"," Fabric strap","Black","4590","","","new","2020-06-04","<p><strong>About Cateye HR Sensor Kit </strong></p>
+<p>The Cateye HR Sensor Kit is compatible with all Bluetooth Smart cycle computers, watches, and Bluetooth Smart enabled smart phones that record heart rate. This sensor snaps onto a super comfortable fabric strap that is designed to be more comfortable than traditional chest straps.</p>
+<p><strong>Technical Specifications </strong></p>
+<p>Compatible with Padrone and Strada Cyclocomputers</p>
+<p>Connets via Bluetooth</p>
+<p>Comfortable Fabric strap</p>","yes","yes");
+INSERT INTO accessories VALUES("23","161115","5","13","Cateye Fit Cyclocomputer and Pedometer","cateye-fit-cyclocomputer-and-pedometer.jpg","","","","8","2","Plastic","Black","4150","","","new","2020-06-04","<p><strong>About Cateye Fit Cyclocomputer and Pedometer </strong></p>
+<p>Based in Osaka, Japan Cateye has been a leading manufacturer of cycle lights, computers and reflectors since 1954. A world leader in lens and reflector technology. The Cateye Fit Cyclocomputer and Pedometer serves to keep you fit also acts as a cyclocomputer.</p>
+<p><strong>Technical Specifications</strong></p>
+<p>3-D pedometer</p>
+<p>tracks in real time current/average/max speed, elapsed time, distance and calories</p>
+<p>CR2032 x1</p>
+<p>Computer: 37 grams</p>","yes","yes");
 
 
 
@@ -140,18 +235,21 @@ CREATE TABLE `customer_orders` (
   `qty` int(10) NOT NULL,
   `size` text NOT NULL,
   `customer_email` text NOT NULL,
-  `order_date` date NOT NULL,
+  `order_date` text NOT NULL,
   `order_status` text NOT NULL,
   `payment_status` text NOT NULL,
   `papage_number` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
 
-INSERT INTO customer_orders VALUES("89","105","1711699","","1446192481","1","33cms","17bmiit116@gmail.com","2020-05-15","o","pending","0");
-INSERT INTO customer_orders VALUES("91","106","1711699","ORDS57531856","1767067093","1","33cms","17bmiit116@gmail.com","2020-05-15","o","successful","0");
+INSERT INTO customer_orders VALUES("89","105","1711699","","1446192481","1","33cms","17bmiit116@gmail.com","2020-05-15","c","cancel","0");
+INSERT INTO customer_orders VALUES("91","106","1711699","ORDS57531856","1767067093","1","33cms","17bmiit116@gmail.com","2020-05-15","d","successful","0");
 INSERT INTO customer_orders VALUES("92","107","1711699","","1258176196","1","33cms","17bmiit116@gmail.com","2020-06-01","o","pending","0");
 INSERT INTO customer_orders VALUES("93","108","1711698","","1385848988","1","40cms","17bmiit116@gmail.com","2020-06-02","o","pending","0");
-INSERT INTO customer_orders VALUES("94","109","1711697","ORDS65103140","1332125552","1","45cms","17bmiit116@gmail.com","2020-06-02","o","successful","0");
+INSERT INTO customer_orders VALUES("94","109","1711697","ORDS65103140","1332125552","1","45cms","17bmiit116@gmail.com","2020-06-02","d","successful","0");
+INSERT INTO customer_orders VALUES("95","110","17116169","","658859300","1","55cms","17bmiit116@gmail.com","2020-06-04 12:08:27","o","pending","0");
+INSERT INTO customer_orders VALUES("96","111","1711698","","1633621673","1","40cms","17bmiit116@gmail.com","2020-06-04 12:13:04","o","pending","0");
+INSERT INTO customer_orders VALUES("97","111","161104","","1633621673","1","N/A","17bmiit116@gmail.com","2020-06-04 12:13:04","o","pending","1");
 
 
 
@@ -169,12 +267,17 @@ CREATE TABLE `customers` (
   `customer_address` text NOT NULL,
   `customer_pincode` int(10) NOT NULL,
   `customer_image` text NOT NULL,
+  `customer_date` text NOT NULL,
   `customer_status` text NOT NULL,
   PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
-INSERT INTO customers VALUES("14","chit","savani","17bmiit116@gmail.com","Chit@9125","guj","surat","7984498992","  34,lax,surat","345673","1_3_4.jpeg","yes");
-INSERT INTO customers VALUES("17","chitraket","savani","chitraketsavani@gmail.com","chit@9125","guj","surat","7984498994","23,lax,surat","234567","","yes");
+INSERT INTO customers VALUES("14","chit","savani","17bmiit116@gmail.com","Chit@9125","Gujarat","surat","7984498992","  34,lax,surat","345673","team_member_4.jpg","","yes");
+INSERT INTO customers VALUES("17","chitraket","savani","chitraketsavani@gmail.com","chit@9125","Gujarat","surat","7984498994","23,lax,surat","234567","Arief.jpeg","","yes");
+INSERT INTO customers VALUES("18","lindsy","niloms","lindsyniloms@gmail.com","lindsyniloms@9125","Gujarat","Surat","9123456789","36,vip,surat","395670","testimonial-2.png","","yes");
+INSERT INTO customers VALUES("19","Daisy","Millan","DaisyMillan@gmail.com","DaisyMillan@9125","Gujarat","Rajkot","8123465678","36,vip road,rajkot","456785","testimonial-1.png","","yes");
+INSERT INTO customers VALUES("20","Anamika","lusy","Anamikalusy@gmail.com","Anamikalusy@9124","Gujarat","Surat","7981234543","34,lx road,surat","556754","testimonial-3.png","","yes");
+INSERT INTO customers VALUES("22","Aman","Narola","amannarola@gmail.com","Aman@9125","Gujarat","Surat","9601994607","34,lax,surat","360078","Arint-Rianti.jpg","2020-06-04 11:33:49","no");
 
 
 
@@ -267,13 +370,15 @@ CREATE TABLE `orders` (
   `customer_contact` varchar(100) NOT NULL,
   `customer_address` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO orders VALUES("105","chit savani","17bmiit116@gmail.com","guj","surat","345673","7984498992","  34,lax,surat");
 INSERT INTO orders VALUES("106","chit savani","17bmiit116@gmail.com","guj","surat","345673","7984498992","  34,lax,surat");
 INSERT INTO orders VALUES("107","chit savani","17bmiit116@gmail.com","guj","surat","345673","7984498992","  34,lax,surat");
 INSERT INTO orders VALUES("108","chit savani","17bmiit116@gmail.com","guj","surat","345673","7984498992","  34,lax,surat");
 INSERT INTO orders VALUES("109","chit savani","17bmiit116@gmail.com","guj","surat","345673","7984498992","  34,lax,surat");
+INSERT INTO orders VALUES("110","chit savani","17bmiit116@gmail.com","Gujarat","surat","345673","7984498992","  34,lax,surat");
+INSERT INTO orders VALUES("111","chit savani","17bmiit116@gmail.com","Gujarat","surat","345673","7984498992","  34,lax,surat");
 
 
 
@@ -450,7 +555,7 @@ INSERT INTO products VALUES("4","1711697","10","5","9","2020-06-02 11:20:25","Ax
 <p>&nbsp;</p>
 <p>ABOUT BRAND</p>
 <p>Firefox is an Indian Bicycle Company who took the market by storm in 2005 with their range of imported bicycles. Firefox&rsquo;s philosophy is to constantly improve the Indian cycling experience. Firefox have a complete range of bicycles for Kids and Adults.</p>","10","9","45cms,48cms","Steel Hard tail","15","Suspension fork","","","","Alloy 36H Double Wall Rims","26","","Steel 40T, 170mm (17 Cms)","16T","Steel 5 Pieces","","Silver","PP","Steel 25.4mm X 300mm (2.54X30 Cms)","Steel 580mm (58 Cms),30mm (3 Cms) rise","Steel, 22.2mm (2.22 Cms)","Steel 8pcs","Alloy ","no","yes");
-INSERT INTO products VALUES("5","1711698","9","5","9","2020-06-02 11:16:20","AXXIS 27.5D SSP","firefox-axxis-27-5-d-ssp-blue.jpg","","","","11900","14900","20","sale","<p>FRAME</p>
+INSERT INTO products VALUES("5","1711698","9","5","9","2020-06-04 12:13:04","AXXIS 27.5D SSP","firefox-axxis-27-5-d-ssp-blue.jpg","","","","11900","14900","20","sale","<p>FRAME</p>
 <p>The Firefox Axxis 27.5D SSP is a Mountain Bicycle which has an Alloy hardtail frame.</p>
 <p>&nbsp;</p>
 <p>GEARING</p>
@@ -466,8 +571,8 @@ INSERT INTO products VALUES("5","1711698","9","5","9","2020-06-02 11:16:20","AXX
 <p>The Firefox Axxis 27.5D SSP comes with a pair of 27.5\" x 2.1\" tires which are attached to Alloy Double Wall Rims.</p>
 <p>&nbsp;</p>
 <p>ABOUT BRAND</p>
-<p>Firefox is an Indian Bicycle Company who took the market by storm in 2005 with their range of imported bicycles. Firefox&rsquo;s philosophy is to constantly improve the Indian cycling experience. Firefox have a complete range of bicycles for Kids and Adults.</p>","10","9","40cms,48cms","Steel Hard Tail","","Zoom Suspension Fork","","","","Alloy Double Wall 36H Rims","27.5","","Steel 40T, 170mm (17 Cms)","18T","Sealed Cartridge","","Blue","PP","Steel 25.4mm X 300mm (2.54X30 Cms)","Steel 660mm (66 Cms), 31.8mm (3.18 Cms), 30mm (3 Cms) rise","Alloy 28.6mm x 31.8mm (2.86X3.18 Cms)","Steel 11 pcs","Front & Rear Disc Brake JAK 7","yes","yes");
-INSERT INTO products VALUES("6","1711699","9","6","13","2020-06-01 14:39:53","Format Hurricane ","format-hurricane-2018-black-blue.jpg","","","","17900","20900","20","sale","<p>FRAME</p>
+<p>Firefox is an Indian Bicycle Company who took the market by storm in 2005 with their range of imported bicycles. Firefox&rsquo;s philosophy is to constantly improve the Indian cycling experience. Firefox have a complete range of bicycles for Kids and Adults.</p>","10","8","40cms,48cms","Steel Hard Tail","","Zoom Suspension Fork","","","","Alloy Double Wall 36H Rims","27.5","","Steel 40T, 170mm (17 Cms)","18T","Sealed Cartridge","","Blue","PP","Steel 25.4mm X 300mm (2.54X30 Cms)","Steel 660mm (66 Cms), 31.8mm (3.18 Cms), 30mm (3 Cms) rise","Alloy 28.6mm x 31.8mm (2.86X3.18 Cms)","Steel 11 pcs","Front & Rear Disc Brake JAK 7","yes","yes");
+INSERT INTO products VALUES("6","1711699","9","6","13","2020-06-03 17:33:16","Format Hurricane ","format-hurricane-2018-black-blue.jpg","","","","17900","20900","20","sale","<p>FRAME</p>
 <p>The Format Hurricane (2018) is a Mountain Bicycle which has a AL6061 Frame.</p>
 <p>&nbsp;</p>
 <p>GEARING</p>
@@ -484,7 +589,7 @@ INSERT INTO products VALUES("6","1711699","9","6","13","2020-06-01 14:39:53","Fo
 <p>&nbsp;</p>
 <p>ABOUT BRAND</p>
 <p>Format is a baby of the Russian Cycling Culture which has been born out of enthusiasm. Format bicycle are known for their highest quality standards and aesthetic design.</p>
-<p>&nbsp;</p>","10","7","33cms","AL 6061 Frame","","Hardtail","","Shimano Tourney ","Shimano Tourney ","27.5\"","G2016 27.5\" x 1.95\"","Shimano Tourney ST-EF51 3x7","","","","","Black","","Format Steel","Format Steel Flatbar","Format AL6061","","Disc Brakes","yes","yes");
+<p>&nbsp;</p>","10","8","33cms","AL 6061 Frame","","Hardtail","","Shimano Tourney ","Shimano Tourney ","27.5\"","G2016 27.5\" x 1.95\"","Shimano Tourney ST-EF51 3x7","","","","","Black","","Format Steel","Format Steel Flatbar","Format AL6061","","Disc Brakes","yes","yes");
 INSERT INTO products VALUES("7","17116100","10","5","14","2020-05-15 15:09:27","Frog Plus Granite","frog-plus-granite-x20-26-green (1).jpg","","","","9799","11979","20","sale","<p>FRAME</p>
 <p>The Frog Plus Granite X20 26\" is a Mountain Bike which has a TIG Welded Steel Frame.</p>
 <p>&nbsp;</p>
@@ -1473,7 +1578,7 @@ INSERT INTO products VALUES("75","17116168","10","5","8","2020-05-15 15:14:51","
 <p>&nbsp;</p>
 <p>ABOUT BRAND</p>
 <p>Hero Cycles was started in 1944 and is now one of the largest manufacturers in the World. Their vision is to provide products that meet the quality, performance and price aspirations of the customer. Hero has an extensive range of Kids and Adult bicycles.</p>","0","0","38cms,45cms","Alloy Frame","13.8kgs","Rigid","","","","700c","700c","","40T","","","Spur 18T","Yellow","","Steel","Spur Alloy 660mm","Alloy","","V-Brakes","yes","yes");
-INSERT INTO products VALUES("76","17116169","11","6","8","2020-05-15 15:14:56","Hero Iguana","hero-octane-iguana-700c.jpg","","","","29700","","","old","<p>FRAME</p>
+INSERT INTO products VALUES("76","17116169","11","6","8","2020-06-04 12:08:27","Hero Iguana","hero-octane-iguana-700c.jpg","","","","29700","","","old","<p>FRAME</p>
 <p>The Hero Octane Iguana 700C is a Road Bicycle which has an Alloy Frame.</p>
 <p>&nbsp;</p>
 <p>GEARING</p>
@@ -1489,7 +1594,7 @@ INSERT INTO products VALUES("76","17116169","11","6","8","2020-05-15 15:14:56","
 <p>The Hero Octane Iguana 700C comes with a pair of 700c tires which are ttached to Double Wall Alloy Rims.</p>
 <p>&nbsp;</p>
 <p>ABOUT BRAND</p>
-<p>Hero Cycles was started in 1944 and is now one of the largest manufacturers in the World. Their vision is to provide products that meet the quality, performance and price aspirations of the customer. Hero has an extensive range of Kids and Adult bicycles.</p>","5","5","55cms","Alloy Frame","12.6kgs","Rigid","","Shimano Claris 2-Speed","Shimano Claris 8-Speed","700c","700c","Shimano Claris","ProWheel 34/50T","","","11/32T","Black","Traction-Alloy with Grip Nodes","Alloy with QR","Alloy 420mm","Alloy","","Caliper Brakes","yes","yes");
+<p>Hero Cycles was started in 1944 and is now one of the largest manufacturers in the World. Their vision is to provide products that meet the quality, performance and price aspirations of the customer. Hero has an extensive range of Kids and Adult bicycles.</p>","5","4","55cms","Alloy Frame","12.6kgs","Rigid","","Shimano Claris 2-Speed","Shimano Claris 8-Speed","700c","700c","Shimano Claris","ProWheel 34/50T","","","11/32T","Black","Traction-Alloy with Grip Nodes","Alloy with QR","Alloy 420mm","Alloy","","Caliper Brakes","yes","yes");
 INSERT INTO products VALUES("77","17116170","11","6","9","2020-05-15 15:14:59","Tarmak","firefox-tarmak.jpg","","","","44000","","","old","<p>FRAME</p>
 <p>The Firefox Tarmak is a Road Bicycle which has an Alloy Rigid Frame.</p>
 <p>&nbsp;</p>
@@ -1694,7 +1799,7 @@ INSERT INTO products VALUES("88","17116181","14","7","18","2020-05-15 15:15:35",
 <p>&nbsp;</p>
 <p>ABOUT BRAND</p>
 <p>Giant is a Taiwanese bicycle manufacturer started in 1972 with a simple goal of creating a better cycling experience. Giant&rsquo;s efficiency in manufacturing have allowed them to make quality bikes at an affordable price. Giant have a wide range of bicycles across all categories</p>","5","5","33cms,38cms","ALUXX-Grade Aluminium","","Rigid","","","Shimano Tourney 7-Speed","24\"","Giant Junior Lite Sport 24\" x 1.95\"","Shimano RS35","Steel","","","14/34","Blue","","Steel","Giant Jr MTB Low Rise","Steel Quill","","Alloy Liner Pull","yes","yes");
-INSERT INTO products VALUES("89","17116182","15","5","7","2020-05-15 15:15:39","BSA Tandem","262_1.jpg","","","","15599","19499","20","sale","<p>BRAKES</p>
+INSERT INTO products VALUES("89","17116182","15","5","7","2020-06-03 17:31:25","BSA Tandem","262_1.jpg","","","","15599","19499","20","sale","<p>BRAKES</p>
 <p>This Speciality Bicycle from BSA comes with Rim Brakes.</p>
 <p>&nbsp;</p>
 <p>PRICE</p>
@@ -1844,14 +1949,18 @@ CREATE TABLE `review` (
   `message` text NOT NULL,
   `time` date NOT NULL,
   `rating` int(10) NOT NULL,
+  `status_top` text NOT NULL,
   `status` text NOT NULL,
   PRIMARY KEY (`review_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
-INSERT INTO review VALUES("29","182","0","17bmiit116@gmail.com","<p>best</p>","2020-05-15","5","yes");
-INSERT INTO review VALUES("30","188","1","17bmiit116@gmail.com","<p style=\"text-align: justify;\">hii&nbsp;</p>","2020-05-15","3","yes");
-INSERT INTO review VALUES("31","17116189","0","17bmiit116@gmail.com","<p>hi</p>","2020-05-31","1","yes");
-INSERT INTO review VALUES("32","17116187","0","17bmiit116@gmail.com","<p>hi</p>","2020-05-31","1","yes");
+INSERT INTO review VALUES("35","17116178","0","17bmiit116@gmail.com","<p>No performance brand is complete without a road bicycle range. Montra released its first ever road bicycle range a few years back with the Unplugged 1.1, Celtic 2.1 and Celtic 2.2. Known for being the most affordable range of road bicycles with good designs this road range has been waiting for an upgrade since then. This year in 2017 Montra refreshed this range of road bicycles and launched the Unplugged 1.1 (2017) and the Celtic 2.1 (2017). We got the opportunity to review the Celtic 2.1 (2017) and here is what we thought.</p>","2020-06-03","4","no","yes");
+INSERT INTO review VALUES("36","17116177","0","17bmiit116@gmail.com","<p>Montra&rsquo;s road bicycle range has always been about value for money. These entry-level road bicycles have seen minor changes every year. We got the opportunity to test ride the entry-level Montra Unplugged (2018) road bicycle and here is what we thought.</p>","2020-06-03","4","no","yes");
+INSERT INTO review VALUES("40","1711694","0","DaisyMillan@gmail.com","<p>Firefox has always been successful with their wide range of MTB&rsquo;s. Until now they have always been a bit of performance and comfort for those beginner riders who want to experience trails. The Firefox Nuke D 29er is a performance focused MTB. We got the opportunity to test ride the Firefox Nuke D 29er and here is what we thought.</p>","2020-06-03","5","yes","yes");
+INSERT INTO review VALUES("37","17116117","0","chitraketsavani@gmail.com","<p>Montra is an Indian performance bicycle brand with all types of bicycles for all kinds of riders. The 2018 range of bicycles from Montra have seen the Rock MTB range get a good facelift in terms of performance. We got the opportunity to test ride the Montra Rock 2.1 26&rdquo; (2018) and here is what we thought.</p>","2020-06-03","3","yes","yes");
+INSERT INTO review VALUES("38","17116182","0","17bmiit116@gmail.com","<p>Tandem bicycles require a bit of practice to master, but the fun of riding around with a partner can be well worth the learning curve. These bicycles are designed with stout frames and wheels to handle the weight of two riders and can accelerate to higher speeds with greater stability than a bicycle with a single rider, since they have twice the leg power. BSA&rsquo;s Tandem Duo is perhaps the only Indian manufactured Tandem bicycle. I got the opportunity to test ride this with another fellow rider and here is what I thought.</p>","2020-06-03","1","no","yes");
+INSERT INTO review VALUES("39","1711698","0","lindsyniloms@gmail.com","<p>Firefox have been launching new models of bicycles over the last 6 months, which increases their portfolio across bicycle categories. Hardtail MTB&rsquo;s are a popular range of bicycles from Firefox with varied price ranges, designs, specs and are built for performance. We got the opportunity to test ride the Firefox Axxis 27.5D SSP and here is what we thought.</p>","2020-06-03","4","yes","yes");
+INSERT INTO review VALUES("41","17116114","0","Anamikalusy@gmail.com","<p>Firefox is a top Indian bicycle manufacturer with bicycles for all kinds of riders. MTB&rsquo;s make up the majority in the Firefox line up with various designs and specs for specific riding needs. We got the opportunity to test ride the newly launched Firefox Hurrikan 27.5D and here is what we thought.</p>","2020-06-03","5","yes","yes");
 
 
 
@@ -1894,7 +2003,7 @@ INSERT INTO terms VALUES("14","Definitions","DEFINITIONS","<p>CMB Information Po
 <p>&nbsp;</p>
 <p>All the terms, conditions and notices contained in this Agreement and the TOS, as may be posted on the Website from time to time shall be applicable for all bicycles and products sold through CMB. For the removal of doubts, it is clarified that the purchase of any bicycle/product by the User constitutes an acknowledgement and acceptance by the User of this Agreement and the TOS. If the User does not agree with any part of such terms, conditions and notices, the User must not make any purchase through CMB.</p>
 <p>&nbsp;</p>
-<p>CMB at its sole discretion reserves the right not to accept any order placed by the User through the website without assigning any reason thereof. Any contract to provide any service by CMB is not complete until full money towards the bicycle/product is received from the User and accepted/acknowledged by CMB.</p>","yes");
+<p>CMB at its sole discretion reserves the right not to accept any order placed by the User through the website without assigning any reason thereof. Any contract to provide any service by CMB is not complete until full money tow<a tabindex=\"-1\" role=\"presentation\" href=\"https://www.tinymce.com/?utm_campaign=editor_referral&amp;utm_medium=poweredby&amp;utm_source=tinymce\" target=\"_blank\" rel=\"noopener\">tinymce</a>ards the bicycle/product is received from the User and accepted/acknowledged by CMB</p>","yes");
 INSERT INTO terms VALUES("15","Modification of terms","MODIFICATION","<p>CMB reserves the right to change the terms, conditions and notices under which the bicycles/products are offered through the website, including but not limited to price of the products offered through its website, which shall be intimated to CMB by the respective manufacturer/brand from time to time. The user shall be responsible for regularly reviewing these terms and conditions.</p>","yes");
 INSERT INTO terms VALUES("16","Links to third party sites","LINKS","<p>The website may contain links to other websites (\"Linked Sites\"). The Linked Sites are not under the control of CMB or the website and CMB is not responsible for the contents of any Linked Site, including without limitation any link contained in a Linked Site, or any changes or updates to a Linked Site. CMB is not responsible for any form of transmission, whatsoever, received by the User from any Linked Site. CMB is providing these links to the User only as a convenience, and the inclusion of any link does not imply endorsement by CMB or the website of the Linked Sites or any association with its operators or owners including the legal heirs or assigns thereof.</p>
 <p>&nbsp;</p>
@@ -1914,9 +2023,8 @@ CREATE TABLE `wishlist` (
   `papage` int(11) NOT NULL,
   `status` text NOT NULL,
   PRIMARY KEY (`wishlist_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
-INSERT INTO wishlist VALUES("47","1711698","17bmiit116@gmail.com","0","yes");
 
 
 

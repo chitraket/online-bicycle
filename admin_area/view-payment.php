@@ -61,7 +61,7 @@
                                             
                                             <?php
                                         
-                                              $select_cat="SELECT * FROM payments ORDER BY payment_id";
+                                              $select_cat="SELECT * FROM payments ORDER BY payment_id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
                                                 if($row_cart["txnid"]=="")

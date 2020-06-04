@@ -171,7 +171,7 @@ window.open('accessories-<?php echo base64_encode($p_id); ?> ', '_self')
 
 function getPro(){
     global $db;
-    $get_products="select * from products where product_status_top='yes' and product_status='yes'";
+    $get_products="select * from products where not available_qty=0 and product_status_top='yes' and product_status='yes' ";
     $run_products=mysqli_query($db,$get_products);
     while($row_products=mysqli_fetch_array($run_products))
     {
@@ -281,7 +281,7 @@ function getPro(){
 function getAcc()
 {
     global $db;
-    $get_accessories="select * from accessories where accessories_status_top='yes' and  accessories_status='yes'";
+    $get_accessories="select * from accessories where not available_qty=0 and accessories_status_top='yes' and  accessories_status='yes'";
     $run_accessories=mysqli_query($db,$get_accessories);
     while($row_accessories=mysqli_fetch_array($run_accessories))
     {
@@ -677,6 +677,45 @@ function getsize()
             
     }   
 
+
+    function getSale()
+    {
+        global $db;
+        $sql="SELECT DISTINCT product_label FROM products where product_label IN ('sale','new') AND product_status='yes'";
+        $result=$db->query($sql);
+        while ($row=$result->fetch_assoc()) {
+    ?>
+    <li>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="common_selector sale custom-control-input"
+                id="<?php echo $row['product_label'];?>" value="<?php  echo  $row['product_label']; ?>">
+            <label class="common_selector sale custom-control-label"
+                for="<?php echo  $row['product_label']; ?>"><?php echo $row['product_label']; ?></label>
+        </div>
+    </li>
+    <?php
+                
+        }   
+    }
+    function getASale()
+    {
+        global $db;
+        $sql="SELECT DISTINCT accessories_label FROM accessories where accessories_label IN ('sale','new') AND accessories_status='yes'";
+        $result=$db->query($sql);
+        while ($row=$result->fetch_assoc()) {
+    ?>
+    <li>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="common_selector sales custom-control-input"
+                id="<?php echo $row['accessories_label'];?>" value="<?php  echo  $row['accessories_label']; ?>">
+            <label class="common_selector sales custom-control-label"
+                for="<?php echo  $row['accessories_label']; ?>"><?php echo $row['accessories_label']; ?></label>
+        </div>
+    </li>
+    <?php
+                
+        }   
+    }
 function logo()
     {
         global $db;

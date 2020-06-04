@@ -67,7 +67,7 @@
                                             
                                             <?php
                                         
-                                              $select_cat="SELECT * FROM orders ";
+                                              $select_cat="SELECT * FROM orders ORDER BY id DESC";
                                               $run_cart=mysqli_query($con, $select_cat);
                                             while ($row_cart=mysqli_fetch_array($run_cart)) {
                                                 $id=$row_cart["id"];
@@ -77,7 +77,7 @@
                                                 <td><?php echo $row_cart["customer_name"]?></td>
                                                 
                                                 <?php 
-                                                $select_cats="SELECT DISTINCT order_date FROM customer_orders WHERE order_id='$id'";
+                                                $select_cats="SELECT DISTINCT order_date FROM customer_orders WHERE order_id='$id' ORDER BY order_id DESC";
                                                 $run_carts=mysqli_query($con, $select_cats);
                                                 while ($row_carts=mysqli_fetch_array($run_carts)) {
                                                     $date=$row_carts["order_date"]; 
@@ -92,7 +92,7 @@
                                                 <?php
                                                 $bill=0;
                                                 $total=0;
-                                                $select_total="SELECT * FROM customer_orders WHERE order_id='$id'";
+                                                $select_total="SELECT * FROM customer_orders WHERE order_id='$id' ORDER BY order_id DESC ";
                                                 $run_total=mysqli_query($con,$select_total);
                                                 while ($row_total=mysqli_fetch_array($run_total)) {
                                                     
@@ -127,7 +127,7 @@
                                                 ?>
                                                 <td>Rs.<?php echo  $totals; ?></td> 
                                                 <?php 
-                                                $select_pays="SELECT DISTINCT txnid,payment_status FROM customer_orders WHERE order_id='$id'";
+                                                $select_pays="SELECT DISTINCT txnid,payment_status FROM customer_orders WHERE order_id='$id' ORDER BY order_id DESC ";
                                                 $run_pays=mysqli_query($con, $select_pays);
                                                 while ($row_pays=mysqli_fetch_array($run_pays)) {
                                                     $pay=$row_pays["txnid"]; 
@@ -148,7 +148,7 @@
                                             }
                                                 ?> 
                                                  <?php 
-                                                $select_payss="SELECT DISTINCT order_status FROM customer_orders WHERE order_id='$id'";
+                                                $select_payss="SELECT DISTINCT order_status FROM customer_orders WHERE order_id='$id' ORDER BY order_id DESC ";
                                                 $run_payss=mysqli_query($con, $select_payss);
                                                 while ($row_payss=mysqli_fetch_array($run_payss)) {
                                                     $order_status=$row_payss["order_status"]; 

@@ -49,7 +49,9 @@
     $pdf->AddPage();
 
    //set font to arial, bold, 14pt
-$pdf->SetFont('Arial','B',14);
+   $pdf->SetFont('Arial','B',14);
+
+$pdf->Image('../assets/img/logo/logo.png',90,5,20);
 
 //Cell(width , height , text , border , end line , [align] )
 
@@ -66,7 +68,7 @@ $pdf->Cell(130	,5,'Surat, India, 395004',0,0);
 $pdf->Cell(25	,5,'Date :',0,0);
 $pdf->Cell(34	,5,"{$order_date}",0,1);//end of line
 
-$pdf->Cell(130	,5,'+91 7984498992',0,0);
+$pdf->Cell(130	,5,'+91 9999999999',0,0);
 $pdf->Cell(25	,5,'Invoice :',0,0);
 $pdf->Cell(34	,5,"{$invoice_no}",0,1);//end of line
 

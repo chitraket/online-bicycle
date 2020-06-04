@@ -8,11 +8,10 @@ $active='Home';
 <!-- end Header Area -->
 <script>
 window.addEventListener("load", setTimeout(function() {
-        var load_screen = document.getElementById("load_screen");
+    var load_screen = document.getElementById("load_screen");
 
-        document.body.removeChild(load_screen);
-    }, 1000)
-);
+    document.body.removeChild(load_screen);
+}, 1000));
 </script>
 <div id="load_screen">
     <div id="loading"><img src="loder.gif"></div>
@@ -76,7 +75,7 @@ window.addEventListener("load", setTimeout(function() {
     </section>
     <!-- hero slider area end -->
     <!-- service policy area start -->
-    <div class="service-policy section-padding">
+    <div class="service-policy section-padding ">
         <div class="container">
             <div class="row mtn-30">
                 <?php
@@ -103,10 +102,8 @@ window.addEventListener("load", setTimeout(function() {
             </div>
         </div>
     </div>
-    <!-- service policy area end -->
 
-    <!-- product area start -->
-    <section class="product-area section-padding">
+    <section class="product-area section-padding pt-0">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -127,7 +124,7 @@ window.addEventListener("load", setTimeout(function() {
         </div>
     </section>
     <!-- group product start -->
-    <section class="group-product-area section-padding">
+    <section class="group-product-area section-padding pt-2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
@@ -324,7 +321,7 @@ window.addEventListener("load", setTimeout(function() {
     </section>
     <!-- group product end -->
     <!-- product area end -->
-    <section class="product-area section-padding">
+    <section class="product-area section-padding pt-0 ">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -338,15 +335,367 @@ window.addEventListener("load", setTimeout(function() {
                                 </div>
                             </div>
                         </div>
-                        <!-- product tab content end -->
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- testimonial area start -->
+    <section class="testimonial-area section-padding  bg-img " data-bg="assets/img/testimonial/testimonials-bg.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- section title start -->
+                    <div class="section-title text-center">
+                        <h2 class="title">Customer Reviews</h2>
+                    </div>
+                    <!-- section title start -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="testimonial-thumb-wrapper">
+                        <div class="testimonial-thumb-carousel">
+                            <?php 
+                    
+                            $get_terms = "select * from review where status='yes' and status_top='yes' LIMIT 0,1";
+                            $run_terms = mysqli_query($con,$get_terms);
+                            while($row_terms=mysqli_fetch_array($run_terms)){
+                                $customer_email=$row_terms['customer_email'];
+                                $get_customers="select * from customers where customer_email='$customer_email' and customer_status='yes'";
+                                $run_customer=mysqli_query($con,$get_customers);
+                                while($row_customer=mysqli_fetch_array($run_customer))
+                                {
+                                    if($row_customer['customer_image']=="")
+                                    {
+                                        ?>
+                            <div class="testimonial-thumb">
+                                <img src="customer/customer_images/user.png" alt="testimonial-thumb">
+                            </div>
+                            <?php
+                                    }
+                                    else{
+                                    ?>
+
+                            <div class="testimonial-thumb">
+                                <img src="customer/customer_images/<?php echo $row_customer['customer_image']; ?>"
+                                    alt="testimonial-thumb">
+                            </div>
+                            <?php
+                                    }
+                                }
+                        }
+                                            $count_terms = "select * from review  where status='yes' and status_top='yes'";
+                                            $run_count_terms = mysqli_query($con,$count_terms);
+                                            $count = mysqli_num_rows($run_count_terms);
+                                            $get_terms = "select * from review where status='yes' and status_top='yes'  LIMIT 1,$count";
+                                            $run_terms = mysqli_query($con,$get_terms);
+                                            while ($row_terms=mysqli_fetch_array($run_terms)) {
+                                                $customer_email=$row_terms['customer_email'];
+                                                $get_customers="select * from customers where customer_email='$customer_email' and customer_status='yes'";
+                                                    $run_customer=mysqli_query($con,$get_customers);
+                                                    while($row_customer=mysqli_fetch_array($run_customer))
+                                                    {
+
+                                                        if($row_customer['customer_image']=="")
+                                                        {
+                                                            ?>
+                            <div class="testimonial-thumb">
+                                <img src="customer/customer_images/user.png" alt="testimonial-thumb">
+                            </div>
+                            <?php
+                                                        }
+                                                        else{
+                                                        ?>
+
+                            <div class="testimonial-thumb">
+                                <img src="customer/customer_images/<?php echo $row_customer['customer_image']; ?>"
+                                    alt="testimonial-thumb">
+                            </div>
+                            <?php
+                                                        }
+                                                    }
+                                                ?>
+
+                            <?php
+                                            }
+                                            ?>
+                        </div>
+                    </div>
+                    <div class="testimonial-content-wrapper">
+                        <div class="testimonial-content-carousel">
+
+                            <?php
+                            $get_termss = "select * from review where status='yes' and status_top='yes' LIMIT 0,1";
+                            $run_termss = mysqli_query($con,$get_termss);
+                            while($row_termss=mysqli_fetch_array($run_termss)){
+                                $customer_email=$row_termss['customer_email'];
+                                $product_id=$row_termss['product_id'];
+                            ?>
+                            <div class="testimonial-content">
+                                <p><?php echo $row_termss['message'] ?></p>
+                                <?php
+                            if($row_termss['rating']==0) 
+                            {
+                                ?>
+                                <div class="ratings">
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                </div>
+                                <?php
+                            }
+                            else if($row_termss['rating']==1)
+                            {
+                                ?>
+                                <div class="ratings">
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                </div>
+                                <?php
+                            }
+                            else if($row_termss['rating']==2)
+                            {
+                                ?>
+                                <div class="ratings">
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                </div>
+                                <?php
+                            }
+                            else if($row_termss['rating']==3)
+                            {
+                                ?>
+                                <div class="ratings">
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                </div>
+                                <?php
+                            }
+                            else if($row_termss['rating']==4)
+                            {
+                                ?>
+                                <div class="ratings">
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                </div>
+                                <?php
+                            }
+                            else if($row_termss['rating']==5)
+                            {
+                                ?>
+                                <div class="ratings">
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                                <div class="product-caption text-center pt-0">
+                                    <?php
+                            $get_customerss="select * from customers where customer_email='$customer_email' and customer_status='yes'";
+                                $run_customers=mysqli_query($con,$get_customerss);
+                                while($row_customers=mysqli_fetch_array($run_customers))
+                                {
+                                    ?>
+                                    <div class="product-identity">
+                                        <p class="manufacturer-name"><?php echo $row_customers['customer_name']; ?></p>
+                                    </div>
+                                    <?php
+                                }
+                                if($row_termss['papage']==0)
+                                {
+                            $get_product="select * from products where product_id='$product_id' and product_status='yes'";
+                            $run_product=mysqli_query($con,$get_product);
+                            while($row_product=mysqli_fetch_array($run_product))
+                            {
+                                ?>
+                                    <h6 class="product-name">
+                                        <a
+                                            href="bikes-<?php echo base64_encode($row_product['product_id']); ?>"><?php echo $row_product['product_title']; ?></a>
+                                    </h6>
+                                    <?php
+                            }
+                        }
+                        if($row_termss['papage']==1)
+                        {
+                            $get_accessories="select * from accessories where accessories_id='$product_id' and accessories_status='yes'";
+                            $run_accessories=mysqli_query($con,$get_accessories);
+                            while($row_accessories=mysqli_fetch_array($run_accessories))
+                            {
+                                ?>
+                                    <h6 class="product-name">
+                                        <a
+                                            href="accessories-<?php echo  base64_encode($row_accessories['accessories_id']);?>"><?php echo $row_accessories['accessories_name']; ?></a>
+                                    </h6>
+                                    <?php
+                            }
+                        }
+                                ?>
+
+                                </div>
+                            </div>
+                            <?php    
+                        }   
+                                            $count_terms = "select * from review  where status='yes' and status_top='yes'";
+                                            $run_count_terms = mysqli_query($con,$count_terms);
+                                            $count = mysqli_num_rows($run_count_terms);
+                                            $get_terms = "select * from review where status='yes' and status_top='yes' LIMIT 1,$count";
+                                            $run_terms = mysqli_query($con,$get_terms);
+                                            while ($row_termss=mysqli_fetch_array($run_terms)) {
+                                                $customer_email=$row_termss['customer_email'];
+                                                $product_id=$row_termss['product_id'];
+                                                ?>
+                            <div class="testimonial-content">
+                                <p><?php echo $row_termss['message'] ?></p>
+                                <?php
+                            if($row_termss['rating']==0) 
+                            {
+                                ?>
+                                <div class="ratings">
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                </div>
+                                <?php
+                            }
+                            else if($row_termss['rating']==1)
+                            {
+                                ?>
+                                <div class="ratings">
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                </div>
+                                <?php
+                            }
+                            else if($row_termss['rating']==2)
+                            {
+                                ?>
+                                <div class="ratings">
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                </div>
+                                <?php
+                            }
+                            else if($row_termss['rating']==3)
+                            {
+                                ?>
+                                <div class="ratings">
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                </div>
+                                <?php
+                            }
+                            else if($row_termss['rating']==4)
+                            {
+                                ?>
+                                <div class="ratings">
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star-o"></i></span>
+                                </div>
+                                <?php
+                            }
+                            else if($row_termss['rating']==5)
+                            {
+                                ?>
+                                <div class="ratings">
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                    <span><i class="fa fa-star"></i></span>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                                <div class="product-caption text-center pt-0">
+                                    <?php
+                            $get_customerss="select * from customers where customer_email='$customer_email' and customer_status='yes'";
+                                $run_customers=mysqli_query($con,$get_customerss);
+                                while($row_customers=mysqli_fetch_array($run_customers))
+                                {
+                                    ?>
+                                    <div class="product-identity">
+                                        <p class="manufacturer-name"><?php echo $row_customers['customer_name']; ?></p>
+                                    </div>
+                                    <?php
+                                }
+                                if($row_termss['papage']==0)
+                                {
+                            $get_product="select * from products where product_id='$product_id' and product_status='yes'";
+                            $run_product=mysqli_query($con,$get_product);
+                            while($row_product=mysqli_fetch_array($run_product))
+                            {
+                                ?>
+                                    <h6 class="product-name">
+                                        <a
+                                            href="bikes-<?php echo base64_encode($row_product['product_id']); ?>"><?php echo $row_product['product_title']; ?></a>
+                                    </h6>
+                                    <?php
+                            }
+                        }
+                        if($row_termss['papage']==1)
+                        {
+                            $get_accessories="select * from accessories where accessories_id='$product_id' and accessories_status='yes'";
+                            $run_accessories=mysqli_query($con,$get_accessories);
+                            while($row_accessories=mysqli_fetch_array($run_accessories))
+                            {
+                                ?>
+                                    <h6 class="product-name">
+                                        <a
+                                            href="accessories-<?php echo  base64_encode($row_accessories['accessories_id']);?>"><?php echo $row_accessories['accessories_name']; ?></a>
+                                    </h6>
+                                    <?php
+                            }
+                        }
+                                ?>
+
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- testimonial area end -->
 
     <!-- brand logo area start -->
-    <div class="brand-logo section-padding pt-0">
+    <div class="brand-logo section-padding ">
         <div class="container">
             <div class="row">
                 <div class="col-12">

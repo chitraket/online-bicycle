@@ -47,7 +47,18 @@
         <!-- single sidebar end -->
 
         <!-- single sidebar start -->
+        <div class="sidebar-single">
+            <h5 class="sidebar-title">Sale</h5>
+            <div class="sidebar-body">
+                <ul class="checkbox-container categories-list">
 
+                    <?php 
+                                        getASale();
+                                    ?>
+
+                </ul>
+            </div>
+        </div>
         <!-- single sidebar end -->
 
 

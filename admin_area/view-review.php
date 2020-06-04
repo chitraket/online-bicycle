@@ -50,8 +50,9 @@ $query_per="select * from admins where admin_email='$admin_email' and admin_stat
                                             <thead>
                                             <tr>
                                                 <th>Email</th>
-                                                <th>Product name</th>
+                                                <th>Name</th>
                                                 <th>Message</th>
+                                                <th>Top</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -93,8 +94,32 @@ $query_per="select * from admins where admin_email='$admin_email' and admin_stat
                                                     <?php
                                                 }
                                             }
+
                                                 ?>
-                                                <td><?php echo $row_cart['message']; ?></td> 
+                                                
+                                                <td><?php echo substr($row_cart['message'],0,55) ?>..</td> 
+                                                <td>
+                                                <?php 
+                                                if($row_cart['status_top']=="yes")
+                                                {
+                                                ?>
+                                               
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['review_id']; ?>" class="switch2" name="no" switch="none" checked/>
+                                                <label for="ch<?php echo $row_cart['review_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                
+                                                    <input type="checkbox" id="ch<?php echo $row_cart['review_id']; ?>" class="switch2" name="yes" switch="none" />
+                                                <label for="ch<?php echo $row_cart['review_id']; ?>" data-on-label="On"
+                                                    data-off-label="Off"></label>
+                                                
+                                                    <?php 
+                                                } 
+                                                ?>
+                                                </td>
                                                 <td>
                                                <?php 
                                                 if($row_cart['status']=="yes")
@@ -257,7 +282,24 @@ $query_per="select * from admins where admin_email='$admin_email' and admin_stat
                         });
                     });
         </script> 
-
+        <script>
+                    $('.switch2').on('click',function(){
+                        var product_id=$(this).attr("id");
+                        var review_ids=product_id.substring(2,product_id.length);
+                        var review_idss=$(this).attr("name");
+                        $.ajax({
+                            url:"review-status-top.php",
+                            method:"POST",
+                            data:{review_ids:review_ids,review_idss:review_idss},
+                            success:function()
+                            {
+                                window.open('view-review.php','_self');
+                            }
+                        });
+                        
+                        
+                    });
+                </script>
         <script>
            $('.btn-delete').on('click',function(e){
                e.preventDefault();

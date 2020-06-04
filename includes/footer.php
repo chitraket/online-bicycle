@@ -25,8 +25,8 @@
                                 <ul>
                                     <li><i class="pe-7s-home"></i> 34,vip,surat</li>
                                     <li><i class="pe-7s-mail"></i> <a
-                                            href="mailto:chitraketsavani@gmail.com">chitraketsavani@gmail.com </a></li>
-                                    <li><i class="pe-7s-call"></i> <a href="tel:+91 7984498992">+91 7984498992</a></li>
+                                            href="mailto:skotebicycle@gmail.com">skotebicycle@gmail.com</a></li>
+                                    <li><i class="pe-7s-call"></i> <a href="tel:+91 9999999999">+91 9999999999</a></li>
                                 </ul>
                             </address>
                         </div>

@@ -38,9 +38,16 @@ if(isset($_POST["action"]))
    AND accessories_category IN('".$ram_filter."')
   ";
  }
+ if(isset($_POST["sales"]))
+ {
+     $sales_filter =implode("','", $_POST["sales"]);
+     $query .="
+     AND accessories_label IN('".$sales_filter."')
+     ";
+ }
  
  $query2 = $query;
- $query.="ORDER BY accessories_id DESC LIMIT "  . $start_from."," .$record_per_page;
+ $query.="ORDER BY available_qty DESC,accessories_id DESC LIMIT "  . $start_from."," .$record_per_page;
 
  $result=mysqli_query($con,$query);
  $total_count=mysqli_num_rows($result);

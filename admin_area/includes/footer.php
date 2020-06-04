@@ -6,7 +6,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="text-sm-right d-none d-sm-block">
-                                    Design & Develop by chitraket
+                                    Design & Develop by SKOTE
                                 </div>
                             </div>
                         </div>

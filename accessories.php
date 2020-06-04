@@ -125,6 +125,7 @@ $(document).ready(function() {
         var minimum_price = $('#hidden_minimum_price').val();
         var maximum_price = $('#hidden_maximum_price').val();
         var brand = get_filter('accessories_brand_id');
+        var sales =get_filter('sales');
         var ram = get_filter('accessories_category');
         $.ajax({
             url: "accessories_fetch_data.php",
@@ -135,6 +136,7 @@ $(document).ready(function() {
                 maximum_price: maximum_price,
                 brand: brand,
                 ram: ram,
+                sales: sales,
                 page: page,
                 firsttime: firsttime
             },

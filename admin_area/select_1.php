@@ -211,7 +211,7 @@ while($row_customer_orders=mysqli_fetch_array($run_customer_orders))
                                       
                                 
                                         ?>
-                                        <a href="Generate_bill.php?or_id=<?php echo $order_id; ?>"><input type="button" class="btn btn-primary"  value="Generate bill" ></a>
+                                        <a href="Generate_bill.php?or_id=<?php echo $order_id; ?>"><input type="button" class="btn btn-primary"  value="Bill" ></a>
                                         <span class="ml-2 badge badge-pill badge-soft-success font-size-10" ><img src="icon/delivery-man.png" style="height:25px;"/> Delivered</span> 
                                     <?php
                                     }

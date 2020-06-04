@@ -128,6 +128,7 @@ $(document).ready(function() {
         var maximum_price = $('#hidden_maximum_price').val();
         var brand = get_filter('manufacturer_id');
         var ram = get_filter('cat_id');
+        var sale = get_filter('sale');
         var storage = get_filter('p_cat_id');
         var colour = get_filter('colour');
         var size = get_filter('size');
@@ -143,6 +144,7 @@ $(document).ready(function() {
                 storage: storage,
                 colour: colour,
                 size: size,
+                sale: sale,
                 page: page,
                 firsttime: firsttime
             },
