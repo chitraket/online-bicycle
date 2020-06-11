@@ -17,7 +17,7 @@ if(isset($_POST['submit'])){
     }
     if(pass($_POST['new_pass']))
     {
-        $error_pass1 = "Required..";
+        $error_pass1 = "Required.. || Please enter valid password.";
         $errorresult=false;
     }
     else
@@ -46,7 +46,7 @@ if(isset($_POST['submit'])){
     
     $c_new_pass_again = $_POST['new_pass_again'];
     
-    $sel_c_old_pass = "select * from customers where customer_pass='$c_old_pass'";
+    $sel_c_old_pass = "select * from customers where customer_pass='$c_old_pass' and customer_status='yes'";
     
     $run_c_old_pass = mysqli_query($con,$sel_c_old_pass);
     
@@ -57,7 +57,7 @@ if(isset($_POST['submit'])){
         ?>
 <script type="text/javascript">
 swal({
-        title: "Sorry, your current password did not valid. Please try again",
+        title: "Sorry, your current password did not valid.",
         text: "",
         icon: "warning",
         buttons: [, "OK"],
@@ -65,9 +65,9 @@ swal({
     })
     .then((willDelete) => {
         if (willDelete) {
-            window.open('myaccount', '_self');
+            window.open('my-account', '_self');
         } else {
-
+            window.open('my-account', '_self');
         }
     });
 </script>
@@ -89,9 +89,9 @@ swal({
     })
     .then((willDelete) => {
         if (willDelete) {
-            window.open('myaccount', '_self');
+            window.open('my-account', '_self');
         } else {
-
+            window.open('my-account', '_self');
         }
     });
 </script>";
@@ -116,9 +116,9 @@ swal({
     })
     .then((willDelete) => {
         if (willDelete) {
-            window.open('myaccount', '_self');
+            window.open('my-account', '_self');
         } else {
-
+            window.open('my-account', '_self');
         }
     });
 </script>
@@ -138,7 +138,7 @@ end:
     <div class="myaccount-content">
         <h5>Change Password</h5>
         <div class="account-details-form">
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="my-account" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="single-input-item">

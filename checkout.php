@@ -6,11 +6,15 @@
 <?php 
            
            if(!isset($_SESSION['customer_email'])){
-            echo "<script>window.open('customer/login','_self')</script>";
+               ?>
+            <script>window.open('customer/login','_self')</script>
+            <?php
            }     
            if(empty($_SESSION['shopping_cart']))
            {
-            echo "<script>window.open('home','_self')</script>";
+               ?>
+            <script>window.open('home','_self')</script>
+            <?php
            }
 ?>
 <main>
@@ -35,7 +39,7 @@
 
     <?php
 $session_email=$_SESSION['customer_email'];
-$select_customer="select * from customers where customer_email='$session_email'";
+$select_customer="select * from customers where customer_email='$session_email' and customer_status='yes'";
 $run_customers=mysqli_query($con,$select_customer);
 $row_customer=mysqli_fetch_array($run_customers);
 $customer_id=$row_customer['customer_id'];
@@ -53,7 +57,6 @@ $_SESSION['c_id']=$customer_id;
                  $error_address="";
                  $error_pincode="";
                  $error_box="";
-                 //$address="";
                  $error_new_address="";
                  $errorresult=true;
         if(isset($_POST['place_order']))
@@ -61,7 +64,7 @@ $_SESSION['c_id']=$customer_id;
 
             if(firstname($_POST['c_name']))
     {
-        $error_c_name = "Required..";
+        $error_c_name = "Required.. || Please enter valid first name";
         $errorresult=false;
     }
     else
@@ -70,7 +73,7 @@ $_SESSION['c_id']=$customer_id;
     }
     if(lastname($_POST['c_lname']))
     {
-        $error_l_name = "Required..";
+        $error_l_name = "Required.. || Please enter valid last name";
         $errorresult=false;
     }
     else
@@ -79,7 +82,7 @@ $_SESSION['c_id']=$customer_id;
     }
     if(city($_POST['c_city']))
     {
-        $error_city = "Required..";
+        $error_city = "Required.. || Please enter valid city";
         $errorresult=false;
     }
     else
@@ -88,7 +91,7 @@ $_SESSION['c_id']=$customer_id;
     }
     if(state($_POST['c_state']))
     {
-        $error_state = "Required..";
+        $error_state = "Required.. || Please enter valid state";
         $errorresult=false;
     }
     else
@@ -97,7 +100,7 @@ $_SESSION['c_id']=$customer_id;
     }
     if(contacts($_POST['c_contact']))
     {
-        $error_c_contact = "Required..";
+        $error_c_contact = "Required.. || Please enter valid contact";
         $errorresult=false;
     }
     else
@@ -169,7 +172,6 @@ $_SESSION['c_id']=$customer_id;
             else{  
                 $_SESSION['ORDER_ID']=$_POST['ORDER_ID'];
                 $_SESSION['CUST_ID']=$_POST['CUST_ID'];
-               // $_SESSION['c_id']=$customer_id;
                 $_SESSION['INDUSTRY_TYPE_ID']=$_POST['INDUSTRY_TYPE_ID'];
                 $_SESSION['CHANNEL_ID']=$_POST['CHANNEL_ID'];
                 $_SESSION['TXN_AMOUNT']=$_POST['TXN_AMOUNT'];
@@ -202,7 +204,7 @@ $_SESSION['c_id']=$customer_id;
     <div class="checkout-page-wrapper section-padding">
         <div class="container">
 
-            <form name="postForm" action="#" method="POST">
+            <form name="postForm" action="checkout" method="POST">
 
                 <input type="hidden" id="ORDER_ID" tabindex="1" maxlength="20" size="20" name="ORDER_ID"
                     autocomplete="off" value="<?php echo  "ORDS" . rand(10000,99999999)?>">
@@ -218,7 +220,7 @@ $_SESSION['c_id']=$customer_id;
                 
                 if(isset($_SESSION['customer_email'])){
                     $customer_email=$_SESSION['customer_email'];
-                    $select_customer = "select * from customers where customer_email='$customer_email'";
+                    $select_customer = "select * from customers where customer_email='$customer_email' and customer_status='yes'";
                     $run_customer=mysqli_query($con,$select_customer);
                     while($row_products=mysqli_fetch_array($run_customer)){
                         $customer_name=$row_products['customer_name'];
@@ -325,18 +327,13 @@ $_SESSION['c_id']=$customer_id;
                                 <div class="single-input-item">
                                     <label for="phone" class="required">Phone</label>
 
-                                    <input type="text" placeholder="Enter your contact"
+                                    <input type="number" placeholder="Enter your contact"
                                         value="<?php echo $customer_contact; ?>" disabled />
                                     <input type="hidden" name="c_contact" id="contact"
                                         value="<?php echo $customer_contact; ?>" required>
                                     <span id="contactMsg"></span>
                                     <span style="color: red;"><?php echo $error_c_contact; ?></span>
                                 </div>
-
-                                <!-- <div class="single-input-item">
-                                        <label for="ordernote">Order Note</label>
-                                        <textarea name="ordernote" name="ordernote" cols="30" rows="3" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                    </div>-->
                             </div>
                         </div>
                     </div>

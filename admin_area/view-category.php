@@ -21,10 +21,6 @@
         if(in_array($paga,$subject))
         {
      ?>
-            <!-- Left Sidebar End --> 
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
             <form action="#" method="POST">
             <div class="main-content">
 
@@ -184,8 +180,6 @@
         <script src="assets/js/app.js"></script>
 
     </body>
-
-<!-- Mirrored from themesbrand.com/skote/layouts/vertical/tables-datatable.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:43:50 GMT -->
 </html>
 <script>  
         $(document).ready(function(){  

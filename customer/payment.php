@@ -7,6 +7,8 @@ $_SESSION['TXN_AMOUNTS']=$_GET['amount'];
 $_SESSION['CUST_IDS']=$_GET['o_id'];
 $_SESSION['CHANNEL_IDS']="WEB";
 $_SESSION['INDUSTRY_TYPE_IDS']="Retail";
-echo"<script>window.open('pgRedirects.php','_self');</script>";
+?>
+<script>window.open('pgRedirects.php','_self');</script>
+<?php
 }
 ?>

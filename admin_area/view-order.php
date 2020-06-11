@@ -100,7 +100,7 @@
                                                     $product_id=$row_total['product_id'];
                                                     if($row_total['papage_number']==0)
                                                     {
-                                                        $select_totals="SELECT * FROM products WHERE product_id='$product_id'";
+                                                        $select_totals="SELECT * FROM products WHERE product_id='$product_id' ORDER BY product_id DESC";
                                                         $run_totals=mysqli_query($con,$select_totals);
                                                         while ($row_totals=mysqli_fetch_array($run_totals)) {
                                                             $bill=$row_totals['product_price']*$qty;
@@ -112,7 +112,7 @@
                                                     }
                                                     if($row_total['papage_number']==1)
                                                     {
-                                                        $select_totalss="SELECT * FROM accessories WHERE accessories_id='$product_id'";
+                                                        $select_totalss="SELECT * FROM accessories WHERE accessories_id='$product_id' ORDER BY accessories_id DESC";
                                                         $run_totalss=mysqli_query($con,$select_totalss);
                                                         while ($row_totalss=mysqli_fetch_array($run_totalss)) {
                                                             $bill=$row_totalss['accessories_prices']*$qty;
@@ -144,7 +144,6 @@
                                                             <td><span class="badge badge-pill badge-soft-success font-size-10" ><img src="icon/icons8-paytm-32.png" style="height:25px;"/> Online Payment</span></td>
                                                               <?php
                                                         }
-
                                             }
                                                 ?> 
                                                  <?php 
@@ -194,7 +193,7 @@
                                                     }
                                                     } 
                                                     ?>
-                                                <td><input type="button" name="view" value="View Details" id="<?php echo $row_cart["id"]?>" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light view_data"  /></td>
+                                                <td><input type="button" name="view" value="Order Details" id="<?php echo $row_cart["id"]?>" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light view_data"  /></td>
                                                
                                             </tr>
                                                 <?php 
@@ -218,7 +217,7 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Product Details</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -249,11 +248,6 @@
         
         <!-- END layout-wrapper -->
           
-        <!-- Right Sidebar -->
-        <!-- /Right-bar -->
-
-        <!-- Right bar overlay-->
-
         <!-- JAVASCRIPT -->
        
         <script src="assets/libs/jquery/jquery.min.js"></script>

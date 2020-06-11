@@ -15,7 +15,6 @@
         $run_orders = mysqli_query($con,$get_orders);
         $i = 0;
        while( $row_orders = mysqli_fetch_array($run_orders)){
-          //  $order_id=$row_orders['order_id'];
             $customer_name=$row_orders['customer_name'];
             $customer_address=$row_orders['customer_address'];
             $customer_contact=$row_orders['customer_contact'];
@@ -23,9 +22,6 @@
             $customer_city=$row_orders['customer_city'];
             $customer_country=$row_orders['customer_country'];
             $order_id=$row_orders['id'];
-          //  $due_amount=$row_orders['due_amount'];
-           // $invoice_no=$row_orders['invoice_no'];
-            //$qty=$row_orders['qty'];
             $i++; 
     
     

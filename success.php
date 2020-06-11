@@ -2,11 +2,12 @@
     $active='';
     include("includes/header.php");
 ?>
-
 <?php 
            
            if(!isset($_SESSION['customer_email'])){
-            echo "<script>window.open('customer/customer_login.php','_self')</script>";
+               ?>
+        <script>window.open('customer/login','_self')</script>
+        <?php
            }
            
 ?>
@@ -57,10 +58,6 @@ window.open('home', '_self')
     $customer_email='';
     $customer_phone='';
 ?>
-
-<!-- Start Header Area -->
-
-<!-- end Header Area -->
 
 <main>
     <!-- breadcrumb area start -->
@@ -113,7 +110,6 @@ window.open('home', '_self')
                                         $select_carts="select * from customer_orders where order_id='$productinfo' and txnid='$txnid'";
                                         $run_carts=mysqli_query($con,$select_carts);
                                         $num_count=mysqli_num_rows($run_carts);
-                                        //echo $num_count;
                                         if($num_count==0)
                                         {
                                             ?>

@@ -3,10 +3,10 @@ session_start();
 include("includes/db.php");
 include("functions/functions.php");
 include("includes/validation.php");
- ?>
+?>
+
 <!doctype html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -33,7 +33,6 @@ include("includes/validation.php");
     <link rel="stylesheet" href="assets/css/plugins/animate.css">
     <!-- Nice Select css -->
     <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
-
     <!-- jquery UI css -->
     <link rel="stylesheet" href="assets/css/plugins/jqueryui.min.css">
     <link rel="stylesheet" href="assets/js/plugins/jquery.min.js">
@@ -46,23 +45,45 @@ include("includes/validation.php");
     <!--sweet alert-->
     <script src="assets/js/sweetalert.min.js"></script>
     <style>
-    div#load_screen {
-        background: #00bbfe;
-        opacity: 1;
+    .loader {
         position: fixed;
-        z-index: 10;
-        top: 0px;
+        z-index: 99;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 1600px;
+        height: 100%;
+        background: #00bbfe;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    div#load_screen>div#loading {
+    .loader>img {
         color: #00bbfe;
         width: 400px;
-        height: 400px;
+        height: 300px;
         margin: 200px auto;
     }
+
+    .loader.hidden {
+        animation: fadeOut 1s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes fadeOut {
+        100% {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    .thumb {
+        height: 100px;
+        border: 1px solid black;
+        margin: 10px;
+    }
     </style>
+
 </head>
 
 <body>
@@ -79,10 +100,14 @@ include("includes/validation.php");
                                 <p>
                                     <?php
                                     if(!isset($_SESSION['customer_email'])){ 
-                                        echo "Welcome:Guest";
+                                        ?>
+                                        Welcome : Guest
+                                        <?php
                                     }
                                     else{
-                                        echo"Welcome: " .$_SESSION['customer_email']. "";
+                                        ?>
+                                        Welcome : <?php  echo $_SESSION['customer_email']; ?>
+                                        <?php
                                     }
                                     
                                     ?>
@@ -151,15 +176,15 @@ include("includes/validation.php");
                                                             <?php }?>
                                                         </ul>
                                                     </li>
-                                                    <li class="megamenu-banners d-none d-lg-block">
-                                                        <a href="bikes">
-                                                            <img src="assets/img/banner/img1.jpg" alt="">
+                                                    <li class="megamenu-banners d-none d-lg-block ">
+                                                        <a href="bikes" class="pb-4">
+                                                            <img src="assets/img/banner/bikes-banner_6.jpg" alt="bikes-banner_6.jpg">
                                                         </a>
-                                                        <a href="bikes">
-                                                            <img src="assets/img/banner/img1.jpg" alt="">
+                                                        <a href="bikes" class="pt-4">
+                                                            <img src="assets/img/banner/kids-banner_2.jpg" alt="kids-banner_2.jpg">
                                                         </a>
                                                     </li>
-                                                    
+
                                                 </ul>
                                             </li>
                                             <li class="position-static <?php if($active=='Accessories') echo"active"?>">
@@ -195,11 +220,11 @@ include("includes/validation.php");
                                                         </ul>
                                                     </li>
                                                     <li class="megamenu-banners d-none d-lg-block">
-                                                        <a href="accessories">
-                                                            <img src="assets/img/banner/Accessories-Banner.jpg" alt="">
+                                                        <a href="accessories" class="pb-4">
+                                                            <img src="assets/img/banner/3.png" alt="3.png">
                                                         </a>
-                                                        <a href="accessories">
-                                                            <img src="assets/img/banner/Accessories-Banner.jpg" alt="">
+                                                        <a href="accessories" class="pt-4">
+                                                            <img src="assets/img/banner/Accessories-Banner.jpg" alt="Accessories-Banner.jpg">
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -225,25 +250,25 @@ include("includes/validation.php");
                                 <div class="header-configure-area">
                                     <ul class="nav justify-content-end">
                                         <li class="user-hover active">
-                                            <a href="#">
+                                            <a>
                                                 <i class="pe-7s-user "></i>
                                             </a>
                                             <ul class="dropdown-list">
                                                 <?php 
                                                 if(!isset($_SESSION['customer_email']))
                                                 {
-                                                    echo"
+                                                    ?>
                                                 <li><a href='customer/login'>Login</a></li>
                                                 <li><a href='register'>Register</a></li>
-                                                ";
+                                                <?php
                                                 }
                                                 else{
                                                 
-                                                    echo"
-                                                    <li><a href='customer/my-account'>My Account</a></li>";
-                                                    echo"
-                                                    <li><a href='logout.php'>Log Out</a></li>";
-                                                    
+                                                ?>
+                                                <li><a href='customer/my-account'>My Account</a></li>
+
+                                                <li><a href='logout.php'>Log Out</a></li>
+                                                <?php    
                                                 }
                                                 ?>
                                             </ul>
@@ -259,7 +284,6 @@ include("includes/validation.php");
                                         <li>
                                             <a href="wishlist">
                                                 <i class="pe-7s-like"></i>
-
                                                 <div class="notification"><?php echo $num_wishlist; ?></div>
                                             </a>
                                         </li>
@@ -291,7 +315,7 @@ include("includes/validation.php");
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="minicart-btn">
+                                            <a class="minicart-btn">
                                                 <i class="pe-7s-shopbag"></i>
                                                 <?php 
 
@@ -315,7 +339,6 @@ include("includes/validation.php");
                             </div>
                         </div>
                         <!-- mini cart area end -->
-
                     </div>
                 </div>
             </div>
@@ -323,7 +346,6 @@ include("includes/validation.php");
         </div>
         <!-- main header start -->
 
-        <!-- mobile header start -->
         <!-- mobile header start -->
         <div class="mobile-header d-lg-none d-md-block sticky">
             <!--mobile header top start -->
@@ -410,22 +432,14 @@ include("includes/validation.php");
             </div>
             <!-- mobile header top start -->
         </div>
-        <!-- mobile header end -->
-        <!-- mobile header end -->
 
-        <!-- offcanvas mobile menu start -->
-        <!-- off-canvas menu start -->
         <aside class="off-canvas-wrapper">
             <div class="off-canvas-overlay"></div>
             <div class="off-canvas-inner-content">
                 <div class="btn-close-off-canvas">
                     <i class="pe-7s-close"></i>
                 </div>
-
                 <div class="off-canvas-inner">
-                    <!-- search box start -->
-                    <!-- search box end -->
-
                     <!-- mobile menu start -->
                     <div class="mobile-navigation">
 
@@ -452,7 +466,7 @@ include("includes/validation.php");
                         <ul class="nav">
                             <li>
                                 <div class="dropdown mobile-top-dropdown">
-                                    <a href="#" class="dropdown-toggle" id="myaccount" data-toggle="dropdown"
+                                    <a  class="dropdown-toggle" id="myaccount" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
                                         My Account
                                         <i class="fa fa-angle-down"></i>
@@ -461,17 +475,17 @@ include("includes/validation.php");
                                         <?php 
                                                 if(!isset($_SESSION['customer_email']))
                                                 {
-                                                    echo"
-                                                <a class='dropdown-item' href='customer/login>Login</a>
-                                                <a class='dropdown-item' href='register'>Register</a>
-                                                ";
+                                                ?>
+                                        <a class='dropdown-item' href='customer/login'>Login</a>
+                                        <a class='dropdown-item' href='register'>Register</a>
+                                        <?php
                                                 }
                                                 else{
                                                 
-                                                    echo"
-                                                    <a class='dropdown-item' href='customer/my-account'>My Account</a>
-                                                    <a class='dropdown-item' href='logout.php'>Log Out</a>";
-                                                    
+                                                ?>
+                                        <a class='dropdown-item' href='customer/my-account'>My Account</a>
+                                        <a class='dropdown-item' href='logout.php'>Log Out</a>
+                                        <?php  
                                                 }
                                                 ?>
                                     </div>
@@ -504,6 +518,4 @@ include("includes/validation.php");
                 </div>
             </div>
         </aside>
-        <!-- off-canvas menu end -->
-        <!-- offcanvas mobile menu end -->
     </header>

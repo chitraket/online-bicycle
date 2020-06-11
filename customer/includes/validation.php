@@ -34,15 +34,15 @@ function lastname($lastname)
 }
 function images($image)
 {
-  $ext = pathinfo($image, PATHINFO_EXTENSION);
-  $extensions= array("jpeg","jpg","png"); 
-  if(!empty($image) && in_array($ext,$extensions)==false)
-  {
-    return true;   
-  }
-  else{
-    return false;
-  }
+    $ext = pathinfo($image, PATHINFO_EXTENSION);
+    $extensions= array("jpeg","jpg","png"); 
+    if(!empty($image) && in_array($ext,$extensions)==false)
+    {
+      return true;   
+    }
+    else{
+      return false;
+    }
 }
 function email($email)
 {
@@ -113,6 +113,21 @@ function city($city)
 function contact($contact)
 {
     if(empty($contact) || !preg_match("/^[9876][0-9]{9}$/",$contact))
+    {
+        return true;
+    }
+    else
+    {
+      return false;
+    }
+}
+function contacte($contactss,$employee_ids)
+{
+  global $con;
+  $select_contacts="select * from customers where not customer_email='$employee_ids' and customer_contact='$contactss'";
+  $row_contacts=mysqli_query($con,$select_contacts);
+  $num_contacts=mysqli_num_rows($row_contacts);
+    if(empty($contactss) || !preg_match("/^[9876][0-9]{9}$/",$contactss) || $num_contacts!=0)
     {
         return true;
     }

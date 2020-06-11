@@ -2,18 +2,20 @@
     $active='';
     include("includes/header.php");
 ?>
-<!-- Start Header Area -->
 
-<!-- end Header Area -->
 <?php
 
 if(!isset($_SESSION['email']))
 {
-    echo "<script>window.open('forget-password','_self')</script>";
+    ?>
+    <script>window.open('forget-password','_self')</script>
+    <?php
 }
 if(!isset($_SESSION['otp']))
 {
-    echo "<script>window.open('forget-password','_self')</script>";
+    ?>
+    <script>window.open('forget-password','_self')</script>
+    <?php
 }
 else{
     $error_email="";
@@ -22,7 +24,7 @@ else{
 
         if(otp($_POST['email']))
         {
-            $error_email = "Required..";
+            $error_email = "Required.. || Please enter valid OTP.";
             $errorresult=false;
         }
         else
@@ -50,7 +52,7 @@ swal({
         if (willDelete) {
             window.open('forget-password-change', '_self');
         } else {
-
+            window.open('forget-password-otp', '_self');
         }
     });
 </script>
@@ -72,7 +74,7 @@ swal({
         if (willDelete) {
             window.open('forget-password-otp', '_self');
         } else {
-
+            window.open('forget-password-otp', '_self');
         }
     });
 </script>
@@ -112,7 +114,7 @@ end:
                     <div class="col-lg-6">
                         <div class="login-reg-form-wrap">
                             <h5>Forget Password</h5>
-                            <form action="#" method="post">
+                            <form action="forget-password-otp" method="post">
                                 <div class="single-input-item">
                                     <input type="text" placeholder="Enter OTP" name="email" id="email" required />
                                     <span id="passMsg"></span>
@@ -121,12 +123,6 @@ end:
 
                                 <div class="single-input-item">
                                     <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                        <!-- <div class="remember-meta">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="rememberMe">
-                                                    <label class="custom-control-label" for="rememberMe">Remember Me</label>
-                                                </div>
-                                            </div>-->
                                     </div>
                                 </div>
                                 <div class="single-input-item">
@@ -137,9 +133,6 @@ end:
                         </div>
                     </div>
                     <!-- Login Content End -->
-
-                    <!-- Register Content Start -->
-                    <!-- Register Content End -->
                 </div>
             </div>
         </div>
@@ -252,7 +245,5 @@ $(document).ready(function() {
 </script>
 </body>
 
-
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:08 GMT -->
 
 </html>

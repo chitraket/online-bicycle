@@ -8,11 +8,15 @@ if(isset($_SESSION['customer_email']))
     {
         if($_SESSION['papage']==1)
         {
-            echo "<script>window.open('../checkout','_self');</script>";
+            ?>
+            <script>window.open('../checkout','_self');</script>
+            <?php
         }
         if($_SESSION['papage']==0)
         {
-            echo "<script>window.open('my-account','_self');</script>";
+            ?>
+            <script>window.open('my-account','_self');</script>
+            <?php
         }
     }
 }
@@ -44,13 +48,13 @@ $errorresult=true;
 
 if (isset($_POST['login'])) {
     if (email($_POST['c_email'])) {
-        $error_email = "Required..";
+        $error_email = "Required.. || Please enter valid email.";
         $errorresult=false;
     } else {
         $error_email = "";
     }
     if (pass($_POST['c_pass'])) {
-        $error_pass = "Required..";
+        $error_pass = "Required.. || Please enter valid password.";
         $errorresult=false;
     } else {
         $error_pass = "";
@@ -134,7 +138,7 @@ end:
                     <div class="col-lg-6">
                         <div class="login-reg-form-wrap">
                             <h5>Sign In</h5>
-                            <form action="#" method="post" onsubmit="return submit_check()">
+                            <form action="login" method="post" onsubmit="return submit_check()">
                                 <div class="single-input-item">
                                     <input type="text" placeholder="Email or Username" name="c_email" id="email" />
                                     <span id="emailMsg"></span>
@@ -147,12 +151,6 @@ end:
                                 </div>
                                 <div class="single-input-item">
                                     <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                        <!-- <div class="remember-meta">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="rememberMe">
-                                                    <label class="custom-control-label" for="rememberMe">Remember Me</label>
-                                                </div>
-                                            </div>-->
                                         <a href="forget_password" class="forget-pwd">Forget Password?</a>
                                     </div>
                                 </div>
@@ -164,8 +162,7 @@ end:
                     </div>
                     <!-- Login Content End -->
 
-                    <!-- Register Content Start -->
-                    <!-- Register Content End -->
+
                 </div>
             </div>
         </div>
@@ -311,8 +308,5 @@ $(document).ready(function() {
 });
 </script>
 </body>
-
-
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:08 GMT -->
 
 </html>

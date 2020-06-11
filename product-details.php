@@ -7,24 +7,22 @@ if(!isset($_GET['pro_id']))
     {
     ?>
 <script type="text/javascript">
-// window.open('home','_self');
+ window.open('home','_self');
 </script>
 <?php 
     }
 }
 else{
     $product_id=base64_decode($_GET['pro_id']);
-
     $get_product="select * from products where product_id=$product_id and product_status='yes'";
     $run_product=mysqli_query($con,$get_product);
     if(!$run_product)
     {
         ?>
 <script>
-// window.open('home','_self');
+ window.open('home','_self');
 </script>
 <?php 
-
     }
     else
     {
@@ -296,8 +294,6 @@ swal({
 <?php
                                            }
                                             else{
-
-                                            
                                             $insert_review="insert into review(product_id,papage,customer_email,message,time,rating,status_top,status) values('$product_id','0','$customer_email','$message',NOW(),'$rating','no','yes')";
                                             $run_review=mysqli_query($con,$insert_review);
                                             if($run_review)
@@ -785,8 +781,6 @@ end:
                                         }
                                         ?>
                                     </div>
-                                    <!-- <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
-                                        <div class="product-countdown" data-countdown="2019/12/20"></div>-->
                                     <div class="availability">
                                         <?php  
                                            if($pro_qty<=0)
@@ -803,7 +797,7 @@ end:
                                     </div>
 
 
-                                    <form action="#" method="POST">
+                                    <form action="bikes-<?php echo base64_encode($product_id); ?>" method="POST">
                                         <div class="quantity-cart-box d-flex align-items-center">
                                             <h6 class="option-title">Size:</h6>
                                             <div class="quantity" style="padding-top: 17px;">
@@ -915,7 +909,7 @@ end:
                                     <?php
                                          
                                         ?>
-                                    <form method="POST" action="">
+                                    <form method="POST" action="bikes-<?php echo base64_encode($product_id); ?>">
                                         <div class="useful-links">
                                             <?php 
                                         if(isset($_SESSION['customer_email']))
@@ -1094,7 +1088,7 @@ end:
                                             </table>
                                         </div>
                                         <div class="tab-pane fade" id="tab_three">
-                                            <form action="#" method="POST" class="review-form">
+                                            <form action="bikes-<?php echo base64_encode($product_id); ?>" method="POST" class="review-form">
                                                 <?php
                                                     //$product_ids=base64_decode($_GET['pro_id']);
                                                     $select_reviews="select * from review where product_id='$product_id' and status='yes' and papage='0'";
@@ -1202,8 +1196,6 @@ end:
                                                             <?php
                                                                 }
                                                                 ?>
-
-
                                                         </div>
                                                         <div class="post-author">
                                                             <p><span><?php echo $row_customer_review['customer_name']; ?>-</span>
@@ -1287,7 +1279,6 @@ end:
                     <!-- section title start -->
                     <div class="section-title text-center">
                         <h2 class="title">Related Products</h2>
-                        <!--<p class="sub-title">Add related products to weekly lineup</p>-->
                     </div>
                     <!-- section title start -->
                 </div>
@@ -1298,7 +1289,7 @@ end:
 
                         <?php
                             
-                                $get_products="select * from products where product_status='yes' and product_status_top='yes' and p_cat_id='$p_cat_id'  order by rand() DESC LIMIT 0,8"; 
+                                $get_products="select * from products where not product_id='$product_id' and not available_qty='0' and  product_status='yes' and product_status_top='yes' and p_cat_id='$p_cat_id'  order by rand() DESC LIMIT 0,8"; 
                                 $run_products=mysqli_query($con,$get_products);
                                 while($row_products=mysqli_fetch_array($run_products))
                                 {
@@ -1432,8 +1423,6 @@ end:
     ?>
 <!-- footer area end -->
 
-
-
 <!-- offcanvas mini cart start -->
 <?php
     include("includes/cart1.php");
@@ -1483,6 +1472,4 @@ tinymce.init({
 </script>
 
 </body>
-
-
 </html>

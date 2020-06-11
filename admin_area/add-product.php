@@ -299,12 +299,10 @@
                                                     
                                                     $manufacturer_id = $row_p_cats['manufacturer_id'];
                                                     $manufacturer_title = $row_p_cats['manufacturer_title'];
-                                                    echo "
-                                                    <option value='$manufacturer_id'> $manufacturer_title </option>
-                                                    ";
-                                                    
+                                                    ?>
+                                                    <option value='<?php echo $manufacturer_id ?>'><?php echo  $manufacturer_title ?></option>
+                                                    <?php   
                                                 }
-                                    
                                         ?>
                                     </select>
                                 </div>
@@ -324,9 +322,9 @@
                                                     
                                                     $p_cat_id = $row_p_cats['p_cat_id'];
                                                     $p_cat_title = $row_p_cats['p_cat_title'];
-                                                    echo "
-                                                    <option value='$p_cat_id'> $p_cat_title </option>
-                                                    ";
+                                                    ?>
+                                                    <option value='<?php echo $p_cat_id ?>'><?php echo  $p_cat_title ?></option>
+                                                    <?php 
                                                     
                                                 }
                                     
@@ -342,19 +340,17 @@
                                         <option disabled selected value>Select</option>
                                         <?php 
                               
-                                    $get_cat = "select * from categories";
+                                    $get_cat = "select * from categories where cat_status='yes'";
                                     $run_cat = mysqli_query($con,$get_cat);
                                     
                                     while ($row_cat=mysqli_fetch_array($run_cat)){
                                         
                                         $cat_id = $row_cat['cat_id'];
                                         $cat_title = $row_cat['cat_title'];
+                                        ?>
+                                        <option value='<?php echo $cat_id; ?>'> <?php echo $cat_title; ?> </option>
                                         
-                                        echo "
-                                        
-                                        <option value='$cat_id'> $cat_title </option>
-                                        
-                                        ";
+                                        <?php
                                         
                                     }
                               

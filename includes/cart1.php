@@ -5,10 +5,6 @@
             <div class="minicart-close">
                 <i class="pe-7s-close"></i>
             </div>
-
-
-
-
             <?php 
         if(isset($_SESSION['shopping_cart']) && !empty($_SESSION['shopping_cart']))
         {

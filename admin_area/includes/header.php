@@ -115,8 +115,6 @@
                         }?>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <!-- item-->
-                               
-                               
                                 <?php
                                     $date=date("Y-m-d");
                                     $select_customer="select * from customers where customer_status='no' AND customer_date LIKE '".$date."%' ";

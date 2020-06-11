@@ -52,12 +52,12 @@ if(isset($_POST["action"]))
  $result=mysqli_query($con,$query);
  $total_count=mysqli_num_rows($result);
 
-//$result=$con->query($query);
-//$total_count=$result->num_rows;
 $outputs='';
 
  if (mysqli_num_rows($result)>0) {
-    echo '<div class="shop-product-wrap grid-view row mbn-30">';
+     ?>
+    <div class="shop-product-wrap grid-view row mbn-30">
+    <?php
      while ($row=mysqli_fetch_assoc($result)) {
         $accessories_brand_id=$row['accessories_brand'];
             ?>
@@ -160,8 +160,9 @@ $outputs='';
 
 <?php 
          }
-         echo'</div>';
-     
+         ?>
+         </div>
+     <?php
  }
  
 else
@@ -191,32 +192,28 @@ if (isset($_POST['firsttime']) && $_POST["firsttime"]=="0") {
 }
 else
 {
-    $page_query = "SELECT * FROM accessories"; 
+    $page_query = "SELECT * FROM accessories where accessories_status='yes'"; 
     $firsttime = 1; 
 }
 
 $page_result = mysqli_query($con, $page_query);  
 $total_records = mysqli_num_rows($page_result);  
 $total_pages = ceil($total_records/$record_per_page); 
-
-
-$outputs .= '<div class="paginatoin-area text-center">
-<ul class="pagination-box">';  
-
-
- 
- 
- $outputs.="<li><a class='previous'><span class='pagination_link' id='1'><i class='pe-7s-angle-left'></i></span></a></li>";
+?> 
+<div class="paginatoin-area text-center">
+<ul class="pagination-box">
+<li><a class='previous'><span class='pagination_link' id='1'><i class='pe-7s-angle-left'></i></span></a></li>
+<?php
  for($i=1; $i<=$total_pages; $i++)  
  {  
-      $outputs .= "
-      <li class='active'>
-      <a><span class='pagination_link' id='".$i."'>".$i."</span></a>
-      <input type='hidden' value=".$firsttime." id='firsttime".$i."' />
-      </li>";  
- } 
- $outputs.="<li><a class='next'><span class='pagination_link' id='".$total_pages."'><i class='pe-7s-angle-right'></i></span></a></li>";
- $outputs .= '</ul>
- </div>'; 
-echo $outputs;
 ?>
+      <li class='active'>
+      <a><span class='pagination_link' id='<?php echo $i ?>'><?php echo $i ?></span></a>
+      <input type='hidden' value="<?php echo $firsttime; ?>" id='firsttime<?php echo $i ?>' />
+      </li> 
+      <?php
+ } 
+ ?>
+<li><a class='next'><span class='pagination_link' id='<?php echo $total_pages; ?>'><i class='pe-7s-angle-right'></i></span></a></li>
+ </ul>
+ </div> 

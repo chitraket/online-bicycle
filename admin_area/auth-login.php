@@ -76,10 +76,7 @@ include("includes/db.php");
                                         <div class="mt-3">
                                             <button class="btn btn-primary btn-block waves-effect waves-light" type="submit" name="admin_login">Log In</button>
                                         </div>
-            
-                                        <!--<div class="mt-4 text-center">
-                                            <a href="auth-recoverpw.html" class="text-muted"><i class="mdi mdi-lock mr-1"></i> Forgot your password?</a>
-                                        </div>-->
+        
                                     </form>
                                 </div>
             
@@ -122,8 +119,7 @@ include("includes/db.php");
                          } 
                         ?>
                         <div class="mt-5 text-center">
-                            <!--<p>Don't have an account ? <a href="auth-register.html" class="font-weight-medium text-primary"> Signup now </a> </p>-->
-                            <p>© 2020 Skote.</p>
+                            <p>© 2020 SKOTE.</p>
                         </div>
 
                     </div>

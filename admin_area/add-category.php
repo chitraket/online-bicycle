@@ -164,8 +164,6 @@
         <script src="assets/js/app.js"></script>
     </body>
 
-
-<!-- Mirrored from themesbrand.com/skote/layouts/vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:43:03 GMT -->
 </html>
 <script>
 $(document).ready(function(){  

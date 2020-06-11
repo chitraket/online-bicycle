@@ -1,10 +1,7 @@
 <?php
-        $active='contact';
-       include("includes/header.php");
+    $active='contact';
+    include("includes/header.php");
     ?>
-<!-- Start Header Area -->
-<!--div id="load_screen"><div id="loading"><img src="loder.gif" ></div></div>-->
-<!-- end Header Area -->
 <main>
     <!-- breadcrumb area start -->
     <div class="breadcrumb-area">
@@ -14,7 +11,7 @@
                     <div class="breadcrumb-wrap">
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.php"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="home"><i class="fa fa-home"></i></a></li>
                                 <li class="breadcrumb-item active" aria-current="page">contact us</li>
                             </ul>
                         </nav>
@@ -30,14 +27,14 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="contact-message">
-                        <h4 class="contact-title">Tell Us Your Project</h4>
-                        <form action="#" method="POST" class="contact-form">
+                        <h4 class="contact-title">Tell Us Your SKOTE</h4>
+                        <form action="contact" method="POST" class="contact-form">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <input name="first_name" placeholder="Name " type="text" required>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <input name="email_address" placeholder="Email " type="text" required>
+                                    <input name="email_address" placeholder="Email " type="email" required>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <input name="contact_subject" placeholder="Subject " type="text">
@@ -172,8 +169,5 @@
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
 </body>
-
-
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:12 GMT -->
 
 </html>

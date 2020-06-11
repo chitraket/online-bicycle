@@ -8,7 +8,9 @@ include("functions/functions.php");
 <?php 
            
            if(!isset($_SESSION['customer_email'])){
-            echo "<script>window.open('customer/customer_login.php','_self')</script>";
+               ?>
+            <script>window.open('customer/login','_self')</script>
+            <?php
            }
            else{
 
@@ -20,13 +22,17 @@ include("functions/functions.php");
      $txnid=$_SESSION['order_id'];
  }
  else{
-    echo "<script>window.open('home','_self')</script>";   
+     ?>
+    <script>window.open('home','_self')</script>  
+    <?php 
 }
  if (isset($_SESSION['c_id'])) {
      $c_id=$_SESSION['c_id'];
  }
  else{
-    echo "<script>window.open('home','_self')</script>";   
+    ?>
+    <script>window.open('home','_self')</script>
+    <?php
 }
                 $status="successful";
                 $o_status="o";
@@ -90,8 +96,6 @@ include("functions/functions.php");
                     $run_querys=mysqli_query($db, $querys);
                     unset($_SESSION['shopping_cart'][$key]);  
                  }
-
-                       // unset($_SESSION[$pro_name]);    
                 
                     }
                     $gsst=$total*12/100;
@@ -111,7 +115,7 @@ include("functions/functions.php");
                         $mail->Port       = 465;                                    // TCP port to connect to
                 
                         //Recipients
-                        $mail->setFrom('skotebicycle@gmail.com', 'skote');
+                        $mail->setFrom('skotebicycle@gmail.com', 'SKOTE');
                         $mail->addAddress($customer_email, $customer_email);     // Add a recipient
                         // Attachments
                         // Optional name
@@ -124,7 +128,7 @@ include("functions/functions.php");
                                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                                 <link rel="icon" href="../assets/images/favicon/1.png" type="image/x-icon">
                                 <link rel="shortcut icon" href="../assets/images/favicon/1.png" type="image/x-icon">
-                                <title>Multikart | Email template </title>
+                                <title>SKOTE - Bikes Shop</title>
                                 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
                                 <style type="text/css">
                                     body{
@@ -269,7 +273,7 @@ include("functions/functions.php");
                                                                 $product_img1=$row_products['product_img1'];
                                                                 $product_price=$row_products['product_price'];
                                                                 $sub_total=$row_products['product_price']*$pro_qty;
-                                                               // echo $product_title;
+                                                            
                                                                 
                                                                 $totals+=$sub_total; 
                                                                 $gst=$totals*12/100;
@@ -402,7 +406,7 @@ include("functions/functions.php");
                 </html>';
                                                        
                         // Content
-                        $mail->isHTML(true);                                  // Set email format to HTML
+                        $mail->isHTML(true);                                 
                         $mail->Subject = "Your SKOTE order confirmation ($order_id)";
                         $mail->Body    = "$html";  
                         $mail->AddEmbeddedImage("assets/img/email-temp/logo.png",1001,'logo.png');

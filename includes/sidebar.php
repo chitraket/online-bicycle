@@ -19,7 +19,7 @@
                 <div class="price-range-wrap">
                     <div id="price_range" class="price-range" data-min="1000" data-max="250000"></div>
                     <div class="range-slider">
-                        <form action="#" class="d-flex align-items-center justify-content-between">
+                        <form action="bikes" class="d-flex align-items-center justify-content-between">
                             <div class="price-input">
                                 <input type="hidden" id="hidden_minimum_price" value="1000" />
                                 <input type="hidden" id="hidden_maximum_price" value="250000" />
@@ -103,16 +103,6 @@
         </div>
 
         
-        <!-- single sidebar end -->
-
-
-        <!--<div class="sidebar-banner">
-                                <div class="img-container">
-                                    <a href="#">
-                                        <img src="assets/img/banner/sidebar-banner.jpg" alt="">
-                                    </a>
-                                </div>
-                            </div>-->
         <!-- single sidebar end -->
 
     </aside>

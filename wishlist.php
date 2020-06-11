@@ -4,12 +4,11 @@ $active='';
 include("includes/header.php");
 
 if(!isset($_SESSION['customer_email']))
-{
-    echo "<script>window.open('customer/login','_self')</script>";
+{?>
+    <script>window.open('customer/login','_self')</script>
+    <?php
 }
 ?>
-
-<!--<div id="load_screen"><div id="loading"><img src="loder.gif" ></div></div>-->
 <main>
     <div class="breadcrumb-area">
         <div class="container">
@@ -289,7 +288,5 @@ if (flashdata) {
 </script>
 </body>
 
-
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/wishlist.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:08 GMT -->
 
 </html>

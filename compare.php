@@ -475,10 +475,6 @@ include('includes/header.php');
     ?>
 <!-- footer area end -->
 
-<!-- Quick view modal start -->
-
-<!-- Quick view modal end -->
-
 <!-- offcanvas mini cart start -->
 <?php
     include("includes/cart1.php")
@@ -543,7 +539,7 @@ $('.btn-delete').on('click', function(e) {
 const flashdata = $('.flash-data').data('flashdata')
 if (flashdata) {
     swal({
-            title: "successful remove item.",
+            title: "Successful remove item.",
             text: "",
             icon: "success",
             buttons: [, "Ok"],
@@ -560,8 +556,4 @@ if (flashdata) {
 }
 </script>
 </body>
-
-
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/compare.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:08 GMT -->
-
 </html>

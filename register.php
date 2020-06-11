@@ -2,9 +2,6 @@
         $active='';
        include("includes/header.php");
     ?>
-<!-- Start Header Area -->
-<!--<div id="load_screen"><div id="loading"><img src="loder.gif" ></div></div>-->
-<!-- end Header Area -->
 <main>
     <!-- breadcrumb area start -->
     <div class="breadcrumb-area">
@@ -30,8 +27,6 @@
         <div class="container">
             <div class="member-area-from-wrap">
                 <div class="row">
-                    <!-- Login Content Start -->
-                    <!-- Login Content End -->
                     <!-- Register Content Start -->
                     <?php 
  $error_c_name = ""; 
@@ -49,7 +44,7 @@
 if(isset($_POST['register'])){
     if(firstname($_POST['c_name']))
     {
-        $error_c_name = "Required..";
+        $error_c_name = "Required.. || Please enter valid first name.";
         $errorresult=false;
     }
     else
@@ -58,7 +53,7 @@ if(isset($_POST['register'])){
     }
     if(lastname($_POST['c_lname']))
     {
-        $error_l_name = "Required..";
+        $error_l_name = "Required.. || Please enter valid last name.";
         $errorresult=false;
     }
     else
@@ -67,7 +62,7 @@ if(isset($_POST['register'])){
     }
     if(email($_POST['c_email']))
     {
-        $error_email = "Required & Email is already registered.";
+        $error_email = "Required.. || Please enter valid email || Email is already registered.";
         $errorresult=false;
     }
     else
@@ -76,7 +71,7 @@ if(isset($_POST['register'])){
     }
     if(pass($_POST['c_pass']))
     {
-        $error_pass = "Required..";
+        $error_pass = "Required.. || Please enter valid password";
         $errorresult=false;
     }
     else
@@ -95,7 +90,7 @@ if(isset($_POST['register'])){
 
     if(city($_POST['c_city']))
     {
-        $error_city = "Required..";
+        $error_city = "Required.. || Please enter valid city.";
         $errorresult=false;
     }
     else
@@ -104,7 +99,7 @@ if(isset($_POST['register'])){
     }
     if(state($_POST['c_state']))
     {
-        $error_state = "Required..";
+        $error_state = "Required.. || Please enter valid state.";
         $errorresult=false;
     }
     else
@@ -113,7 +108,7 @@ if(isset($_POST['register'])){
     }
     if(contact($_POST['c_contact']))
     {
-        $error_c_contact = "Required & Contact is already registered.";
+        $error_c_contact = "Required || Please enter valid contact || Contact is already registered.";
         $errorresult=false;
     }
     else
@@ -131,7 +126,7 @@ if(isset($_POST['register'])){
     }
     if(pincode($_POST['c_pincode']))
     {
-        $error_pincode = "Required..";
+        $error_pincode = "Required.. || Please enter valid pincode.";
         $errorresult=false;
     }
     else
@@ -142,7 +137,7 @@ if(isset($_POST['register'])){
                 
     if(images($test_img2))
     {   
-        $error_image2="JPEG or PNG file.";
+        $error_image2="JPEG or PNG or JPG file.";
         $errorresult=false;
     }
     else{
@@ -180,7 +175,7 @@ if(isset($_POST['register'])){
         $mail->Port       = 465;                                    // TCP port to connect to
 
         //Recipients
-        $mail->setFrom('skotebicycle@gmail.com', 'skote');
+        $mail->setFrom('skotebicycle@gmail.com', 'SKOTE');
         $mail->addAddress($c_email, $c_email);     // Add a recipient
     
         $html='<!DOCTYPE html>
@@ -191,7 +186,7 @@ if(isset($_POST['register'])){
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link rel="icon" href="../assets/images/favicon/1.png" type="image/x-icon">
                 <link rel="shortcut icon" href="../assets/images/favicon/1.png" type="image/x-icon">
-                <title>Multikart | Email template </title>
+                <title>SKOTE - Bikes Shop</title>
                 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
                 <style type="text/css">
                     body{
@@ -378,9 +373,6 @@ if(isset($_POST['register'])){
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
     }
-
-        /// If register have items in cart ///
-
 }
 end:
 ?>
@@ -388,7 +380,7 @@ end:
 
                         <div class="login-reg-form-wrap sign-up-form">
                             <h5>Register Form</h5>
-                            <form action="#" method="post" id="registration_form" enctype="multipart/form-data">
+                            <form action="register" method="POST" id="registration_form" enctype="multipart/form-data">
 
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -479,6 +471,7 @@ end:
                                 <div class="single-input-item">
                                     <label for="image">Image</label>
                                     <input type="file" name="c_image" id="image" accept=".jpg,.jpeg,.png" />
+                                    <span id="imageMsg"></span>
                                     <span style="color: red;"><?php echo $error_image2; ?></span>
                                 </div>
 
@@ -560,6 +553,7 @@ $(document).ready(function() {
     var contact_err = true;
     var pincode_err = true;
     var address_err = true;
+    var image_err = true;
 
     $("#btnsubmit").attr("disabled", true);
 
@@ -581,9 +575,6 @@ $(document).ready(function() {
         email_check();
     });
     $('#email').focusout(function() {
-        email_check();
-    });
-    $('#email').focusout(function() {
         var email = $("#email").val();
         $.ajax({
             url: "registers.php",
@@ -601,13 +592,11 @@ $(document).ready(function() {
                     email_err = false;
                     return false;
                 } else {
-                    $("#email").css("border", "1px solid green");
-                    $("#emailMsg").html("<p class='text-danger'></p>");
-                    $("#btnsubmit").attr("disabled", false);
+                    email_check();
                 }
             }
         });
-        
+
     });
 
     $('#pass').keyup(function() {
@@ -642,9 +631,6 @@ $(document).ready(function() {
         contact_check();
     });
     $('#contact').focusout(function() {
-        contact_check();
-    });
-    $('#contact').focusout(function() {
         var phone = $("#contact").val();
         $.ajax({
             url: "registers.php",
@@ -662,9 +648,7 @@ $(document).ready(function() {
                     contact_err = false;
                     return false;
                 } else {
-                    $("#contact").css("border", "1px solid green");
-                    $("#contactMsg").html("<p class='text-danger'></p>");
-                    $("#btnsubmit").attr("disabled", false);
+                    contact_check();
                 }
             }
         });
@@ -748,7 +732,7 @@ $(document).ready(function() {
 
     function email_check() {
         var email = $('#email').val();
-        var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+        var reg = /@gmail\.com$/
         if (email.length == '') {
             $("#email").css("border", "1px solid red");
             $("#emailMsg").html("<p class='text-danger'>Please fill out this field.</p>");
@@ -764,7 +748,7 @@ $(document).ready(function() {
 
         if (!(reg.test(email))) {
             $("#email").css("border", "1px solid red");
-            $("#emailMsg").html("<p class='text-danger'>Invalid email id.</p>");
+            $("#emailMsg").html("<p class='text-danger'>Invalid email id (Only add Gmail id).</p>");
             $('#emailMsg').focus();
             $("#btnsubmit").attr("disabled", true);
             email_err = false;

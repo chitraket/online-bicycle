@@ -4,7 +4,9 @@ include("includes/header.php");
 $_SESSION['papage']=0;
 if(!isset($_SESSION['customer_email']))
 {
-    echo "<script>window.open('login','_self')</script>";
+    ?>
+    <script>window.open('login','_self')</script>
+    <?php
 }
 
 $custmoer_email=$_SESSION['customer_email'];
@@ -253,8 +255,6 @@ $custmoer_email=$_SESSION['customer_email'];
 
 </body>
 
-
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/my-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:08 GMT -->
 
 </html>
 <script>

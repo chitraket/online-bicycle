@@ -1,4 +1,3 @@
-
 <?php
 session_start();
  include("includes/db.php");
@@ -57,66 +56,57 @@ fwrite($handle,$return);
 fclose($handle);
 ?>
 <script>
-                    swal({
-                        title: "Successful Data Backup.",
-                        text: "",
-                        icon: "success",
-                        buttons:[,"OK"],
-                        successMode: true,
-                       
-                })
-                .then((willDelete) => {
-                        if (willDelete) {
-                            window.open("index.php","_self");
-                        } 
-                        else {  
-                        }
-                });
-            </script>
+swal({
+        title: "Successful Data Backup.",
+        text: "",
+        icon: "success",
+        buttons: [, "OK"],
+        successMode: true,
+
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+            window.open("index.php", "_self");
+        } else {}
+    });
+</script>
 <script>
-$(document).ready(function(){  
- var counter=60*60;
- myVar= setInterval(function()
- { 
-     if(counter<=30)
-     {
+$(document).ready(function() {
+    var counter = 60 * 60;
+    myVar = setInterval(function() {
+        if (counter <= 30) {
 
-                    swal({
-                        title:"Your Session is About to Expire!",
-                        text: "Redirecting in "+counter+"s seconds.",
-                        icon: "warning",
-                        buttons: ["Logout","Stay Connected"],
-                        successMode: true,
-                       
+            swal({
+                    title: "Your Session is About to Expire!",
+                    text: "Redirecting in " + counter + "s seconds.",
+                    icon: "warning",
+                    buttons: ["Logout", "Stay Connected"],
+                    successMode: true,
+
                 })
                 .then((willDelete) => {
-                        if (willDelete) {
-                            window.open('index.php','_self');
-                        } 
-                        else
-                        {
-                            window.open('logout.php','_self');
-                        }
+                    if (willDelete) {
+                        window.open('index.php', '_self');
+                    } else {
+                        window.open('logout.php', '_self');
+                    }
 
                 });
-     }
-  if(counter==0)
-  {
-   $.ajax
-   ({
-    type:'post',
-     url:'auth-logout.php',
-     data:{
-      logout:"logout"
-     },
-     success:function(response) 
-     {
-        window.location="auth-login.php";
-     }
-   });
-   }
-   counter--;
- }, 1000)
+        }
+        if (counter == 0) {
+            $.ajax({
+                type: 'post',
+                url: 'auth-logout.php',
+                data: {
+                    logout: "logout"
+                },
+                success: function(response) {
+                    window.location = "auth-login.php";
+                }
+            });
+        }
+        counter--;
+    }, 1000)
 });
 </script>
 <?php
@@ -125,26 +115,24 @@ $(document).ready(function(){
 else{
     
     ?>
-    <!-- Sweet Alert-->
+<!-- Sweet Alert-->
 
-    <script>
-    swal({
-        title:"You cannot access this page!",
+<script>
+swal({
+        title: "You cannot access this page!",
         text: "Please contact administrator",
         icon: "warning",
-        buttons: [,"OK"],
+        buttons: [, "OK"],
         successMode: true,
-       
-})
-.then((willDelete) => {
+
+    })
+    .then((willDelete) => {
         if (willDelete) {
-            window.open('index.php','_self');
-        } 
-        else {
-        }
-});
-    </script>
-    <?php
+            window.open('index.php', '_self');
+        } else {}
+    });
+</script>
+<?php
         }
     }
 ?>

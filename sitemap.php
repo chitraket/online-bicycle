@@ -2,8 +2,6 @@
    $active='';
    include("includes/header.php"); 
    ?>
-
-<!--<div id="load_screen"><div id="loading"><img src="loder.gif" ></div></div>-->
 <main>
     <!-- breadcrumb area start -->
     <div class="breadcrumb-area">
@@ -136,8 +134,6 @@
    ?>
 <!-- footer area end -->
 
-<!-- Quick view modal start -->
-<!-- Quick view modal end -->
 
 <!-- offcanvas mini cart start -->
 <?php
@@ -181,8 +177,4 @@
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
 </body>
-
-
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/my-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:08 GMT -->
-
 </html>

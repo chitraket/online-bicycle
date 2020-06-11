@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Corano - Bikes Shop</title>
+    <title>SKOTE - Bikes Shop</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="assets/css/plugins/slick.min.css">
     <!-- animate css -->
     <link rel="stylesheet" href="assets/css/plugins/animate.css">
-    <!-- Nice Select css -->
+    <!-- Nice Select css -->lo
     <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
 
     <!-- jquery UI css -->
@@ -85,7 +85,7 @@ swal({
         if (willDelete) {
             window.open('customer/login', '_self');
         } else {
-
+            window.open('customer/login', '_self');
         }
     });
 </script>

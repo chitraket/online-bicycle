@@ -56,7 +56,7 @@ include("includes/validation.php");
                     else{
                         $error_name="";
                     }
-                    if(email($_POST['a_email']))
+                    if(emailua($_POST['a_email'],$edit_admin_id))
                     {
                         $error_email="Required..";
                         $errorresult=false;
@@ -72,7 +72,7 @@ include("includes/validation.php");
                     else{
                         $error_pass="";
                     }
-                    if(contact($_POST['a_contact']))
+                    if(contactua($_POST['a_contact'],$edit_admin_id))
                     {
                         $error_contact="Required..";
                         $errorresult=false;
@@ -207,7 +207,8 @@ include("includes/validation.php");
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Admin Email</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="email" placeholder="Admin Email" name="a_email" value="<?php echo $admin_email; ?>" id="example-text-input" required>
+                                    <input class="form-control <?php echo $edit_admin_id; ?>" type="email" placeholder="Admin Email" name="a_email" value="<?php echo $admin_email; ?>" id="email" required>
+                                    <span id="emailMsg"></span>
                                     <span style="color: red;"><?php echo $error_email; ?></span>
                                 </div>
                             </div>
@@ -221,7 +222,8 @@ include("includes/validation.php");
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Admin Contact</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="number" placeholder="Admin Contact" name="a_contact" value="<?php echo $admin_contact; ?>" id="example-text-input" required data-parsley-pattern="/^[9876][0-9]{9}$/">
+                                    <input class="form-control <?php echo $edit_admin_id; ?>" type="number" placeholder="Admin Contact" name="a_contact" value="<?php echo $admin_contact; ?>" id="contact" required data-parsley-pattern="/^[9876][0-9]{9}$/">
+                                    <span id="contactMsg"></span>
                                     <span style="color: red;"><?php echo $error_contact; ?></span>
                                 </div>
                             </div>
@@ -596,11 +598,8 @@ include("includes/validation.php");
                             </div>
                             <div class="form-group mt-4">
                                 <div class="text-right">
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="submit">
-                                        Submit
-                                    </button>
-                                    <button type="reset" class="btn btn-secondary waves-effect">
-                                        Cancel
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="submit" id="btnsubmit">
+                                        Update
                                     </button>
                                 </div>
                             </div>                                        
@@ -641,7 +640,67 @@ include("includes/validation.php");
 
 <!-- Mirrored from themesbrand.com/skote/layouts/vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:43:03 GMT -->
 </html>
+<script type="text/javascript">
+$(document).ready(function() {
+    var email_err = true;
+    $('#email').keyup(function() {
+        var emails = $("#email").val();
+        var product_id=$(this).attr("class");
+        var product_ids=product_id.substring(13,product_id.length);
+        $.ajax({
+            url: "registers.php",
+            method: "POST",
+            data: {
+                product_ids:product_ids,emails: emails 
+            },
+            success: function(data) {
+                if (data != '0') {
+                    $("#email").css("border", "1px solid red");
+                    $("#emailMsg").html(
+                        "<p class='text-danger'>Email is already registered.</p>");
+                    $('#emailMsg').focus();
+                    $("#btnsubmit").attr("disabled", true);
+                    email_err = false;
+                    return false;
+                } else {
+                    $("#email").css("border", "1px solid #ced4da");
+                    $("#emailMsg").html("<p class='text-danger'></p>");
+                    $("#btnsubmit").attr("disabled", false);
+                }
+            }
+        });
+        
+    });
+    $('#contact').focusout(function() {
+        var phones = $("#contact").val();
+        var product_ids=$(this).attr("class");
+        var product_idss=product_ids.substring(13,product_ids.length);
+        $.ajax({
+            url: "registers.php",
+            method: "POST",
+            data: {
+                product_idss: product_idss,phones: phones
+            },
+            success: function(data) {
+                if (data != '0') {
+                    $("#contact").css("border", "1px solid red");
+                    $("#contactMsg").html(
+                        "<p class='text-danger'>Contact is already registered.</p>");
+                    $('#contactMsg').focus();
+                    $("#btnsubmit").attr("disabled", true);
+                    contact_err = false;
+                    return false;
+                } else {
+                    $("#contact").css("border", "1px solid #ced4da");
+                    $("#contactMsg").html("<p class='text-danger'></p>");
+                    $("#btnsubmit").attr("disabled", false);
+                }
+            }
+        });
+    });
+});
 
+</script>
 <script>
 $(document).ready(function(){  
  var counter=60*60;

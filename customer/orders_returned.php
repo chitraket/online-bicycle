@@ -76,7 +76,7 @@ $gst=0;
                             $mail->Port       = 465;                                    // TCP port to connect to
                     
                             //Recipients
-                            $mail->setFrom('skotebicycle@gmail.com', 'skote');
+                            $mail->setFrom('skotebicycle@gmail.com', 'SKOTE');
                             $mail->addAddress($customer_email, $customer_email);     // Add a recipient
                             // Attachments
                             // Optional name
@@ -89,7 +89,7 @@ $gst=0;
                                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                                     <link rel="icon" href="../assets/images/favicon/1.png" type="image/x-icon">
                                     <link rel="shortcut icon" href="../assets/images/favicon/1.png" type="image/x-icon">
-                                    <title>Multikart | Email template </title>
+                                    <title>SKOTE - Bikes Shop</title>
                                     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
                                     <style type="text/css">
                                         body{

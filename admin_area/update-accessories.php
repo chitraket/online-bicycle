@@ -344,7 +344,7 @@ end:
                               
                               <?php 
                               
-                              $get_accessories_manufacturers = "select * from accessories_brand where accessories_brand_status='yes'";
+                              $get_accessories_manufacturers = "select * from accessories_brand where not accessories_brand_id='$manufacturer_accessories_ids' and  accessories_brand_status='yes'";
                               $run_accessories_manufacturers = mysqli_query($con,$get_accessories_manufacturers);
                               
                               while ($row_accessories_manufacturers=mysqli_fetch_array($run_accessories_manufacturers)){
@@ -352,11 +352,10 @@ end:
                                 $manufacturer_accessories_id=$row_accessories_manufacturers['accessories_brand_id'];
                                   $manufacturer_accessories_title = $row_accessories_manufacturers['accessories_brand'];
                                   
-                                  echo "
+                                  ?>
+                                  <option value='<?php echo $manufacturer_accessories_id; ?>'><?php echo  $manufacturer_accessories_title; ?></option>
                                   
-                                  <option value='$manufacturer_accessories_id'> $manufacturer_accessories_title </option>
-                                  
-                                  ";
+                                  <?php
                                   
                               }
                               
@@ -373,18 +372,17 @@ end:
                                 <option value="<?php echo $accessories_category_ids; ?>"> <?php echo $accessories_categorys ?> </option>
                               
                               <?php 
-                              $get_accessories_category = "select * from accessories_category where accessories_category_status='yes'";
+                              $get_accessories_category = "select * from accessories_category where not accessories_category_id='$accessories_category_ids' and accessories_category_status='yes'";
                               $run_accessories_category = mysqli_query($con,$get_accessories_category);
                               while ($row_accessories_category=mysqli_fetch_array($run_accessories_category)){
                                   
                                     $accessories_category_id = $row_accessories_category['accessories_category_id'];
                                   $accessories_category = $row_accessories_category['accessories_category'];
                                   
-                                  echo "
+                                  ?>
+                                  <option value='<?php echo $accessories_category_id; ?>'><?php echo $accessories_category; ?></option>
                                   
-                                  <option value='$accessories_category_id'> $accessories_category </option>
-                                  
-                                  ";
+                                <?php
                                   
                               }
                               

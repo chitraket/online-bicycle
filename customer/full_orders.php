@@ -459,7 +459,6 @@ window.open('my-account', '_self')
 
                                 </div>
                             </div>
-                            <!--  <a href="checkout.php" class="btn btn-sqr d-block">Proceed Checkout</a>-->
                         </div>
                     </div>
 
@@ -501,10 +500,6 @@ if(isset($_GET['n']))
     include("includes/footer.php");
     ?>
 <!-- footer area end -->
-
-<!-- Quick view modal start -->
-
-<!-- Quick view modal end -->
 
 <!-- offcanvas mini cart start -->
 <?php
@@ -626,7 +621,5 @@ if (flashdatas) {
 
 </body>
 
-
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:06 GMT -->
 
 </html>

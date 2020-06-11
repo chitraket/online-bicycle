@@ -1,21 +1,17 @@
 <?php
 $active='Home';
+include("includes/header.php");
 ?>
-<!-- Start Header Area -->
-<?php
-       include("includes/header.php");
-    ?>
-<!-- end Header Area -->
 <script>
-window.addEventListener("load", setTimeout(function() {
-    var load_screen = document.getElementById("load_screen");
-
-    document.body.removeChild(load_screen);
-}, 1000));
+window.addEventListener("load", function() {
+    const loader = document.querySelector(".loader");
+    loader.className += " hidden";
+});
 </script>
-<div id="load_screen">
-    <div id="loading"><img src="loder.gif"></div>
+<div class="loader">
+    <img src="loder.gif" alt="Loading..." />
 </div>
+
 <main>
     <!-- hero slider area start -->
     <section class="slider-area">
@@ -769,6 +765,7 @@ window.addEventListener("load", setTimeout(function() {
 <script src="assets/js/plugins/google-map.js"></script>
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
+
 </body>
 
 

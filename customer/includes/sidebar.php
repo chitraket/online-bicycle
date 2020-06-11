@@ -1,9 +1,8 @@
 <div class="col-lg-3 col-md-4">
-
     <div class="myaccount-tab-menu nav" role="tablist">
         <?php
                                            $customer_session=$_SESSION['customer_email'];
-                                           $get_customer="select * from customers where customer_email='$customer_session'";
+                                           $get_customer="select * from customers where customer_email='$customer_session' and customer_status='yes'";
                                            $run_customer=mysqli_query($con,$get_customer);
                                            $row_customer=mysqli_fetch_array($run_customer);
                                            $customer_image=$row_customer['customer_image'];

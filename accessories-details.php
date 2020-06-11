@@ -138,7 +138,7 @@ swal({
         if (willDelete) {
             window.open('accessories-<?php echo base64_encode($accessories_id); ?>', '_self');
         } else {
-
+            window.open('accessories-<?php echo base64_encode($accessories_id); ?>', '_self');
         }
     });
 </script>
@@ -164,7 +164,7 @@ swal({
         if (willDelete) {
             window.open('accessories-<?php echo base64_encode($accessories_id); ?>', '_self');
         } else {
-
+            window.open('accessories-<?php echo base64_encode($accessories_id); ?>', '_self');
         }
     });
 </script>
@@ -279,7 +279,7 @@ swal({
         if (willDelete) {
             window.open('accessories-<?php echo base64_encode($p_id); ?>', '_self');
         } else {
-
+            window.open('accessories-<?php echo base64_encode($p_id); ?>', '_self');
         }
     });
 </script>
@@ -303,7 +303,7 @@ swal({
         if (willDelete) {
             window.open('accessories-<?php echo base64_encode($p_id); ?>', '_self');
         } else {
-
+            window.open('accessories-<?php echo base64_encode($p_id); ?>', '_self');
         }
     });
 </script>
@@ -320,9 +320,6 @@ swal({
     end:
 ?>
 
-<!-- Start Header Area -->
-
-<!-- end Header Area -->
 <main>
     <!-- breadcrumb area start -->
     <div class="breadcrumb-area">
@@ -632,19 +629,20 @@ swal({
                                         <?php  
                                            if($available_qty<=0)
                                             {
-                                                
-                                             echo "  <span style='color: red;'>out of stock</span>";
-                                               
+                                             ?>   
+                                             <span style='color: red;'>out of stock</span>
+                                             <?php
                                             }
                                             else
                                             {
-                                              echo " <span style='color: green'> $available_qty in stock </span>";
+                                                ?>
+                                              <span style='color: green'><?php echo $available_qty; ?> in stock </span>
+                                              <?php
                                             }
                                             ?>
                                     </div>
-                                    <!--<p class="pro-desc"><?php echo $accessories_desc; ?></p>-->
 
-                                    <form action="#" method="POST">
+                                    <form action="accessories-<?php echo base64_encode($accessories_id); ?>" method="POST">
                                         <div class="quantity-cart-box d-flex align-items-center">
                                             <h6 class="option-title">qty:</h6>
                                             <div class="quantity">
@@ -655,10 +653,8 @@ swal({
                                                     <span style="color: red;"><?php echo $error_qty; ?></span>
                                                 </div>
                                             </div>
-
-
-
-                                            <?php  if($available_qty<=0)
+                            <?php   
+                                    if($available_qty<=0)
                                        {
 
                                        }
@@ -666,8 +662,6 @@ swal({
                                     {
                                        
                                         ?>
-
-
                                             <input type="hidden" name="accessories_id"
                                                 value="<?php echo $accessories_id; ?>" />
                                             <input type="hidden" name="accessories_img"
@@ -681,18 +675,15 @@ swal({
 
                                                 <input type="submit" class="btn btn-cart2" name="add_cart"
                                                     value="Add to cart">
-
                                             </div>
                                             <?php 
                                     }
-                                   
                                        ?>
                                         </div>
                                     </form>
                                     <div class="color-option">
-
                                     </div>
-                                    <form method="POST" action="">
+                                    <form method="POST" action="accessories-<?php echo base64_encode($accessories_id); ?>">
                                         <div class="useful-links">
                                             <?php 
                                                 if(isset($_SESSION['customer_email']))
@@ -732,7 +723,9 @@ swal({
                                                     'accessories-<?php echo base64_encode($accessories_id); ?>',
                                                     '_self');
                                             } else {
-
+                                                window.open(
+                                                    'accessories-<?php echo base64_encode($accessories_id); ?>',
+                                                    '_self');
                                             }
                                         });
                                     </script>
@@ -802,7 +795,7 @@ swal({
                                             </table>
                                         </div>
                                         <div class="tab-pane fade" id="tab_three">
-                                            <form action="#" method="POST" class="review-form">
+                                            <form action="accessories-<?php echo base64_encode($accessories_id); ?>" method="POST" class="review-form">
                                                 <?php
                                                     
                                                     $select_reviews="select * from review where product_id='$accessories_id' and status='yes' and papage='1'";
@@ -979,7 +972,8 @@ swal({
                                                     }
                                                     ?>
 
-                                            </form> <!-- end of review-form -->
+                                            </form> 
+                                            <!-- end of review-form -->
                                         </div>
                                     </div>
 
@@ -1013,7 +1007,7 @@ swal({
 
                         <?php
                             
-                                $get_products="select * from accessories where accessories_status_top='yes' and accessories_status='yes' and accessories_category='$accessories_category' order by rand() DESC LIMIT 0,8"; 
+                                $get_products="select * from accessories where not accessories_id='$accessories_id' and not available_qty='0' and accessories_status_top='yes' and accessories_status='yes' and accessories_category='$accessories_category' order by rand() DESC LIMIT 0,8"; 
                                 $run_products=mysqli_query($con,$get_products);
                                 while($row_accessoriess=mysqli_fetch_array($run_products))
                                 {
@@ -1078,9 +1072,6 @@ swal({
                                             }
                                             ?>
                                 </div>
-                                <!--<div class='button-group'>
-                                            <a href='wishlist.html' data-toggle='tooltip' data-placement='left' title='Add to wishlist'><i class='pe-7s-like'></i></a> 
-                                        </div>-->
                             </figure>
                             <div class='product-caption text-center'>
                                 <div class="manufacturer-name">
@@ -1202,8 +1193,6 @@ tinymce.init({
     selector: 'textarea'
 });
 </script>
-<!--sweet alert-->
-<!--<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>-->
 </body>
 
 </html>

@@ -22,17 +22,20 @@ $isValidChecksum = verifychecksum_e($paramList, PAYTM_MERCHANT_KEY, $paytmChecks
 
 
 if($isValidChecksum == "TRUE") {
-	if ($_POST["STATUS"] == "TXN_SUCCESS") {			
-			echo "<script>window.open('form_process3.php','_self')</script>";
+	if ($_POST["STATUS"] == "TXN_SUCCESS") {
+		?>			
+			<script>window.open('form_process3.php','_self')</script>
+			<?php
 	}
 	else {
-		echo "<script>window.open('form_process4.php','_self')</script>";
+		?>
+		<script>window.open('form_process4.php','_self')</script>
+		<?php
 	}
 
 }
 else {
 	echo "<b>Checksum mismatched.</b>";
-	//Process transaction as suspicious.
 }
 
 ?>

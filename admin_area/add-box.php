@@ -14,8 +14,7 @@
          $run_query_per=mysqli_query($con,$query_per);
          while($row_query_per=mysqli_fetch_array($run_query_per))
          {
-              $admin_permission=$row_query_per['admin_permission'];
-                                     
+              $admin_permission=$row_query_per['admin_permission'];                     
          } 
          $subject=explode(",",$admin_permission);
         if(in_array($paga,$subject))

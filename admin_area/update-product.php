@@ -455,7 +455,7 @@ end:
                               
                               <?php 
                               
-                              $get_manufacturers = "select * from manufacturers where manufacturer_status='yes'";
+                              $get_manufacturers = "select * from manufacturers where not manufacturer_id='$manufacturer_id' and manufacturer_status='yes'";
                               $run_manufacturers = mysqli_query($con,$get_manufacturers);
                               
                               while ($row_manufacturers=mysqli_fetch_array($run_manufacturers)){
@@ -463,11 +463,11 @@ end:
                                 $manufacturer_id = $row_manufacturers['manufacturer_id'];
                                   $manufacturer_title = $row_manufacturers['manufacturer_title'];
                                   
-                                  echo "
+                                  ?>
                                   
-                                  <option value='$manufacturer_id'> $manufacturer_title </option>
+                                  <option value='<?php echo $manufacturer_id; ?>'> <?php echo $manufacturer_title; ?> </option>
                                   
-                                  ";
+                                  <?php
                                   
                               }
                               
@@ -485,7 +485,7 @@ end:
                               
                               <?php 
                               
-                              $get_p_cats = "select * from product_categories where p_cat_status='yes'";
+                              $get_p_cats = "select * from product_categories where not p_cat_id='$p_cat' and p_cat_status='yes'";
                               $run_p_cats = mysqli_query($con,$get_p_cats);
                               
                               while ($row_p_cats=mysqli_fetch_array($run_p_cats)){
@@ -493,11 +493,10 @@ end:
                                 $p_cat = $row_p_cats['p_cat_id'];
                                   $p_cat_title = $row_p_cats['p_cat_title'];
                                   
-                                  echo "
+                                    ?>
+                                  <option value='<?php echo $p_cat; ?>'> <?php echo $p_cat_title; ?> </option>
                                   
-                                  <option value='$p_cat'> $p_cat_title </option>
-                                  
-                                  ";
+                                <?php
                                   
                               }
                               
@@ -510,13 +509,13 @@ end:
                                 <label for="example-email-input" class="col-md-3 col-form-label">Bikes Age</label>
                                 <div class="col-md-9">
                                 
-                                <select name="cat" class="form-control select2" required><!-- form-control Begin -->
+                                <select name="cat" class="form-control select2" required>
                                 <span style="color: red;"><?php echo $error_cat; ?></span>
                               <option value="<?php echo $cat; ?>"> <?php echo $cat_title; ?> </option>
                               
                               <?php 
                               
-                              $get_cat = "select * from categories where cat_status='yes'";
+                              $get_cat = "select * from categories where not cat_id='$cat' and  cat_status='yes'";
                               $run_cat = mysqli_query($con,$get_cat);
                               
                               while ($row_cat=mysqli_fetch_array($run_cat)){
@@ -524,11 +523,11 @@ end:
                                 $cat = $row_cat['cat_id'];
                                   $cat_title = $row_cat['cat_title'];
                                   
-                                  echo "
+                                  ?>
                                   
-                                  <option value='$cat'> $cat_title </option>
+                                  <option value='<?php echo $cat ?>'><?php echo  $cat_title; ?> </option>
                                   
-                                  ";
+                                  <?php
                                   
                               }
                               

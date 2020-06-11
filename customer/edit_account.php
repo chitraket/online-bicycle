@@ -1,29 +1,17 @@
 <?php
 
 $customer_session = $_SESSION['customer_email'];
-
-$get_customer = "select * from customers where customer_email='$customer_session'";
-
+$get_customer = "select * from customers where customer_email='$customer_session' and customer_status='yes'";
 $run_customer = mysqli_query($con,$get_customer);
-
 $row_customer = mysqli_fetch_array($run_customer);
-
 $customer_id = $row_customer['customer_id'];
-
 $customer_name = $row_customer['customer_name'];
-
 $customer_lname=$row_customer['customer_lname'];
-
 $customer_email = $row_customer['customer_email'];
-
 $customer_state = $row_customer['customer_state'];
-
 $customer_city = $row_customer['customer_city'];
-
 $customer_contact = $row_customer['customer_contact'];
-
 $customer_address = $row_customer['customer_address'];
-
 $customer_image = $row_customer['customer_image'];
 if($customer_image=="")
 {
@@ -48,7 +36,7 @@ else{
 if(isset($_POST['register'])){
     if(firstname($_POST['c_name']))
     {
-        $error_c_name = "Required..";
+        $error_c_name = "Required.. || Please enter valid first name.";
         $errorresult=false;
     }
     else
@@ -57,7 +45,7 @@ if(isset($_POST['register'])){
     }
     if(lastname($_POST['c_lname']))
     {
-        $error_l_name = "Required..";
+        $error_l_name = "Required.. || Please enter valid last name.";
         $errorresult=false;
     }
     else
@@ -76,7 +64,7 @@ if(isset($_POST['register'])){
 
     if(city($_POST['c_city']))
     {
-        $error_city = "Required..";
+        $error_city = "Required.. || Please enter valid city.";
         $errorresult=false;
     }
     else
@@ -85,16 +73,16 @@ if(isset($_POST['register'])){
     }
     if(state($_POST['c_state']))
     {
-        $error_state = "Required..";
+        $error_state = "Required.. || Please enter valid state.";
         $errorresult=false;
     }
     else
     {
         $error_state = "";
     }
-    if(contact($_POST['c_contact']))
+    if(contacte($_POST['c_contact'],$customer_session))
     {
-        $error_c_contact = "Required..";
+        $error_c_contact = "Required.. || Please enter valid contact. || contact is already registered.";
         $errorresult=false;
     }
     else
@@ -114,7 +102,7 @@ if(isset($_POST['register'])){
                 
     if(images($test_img2))
     {   
-        $error_image2="JPEG or PNG file.";
+        $error_image2="JPEG or PNG or JPG file.";
         $errorresult=false;
     }
     else{
@@ -147,7 +135,7 @@ if(isset($_POST['register'])){
        ?>
 <script>
 swal({
-        title: "Your account has been edited, to complete the process.",
+        title: "Your account has been edited.",
         text: "",
         icon: "success",
         buttons: [, "OK"],
@@ -156,8 +144,10 @@ swal({
     })
     .then((willDelete) => {
         if (willDelete) {
-            window.open('myaccount', '_self');
-        } else {}
+            window.open('my-account', '_self');
+        } else {
+            window.open('my-account', '_self');
+        }
     });
 </script>
 <?php 
@@ -172,7 +162,7 @@ else
       ?>
 <script>
 swal({
-        title: "Your account has been edited, to complete the process.",
+        title: "Your account has been edited.",
         text: "",
         icon: "success",
         buttons: [, "OK"],
@@ -181,8 +171,10 @@ swal({
     })
     .then((willDelete) => {
         if (willDelete) {
-            window.open('myaccount', '_self');
-        } else {}
+            window.open('my-account', '_self');
+        } else {
+            window.open('my-account', '_self');
+        }
     });
 </script>
 <?php  
@@ -200,7 +192,7 @@ end:
     <div class="myaccount-content">
         <h5>Account Details</h5>
         <div class="account-details-form">
-            <form action="#" method="post" id="registration_form" enctype="multipart/form-data">
+            <form action="my-account" method="post" id="registration_form" enctype="multipart/form-data">
 
                 <div class="row">
                     <div class="col-lg-6">
@@ -210,8 +202,6 @@ end:
                                 value="<?php echo $customer_name;?>" autocomplete="off" />
                             <span id="f_nameMsg"></span>
                             <span style="color: red;"><?php echo $error_c_name;?></span>
-
-
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -224,8 +214,6 @@ end:
                         </div>
                     </div>
                 </div>
-
-
                 <div class="single-input-item">
                     <label for="email">Email</label>
                     <input type="email" placeholder="Enter your Email" value="<?php  echo $customer_email;?>"
@@ -234,8 +222,6 @@ end:
                     <span id="emailMsg"></span>
                     <span style="color: red;"><?php echo $error_email; ?></span>
                 </div>
-
-
                 <div class="single-input-item">
                     <label for="state">State</label>
                     <input type="text" placeholder="Enter your state" name="c_state" id="state"
@@ -253,9 +239,7 @@ end:
                 </div>
                 <div class="single-input-item">
                     <label for="contact">Contact</label>
-                    <input type="text" placeholder="Enter your contact " value="<?php echo $customer_contact; ?>"
-                        disabled />
-                    <input type="hidden" name="c_contact" id="contact" value="<?php echo $customer_contact; ?>"
+                    <input type="text" name="c_contact" class="<?php echo  $customer_session; ?>" placeholder="Enter your contact " id="contact" value="<?php echo $customer_contact; ?>"
                         required />
                     <span id="contactMsg"></span>
                     <span style="color: red;"><?php echo $error_c_contact; ?></span>
@@ -296,12 +280,7 @@ end:
     <i class="fa fa-angle-up"></i>
 </div>
 <!-- Scroll to Top End -->
-<!-- footer area start -->
 
-<!-- footer area end -->
-<!-- Quick view modal start -->
-
-<!-- Quick view modal end -->
 <!-- offcanvas mini cart start -->
 <?php
      include("includes/cart1.php");
@@ -397,7 +376,29 @@ $(document).ready(function() {
         contact_check();
     });
     $('#contact').focusout(function() {
-        contact_check();
+        var phone = $("#contact").val();
+        var product_id=$(this).attr("class");
+        $.ajax({
+            url: "registers.php",
+            method: "POST",
+            data: {
+                product_id: product_id,
+                phone: phone
+            },
+            success: function(data) {
+                if (data != '0') {
+                    $("#contact").css("border", "1px solid red");
+                    $("#contactMsg").html(
+                        "<p class='text-danger'>Contact is already registered.</p>");
+                    $('#contactMsg').focus();
+                    $("#btnsubmit").attr("disabled", true);
+                    contact_err = false;
+                    return false;
+                } else {
+                    contact_check();
+                }
+            }
+        });
     });
 
     $('#address').keyup(function() {

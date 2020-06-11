@@ -1,9 +1,8 @@
-<!-- Start Header Area -->
 <?php
-
-
-$active='';
-       include("includes/header.php");
+$active=' ';
+include("includes/header.php");
+?>
+<?php
     if(!empty($_SESSION['shopping_cart']))
     {
        if(isset($_POST['action']) && $_POST['action']=="change")
@@ -31,7 +30,9 @@ $active='';
         }
         if ($product_qty>$pro_qty) 
         {
-            echo "<script type='text/javascript'>swal('Please enter lower quantity', '', 'warning')</script>";
+            ?>
+            <script type='text/javascript'>swal('Please enter lower quantity', '', 'warning')</script>
+            <?php
         }
         else{
             foreach($_SESSION["shopping_cart"] as $keys => $values)  
@@ -129,7 +130,7 @@ $active='';
 
                                     <td class="pro-price"><span>Rs.<?php echo $values['item_price'] ?></span></td>
 
-                                    <form method="POST" action="">
+                                    <form method="POST" action="cart">
                                         <td class="pro-quantity">
                                             <input type="number"
                                                 style="width: 90px;height: 40px;border: 1px solid #ddd;padding: 0 15px;float: left;"
@@ -169,7 +170,7 @@ $active='';
 
                                     <td class="pro-price"><span>Rs.<?php echo $values['item_price'] ?></span></td>
 
-                                    <form method="POST" action="">
+                                    <form method="POST" action="cart">
                                         <td class="pro-quantity">
                                             <input type="number"
                                                 style="width: 90px;height: 40px;border: 1px solid #ddd;padding: 0 15px;float: left;"
@@ -186,11 +187,9 @@ $active='';
                                     </form>
                                     <td class="pro-subtotal"><span>Rs.
                                             <?php echo $values['item_price']*$values['item_qty']; ?></span></td>
-                                    <form method="POST" action="">
                                         <td class="pro-remove"><a
                                                 href="delete-cart?p_name=<?php echo base64_encode($values['item_name']);?>&p_id=<?php echo base64_encode($values['item_id']); ?>"
                                                 class="btn-delete"><i class="fa fa-trash-o"></i></a></td>
-                                    </form>
                                     <?php
                                       }
                                       ?>
@@ -350,7 +349,7 @@ $('.btn-delete').on('click', function(e) {
 const flashdata = $('.flash-data').data('flashdata')
 if (flashdata) {
     swal({
-            title: "successful remove item.",
+            title: "Successful Remove Item.",
             text: "",
             icon: "success",
             buttons: [, "Ok"],

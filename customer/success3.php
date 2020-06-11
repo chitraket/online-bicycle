@@ -35,9 +35,6 @@ window.open('my-account', '_self')
             $customer_email='';
             $customer_phone='';      
 ?>
-<!-- Start Header Area -->
-
-<!-- end Header Area -->
 
 <main>
     <!-- breadcrumb area start -->
@@ -296,8 +293,5 @@ window.open('my-account', '_self')
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
 </body>
-
-
-<!-- Mirrored from demo.hasthemes.com/corano-preview/corano/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 11:22:07 GMT -->
 
 </html>

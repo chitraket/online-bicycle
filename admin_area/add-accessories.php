@@ -258,11 +258,10 @@
                                                     $accessories_brand_id = $row_p_cats['accessories_brand_id'];
                                                     $accessories_brand = $row_p_cats['accessories_brand'];
 
-                                                    echo "
+                                                    ?>
+                                                    <option value='<?php echo $accessories_brand_id; ?>'><?php echo  $accessories_brand; ?></option>
                                                     
-                                                    <option value='$accessories_brand_id'> $accessories_brand </option>
-                                                    
-                                                    ";
+                                                    <?php
                                                     
                                                 }
                                     
@@ -286,15 +285,10 @@
                                                     $accessories_category_id = $row_p_cats['accessories_category_id'];
                                                     $accessories_category = $row_p_cats['accessories_category'];
                                                     
-                                                    
-                                                    echo "
-                                                    
-                                                    <option value='$accessories_category_id'> $accessories_category </option>
-                                                    
-                                                    ";
-                                                    
+                                                ?>
+                                                    <option value='<?php echo $accessories_category_id; ?>'><?php echo  $accessories_category; ?></option>
+                                                    <?php                
                                                 }
-                                    
                                         ?>
                                     </select>
                                 </div>

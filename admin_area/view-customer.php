@@ -21,13 +21,6 @@
         if(in_array($paga,$subject))
         {
      ?>
-
-            <!-- Left Sidebar End -->
-
-             
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
             <form action="#" method="POST">
             <div class="main-content">
 
@@ -58,8 +51,6 @@
                                                 <th>Contact</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
-                                               
-                                                
                                             </tr>
                                             </thead>
                                             
@@ -110,7 +101,7 @@
                                                 } 
                                                 ?>
                                                 </td>
-                                                <td><a href="delete-customer.php?customer_id=<?php echo $row_cart["customer_id"]?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a> </td>
+                                                <td><a href="delete-customer.php?customer_id=<?php echo $row_cart["customer_id"]?>" class="btn-delete"><i class="bx bx-trash font-size-20 align-middle mr-1"></i></a> <a href="update-customer.php?customer_id=<?php echo $row_cart["customer_id"];?>" class="pl-2"><i class="bx bx-edit font-size-20 align-middle mr-1"></i></a></td>
                                                 </tr>
                                                 <?php 
                                                  }?>

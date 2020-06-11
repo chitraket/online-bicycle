@@ -30,13 +30,15 @@
         $errorresult=true;
 if(!isset($_SESSION['email']))
 {
-    echo "<script>window.open('forget_password.php','_self')</script>";
+    ?>
+    <script>window.open('forget-password','_self')</script>
+    <?php
 }
 else{
     if (isset($_POST['login'])) {
         if(pass($_POST['pass']))
         {
-            $error_pass = "Required..";
+            $error_pass = "Required.. || Please enter valid Password.";
             $errorresult=false;
         }
         else
@@ -75,7 +77,7 @@ else{
             if (willDelete) {
                 window.open('login', '_self');
             } else {
-
+                window.open('login', '_self');
             }
         });
     </script>
@@ -97,7 +99,7 @@ else{
             if (willDelete) {
                 window.open('forget-password', '_self');
             } else {
-
+                window.open('forget-password', '_self');
             }
         });
     </script>
@@ -117,7 +119,7 @@ end:
                     <div class="col-lg-6">
                         <div class="login-reg-form-wrap">
                             <h5>change Password</h5>
-                            <form action="#" method="post">
+                            <form action="forget-password-change" method="post">
                                 <div class="single-input-item">
                                     <input type="password" placeholder="Enter new password" name="pass" id="pass"
                                         required />
@@ -132,12 +134,6 @@ end:
                                 </div>
                                 <div class="single-input-item">
                                     <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                        <!-- <div class="remember-meta">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="rememberMe">
-                                                    <label class="custom-control-label" for="rememberMe">Remember Me</label>
-                                                </div>
-                                            </div>-->
                                     </div>
                                 </div>
                                 <div class="single-input-item">

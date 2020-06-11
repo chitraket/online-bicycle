@@ -225,7 +225,6 @@
                     <i class="bx bx-money"></i>
                     <span>Payment</span>
                 </a>
-               
             </li>
 
             <li class="menu-title">Sub User</li>

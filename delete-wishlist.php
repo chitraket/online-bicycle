@@ -7,10 +7,14 @@ if(isset($_GET['wishlist_id']))
     $run_wishlist=mysqli_query($con,$delete_wishlist);
     if($run_wishlist)
     {
-        echo "<script>window.open('wishlist.php?m=1','_self')</script>";
+        ?>
+        <script>window.open('wishlist?m=1','_self')</script>
+        <?php
     }
 }
 else{
-    echo "<script>window.open('home','_self')</script>";
+?>
+    <script>window.open('home','_self')</script>
+    <?php
 }
 ?>

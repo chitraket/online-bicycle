@@ -41,7 +41,7 @@ if(isset($_POST['otp']))
         goto end;
     }
     $email=$_POST['email'];
-    $get_products="select * from customers where customer_email='$email'";
+    $get_products="select * from customers where customer_email='$email' and customer_status='yes'";
     $run_products=mysqli_query($con,$get_products);
 
     if(mysqli_num_rows($run_products)>0)
@@ -64,7 +64,7 @@ if(isset($_POST['otp']))
         $mail->Port       = 465;                                    // TCP port to connect to
 
         //Recipients
-        $mail->setFrom('skotebicycle@gmail.com', 'skote');
+        $mail->setFrom('skotebicycle@gmail.com', 'SKOTE');
         $mail->addAddress($email, $email);     // Add a recipient
     
         $html='<!DOCTYPE html>
@@ -75,7 +75,7 @@ if(isset($_POST['otp']))
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link rel="icon" href="../assets/images/favicon/1.png" type="image/x-icon">
                 <link rel="shortcut icon" href="../assets/images/favicon/1.png" type="image/x-icon">
-                <title>Multikart | Email template </title>
+                <title>SKOTE - Bikes Shop</title>
                 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
                 <style type="text/css">
                     body{
@@ -250,7 +250,7 @@ if(isset($_POST['otp']))
             if (willDelete) {
                 window.open('forget-password-otp', '_self');
             } else {
-
+                window.open('forget-password-otp', '_self');
             }
         });
     </script>
@@ -276,6 +276,9 @@ if(isset($_POST['otp']))
         })
         .then((willDelete) => {
             if (willDelete) {
+                window.open('forget-password', '_self');
+            }
+            else{
                 window.open('forget-password', '_self');
             }
         });
@@ -305,12 +308,6 @@ end:
 
                                 <div class="single-input-item">
                                     <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                        <!-- <div class="remember-meta">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="rememberMe">
-                                                    <label class="custom-control-label" for="rememberMe">Remember Me</label>
-                                                </div>
-                                            </div>-->
                                     </div>
                                 </div>
                                 <div class="single-input-item">

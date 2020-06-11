@@ -3,15 +3,13 @@ $active='Shop';
 include("includes/header.php");
 ?>
 <script>
-window.addEventListener("load", setTimeout(function() {
-        var load_screen = document.getElementById("load_screen");
-
-        document.body.removeChild(load_screen);
-    }, 1000)
-);
+window.addEventListener("load", function() {
+    const loader = document.querySelector(".loader");
+    loader.className += " hidden";
+});
 </script>
-<div id="load_screen">
-    <div id="loading"><img src="loder.gif"></div>
+<div class="loader">
+    <img src="loder.gif" alt="Loading..." />
 </div>
 <main>
     <!-- breadcrumb area start -->
@@ -72,13 +70,8 @@ window.addEventListener("load", setTimeout(function() {
     include("includes/footer.php");
     ?>
 <!-- footer area end -->
-
-
-<!-- offcanvas mini cart start -->
-<!-- offcanvas mini cart end -->
 <?php
-     include("includes/cart1.php");
-     
+     include("includes/cart1.php"); 
     ?>
 
 <!-- JS

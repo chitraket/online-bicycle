@@ -9,11 +9,15 @@ if(isset($_GET['p_id']) && isset($_GET['p_name']))
         if($values["item_id"] == $p_id && $values['item_name']== $p_name)  
         { 
             unset($_SESSION["compare"][$keys]);
-            echo "<script>window.open('compare?m=1','_self')</script>";
+            ?>
+            <script>window.open('compare?m=1','_self')</script>
+            <?php
         }
     }
 }
 else{
-    echo "<script>window.open('home','_self')</script>";
+    ?>
+    <script>window.open('home','_self')</script>
+    <?php
 }
 ?>

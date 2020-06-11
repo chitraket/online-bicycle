@@ -36,9 +36,9 @@
                     else{
                         $error_name="";
                     }
-                    if(email($_POST['a_email']))
+                    if(emaila($_POST['a_email']))
                     {
-                        $error_email="Required..";
+                        $error_email="Required.. || Please enter valid email || Email is already registered.";
                         $errorresult=false;
                     }
                     else{
@@ -52,9 +52,9 @@
                     else{
                         $error_pass="";
                     }
-                    if(contact($_POST['a_contact']))
+                    if(contacta($_POST['a_contact']))
                     {
-                        $error_contact="Required..";
+                        $error_contact="Required.. || Please enter valid contact || Contact is already registered.";
                         $errorresult=false;
                     }
                     else{
@@ -71,7 +71,7 @@
                     $test_img1 = $_FILES['admin_img1']['name'];
                 if(images($test_img1))
                 {   
-                    $error_image2="JPEG or PNG file.";
+                    $error_image2="JPEG or PNG on JPG file.";
                     $errorresult=false;
                 }
                 else{
@@ -87,10 +87,8 @@
                 $a_contact=$_POST['a_contact'];
                 $a=$_POST['subject'];
                 $per=implode(",",$a);
-                //$admin_img1=$_POST['admin_img1'];
                 $admin_img1 = $_FILES['admin_img1']['name'];
                 $temp_name1 = $_FILES['admin_img1']['tmp_name'];
-               
                 move_uploaded_file($temp_name1,"admin_images/$admin_img1");
                 $insert_cat = "insert into admins(admin_name,admin_email,admin_pass,admin_image,admin_contact,admin_roles,admin_permission,admin_status)  values('$a_name','$a_email','$a_pass','$admin_img1','$a_contact','sub','$per','yes')";
                 $run_cat = mysqli_query($con,$insert_cat);
@@ -150,7 +148,8 @@
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Admin Email</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="email" placeholder="Admin Email" name="a_email"  id="example-text-input" required>
+                                    <input class="form-control" type="email" placeholder="Admin Email" name="a_email"  id="email" required>
+                                    <span id="emailMsg"></span>
                                     <span style="color: red;"><?php echo $error_email; ?></span>
                                 </div>
                             </div>
@@ -164,7 +163,8 @@
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Admin Contact</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="number" placeholder="Admin Contact" name="a_contact"  id="example-text-input" required data-parsley-pattern="/^[9876][0-9]{9}$/">
+                                    <input class="form-control" type="number" placeholder="Admin Contact" name="a_contact"  id="contact" required data-parsley-pattern="/^[9876][0-9]{9}$/">
+                                    <span id="contactMsg"></span>
                                     <span style="color: red;"><?php echo $error_contact; ?></span>
                                 </div>
                             </div>
@@ -320,7 +320,7 @@
                             
                             <div class="form-group mt-4">
                                 <div class="text-right">
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" name="submit">
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light mr-1" id="btnsubmit" name="submit">
                                         Submit
                                     </button>
                                     <button type="reset" class="btn btn-secondary waves-effect">
@@ -338,10 +338,6 @@
         <?php 
         include("includes/footer.php");
         ?>
-        <?php 
-         
-               
-?>
     </div>
 </div>
 </div>
@@ -360,11 +356,63 @@
 
         <script src="assets/js/app.js"></script>
     </body>
-
-
-<!-- Mirrored from themesbrand.com/skote/layouts/vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Feb 2020 17:43:03 GMT -->
 </html>
+<script type="text/javascript">
+$(document).ready(function() {
+    var email_err = true;
+    $('#email').keyup(function() {
+        var email = $("#email").val();
+        $.ajax({
+            url: "registers.php",
+            method: "POST",
+            data: {
+                email: email
+            },
+            success: function(data) {
+                if (data != '0') {
+                    $("#email").css("border", "1px solid red");
+                    $("#emailMsg").html(
+                        "<p class='text-danger'>Email is already registered.</p>");
+                    $('#emailMsg').focus();
+                    $("#btnsubmit").attr("disabled", true);
+                    email_err = false;
+                    return false;
+                } else {
+                    $("#email").css("border", "1px solid #ced4da");
+                    $("#emailMsg").html("<p class='text-danger'></p>");
+                    $("#btnsubmit").attr("disabled", false);
+                }
+            }
+        });
+    });
+    $('#contact').focusout(function() {
+        var phone = $("#contact").val();
+        $.ajax({
+            url: "registers.php",
+            method: "POST",
+            data: {
+                phone: phone
+            },
+            success: function(data) {
+                if (data != '0') {
+                    $("#contact").css("border", "1px solid red");
+                    $("#contactMsg").html(
+                        "<p class='text-danger'>Contact is already registered.</p>");
+                    $('#contactMsg').focus();
+                    $("#btnsubmit").attr("disabled", true);
+                    contact_err = false;
+                    return false;
+                } else {
+                    $("#contact").css("border", "1px solid #ced4da");
+                    $("#contactMsg").html("<p class='text-danger'></p>");
+                    $("#btnsubmit").attr("disabled", false);
+                }
+            }
+        });
+    });
+});
 
+</script>
 <script>
 $(document).ready(function(){  
  var counter=60*60;
