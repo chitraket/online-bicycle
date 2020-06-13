@@ -270,7 +270,7 @@ $('.btn-delete').on('click', function(e) {
 const flashdata = $('.flash-data').data('flashdata')
 if (flashdata) {
     swal({
-            title: "successful remove item.",
+            title: "Successful remove item.",
             text: "",
             icon: "success",
             buttons: [, "OK"],

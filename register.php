@@ -173,7 +173,6 @@ if(isset($_POST['register'])){
         $mail->Password   = 'Ab7man91';                               // SMTP password
         $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
         $mail->Port       = 465;                                    // TCP port to connect to
-
         //Recipients
         $mail->setFrom('skotebicycle@gmail.com', 'SKOTE');
         $mail->addAddress($c_email, $c_email);     // Add a recipient
@@ -276,7 +275,7 @@ if(isset($_POST['register'])){
                                     </tr>
                                     <tr>
                                         <td>
-                                       <p>Click<a href="http://localhost/SKOTE/register-verification-'.base64_encode($c_email).'" class="btn btn-sqr">here</a> to activate your account.</p>
+                                       <p> Click <a href="http://localhost/SKOTE/register-verification-'.base64_encode($c_email).'" class="btn btn-sqr">here</a> to activate your account.</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -362,7 +361,7 @@ if(isset($_POST['register'])){
                             if (willDelete) {
                                 window.open('customer/login', '_self');
                             } else {
-
+                                window.open('customer/login', '_self');
                             }
                         });
                     </script>

@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="assets/css/plugins/slick.min.css">
     <!-- animate css -->
     <link rel="stylesheet" href="assets/css/plugins/animate.css">
-    <!-- Nice Select css -->lo
+    <!-- Nice Select css -->
     <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
 
     <!-- jquery UI css -->
